@@ -322,6 +322,11 @@ and coq = parse
         coq lexbuf }
   | path as id
       { ident (Lexing.lexeme_start lexbuf) id; coq lexbuf }
+  | (". ") (space* as s) (start_proof as sp)
+      { newline();
+        start_proof s sp;
+	skip_newline lexbuf ;
+        coq lexbuf }
   | "\n"
       { newline(); coq_bol lexbuf }
   | eof
