@@ -14,16 +14,13 @@
 
 {
 open Printf
+open Generate_index
 
 (** Cross-referencing *)
 
 let current_module = ref ""
 
 (* Record cross-references found in .glob files *)
-
-type xref =
-  | Def of string * string    (* path, type *)
-  | Ref of string * string * string (* unit, path, type *)
 
 (* (name of module, character position in file) -> cross-reference *)
 let xref_table : (string * int, xref) Hashtbl.t = Hashtbl.create 273
@@ -48,6 +45,7 @@ let add_reference curmod pos dp sp id ty =
   then Hashtbl.add xref_table (curmod, pos) (Ref(dp, path sp id, ty))
 
 let add_definition curmod pos sp id ty =
+  (*eprintf "add_definition %s %d %s %s %s\n" curmod pos sp id ty;*)
   if not (Hashtbl.mem xref_table (curmod, pos))
   then Hashtbl.add xref_table (curmod, pos) (Def(path sp id, ty))
 
@@ -80,6 +78,22 @@ let url_for_module m =
   | (pref, url) :: rem ->
       if starts_with m pref then url_concat url m ^ ".html" else url_for rem
   in url_for !documentation_urls
+
+let directory_mappings : (string * string) list ref = ref []
+
+let add_directory_mapping physical_dir path =
+  directory_mappings := (physical_dir, path) :: !directory_mappings
+
+let module_name_of_file_name f =
+  let concat f = Str.(split (regexp "/")) f
+                 |> List.filter (fun s -> s <> "." && s <> "..")
+                 |> String.concat "."
+  in
+  match List.find_opt (fun (dir, _) -> starts_with f dir) !directory_mappings with
+  | None -> concat f
+  | Some (physical_dir, path) ->
+     Str.(replace_first (regexp_string physical_dir)) path f
+     |> concat
 
 (* Produce a HTML link if possible *)
 
@@ -288,6 +302,20 @@ rule coq_bol = parse
       { if !in_proof then (space s; start_comment());
 	comment lexbuf;
         if !in_proof then coq lexbuf else skip_newline lexbuf }
+  (* Enter verbatim mode *)
+  | space* ("(***" "*"+ "***)" "\n" as s)
+      { fprintf !oc "<pre class=\"ssrdoc\">\n";
+        ssr_doc_bol lexbuf;
+	fprintf !oc "%s" "</pre>\n";
+	skip_newline lexbuf
+      }
+  (* Enter ssrdoc markdown mode *)
+  | space* ("(***" (['a'-'z']+ as mode) "*"+ "***)" "\n" as s)
+      { fprintf !oc "<div class=\"ssrdoc %s\">\n" mode;
+        ssr_doc_bol lexbuf;
+	fprintf !oc "%s" "</div>\n";
+	skip_newline lexbuf
+      }
   | eof
       { () }
   | space* as s
@@ -315,6 +343,11 @@ and coq = parse
         coq lexbuf }
   | path as id
       { ident (Lexing.lexeme_start lexbuf) id; coq lexbuf }
+  | (". ") (space* as s) (start_proof as sp)
+      { newline();
+        start_proof s sp;
+	skip_newline lexbuf ;
+        coq lexbuf }
   | "\n"
       { newline(); coq_bol lexbuf }
   | eof
@@ -381,6 +414,28 @@ and doc = parse
   | _ as c
       { character c; doc lexbuf }
 
+(* beginning of line *)
+and ssr_doc_bol = parse
+  (* Leave verbatim mode *)
+  | space* ("(***" "*"+ "***)" as s)
+      { () }
+  | "(* "
+      { ssr_doc_bol lexbuf }
+  | "\n"
+      { ssr_doc_bol lexbuf }
+  | ""
+      { ssr_doc lexbuf }
+
+and ssr_doc = parse
+  | "*)"
+      { ssr_doc lexbuf }
+  | "\n"
+      { character '\n'; ssr_doc_bol lexbuf }
+  | eof
+      { () }
+  | _ as c
+      { character c; ssr_doc lexbuf }
+
 and verbatim = parse
   | "\n>>" space* "\n"
       { () }
@@ -426,10 +481,6 @@ let logical_name_base = ref ""
 let generate_css = ref true
 let use_short_names = ref false
 let generate_redirects = ref false
-
-let module_name_of_file_name f =
-  let components = Str.split (Str.regexp "/") f in
-  String.concat "." (List.filter (fun s -> s <> "." && s <> "..") components)
 
 let process_v_file f =
   let pref_f = Filename.chop_suffix f ".v" in
@@ -477,6 +528,12 @@ let _ =
       "<url>   Set base URL for Coq standard library";
     "-d", Arg.Set_string output_dir,
       "<dir>   Output files to directory <dir> (default: current directory)";
+    "-Q",
+      (let dir = ref "" in
+       Arg.Tuple
+         [Arg.Set_string dir;
+          Arg.String (fun path -> add_directory_mapping !dir path)]),
+      "<directory> <dirpath>  Map physical directory to path";
     "-external",
       (let x = ref "" in
        Arg.Tuple [
@@ -504,6 +561,7 @@ let _ =
   end;
   List.iter process_glob_file (List.rev !glob_files);
   List.iter process_v_file (List.rev !v_files);
+  Generate_index.generate !output_dir xref_table xref_modules;
   write_file Resources.js (Filename.concat !output_dir "coq2html.js");
   if !generate_css then
     write_file Resources.css (Filename.concat !output_dir "coq2html.css")

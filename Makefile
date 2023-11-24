@@ -1,16 +1,21 @@
 OCAMLOPT=ocamlopt
 OCAMLLEX=ocamllex
 
-coq2html: resources.cmx coq2html.cmx
-	$(OCAMLOPT) -o coq2html str.cmxa resources.cmx coq2html.cmx
+GEN_IDX=generate_index
+
+coq2html: $(GEN_IDX).cmi $(GEN_IDX).cmx coq2html.cmx
+	$(OCAMLOPT) -o coq2html str.cmxa resources.cmx $(GEN_IDX).cmx coq2html.cmx
 
 %.cmx: %.ml
 	$(OCAMLOPT) -c $*.ml
 
+%.cmi: %.mli
+	$(OCAMLOPT) -c $*.mli
+
 %.ml: %.mll
 	$(OCAMLLEX) $*.mll
 
-coq2html.cmx: resources.cmx
+generate_index.cmx: resources.cmx
 
 resources.ml: coq2html.css coq2html.js coq2html.header coq2html.footer coq2html.redirect
 	(for i in header footer css js redirect; do \
