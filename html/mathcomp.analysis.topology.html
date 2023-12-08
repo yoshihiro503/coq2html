@@ -27,17 +27,28 @@
  # Filters and basic topological notions                                   
                                                                            
 This file develops tools for the manipulation of filters and basic         
-topological notions. The development of topological notions builds on      
-"filtered types". They are types equipped with an interface that           
-associates to each element a set of sets, intended to represent a filter.  
-The notions of limit and convergence are defined for filtered types and in 
-the documentation below we call "canonical filter" of an element the set   
-of sets associated to it by the interface of filtered types.               
+topological notions.                                                       
                                                                            
+The development of topological notions builds on "filtered types". They    
+are types equipped with an interface that associates to each element a     
+set of sets, intended to represent a filter. The notions of limit and      
+convergence are defined for filtered types and in the documentation below  
+we call "canonical filter" of an element the set of sets associated to it  
+by the interface of filtered types.                                        
+                                                                           
+To make the manipulation of filters easier, this file also introduces      
+"near notations and tactics". Instead of proving $F\; G$, one can prove    
+$G\; x$ for $x$ "near $F$", i.e., for $x$ such that $H\; x$ for $H$        
+arbitrarily precise as long as $F\; H$. The near tactics allow for a       
+delayed introduction of $H$: $H$ is introduced as an existential variable  
+and progressively instantiated during the proof process.                   
+                                                                           
+Here follow the detailed contents of this file:                            
+```                                                                        
                 monotonous A f := {in A &amp;, {mono f : x y / x &lt;= y}} \/     
                                   {in A &amp;, {mono f : x y /~ x &lt;= y}}.      
-                                                                           
-* Filters :                                                                
+```                                                                        
+## Filters                                                                 
 ```                                                                        
                   filteredType U == interface type for types whose         
                                     elements represent sets of sets on U.  
@@ -148,14 +159,9 @@ of sets associated to it by the interface of filtered types.
                                     sets, join_product is an embedding.    
 ```                                                                        
                                                                            
-* Near notations and tactics:                                              
-  --&gt; The purpose of the near notations and tactics is to make the         
-      manipulation of filters easier. Instead of proving F G, one can      
-      prove G x for x "near F", i.e. for x such that H x for H arbitrarily 
-      precise as long as F H. The near tactics allow for a delayed         
-      introduction of H: H is introduced as an existential variable and    
-      progressively instantiated during the proof process.                 
-  --&gt; Notations:                                                           
+## Near notations and tactics                                              
+                                                                           
+Notations:                                                                 
 ```                                                                        
                      {near F, P} == the property P holds near the          
                                     canonical filter associated to F; P    
@@ -171,27 +177,27 @@ of sets associated to it by the interface of filtered types.
                     x \is_near F == x belongs to a set P : in_filter F.    
 ```                                                                        
                                                                            
-  --&gt; Tactics:                                                             
-    - near=&gt; x    introduces x:                                            
-      On the goal \forall x \near F, G x, introduces the variable x and an 
-      "existential", and unaccessible hypothesis ?H x and asks the user to 
-      prove (G x) in this context.                                         
-      Under the hood delays the proof of F ?H and waits for near: x        
-      Also exists under the form near=&gt; x y.                               
-    - near: x     discharges x:                                            
-      On the goal H_i x, and where x \is_near F, it asks the user to prove 
-      that (\forall x \near F, H_i x), provided that H_i x does not depend 
-      on variables introduced after x.                                     
-      Under the hood, it refines by intersection the existential variable  
-      ?H attached to x, computes the intersection with F, and asks the     
-      user to prove F H_i, right now                                       
-    - end_near should be used to close remaining existentials trivially    
-    - near F =&gt; x     poses a variable near F, where F is a proper filter  
-      adds to the context a variable x that \is_near F, i.e. one may       
-      assume H x for any H in F. This new variable x can be dealt with     
-      using  near: x, as for variables introduced by near=&gt;.               
+Tactics:                                                                   
+- near=&gt; x    introduces x:                                                
+  On the goal \forall x \near F, G x, introduces the variable x and an     
+  "existential", and unaccessible hypothesis ?H x and asks the user to     
+  prove (G x) in this context.                                             
+  Under the hood delays the proof of F ?H and waits for near: x            
+  Also exists under the form near=&gt; x y.                                   
+- near: x     discharges x:                                                
+  On the goal H_i x, and where x \is_near F, it asks the user to prove     
+  that (\forall x \near F, H_i x), provided that H_i x does not depend     
+  on variables introduced after x.                                         
+  Under the hood, it refines by intersection the existential variable      
+  ?H attached to x, computes the intersection with F, and asks the         
+  user to prove F H_i, right now                                           
+- end_near should be used to close remaining existentials trivially        
+- near F =&gt; x     poses a variable near F, where F is a proper filter      
+  adds to the context a variable x that \is_near F, i.e. one may           
+  assume H x for any H in F. This new variable x can be dealt with         
+  using  near: x, as for variables introduced by near=&gt;.                   
                                                                            
-* Topology :                                                               
+## Topology                                                                
 ```                                                                        
                  topologicalType == interface type for topological space   
                                     structure.                             
@@ -287,7 +293,7 @@ topologyOfFilterMixin nbhs_filt nbhs_sing nbhs_nbhs == builds the mixin
                                     type topologicalType                   
 ```                                                                        
                                                                            
-* Function space topologies :                                              
+## Function space topologies                                               
 ```                                                                        
     {uniform` A -&gt; V} == The space U -&gt; V, equipped with the topology of   
                          uniform convergence from a set A to V, where      
@@ -306,10 +312,11 @@ topologyOfFilterMixin nbhs_filt nbhs_sing nbhs_nbhs == builds the mixin
 {family fam, F --&gt; f} == F converges to f in {family fam, U -&gt; V}.         
 ```                                                                        
                                                                            
---&gt; We used these topological notions to prove Tychonoff's Theorem, which  
-    states that any product of compact sets is compact according to the    
-    product topology.                                                      
-* Uniform spaces :                                                         
+We used these topological notions to prove Tychonoff's Theorem, which      
+states that any product of compact sets is compact according to the        
+product topology.                                                          
+                                                                           
+## Uniform spaces                                                          
 ```                                                                        
                      nbhs_ ent == neighbourhoods defined using entourages  
                    uniformType == interface type for uniform spaces: a     
@@ -344,7 +351,7 @@ topologyOfFilterMixin nbhs_filt nbhs_sing nbhs_nbhs == builds the mixin
                   discrete_ent == entourages for the discrete topology     
 ```                                                                        
                                                                            
-* PseudoMetric spaces :                                                    
+## PseudoMetric spaces                                                     
 ```                                                                        
                entourage_ ball == entourages defined using balls           
               pseudoMetricType == interface type for pseudo metric space   
@@ -374,8 +381,10 @@ topologyOfFilterMixin nbhs_filt nbhs_sing nbhs_nbhs == builds the mixin
                                   quotient Q : quotType T. where T has     
                                   type topologicalType                     
                  discrete_ball == singleton balls for thediscrete topology 
+```                                                                        
                                                                            
-* Complete uniform spaces :                                                
+## Complete uniform spaces                                                 
+```                                                                        
                      cauchy F &lt;-&gt; the set of sets F is a cauchy filter     
                                   (entourage definition)                   
                   completeType == interface type for a complete uniform    
@@ -390,7 +399,7 @@ topologyOfFilterMixin nbhs_filt nbhs_sing nbhs_nbhs == builds the mixin
                                   completeType on T.                       
 ```                                                                        
                                                                            
-* Complete pseudometric spaces :                                           
+## Complete pseudometric spaces                                            
 ```                                                                        
                   cauchy_ex F &lt;-&gt; the set of sets F is a cauchy filter     
                                   (epsilon-delta definition).              
@@ -414,7 +423,7 @@ CompletePseudoMetricType T cvgCauchy == packs the proof that every proper
                                   T of type topologicalType                
 ```                                                                        
                                                                            
-* Subspaces of topological spaces :                                        
+## Subspaces of topological spaces                                         
 ```                                                                        
                 subspace A == for (A : set T), this is a copy of T with    
                               a topology that ignores points outside A     
@@ -422,7 +431,7 @@ CompletePseudoMetricType T cvgCauchy == packs the proof that every proper
                               inclusion of subspace A into T               
 ```                                                                        
                                                                            
-* Arzela Ascoli' theorem :                                                 
+## Arzela Ascoli' theorem                                                  
 ```                                                                        
            singletons T := [set [set x] | x in [set: T]].                  
      equicontinuous W x == the set (W : X -&gt; Y) is equicontinuous at x     
@@ -863,9 +872,9 @@ Qed.</div>
 <span class="kwd">by</span> <span class="kwd">exists</span> (<span class="id">B</span>, <span class="id">A</span>) =&gt; // -[<span class="id">x</span> <span class="id">y</span>] [/=<span class="id">Bx</span> <span class="id">Ay</span>]; <span class="id">apply</span>: (<span class="id">ABP</span> (<span class="id">y</span>, <span class="id">x</span>)).<br/>
 Qed.</div>
 <br/>
-<h1> Filters </h1>
-<br/>
-<h2> Definitions </h2>
+<div class="ssrdoc markdown">
+## Filters                                                                 
+</div>
 <br/>
 <span class="kwd">Class</span> <span class="id"><a name="Filter">Filter</a></span> {<span class="id"><a name="T:277">T</a></span> : <span class="kwd">Type</span>} (<span class="id"><a name="F:278">F</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>)) := {<br/>
 &nbsp;&nbsp;<span class="id"><a name="filterT">filterT</a></span> : <span class="id">F</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> ;<br/>
@@ -1295,7 +1304,9 @@ Qed.</div>
 <span class="kwd">by</span> <span class="id">case</span>: <span class="id"><a href="mathcomp.classical.boolp.html#asboolP">asboolP</a></span>=&gt; [/<span class="id">PF</span>|<span class="id">_</span>]; <span class="kwd">by</span> [<span class="id">apply</span>: <span class="id"><a href="mathcomp.analysis.topology.html#filterS">filterS</a></span>|<span class="id">apply</span>: <span class="id"><a href="mathcomp.analysis.topology.html#nearW">nearW</a></span>].<br/>
 <span class="id">Unshelve</span>. <span class="id">all</span>: <span class="kwd">by</span> <span class="id">end_near</span>. Qed.</div>
 <br/>
-<h2> Limits expressed with filters </h2>
+<div class="ssrdoc markdown">
+## Limits expressed with filters                                           
+</div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="fmap">fmap</a></span> {<span class="id"><a name="T:575">T</a></span> <span class="id"><a name="U:576">U</a></span> : <span class="kwd">Type</span>} (<span class="id"><a name="f:577">f</a></span> : <span class="id">T</span> -&gt; <span class="id">U</span>) (<span class="id"><a name="F:578">F</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>)) :=<br/>
 &nbsp;&nbsp;[<span class="id">set</span> <span class="id"><a name="P:579">P</a></span> | <span class="id">F</span> (<span class="id">f</span> @^-1` <span class="id">P</span>)].<br/>
@@ -1475,7 +1486,7 @@ Qed.</div>
 <div class="proofscript" id="proof88">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">Aa</span>; <span class="id">apply</span>: <span class="id">Build_ProperFilter</span>' =&gt; /(<span class="id">_</span> <span class="id">a</span>). Qed.</div>
 <br/>
-<h2> Specific filters </h2>
+<div class="doc">Specific filters </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="frechet_filter">frechet_filter</a></span>.<br/>
 <span class="kwd">Variable</span> <span class="id"><a name="frechet_filter.T">T</a></span> : <span class="kwd">Type</span>.<br/>
@@ -1837,7 +1848,9 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#PrincipalFilters">PrincipalFilters</a></span>.<br/>
 <br/>
-<h1> Topological spaces </h1>
+<div class="ssrdoc markdown">
+## Topological spaces                                                      
+</div>
 <br/>
 <span class="kwd">Module</span> <span class="id"><a name="Topological">Topological</a></span>.<br/>
 <br/>
@@ -2259,7 +2272,7 @@ Qed.</div>
 <br/>
 <span class="kwd">Notation</span> "[ '<span class="id">locally</span>' <span class="id">P</span> ]" := (@<span class="id"><a href="mathcomp.analysis.topology.html#locally_of">locally_of</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#Phantom">Phantom</a></span> <span class="id">_</span> <span class="id">P</span>)).<br/>
 <br/>
-<h2> Topology defined by a filter </h2>
+<div class="doc">Topology defined by a filter                                              </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="TopologyOfFilter">TopologyOfFilter</a></span>.<br/>
 <br/>
@@ -2285,7 +2298,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#TopologyOfFilter">TopologyOfFilter</a></span>.<br/>
 <br/>
-<h2> Topology defined by open sets </h2>
+<div class="doc">Topology defined by open sets </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="TopologyOfOpen">TopologyOfOpen</a></span>.<br/>
 <br/>
@@ -2326,7 +2339,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#TopologyOfOpen">TopologyOfOpen</a></span>.<br/>
 <br/>
-<h2> Topology defined by a base of open sets </h2>
+<div class="doc">Topology defined by a base of open sets </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="TopologyOfBase">TopologyOfBase</a></span>.<br/>
 <br/>
@@ -2430,7 +2443,7 @@ Qed.</div>
 <span class="kwd">by</span> <span class="id">apply</span>: (<span class="id"><a href="mathcomp.analysis.topology.html#filterI">filterI</a></span> <span class="id">_</span> <span class="id">_</span>); [<span class="id">exact</span>: (<span class="id">IH</span> <span class="id">_</span> <span class="id">_</span> <span class="id">sFP</span>)|<span class="id">exact</span>: (<span class="id">IH</span> <span class="id">_</span> <span class="id">_</span> <span class="id">sFQ</span>)].<br/>
 Qed.</div>
 <br/>
-<h2> Topology defined by a subbase of open sets </h2>
+<div class="doc">Topology defined by a subbase of open sets </div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="finI_from">finI_from</a></span> (<span class="id"><a name="I:1231">I</a></span> : <span class="id">choiceType</span>) <span class="id"><a name="T:1232">T</a></span> (<span class="id"><a name="D:1233">D</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">I</span>) (<span class="id"><a name="f:1234">f</a></span> : <span class="id">I</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>) :=<br/>
 &nbsp;&nbsp;[<span class="id">set</span> \<span class="id">bigcap_</span>(<span class="id"><a name="i:1237">i</a></span> <span class="kwd">in</span> [<span class="id">set</span>` <span class="id">D</span>']) <span class="id">f</span> <span class="id">i</span> |<br/>
@@ -2521,6 +2534,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#TopologyOfSubbase">TopologyOfSubbase</a></span>.<br/>
 <br/>
+<div class="doc">Topology on nat </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="nat_topologicalType">nat_topologicalType</a></span>.<br/>
 <br/>
@@ -2670,7 +2684,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#infty_nat">infty_nat</a></span>.<br/>
 <br/>
-<h2> Topology on the product of two spaces </h2>
+<div class="doc">Topology on the product of two spaces </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Prod_Topology">Prod_Topology</a></span>.<br/>
 <br/>
@@ -2705,7 +2719,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#Prod_Topology">Prod_Topology</a></span>.<br/>
 <br/>
-<h2> Topology on matrices </h2>
+<div class="doc">Topology on matrices </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="matrix_Topology">matrix_Topology</a></span>.<br/>
 <br/>
@@ -2745,7 +2759,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#matrix_Topology">matrix_Topology</a></span>.<br/>
 <br/>
-<h2> Weak topology by a function </h2>
+<div class="doc">Weak topology by a function </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Weak_Topology">Weak_Topology</a></span>.<br/>
 <br/>
@@ -2809,7 +2823,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#Weak_Topology">Weak_Topology</a></span>.<br/>
 <br/>
-<h2> Supremum of a family of topologies </h2>
+<div class="doc">Supremum of a family of topologies </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Sup_Topology">Sup_Topology</a></span>.<br/>
 <br/>
@@ -2847,7 +2861,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#Sup_Topology">Sup_Topology</a></span>.<br/>
 <br/>
-<h2> Product topology </h2>
+<div class="doc">Product topology </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Product_Topology">Product_Topology</a></span>.<br/>
 <br/>
@@ -2908,7 +2922,7 @@ Qed.</div>
 <div class="proofscript" id="proof215">
  <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.topology.html#cvg_within">cvg_within</a></span>. Qed.</div>
 <br/>
-<div class="doc">meets </div>
+<div class="doc">meets: </div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="meets_openr">meets_openr</a></span> {<span class="id"><a name="T:1413">T</a></span> : <span class="id"><a href="mathcomp.analysis.topology.html#topologicalType">topologicalType</a></span>} (<span class="id"><a name="F:1414">F</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>)) (<span class="id"><a name="x:1415">x</a></span> : <span class="id">T</span>) :<br/>
 &nbsp;&nbsp;<span class="id">F</span> `#` <span class="id"><a href="mathcomp.analysis.topology.html#nbhs">nbhs</a></span> <span class="id">x</span> = <span class="id">F</span> `#` <span class="id"><a href="mathcomp.analysis.topology.html#open_nbhs">open_nbhs</a></span> <span class="id">x</span>.<br/>
@@ -2952,7 +2966,9 @@ Qed.</div>
 <div class="proofscript" id="proof221">
  <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="mathcomp.analysis.topology.html#meetsxx">meetsxx</a></span>; <span class="id">apply</span>: <span class="id"><a href="mathcomp.analysis.topology.html#filter_not_empty">filter_not_empty</a></span>. Qed.</div>
 <br/>
-<h2> Closed sets in topological spaces </h2>
+<div class="ssrdoc markdown">
+## Closed sets in topological spaces                                       
+</div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Closed">Closed</a></span>.<br/>
 <br/>
@@ -3187,7 +3203,9 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#closure_lemmas">closure_lemmas</a></span>.<br/>
 <br/>
-<h2> Compact sets </h2>
+<div class="ssrdoc markdown">
+## Compact sets                                                            
+</div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Compact">Compact</a></span>.<br/>
 <br/>
@@ -4585,7 +4603,9 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#set_nbhs">set_nbhs</a></span>.<br/>
 <br/>
-<h1> Uniform spaces </h1>
+<div class="ssrdoc markdown">
+## Uniform spaces                                                          
+</div>
 <br/>
 <span class="id">Local</span> <span class="kwd">Notation</span> "<span class="id">A</span> ^-1" := ([<span class="id">set</span> <span class="id"><a name="xy:2021">xy</a></span> | <span class="id">A</span> (<span class="id">xy</span>.2, <span class="id">xy</span>.1)]) : <span class="id">classical_set_scope</span>.<br/>
 <br/>
@@ -5041,7 +5061,7 @@ Qed.</div>
 <span class="kwd">Canonical</span> <span class="id"><a name="prod_uniformType">prod_uniformType</a></span> (<span class="id"><a name="U:2173">U</a></span> <span class="id"><a name="V:2174">V</a></span> : <span class="id"><a href="mathcomp.analysis.topology.html#uniformType">uniformType</a></span>) :=<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.topology.html#UniformType">UniformType</a></span> (<span class="id">U</span> * <span class="id">V</span>) (@<span class="id"><a href="mathcomp.analysis.topology.html#prod_uniformType_mixin">prod_uniformType_mixin</a></span> <span class="id">U</span> <span class="id">V</span>).<br/>
 <br/>
-<div class="doc">matrices </div>
+<div class="doc">Matrices </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="matrix_Uniform">matrix_Uniform</a></span>.<br/>
 <br/>
@@ -5217,7 +5237,9 @@ Qed.</div>
 <span class="kwd">Canonical</span> <span class="id"><a name="set_filter_source">set_filter_source</a></span> (<span class="id"><a name="U:2297">U</a></span> : <span class="id"><a href="mathcomp.analysis.topology.html#uniformType">uniformType</a></span>) :=<br/>
 &nbsp;&nbsp;@<span class="id"><a href="mathcomp.analysis.topology.html#Source">Filtered.Source</a></span> <span class="kwd">Prop</span> <span class="id">_</span> <span class="id">U</span> (<span class="kwd">fun</span> <span class="id"><a name="A:2298">A</a></span> =&gt; <span class="id"><a href="mathcomp.analysis.topology.html#nbhs_">nbhs_</a></span> (@<span class="id"><a href="mathcomp.analysis.topology.html#entourage_set">entourage_set</a></span> <span class="id">U</span>) <span class="id">A</span>).<br/>
 <br/>
-<h1> PseudoMetric spaces defined using balls </h1>
+<div class="ssrdoc markdown">
+## PseudoMetric spaces defined using balls                                 
+</div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="entourage_">entourage_</a></span> {<span class="id"><a name="R:2299">R</a></span> : <span class="id">numDomainType</span>} {<span class="id"><a name="T:2300">T</a></span> <span class="id"><a name="T':2301">T</a></span>'} (<span class="id"><a name="ball:2302">ball</a></span> : <span class="id">T</span> -&gt; <span class="id">R</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>') :=<br/>
 &nbsp;&nbsp;@<span class="id"><a href="mathcomp.analysis.topology.html#filter_from">filter_from</a></span> <span class="id">R</span> <span class="id">_</span> [<span class="id">set</span> <span class="id"><a name="x:2303">x</a></span> | 0 &lt; <span class="id">x</span>] (<span class="kwd">fun</span> <span class="id"><a name="e:2304">e</a></span> =&gt; [<span class="id">set</span> <span class="id"><a name="xy:2305">xy</a></span> | <span class="id">ball</span> <span class="id">xy</span>.1 <span class="id">e</span> <span class="id">xy</span>.2]).<br/>
@@ -5879,7 +5901,9 @@ Qed.</div>
 <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">natr_absz</span> <span class="id">ger0_norm</span> ?<span class="id"><a href="mathcomp.analysis.reals.html#floor_ge0">floor_ge0</a></span> ?<span class="id">invr_ge0</span>// 1?<span class="id">ltW</span>// <span class="id"><a href="mathcomp.analysis.reals.html#lt_succ_floor">lt_succ_floor</a></span>.<br/>
 Qed.</div>
 <br/>
-<h2> Specific pseudoMetric spaces </h2>
+<div class="ssrdoc markdown">
+## Specific pseudoMetric spaces                                            
+</div>
 <br/>
 <div class="doc">matrices </div>
 <span class="kwd">Section</span> <span class="id"><a name="matrix_PseudoMetric">matrix_PseudoMetric</a></span>.<br/>
@@ -6123,7 +6147,9 @@ Qed.</div>
 <span class="kwd">Definition</span> <span class="id"><a name="pseudoMetric_bool">pseudoMetric_bool</a></span> {<span class="id"><a name="R:2736">R</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>} :=<br/>
 &nbsp;&nbsp;@<span class="id"><a href="mathcomp.analysis.topology.html#discrete_pseudoMetricType">discrete_pseudoMetricType</a></span> <span class="id">R</span> [<span class="id">topologicalType</span> <span class="id">of</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#bool">bool</a></span>] <span class="id"><a href="mathcomp.analysis.topology.html#discrete_bool">discrete_bool</a></span>.<br/>
 <br/>
-<h2> Complete uniform spaces </h2>
+<div class="ssrdoc markdown">
+## Complete uniform spaces                                                 
+</div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="cauchy">cauchy</a></span> {<span class="id"><a name="T:2737">T</a></span> : <span class="id"><a href="mathcomp.analysis.topology.html#uniformType">uniformType</a></span>} (<span class="id"><a name="F:2738">F</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>)) := (<span class="id">F</span>, <span class="id">F</span>) --&gt; <span class="id"><a href="mathcomp.analysis.topology.html#entourage">entourage</a></span>.<br/>
 <br/>
@@ -6259,7 +6285,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#fun_Complete">fun_Complete</a></span>.<br/>
 <br/>
-<h2> Limit switching </h2>
+<div class="doc">Limit switching </div>
 <span class="kwd">Section</span> <span class="id"><a name="Cvg_switch">Cvg_switch</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="T1:2787">T1</a></span> <span class="id"><a name="T2:2788">T2</a></span> : <span class="id">choiceType</span>}.<br/>
 <br/>
@@ -6312,7 +6338,9 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.topology.html#Cvg_switch">Cvg_switch</a></span>.<br/>
 <br/>
-<h2> Complete pseudoMetric spaces </h2>
+<div class="ssrdoc markdown">
+## Complete pseudoMetric spaces                                            
+</div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="cauchy_ex">cauchy_ex</a></span> {<span class="id"><a name="R:2818">R</a></span> : <span class="id">numDomainType</span>} {<span class="id"><a name="T:2819">T</a></span> : <span class="id"><a href="mathcomp.analysis.topology.html#pseudoMetricType">pseudoMetricType</a></span> <span class="id">R</span>} (<span class="id"><a name="F:2820">F</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>)) :=<br/>
 &nbsp;&nbsp;<span class="kwd">forall</span> <span class="id"><a name="eps:2821">eps</a></span> : <span class="id">R</span>, 0 &lt; <span class="id">eps</span> -&gt; <span class="kwd">exists</span> <span class="id"><a name="x:2822">x</a></span>, <span class="id">F</span> (<span class="id"><a href="mathcomp.analysis.topology.html#ball">ball</a></span> <span class="id">x</span> <span class="id">eps</span>).<br/>

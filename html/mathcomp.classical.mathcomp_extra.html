@@ -25,13 +25,12 @@
 <span class="kwd">From</span> <span class="id">mathcomp</span> <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">all_ssreflect</span> <span class="id">finmap</span> <span class="id">ssralg</span> <span class="id">ssrnum</span> <span class="id">ssrint</span> <span class="id">rat</span>.<br/>
 <span class="kwd">From</span> <span class="id">mathcomp</span> <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">finset</span> <span class="id">interval</span>.<br/>
 <br/>
-<pre class="ssrdoc">
-MathComp 1.15 additions 
-</pre>
-<br/>
-<pre class="ssrdoc">
+<div class="ssrdoc markdown">
+# MathComp extra                                                           
+                                                                           
 This files contains lemmas and definitions missing from MathComp.          
                                                                            
+```                                                                        
               f \max g := fun x =&gt; Num.max (f x) (g x)                     
               f \min g := fun x =&gt; Num.min (f x) (g x)                     
                oflit f := Some \o f                                        
@@ -46,12 +45,17 @@ This files contains lemmas and definitions missing from MathComp.
             dfwith f x == fun j =&gt; x if j = i, and f j otherwise           
                           given x : T i                                    
                 swap x := (x.2, x.1)                                       
+```                                                                        
                                                                            
-</pre>
+</div>
 <br/>
 <span class="kwd">Set</span> <span class="kwd">Implicit</span> <span class="kwd">Arguments</span>.<br/>
 <span class="id">Unset</span> <span class="id">Strict</span> <span class="kwd">Implicit</span>.<br/>
 <span class="id">Unset</span> <span class="id">Printing</span> <span class="kwd">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+MathComp 1.15 additions 
+</pre>
 <br/>
 <span class="kwd">Reserved</span> <span class="kwd">Notation</span> "<span class="id">f</span> \* <span class="id">g</span>" (<span class="kwd">at</span> <span class="id">level</span> 40, <span class="id">left</span> <span class="id">associativity</span>).<br/>
 <span class="kwd">Reserved</span> <span class="kwd">Notation</span> "<span class="id">f</span> \- <span class="id">g</span>" (<span class="kwd">at</span> <span class="id">level</span> 50, <span class="id">left</span> <span class="id">associativity</span>).<br/>

@@ -20,7 +20,7 @@
 <div class="coq">
 <br/>
 <div class="ssrdoc markdown">
-# An axiomatization of real numbers                                        
+# An axiomatization of real numbers $\mathbb{R}$                           
                                                                            
 This file provides a classical axiomatization of real numbers as a         
 discrete real archimedean field with in particular a theory of floor and   
@@ -35,9 +35,9 @@ ceil.
                                                                            
 The mixin corresponding to realType extends an archiFieldType with two     
 properties:                                                                
- - when sup A exists, it is an upper bound of A (lemma sup_upper_bound)    
- - when sup A exists, there exists an element x in A such that             
-   sup A - eps &lt; x for any 0 &lt; eps (lemma sup_adherent)                    
+- when sup A exists, it is an upper bound of A (lemma sup_upper_bound)     
+- when sup A exists, there exists an element x in A such that              
+  sup A - eps &lt; x for any 0 &lt; eps (lemma sup_adherent)                     
                                                                            
 ```                                                                        
         Rint == the set of real numbers that can be written as z%:~R,      
@@ -355,6 +355,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rint_ltr_addr1">Rint_ltr_addr1</a></span> (<span class="id"><a name="x:65">x</a></span> <span class="id"><a name="y:66">y</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#IsInt.R">R</a></span>) : <span class="id">x</span> \<span class="id">is</span> <span class="id">a</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rint">Rint</a></span> -&gt; <span class="id">y</span> \<span class="id">is</span> <span class="id">a</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rint">Rint</a></span> -&gt;<br/>
 &nbsp;&nbsp;(<span class="id">x</span> &lt; <span class="id">y</span> + 1) = (<span class="id">x</span> &lt;= <span class="id">y</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
 <span class="id">move</span>=&gt; /<span class="id"><a href="mathcomp.analysis.reals.html#RintP">RintP</a></span>[<span class="id">xi</span> -&gt;] /<span class="id"><a href="mathcomp.analysis.reals.html#RintP">RintP</a></span>[<span class="id">yi</span> -&gt;]; <span class="id">rewrite</span> -{3}[1]<span class="id">mulr1z</span>.<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> -<span class="id">intrD</span> !(<span class="id">ltr_int</span>, <span class="id">ler_int</span>) <span class="id">ltz_addr1</span>.<br/>
 Qed.</div>
@@ -372,30 +374,30 @@ Qed.</div>
 &nbsp;&nbsp;<span class="kwd">else</span> 0.<br/>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="RtointK">RtointK</a></span> (<span class="id"><a name="x:70">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#ToInt.R">R</a></span>): <span class="id">x</span> \<span class="id">is</span> <span class="id">a</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rint">Rint</a></span> -&gt; (<span class="id"><a href="mathcomp.analysis.reals.html#Rtoint">Rtoint</a></span> <span class="id">x</span>)%:~<span class="id">R</span> = <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
-<div class="proofscript" id="proof19">
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
 <span class="id">move</span>=&gt; <span class="id">Ix</span>; <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#Rtoint">Rtoint</a></span> <span class="id">insubT</span> /= [<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssrmatching.ssrmatching.html#SsrMatchingSyntax.RHS">RHS</a></span>](<span class="id">eqP</span> (<span class="id">xchooseP</span> (<span class="id"><a href="mathcomp.classical.boolp.html#asboolP">asboolP</a></span> <span class="id">_</span> <span class="id">Ix</span>))).<br/>
 <span class="kwd">by</span> <span class="id">congr</span> <span class="id">_</span>%:~<span class="id">R</span>; <span class="id">apply</span>/<span class="id">eq_xchoose</span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rtointz">Rtointz</a></span> (<span class="id"><a name="z:71">z</a></span> : <span class="id">int</span>): <span class="id"><a href="mathcomp.analysis.reals.html#Rtoint">Rtoint</a></span> <span class="id">z</span>%:~<span class="id">R</span> = <span class="id">z</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
-<div class="proofscript" id="proof20">
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
  <span class="kwd">by</span> <span class="id">apply</span>/<span class="id">eqP</span>; <span class="id">rewrite</span> -(@<span class="id">eqr_int</span> <span class="id"><a href="mathcomp.analysis.reals.html#ToInt.R">R</a></span>) <span class="id"><a href="mathcomp.analysis.reals.html#RtointK">RtointK</a></span> ?<span class="id">rpred_int</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rtointn">Rtointn</a></span> (<span class="id"><a name="n:72">n</a></span> : <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span>): <span class="id"><a href="mathcomp.analysis.reals.html#Rtoint">Rtoint</a></span> <span class="id">n</span>%:<span class="id">R</span> = <span class="id">n</span>%:~<span class="id">R</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
-<div class="proofscript" id="proof21">
+<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
+<div class="proofscript" id="proof22">
  <span class="kwd">by</span> <span class="id">rewrite</span> -{1}<span class="id">mulrz_nat</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rtointz">Rtointz</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inj_Rtoint">inj_Rtoint</a></span> : {<span class="kwd">in</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rint">Rint</a></span> &amp;, <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#injective">injective</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#Rtoint">Rtoint</a></span>}.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
-<div class="proofscript" id="proof22">
+<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
+<div class="proofscript" id="proof23">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">x</span> <span class="id">y</span> <span class="id">Ix</span> <span class="id">Iy</span> /= /(<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#congr1">congr1</a></span> (@<span class="id">intmul</span> <span class="id"><a href="mathcomp.analysis.reals.html#ToInt.R">R</a></span> 1)); <span class="id">rewrite</span> !<span class="id"><a href="mathcomp.analysis.reals.html#RtointK">RtointK</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="RtointN">RtointN</a></span> <span class="id"><a name="x:73">x</a></span> : <span class="id">x</span> \<span class="id">is</span> <span class="id">a</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rint">Rint</a></span> -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#Rtoint">Rtoint</a></span> (- <span class="id">x</span>) = - <span class="id"><a href="mathcomp.analysis.reals.html#Rtoint">Rtoint</a></span> <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
-<div class="proofscript" id="proof23">
+<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
+<div class="proofscript" id="proof24">
 <span class="id">move</span>=&gt; <span class="id">Ir</span>; <span class="id">apply</span>/<span class="id">eqP</span>.<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> -(@<span class="id">eqr_int</span> <span class="id"><a href="mathcomp.analysis.reals.html#ToInt.R">R</a></span>) <span class="id"><a href="mathcomp.analysis.reals.html#RtointK">RtointK</a></span> // ?<span class="id">rpredN</span> // <span class="id">mulrNz</span> <span class="id"><a href="mathcomp.analysis.reals.html#RtointK">RtointK</a></span>.<br/>
 Qed.</div>
@@ -428,38 +430,38 @@ Qed.</div>
 <span class="kwd">Implicit</span> <span class="id">Types</span> <span class="id">x</span> : <span class="id"><a href="mathcomp.analysis.reals.html#RealLemmas.R">R</a></span>.<br/>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_out">sup_out</a></span> <span class="id"><a name="E:84">E</a></span> : ~ <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">E</span> -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span> = 0<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
-<div class="proofscript" id="proof24">
+<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
+<div class="proofscript" id="proof25">
  <span class="id">exact</span>: <span class="id"><a href="mathcomp.classical.classical_sets.html#supremum_out">supremum_out</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup0">sup0</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> (@<span class="id"><a href="mathcomp.classical.classical_sets.html#set0">set0</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#RealLemmas.R">R</a></span>) = 0<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
-<div class="proofscript" id="proof25">
+<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
+<div class="proofscript" id="proof26">
  <span class="id">exact</span>: <span class="id"><a href="mathcomp.classical.classical_sets.html#supremum0">supremum0</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup1">sup1</a></span> <span class="id"><a name="x:85">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> [<span class="id">set</span> <span class="id">x</span>] = <span class="id">x</span><br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
-<div class="proofscript" id="proof26">
+<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
+<div class="proofscript" id="proof27">
  <span class="id">exact</span>: <span class="id"><a href="mathcomp.classical.classical_sets.html#supremum1">supremum1</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_ub">sup_ub</a></span> {<span class="id"><a name="E:86">E</a></span>} : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_ubound">has_ubound</a></span> <span class="id">E</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#ubound">ubound</a></span> <span class="id">E</span> (<span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
-<div class="proofscript" id="proof27">
+<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
+<div class="proofscript" id="proof28">
 <span class="id">move</span>=&gt; <span class="id">ubE</span>; <span class="id">apply</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#ubP">ubP</a></span>=&gt; <span class="id">x</span> <span class="id">x_in_E</span>; <span class="id">move</span>: (<span class="id">x</span>) (<span class="id">x_in_E</span>).<br/>
 <span class="kwd">by</span> <span class="id">apply</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#ubP">ubP</a></span>/<span class="id"><a href="mathcomp.analysis.reals.html#sup_upper_bound">sup_upper_bound</a></span>=&gt; //; <span class="id">split</span>; <span class="id">first</span> <span class="kwd">by</span> <span class="kwd">exists</span> <span class="id">x</span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_ub_strict">sup_ub_strict</a></span> <span class="id"><a name="E:87">E</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_ubound">has_ubound</a></span> <span class="id">E</span> -&gt;<br/>
 &nbsp;&nbsp;~ <span class="id">E</span> (<span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span>) -&gt; <span class="id">E</span> `&lt;=` [<span class="id">set</span> <span class="id"><a name="r:88">r</a></span> | <span class="id">r</span> &lt; <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span>].<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
-<div class="proofscript" id="proof28">
+<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
+<div class="proofscript" id="proof29">
 <span class="id">move</span>=&gt; <span class="id">ubE</span> <span class="id">EsupE</span> <span class="id">r</span> <span class="id">Er</span>; <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.classical.classical_sets.html#mkset">mkset</a></span> <span class="id">lt_neqAle</span> <span class="id"><a href="mathcomp.analysis.reals.html#sup_ub">sup_ub</a></span> // <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andbT">andbT</a></span>.<br/>
 <span class="kwd">by</span> <span class="id">apply</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#negP">negP</a></span> =&gt; /<span class="id">eqP</span> <span class="id">supEr</span>; <span class="id">move</span>: <span class="id">EsupE</span>; <span class="id">rewrite</span> -<span class="id">supEr</span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_total">sup_total</a></span> {<span class="id"><a name="E:89">E</a></span>} <span class="id"><a name="x:90">x</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">E</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> <span class="id">E</span> <span class="id">x</span> \/ <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span> &lt;= <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
-<div class="proofscript" id="proof29">
+<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
+<div class="proofscript" id="proof30">
 <span class="id">move</span>=&gt; <span class="id">has_supE</span>; <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.boolp.html#orC">orC</a></span>.<br/>
 <span class="id">case</span>: (<span class="id">lerP</span> (<span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span>) <span class="id">x</span>)=&gt; <span class="id">hx</span> /=; [<span class="kwd">by</span> <span class="id">left</span>|<span class="id">right</span>].<br/>
 <span class="id">have</span> /<span class="id"><a href="mathcomp.analysis.reals.html#sup_adherent">sup_adherent</a></span>/(<span class="id">_</span>  <span class="id">has_supE</span>) : 0 &lt; <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span> - <span class="id">x</span> <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">subr_gt0</span>.<br/>
@@ -468,8 +470,8 @@ Qed.</div>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_le_ub">sup_le_ub</a></span> {<span class="id"><a name="E:91">E</a></span>} <span class="id"><a name="x:92">x</a></span> : <span class="id">E</span> !=<span class="id">set0</span> -&gt; (<span class="id"><a href="mathcomp.classical.classical_sets.html#ubound">ubound</a></span> <span class="id">E</span>) <span class="id">x</span> -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span> &lt;= <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
-<div class="proofscript" id="proof30">
+<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
+<div class="proofscript" id="proof31">
 <span class="id">move</span>=&gt; <span class="id">hasE</span> <span class="id">leEx</span>; <span class="id">set</span> <span class="id">y</span> := <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">E</span>; <span class="id">pose</span> <span class="id">z</span> := (<span class="id">x</span> + <span class="id">y</span>) / 2%:<span class="id">R</span>.<br/>
 <span class="id">have</span> <span class="id">Dz</span>: 2%:<span class="id">R</span> * <span class="id">z</span> = <span class="id">x</span> + <span class="id">y</span>.<br/>
 &nbsp;&nbsp;<span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">mulrCA</span> <span class="id">divff</span> ?<span class="id">mulr1</span> // <span class="id">pnatr_eq0</span>.<br/>
@@ -484,8 +486,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_setU">sup_setU</a></span> (<span class="id"><a name="A:93">A</a></span> <span class="id"><a name="B:94">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#RealLemmas.R">R</a></span>) : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">B</span> -&gt;<br/>
 &nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id"><a name="a:95">a</a></span> <span class="id"><a name="b:96">b</a></span>, <span class="id">A</span> <span class="id">a</span> -&gt; <span class="id">B</span> <span class="id">b</span> -&gt; <span class="id">a</span> &lt;= <span class="id">b</span>) -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> (<span class="id">A</span> `|` <span class="id">B</span>) = <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">B</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
-<div class="proofscript" id="proof31">
+<div><span class="toggleproof" onclick="toggleDisplay('proof32')">Proof.</span></div>
+<div class="proofscript" id="proof32">
 <span class="id">move</span>=&gt; [<span class="id">B0</span> [<span class="id">l</span> <span class="id">Bl</span>]] <span class="id">AB</span>; <span class="id">apply</span>/<span class="id">eqP</span>; <span class="id">rewrite</span> <span class="id">eq_le</span>; <span class="id">apply</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andP">andP</a></span>; <span class="id">split</span>.<br/>
 - <span class="id">apply</span> <span class="id"><a href="mathcomp.analysis.reals.html#sup_le_ub">sup_le_ub</a></span> =&gt; [|<span class="id">x</span> [<span class="id">Ax</span>|]]; <span class="id">first</span> <span class="kwd">by</span> <span class="id">apply</span>: <span class="id"><a href="mathcomp.classical.classical_sets.html#subset_nonempty">subset_nonempty</a></span> <span class="id">B0</span> =&gt; ?; <span class="id">right</span>.<br/>
 &nbsp;&nbsp;<span class="kwd">by</span> <span class="id">case</span>: <span class="id">B0</span> =&gt; <span class="id">b</span> <span class="id">Bb</span>; <span class="id">rewrite</span> (<span class="id">le_trans</span> (<span class="id">AB</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Ax</span> <span class="id">Bb</span>)) // <span class="id"><a href="mathcomp.analysis.reals.html#sup_ub">sup_ub</a></span> //; <span class="kwd">exists</span> <span class="id">l</span>.<br/>
@@ -496,8 +498,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_gt">sup_gt</a></span> (<span class="id"><a name="S:97">S</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#RealLemmas.R">R</a></span>) (<span class="id"><a name="x:98">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#RealLemmas.R">R</a></span>) : <span class="id">S</span> !=<span class="id">set0</span> -&gt;<br/>
 &nbsp;&nbsp;(<span class="id">x</span> &lt; <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">S</span> -&gt; <span class="kwd">exists2</span> <span class="id"><a name="y:99">y</a></span>, <span class="id">S</span> <span class="id">y</span> &amp; <span class="id">x</span> &lt; <span class="id">y</span>)%<span class="id">R</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof32')">Proof.</span></div>
-<div class="proofscript" id="proof32">
+<div><span class="toggleproof" onclick="toggleDisplay('proof33')">Proof.</span></div>
+<div class="proofscript" id="proof33">
 <span class="id">move</span>=&gt; <span class="id">S0</span>; <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.boolp.html#not_exists2P">not_exists2P</a></span> =&gt; + <span class="id">g</span>; <span class="id">apply</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#negP">negP</a></span>; <span class="id">rewrite</span> -<span class="id">leNgt</span>.<br/>
 <span class="kwd">by</span> <span class="id">apply</span> <span class="id"><a href="mathcomp.analysis.reals.html#sup_le_ub">sup_le_ub</a></span> =&gt; // <span class="id">y</span> <span class="id">Sy</span>; <span class="id">move</span>: (<span class="id">g</span> <span class="id">y</span>) =&gt; -[// | /<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#negP">negP</a></span>]; <span class="id">rewrite</span> <span class="id">leNgt</span>.<br/>
 Qed.</div>
@@ -509,8 +511,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_sumE">sup_sumE</a></span> (<span class="id"><a name="A:102">A</a></span> <span class="id"><a name="B:103">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#sup_sum.R">R</a></span>) :<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">A</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">B</span> -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> [<span class="id">set</span> <span class="id">x</span> + <span class="id">y</span> | <span class="id"><a name="x:104">x</a></span> <span class="kwd">in</span> <span class="id">A</span> &amp; <span class="id"><a name="y:105">y</a></span> <span class="kwd">in</span> <span class="id">B</span>] = <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">A</span> + <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">B</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof33')">Proof.</span></div>
-<div class="proofscript" id="proof33">
+<div><span class="toggleproof" onclick="toggleDisplay('proof34')">Proof.</span></div>
+<div class="proofscript" id="proof34">
 <span class="id">move</span>=&gt; /[<span class="id">dup</span>] <span class="id">supA</span> [[<span class="id">a</span> <span class="id">Aa</span>] <span class="id">ubA</span>] /[<span class="id">dup</span>] <span class="id">supB</span> [[<span class="id">b</span> <span class="id">Bb</span>] <span class="id">ubB</span>].<br/>
 <span class="id">have</span> <span class="id">ABsup</span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> [<span class="id">set</span> <span class="id">x</span> + <span class="id">y</span> | <span class="id"><a name="x:106">x</a></span> <span class="kwd">in</span> <span class="id">A</span> &amp; <span class="id"><a name="y:107">y</a></span> <span class="kwd">in</span> <span class="id">B</span>].<br/>
 &nbsp;&nbsp;<span class="id">split</span>; <span class="id">first</span> <span class="kwd">by</span> <span class="kwd">exists</span> (<span class="id">a</span> + <span class="id">b</span>), <span class="id">a</span> =&gt; //; <span class="kwd">exists</span> <span class="id">b</span>.<br/>
@@ -532,8 +534,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf_sumE">inf_sumE</a></span> (<span class="id"><a name="A:108">A</a></span> <span class="id"><a name="B:109">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#sup_sum.R">R</a></span>) :<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> <span class="id">A</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> <span class="id">B</span> -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> [<span class="id">set</span> <span class="id">x</span> + <span class="id">y</span> | <span class="id"><a name="x:110">x</a></span> <span class="kwd">in</span> <span class="id">A</span> &amp; <span class="id"><a name="y:111">y</a></span> <span class="kwd">in</span> <span class="id">B</span>] = <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">A</span> + <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">B</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof34')">Proof.</span></div>
-<div class="proofscript" id="proof34">
+<div><span class="toggleproof" onclick="toggleDisplay('proof35')">Proof.</span></div>
+<div class="proofscript" id="proof35">
 <span class="id">move</span>/<span class="id"><a href="mathcomp.analysis.reals.html#has_inf_supN">has_inf_supN</a></span> =&gt; ? /<span class="id"><a href="mathcomp.analysis.reals.html#has_inf_supN">has_inf_supN</a></span> ?; <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span>.<br/>
 <span class="id">rewrite</span> [<span class="id">X</span> <span class="kwd">in</span> - <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">X</span> = <span class="id">_</span>](<span class="id">_</span> : <span class="id">_</span> =<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;[<span class="id">set</span> <span class="id">x</span> + <span class="id">y</span> | <span class="id"><a name="x:114">x</a></span> <span class="kwd">in</span> [<span class="id">set</span> - <span class="id">x</span> | <span class="id"><a name="x:112">x</a></span> <span class="kwd">in</span> <span class="id">A</span> ] &amp; <span class="id"><a name="y:115">y</a></span> <span class="kwd">in</span> [<span class="id">set</span> - <span class="id">x</span> | <span class="id"><a name="x:113">x</a></span> <span class="kwd">in</span> <span class="id">B</span>]]).<br/>
@@ -555,69 +557,69 @@ Qed.</div>
 <span class="kwd">Implicit</span> <span class="id">Types</span> <span class="id">x</span> : <span class="id"><a href="mathcomp.analysis.reals.html#InfTheory.R">R</a></span>.<br/>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf_lower_bound">inf_lower_bound</a></span> <span class="id"><a name="E:126">E</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> <span class="id">E</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#lbound">lbound</a></span> <span class="id">E</span> (<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">E</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof35')">Proof.</span></div>
-<div class="proofscript" id="proof35">
+<div><span class="toggleproof" onclick="toggleDisplay('proof36')">Proof.</span></div>
+<div class="proofscript" id="proof36">
 <span class="id">move</span>=&gt; /<span class="id"><a href="mathcomp.analysis.reals.html#has_inf_supN">has_inf_supN</a></span> /<span class="id"><a href="mathcomp.analysis.reals.html#sup_upper_bound">sup_upper_bound</a></span> /<span class="id"><a href="mathcomp.classical.classical_sets.html#ubP">ubP</a></span> <span class="id">inflb</span>; <span class="id">apply</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#lbP">lbP</a></span> =&gt; <span class="id">x</span>.<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.set_interval.html#memNE">memNE</a></span> =&gt; /<span class="id">inflb</span>; <span class="id">rewrite</span> <span class="id">ler_oppl</span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf_adherent">inf_adherent</a></span> <span class="id"><a name="E:127">E</a></span> (<span class="id"><a name="eps:128">eps</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#InfTheory.R">R</a></span>) : 0 &lt; <span class="id">eps</span> -&gt;<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> <span class="id">E</span> -&gt; <span class="kwd">exists2</span> <span class="id"><a name="e:129">e</a></span>, <span class="id">E</span> <span class="id">e</span> &amp; <span class="id">e</span> &lt; <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">E</span> + <span class="id">eps</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof36')">Proof.</span></div>
-<div class="proofscript" id="proof36">
+<div><span class="toggleproof" onclick="toggleDisplay('proof37')">Proof.</span></div>
+<div class="proofscript" id="proof37">
 <span class="id">move</span>=&gt; + /<span class="id"><a href="mathcomp.analysis.reals.html#has_inf_supN">has_inf_supN</a></span> <span class="id">supNE</span> =&gt; /<span class="id"><a href="mathcomp.analysis.reals.html#sup_adherent">sup_adherent</a></span> /(<span class="id">_</span> <span class="id">supNE</span>)[<span class="id">e</span> <span class="id">NEx</span> <span class="id">egtsup</span>].<br/>
 <span class="kwd">exists</span> (- <span class="id">e</span>); <span class="id">first</span> <span class="kwd">by</span> <span class="id">case</span>: <span class="id">NEx</span> =&gt; <span class="id">x</span> <span class="id">Ex</span> &lt;-{}; <span class="id">rewrite</span> <span class="id">opprK</span>.<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">ltr_oppl</span> -<span class="id">mulN1r</span> <span class="id">mulrDr</span> !<span class="id">mulN1r</span> <span class="id">opprK</span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf_out">inf_out</a></span> <span class="id"><a name="E:131">E</a></span> : ~ <span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> <span class="id">E</span> -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">E</span> = 0.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof37')">Proof.</span></div>
-<div class="proofscript" id="proof37">
+<div><span class="toggleproof" onclick="toggleDisplay('proof38')">Proof.</span></div>
+<div class="proofscript" id="proof38">
 <span class="id">move</span>=&gt; <span class="id">ninfE</span>; <span class="id">rewrite</span> -<span class="id">oppr0</span> -(@<span class="id"><a href="mathcomp.analysis.reals.html#sup_out">sup_out</a></span> <span class="id">_</span> (-%<span class="id">R</span> @` <span class="id">E</span>)) =&gt; // <span class="id">supNE</span>; <span class="id">apply</span>: <span class="id">ninfE</span>.<br/>
 <span class="id">exact</span>/<span class="id"><a href="mathcomp.analysis.reals.html#has_inf_supN">has_inf_supN</a></span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf0">inf0</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> (@<span class="id"><a href="mathcomp.classical.classical_sets.html#set0">set0</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#InfTheory.R">R</a></span>) = 0.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof38')">Proof.</span></div>
-<div class="proofscript" id="proof38">
+<div><span class="toggleproof" onclick="toggleDisplay('proof39')">Proof.</span></div>
+<div class="proofscript" id="proof39">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#image_set0">image_set0</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#sup0">sup0</a></span> <span class="id">oppr0</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf1">inf1</a></span> <span class="id"><a name="x:132">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> [<span class="id">set</span> <span class="id">x</span>] = <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof39')">Proof.</span></div>
-<div class="proofscript" id="proof39">
+<div><span class="toggleproof" onclick="toggleDisplay('proof40')">Proof.</span></div>
+<div class="proofscript" id="proof40">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#image_set1">image_set1</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#sup1">sup1</a></span> <span class="id">opprK</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf_lb">inf_lb</a></span> <span class="id"><a name="E:133">E</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_lbound">has_lbound</a></span> <span class="id">E</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#lbound">lbound</a></span> <span class="id">E</span> (<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">E</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof40')">Proof.</span></div>
-<div class="proofscript" id="proof40">
+<div><span class="toggleproof" onclick="toggleDisplay('proof41')">Proof.</span></div>
+<div class="proofscript" id="proof41">
  <span class="kwd">by</span> <span class="id">move</span>/<span class="id"><a href="mathcomp.classical.set_interval.html#has_lb_ubN">has_lb_ubN</a></span>/<span class="id"><a href="mathcomp.analysis.reals.html#sup_ub">sup_ub</a></span>/<span class="id"><a href="mathcomp.classical.set_interval.html#ub_lbN">ub_lbN</a></span>; <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.set_interval.html#setNK">setNK</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf_lb_strict">inf_lb_strict</a></span> <span class="id"><a name="E:134">E</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_lbound">has_lbound</a></span> <span class="id">E</span> -&gt;<br/>
 &nbsp;&nbsp;~ <span class="id">E</span> (<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">E</span>) -&gt; <span class="id">E</span> `&lt;=` [<span class="id">set</span> <span class="id"><a name="r:135">r</a></span> | <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">E</span> &lt; <span class="id">r</span>].<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof41')">Proof.</span></div>
-<div class="proofscript" id="proof41">
+<div><span class="toggleproof" onclick="toggleDisplay('proof42')">Proof.</span></div>
+<div class="proofscript" id="proof42">
 <span class="id">move</span>=&gt; <span class="id">lE</span> <span class="id">EinfE</span> <span class="id">r</span> <span class="id">Er</span>; <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.classical.classical_sets.html#mkset">mkset</a></span> <span class="id">lt_neqAle</span> <span class="id"><a href="mathcomp.analysis.reals.html#inf_lb">inf_lb</a></span> // <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andbT">andbT</a></span>.<br/>
 <span class="kwd">by</span> <span class="id">apply</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#negP">negP</a></span> =&gt; /<span class="id">eqP</span> <span class="id">infEr</span>; <span class="id">move</span>: <span class="id">EinfE</span>; <span class="id">rewrite</span> <span class="id">infEr</span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="lb_le_inf">lb_le_inf</a></span> <span class="id"><a name="E:136">E</a></span> <span class="id"><a name="x:137">x</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#nonempty">nonempty</a></span> <span class="id">E</span> -&gt; (<span class="id"><a href="mathcomp.classical.classical_sets.html#lbound">lbound</a></span> <span class="id">E</span>) <span class="id">x</span> -&gt; <span class="id">x</span> &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">E</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof42')">Proof.</span></div>
-<div class="proofscript" id="proof42">
+<div><span class="toggleproof" onclick="toggleDisplay('proof43')">Proof.</span></div>
+<div class="proofscript" id="proof43">
 <span class="kwd">by</span> <span class="id">move</span>=&gt; /(<span class="id"><a href="mathcomp.classical.set_interval.html#nonemptyN">nonemptyN</a></span> <span class="id">E</span>) <span class="id">En0</span> /<span class="id"><a href="mathcomp.classical.set_interval.html#lb_ubN">lb_ubN</a></span> /(<span class="id"><a href="mathcomp.analysis.reals.html#sup_le_ub">sup_le_ub</a></span> <span class="id">En0</span>); <span class="id">rewrite</span> <span class="id">ler_oppr</span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="has_infPn">has_infPn</a></span> <span class="id"><a name="E:138">E</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#nonempty">nonempty</a></span> <span class="id">E</span> -&gt;<br/>
 &nbsp;&nbsp;~ <span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> <span class="id">E</span> &lt;-&gt; (<span class="kwd">forall</span> <span class="id"><a name="x:139">x</a></span>, <span class="kwd">exists2</span> <span class="id"><a name="y:140">y</a></span>, <span class="id">E</span> <span class="id">y</span> &amp; <span class="id">y</span> &lt; <span class="id">x</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof43')">Proof.</span></div>
-<div class="proofscript" id="proof43">
+<div><span class="toggleproof" onclick="toggleDisplay('proof44')">Proof.</span></div>
+<div class="proofscript" id="proof44">
 <span class="id">move</span>=&gt; <span class="id">nzE</span>; <span class="id">split</span>=&gt; [/<span class="id"><a href="mathcomp.classical.boolp.html#asboolPn">asboolPn</a></span>|/<span class="id"><a href="mathcomp.classical.set_interval.html#has_lbPn">has_lbPn</a></span> <span class="id">h</span> [<span class="id">_</span>] //].<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.boolp.html#asbool_and">asbool_and</a></span> (<span class="id"><a href="mathcomp.classical.boolp.html#asboolT">asboolT</a></span> <span class="id">nzE</span>) /= =&gt; /<span class="id"><a href="mathcomp.classical.boolp.html#asboolP">asboolP</a></span>/<span class="id"><a href="mathcomp.classical.set_interval.html#has_lbPn">has_lbPn</a></span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf_setU">inf_setU</a></span> (<span class="id"><a name="A:142">A</a></span> <span class="id"><a name="B:143">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#InfTheory.R">R</a></span>) : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> <span class="id">A</span> -&gt;<br/>
 &nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id"><a name="a:144">a</a></span> <span class="id"><a name="b:145">b</a></span>, <span class="id">A</span> <span class="id">a</span> -&gt; <span class="id">B</span> <span class="id">b</span> -&gt; <span class="id">a</span> &lt;= <span class="id">b</span>) -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> (<span class="id">A</span> `|` <span class="id">B</span>) = <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">A</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof44')">Proof.</span></div>
-<div class="proofscript" id="proof44">
+<div><span class="toggleproof" onclick="toggleDisplay('proof45')">Proof.</span></div>
+<div class="proofscript" id="proof45">
 <span class="id">move</span>=&gt; <span class="id">hiA</span> <span class="id">AB</span>; <span class="id">congr</span> (- <span class="id">_</span>).<br/>
 <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#image_setU">image_setU</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setUC">setUC</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#sup_setU">sup_setU</a></span> //; <span class="id">first</span> <span class="id">exact</span>/<span class="id"><a href="mathcomp.analysis.reals.html#has_inf_supN">has_inf_supN</a></span>.<br/>
 <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">_</span> <span class="id">_</span> [] <span class="id">b</span> <span class="id">Bb</span> &lt;-{} [] <span class="id">a</span> <span class="id">Aa</span> &lt;-{}; <span class="id">rewrite</span> <span class="id">ler_oppl</span> <span class="id">opprK</span>; <span class="id">apply</span> <span class="id">AB</span>.<br/>
@@ -625,8 +627,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="inf_lt">inf_lt</a></span> (<span class="id"><a name="S:146">S</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#InfTheory.R">R</a></span>) (<span class="id"><a name="x:147">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#InfTheory.R">R</a></span>) : <span class="id">S</span> !=<span class="id">set0</span> -&gt;<br/>
 &nbsp;&nbsp;(<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">S</span> &lt; <span class="id">x</span> -&gt; <span class="kwd">exists2</span> <span class="id"><a name="y:148">y</a></span>, <span class="id">S</span> <span class="id">y</span> &amp; <span class="id">y</span> &lt; <span class="id">x</span>)%<span class="id">R</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof45')">Proof.</span></div>
-<div class="proofscript" id="proof45">
+<div><span class="toggleproof" onclick="toggleDisplay('proof46')">Proof.</span></div>
+<div class="proofscript" id="proof46">
 <span class="id">move</span>=&gt; /<span class="id"><a href="mathcomp.classical.set_interval.html#nonemptyN">nonemptyN</a></span> <span class="id">S0</span>; <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">ltr_oppl</span> =&gt; /<span class="id"><a href="mathcomp.analysis.reals.html#sup_gt">sup_gt</a></span> =&gt; /(<span class="id">_</span> <span class="id">S0</span>)[<span class="id">r</span> [<span class="id">r</span>' <span class="id">Sr</span>']].<br/>
 <span class="kwd">by</span> <span class="id">move</span>=&gt; &lt;-; <span class="id">rewrite</span> <span class="id">ltr_oppr</span> <span class="id">opprK</span> =&gt; <span class="id">r</span>'<span class="id">x</span>; <span class="kwd">exists</span> <span class="id">r</span>'.<br/>
 Qed.</div>
@@ -639,8 +641,8 @@ Qed.</div>
 <span class="kwd">Implicit</span> <span class="id">Types</span> <span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>.<br/>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="has_sup_floor_set">has_sup_floor_set</a></span> <span class="id"><a name="x:151">x</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> (<span class="id"><a href="mathcomp.analysis.reals.html#floor_set">floor_set</a></span> <span class="id">x</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof46')">Proof.</span></div>
-<div class="proofscript" id="proof46">
+<div><span class="toggleproof" onclick="toggleDisplay('proof47')">Proof.</span></div>
+<div class="proofscript" id="proof47">
 <span class="id">split</span>; [<span class="kwd">exists</span> (- (<span class="id">Num.bound</span> (-<span class="id">x</span>))%:~<span class="id">R</span>) | <span class="kwd">exists</span> (<span class="id">Num.bound</span> <span class="id">x</span>)%:~<span class="id">R</span>].<br/>
 &nbsp;&nbsp;<span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#floor_set">floor_set</a></span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#mkset">mkset</a></span> <span class="id">rpredN</span> <span class="id">rpred_int</span> /= <span class="id">ler_oppl</span>.<br/>
 &nbsp;&nbsp;<span class="id">case</span>: (<span class="id">ger0P</span> (-<span class="id">x</span>)) =&gt; [/<span class="id">archi_boundP</span>/<span class="id">ltW</span>//|].<br/>
@@ -651,8 +653,8 @@ Qed.</div>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_in_floor_set">sup_in_floor_set</a></span> <span class="id"><a name="x:152">x</a></span> : (<span class="id"><a href="mathcomp.analysis.reals.html#floor_set">floor_set</a></span> <span class="id">x</span>) (<span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> (<span class="id"><a href="mathcomp.analysis.reals.html#floor_set">floor_set</a></span> <span class="id">x</span>)).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof47')">Proof.</span></div>
-<div class="proofscript" id="proof47">
+<div><span class="toggleproof" onclick="toggleDisplay('proof48')">Proof.</span></div>
+<div class="proofscript" id="proof48">
 <span class="id">have</span> /(<span class="id"><a href="mathcomp.analysis.reals.html#sup_adherent">sup_adherent</a></span> <span class="id">ltr01</span>) [<span class="id">y</span> <span class="id">Fy</span>] := <span class="id"><a href="mathcomp.analysis.reals.html#has_sup_floor_set">has_sup_floor_set</a></span> <span class="id">x</span>.<br/>
 <span class="id">have</span> /<span class="id"><a href="mathcomp.analysis.reals.html#sup_upper_bound">sup_upper_bound</a></span> /<span class="id"><a href="mathcomp.classical.classical_sets.html#ubP">ubP</a></span> /(<span class="id">_</span> <span class="id">_</span> <span class="id">Fy</span>) := <span class="id"><a href="mathcomp.analysis.reals.html#has_sup_floor_set">has_sup_floor_set</a></span> <span class="id">x</span>.<br/>
 <span class="id">rewrite</span> <span class="id">le_eqVlt</span>=&gt; /<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#orP">orP</a></span>[/<span class="id">eqP</span>&lt;-//| <span class="id">lt_yFx</span>].<br/>
@@ -670,18 +672,18 @@ Qed.</div>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="isint_Rfloor">isint_Rfloor</a></span> <span class="id"><a name="x:153">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> \<span class="id">is</span> <span class="id">a</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rint">Rint</a></span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof48')">Proof.</span></div>
-<div class="proofscript" id="proof48">
+<div><span class="toggleproof" onclick="toggleDisplay('proof49')">Proof.</span></div>
+<div class="proofscript" id="proof49">
  <span class="kwd">by</span> <span class="id">case</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andP">andP</a></span>: (<span class="id"><a href="mathcomp.analysis.reals.html#sup_in_floor_set">sup_in_floor_set</a></span> <span class="id">x</span>). Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="RfloorE">RfloorE</a></span> <span class="id"><a name="x:154">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> = (<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span>)%:~<span class="id">R</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof49')">Proof.</span></div>
-<div class="proofscript" id="proof49">
+<div><span class="toggleproof" onclick="toggleDisplay('proof50')">Proof.</span></div>
+<div class="proofscript" id="proof50">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#RtointK">RtointK</a></span> ?<span class="id"><a href="mathcomp.analysis.reals.html#isint_Rfloor">isint_Rfloor</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="mem_rg1_Rfloor">mem_rg1_Rfloor</a></span> <span class="id"><a name="x:155">x</a></span> : (<span class="id"><a href="mathcomp.analysis.reals.html#range1">range1</a></span> (<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span>)) <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof50')">Proof.</span></div>
-<div class="proofscript" id="proof50">
+<div><span class="toggleproof" onclick="toggleDisplay('proof51')">Proof.</span></div>
+<div class="proofscript" id="proof51">
 <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#range1">range1</a></span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#mkset">mkset</a></span>.<br/>
 <span class="id">have</span> /<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andP">andP</a></span>[<span class="id">_</span> -&gt;] /= := <span class="id"><a href="mathcomp.analysis.reals.html#sup_in_floor_set">sup_in_floor_set</a></span> <span class="id">x</span>.<br/>
 <span class="id">have</span> [|] := <span class="id"><a href="mathcomp.classical.boolp.html#pselect">pselect</a></span> ((<span class="id"><a href="mathcomp.analysis.reals.html#floor_set">floor_set</a></span> <span class="id">x</span>) (<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> + 1)); <span class="id">last</span> <span class="id">first</span>.<br/>
@@ -692,24 +694,24 @@ Qed.</div>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rfloor_le">Rfloor_le</a></span> <span class="id"><a name="x:156">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> &lt;= <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof51')">Proof.</span></div>
-<div class="proofscript" id="proof51">
+<div><span class="toggleproof" onclick="toggleDisplay('proof52')">Proof.</span></div>
+<div class="proofscript" id="proof52">
  <span class="kwd">by</span> <span class="id">case</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andP">andP</a></span>: (<span class="id"><a href="mathcomp.analysis.reals.html#mem_rg1_Rfloor">mem_rg1_Rfloor</a></span> <span class="id">x</span>). Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor_le">floor_le</a></span> <span class="id"><a name="x:157">x</a></span> : (<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span>)%:~<span class="id">R</span> &lt;= <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof52')">Proof.</span></div>
-<div class="proofscript" id="proof52">
+<div><span class="toggleproof" onclick="toggleDisplay('proof53')">Proof.</span></div>
+<div class="proofscript" id="proof53">
  <span class="kwd">by</span> <span class="id">rewrite</span> -<span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span>; <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_le">Rfloor_le</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="lt_succ_Rfloor">lt_succ_Rfloor</a></span> <span class="id"><a name="x:158">x</a></span> : <span class="id">x</span> &lt; <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> + 1.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof53')">Proof.</span></div>
-<div class="proofscript" id="proof53">
+<div><span class="toggleproof" onclick="toggleDisplay('proof54')">Proof.</span></div>
+<div class="proofscript" id="proof54">
  <span class="kwd">by</span> <span class="id">case</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andP">andP</a></span>: (<span class="id"><a href="mathcomp.analysis.reals.html#mem_rg1_Rfloor">mem_rg1_Rfloor</a></span> <span class="id">x</span>). Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="range1z_inj">range1z_inj</a></span> <span class="id"><a name="x:159">x</a></span> (<span class="id"><a name="m1:160">m1</a></span> <span class="id"><a name="m2:161">m2</a></span> : <span class="id">int</span>) :<br/>
 &nbsp;&nbsp;(<span class="id"><a href="mathcomp.analysis.reals.html#range1">range1</a></span> <span class="id">m1</span>%:~<span class="id">R</span>) <span class="id">x</span> -&gt; (<span class="id"><a href="mathcomp.analysis.reals.html#range1">range1</a></span> <span class="id">m2</span>%:~<span class="id">R</span>) <span class="id">x</span> -&gt; <span class="id">m1</span> = <span class="id">m2</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof54')">Proof.</span></div>
-<div class="proofscript" id="proof54">
+<div><span class="toggleproof" onclick="toggleDisplay('proof55')">Proof.</span></div>
+<div class="proofscript" id="proof55">
 <span class="id">move</span>=&gt; /<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andP">andP</a></span>[<span class="id">m1x</span> <span class="id">x_m1</span>] /<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andP">andP</a></span>[<span class="id">m2x</span> <span class="id">x_m2</span>].<br/>
 <span class="id">wlog</span> <span class="id">suffices</span>: <span class="id">m1</span> <span class="id">m2</span> <span class="id">m1x</span> {<span class="id">x_m1</span> <span class="id">m2x</span>} <span class="id">x_m2</span> / (<span class="id">m1</span> &lt;= <span class="id">m2</span>).<br/>
 &nbsp;&nbsp;<span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">ih</span>; <span class="id">apply</span>/<span class="id">eqP</span>; <span class="id">rewrite</span> <span class="id">eq_le</span> !<span class="id">ih</span>.<br/>
@@ -718,101 +720,101 @@ Qed.</div>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="range1rr">range1rr</a></span> <span class="id"><a name="x:162">x</a></span> : (<span class="id"><a href="mathcomp.analysis.reals.html#range1">range1</a></span> <span class="id">x</span>) <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof55')">Proof.</span></div>
-<div class="proofscript" id="proof55">
+<div><span class="toggleproof" onclick="toggleDisplay('proof56')">Proof.</span></div>
+<div class="proofscript" id="proof56">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#range1">range1</a></span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#mkset">mkset</a></span> <span class="id">lexx</span> /= <span class="id">ltr_addl</span> <span class="id">ltr01</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="range1zP">range1zP</a></span> (<span class="id"><a name="m:163">m</a></span> : <span class="id">int</span>) <span class="id"><a name="x:164">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> = <span class="id">m</span>%:~<span class="id">R</span> &lt;-&gt; (<span class="id"><a href="mathcomp.analysis.reals.html#range1">range1</a></span> <span class="id">m</span>%:~<span class="id">R</span>) <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof56')">Proof.</span></div>
-<div class="proofscript" id="proof56">
+<div><span class="toggleproof" onclick="toggleDisplay('proof57')">Proof.</span></div>
+<div class="proofscript" id="proof57">
 <span class="id">split</span>=&gt; [&lt;-|<span class="id">h</span>]; <span class="id">first</span> <span class="id">exact</span>/<span class="id"><a href="mathcomp.analysis.reals.html#mem_rg1_Rfloor">mem_rg1_Rfloor</a></span>.<br/>
 <span class="id">apply</span>/<span class="id">eqP</span>; <span class="id">rewrite</span> <span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span> <span class="id">eqr_int</span>; <span class="id">apply</span>/<span class="id">eqP</span>/(@<span class="id"><a href="mathcomp.analysis.reals.html#range1z_inj">range1z_inj</a></span> <span class="id">x</span>) =&gt; //.<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#range1">range1</a></span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#mkset">mkset</a></span> -<span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#mem_rg1_Rfloor">mem_rg1_Rfloor</a></span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rfloor_natz">Rfloor_natz</a></span> (<span class="id"><a name="z:165">z</a></span> : <span class="id">int</span>) : <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">z</span>%:~<span class="id">R</span> = <span class="id">z</span>%:~<span class="id">R</span> :&gt; <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof57')">Proof.</span></div>
-<div class="proofscript" id="proof57">
+<div><span class="toggleproof" onclick="toggleDisplay('proof58')">Proof.</span></div>
+<div class="proofscript" id="proof58">
  <span class="kwd">by</span> <span class="id">apply</span>/<span class="id"><a href="mathcomp.analysis.reals.html#range1zP">range1zP</a></span>/<span class="id"><a href="mathcomp.analysis.reals.html#range1rr">range1rr</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rfloor0">Rfloor0</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> 0 = 0 :&gt; <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof58')">Proof.</span></div>
-<div class="proofscript" id="proof58">
+<div><span class="toggleproof" onclick="toggleDisplay('proof59')">Proof.</span></div>
+<div class="proofscript" id="proof59">
  <span class="kwd">by</span> <span class="id">rewrite</span> -{1}(<span class="id">mulr0z</span> 1) <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_natz">Rfloor_natz</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rfloor1">Rfloor1</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> 1 = 1 :&gt; <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof59')">Proof.</span></div>
-<div class="proofscript" id="proof59">
+<div><span class="toggleproof" onclick="toggleDisplay('proof60')">Proof.</span></div>
+<div class="proofscript" id="proof60">
  <span class="kwd">by</span> <span class="id">rewrite</span> -{1}(<span class="id">mulr1z</span> 1) <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_natz">Rfloor_natz</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="le_Rfloor">le_Rfloor</a></span> : {<span class="id">homo</span> (@<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) : <span class="id"><a name="x:166">x</a></span> <span class="id"><a name="y:167">y</a></span> / <span class="id">x</span> &lt;= <span class="id">y</span>}.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof60')">Proof.</span></div>
-<div class="proofscript" id="proof60">
+<div><span class="toggleproof" onclick="toggleDisplay('proof61')">Proof.</span></div>
+<div class="proofscript" id="proof61">
 <span class="id">move</span>=&gt; <span class="id">x</span> <span class="id">y</span> <span class="id">le_xy</span>; <span class="id">case</span>: <span class="id">lerP</span>=&gt; //=; <span class="id">rewrite</span> -<span class="id"><a href="mathcomp.analysis.reals.html#Rint_ler_addr1">Rint_ler_addr1</a></span> ?<span class="id"><a href="mathcomp.analysis.reals.html#isint_Rfloor">isint_Rfloor</a></span> //.<br/>
 <span class="id">move</span>/(<span class="id">lt_le_trans</span> (<span class="id"><a href="mathcomp.analysis.reals.html#lt_succ_Rfloor">lt_succ_Rfloor</a></span> <span class="id">y</span>))/<span class="id">lt_le_trans</span>/(<span class="id">_</span> (<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_le">Rfloor_le</a></span> <span class="id">x</span>)).<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">ltNge</span> <span class="id">le_xy</span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rfloor_ge_int">Rfloor_ge_int</a></span> <span class="id"><a name="x:170">x</a></span> (<span class="id"><a name="n:171">n</a></span> : <span class="id">int</span>) : (<span class="id">n</span>%:~<span class="id">R</span> &lt;= <span class="id">x</span>)= (<span class="id">n</span>%:~<span class="id">R</span> &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof61')">Proof.</span></div>
-<div class="proofscript" id="proof61">
+<div><span class="toggleproof" onclick="toggleDisplay('proof62')">Proof.</span></div>
+<div class="proofscript" id="proof62">
 <span class="id">apply</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#idP">idP</a></span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#idP">idP</a></span>; <span class="id">last</span> <span class="kwd">by</span> <span class="id">move</span>/<span class="id">le_trans</span> =&gt; /(<span class="id">_</span> <span class="id">_</span> (<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_le">Rfloor_le</a></span> <span class="id">x</span>)).<br/>
 <span class="kwd">by</span> <span class="id">move</span>/<span class="id"><a href="mathcomp.analysis.reals.html#le_Rfloor">le_Rfloor</a></span>; <span class="id">apply</span> <span class="id">le_trans</span>; <span class="id">rewrite</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_natz">Rfloor_natz</a></span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rfloor_lt_int">Rfloor_lt_int</a></span> <span class="id"><a name="x:172">x</a></span> (<span class="id"><a name="z:173">z</a></span> : <span class="id">int</span>) : (<span class="id">x</span> &lt; <span class="id">z</span>%:~<span class="id">R</span>) = (<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> &lt; <span class="id">z</span>%:~<span class="id">R</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof62')">Proof.</span></div>
-<div class="proofscript" id="proof62">
+<div><span class="toggleproof" onclick="toggleDisplay('proof63')">Proof.</span></div>
+<div class="proofscript" id="proof63">
  <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">ltNge</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_ge_int">Rfloor_ge_int</a></span> -<span class="id">ltNge</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rfloor_le0">Rfloor_le0</a></span> <span class="id"><a name="x:174">x</a></span> : <span class="id">x</span> &lt;= 0 -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> &lt;= 0.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof63')">Proof.</span></div>
-<div class="proofscript" id="proof63">
+<div><span class="toggleproof" onclick="toggleDisplay('proof64')">Proof.</span></div>
+<div class="proofscript" id="proof64">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; ?; <span class="id">rewrite</span> -<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor0">Rfloor0</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#le_Rfloor">le_Rfloor</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rfloor_lt0">Rfloor_lt0</a></span> <span class="id"><a name="x:175">x</a></span> : <span class="id">x</span> &lt; 0 -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor">Rfloor</a></span> <span class="id">x</span> &lt; 0.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof64')">Proof.</span></div>
-<div class="proofscript" id="proof64">
+<div><span class="toggleproof" onclick="toggleDisplay('proof65')">Proof.</span></div>
+<div class="proofscript" id="proof65">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">x0</span>; <span class="id">rewrite</span> (<span class="id">le_lt_trans</span> <span class="id">_</span> <span class="id">x0</span>) // <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_le">Rfloor_le</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor_natz">floor_natz</a></span> <span class="id"><a name="n:176">n</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> (<span class="id">n</span>%:<span class="id">R</span> : <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) = <span class="id">n</span>%:~<span class="id">R</span> :&gt; <span class="id">int</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof65')">Proof.</span></div>
-<div class="proofscript" id="proof65">
+<div><span class="toggleproof" onclick="toggleDisplay('proof66')">Proof.</span></div>
+<div class="proofscript" id="proof66">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> (<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_natz">Rfloor_natz</a></span> <span class="id">n</span>) <span class="id"><a href="mathcomp.analysis.reals.html#Rtointz">Rtointz</a></span> <span class="id">intz</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor0">floor0</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> (0 : <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) = 0.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof66')">Proof.</span></div>
-<div class="proofscript" id="proof66">
+<div><span class="toggleproof" onclick="toggleDisplay('proof67')">Proof.</span></div>
+<div class="proofscript" id="proof67">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor0">Rfloor0</a></span> (<span class="id">_</span> : 0 = 0%:<span class="id">R</span>) // <span class="id"><a href="mathcomp.analysis.reals.html#Rtointn">Rtointn</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor1">floor1</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> (1 : <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) = 1.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof67')">Proof.</span></div>
-<div class="proofscript" id="proof67">
+<div><span class="toggleproof" onclick="toggleDisplay('proof68')">Proof.</span></div>
+<div class="proofscript" id="proof68">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor1">Rfloor1</a></span> (<span class="id">_</span> : 1 = 1%:<span class="id">R</span>) // <span class="id"><a href="mathcomp.analysis.reals.html#Rtointn">Rtointn</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor_ge0">floor_ge0</a></span> <span class="id"><a name="x:177">x</a></span> : (0 &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span>) = (0 &lt;= <span class="id">x</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof68')">Proof.</span></div>
-<div class="proofscript" id="proof68">
+<div><span class="toggleproof" onclick="toggleDisplay('proof69')">Proof.</span></div>
+<div class="proofscript" id="proof69">
  <span class="kwd">by</span> <span class="id">rewrite</span> -(@<span class="id">ler_int</span> <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) -<span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span> -<span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_ge_int">Rfloor_ge_int</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor_le0">floor_le0</a></span> <span class="id"><a name="x:178">x</a></span> : <span class="id">x</span> &lt;= 0 -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span> &lt;= 0.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof69')">Proof.</span></div>
-<div class="proofscript" id="proof69">
+<div><span class="toggleproof" onclick="toggleDisplay('proof70')">Proof.</span></div>
+<div class="proofscript" id="proof70">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; ?; <span class="id">rewrite</span> -(@<span class="id">ler_int</span> <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) -<span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_le0">Rfloor_le0</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor_lt0">floor_lt0</a></span> <span class="id"><a name="x:179">x</a></span> : <span class="id">x</span> &lt; 0 -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span> &lt; 0.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof70')">Proof.</span></div>
-<div class="proofscript" id="proof70">
+<div><span class="toggleproof" onclick="toggleDisplay('proof71')">Proof.</span></div>
+<div class="proofscript" id="proof71">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; ?; <span class="id">rewrite</span> -(@<span class="id">ltrz0</span> <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) <span class="id"><a href="mathcomp.analysis.reals.html#RtointK">RtointK</a></span> ?<span class="id"><a href="mathcomp.analysis.reals.html#isint_Rfloor">isint_Rfloor</a></span>// <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_lt0">Rfloor_lt0</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="le_floor">le_floor</a></span> : {<span class="id">homo</span> @<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span> : <span class="id"><a name="x:180">x</a></span> <span class="id"><a name="y:181">y</a></span> / <span class="id">x</span> &lt;= <span class="id">y</span>}.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof71')">Proof.</span></div>
-<div class="proofscript" id="proof71">
+<div><span class="toggleproof" onclick="toggleDisplay('proof72')">Proof.</span></div>
+<div class="proofscript" id="proof72">
  <span class="kwd">by</span> <span class="id">move</span>=&gt;*; <span class="id">rewrite</span> -(@<span class="id">ler_int</span> <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) !<span class="id"><a href="mathcomp.analysis.reals.html#RtointK">RtointK</a></span> ?<span class="id"><a href="mathcomp.analysis.reals.html#isint_Rfloor">isint_Rfloor</a></span> ?<span class="id"><a href="mathcomp.analysis.reals.html#le_Rfloor">le_Rfloor</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor_neq0">floor_neq0</a></span> <span class="id"><a name="x:184">x</a></span> : (<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span> != 0) = (<span class="id">x</span> &lt; 0) || (<span class="id">x</span> &gt;= 1).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof72')">Proof.</span></div>
-<div class="proofscript" id="proof72">
+<div><span class="toggleproof" onclick="toggleDisplay('proof73')">Proof.</span></div>
+<div class="proofscript" id="proof73">
 <span class="id">apply</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#idP">idP</a></span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#orP">orP</a></span> =&gt; [|[<span class="id">x0</span>|/<span class="id"><a href="mathcomp.analysis.reals.html#le_floor">le_floor</a></span> <span class="id">r1</span>]]; <span class="id">first</span> <span class="id">rewrite</span> <span class="id">neq_lt</span> =&gt; /<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#orP">orP</a></span>[<span class="id">x0</span>|<span class="id">x0</span>].<br/>
 - <span class="kwd">by</span> <span class="id">left</span>; <span class="id">apply</span>: <span class="id">contra_lt</span> <span class="id">x0</span>; <span class="id">rewrite</span> <span class="id"><a href="mathcomp.analysis.reals.html#floor_ge0">floor_ge0</a></span>.<br/>
 - <span class="kwd">by</span> <span class="id">right</span>; <span class="id">rewrite</span> (<span class="id">le_trans</span> <span class="id">_</span> (<span class="id"><a href="mathcomp.analysis.reals.html#floor_le">floor_le</a></span> <span class="id">_</span>))// <span class="id">ler1z</span> -<span class="id">gtz0_ge1</span>.<br/>
@@ -821,23 +823,23 @@ Qed.</div>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="lt_succ_floor">lt_succ_floor</a></span> <span class="id"><a name="x:185">x</a></span> : <span class="id">x</span> &lt; (<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span>)%:~<span class="id">R</span> + 1.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof73')">Proof.</span></div>
-<div class="proofscript" id="proof73">
+<div><span class="toggleproof" onclick="toggleDisplay('proof74')">Proof.</span></div>
+<div class="proofscript" id="proof74">
  <span class="kwd">by</span> <span class="id">rewrite</span> -<span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#lt_succ_Rfloor">lt_succ_Rfloor</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor_lt_int">floor_lt_int</a></span> <span class="id"><a name="x:186">x</a></span> (<span class="id"><a name="z:187">z</a></span> : <span class="id">int</span>) : (<span class="id">x</span> &lt; <span class="id">z</span>%:~<span class="id">R</span>) = (<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span> &lt; <span class="id">z</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof74')">Proof.</span></div>
-<div class="proofscript" id="proof74">
+<div><span class="toggleproof" onclick="toggleDisplay('proof75')">Proof.</span></div>
+<div class="proofscript" id="proof75">
  <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_lt_int">Rfloor_lt_int</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span> <span class="id">ltr_int</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floor_ge_int">floor_ge_int</a></span> <span class="id"><a name="x:188">x</a></span> (<span class="id"><a name="z:189">z</a></span> : <span class="id">int</span>) : (<span class="id">z</span>%:~<span class="id">R</span> &lt;= <span class="id">x</span>) = (<span class="id">z</span> &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof75')">Proof.</span></div>
-<div class="proofscript" id="proof75">
+<div><span class="toggleproof" onclick="toggleDisplay('proof76')">Proof.</span></div>
+<div class="proofscript" id="proof76">
  <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_ge_int">Rfloor_ge_int</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span> <span class="id">ler_int</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="ltr_add_invr">ltr_add_invr</a></span> (<span class="id"><a name="y:190">y</a></span> <span class="id"><a name="x:191">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#FloorTheory.R">R</a></span>) : <span class="id">y</span> &lt; <span class="id">x</span> -&gt; <span class="kwd">exists</span> <span class="id"><a name="k:192">k</a></span>, <span class="id">y</span> + <span class="id">k</span>.+1%:<span class="id">R</span>^-1 &lt; <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof76')">Proof.</span></div>
-<div class="proofscript" id="proof76">
+<div><span class="toggleproof" onclick="toggleDisplay('proof77')">Proof.</span></div>
+<div class="proofscript" id="proof77">
 <span class="id">move</span>=&gt; <span class="id">yx</span>; <span class="kwd">exists</span> `|<span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> (<span class="id">x</span> - <span class="id">y</span>)^-1|%<span class="id">N</span>.<br/>
 <span class="id">rewrite</span> -<span class="id">ltr_subr_addl</span> -{2}(<span class="id">invrK</span> (<span class="id">x</span> - <span class="id">y</span>)%<span class="id">R</span>) <span class="id">ltf_pinv</span> ?<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#qualifE">qualifE</a></span> ?<span class="id">ltr0n</span>//.<br/>
 &nbsp;&nbsp;<span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">invr_gt0</span> <span class="id">subr_gt0</span>.<br/>
@@ -854,78 +856,78 @@ Qed.</div>
 <span class="kwd">Implicit</span> <span class="id">Types</span> <span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="mathcomp.analysis.reals.html#CeilTheory.R">R</a></span>.<br/>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="isint_Rceil">isint_Rceil</a></span> <span class="id"><a name="x:194">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> <span class="id">x</span> \<span class="id">is</span> <span class="id">a</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rint">Rint</a></span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof77')">Proof.</span></div>
-<div class="proofscript" id="proof77">
+<div><span class="toggleproof" onclick="toggleDisplay('proof78')">Proof.</span></div>
+<div class="proofscript" id="proof78">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> <span class="id">rpredN</span> <span class="id"><a href="mathcomp.analysis.reals.html#isint_Rfloor">isint_Rfloor</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rceil0">Rceil0</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> 0 = 0 :&gt; <span class="id"><a href="mathcomp.analysis.reals.html#CeilTheory.R">R</a></span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof78')">Proof.</span></div>
-<div class="proofscript" id="proof78">
+<div><span class="toggleproof" onclick="toggleDisplay('proof79')">Proof.</span></div>
+<div class="proofscript" id="proof79">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> <span class="id">oppr0</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor0">Rfloor0</a></span> <span class="id">oppr0</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rceil_ge">Rceil_ge</a></span> <span class="id"><a name="x:195">x</a></span> : <span class="id">x</span> &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof79')">Proof.</span></div>
-<div class="proofscript" id="proof79">
+<div><span class="toggleproof" onclick="toggleDisplay('proof80')">Proof.</span></div>
+<div class="proofscript" id="proof80">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> <span class="id">ler_oppr</span> <span class="id"><a href="mathcomp.analysis.reals.html#Rfloor_le">Rfloor_le</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="le_Rceil">le_Rceil</a></span> : {<span class="id">homo</span> (@<span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#CeilTheory.R">R</a></span>) : <span class="id"><a name="x:196">x</a></span> <span class="id"><a name="y:197">y</a></span> / <span class="id">x</span> &lt;= <span class="id">y</span>}.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof80')">Proof.</span></div>
-<div class="proofscript" id="proof80">
+<div><span class="toggleproof" onclick="toggleDisplay('proof81')">Proof.</span></div>
+<div class="proofscript" id="proof81">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">x</span> <span class="id">y</span> ?; <span class="id">rewrite</span> <span class="id">ler_oppl</span> <span class="id">opprK</span> <span class="id"><a href="mathcomp.analysis.reals.html#le_Rfloor">le_Rfloor</a></span> // <span class="id">ler_oppl</span> <span class="id">opprK</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Rceil_ge0">Rceil_ge0</a></span> <span class="id"><a name="x:200">x</a></span> : 0 &lt;= <span class="id">x</span> -&gt; 0 &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof81')">Proof.</span></div>
-<div class="proofscript" id="proof81">
+<div><span class="toggleproof" onclick="toggleDisplay('proof82')">Proof.</span></div>
+<div class="proofscript" id="proof82">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; ?; <span class="id">rewrite</span> -<span class="id"><a href="mathcomp.analysis.reals.html#Rceil0">Rceil0</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#le_Rceil">le_Rceil</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="RceilE">RceilE</a></span> <span class="id"><a name="x:201">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> <span class="id">x</span> = (<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">x</span>)%:~<span class="id">R</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof82')">Proof.</span></div>
-<div class="proofscript" id="proof82">
+<div><span class="toggleproof" onclick="toggleDisplay('proof83')">Proof.</span></div>
+<div class="proofscript" id="proof83">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#Rceil">Rceil</a></span> /<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#RfloorE">RfloorE</a></span> <span class="id">mulrNz</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="ceil_ge">ceil_ge</a></span> <span class="id"><a name="x:202">x</a></span> : <span class="id">x</span> &lt;= (<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">x</span>)%:~<span class="id">R</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof83')">Proof.</span></div>
-<div class="proofscript" id="proof83">
+<div><span class="toggleproof" onclick="toggleDisplay('proof84')">Proof.</span></div>
+<div class="proofscript" id="proof84">
  <span class="kwd">by</span> <span class="id">rewrite</span> -<span class="id"><a href="mathcomp.analysis.reals.html#RceilE">RceilE</a></span>; <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.reals.html#Rceil_ge">Rceil_ge</a></span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="ceil_ge0">ceil_ge0</a></span> <span class="id"><a name="x:203">x</a></span> : 0 &lt;= <span class="id">x</span> -&gt; 0 &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof84')">Proof.</span></div>
-<div class="proofscript" id="proof84">
+<div><span class="toggleproof" onclick="toggleDisplay('proof85')">Proof.</span></div>
+<div class="proofscript" id="proof85">
  <span class="kwd">by</span> <span class="id">move</span>/(<span class="id">ge_trans</span> (<span class="id"><a href="mathcomp.analysis.reals.html#ceil_ge">ceil_ge</a></span> <span class="id">x</span>)); <span class="id">rewrite</span> -(<span class="id">ler_int</span> <span class="id"><a href="mathcomp.analysis.reals.html#CeilTheory.R">R</a></span>). Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="ceil_gt0">ceil_gt0</a></span> <span class="id"><a name="x:204">x</a></span> : 0 &lt; <span class="id">x</span> -&gt; 0 &lt; <span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof85')">Proof.</span></div>
-<div class="proofscript" id="proof85">
+<div><span class="toggleproof" onclick="toggleDisplay('proof86')">Proof.</span></div>
+<div class="proofscript" id="proof86">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; ?; <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">oppr_gt0</span> <span class="id"><a href="mathcomp.analysis.reals.html#floor_lt0">floor_lt0</a></span> // <span class="id">ltr_oppl</span> <span class="id">oppr0</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="ceil_le0">ceil_le0</a></span> <span class="id"><a name="x:205">x</a></span> : <span class="id">x</span> &lt;= 0 -&gt; <span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">x</span> &lt;= 0.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof86')">Proof.</span></div>
-<div class="proofscript" id="proof86">
+<div><span class="toggleproof" onclick="toggleDisplay('proof87')">Proof.</span></div>
+<div class="proofscript" id="proof87">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">x0</span>; <span class="id">rewrite</span> -<span class="id">ler_oppl</span> <span class="id">oppr0</span> <span class="id"><a href="mathcomp.analysis.reals.html#floor_ge0">floor_ge0</a></span> -<span class="id">ler_oppr</span> <span class="id">oppr0</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="le_ceil">le_ceil</a></span> : {<span class="id">homo</span> @<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#CeilTheory.R">R</a></span> : <span class="id"><a name="x:206">x</a></span> <span class="id"><a name="y:207">y</a></span> / <span class="id">x</span> &lt;= <span class="id">y</span>}.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof87')">Proof.</span></div>
-<div class="proofscript" id="proof87">
+<div><span class="toggleproof" onclick="toggleDisplay('proof88')">Proof.</span></div>
+<div class="proofscript" id="proof88">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">x</span> <span class="id">y</span> <span class="id">xy</span>; <span class="id">rewrite</span> <span class="id">ler_oppl</span> <span class="id">opprK</span> <span class="id"><a href="mathcomp.analysis.reals.html#le_floor">le_floor</a></span> // <span class="id">ler_oppl</span> <span class="id">opprK</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="ceil_ge_int">ceil_ge_int</a></span> <span class="id"><a name="x:210">x</a></span> (<span class="id"><a name="z:211">z</a></span> : <span class="id">int</span>) : (<span class="id">x</span> &lt;= <span class="id">z</span>%:~<span class="id">R</span>) = (<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">x</span> &lt;= <span class="id">z</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof88')">Proof.</span></div>
-<div class="proofscript" id="proof88">
+<div><span class="toggleproof" onclick="toggleDisplay('proof89')">Proof.</span></div>
+<div class="proofscript" id="proof89">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">ler_oppl</span> -<span class="id"><a href="mathcomp.analysis.reals.html#floor_ge_int">floor_ge_int</a></span>// -<span class="id">ler_oppr</span> <span class="id">mulrNz</span> <span class="id">opprK</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="ceil_lt_int">ceil_lt_int</a></span> <span class="id"><a name="x:212">x</a></span> (<span class="id"><a name="z:213">z</a></span> : <span class="id">int</span>) : (<span class="id">z</span>%:~<span class="id">R</span> &lt; <span class="id">x</span>) = (<span class="id">z</span> &lt; <span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">x</span>).<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof89')">Proof.</span></div>
-<div class="proofscript" id="proof89">
+<div><span class="toggleproof" onclick="toggleDisplay('proof90')">Proof.</span></div>
+<div class="proofscript" id="proof90">
  <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">ltNge</span> <span class="id"><a href="mathcomp.analysis.reals.html#ceil_ge_int">ceil_ge_int</a></span> -<span class="id">ltNge</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="ceilN">ceilN</a></span> <span class="id"><a name="x:214">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> (- <span class="id">x</span>) = - <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> <span class="id">x</span><br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof90')">Proof.</span></div>
-<div class="proofscript" id="proof90">
+<div><span class="toggleproof" onclick="toggleDisplay('proof91')">Proof.</span></div>
+<div class="proofscript" id="proof91">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">opprK</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="floorN">floorN</a></span> <span class="id"><a name="x:215">x</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#floor">floor</a></span> (- <span class="id">x</span>) = - <span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">x</span><br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof91')">Proof.</span></div>
-<div class="proofscript" id="proof91">
+<div><span class="toggleproof" onclick="toggleDisplay('proof92')">Proof.</span></div>
+<div class="proofscript" id="proof92">
  <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#ceil">ceil</a></span> <span class="id">opprK</span>. Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.reals.html#CeilTheory">CeilTheory</a></span>.<br/>
@@ -935,21 +937,21 @@ Qed.</div>
 <span class="kwd">Implicit</span> <span class="id">Types</span> <span class="id">A</span> <span class="id">B</span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.reals.html#Sup.R">R</a></span>.<br/>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="le_down">le_down</a></span> <span class="id"><a name="A:217">A</a></span> : <span class="id">A</span> `&lt;=` <span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> <span class="id">A</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof92')">Proof.</span></div>
-<div class="proofscript" id="proof92">
+<div><span class="toggleproof" onclick="toggleDisplay('proof93')">Proof.</span></div>
+<div class="proofscript" id="proof93">
  <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">x</span> <span class="id">xA</span>; <span class="id">apply</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#downP">downP</a></span>; <span class="kwd">exists</span> <span class="id">x</span>. Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="downK">downK</a></span> <span class="id"><a name="A:218">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> <span class="id">A</span>) = <span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> <span class="id">A</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof93')">Proof.</span></div>
-<div class="proofscript" id="proof93">
+<div><span class="toggleproof" onclick="toggleDisplay('proof94')">Proof.</span></div>
+<div class="proofscript" id="proof94">
 <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.boolp.html#predeqE">predeqE</a></span> =&gt; <span class="id">x</span>; <span class="id">split</span>; <span class="id">last</span> <span class="kwd">by</span> <span class="id">move</span>=&gt; <span class="id">Ax</span>; <span class="id">apply</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#downP">downP</a></span>; <span class="kwd">exists</span> <span class="id">x</span>.<br/>
 <span class="id">case</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#downP">downP</a></span> =&gt; <span class="id">y</span> /<span class="id"><a href="mathcomp.classical.classical_sets.html#downP">downP</a></span>[<span class="id">z</span> <span class="id">Az</span> <span class="id">yz</span> <span class="id">xy</span>].<br/>
 <span class="kwd">by</span> <span class="id">apply</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#downP">downP</a></span>; <span class="kwd">exists</span> <span class="id">z</span> =&gt; //; <span class="id">rewrite</span> (<span class="id">le_trans</span> <span class="id">xy</span>).<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="has_sup_down">has_sup_down</a></span> <span class="id"><a name="A:219">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> <span class="id">A</span>) &lt;-&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">A</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof94')">Proof.</span></div>
-<div class="proofscript" id="proof94">
+<div><span class="toggleproof" onclick="toggleDisplay('proof95')">Proof.</span></div>
+<div class="proofscript" id="proof95">
 <span class="id">split</span>=&gt; -[<span class="id">nzA</span> <span class="id">nzubA</span>].<br/>
 &nbsp;&nbsp;<span class="id">case</span>: <span class="id">nzA</span> =&gt; <span class="id">x</span> /<span class="id"><a href="mathcomp.classical.classical_sets.html#downP">downP</a></span>[<span class="id">y</span> <span class="id">yS</span> <span class="id">le_xy</span>]; <span class="id">split</span>; <span class="id">first</span> <span class="kwd">by</span> <span class="kwd">exists</span> <span class="id">y</span>.<br/>
 &nbsp;&nbsp;<span class="id">case</span>: <span class="id">nzubA</span>=&gt; <span class="id">u</span> /<span class="id"><a href="mathcomp.classical.classical_sets.html#ubP">ubP</a></span> <span class="id">ubA</span>; <span class="kwd">exists</span> <span class="id">u</span>; <span class="id">apply</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#ubP">ubP</a></span>=&gt; <span class="id">z</span> <span class="id">zS</span>.<br/>
@@ -961,8 +963,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="le_sup">le_sup</a></span> <span class="id"><a name="A:220">A</a></span> <span class="id"><a name="B:221">B</a></span> : <span class="id">A</span> `&lt;=` <span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> <span class="id">B</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#nonempty">nonempty</a></span> <span class="id">A</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">B</span> -&gt;<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">A</span> &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">B</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof95')">Proof.</span></div>
-<div class="proofscript" id="proof95">
+<div><span class="toggleproof" onclick="toggleDisplay('proof96')">Proof.</span></div>
+<div class="proofscript" id="proof96">
 <span class="id">move</span>=&gt; <span class="id">le_AB</span> <span class="id">nz_A</span> <span class="id">hs_B</span>; <span class="id">have</span> <span class="id">hs_A</span>: <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">A</span>.<br/>
 &nbsp;&nbsp;<span class="id">split</span>=&gt; //; <span class="id">case</span>: <span class="id">hs_B</span> =&gt; <span class="id">_</span> [<span class="id">x</span> <span class="id">ubx</span>].<br/>
 &nbsp;&nbsp;<span class="kwd">exists</span> <span class="id">x</span>; <span class="id">apply</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#ubP">ubP</a></span>=&gt; <span class="id">y</span> /<span class="id">le_AB</span> /<span class="id"><a href="mathcomp.classical.classical_sets.html#downP">downP</a></span>[<span class="id">z</span> <span class="id">zB</span> <span class="id">le_yz</span>].<br/>
@@ -976,15 +978,15 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="le_inf">le_inf</a></span> <span class="id"><a name="A:222">A</a></span> <span class="id"><a name="B:223">B</a></span> : -%<span class="id">R</span> @` <span class="id">B</span> `&lt;=` <span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> (-%<span class="id">R</span> @` <span class="id">A</span>) -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#nonempty">nonempty</a></span> <span class="id">B</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> <span class="id">A</span> -&gt;<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">A</span> &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> <span class="id">B</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof96')">Proof.</span></div>
-<div class="proofscript" id="proof96">
+<div><span class="toggleproof" onclick="toggleDisplay('proof97')">Proof.</span></div>
+<div class="proofscript" id="proof97">
 <span class="id">move</span>=&gt; <span class="id">SBA</span> <span class="id">AB</span> <span class="id">Ai</span>; <span class="id">rewrite</span> <span class="id">ler_oppl</span> <span class="id">opprK</span> <span class="id"><a href="mathcomp.analysis.reals.html#le_sup">le_sup</a></span>// ?<span class="id"><a href="mathcomp.analysis.reals.html#has_inf_supN">has_inf_supN</a></span>//.<br/>
 <span class="id">exact</span>/<span class="id"><a href="mathcomp.classical.set_interval.html#nonemptyN">nonemptyN</a></span>.<br/>
 Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="sup_down">sup_down</a></span> <span class="id"><a name="A:224">A</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> <span class="id">A</span>) = <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> <span class="id">A</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof97')">Proof.</span></div>
-<div class="proofscript" id="proof97">
+<div><span class="toggleproof" onclick="toggleDisplay('proof98')">Proof.</span></div>
+<div class="proofscript" id="proof98">
 <span class="id">have</span> [<span class="id">supA</span>|<span class="id">supNA</span>] := <span class="id"><a href="mathcomp.classical.boolp.html#pselect">pselect</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> <span class="id">A</span>); <span class="id">last</span> <span class="id">first</span>.<br/>
 &nbsp;&nbsp;<span class="kwd">by</span> <span class="id">rewrite</span> !<span class="id"><a href="mathcomp.analysis.reals.html#sup_out">sup_out</a></span> // =&gt; /<span class="id"><a href="mathcomp.analysis.reals.html#has_sup_down">has_sup_down</a></span>.<br/>
 <span class="id">have</span> <span class="id">supDA</span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#down">down</a></span> <span class="id">A</span>) <span class="kwd">by</span> <span class="id">apply</span>/<span class="id"><a href="mathcomp.analysis.reals.html#has_sup_down">has_sup_down</a></span>.<br/>
@@ -998,8 +1000,8 @@ Qed.</div>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#has_sup">has_sup</a></span> [<span class="id">set</span> <span class="id"><a name="y:228">y</a></span> | <span class="kwd">exists</span> <span class="id"><a name="x:229">x</a></span>, <span class="id">y</span> = <span class="id">F</span> <span class="id">x</span>] -&gt;<br/>
 &nbsp;&nbsp;<span class="id">l</span> &lt; <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> [<span class="id">set</span> <span class="id"><a name="y:230">y</a></span> | <span class="kwd">exists</span> <span class="id"><a name="x:231">x</a></span>, <span class="id">y</span> = <span class="id">F</span> <span class="id">x</span>] -&gt;<br/>
 &nbsp;&nbsp;<span class="kwd">exists2</span> <span class="id"><a name="x:232">x</a></span>, <span class="id">l</span> &lt; <span class="id">F</span> <span class="id">x</span> &amp; <span class="id">F</span> <span class="id">x</span> &lt;= <span class="id"><a href="mathcomp.analysis.reals.html#sup">sup</a></span> [<span class="id">set</span> <span class="id"><a name="y:234">y</a></span> | <span class="kwd">exists</span> <span class="id"><a name="x:235">x</a></span>, <span class="id">y</span> = <span class="id">F</span> <span class="id">x</span>].<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof98')">Proof.</span></div>
-<div class="proofscript" id="proof98">
+<div><span class="toggleproof" onclick="toggleDisplay('proof99')">Proof.</span></div>
+<div class="proofscript" id="proof99">
 <span class="id">set</span> <span class="id">P</span> := [<span class="id">set</span> <span class="id"><a name="y:236">y</a></span> | <span class="id">_</span>] =&gt; <span class="id">hs</span>; <span class="id">rewrite</span> -<span class="id">subr_gt0</span>.<br/>
 <span class="id">move</span>=&gt; /<span class="id"><a href="mathcomp.analysis.reals.html#sup_adherent">sup_adherent</a></span>/(<span class="id">_</span> <span class="id">hs</span>)[<span class="id">_</span> [<span class="id">x</span> -&gt;]]; <span class="id">rewrite</span> <span class="id">subKr</span>=&gt; <span class="id">lt_lFx</span>.<br/>
 <span class="kwd">by</span> <span class="kwd">exists</span> <span class="id">x</span> =&gt; //; <span class="id">move</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#ubP">ubP</a></span> : (<span class="id"><a href="mathcomp.analysis.reals.html#sup_upper_bound">sup_upper_bound</a></span> <span class="id">hs</span>) =&gt; -&gt; //; <span class="kwd">exists</span> <span class="id">x</span>.<br/>
@@ -1009,8 +1011,8 @@ Qed.</div>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#has_inf">has_inf</a></span> [<span class="id">set</span> <span class="id"><a name="y:242">y</a></span> | <span class="kwd">exists</span> <span class="id"><a name="x:243">x</a></span>, <span class="id">y</span> = <span class="id">F</span> <span class="id">x</span>] -&gt;<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> [<span class="id">set</span> <span class="id"><a name="y:244">y</a></span> | <span class="kwd">exists</span> <span class="id"><a name="x:245">x</a></span>, <span class="id">y</span> = <span class="id">F</span> <span class="id">x</span>] &lt; <span class="id">l</span> -&gt;<br/>
 &nbsp;&nbsp;<span class="kwd">exists2</span> <span class="id"><a name="x:246">x</a></span>, <span class="id">F</span> <span class="id">x</span> &lt; <span class="id">l</span> &amp; <span class="id"><a href="mathcomp.analysis.reals.html#inf">inf</a></span> [<span class="id">set</span> <span class="id"><a name="y:248">y</a></span> | <span class="kwd">exists</span> <span class="id"><a name="x:249">x</a></span>, <span class="id">y</span> = <span class="id">F</span> <span class="id">x</span>] &lt;= <span class="id">F</span> <span class="id">x</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof99')">Proof.</span></div>
-<div class="proofscript" id="proof99">
+<div><span class="toggleproof" onclick="toggleDisplay('proof100')">Proof.</span></div>
+<div class="proofscript" id="proof100">
 <span class="id">set</span> <span class="id">P</span> := [<span class="id">set</span> <span class="id"><a name="y:250">y</a></span> | <span class="id">_</span>]; <span class="id">move</span>=&gt; <span class="id">hs</span>; <span class="id">rewrite</span> -<span class="id">subr_gt0</span>.<br/>
 <span class="id">move</span>=&gt; /<span class="id"><a href="mathcomp.analysis.reals.html#inf_adherent">inf_adherent</a></span>/(<span class="id">_</span> <span class="id">hs</span>)[<span class="id">_</span> [<span class="id">x</span> -&gt;]]; <span class="id">rewrite</span> <span class="id">addrCA</span> <span class="id">subrr</span> <span class="id">addr0</span> =&gt; <span class="id">ltFxl</span>.<br/>
 <span class="kwd">by</span> <span class="kwd">exists</span> <span class="id">x</span>=&gt; //; <span class="id">move</span>/<span class="id"><a href="mathcomp.classical.classical_sets.html#lbP">lbP</a></span> : (<span class="id"><a href="mathcomp.analysis.reals.html#inf_lower_bound">inf_lower_bound</a></span> <span class="id">hs</span>) =&gt; -&gt; //; <span class="kwd">exists</span> <span class="id">x</span>.<br/>
@@ -1020,8 +1022,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="int_lbound_has_minimum">int_lbound_has_minimum</a></span> (<span class="id"><a name="B:253">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">int</span>) <span class="id"><a name="i:254">i</a></span> : <span class="id">B</span> !=<span class="id">set0</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#lbound">lbound</a></span> <span class="id">B</span> <span class="id">i</span> -&gt;<br/>
 &nbsp;&nbsp;<span class="kwd">exists</span> <span class="id"><a name="j:255">j</a></span>, <span class="id">B</span> <span class="id">j</span> /\ <span class="kwd">forall</span> <span class="id"><a name="k:256">k</a></span>, <span class="id">B</span> <span class="id">k</span> -&gt; <span class="id">j</span> &lt;= <span class="id">k</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof100')">Proof.</span></div>
-<div class="proofscript" id="proof100">
+<div><span class="toggleproof" onclick="toggleDisplay('proof101')">Proof.</span></div>
+<div class="proofscript" id="proof101">
 <span class="id">move</span>=&gt; [<span class="id">i0</span> <span class="id">Bi0</span>] <span class="id">lbBi</span>; <span class="id">have</span> [<span class="id">n</span> <span class="id">i0in</span>] : <span class="kwd">exists</span> <span class="id"><a name="n:257">n</a></span>, <span class="id">i0</span> - <span class="id">i</span> = <span class="id">n</span>%:<span class="id">Z</span>.<br/>
 &nbsp;&nbsp;<span class="kwd">by</span> <span class="kwd">exists</span> `|<span class="id">i0</span> - <span class="id">i</span>|%<span class="id">N</span>; <span class="id">rewrite</span> <span class="id">gez0_abs</span> // <span class="id">subr_ge0</span>; <span class="id">exact</span>: <span class="id">lbBi</span>.<br/>
 <span class="id">elim</span>: <span class="id">n</span> <span class="id">i</span> <span class="id">lbBi</span> <span class="id">i0in</span> =&gt; [<span class="id">i</span> <span class="id">lbBi</span> /<span class="id">eqP</span>|<span class="id">n</span> <span class="id">ih</span> <span class="id">i</span> <span class="id">lbBi</span> <span class="id">i0in1</span>].<br/>
@@ -1040,8 +1042,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Let</span> <span class="id"><a name="rat_in_itvoo.archi_bound_divP">archi_bound_divP</a></span> (<span class="id"><a name="R:261">R</a></span> : <span class="id">archiFieldType</span>) (<span class="id"><a name="x:262">x</a></span> <span class="id"><a name="y:263">y</a></span> : <span class="id">R</span>) :<br/>
 &nbsp;&nbsp;0 &lt; <span class="id">x</span> -&gt; <span class="id">y</span> &lt; <span class="id">x</span> *+ <span class="id"><a href="mathcomp.analysis.reals.html#rat_in_itvoo.bound_div">bound_div</a></span> <span class="id">x</span> <span class="id">y</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof101')">Proof.</span></div>
-<div class="proofscript" id="proof101">
+<div><span class="toggleproof" onclick="toggleDisplay('proof102')">Proof.</span></div>
+<div class="proofscript" id="proof102">
 <span class="id">move</span>=&gt; <span class="id">x0</span>; <span class="id">have</span> [<span class="id">y0</span>|<span class="id">y0</span>] := <span class="id">leP</span> 0 <span class="id">y</span>; <span class="id">last</span> <span class="kwd">by</span> <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#rat_in_itvoo.bound_div">bound_div</a></span> <span class="id">y0</span> <span class="id">mulr0n</span>.<br/>
 <span class="id">rewrite</span> /<span class="id"><a href="mathcomp.analysis.reals.html#rat_in_itvoo.bound_div">bound_div</a></span> (<span class="id">ltNge</span> <span class="id">y</span> 0) <span class="id">y0</span>/= -<span class="id">mulr_natl</span> -<span class="id">ltr_pdivr_mulr</span>//.<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">archi_boundP</span>// (<span class="id">divr_ge0</span> <span class="id">_</span>(<span class="id">ltW</span> <span class="id">_</span>)).<br/>
@@ -1049,8 +1051,8 @@ Qed.</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="rat_in_itvoo">rat_in_itvoo</a></span> (<span class="id"><a name="R:264">R</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#realType">realType</a></span>) (<span class="id"><a name="x:265">x</a></span> <span class="id"><a name="y:266">y</a></span> : <span class="id">R</span>) :<br/>
 &nbsp;&nbsp;<span class="id">x</span> &lt; <span class="id">y</span> -&gt; <span class="kwd">exists</span> <span class="id"><a name="q:267">q</a></span>, <span class="id">ratr</span> <span class="id">q</span> \<span class="kwd">in</span> `]<span class="id">x</span>, <span class="id">y</span>[.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof102')">Proof.</span></div>
-<div class="proofscript" id="proof102">
+<div><span class="toggleproof" onclick="toggleDisplay('proof103')">Proof.</span></div>
+<div class="proofscript" id="proof103">
 <span class="id">move</span>=&gt; <span class="id">xy</span>; <span class="id">move</span>: (<span class="id">xy</span>); <span class="id">rewrite</span> -<span class="id">subr_gt0</span>.<br/>
 <span class="id">move</span>=&gt; /(<span class="id"><a href="mathcomp.analysis.reals.html#rat_in_itvoo.archi_bound_divP">archi_bound_divP</a></span> 1); <span class="id">set</span> <span class="id">n</span> := <span class="id"><a href="mathcomp.analysis.reals.html#rat_in_itvoo.bound_div">bound_div</a></span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id">nyx</span>.<br/>
 <span class="id">have</span> [<span class="id">m1</span> <span class="id">m1nx</span>] : <span class="kwd">exists</span> <span class="id"><a name="m1:268">m1</a></span>, <span class="id">m1</span>.+1%:~<span class="id">R</span> &gt; <span class="id">x</span> *+ <span class="id">n</span>.<br/>

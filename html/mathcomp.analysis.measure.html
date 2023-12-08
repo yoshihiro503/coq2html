@@ -31,13 +31,18 @@ NB: See CONTRIBUTING.md for an introduction to HB concepts and commands.
                                                                            
 This files provides a formalization of the basics of measure theory. This  
 includes the formalization of mathematical structures and of measures, as  
-well as standard theorems such as the Measure Extension theorem.           
+well as standard theorems such as the Measure Extension theorem that       
+builds a measure given a function defined over a semiring of sets, the     
+intermediate outer measure being                                           
+$\inf_F\{ \sum_{k=0}^\infty \mu(F_k)  | X \subseteq \bigcup_k F_k\}.$      
                                                                            
-References:                                                                
-- Daniel Li, Intégration et applications, 2016                             
-- Achim Klenke, Probability Theory 2nd edition, 2014                       
+Reference:                                                                 
+- R. Affeldt, C. Cohen. Measure construction by extension in dependent     
+  type theory with application to integration. JAR 2023                    
+- Daniel Li. Intégration et applications. 2016                             
+- Achim Klenke. Probability Theory. 2014                                   
                                                                            
-* Mathematical structures                                                  
+## Mathematical structures                                                 
 ```                                                                        
    semiRingOfSetsType d == the type of semirings of sets                   
                            The carrier is a set of sets A_i such that      
@@ -55,7 +60,7 @@ References:
                            The HB class is Measurable.                     
 ```                                                                        
                                                                            
-* Instances of mathematical structures                                     
+## Instances of mathematical structures                                    
 ```                                                                        
 discrete_measurable_unit == the measurableType corresponding to            
                             [set: set unit]                                
@@ -81,9 +86,11 @@ discrete_measurable_bool == the measurableType corresponding to
    mu .-cara.-measurable == sigma-algebra of Caratheodory measurable sets  
 ```                                                                        
                                                                            
-* Structures for functions on classes of sets                              
-  (There are a few details about mixins/factories to highlight             
-  implementations peculiarities.)                                          
+## Structures for functions on classes of sets                             
+                                                                           
+A few details about mixins/factories to highlight implementations          
+peculiarities:                                                             
+                                                                           
 ```                                                                        
 {content set T -&gt; \bar R} == type of contents                              
                            T is expected to be a semiring of sets and R a  
@@ -139,7 +146,7 @@ Content_isMeasure == factory that extends a content to a measure with
                            The HB class is OuterMeasure.                   
 ```                                                                        
                                                                            
-* Instances of measures                                                    
+## Instances of measures                                                   
 ```                                                                        
  pushforward mf m == pushforward/image measure of m by f, where mf is a    
                      proof that f is measurable                            
@@ -168,7 +175,7 @@ measure_add m1 m2 == the measure corresponding to the sum of the
                       countable union                                      
 ```                                                                        
                                                                            
-* Hierarchy of s-finite, sigma-finite, finite measures:                    
+## Hierarchy of s-finite, sigma-finite, finite measures                    
 ```                                                                        
     sfinite_measure == predicate for s-finite measure functions            
     Measure_isSFinite_subdef == mixin for s-finite measures                
@@ -225,7 +232,9 @@ measure_add m1 m2 == the measure corresponding to the sum of the
                            declared as an instance of the type of filters  
 ```                                                                        
                                                                            
-* From a premeasure to an outer measure (Measure Extension Theorem part 1) 
+# Measure Extension Theorem                                                
+                                                                           
+From a premeasure to an outer measure (Measure Extension Theorem part 1):  
 ```                                                                        
   measurable_cover X == the set of sequences F such that                   
                         - forall k, F k is measurable                      
@@ -233,7 +242,7 @@ measure_add m1 m2 == the measure corresponding to the sum of the
                 mu^* == extension of the measure mu over a semiring of     
                         sets (it is an outer measure)                      
 ```                                                                        
-* From an outer measure to a measure (Measure Extension Theorem part 2):   
+From an outer measure to a measure (Measure Extension Theorem part 2):     
 ```                                                                        
        mu.-caratheodory == the set of Caratheodory measurable sets for the 
                         outer measure mu, i.e., sets A such that           
@@ -246,14 +255,14 @@ measure_add m1 m2 == the measure corresponding to the sum of the
                         Remark: sets that are negligible for               
                         this measure are Caratheodory measurable.          
 ```                                                                        
-* Measure Extension Theorem:                                               
+Measure Extension Theorem:                                                 
 ```                                                                        
    measure_extension mu == extension of the content mu over a semiring of  
                         sets to a measure over the generated sigma algebra 
                         (requires a proof of sigma-sub-additivity)         
 ```                                                                        
                                                                            
-* Product of measurable spaces:                                            
+Product of measurable spaces:                                              
 ```                                                                        
   preimage_classes f1 f2 == sigma-algebra generated by the union of the    
                             preimages by f1 and the preimages by f2 with   
@@ -264,6 +273,7 @@ measure_add m1 m2 == the measure corresponding to the sum of the
                             measurableType's with resp. display d1 and d2  
 ```                                                                        
                                                                            
+Others:                                                                    
 ```                                                                        
  m1 `&lt;&lt; m2 == m1 is absolutely continuous w.r.t. m2 or m2 dominates m1     
  ess_sup f == essential supremum of the function f : T -&gt; R where T is a   

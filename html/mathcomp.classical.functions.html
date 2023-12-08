@@ -26,12 +26,13 @@
 <span class="id">Add</span> <span class="id">Search</span> <span class="id">Blacklist</span> "<span class="id">_factory_</span>".<br/>
 <span class="id">Add</span> <span class="id">Search</span> <span class="id">Blacklist</span> "<span class="id">_mixin_</span>".<br/>
 <br/>
-<pre class="ssrdoc">
-                           Theory of functions                             
+<div class="ssrdoc markdown">
+# Theory of functions                                                      
                                                                            
-This file provides a theory of functions whose domain and codomain are     
-represented by sets.                                                       
+This file provides a theory of functions $f : A\to B$ whose domain $A$     
+and codomain $B$ are represented by sets.                                  
                                                                            
+```                                                                        
          set_fun A B f == f : aT -&gt; rT is a function with domain           
                           A : set aT and codomain B : set rT               
         set_surj A B f == f is surjective                                  
@@ -63,7 +64,9 @@ represented by sets.
                           {splitsurj A &gt;-&gt; B}                              
                'inj_ f == proof of {in A &amp;, injective f} where f has type  
                           {splitinj A &gt;-&gt; _}                               
+```                                                                        
                                                                            
+```                                                                        
              funin A f == alias for f : aT -&gt; rT, with A : set aT          
             [fun f in A] == the function f from the set A to the set f @` A
            'split_ d f == partial injection from aT : Type to rt : Type;   
@@ -97,8 +100,10 @@ represented by sets.
           'pinv_ d A f == inverse of the function [fun f in A] over        
                           f @` A, function d outside of f @` A             
                  pinv := notation for 'pinv_point                          
+```                                                                        
                                                                            
-* Function restriction:                                                    
+## Function restriction                                                    
+```                                                                        
            patch d A f == "partial function" that behaves as the function  
                           f over the set A and as the function d otherwise 
           restrict D f := patch (fun=&gt; point) D f                          
@@ -124,13 +129,16 @@ represented by sets.
       valLfun_ v A B f := [fun of valL_ f] with f : {fun [set: A] &gt;-&gt; B}   
                   valL := 'valL_ point                                     
             valLRfun v := 'valLfun_ v \o valR_fun                          
+```                                                                        
                                                                            
+```                                                                        
 Section function_space == canonical ringType and lmodType                  
                           structures for functions whose range is          
                           a ringType, comRingType, or lmodType.            
                   fctE == multi-rule for fct                               
+```                                                                        
                                                                            
-</pre>
+</div>
 <br/>
 <span class="kwd">Set</span> <span class="kwd">Implicit</span> <span class="kwd">Arguments</span>.<br/>
 <span class="id">Unset</span> <span class="id">Strict</span> <span class="kwd">Implicit</span>.<br/>
@@ -367,8 +375,6 @@ Section function_space == canonical ringType and lmodType
 <span class="kwd">Notation</span> "{ '<span class="id">splitbij</span>' <span class="id">A</span> &gt;-&gt; <span class="id">B</span> }" := (@<span class="id"><a href="mathcomp.classical.functions.html#type">SplitBij.type</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">A</span> <span class="id">B</span>) : <span class="id">type_scope</span>.<br/>
 <span class="kwd">Notation</span> "[ '<span class="id">splitbij</span>'  '<span class="id">of</span>'  <span class="id">f</span> ]" := [<span class="id">the</span> {<span class="id">splitbij</span> <span class="id">_</span> &gt;-&gt; <span class="id">_</span>} <span class="id">of</span> <span class="id">f</span>] : <span class="id">form_scope</span>.<br/>
 <br/>
-<div class="doc">begin hide </div>
-<div class="doc">end hide </div>
 <br/>
 <span class="kwd">Module</span> <span class="id"><a name="ShortFunSyntax">ShortFunSyntax</a></span>.<br/>
 <span class="kwd">Notation</span> "<span class="id">A</span> ~&gt; <span class="id">B</span>" := {<span class="kwd">fun</span> <span class="id">A</span> &gt;-&gt; <span class="id">B</span>} (<span class="kwd">at</span> <span class="id">level</span> 70) : <span class="id">type_scope</span>.<br/>
@@ -388,9 +394,9 @@ Section function_space == canonical ringType and lmodType
 <span class="kwd">Notation</span> "<span class="id">A</span> &lt;&lt;~&gt; <span class="id">B</span>" := {<span class="id">splitbij</span> <span class="id">A</span> &gt;-&gt; <span class="id">B</span>} (<span class="kwd">at</span> <span class="id">level</span> 70) : <span class="id">type_scope</span>.<br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#ShortFunSyntax">ShortFunSyntax</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Theory 
-</pre>
+<div class="ssrdoc markdown">
+## Theory                                                                  
+</div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="phant_funS">phant_funS</a></span> <span class="id"><a name="aT:200">aT</a></span> <span class="id"><a name="rT:201">rT</a></span> (<span class="id"><a name="A:202">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>) (<span class="id"><a name="B:203">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>)<br/>
 &nbsp;&nbsp;(<span class="id"><a name="f:204">f</a></span> : {<span class="kwd">fun</span> <span class="id">A</span> &gt;-&gt; <span class="id">B</span>}) <span class="id">of</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#phantom">phantom</a></span> (<span class="id">_</span> -&gt; <span class="id">_</span>) <span class="id">f</span> := @<span class="id"><a href="mathcomp.classical.functions.html#funS">funS</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">f</span>.<br/>
@@ -508,9 +514,7 @@ Qed.</div>
 <span class="kwd">Notation</span> "'<span class="id">funK_</span>  <span class="id">f</span>" := (<span class="id"><a href="mathcomp.classical.functions.html#phant_funK">phant_funK</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#Phantom">Phantom</a></span> (<span class="id">_</span> -&gt; <span class="id">_</span>) <span class="id">f</span>)) : <span class="id">form_scope</span>.<br/>
 #[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Resolve</span> <span class="id">funK</span> : <span class="id">core</span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Structure Equality 
-</pre>
+<div class="doc">Structure Equality </div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="funP">funP</a></span> {<span class="id"><a name="aT:314">aT</a></span> <span class="id"><a name="rT:315">rT</a></span>} {<span class="id"><a name="A:316">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} {<span class="id"><a name="B:317">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>} (<span class="id"><a name="f:318">f</a></span> <span class="id"><a name="g:319">g</a></span> : {<span class="kwd">fun</span> <span class="id">A</span> &gt;-&gt; <span class="id">B</span>}) :<br/>
 &nbsp;&nbsp;<span class="id">f</span> = <span class="id">g</span> &lt;-&gt; <span class="id">f</span> =1 <span class="id">g</span>.<br/>
@@ -522,9 +526,7 @@ Structure Equality
 <span class="id">exact</span>: <span class="id"><a href="mathcomp.classical.boolp.html#Prop_irrelevance">Prop_irrelevance</a></span>.<br/>
 Qed.</div>
 <br/>
-<pre class="ssrdoc">
-Preliminary Builders 
-</pre>
+<div class="doc">Preliminary Builders </div>
 <br/>
 <span class="id"><a name="Inv_Can">HB.factory</a></span> <span class="kwd">Record</span> <span class="id">Inv_Can</span> {<span class="id"><a name="aT:320">aT</a></span> <span class="id"><a name="rT:321">rT</a></span>} {<span class="id"><a name="A:322">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} (<span class="id"><a name="f:323">f</a></span> : <span class="id">aT</span> -&gt; <span class="id">rT</span>) <span class="id">of</span> <span class="id"><a href="mathcomp.classical.functions.html#Inv">Inv</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">f</span> :=<br/>
 &nbsp;&nbsp;{ <span class="id"><a name="funK:324">funK</a></span> : {<span class="kwd">in</span> <span class="id">A</span>, <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#cancel">cancel</a></span> <span class="id">f</span> <span class="id">f</span>^-1} }.<br/>
@@ -554,9 +556,7 @@ Preliminary Builders
 &nbsp;&nbsp;<span class="id"><a name="Builders_109.HB_unnamed_factory_111">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> := <span class="id"><a href="mathcomp.classical.functions.html#OInv_CanV.Build">OInv_CanV.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="mathcomp.classical.functions.html#Builders_109.Builders_109.f">f</a></span> <span class="id"><a href="mathcomp.classical.functions.html#Builders_109.oinvS">oinvS</a></span> <span class="id"><a href="mathcomp.classical.functions.html#Builders_109.oinvK">oinvK</a></span>.<br/>
 <span class="id"><a href="mathcomp.classical.functions.html#Builders_109.Builders_109">HB.end</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Trivial instances 
-</pre>
+<div class="doc">Trivial instances </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="OInverse">OInverse</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:363">aT</a></span> <span class="id"><a name="rT:364">rT</a></span> : <span class="kwd">Type</span>} {<span class="id"><a name="A:365">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} {<span class="id"><a name="B:366">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>}.<br/>
@@ -861,9 +861,7 @@ Qed.</div>
 <span class="id"><a name="Map.hb_instance_420">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> (<span class="id"><a name="f:504">f</a></span> : {<span class="id">bij</span> <span class="id"><a href="mathcomp.classical.functions.html#Map.A">A</a></span> &gt;-&gt; <span class="id"><a href="mathcomp.classical.functions.html#Map.B">B</a></span>}) := <span class="id"><a href="mathcomp.classical.functions.html#on">Fun.on</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#omap">omap</a></span> <span class="id">f</span>).<br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#Map">Map</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Builders 
-</pre>
+<div class="doc">Builders </div>
 <br/>
 <span class="id"><a name="CanV">HB.factory</a></span> <span class="kwd">Record</span> <span class="id">CanV</span> {<span class="id"><a name="aT:505">aT</a></span> <span class="id"><a name="rT:506">rT</a></span>} {<span class="id"><a name="A:507">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} {<span class="id"><a name="B:508">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>} (<span class="id"><a name="f:509">f</a></span> : <span class="id">aT</span> -&gt; <span class="id">rT</span>) :=<br/>
 &nbsp;&nbsp;{ <span class="id"><a name="inv:510">inv</a></span>; <span class="id"><a name="invS:513">invS</a></span> : {<span class="id">homo</span> <span class="id">inv</span> : <span class="id"><a name="x:511">x</a></span> / <span class="id">B</span> <span class="id">x</span> &gt;-&gt; <span class="id">A</span> <span class="id">x</span>}; <span class="id"><a name="invK:514">invK</a></span> : {<span class="kwd">in</span> <span class="id">B</span>, <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#cancel">cancel</a></span> <span class="id">inv</span> <span class="id">f</span>}; }.<br/>
@@ -952,9 +950,7 @@ Builders
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#projT2">projT2</a></span> <span class="id"><a href="mathcomp.classical.functions.html#Builders_475.exg">exg</a></span>).1) (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#projT2">projT2</a></span> <span class="id"><a href="mathcomp.classical.functions.html#Builders_475.exg">exg</a></span>).2).<br/>
 <span class="id"><a href="mathcomp.classical.functions.html#Builders_475.Builders_475">HB.end</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Fun in 
-</pre>
+<div class="doc">Fun in </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="surj_oinv">surj_oinv</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:704">aT</a></span> <span class="id"><a name="rT:705">rT</a></span>} {<span class="id"><a name="A:706">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} {<span class="id"><a name="B:707">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>} {<span class="id"><a name="f:708">f</a></span> : <span class="id">aT</span> -&gt; <span class="id">rT</span>} (<span class="id"><a name="fsurj:709">fsurj</a></span> : <span class="id"><a href="mathcomp.classical.functions.html#set_surj">set_surj</a></span> <span class="id">A</span> <span class="id">B</span> <span class="id">f</span>).<br/>
@@ -1033,9 +1029,7 @@ Qed.</div>
 &nbsp;&nbsp;&nbsp;<span class="id">format</span> "[ '<span class="kwd">fun</span>'  <span class="id">f</span>  '<span class="kwd">in</span>'  <span class="id">A</span> ]") : <span class="id">function_scope</span>.<br/>
 #[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Resolve</span> <span class="id">set_fun_image</span> : <span class="id">core</span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Partial injection 
-</pre>
+<div class="doc">Partial injection </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="split">split</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:748">aT</a></span> <span class="id"><a name="rT:749">rT</a></span>} (<span class="id"><a name="A:750">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>) (<span class="id"><a name="B:751">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>).<br/>
@@ -1082,9 +1076,7 @@ Partial injection
 <span class="kwd">Notation</span> "''<span class="id">split_</span>' <span class="id">a</span>" := (<span class="id"><a href="mathcomp.classical.functions.html#split_">split_</a></span> <span class="id">a</span>) : <span class="id">form_scope</span>.<br/>
 <span class="kwd">Notation</span> <span class="id"><a name="split">split</a></span> := '<span class="id">split_point</span>.<br/>
 <br/>
-<pre class="ssrdoc">
-More Builders 
-</pre>
+<div class="doc">More Builders </div>
 <br/>
 <span class="id"><a name="Inj">HB.factory</a></span> <span class="kwd">Record</span> <span class="id">Inj</span> {<span class="id"><a name="aT:767">aT</a></span> <span class="id"><a name="rT:768">rT</a></span>} (<span class="id"><a name="A:769">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>) (<span class="id"><a name="f:770">f</a></span> : <span class="id">aT</span> -&gt; <span class="id">rT</span>) :=<br/>
 &nbsp;&nbsp;&nbsp;{ <span class="id"><a name="inj:771">inj</a></span> : {<span class="kwd">in</span> <span class="id">A</span> &amp;, <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#injective">injective</a></span> <span class="id">f</span>} }.<br/>
@@ -1133,9 +1125,9 @@ More Builders
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#Build">SurjFun_Inj.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> [<span class="kwd">fun</span> <span class="id">f</span> <span class="kwd">in</span> <span class="id"><a href="mathcomp.classical.functions.html#Inverses.A">A</a></span>] '<span class="id">inj_f</span>.<br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#Inverses">Inverses</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Simple Factories 
-</pre>
+<div class="ssrdoc markdown">
+## Simple Factories                                                        
+</div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Pinj">Pinj</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:831">aT</a></span> <span class="id"><a name="rT:832">rT</a></span>} {<span class="id"><a name="A:833">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} {<span class="id"><a name="f:834">f</a></span> : <span class="id">aT</span> -&gt; <span class="id">rT</span>} (<span class="id"><a name="finj:835">finj</a></span> : {<span class="kwd">in</span> <span class="id">A</span> &amp;, <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#injective">injective</a></span> <span class="id">f</span>}).<br/>
@@ -1251,20 +1243,16 @@ Simple Factories
 <span class="kwd">by</span> <span class="id">move</span>/<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span>/(@<span class="id"><a href="mathcomp.classical.functions.html#funPsplitsurj">funPsplitsurj</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> [<span class="kwd">fun</span> <span class="id">of</span> <span class="id"><a href="mathcomp.classical.functions.html#totalfun">totalfun</a></span> <span class="id">f</span>] [<span class="kwd">fun</span> <span class="id">of</span> <span class="id"><a href="mathcomp.classical.functions.html#totalfun">totalfun</a></span> <span class="id">g</span>]).<br/>
 Qed.</div>
 <br/>
-<pre class="ssrdoc">
-Instances 
-</pre>
+<div class="ssrdoc markdown">
+## Instances                                                               
+</div>
 <br/>
-<pre class="ssrdoc">
-The identity is a split bijection 
-</pre>
+<div class="doc">The identity is a split bijection </div>
 <br/>
 <span class="id"><a name="hb_instance_665">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> <span class="id"><a name="T:911">T</a></span> <span class="id"><a name="A:912">A</a></span> := @<span class="id"><a href="mathcomp.classical.functions.html#Build">Can2.Build</a></span> <span class="id">T</span> <span class="id">T</span> <span class="id">A</span> <span class="id">A</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun</a></span><br/>
 &nbsp;&nbsp;&nbsp;(<span class="kwd">fun</span> <span class="id"><a name="x:913">x</a></span> <span class="id"><a name="y:914">y</a></span> =&gt; <span class="id">y</span>) (<span class="kwd">fun</span> <span class="id"><a name="x:915">x</a></span> <span class="id"><a name="y:916">y</a></span> =&gt; <span class="id">y</span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#erefl">erefl</a></span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#erefl">erefl</a></span>).<br/>
 <br/>
-<pre class="ssrdoc">
-Iteration preserves Fun, Injectivity, and Surjectivity 
-</pre>
+<div class="doc">Iteration preserves Fun, Injectivity, and Surjectivity </div>
 <span class="kwd">Section</span> <span class="id"><a name="iter_inv">iter_inv</a></span>.<br/>
 <br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:917">aT</a></span>} {<span class="id"><a name="A:918">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>}.<br/>
@@ -1340,9 +1328,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#iter_surj">iter_surj</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Unbind 
-</pre>
+<div class="doc">Unbind </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Unbind">Unbind</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:954">aT</a></span> <span class="id"><a name="rT:955">rT</a></span>} {<span class="id"><a name="A:956">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} {<span class="id"><a name="B:957">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>} (<span class="id"><a name="dflt:958">dflt</a></span> : <span class="id">aT</span> -&gt; <span class="id">rT</span>).<br/>
@@ -1411,9 +1397,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#Unbind">Unbind</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Odflt 
-</pre>
+<div class="doc">Odflt </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Odflt">Odflt</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="T:977">T</a></span>} {<span class="id"><a name="A:978">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>} (<span class="id"><a name="x:979">x</a></span> : <span class="id">T</span>).<br/>
@@ -1430,9 +1414,7 @@ Odflt
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#Odflt">Odflt</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Subtypes 
-</pre>
+<div class="doc">Subtypes </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="SubType">SubType</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="T:980">T</a></span> : <span class="kwd">Type</span>} {<span class="id"><a name="P:981">P</a></span> : <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#pred">pred</a></span> <span class="id">T</span>} (<span class="id"><a name="sT:982">sT</a></span> : <span class="id">subType</span> <span class="id">P</span>) (<span class="id"><a name="x0:983">x0</a></span> : <span class="id">sT</span>).<br/>
@@ -1464,9 +1446,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#SubType">SubType</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-To setT 
-</pre>
+<div class="doc">To setT </div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="to_setT">to_setT</a></span> {<span class="id"><a name="T:986">T</a></span>} (<span class="id"><a name="x:987">x</a></span> : <span class="id">T</span>) : [<span class="id">set</span>: <span class="id">T</span>] :=<br/>
 &nbsp;&nbsp;@<span class="id"><a href="mathcomp.classical.classical_sets.html#SigSub">SigSub</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">x</span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#mem_set">mem_set</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span> : <span class="id">x</span> \<span class="kwd">in</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span>).<br/>
@@ -1482,9 +1462,7 @@ To setT
 <div class="proofscript" id="proof81">
  <span class="kwd">by</span> []. Qed.</div>
 <br/>
-<pre class="ssrdoc">
-Subfun 
-</pre>
+<div class="doc">Subfun </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="subfun">subfun</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="T:995">T</a></span>} {<span class="id"><a name="A:996">A</a></span> <span class="id"><a name="B:997">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>}.<br/>
@@ -1545,9 +1523,8 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#seteqfun">seteqfun</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Inclusion 
-</pre>
+<div class="doc">Inclusion </div>
+<br/>
 <span class="kwd">Section</span> <span class="id"><a name="incl">incl</a></span>.<br/>
 <span class="kwd">Context</span>  {<span class="id"><a name="T:1017">T</a></span>} {<span class="id"><a name="A:1018">A</a></span> <span class="id"><a name="B:1019">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>}.<br/>
 <span class="kwd">Definition</span> <span class="id"><a name="incl">incl</a></span> (<span class="id"><a name="AB:1020">AB</a></span> : <span class="id"><a href="mathcomp.classical.functions.html#incl.A">A</a></span> `&lt;=` <span class="id"><a href="mathcomp.classical.functions.html#incl.B">B</a></span>) := @<span class="id">id</span> <span class="id"><a href="mathcomp.classical.functions.html#incl.T">T</a></span>.<br/>
@@ -1568,9 +1545,7 @@ Inclusion
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#incl">incl</a></span>.<br/>
 <span class="kwd">Notation</span> <span class="id"><a name="inclT">inclT</a></span> <span class="id">A</span> := (<span class="id"><a href="mathcomp.classical.functions.html#incl">incl</a></span> (@<span class="id"><a href="mathcomp.classical.classical_sets.html#subsetT">subsetT</a></span> <span class="id">_</span> <span class="id">_</span>)).<br/>
 <br/>
-<pre class="ssrdoc">
-Ad hoc function 
-</pre>
+<div class="doc">Ad hoc function </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="mkfun">mkfun</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:1028">aT</a></span>} {<span class="id"><a name="rT:1029">rT</a></span>} {<span class="id"><a name="A:1030">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} {<span class="id"><a name="B:1031">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>}.<br/>
@@ -1587,9 +1562,7 @@ Ad hoc function
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#on">SplitSurj.on</a></span> (@<span class="id"><a href="mathcomp.classical.functions.html#mkfun">mkfun</a></span> <span class="id">f</span> <span class="id">fAB</span>).<br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#mkfun">mkfun</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-set_val 
-</pre>
+<div class="doc">set_val </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="set_val">set_val</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="T:1048">T</a></span>} {<span class="id"><a name="A:1049">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>}.<br/>
@@ -1608,27 +1581,21 @@ set_val
 #[<span class="id">global</span>]<br/>
 <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#is_true">is_true</a></span> (<span class="id"><a href="mathcomp.classical.functions.html#set_val">set_val</a></span> <span class="id">_</span> \<span class="kwd">in</span> <span class="id">_</span>)) =&gt; <span class="id">solve</span> [<span class="id">apply</span>: <span class="id">valP</span>] : <span class="id">core</span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Squash 
-</pre>
+<div class="doc">Squash </div>
 <br/>
 <span class="id"><a name="hb_instance_977">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> <span class="id"><a name="T:1050">T</a></span> := <span class="id"><a href="mathcomp.classical.functions.html#Build">CanV.Build</a></span> <span class="id">T</span> $|<span class="id">T</span>| <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#squash">squash</a></span> (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#unsquashK">unsquashK</a></span>).<br/>
 <span class="id"><a name="hb_instance_988">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> <span class="id"><a name="T:1051">T</a></span> := <span class="id"><a href="mathcomp.classical.functions.html#copy">SplitInj.copy</a></span> (@<span class="id"><a href="mathcomp.classical.classical_sets.html#unsquash">unsquash</a></span> <span class="id">T</span>) <span class="id"><a href="mathcomp.classical.classical_sets.html#squash">squash</a></span>^-1%<span class="id">FUN</span>.<br/>
 <span class="kwd">Definition</span> <span class="id"><a name="ssquash">ssquash</a></span> {<span class="id"><a name="T:1052">T</a></span>} := [<span class="id">splitsurj</span> <span class="id">of</span> @<span class="id"><a href="mathcomp.classical.classical_sets.html#squash">squash</a></span> <span class="id">T</span>].<br/>
 <br/>
-<pre class="ssrdoc">
-pickle and unpickle 
-</pre>
+<div class="doc">pickle and unpickle </div>
 <br/>
 <span class="id"><a name="hb_instance_999">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> (<span class="id"><a name="T:1053">T</a></span> : <span class="id">countType</span>) :=<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#Build">Inj.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> (@<span class="id">choice.pickle</span> <span class="id">T</span>) (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in2W">in2W</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#pcan_inj">pcan_inj</a></span> <span class="id">choice.pickleK</span>)).<br/>
 <span class="id"><a name="hb_instance_1007">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> (<span class="id"><a name="T:1054">T</a></span> : <span class="id">countType</span>) :=<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#Build">isFun.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> (@<span class="id">choice.pickle</span> <span class="id">T</span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>).<br/>
 <br/>
-<pre class="ssrdoc">
-set0fun 
-</pre>
+<div class="doc">set0fun </div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="set0fun_inj">set0fun_inj</a></span> {<span class="id"><a name="P:1055">P</a></span> <span class="id"><a name="T:1056">T</a></span>} : <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#injective">injective</a></span> (@<span class="id"><a href="mathcomp.classical.classical_sets.html#set0fun">set0fun</a></span> <span class="id">P</span> <span class="id">T</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof89')">Proof.</span></div>
@@ -1640,18 +1607,14 @@ set0fun
 <span class="id"><a name="hb_instance_1018">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> <span class="id"><a name="P:1059">P</a></span> <span class="id"><a name="T:1060">T</a></span> :=<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#Build">isFun.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> (@<span class="id"><a href="mathcomp.classical.classical_sets.html#set0fun">set0fun</a></span> <span class="id">P</span> <span class="id">T</span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>).<br/>
 <br/>
-<pre class="ssrdoc">
-cast_ord 
-</pre>
+<div class="doc">cast_ord </div>
 <br/>
 <span class="id"><a name="hb_instance_1021">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> {<span class="id"><a name="m:1061">m</a></span> <span class="id"><a name="n:1062">n</a></span>} {<span class="id"><a name="eq_mn:1063">eq_mn</a></span> : <span class="id">m</span> = <span class="id">n</span>} :=<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#Build">Can2.Build</a></span> '<span class="id">I_m</span> '<span class="id">I_n</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> (<span class="id">cast_ord</span> <span class="id">eq_mn</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> (<span class="id">cast_ordK</span> <span class="id">_</span>)) (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> (<span class="id">cast_ordKV</span> <span class="id">_</span>)).<br/>
 <br/>
-<pre class="ssrdoc">
-enum_val &amp; enum_rank 
-</pre>
+<div class="doc">enum_val &amp; enum_rank </div>
 <br/>
 <span class="id"><a name="hb_instance_1038">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> (<span class="id"><a name="T:1064">T</a></span> : <span class="id">finType</span>) :=<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#Build">Can2.Build</a></span> <span class="id">T</span> <span class="id">_</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id">enum_rank</span> (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>)<br/>
@@ -1661,9 +1624,7 @@ enum_val &amp; enum_rank
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#Build">Can2.Build</a></span> <span class="id">_</span> <span class="id">T</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id">enum_val</span> (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> <span class="id">enum_valK</span>) (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> <span class="id">enum_rankK</span>).<br/>
 <br/>
-<pre class="ssrdoc">
-Finset val 
-</pre>
+<div class="doc">Finset val </div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="finset_val">finset_val</a></span> {<span class="id"><a name="T:1066">T</a></span> : <span class="id">choiceType</span>} {<span class="id"><a name="X:1067">X</a></span> : {<span class="id">fset</span> <span class="id">T</span>}} (<span class="id"><a name="x:1068">x</a></span> : <span class="id">X</span>) : [<span class="id">set</span>` <span class="id">X</span>] :=<br/>
 &nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#exist">exist</a></span> (<span class="kwd">fun</span> <span class="id"><a name="x:1069">x</a></span> =&gt; <span class="id">x</span> \<span class="kwd">in</span> [<span class="id">set</span>` <span class="id">X</span>]) (<span class="id">val</span> <span class="id">x</span>) (<span class="id"><a href="mathcomp.classical.classical_sets.html#mem_set">mem_set</a></span> (<span class="id">valP</span> <span class="id">x</span>)).<br/>
@@ -1689,17 +1650,15 @@ Finset val
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.functions.html#Build">Can2.Build</a></span> <span class="id">_</span> <span class="id">X</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.functions.html#val_finset">val_finset</a></span> (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> <span class="id"><a href="mathcomp.classical.functions.html#val_finsetK">val_finsetK</a></span>) (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> <span class="id"><a href="mathcomp.classical.functions.html#finset_valK">finset_valK</a></span>).<br/>
 <br/>
-<pre class="ssrdoc">
-'I_n and `I_n 
-</pre>
+<div class="doc">'I_n and `I_n </div>
 <br/>
 <span class="id"><a name="hb_instance_1106">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> <span class="id"><a name="n:1081">n</a></span> := <span class="id"><a href="mathcomp.classical.functions.html#Build">Can2.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span> (@<span class="id"><a href="mathcomp.classical.classical_sets.html#ordII">ordII</a></span> <span class="id">n</span>)<br/>
 &nbsp;&nbsp;&nbsp;(<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>) (<span class="kwd">fun</span> <span class="id">_</span> <span class="id">_</span> =&gt; <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#I">I</a></span>) (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#ordIIK">ordIIK</a></span>) (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#in1W">in1W</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html#IIordK">IIordK</a></span>).<br/>
 <span class="id"><a name="hb_instance_1123">HB.instance</a></span> <span class="kwd">Definition</span> <span class="id">_</span> <span class="id"><a name="n:1082">n</a></span> := <span class="id"><a href="mathcomp.classical.functions.html#copy">SplitBij.copy</a></span> (@<span class="id"><a href="mathcomp.classical.classical_sets.html#IIord">IIord</a></span> <span class="id">n</span>) (<span class="id"><a href="mathcomp.classical.classical_sets.html#ordII">ordII</a></span>^-1).<br/>
 <br/>
-<pre class="ssrdoc">
-Glueing 
-</pre>
+<div class="ssrdoc markdown">
+## Glueing                                                                 
+</div>
 <br/>
 <span class="kwd">Definition</span> <span class="id"><a name="glue">glue</a></span> {<span class="id"><a name="T:1083">T</a></span> <span class="id"><a name="T':1084">T</a></span>'} {<span class="id"><a name="X:1085">X</a></span> <span class="id"><a name="Y:1086">Y</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>} {<span class="id"><a name="A:1087">A</a></span> <span class="id"><a name="B:1088">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>'}<br/>
 &nbsp;&nbsp;<span class="id">of</span> [<span class="id">disjoint</span> <span class="id">X</span> &amp; <span class="id">Y</span>] &amp; [<span class="id">disjoint</span> <span class="id">A</span> &amp; <span class="id">B</span>] :=<br/>
@@ -1805,9 +1764,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#Glue">Glue</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Z-module addition is a bijection 
-</pre>
+<div class="doc">Z-module addition is a bijection </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="addition">addition</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="V:1150">V</a></span> : <span class="id">zmodType</span>} (<span class="id"><a name="x:1151">x</a></span> : <span class="id">V</span>).<br/>
@@ -1827,9 +1784,7 @@ Z-module addition is a bijection
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#addition">addition</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Z-module opposite is a bijection 
-</pre>
+<div class="doc">Z-module opposite is a bijection </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="addition">addition</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="V:1152">V</a></span> : <span class="id">zmodType</span>} (<span class="id"><a name="x:1153">x</a></span> : <span class="id">V</span>).<br/>
@@ -1849,9 +1804,7 @@ Z-module opposite is a bijection
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#addition">addition</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-emtpyType 
-</pre>
+<div class="doc">emtpyType </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="empty">empty</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="T:1154">T</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#Empty.Exports.emptyType">emptyType</a></span>} {<span class="id"><a name="T':1155">T</a></span>' : <span class="kwd">Type</span>} {<span class="id"><a name="X:1156">X</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>}.<br/>
@@ -1879,9 +1832,9 @@ emtpyType
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.classical.functions.html#empty">empty</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Theory of surjection 
-</pre>
+<div class="ssrdoc markdown">
+## Theory of surjection                                                    
+</div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="surj_lemmas">surj_lemmas</a></span>.<br/>
 <span class="kwd">Variables</span> <span class="id"><a name="surj_lemmas.aT">aT</a></span> <span class="id"><a name="surj_lemmas.rT">rT</a></span> : <span class="kwd">Type</span>.<br/>
@@ -2055,9 +2008,7 @@ Qed.</div>
 <span class="kwd">by</span> <span class="id">move</span>=&gt; [<span class="id">f</span> <span class="id">fDE</span> <span class="id">fF</span> <span class="id">i</span> <span class="id">Fi</span>]; <span class="kwd">exists</span> (<span class="id">f</span> <span class="id">i</span>); [<span class="id">apply</span>: <span class="id">fDE</span>|<span class="id">apply</span>: <span class="id">fF</span>].<br/>
 Qed.</div>
 <br/>
-<pre class="ssrdoc">
-Injections 
-</pre>
+<div class="doc">Injections </div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="trivIset_inj">trivIset_inj</a></span> <span class="id"><a name="T:1288">T</a></span> <span class="id"><a name="I:1289">I</a></span> (<span class="id"><a name="D:1290">D</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">I</span>) (<span class="id"><a name="F:1291">F</a></span> : <span class="id">I</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">T</span>) :<br/>
 &nbsp;&nbsp;(<span class="kwd">forall</span> <span class="id"><a name="i:1292">i</a></span>, <span class="id">D</span> <span class="id">i</span> -&gt; <span class="id">F</span> <span class="id">i</span> !=<span class="id">set0</span>) -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#trivIset">trivIset</a></span> <span class="id">D</span> <span class="id">F</span> -&gt; <span class="id"><a href="mathcomp.classical.functions.html#set_inj">set_inj</a></span> <span class="id">D</span> <span class="id">F</span>.<br/>
@@ -2067,9 +2018,7 @@ Injections
 <span class="kwd">by</span> <span class="id">apply</span>: <span class="id">Ftriv</span> <span class="id">Di</span> (<span class="id">Dj</span>) <span class="id">_</span>; <span class="id">rewrite</span> <span class="id">Fij</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#setIid">setIid</a></span>; <span class="id">apply</span>: <span class="id">FN0</span>.<br/>
 Qed.</div>
 <br/>
-<pre class="ssrdoc">
-Bijections 
-</pre>
+<div class="doc">Bijections </div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="set_bij_lemmas">set_bij_lemmas</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:1293">aT</a></span> <span class="id"><a name="rT:1294">rT</a></span> : <span class="kwd">Type</span>} {<span class="id"><a name="A:1295">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>} {<span class="id"><a name="B:1296">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">rT</span>} {<span class="id"><a name="f:1297">f</a></span> : <span class="id">aT</span> -&gt; <span class="id">rT</span>}.<br/>
@@ -2156,9 +2105,9 @@ Qed.</div>
 <span class="kwd">Notation</span> "''<span class="id">bijTT_</span>'  <span class="id">f</span>" := (<span class="id"><a href="mathcomp.classical.functions.html#phant_bijTT">phant_bijTT</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#Phantom">Phantom</a></span> (<span class="id">_</span> -&gt; <span class="id">_</span>) <span class="id">f</span>)) : <span class="id">form_scope</span>.<br/>
 #[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#bijective">bijective</a></span> <span class="id">_</span>) =&gt; <span class="id">solve</span> [<span class="id">apply</span>: <span class="id"><a href="mathcomp.classical.functions.html#bijTT">bijTT</a></span>] : <span class="id">core</span>.<br/>
 <br/>
-<pre class="ssrdoc">
-Patching and restrictions 
-</pre>
+<div class="ssrdoc markdown">
+## Patching and restrictions                                               
+</div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="patch">patch</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="aT:1338">aT</a></span> <span class="id"><a name="rT:1339">rT</a></span> : <span class="kwd">Type</span>} (<span class="id"><a name="d:1340">d</a></span> : <span class="id">aT</span> -&gt; <span class="id">rT</span>) (<span class="id"><a name="A:1341">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">aT</span>).<br/>
@@ -2264,10 +2213,9 @@ Qed.</div>
 <span class="kwd">by</span> <span class="id">apply</span>: <span class="id">FDtriv</span> =&gt; //; <span class="kwd">exists</span> <span class="id">x</span>.<br/>
 Qed.</div>
 <br/>
-<br/>
-<pre class="ssrdoc">
-Restriction of domain and codomain 
-</pre>
+<div class="ssrdoc markdown">
+## Restriction of domain and codomain                                      
+</div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="RestrictionLeft">RestrictionLeft</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="U:1397">U</a></span> <span class="id"><a name="V:1398">V</a></span> : <span class="kwd">Type</span>} (<span class="id"><a name="v:1399">v</a></span> : <span class="id">V</span>) {<span class="id"><a name="A:1400">A</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">U</span>} {<span class="id"><a name="B:1401">B</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">V</span>}.<br/>

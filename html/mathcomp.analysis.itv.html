@@ -24,7 +24,9 @@
 <span class="kwd">From</span> <span class="id">mathcomp</span> <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="mathcomp.classical.mathcomp_extra.html">mathcomp_extra</a></span> <span class="id"><a href="mathcomp.classical.boolp.html">boolp</a></span>.<br/>
 <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="mathcomp.analysis.signed.html">signed</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
+<div class="ssrdoc markdown">
+# Numbers within an intervel                                               
+                                                                           
 This file develops tools to make the manipulation of numbers within        
 a known interval easier, thanks to canonical structures. This adds types   
 like {itv R &amp; `[a, b]}, a notation e%:itv that infers an enclosing         
@@ -33,7 +35,8 @@ interval for expression e according to existing canonical instances and
 For instance, x : {i01 R}, we have (1 - x%:inum)%:itv : {i01 R}            
 automatically inferred.                                                    
                                                                            
-* types for values within known interval                                   
+## types for values within known interval                                  
+```                                                                        
       {i01 R} == interface type for elements in R that live in `[0, 1];    
                  R must have a numDomainType structure.                    
                  Allows to solve automatically goals of the form x &gt;= 0    
@@ -42,15 +45,19 @@ automatically inferred.
   {itv R &amp; i} == more generic type of values in interval i : interval int  
                  R must have a numDomainType structure. This type is shown 
                  to be a porderType.                                       
+```                                                                        
                                                                            
-* casts from/to values within known interval                               
+## casts from/to values within known interval                              
+```                                                                        
        x%:itv == explicitly casts x to the most precise known {itv R &amp; i}  
                  according to existing canonical instances.                
        x%:i01 == explicitly casts x to {i01 R} according to existing       
                  canonical instances.                                      
       x%:inum == explicit cast from {itv R &amp; i} to R.                      
+```                                                                        
                                                                            
-* sign proofs                                                              
+## sign proofs                                                             
+```                                                                        
    [itv of x] == proof that x is in interval inferred by x%:itv            
     [lb of x] == proof that lb &lt; x or lb &lt;= x with lb the lower bound      
                  inferred by x%:itv                                        
@@ -58,18 +65,21 @@ automatically inferred.
                  inferred by x%:itv                                        
    [lbe of x] == proof that lb &lt;= x                                        
    [ube of x] == proof that x &lt;= ub                                        
+```                                                                        
                                                                            
-* constructors                                                             
+## constructors                                                            
+```                                                                        
    ItvNum xin == builds a {itv R &amp; i} from a proof xin : x \in i           
                  where x : R                                               
+```                                                                        
                                                                            
---&gt; A number of canonical instances are provided for common operations, if 
+A number of canonical instances are provided for common operations, if     
 your favorite operator is missing, look below for examples on how to add   
 the appropriate Canonical.                                                 
---&gt; Canonical instances are also provided according to types, as a         
+Canonical instances are also provided according to types, as a             
 fallback when no known operator appears in the expression. Look to         
 itv_top_typ below for an example on how to add your favorite type.         
-</pre>
+</div>
 <br/>
 <span class="kwd">Reserved</span> <span class="kwd">Notation</span> "{ '<span class="id">itv</span>' <span class="id">R</span> &amp; <span class="id">i</span> }"<br/>
 &nbsp;&nbsp;(<span class="kwd">at</span> <span class="id">level</span> 0, <span class="id">R</span> <span class="kwd">at</span> <span class="id">level</span> 200, <span class="id">i</span> <span class="kwd">at</span> <span class="id">level</span> 200, <span class="id">format</span> "{ '<span class="id">itv</span>'  <span class="id">R</span>  &amp;  <span class="id">i</span> }").<br/>
@@ -918,12 +928,18 @@ Qed.</div>
 <span class="kwd">Variable</span> <span class="id"><a name="Test1.x">x</a></span> : {<span class="id">i01</span> <span class="id"><a href="mathcomp.analysis.itv.html#Test1.R">R</a></span>}.<br/>
 <br/>
 <span class="kwd">Goal</span> 0%:<span class="id">i01</span> = 1%:<span class="id">i01</span> :&gt; {<span class="id">i01</span> <span class="id"><a href="mathcomp.analysis.itv.html#Test1.R">R</a></span>}.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof42')">Proof.</span></div>
+<div class="proofscript" id="proof42">
 Abort.</div>
 <br/>
 <span class="kwd">Goal</span> (- <span class="id"><a href="mathcomp.analysis.itv.html#Test1.x">x</a></span>%:<span class="id">inum</span>)%:<span class="id">itv</span> = (- <span class="id"><a href="mathcomp.analysis.itv.html#Test1.x">x</a></span>%:<span class="id">inum</span>)%:<span class="id">itv</span> :&gt; {<span class="id">itv</span> <span class="id"><a href="mathcomp.analysis.itv.html#Test1.R">R</a></span> &amp; `[-1, 0]}.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof43')">Proof.</span></div>
+<div class="proofscript" id="proof43">
 Abort.</div>
 <br/>
 <span class="kwd">Goal</span> (1 - <span class="id"><a href="mathcomp.analysis.itv.html#Test1.x">x</a></span>%:<span class="id">inum</span>)%:<span class="id">i01</span> = <span class="id"><a href="mathcomp.analysis.itv.html#Test1.x">x</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof44')">Proof.</span></div>
+<div class="proofscript" id="proof44">
 Abort.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.itv.html#Test1">Test1</a></span>.<br/>
@@ -934,6 +950,8 @@ Abort.</div>
 <span class="kwd">Variable</span> <span class="id"><a name="Test2.x">x</a></span> <span class="id"><a name="Test2.y">y</a></span> : {<span class="id">i01</span> <span class="id"><a href="mathcomp.analysis.itv.html#Test2.R">R</a></span>}.<br/>
 <br/>
 <span class="kwd">Goal</span> (<span class="id"><a href="mathcomp.analysis.itv.html#Test2.x">x</a></span>%:<span class="id">inum</span> * <span class="id"><a href="mathcomp.analysis.itv.html#Test2.y">y</a></span>%:<span class="id">inum</span>)%:<span class="id">i01</span> = <span class="id"><a href="mathcomp.analysis.itv.html#Test2.x">x</a></span>%:<span class="id">inum</span>%:<span class="id">i01</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof45')">Proof.</span></div>
+<div class="proofscript" id="proof45">
 Abort.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.itv.html#Test2">Test2</a></span>.<br/>
@@ -946,8 +964,8 @@ Abort.</div>
 &nbsp;&nbsp;(1 - ((1 - <span class="id">p</span>%:<span class="id">inum</span>)%:<span class="id">i01</span>%:<span class="id">inum</span> * (1 - <span class="id">q</span>%:<span class="id">inum</span>)%:<span class="id">i01</span>%:<span class="id">inum</span>))%:<span class="id">i01</span>.<br/>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="Test3.s_of_p0">s_of_p0</a></span> (<span class="id"><a name="p:228">p</a></span> : {<span class="id">i01</span> <span class="id"><a href="mathcomp.analysis.itv.html#Test3.Test3.R">R</a></span>}) : <span class="id"><a href="mathcomp.analysis.itv.html#Test3.s_of_pq">s_of_pq</a></span> <span class="id">p</span> 0%:<span class="id">i01</span> = <span class="id">p</span>.<br/>
-<div><span class="toggleproof" onclick="toggleDisplay('proof42')">Proof.</span></div>
-<div class="proofscript" id="proof42">
+<div><span class="toggleproof" onclick="toggleDisplay('proof46')">Proof.</span></div>
+<div class="proofscript" id="proof46">
 <span class="id">apply</span>/<span class="id">val_inj</span> =&gt; /=.<br/>
 <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id">subr0</span> <span class="id">mulr1</span> <span class="id">opprB</span> <span class="id">addrCA</span> <span class="id">subrr</span> <span class="id">addr0</span>.<br/>
 Qed.</div>

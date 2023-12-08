@@ -25,19 +25,34 @@
 <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="mathcomp.analysis.reals.html">reals</a></span> <span class="id"><a href="mathcomp.analysis.signed.html">signed</a></span> <span class="id"><a href="mathcomp.analysis.topology.html">topology</a></span>.<br/>
 <span class="kwd">From</span> <span class="id">HB</span> <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">structures</span>.<br/>
 <br/>
-<pre class="ssrdoc">
-                     The Cantor Space and Applications                     
+<div class="ssrdoc markdown">
+# The Cantor Space and Applications                                        
                                                                            
 This file develops the theory of the Cantor space, that is bool^nat with   
 the product topology. The two main theorems proved here are                
 homeomorphism_cantor_like, and cantor_surj, a.k.a. Alexandroff-Hausdorff.  
                                                                            
+```                                                                        
          cantor_space == the Cantor space, with its canonical metric       
         cantor_like T == perfect + compact + hausdroff + zero dimensional  
    pointed_discrete T == equips T with the discrete topology               
             tree_of T == builds a topological tree with levels (T n)       
+```                                                                        
                                                                            
-</pre>
+The overall goal of the next few sections is to prove that                 
+      Every compact metric space `T` is the image of the Cantor space.     
+ The overall proof will build two continuous functions                     
+          Cantor space -&gt; a bespoke tree for `T` -&gt; `T`                    
+                                                                           
+The proof is in 4 parts:                                                   
+- Part 1: Some generic machinery about continuous functions from trees.    
+- Part 2: All cantor-like spaces are homeomorphic to the Cantor space.     
+          (an application of part 1)                                       
+- Part 3: Finitely branching trees are Cantor-like.                        
+- Part 4: Every compact metric space has a finitely branching tree with    
+          a continuous surjection. (a second application of part 1)        
+                                                                           
+</div>
 <br/>
 <span class="kwd">Set</span> <span class="kwd">Implicit</span> <span class="kwd">Arguments</span>.<br/>
 <span class="id">Unset</span> <span class="id">Strict</span> <span class="kwd">Implicit</span>.<br/>
@@ -89,6 +104,20 @@ Qed.</div>
 - <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.cantor.html#cantor_zero_dimensional">cantor_zero_dimensional</a></span>.<br/>
 Qed.</div>
 <br/>
+<div class="ssrdoc markdown">
+## Part 1                                                                  
+                                                                           
+A tree here has countable levels, and nodes of type `K n` on the nth       
+level.                                                                     
+Each level is in the 'discrete' topology, so the nodes are independent.    
+The goal is to build a map from branches to X.                             
+1. Each level of the tree corresponds to an approximation of `X`.          
+2. Each level refines the previous approximation.                          
+3. Then each branch has a corresponding Cauchy filter.                     
+4. The overall function from branches to X is a continuous surjection.     
+5. With an extra disjointness condition, this is also an injection         
+                                                                           
+</div>
 <span class="kwd">Section</span> <span class="id"><a name="topological_trees">topological_trees</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="K:2">K</a></span> : <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span> -&gt; <span class="id"><a href="mathcomp.analysis.topology.html#Topological.Exports.topologicalType">topologicalType</a></span>} {<span class="id"><a name="X:3">X</a></span> : <span class="id"><a href="mathcomp.analysis.topology.html#Topological.Exports.topologicalType">topologicalType</a></span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a name="refine_apx:5">refine_apx</a></span> : <span class="kwd">forall</span> <span class="id"><a name="n:4">n</a></span>, <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">X</span> -&gt; <span class="id">K</span> <span class="id">n</span> -&gt; <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">X</span>)<br/>
@@ -254,6 +283,11 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.cantor.html#topological_trees">topological_trees</a></span>.<br/>
 <br/>
+<div class="ssrdoc markdown">
+## Part 2                                                                  
+We can use `tree_map_props` to build a homeomorphism from the              
+cantor_space to a Cantor-like space T.                                     
+</div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="TreeStructure">TreeStructure</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="R:80">R</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>} {<span class="id"><a name="T:81">T</a></span> : <span class="id"><a href="mathcomp.analysis.topology.html#PseudoMetric.Exports.pseudoMetricType">pseudoMetricType</a></span> <span class="id">R</span>}.<br/>
@@ -363,6 +397,9 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.cantor.html#TreeStructure">TreeStructure</a></span>.<br/>
 <br/>
+<div class="ssrdoc markdown">
+## Part 3: Finitely branching trees are Cantor-like                        
+</div>
 <span class="kwd">Section</span> <span class="id"><a name="FinitelyBranchingTrees">FinitelyBranchingTrees</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="R:94">R</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>}.<br/>
 <br/>
@@ -397,6 +434,9 @@ Qed.</div>
 <br/>
 <span class="id">Local</span> <span class="kwd">Notation</span> "<span class="id">A</span> ^-1" := ([<span class="id">set</span> <span class="id"><a name="xy:103">xy</a></span> | <span class="id">A</span> (<span class="id">xy</span>.2, <span class="id">xy</span>.1)]) : <span class="id">classical_set_scope</span>.<br/>
 <br/>
+<div class="ssrdoc markdown">
+## Part 4: Building a finitely branching tree to cover `T`                 
+</div>
 <span class="kwd">Section</span> <span class="id"><a name="alexandroff_hausdorff">alexandroff_hausdorff</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="R:104">R</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>} {<span class="id"><a name="T:105">T</a></span> : <span class="id"><a href="mathcomp.analysis.topology.html#PseudoMetric.Exports.pseudoMetricType">pseudoMetricType</a></span> <span class="id">R</span>}.<br/>
 <br/>
@@ -563,6 +603,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.cantor.html#alexandroff_hausdorff.two_pointed">two_pointed</a></span>.<br/>
 <br/>
+<div class="doc">The Alexandroff-Hausdorff theorem </div>
 <span class="kwd">Theorem</span> <span class="id"><a name="cantor_surj">cantor_surj</a></span> :<br/>
 &nbsp;&nbsp;<span class="kwd">exists</span> <span class="id"><a name="f:142">f</a></span> : {<span class="id">surj</span> [<span class="id">set</span>: <span class="id"><a href="mathcomp.analysis.cantor.html#cantor_space">cantor_space</a></span>] &gt;-&gt; [<span class="id">set</span>: <span class="id"><a href="mathcomp.analysis.cantor.html#alexandroff_hausdorff.T">T</a></span>]}, <span class="id"><a href="mathcomp.analysis.topology.html#continuous">continuous</a></span> <span class="id">f</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof36')">Proof.</span></div>

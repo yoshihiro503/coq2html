@@ -25,27 +25,31 @@
 <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="mathcomp.analysis.reals.html">reals</a></span> <span class="id"><a href="mathcomp.analysis.signed.html">signed</a></span> <span class="id"><a href="mathcomp.analysis.topology.html">topology</a></span>.<br/>
 <span class="kwd">Require</span> <span class="kwd">Export</span> <span class="id"><a href="mathcomp.analysis.constructive_ereal.html">constructive_ereal</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
-                  Extended real numbers, classical part                    
+<div class="ssrdoc markdown">
+# Extended real numbers, classical part ($\overline{\mathbb{R}}$)          
                                                                            
 This is an addition to the file constructive_ereal.v with classical logic  
 elements.                                                                  
-                                                                           
+```                                                                        
  (\sum_(i \in A) f i)%E == finitely supported sum, see fsbigop.v           
                                                                            
             ereal_sup E == supremum of E                                   
             ereal_inf E == infimum of E                                    
  ereal_supremums_neq0 S == S has a supremum                                
+```                                                                        
                                                                            
-Topology of extended real numbers:                                         
+## Topology of extended real numbers                                       
+```                                                                        
        ereal_topologicalType R == topology for extended real numbers over  
                                   R, a realFieldType                       
       ereal_pseudoMetricType R == pseudometric space for extended reals    
                                   over R where is a realFieldType; the     
                                   distance between x and y is defined by   
                                   `|contract x - contract y|               
+```                                                                        
                                                                            
-Filters:                                                                   
+## Filters                                                                 
+```                                                                        
                  ereal_dnbhs x == filter on extended real numbers that     
                                   corresponds to the deleted neighborhood  
                                   x^' if x is a real number and to         
@@ -55,8 +59,9 @@ Filters:
                                   replaced with nbhs.                      
                ereal_loc_seq x == sequence that converges to x in the set  
                                   of extended real numbers.                
+```                                                                        
                                                                            
-</pre>
+</div>
 <br/>
 <span class="kwd">Set</span> <span class="kwd">Implicit</span> <span class="kwd">Arguments</span>.<br/>
 <span class="id">Unset</span> <span class="id">Strict</span> <span class="kwd">Implicit</span>.<br/>

@@ -24,12 +24,19 @@
 <span class="kwd">From</span> <span class="id">mathcomp</span> <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="mathcomp.classical.cardinality.html">cardinality</a></span> <span class="id"><a href="mathcomp.classical.set_interval.html">set_interval</a></span> <span class="id"><a href="mathcomp.analysis.Rstruct.html">Rstruct</a></span>.<br/>
 <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="mathcomp.analysis.ereal.html">ereal</a></span> <span class="id"><a href="mathcomp.analysis.reals.html">reals</a></span> <span class="id"><a href="mathcomp.analysis.signed.html">signed</a></span> <span class="id"><a href="mathcomp.analysis.topology.html">topology</a></span> <span class="id"><a href="mathcomp.analysis.prodnormedzmodule.html">prodnormedzmodule</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
+<div class="ssrdoc markdown">
+# Norm-related Notions                                                     
+                                                                           
 This file extends the topological hierarchy with norm-related notions.     
-                                                                           
 Note that balls in topology.v are not necessarily open, here they are.     
+We used these definitions to prove the intermediate value theorem and      
+the Heine-Borel theorem, which states that the compact sets of             
+$\mathbb{R}^n$ are the closed and bounded sets, Urysohn's lemma, Vitali's  
+covering lemmas (finite case), etc.                                        
                                                                            
-* Normed Topological Abelian groups:                                       
+                                                                           
+## Normed Topological Abelian groups                                       
+```                                                                        
  pseudoMetricNormedZmodType R  == interface type for a normed topological  
                                   Abelian group equipped with a norm       
  PseudoMetricNormedZmodule.Mixin nb == builds the mixin for a normed       
@@ -37,8 +44,10 @@ Note that balls in topology.v are not necessarily open, here they are.
                                   compatibility between the norm and       
                                   balls; the carrier type must have a      
                                   normed Zmodule over a numDomainType.     
+```                                                                        
                                                                            
-* Normed modules :                                                         
+## Normed modules                                                          
+```                                                                        
                normedModType K == interface type for a normed module       
                                   structure over the numDomainType K.      
           NormedModMixin normZ == builds the mixin for a normed module     
@@ -75,8 +84,10 @@ Note that balls in topology.v are not necessarily open, here they are.
                                     maxr (f a) (f b)]%classic              
                  f @`] a , b [ := `]minr (f a) (f b),                      
                                     maxr (f a) (f b)[%classic              
+```                                                                        
                                                                            
-* Domination notations:                                                    
+## Domination notations                                                    
+```                                                                        
              dominated_by h k f F == `|f| &lt;= k * `|h|, near F              
                  bounded_near f F == f is bounded near F                   
            [bounded f x | x in A] == f is bounded on A, ie F := globally A 
@@ -102,22 +113,24 @@ Note that balls in topology.v are not necessarily open, here they are.
                           Rhull A == the real interval hull of a set A     
                         shift x y == y + x                                 
                          center c := shift (- c)                           
+```                                                                        
                                                                            
-* Complete normed modules :                                                
+## Complete normed modules                                                 
+```                                                                        
        completeNormedModType K == interface type for a complete normed     
                                   module structure over a realFieldType    
                                   K.                                       
 [completeNormedModType K of T] == clone of a canonical complete normed     
                                   module structure over K on T.            
+```                                                                        
                                                                            
-* Filters :                                                                
+## Filters                                                                 
+```                                                                        
          at_left x, at_right x == filters on real numbers for predicates   
                                   s.t. nbhs holds on the left/right of x   
+```                                                                        
                                                                            
---&gt; We used these definitions to prove the intermediate value theorem and  
-    the Heine-Borel theorem, which states that the compact sets of R^n are 
-    the closed and bounded sets.                                           
-                                                                           
+```                                                                        
        cpoint A == the center of the set A if it is an open ball           
        radius A == the radius of the set A if it is an open ball           
                    Radius A has type {nonneg R} with R a numDomainType.    
@@ -126,8 +139,9 @@ Note that balls in topology.v are not necessarily open, here they are.
                    if A is an open ball and set0 o.w.                      
   vitali_collection_partition B V r n == subset of indices of V such the   
                    the ball B i has a radius between r/2^n+1 and r/2^n     
+```                                                                        
                                                                            
-</pre>
+</div>
 <br/>
 <span class="kwd">Reserved</span> <span class="kwd">Notation</span> "<span class="id">f</span> @`[ <span class="id">a</span> , <span class="id">b</span> ]" (<span class="kwd">at</span> <span class="id">level</span> 20, <span class="id">b</span> <span class="kwd">at</span> <span class="id">level</span> 9,<br/>
 &nbsp;&nbsp;<span class="id">format</span> "<span class="id">f</span>  @`[ <span class="id">a</span> ,  <span class="id">b</span> ]").<br/>
@@ -447,8 +461,6 @@ Qed.</div>
 #[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="mathcomp.analysis.topology.html#ProperFilter">ProperFilter</a></span> <span class="id">_</span>^') =&gt;<br/>
 &nbsp;&nbsp;(<span class="id">apply</span>: <span class="id"><a href="mathcomp.analysis.normedtype.html#Proper_dnbhs_numFieldType">Proper_dnbhs_numFieldType</a></span>) : <span class="id">typeclass_instances</span>.<br/>
 <br/>
-<h1> Some Topology on extended real numbers </h1>
-<br/>
 <span class="kwd">Definition</span> <span class="id"><a name="pinfty_nbhs">pinfty_nbhs</a></span> (<span class="id"><a name="R:107">R</a></span> : <span class="id">numFieldType</span>) : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">R</span>) :=<br/>
 &nbsp;&nbsp;<span class="kwd">fun</span> <span class="id"><a name="P:108">P</a></span> =&gt; <span class="kwd">exists</span> <span class="id"><a name="M:109">M</a></span>, <span class="id">M</span> \<span class="id">is</span> <span class="id">Num.real</span> /\ <span class="kwd">forall</span> <span class="id"><a name="x:110">x</a></span>, <span class="id">M</span> &lt; <span class="id">x</span> -&gt; <span class="id">P</span> <span class="id">x</span>.<br/>
 <span class="kwd">Arguments</span> <span class="id"><a href="mathcomp.analysis.normedtype.html#pinfty_nbhs">pinfty_nbhs</a></span> <span class="id">R</span> : <span class="id">clear</span> <span class="id">implicits</span>.<br/>
@@ -574,7 +586,7 @@ Qed.</div>
 #[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#is_true">is_true</a></span> (<span class="id">_</span> &lt;= ?<span class="id">x</span>)%<span class="id">E</span>) =&gt; <span class="kwd">match</span> <span class="id">goal</span> <span class="kwd">with</span><br/>
 &nbsp;&nbsp;<span class="id">H</span> : <span class="id">x</span> \<span class="id">is_near</span> <span class="id">_</span> |- <span class="id">_</span> =&gt; <span class="id">near</span>: <span class="id">x</span>; <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.ereal.html#ereal_nbhs_pinfty_ge">ereal_nbhs_pinfty_ge</a></span> <span class="kwd">end</span> : <span class="id">core</span>.<br/>
 #[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#is_true">is_true</a></span> (<span class="id">_</span> &gt; ?<span class="id">x</span>)%<span class="id">E</span>) =&gt; <span class="kwd">match</span> <span class="id">goal</span> <span class="kwd">with</span><br/>
-&nbsp;&nbsp;<span class="id">H</span> : <span class="id">x</span> \<span class="id">is_near</span> <span class="id">_</span> |- <span class="id">_</span> =&gt; <span class="id">near</span>: <span class="id"><a href="mathcomp.analysis.signed.html#gt0">x</a></span>; <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.ereal.html#ereal_nbhs_ninfty_lt">ereal_nbhs_ninfty_lt</a></span> <span class="kwd">end</span> : <span class="id">core</span>.<br/>
+&nbsp;&nbsp;<span class="id">H</span> : <span class="id">x</span> \<span class="id">is_near</span> <span class="id">_</span> |- <span class="id">_</span> =&gt; <span class="id">near</span>: <span class="id">x</span>; <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.ereal.html#ereal_nbhs_ninfty_lt">ereal_nbhs_ninfty_lt</a></span> <span class="kwd">end</span> : <span class="id">core</span>.<br/>
 #[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#is_true">is_true</a></span> (<span class="id">_</span> &gt;= ?<span class="id">x</span>)%<span class="id">E</span>) =&gt; <span class="kwd">match</span> <span class="id">goal</span> <span class="kwd">with</span><br/>
 &nbsp;&nbsp;<span class="id">H</span> : <span class="id">x</span> \<span class="id">is_near</span> <span class="id">_</span> |- <span class="id">_</span> =&gt; <span class="id">near</span>: <span class="id">x</span>; <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.ereal.html#ereal_nbhs_ninfty_le">ereal_nbhs_ninfty_le</a></span> <span class="kwd">end</span> : <span class="id">core</span>.<br/>
 #[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#is_true">is_true</a></span> (<span class="id"><a href="mathcomp.analysis.constructive_ereal.html#fine">fine</a></span> ?<span class="id">x</span> \<span class="id">is</span> <span class="id">Num.real</span>)) =&gt; <span class="kwd">match</span> <span class="id">goal</span> <span class="kwd">with</span><br/>
@@ -971,7 +983,9 @@ Qed.</div>
 <div class="proofscript" id="proof81">
  <span class="kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="mathcomp.analysis.normedtype.html#cvgeryP">cvgeryP</a></span> <span class="id"><a href="mathcomp.analysis.normedtype.html#cvgrnyP">cvgrnyP</a></span>. Qed.</div>
 <br/>
-<h2> Modules with a norm </h2>
+<div class="ssrdoc markdown">
+## Modules with a norm                                                     
+</div>
 <br/>
 <span class="kwd">Module</span> <span class="id"><a name="NormedModule">NormedModule</a></span>.<br/>
 <br/>
@@ -2097,7 +2111,7 @@ Qed.</div>
 <span class="kwd">Section</span> <span class="id"><a name="open_closed_sets">open_closed_sets</a></span>.<br/>
 <span class="kwd">Variable</span> <span class="id"><a name="open_closed_sets.R">R</a></span> : <span class="id">realFieldType</span>.<br/>
 <br/>
-<div class="doc">Some open sets of <span class="bracket"><span class="id">R</span></span> </div>
+<div class="doc">Some open sets of R </div>
 <span class="kwd">Lemma</span> <span class="id"><a name="open_lt">open_lt</a></span> (<span class="id"><a name="y:538">y</a></span> : <span class="id"><a href="mathcomp.analysis.normedtype.html#open_closed_sets.R">R</a></span>) : <span class="id"><a href="mathcomp.analysis.topology.html#open">open</a></span> [<span class="id">set</span> <span class="id"><a name="x:539">x</a></span> : <span class="id"><a href="mathcomp.analysis.normedtype.html#open_closed_sets.R">R</a></span>| <span class="id">x</span> &lt; <span class="id">y</span>].<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof124')">Proof.</span></div>
 <div class="proofscript" id="proof124">
@@ -2136,8 +2150,7 @@ Qed.</div>
 - <span class="kwd">by</span> <span class="id">rewrite</span> (<span class="id">_</span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#mkset">mkset</a></span> <span class="id">_</span> = <span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span>); [<span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.topology.html#openT">openT</a></span> | <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.boolp.html#predeqE">predeqE</a></span>].<br/>
 Qed.</div>
 <br/>
-<div class="doc">Some closed sets of <span class="bracket"><span class="id">R</span></span> </div>
-<br/>
+<div class="doc">Some closed sets of R </div>
 <span class="kwd">Lemma</span> <span class="id"><a name="closed_le">closed_le</a></span> (<span class="id"><a name="y:556">y</a></span> : <span class="id"><a href="mathcomp.analysis.normedtype.html#open_closed_sets.R">R</a></span>) : <span class="id"><a href="mathcomp.analysis.topology.html#closed">closed</a></span> [<span class="id">set</span> <span class="id"><a name="x:557">x</a></span> : <span class="id"><a href="mathcomp.analysis.normedtype.html#open_closed_sets.R">R</a></span> | <span class="id">x</span> &lt;= <span class="id">y</span>].<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof128')">Proof.</span></div>
 <div class="proofscript" id="proof128">
@@ -2286,6 +2299,12 @@ Qed.</div>
 #[<span class="id">global</span>] <span class="id">Typeclasses</span> <span class="kwd">Opaque</span> <span class="id">at_left</span> <span class="id">at_right</span>.<br/>
 <span class="kwd">Notation</span> "<span class="id">x</span> ^'-" := (<span class="id"><a href="mathcomp.analysis.normedtype.html#at_left">at_left</a></span> <span class="id">x</span>) : <span class="id">classical_set_scope</span>.<br/>
 <span class="kwd">Notation</span> "<span class="id">x</span> ^'+" := (<span class="id"><a href="mathcomp.analysis.normedtype.html#at_right">at_right</a></span> <span class="id">x</span>) : <span class="id">classical_set_scope</span>.<br/>
+<br/>
+#[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="mathcomp.analysis.topology.html#Filter">Filter</a></span> (<span class="id"><a href="mathcomp.analysis.topology.html#nbhs">nbhs</a></span> <span class="id">_</span>^'+)) =&gt;<br/>
+&nbsp;&nbsp;(<span class="id">apply</span>: <span class="id"><a href="mathcomp.analysis.normedtype.html#at_right_proper_filter">at_right_proper_filter</a></span>) : <span class="id">typeclass_instances</span>.<br/>
+<br/>
+#[<span class="id">global</span>] <span class="kwd">Hint</span> <span class="id">Extern</span> 0 (<span class="id"><a href="mathcomp.analysis.topology.html#Filter">Filter</a></span> (<span class="id"><a href="mathcomp.analysis.topology.html#nbhs">nbhs</a></span> <span class="id">_</span>^'-)) =&gt;<br/>
+&nbsp;&nbsp;(<span class="id">apply</span>: <span class="id"><a href="mathcomp.analysis.normedtype.html#at_left_proper_filter">at_left_proper_filter</a></span>) : <span class="id">typeclass_instances</span>.<br/>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="open_itv_subset">open_itv_subset</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="R:613">R</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>}.<br/>
@@ -3145,8 +3164,7 @@ Qed.</div>
 &nbsp;&nbsp;<span class="id">note</span>="<span class="id">simply</span> <span class="id">use</span> <span class="id">the</span> <span class="id">fact</span> <span class="id">that</span> `(<span class="id">x</span> --&gt; <span class="id">l</span>) -&gt; (<span class="id">x</span> = <span class="id">l</span>)`")]<br/>
 <span class="kwd">Notation</span> <span class="id"><a name="continuous_cvg_dist">continuous_cvg_dist</a></span> := <span class="id"><a href="mathcomp.analysis.normedtype.html#__deprecated__continuous_cvg_dist">__deprecated__continuous_cvg_dist</a></span> (<span class="id">only</span> <span class="id">parsing</span>).<br/>
 <br/>
-<h2> Matrices </h2>
-<br/>
+<div class="doc">Matrices: </div>
 <span class="kwd">Section</span> <span class="id"><a name="mx_norm">mx_norm</a></span>.<br/>
 <span class="kwd">Variables</span> (<span class="id"><a name="mx_norm.K">K</a></span> : <span class="id">numDomainType</span>) (<span class="id"><a name="mx_norm.m">m</a></span> <span class="id"><a name="mx_norm.n">n</a></span> : <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span>).<br/>
 <span class="kwd">Implicit</span> <span class="id">Types</span> <span class="id">x</span> <span class="id">y</span> : '<span class="id">M</span>[<span class="id"><a href="mathcomp.analysis.normedtype.html#mx_norm.K">K</a></span>]<span class="id">_</span>(<span class="id"><a href="mathcomp.analysis.normedtype.html#mx_norm.m">m</a></span>, <span class="id"><a href="mathcomp.analysis.normedtype.html#mx_norm.n">n</a></span>).<br/>
@@ -3279,8 +3297,7 @@ Qed.</div>
 <br/>
 <span class="kwd">End</span> <span class="id"><a href="mathcomp.analysis.normedtype.html#matrix_NormedModule">matrix_NormedModule</a></span>.<br/>
 <br/>
-<h2> Pairs </h2>
-<br/>
+<div class="doc">Pairs: </div>
 <span class="kwd">Section</span> <span class="id"><a name="prod_PseudoMetricNormedZmodule">prod_PseudoMetricNormedZmodule</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="K:1180">K</a></span> : <span class="id">numDomainType</span>} {<span class="id"><a name="U:1181">U</a></span> <span class="id"><a name="V:1182">V</a></span> : <span class="id"><a href="mathcomp.analysis.normedtype.html#pseudoMetricNormedZmodType">pseudoMetricNormedZmodType</a></span> <span class="id">K</span>}.<br/>
 <br/>
@@ -3387,8 +3404,8 @@ Qed.</div>
 <span class="id">note</span>="<span class="id">use</span> `<span class="id">fcvgr2dist_ltP</span>` <span class="id">or</span> <span class="id">a</span> <span class="id">variant</span> <span class="id">instead</span>")]<br/>
 <span class="kwd">Notation</span> <span class="id"><a name="cvg_dist2P">cvg_dist2P</a></span> := <span class="id"><a href="mathcomp.analysis.normedtype.html#fcvgr2dist_ltP">fcvgr2dist_ltP</a></span> (<span class="id">only</span> <span class="id">parsing</span>).<br/>
 <br/>
-<div class="doc">Normed vector spaces have some continuous functions </div>
-<div class="doc">that are in fact continuous on pseudoMetricNormedZmodType </div>
+<div class="doc">Normed vector spaces have some continuous functions that are in fact
+continuous on pseudoMetricNormedZmodType </div>
 <span class="kwd">Section</span> <span class="id"><a name="NVS_continuity_pseudoMetricNormedZmodType">NVS_continuity_pseudoMetricNormedZmodType</a></span>.<br/>
 <span class="kwd">Context</span> {<span class="id"><a name="K:1245">K</a></span> : <span class="id">numFieldType</span>} {<span class="id"><a name="V:1246">V</a></span> : <span class="id"><a href="mathcomp.analysis.normedtype.html#pseudoMetricNormedZmodType">pseudoMetricNormedZmodType</a></span> <span class="id">K</span>}.<br/>
 <br/>
@@ -5293,9 +5310,9 @@ Qed.</div>
 <br/>
 <span class="kwd">Export</span> <span class="id"><a href="mathcomp.analysis.normedtype.html#CompleteNormedModule.Exports">CompleteNormedModule.Exports</a></span>.<br/>
 <br/>
-<h1> Extended Types </h1>
-<br/>
-<h1> The topology on real numbers </h1>
+<div class="ssrdoc markdown">
+## The topology on real numbers                                            
+</div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="R_complete">R_complete</a></span> (<span class="id"><a name="R:1857">R</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>) (<span class="id"><a name="F:1858">F</a></span> : <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id">R</span>)) : <span class="id"><a href="mathcomp.analysis.topology.html#ProperFilter">ProperFilter</a></span> <span class="id">F</span> -&gt; <span class="id"><a href="mathcomp.analysis.topology.html#cauchy">cauchy</a></span> <span class="id">F</span> -&gt; <span class="id"><a href="mathcomp.analysis.topology.html#cvg">cvg</a></span> <span class="id">F</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof414')">Proof.</span></div>
@@ -6108,7 +6125,7 @@ Qed.</div>
 <span class="kwd">Section</span> <span class="id"><a name="segment">segment</a></span>.<br/>
 <span class="kwd">Variable</span> <span class="id"><a name="segment.R">R</a></span> : <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>.<br/>
 <br/>
-<div class="doc">properties of segments in <span class="bracket"><span class="id">R</span></span> </div>
+<div class="doc">properties of segments in R </div>
 <br/>
 <span class="kwd">Lemma</span> <span class="id"><a name="segment_connected">segment_connected</a></span> (<span class="id"><a name="a:2170">a</a></span> <span class="id"><a name="b:2171">b</a></span> : <span class="id"><a href="mathcomp.analysis.normedtype.html#segment.R">R</a></span>) : <span class="id"><a href="mathcomp.analysis.topology.html#connected">connected</a></span> `[<span class="id">a</span>, <span class="id">b</span>].<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof475')">Proof.</span></div>
@@ -6195,7 +6212,6 @@ Qed.</div>
 <span class="id">exact</span>: <span class="id"><a href="mathcomp.analysis.normedtype.html#segment_connected">segment_connected</a></span>.<br/>
 Qed.</div>
 <br/>
-<div class="doc">Local properties in <span class="bracket"><span class="id">R</span></span> </div>
 <br/>
 <br/>
 <br/>
@@ -6300,8 +6316,9 @@ Qed.</div>
 <span class="kwd">by</span> <span class="id">rewrite</span> [<span class="id"><a href="mathcomp.classical.mathcomp_extra.html#leRHS">leRHS</a></span>]/<span class="id">normr</span> /= <span class="id"><a href="mathcomp.analysis.normedtype.html#mx_normrE">mx_normrE</a></span>; <span class="id">apply</span>/<span class="id"><a href="mathcomp.analysis.topology.html#bigmax_geP">bigmax_geP</a></span>; <span class="id">right</span> =&gt; /=; <span class="kwd">exists</span> <span class="id">j</span>.<br/>
 Qed.</div>
 <br/>
-<br/>
-<h1> Some limits on real functions </h1>
+<div class="ssrdoc markdown">
+## Some limits on real functions                                           
+</div>
 <br/>
 <span class="kwd">Section</span> <span class="id"><a name="Shift">Shift</a></span>.<br/>
 <br/>

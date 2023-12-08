@@ -23,6 +23,8 @@
 <span class="kwd">From</span> <span class="id">mathcomp</span> <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="mathcomp.classical.mathcomp_extra.html">mathcomp_extra</a></span>.<br/>
 <br/>
 <div class="ssrdoc markdown">
+# Positive, non-negative numbers, etc.                                      
+                                                                           
 This file develops tools to make the manipulation of numbers with a known  
 sign easier, thanks to canonical structures. This adds types like          
 {posnum R} for positive values in R, a notation e%:pos that infers the     
@@ -31,7 +33,7 @@ positivity of expression e according to existing canonical instances and
 For instance, given x, y : {posnum R}, we have                             
 ((x%:num + y%:num) / 2)%:pos : {posnum R} automatically inferred.          
                                                                            
-* types for values with known sign                                         
+## Types for values with known sign                                        
 ```                                                                        
    {posnum R} == interface type for elements in R that are positive; R     
                  must have a zmodType structure.                           
@@ -71,7 +73,7 @@ For instance, given x, y : {posnum R}, we have
   {?= x0 : T} == same with an explicit type T                              
 ```                                                                        
                                                                            
-* casts from/to values with known sign                                     
+## Casts from/to values with known sign                                    
 ```                                                                        
        x%:pos == explicitly casts x to {posnum R}, triggers the inference  
                  of a {posnum R} structure for x.                          
@@ -86,7 +88,7 @@ For instance, given x, y : {posnum R}, we have
     x%:nngnum == explicit cast from {nonneg R} to R.                       
 ```                                                                        
                                                                            
-* nullity conditions nz                                                    
+## Nullity conditions nz                                                   
 All nz above can be the following (in scope snum_nullity_scope delimited   
 by %snum_nullity)                                                          
 ```                                                                        
@@ -94,7 +96,7 @@ by %snum_nullity)
           ?=0 == unknown nullity                                           
 ```                                                                        
                                                                            
-* reality conditions cond                                                  
+## Reality conditions cond                                                 
 All cond above can be the following (in scope snum_sign_scope delimited by 
 by %snum_sign)                                                             
 ```                                                                        
@@ -105,7 +107,7 @@ by %snum_sign)
          &gt;?&lt;0 == unknown reality                                           
 ```                                                                        
                                                                            
-* sign proofs                                                              
+## Sign proofs                                                             
 ```                                                                        
    [sgn of x] == proof that x is of sign inferred by x%:sgn                
    [gt0 of x] == proof that x &gt; 0                                          
@@ -116,7 +118,7 @@ by %snum_sign)
   [neq0 of x] == proof that x != 0                                         
 ```                                                                        
                                                                            
-* constructors                                                             
+## Constructors                                                            
 ```                                                                        
   PosNum xgt0 == builds a {posnum R} from a proof xgt0 : x &gt; 0 where x : R 
   NngNum xge0 == builds a {posnum R} from a proof xgt0 : x &gt;= 0 where x : R
@@ -124,7 +126,7 @@ by %snum_sign)
                  some x satisfies sign conditions encoded by nz and cond   
 ```                                                                        
                                                                            
-* misc                                                                     
+## Misc.                                                                   
 ```                                                                        
          !! x == triggers pretyping to fill the holes of the term x. The   
                  main use case is to trigger typeclass inference in the    
@@ -132,10 +134,11 @@ by %snum_sign)
                  Credits: Enrico Tassi.                                    
 ```                                                                        
                                                                            
---&gt; A number of canonical instances are provided for common operations, if 
+A number of canonical instances are provided for common operations, if     
 your favorite operator is missing, look below for examples on how to add   
 the appropriate Canonical.                                                 
---&gt; Canonical instances are also provided according to types, as a         
+                                                                           
+Canonical instances are also provided according to types, as a             
 fallback when no known operator appears in the expression. Look to         
 nat_snum below for an example on how to add your favorite type.            
 </div>
@@ -398,6 +401,11 @@ nat_snum below for an example on how to add your favorite type.
 <div class="proofscript" id="proof6">
  <span class="kwd">by</span> <span class="id">move</span>: <span class="id">xt</span> <span class="id">x</span> =&gt; []. Qed.</div>
 <br/>
+<div class="doc">This adds _ &lt;- Signed.r ( typ_snum )
+   to canonical projections (c.f., Print Canonical Projections
+   Signed.r) meaning that if no other canonical instance (with a
+   registered head symbol) is found, a canonical instance of
+   Signed.typ, like the ones above, will be looked for. </div>
 <span class="kwd">Canonical</span> <span class="id"><a name="typ_snum">typ_snum</a></span> <span class="id"><a name="d:100">d</a></span> <span class="id"><a name="nz:101">nz</a></span> <span class="id"><a name="cond:102">cond</a></span> (<span class="id"><a name="xt:103">xt</a></span> : <span class="id"><a href="mathcomp.analysis.signed.html#typ">Signed.typ</a></span> <span class="id">d</span> <span class="id">nz</span> <span class="id">cond</span>) (<span class="id"><a name="x:104">x</a></span> : <span class="id"><a href="mathcomp.analysis.signed.html#sort">Signed.sort</a></span> <span class="id">xt</span>) :=<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.signed.html#mk">Signed.mk</a></span> (<span class="id"><a href="mathcomp.analysis.signed.html#typ_snum_subproof">typ_snum_subproof</a></span> <span class="id">x</span>).<br/>
 <br/>
@@ -1302,6 +1310,10 @@ Qed.</div>
 <br/>
 <br/>
 <br/>
+<div class="doc">These proofs help integrate more arithmetic with signed.v. The issue is
+    Terms like `0 &lt; 1-q` with subtraction don't work well. So we hide the
+    subtractions behind `PosNum` and `NngNum` constructors, see sequences.v
+    for examples. </div>
 <span class="kwd">Section</span> <span class="id"><a name="onem_signed">onem_signed</a></span>.<br/>
 <span class="kwd">Variable</span> <span class="id"><a name="onem_signed.R">R</a></span> : <span class="id">numDomainType</span>.<br/>
 <span class="kwd">Implicit</span> <span class="id">Types</span> <span class="id">r</span> : <span class="id"><a href="mathcomp.analysis.signed.html#onem_signed.R">R</a></span>.<br/>

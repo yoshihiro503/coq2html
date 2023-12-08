@@ -23,9 +23,12 @@
 <span class="kwd">From</span> <span class="id">HB</span> <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id">structures</span>.<br/>
 <span class="kwd">From</span> <span class="id">mathcomp</span> <span class="kwd">Require</span> <span class="kwd">Import</span> <span class="id"><a href="mathcomp.classical.functions.html">functions</a></span>.<br/>
 <br/>
-<pre class="ssrdoc">
+<div class="ssrdoc markdown">
+# Sets and Intervals                                                       
+                                                                           
 This files contains lemmas about sets and intervals.                       
                                                                            
+```                                                                        
              neitv i == the interval i is non-empty                        
                         when the support type is a numFieldType, this      
                         is equivalent to (i.1 &lt; i.2)%O (lemma neitvE)      
@@ -36,8 +39,9 @@ This files contains lemmas about sets and intervals.
         factor a b x := (x - a) / (b - a)                                  
             set_itvE == multirule to turn intervals into inequalities      
     disjoint_itv i j == intervals i and j are disjoint                     
+```                                                                        
                                                                            
-</pre>
+</div>
 <br/>
 <span class="kwd">Set</span> <span class="kwd">Implicit</span> <span class="kwd">Arguments</span>.<br/>
 <span class="id">Unset</span> <span class="id">Strict</span> <span class="kwd">Implicit</span>.<br/>
@@ -47,6 +51,8 @@ This files contains lemmas about sets and intervals.
 <span class="id">Local</span> <span class="kwd">Open</span> <span class="kwd">Scope</span> <span class="id">classical_set_scope</span>.<br/>
 <span class="id">Local</span> <span class="kwd">Open</span> <span class="kwd">Scope</span> <span class="id">ring_scope</span>.<br/>
 <br/>
+<div class="doc">definitions and lemmas to make a bridge between MathComp intervals and
+    classical sets </div>
 <span class="kwd">Section</span> <span class="id"><a name="set_itv_porderType">set_itv_porderType</a></span>.<br/>
 <span class="kwd">Variables</span> (<span class="id"><a name="set_itv_porderType.d">d</a></span> : <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span>) (<span class="id"><a name="set_itv_porderType.T">T</a></span> : <span class="id">porderType</span> <span class="id">d</span>).<br/>
 <span class="kwd">Implicit</span> <span class="id">Types</span> (<span class="id">i</span> <span class="id">j</span> : <span class="id">interval</span> <span class="id"><a href="mathcomp.classical.set_interval.html#set_itv_porderType.T">T</a></span>) (<span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="mathcomp.classical.set_interval.html#set_itv_porderType.T">T</a></span>) (<span class="id">a</span> : <span class="id">itv_bound</span> <span class="id"><a href="mathcomp.classical.set_interval.html#set_itv_porderType.T">T</a></span>).<br/>
@@ -405,6 +411,7 @@ Qed.</div>
 <span class="kwd">by</span> <span class="kwd">exists</span> (- <span class="id">r</span>); <span class="id">rewrite</span> ?<span class="id">opprK</span>// !<span class="id">in_itv</span>/= <span class="id">ltr_oppl</span> <span class="id">ltr_oppr</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrbool.html#andbC">andbC</a></span>.<br/>
 Qed.</div>
 <br/>
+<div class="doc">lemmas between itv and set-theoretic operations </div>
 <span class="kwd">Section</span> <span class="id"><a name="set_itv_porderType">set_itv_porderType</a></span>.<br/>
 <span class="kwd">Variables</span> (<span class="id"><a name="set_itv_porderType.d">d</a></span> : <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span>) (<span class="id"><a name="set_itv_porderType.T">T</a></span> : <span class="id">orderType</span> <span class="id">d</span>).<br/>
 <span class="kwd">Implicit</span> <span class="id">Types</span> (<span class="id">a</span> : <span class="id">itv_bound</span> <span class="id"><a href="mathcomp.classical.set_interval.html#set_itv_porderType.T">T</a></span>) (<span class="id">x</span> <span class="id">y</span> : <span class="id"><a href="mathcomp.classical.set_interval.html#set_itv_porderType.T">T</a></span>) (<span class="id">i</span> <span class="id">j</span> : <span class="id">interval</span> <span class="id"><a href="mathcomp.classical.set_interval.html#set_itv_porderType.T">T</a></span>) (<span class="id">b</span> : <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#bool">bool</a></span>).<br/>
