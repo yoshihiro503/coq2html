@@ -99,8 +99,6 @@ let module_name_of_file_name f =
 
 type link = Link of string | Anchor of string | Nolink
 
-let re_sane_path = Str.regexp "[A-Za-z0-9_.]+$"
-
 let crossref m pos =
   (*eprintf "crossref %s %d\n" m pos;*)
   try match Hashtbl.find xref_table (m, pos) with
@@ -110,10 +108,8 @@ let crossref m pos =
       let url = url_for_module m' in  (* can raise Not_found *)
       if p = "" then
         Link url
-      else if Str.string_match re_sane_path p 0 then
-        Link(url ^ "#" ^ p)
       else
-        Nolink
+        Link(url ^ "#" ^ p)
   with Not_found ->
     Nolink
 
@@ -293,8 +289,10 @@ let ident = ['A'-'Z' 'a'-'z' '_'] ['A'-'Z' 'a'-'z' '0'-'9' '_']*
 let path = ident ("." ident)*
 let start_proof = ("Proof" space* ".") | ("Proof" space+ "with") | ("Next" space+ "Obligation.")
 let end_proof = "Qed." | "Defined." | "Save." | "Admitted." | "Abort."
+let quoted = ['\"'] [' '-'~']* ['\"']
+let special_symbols = ['!' '#'-'\'' '*'-'-' '/'-'~']+
 
-let xref = ['A'-'Z' 'a'-'z' '0'-'9' '_' '.' '\'' ':' '[' ']' '*' '=' '+']+ | "<>"
+let xref = ['A'-'Z' 'a'-'z' '0'-'9' '#'-'~']+ | "<>"
 let integer = ['0'-'9']+
 
 rule coq_bol = parse
@@ -365,6 +363,10 @@ and coq = parse
       { newline(); coq_bol lexbuf }
   | eof
       { () }
+  | quoted as q
+      {ident (Lexing.lexeme_start lexbuf) q; coq lexbuf}
+  | special_symbols as id
+      {ident (Lexing.lexeme_start lexbuf) id; coq lexbuf}
   | _ as c
       { character c; coq lexbuf }
 
