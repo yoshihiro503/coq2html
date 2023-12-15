@@ -35,8 +35,16 @@ function renderMarkdowns()
     }
 }
 
+function showDarkmodeWidget()
+{
+    new Darkmode({
+	label: '🌓', // default: ''
+    }).showWidget();
+}
+
 function init(cls)
 {
     hideAll(cls);
     renderMarkdowns();
+    showDarkmodeWidget();
 }
