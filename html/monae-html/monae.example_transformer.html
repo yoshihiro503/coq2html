@@ -1,0 +1,451 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module monae.example_transformer</title>
+<meta name="description" content="Documentation of Coq module monae.example_transformer" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module monae.example_transformer</h1>
+<div class="coq">
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.all_ssreflect.html">all_ssreflect</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="monae.monae_lib.html">monae_lib</a></span> <span class="id"><a href="monae.hierarchy.html">hierarchy</a></span> <span class="id"><a href="monae.monad_lib.html">monad_lib</a></span> <span class="id"><a href="monae.fail_lib.html">fail_lib</a></span> <span class="id"><a href="monae.state_lib.html">state_lib</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="monae.monad_transformer.html">monad_transformer</a></span>.<br/>
+<br/>
+<pre class="ssrdoc">
+              Examples of programs using monad transformers                
+                                                                           
+reference:                                                                 
+- R. Affeldt, D. Nowak, Extending Equational Monadic Reasoning with Monad  
+  Transformers, https://arxiv.org/abs/2011.03463                           
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="evalStateT" class="id">
+  <a name="evalStateT" class="">evalStateT</a>
+</span> (<span id="N:1" class="id">
+  <a name="N:1" class="">N</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#Monad.Exports.monad">monad</a></span>) (<span id="S:2" class="id">
+  <a name="S:2" class="">S</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="M:3" class="id">
+  <a name="M:3" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadStateRun.Exports.stateRunMonad">stateRunMonad</a></span> <span class="id"><a href="monae.example_transformer.html#S:2">S</a></span> <span class="id"><a href="monae.example_transformer.html#N:1">N</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{A</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0}</a></span> (<span id="m:5" class="id">
+  <a name="m:5" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#M:3">M</a></span> <span class="id"><a href="monae.example_transformer.html#A:4">A</a></span>) (<span id="s:6" class="id">
+  <a name="s:6" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#S:2">S</a></span>) <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#N:1">N</a></span> <span class="id"><a href="monae.example_transformer.html#A:4">A</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#runStateT">runStateT</a></span> <span class="id"><a href="monae.example_transformer.html#m:5">m</a></span> <span class="id"><a href="monae.example_transformer.html#s:6">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="x:7" class="id">
+  <a name="x:7" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#Ret">Ret</a></span> <span class="id"><a href="monae.example_transformer.html#x:7">x</a></span>.<span class="id">1</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="FastProduct" class="id">
+  <a name="FastProduct" class="">FastProduct</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> (<span id="FastProduct.N" class="id">
+  <a name="FastProduct.N" class="">N</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadExcept.Exports.exceptMonad">exceptMonad</a></span>) (<span id="FastProduct.M" class="id">
+  <a name="FastProduct.M" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadExceptStateRun.Exports.exceptStateRunMonad">exceptStateRunMonad</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span> <span class="id"><a href="monae.example_transformer.html#N:8">N</a></span>).<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="fastProductRec" class="id">
+  <a name="fastProductRec" class="">fastProductRec</a>
+</span> <span id="l:10" class="id">
+  <a name="l:10" class="">l</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#FastProduct.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="monae.example_transformer.html#l:10">l</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.seq.html#::seq_scope:'['_'::'_']'">[::]</a></span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#Ret">Ret</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#tt">tt</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">0</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.seq.html#::seq_scope:x_'::'_x">::</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#fail">fail</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">n</span>.<span class="id">+1</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.seq.html#::seq_scope:x_'::'_x">::</a></span> <span class="id">l'</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#get">get</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="m:13" class="id">
+  <a name="m:13" class="">m</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#put">put</a></span> (<span class="id"><a href="monae.example_transformer.html#m:13">m</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#::nat_scope:x_'*'_x">*</a></span> <span class="id">n</span>.<span class="id">+1</span>) <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#fastProductRec:11">fastProductRec</a></span> <span class="id">l'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="fastProduct" class="id">
+  <a name="fastProduct" class="">fastProduct</a>
+</span> <span id="l:14" class="id">
+  <a name="l:14" class="">l</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#FastProduct.M">M</a></span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#catch">catch</a></span> (<span class="id"><a href="monae.hierarchy.html#put">put</a></span> <span class="id">1</span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#fastProductRec">fastProductRec</a></span> <span class="id"><a href="monae.example_transformer.html#l:14">l</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.hierarchy.html#get">get</a></span>) (<span class="id"><a href="monae.hierarchy.html#Ret">Ret</a></span> <span class="id">0</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id"><a href="monae.example_transformer.html#FastProduct.M">M</a></span> <span class="id">_</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="fastProductCorrect" class="id">
+  <a name="fastProductCorrect" class="">fastProductCorrect</a>
+</span> <span id="l:15" class="id">
+  <a name="l:15" class="">l</a>
+</span> <span id="n:16" class="id">
+  <a name="n:16" class="">n</a>
+</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.example_transformer.html#evalStateT">evalStateT</a></span> (<span class="id"><a href="monae.example_transformer.html#fastProduct">fastProduct</a></span> <span class="id"><a href="monae.example_transformer.html#l:15">l</a></span>) <span class="id"><a href="monae.example_transformer.html#n:16">n</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#Ret">Ret</a></span> (<span class="id"><a href="monae.fail_lib.html#product">product</a></span> <span class="id"><a href="monae.example_transformer.html#l:15">l</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+<span class="id">rewrite</span> <span class="id">/fastProduct</span> <span class="id">-</span>(<span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#mul1n">mul1n</a></span> (<span class="id"><a href="monae.fail_lib.html#product">product</a></span> <span class="id">_</span>))<span class="id">;</span> <span class="id">move:</span> <span class="id">1</span>.<br/>
+<span class="id">elim:</span> <span class="id">l</span> <span class="id">=&gt;</span> <span class="id">[</span> <span class="id">|</span> <span class="id">[</span> <span class="id">|</span> <span class="id">x]</span> <span class="id">l</span> <span class="id">ih]</span> <span class="id">m</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#muln1">muln1</a></span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindretf">bindretf</a></span> <span class="id"><a href="monae.hierarchy.html#putget">putget</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/evalStateT</span> <span class="id"><a href="monae.hierarchy.html#runStateTcatch">runStateTcatch</a></span> <span class="id"><a href="monae.hierarchy.html#runStateTbind">runStateTbind</a></span> <span class="id"><a href="monae.hierarchy.html#runStateTput">runStateTput</a></span> <span class="id"><a href="monae.hierarchy.html#bindretf">bindretf</a></span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#runStateTret">runStateTret</a></span> <span class="id"><a href="monae.hierarchy.html#runStateTret">runStateTret</a></span> <span class="id"><a href="monae.hierarchy.html#catchret">catchret</a></span> <span class="id"><a href="monae.hierarchy.html#bindretf">bindretf</a></span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#muln0">muln0</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/evalStateT</span> <span class="id"><a href="monae.hierarchy.html#runStateTcatch">runStateTcatch</a></span> <span class="id"><a href="monae.hierarchy.html#runStateTbind">runStateTbind</a></span> <span class="id"><a href="monae.hierarchy.html#runStateTbind">runStateTbind</a></span> <span class="id"><a href="monae.hierarchy.html#runStateTput">runStateTput</a></span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindretf">bindretf</a></span> <span class="id"><a href="monae.hierarchy.html#runStateTfail">runStateTfail</a></span> <span class="id"><a href="monae.hierarchy.html#bindfailf">bindfailf</a></span> <span class="id"><a href="monae.hierarchy.html#catchfailm">catchfailm</a></span> <span class="id"><a href="monae.hierarchy.html#runStateTret">runStateTret</a></span> <span class="id"><a href="monae.hierarchy.html#bindretf">bindretf</a></span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">[fastProductRec</span> <span class="id">_]/=</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-bindA</span> <span class="id"><a href="monae.hierarchy.html#putget">putget</a></span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindretf">bindretf</a></span> <span class="id">-bindA</span> <span class="id">-bindA</span> <span class="id"><a href="monae.hierarchy.html#putput">putput</a></span> <span class="id">ih</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#mulnA">mulnA</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#FastProduct">FastProduct</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="PersistentState" class="id">
+  <a name="PersistentState" class="">PersistentState</a>
+</span>.<br/>
+<span class="vernacular">Section</span> <span id="PersistentState.persistentstate" class="id">
+  <a name="PersistentState.persistentstate" class="">persistentstate</a>
+</span>.<br/>
+<span class="vernacular">Variable</span> <span id="PersistentState.persistentstate.S" class="id">
+  <a name="PersistentState.persistentstate.S" class="">S</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="PersistentState.failPState" class="id">
+  <a name="PersistentState.failPState" class="">failPState</a>
+</span> (<span id="A:18" class="id">
+  <a name="A:18" class="">A</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span> <span class="id">:=</span><br/>
+<span class="id"><a href="monae.example_transformer.html#PersistentState.persistentstate.S">S</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="monae.example_transformer.html#A:18">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.persistentstate.S">S</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="PersistentState.runFailPState" class="id">
+  <a name="PersistentState.runFailPState" class="">runFailPState</a>
+</span> <span class="id">{A</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0}</a></span> (<span id="m:20" class="id">
+  <a name="m:20" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#A:19">A</a></span>) (<span id="s:21" class="id">
+  <a name="s:21" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.persistentstate.S">S</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="monae.example_transformer.html#A:19">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.persistentstate.S">S</a></span> <span class="id">:=</span><br/>
+<span class="id"><a href="monae.example_transformer.html#m:20">m</a></span> <span class="id"><a href="monae.example_transformer.html#s:21">s</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="PersistentState.ret" class="id">
+  <a name="PersistentState.ret" class="">ret</a>
+</span> <span class="id">{A</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0}</a></span> (<span id="a:23" class="id">
+  <a name="a:23" class="">a</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#A:22">A</a></span>) <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#A:22">A</a></span> <span class="id">:=</span><br/>
+<span class="gallina-kwd">fun</span> <span id="s:24" class="id">
+  <a name="s:24" class="">s</a>
+</span> <span class="id">=&gt;</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="monae.example_transformer.html#a:23">a,</a></span> <span class="id"><a href="monae.example_transformer.html#s:24">s</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="PersistentState.bind" class="id">
+  <a name="PersistentState.bind" class="">bind</a>
+</span> <span class="id">{A</span> <span id="B:26" class="id">
+  <a name="B:26" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0}</a></span> (<span id="m:27" class="id">
+  <a name="m:27" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#A:25">A</a></span>) (<span id="f:28" class="id">
+  <a name="f:28" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#A:25">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#B:26">B</a></span>) <span class="id">:</span><br/>
+<span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#B:26">B</a></span> <span class="id">:=</span><br/>
+<span class="gallina-kwd">fun</span> <span id="s:29" class="id">
+  <a name="s:29" class="">s</a>
+</span> <span class="id">=&gt;</span> <span class="gallina-kwd">match</span> <span class="id"><a href="monae.example_transformer.html#m:27">m</a></span> <span class="id"><a href="monae.example_transformer.html#s:29">s</a></span> <span class="gallina-kwd">with</span><br/>
+<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#None">None,</a></span> <span class="id">s'</span>) <span class="id">=&gt;</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#None">None,</a></span> <span class="id">s'</span>)<br/>
+<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">a,</span> <span class="id">s'</span>) <span class="id">=&gt;</span> <span class="id"><a href="monae.example_transformer.html#f:28">f</a></span> <span class="id">a</span> <span class="id">s'</span><br/>
+<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="PersistentState.bindretf" class="id">
+  <a name="PersistentState.bindretf" class="">bindretf</a>
+</span> (<span id="A:30" class="id">
+  <a name="A:30" class="">A</a>
+</span> <span id="B:31" class="id">
+  <a name="B:31" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="a:32" class="id">
+  <a name="a:32" class="">a</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#A:30">A</a></span>) (<span id="f:33" class="id">
+  <a name="f:33" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#A:30">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#B:31">B</a></span>) <span class="id">:</span><br/>
+<span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span> (<span class="id"><a href="monae.example_transformer.html#PersistentState.ret">ret</a></span> <span class="id"><a href="monae.example_transformer.html#a:32">a</a></span>) <span class="id"><a href="monae.example_transformer.html#f:33">f</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.example_transformer.html#f:33">f</a></span> <span class="id"><a href="monae.example_transformer.html#a:32">a</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+<span class="id">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="PersistentState.bindmret" class="id">
+  <a name="PersistentState.bindmret" class="">bindmret</a>
+</span> (<span id="A:34" class="id">
+  <a name="A:34" class="">A</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="m:35" class="id">
+  <a name="m:35" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#A:34">A</a></span>) <span class="id">:</span><br/>
+<span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span> <span class="id"><a href="monae.example_transformer.html#m:35">m</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.ret">ret</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.example_transformer.html#m:35">m</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">apply:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funext">boolp.funext</a></span> <span class="id">=&gt;</span> <span class="id">s</span>.<br/>
+<span class="id">unfold</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span>.<br/>
+<span class="id">destruct</span> (<span class="id">m</span> <span class="id">s</span>) <span class="gallina-kwd">as</span> <span class="id">[[|]];</span> <span class="id">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="PersistentState.bindA" class="id">
+  <a name="PersistentState.bindA" class="">bindA</a>
+</span><br/>
+&nbsp;&nbsp;(<span id="A:36" class="id">
+  <a name="A:36" class="">A</a>
+</span> <span id="B:37" class="id">
+  <a name="B:37" class="">B</a>
+</span> <span id="C:38" class="id">
+  <a name="C:38" class="">C</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="m:39" class="id">
+  <a name="m:39" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#A:36">A</a></span>)<br/>
+&nbsp;&nbsp;(<span id="f:40" class="id">
+  <a name="f:40" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#A:36">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#B:37">B</a></span>) (<span id="g:41" class="id">
+  <a name="g:41" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#B:37">B</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#C:38">C</a></span>) <span class="id">:</span><br/>
+<span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span> (<span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span> <span class="id"><a href="monae.example_transformer.html#m:39">m</a></span> <span class="id"><a href="monae.example_transformer.html#f:40">f</a></span>) <span class="id"><a href="monae.example_transformer.html#g:41">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span> <span class="id"><a href="monae.example_transformer.html#m:39">m</a></span> (<span class="gallina-kwd">fun</span> <span id="x:42" class="id">
+  <a name="x:42" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span> (<span class="id"><a href="monae.example_transformer.html#f:40">f</a></span> <span class="id"><a href="monae.example_transformer.html#x:42">x</a></span>) <span class="id"><a href="monae.example_transformer.html#g:41">g</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+<span class="id">apply:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funext">boolp.funext</a></span> <span class="id">=&gt;</span> <span class="id">s</span>.<br/>
+<span class="id">unfold</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span>.<br/>
+<span class="id">destruct</span> (<span class="id">m</span> <span class="id">s</span>) <span class="gallina-kwd">as</span> <span class="id">[[|]];</span> <span class="id">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span id="PersistentState.fail" class="id">
+  <a name="PersistentState.fail" class="">fail</a>
+</span> <span class="id">{A</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0}</a></span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#A:43">A</a></span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span id="s:44" class="id">
+  <a name="s:44" class="">s</a>
+</span> <span class="id">=&gt;</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#None">None,</a></span> <span class="id"><a href="monae.example_transformer.html#s:44">s</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="PersistentState.catch" class="id">
+  <a name="PersistentState.catch" class="">catch</a>
+</span> <span class="id">{A</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0}</a></span> (<span id="m1:46" class="id">
+  <a name="m1:46" class="">m1</a>
+</span> <span id="m2:47" class="id">
+  <a name="m2:47" class="">m2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#A:45">A</a></span>) <span class="id">:=</span><br/>
+<span class="gallina-kwd">fun</span> <span id="s:48" class="id">
+  <a name="s:48" class="">s</a>
+</span> <span class="id">=&gt;</span> <span class="gallina-kwd">match</span> <span class="id"><a href="monae.example_transformer.html#m1:46">m1</a></span> <span class="id"><a href="monae.example_transformer.html#s:48">s</a></span> <span class="gallina-kwd">with</span><br/>
+<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">a,</span> <span class="id">s'</span>) <span class="id">=&gt;</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">a,</span> <span class="id">s'</span>)<br/>
+<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#None">None,</a></span> <span class="id">s'</span>) <span class="id">=&gt;</span> <span class="id"><a href="monae.example_transformer.html#m2:47">m2</a></span> <span class="id">s'</span><br/>
+<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="PersistentState.get" class="id">
+  <a name="PersistentState.get" class="">get</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.persistentstate.S">S</a></span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span id="s:49" class="id">
+  <a name="s:49" class="">s</a>
+</span> <span class="id">=&gt;</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="monae.example_transformer.html#s:49">s,</a></span> <span class="id"><a href="monae.example_transformer.html#s:49">s</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="PersistentState.put" class="id">
+  <a name="PersistentState.put" class="">put</a>
+</span> (<span id="s:50" class="id">
+  <a name="s:50" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.persistentstate.S">S</a></span>) <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.failPState">failPState</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#tt">tt,</a></span> <span class="id"><a href="monae.example_transformer.html#s:50">s</a></span>).<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.persistentstate">persistentstate</a></span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.runFailPState">runFailPState</a></span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.ret">ret</a></span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span> <span class="id">{_</span> <span class="id">_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.fail">fail</a></span> <span class="id">{_</span> <span class="id">_}</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.get">get</a></span> <span class="id">{_}</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.put">put</a></span> <span class="id">{_}</span> <span class="id">_</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span id="PersistentState.:::x_'>>>'_x" class="id">
+  <a name="PersistentState.:::x_'>>>'_x" class="">"m&nbsp;&gt;&gt;&gt;&nbsp;f"</a>
+</span> <span class="id">:=</span> (<span class="id"><a href="monae.example_transformer.html#PersistentState.bind">bind</a></span> <span class="id">m</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">f</span>)) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">49</span>).<br/>
+<br/>
+<span class="vernacular">Goal</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.example_transformer.html#PersistentState.runFailPState">runFailPState</a></span> (<span class="id"><a href="monae.example_transformer.html#PersistentState.put">put</a></span> <span class="id">1</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.:::x_'>>>'_x">&gt;&gt;&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.catch">catch</a></span> (<span class="id"><a href="monae.example_transformer.html#PersistentState.put">put</a></span> <span class="id">2</span> <span class="id"><a href="monae.example_transformer.html#PersistentState.:::x_'>>>'_x">&gt;&gt;&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#PersistentState.fail">fail</a></span>) <span class="id"><a href="monae.example_transformer.html#PersistentState.get">get</a></span>) <span class="id">0</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">2,</span> <span class="id">2</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+<span class="id">reflexivity</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#PersistentState">PersistentState</a></span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="incr_fail_incr" class="id">
+  <a name="incr_fail_incr" class="">incr_fail_incr</a>
+</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="incr_fail_incr.with_failStateReifyMonad" class="id">
+  <a name="incr_fail_incr.with_failStateReifyMonad" class="">with_failStateReifyMonad</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> <span id="incr_fail_incr.with_failStateReifyMonad.M" class="id">
+  <a name="incr_fail_incr.with_failStateReifyMonad.M" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadFailStateReify.Exports.failStateReifyMonad">failStateReifyMonad</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr.with_failStateReifyMonad.incr" class="id">
+  <a name="incr_fail_incr.with_failStateReifyMonad.incr" class="">incr</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_failStateReifyMonad.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="id"><a href="monae.hierarchy.html#get">get</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> (<span class="id"><a href="monae.hierarchy.html#put">put</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#succn">succn</a></span>).<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr.with_failStateReifyMonad.prog" class="id">
+  <a name="incr_fail_incr.with_failStateReifyMonad.prog" class="">prog</a>
+</span> (<span id="B:52" class="id">
+  <a name="B:52" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_failStateReifyMonad.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_failStateReifyMonad.incr">incr</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id">@fail</span> <span class="id">_</span> <span class="id"><a href="monae.example_transformer.html#B:52">B</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_failStateReifyMonad.incr">incr</a></span>.<br/>
+<br/>
+<span class="vernacular">Goal</span> <span class="gallina-kwd">forall</span> <span id="T:53" class="id">
+  <a name="T:53" class="">T,</a>
+</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_failStateReifyMonad.prog">prog</a></span> <span class="id"><a href="monae.example_transformer.html#T:53">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id">@fail</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="id">move=&gt;</span> <span class="id">T;</span> <span class="id">rewrite</span> <span class="id">/prog</span>.<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span>.<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindfailf">bindfailf</a></span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindmfail">bindmfail</a></span>.<br/>
+Abort.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_failStateReifyMonad">with_failStateReifyMonad</a></span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="incr_fail_incr.with_stateT_of_failMonad" class="id">
+  <a name="incr_fail_incr.with_stateT_of_failMonad" class="">with_stateT_of_failMonad</a>
+</span>.<br/>
+<span class="vernacular">Variable</span> <span id="incr_fail_incr.with_stateT_of_failMonad.N" class="id">
+  <a name="incr_fail_incr.with_stateT_of_failMonad.N" class="">N</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadFail.Exports.failMonad">failMonad</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr.with_stateT_of_failMonad.M" class="id">
+  <a name="incr_fail_incr.with_stateT_of_failMonad.M" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#Monad.Exports.monad">monad</a></span> <span class="id">:=</span> <span class="id"><a href="monae.monad_transformer.html#stateT">stateT</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad.N">N</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr.with_stateT_of_failMonad.incr" class="id">
+  <a name="incr_fail_incr.with_stateT_of_failMonad.incr" class="">incr</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="id"><a href="monae.hierarchy.html#get">get</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> (<span class="id"><a href="monae.hierarchy.html#put">put</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#succn">succn</a></span>).<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr.with_stateT_of_failMonad.prog" class="id">
+  <a name="incr_fail_incr.with_stateT_of_failMonad.prog" class="">prog</a>
+</span> <span id="T:55" class="id">
+  <a name="T:55" class="">T</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad.incr">incr</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.monad_transformer.html#Lift">Lift</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.monad_transformer.html#MonadT.Exports.monadT">monadT</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#stateT">stateT</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat]</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad.N">N</a></span> <span class="id"><a href="monae.example_transformer.html#T:55">T</a></span> <span class="id"><a href="monae.hierarchy.html#fail">fail</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad.incr">incr</a></span>.<br/>
+<span class="vernacular">Goal</span> <span class="gallina-kwd">forall</span> <span id="T:56" class="id">
+  <a name="T:56" class="">T,</a>
+</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad.prog">prog</a></span> <span class="id"><a href="monae.example_transformer.html#T:56">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.monad_transformer.html#Lift">Lift</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.monad_transformer.html#MonadT.Exports.monadT">monadT</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#stateT">stateT</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat]</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad.N">N</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id"><a href="monae.hierarchy.html#fail">fail</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+<span class="id">move=&gt;</span> <span class="id">T;</span> <span class="id">rewrite</span> <span class="id">/prog</span>.<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span>.<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.monad_transformer.html#bindLfailf">bindLfailf</a></span>. <span class="comment">(*&nbsp;fail&nbsp;laws&nbsp;are&nbsp;not&nbsp;sufficient&nbsp;*)</span><br/>
+Abort.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_stateT_of_failMonad">with_stateT_of_failMonad</a></span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="incr_fail_incr.with_exceptT_of_stateMonad" class="id">
+  <a name="incr_fail_incr.with_exceptT_of_stateMonad" class="">with_exceptT_of_stateMonad</a>
+</span>.<br/>
+<span class="vernacular">Definition</span> <span id="LGet" class="id">
+  <a name="LGet" class="">LGet</a>
+</span> <span id="S:57" class="id">
+  <a name="S:57" class="">S</a>
+</span> (<span id="M:58" class="id">
+  <a name="M:58" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadState.Exports.stateMonad">stateMonad</a></span> <span class="id"><a href="monae.example_transformer.html#S:57">S</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.monad_transformer.html#Lift">Lift</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.monad_transformer.html#MonadT.Exports.monadT">monadT</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#exceptT">exceptT</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit]</a></span> <span class="id"><a href="monae.example_transformer.html#M:58">M</a></span> <span class="id"><a href="monae.example_transformer.html#S:57">S</a></span> (<span class="id">@get</span> <span class="id"><a href="monae.example_transformer.html#S:57">S</a></span> <span class="id"><a href="monae.example_transformer.html#M:58">M</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="LPut" class="id">
+  <a name="LPut" class="">LPut</a>
+</span> <span id="S:59" class="id">
+  <a name="S:59" class="">S</a>
+</span> (<span id="M:60" class="id">
+  <a name="M:60" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadState.Exports.stateMonad">stateMonad</a></span> <span class="id"><a href="monae.example_transformer.html#S:59">S</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.monad_transformer.html#Lift">Lift</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.monad_transformer.html#MonadT.Exports.monadT">monadT</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#exceptT">exceptT</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit]</a></span> <span class="id"><a href="monae.example_transformer.html#M:60">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> (<span class="id">@put</span> <span class="id"><a href="monae.example_transformer.html#S:59">S</a></span> <span class="id"><a href="monae.example_transformer.html#M:60">M</a></span>).<br/>
+<br/>
+<span class="vernacular">Variable</span> <span id="incr_fail_incr.with_exceptT_of_stateMonad.N" class="id">
+  <a name="incr_fail_incr.with_exceptT_of_stateMonad.N" class="">N</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadState.Exports.stateMonad">stateMonad</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr.with_exceptT_of_stateMonad.M" class="id">
+  <a name="incr_fail_incr.with_exceptT_of_stateMonad.M" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#Monad.Exports.monad">monad</a></span> <span class="id">:=</span> <span class="id"><a href="monae.monad_transformer.html#exceptT">exceptT</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad.N">N</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr.with_exceptT_of_stateMonad.incr" class="id">
+  <a name="incr_fail_incr.with_exceptT_of_stateMonad.incr" class="">incr</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="id"><a href="monae.example_transformer.html#LGet">LGet</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad.N">N</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> (<span class="id"><a href="monae.example_transformer.html#LPut">LPut</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad.N">N</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#succn">succn</a></span>).<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr.with_exceptT_of_stateMonad.prog" class="id">
+  <a name="incr_fail_incr.with_exceptT_of_stateMonad.prog" class="">prog</a>
+</span> <span id="T:62" class="id">
+  <a name="T:62" class="">T</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad.incr">incr</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#fail">fail</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">_</span> <span class="id"><a href="monae.example_transformer.html#T:62">T</a></span>) <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad.incr">incr</a></span>.<br/>
+<br/>
+<span class="vernacular">Goal</span> <span class="gallina-kwd">forall</span> <span id="T:63" class="id">
+  <a name="T:63" class="">T,</a>
+</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad.prog">prog</a></span> <span class="id"><a href="monae.example_transformer.html#T:63">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id">@fail</span> <span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">move=&gt;</span> <span class="id">T;</span> <span class="id">rewrite</span> <span class="id">/prog</span>.<br/>
+Abort.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr.with_exceptT_of_stateMonad">with_exceptT_of_stateMonad</a></span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr">incr_fail_incr</a></span>.<br/>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="monae.monad_model.html">monad_model</a></span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="incr_fail_incr_model" class="id">
+  <a name="incr_fail_incr_model" class="">incr_fail_incr_model</a>
+</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="bindLmfail" class="id">
+  <a name="bindLmfail" class="">bindLmfail</a>
+</span> (<span id="M:64" class="id">
+  <a name="M:64" class="">M</a>
+</span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.hierarchy.html#Monad.Exports.monad">monad</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_model.html#option_monad">option_monad]</a></span>) <span id="S:65" class="id">
+  <a name="S:65" class="">S</a>
+</span> <span id="T:66" class="id">
+  <a name="T:66" class="">T</a>
+</span> <span id="U:67" class="id">
+  <a name="U:67" class="">U</a>
+</span> (<span id="m:68" class="id">
+  <a name="m:68" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.monad_transformer.html#stateT">stateT</a></span> <span class="id"><a href="monae.example_transformer.html#S:65">S</a></span> <span class="id"><a href="monae.example_transformer.html#M:64">M</a></span> <span class="id"><a href="monae.example_transformer.html#U:67">U</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span id="FAIL:69" class="id">
+  <a name="FAIL:69" class="">FAIL</a>
+</span> <span class="id">:=</span> <span class="id">@throw</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id"><a href="monae.example_transformer.html#T:66">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#tt">tt</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.example_transformer.html#m:68">m</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.monad_transformer.html#Lift">Lift</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.monad_transformer.html#MonadT.Exports.monadT">monadT</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#stateT">stateT</a></span> <span class="id"><a href="monae.example_transformer.html#S:65">S]</a></span> <span class="id"><a href="monae.example_transformer.html#M:64">M</a></span> <span class="id"><a href="monae.example_transformer.html#T:66">T</a></span> <span class="id"><a href="monae.example_transformer.html#FAIL:69">FAIL</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.monad_transformer.html#Lift">Lift</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.monad_transformer.html#MonadT.Exports.monadT">monadT</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#stateT">stateT</a></span> <span class="id"><a href="monae.example_transformer.html#S:65">S]</a></span> <span class="id"><a href="monae.example_transformer.html#M:64">M</a></span> <span class="id"><a href="monae.example_transformer.html#T:66">T</a></span> <span class="id"><a href="monae.example_transformer.html#FAIL:69">FAIL</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/liftS;</span> <span class="id">apply:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funext">boolp.funext</a></span> <span class="id">=&gt;</span> <span class="id">s</span>.<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.monad_model.html#except_bindE">except_bindE</a></span>.<br/>
+<span class="id">rewrite</span> <span class="id">{1}bindE</span> <span class="id">/=</span> <span class="id"><a href="monae.monad_transformer.html#MS_mapE">MS_mapE</a></span> <span class="id">{1}/bindS</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case</span> (<span class="id">m</span> <span class="id">s</span>) <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">-[]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Section</span> <span id="incr_fail_incr_model.fail_model_sufficient" class="id">
+  <a name="incr_fail_incr_model.fail_model_sufficient" class="">fail_model_sufficient</a>
+</span>.<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr_model.fail_model_sufficient.N" class="id">
+  <a name="incr_fail_incr_model.fail_model_sufficient.N" class="">N</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadFail.Exports.failMonad">failMonad</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.hierarchy.html#MonadFail.Exports.failMonad">failMonad</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_model.html#option_monad">option_monad]</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr_model.fail_model_sufficient.M" class="id">
+  <a name="incr_fail_incr_model.fail_model_sufficient.M" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#Monad.Exports.monad">monad</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.hierarchy.html#MonadState.Exports.stateMonad">stateMonad</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#MS">MS</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient.N">N]</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr_model.fail_model_sufficient.FAIL" class="id">
+  <a name="incr_fail_incr_model.fail_model_sufficient.FAIL" class="">FAIL</a>
+</span> <span id="T:70" class="id">
+  <a name="T:70" class="">T</a>
+</span> <span class="id">:=</span> <span class="id">@throw</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id"><a href="monae.example_transformer.html#T:70">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#tt">tt</a></span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr_model.fail_model_sufficient.incr" class="id">
+  <a name="incr_fail_incr_model.fail_model_sufficient.incr" class="">incr</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="id"><a href="monae.hierarchy.html#get">get</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> (<span class="id"><a href="monae.hierarchy.html#put">put</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.ssrnat.html#succn">succn</a></span>).<br/>
+<span class="vernacular">Let</span> <span id="incr_fail_incr_model.fail_model_sufficient.prog" class="id">
+  <a name="incr_fail_incr_model.fail_model_sufficient.prog" class="">prog</a>
+</span> <span id="T:71" class="id">
+  <a name="T:71" class="">T</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient.incr">incr</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.monad_transformer.html#Lift">Lift</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.monad_transformer.html#MonadT.Exports.monadT">monadT</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#stateT">stateT</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat]</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient.N">N</a></span> <span class="id"><a href="monae.example_transformer.html#T:71">T</a></span> (<span class="id">@FAIL</span> <span class="id"><a href="monae.example_transformer.html#T:71">T</a></span>) <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient.incr">incr</a></span>.<br/>
+<span class="vernacular">Goal</span> <span class="gallina-kwd">forall</span> <span id="T:72" class="id">
+  <a name="T:72" class="">T,</a>
+</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient.prog">prog</a></span> <span class="id"><a href="monae.example_transformer.html#T:72">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.monad_transformer.html#Lift">Lift</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.monad_transformer.html#MonadT.Exports.monadT">monadT</a></span> <span class="id">of</span> <span class="id"><a href="monae.monad_transformer.html#stateT">stateT</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#nat">nat]</a></span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient.N">N</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> (<span class="id">@FAIL</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">move=&gt;</span> <span class="id">T;</span> <span class="id">rewrite</span> <span class="id">/prog</span>.<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.example_transformer.html#bindLmfail">bindLmfail</a></span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.monad_transformer.html#bindLfailf">bindLfailf</a></span>.<br/>
+Abort.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model.fail_model_sufficient">fail_model_sufficient</a></span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.example_transformer.html#incr_fail_incr_model">incr_fail_incr_model</a></span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

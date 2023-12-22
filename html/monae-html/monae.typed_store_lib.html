@@ -1,0 +1,462 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module monae.typed_store_lib</title>
+<meta name="description" content="Documentation of Coq module monae.typed_store_lib" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module monae.typed_store_lib</h1>
+<div class="coq">
+<span class="vernacular">Ltac</span> <span class="id">typeof</span> <span class="id">X</span> <span class="id">:=</span> <span class="id">type</span> <span class="id">of</span> <span class="id">X</span>.<br/>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssrmatching.ssrmatching.html">ssrmatching</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Reals.Reals.html">Reals</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Logic.JMeq.html">JMeq</a></span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.all_ssreflect.html">all_ssreflect</a></span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp">boolp</a></span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="NOTFOUND the module url for infotheo.lib.Reals_ext">Reals_ext</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="monae.monae_lib.html">monae_lib</a></span> <span class="id"><a href="monae.hierarchy.html">hierarchy</a></span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                     Lemmas using the typed store monad                    
+                                                                           
+    cchk T (r : loc T) := cget r &gt;&gt; skip.                                  
+                                                                           
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="cchk" class="id">
+  <a name="cchk" class="">cchk</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> (<span id="cchk.MLU" class="id">
+  <a name="cchk.MLU" class="">MLU</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#ML_UNIVERSE.Exports.ML_universe">ML_universe</a></span>) (<span id="cchk.N" class="id">
+  <a name="cchk.N" class="">N</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#Monad.Exports.monad">monad</a></span>) (<span id="cchk.locT" class="id">
+  <a name="cchk.locT" class="">locT</a>
+</span> <span class="id">:</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.eqtype.html#Equality.Exports.eqType">eqType</a></span>) (<span id="cchk.M" class="id">
+  <a name="cchk.M" class="">M</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#MonadTypedStore.Exports.typedStoreMonad">typedStoreMonad</a></span> <span class="id"><a href="monae.typed_store_lib.html#MLU:1">MLU</a></span> <span class="id"><a href="monae.typed_store_lib.html#N:2">N</a></span> <span class="id"><a href="monae.typed_store_lib.html#locT:3">locT</a></span>).<br/>
+<span class="vernacular">Notation</span> <span id="loc" class="id">
+  <a name="loc" class="">loc</a>
+</span> <span class="id">:=</span> (<span class="id">@loc</span> <span class="id"><a href="monae.typed_store_lib.html#cchk.MLU">MLU</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.locT">locT</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="cchk" class="id">
+  <a name="cchk" class="">cchk</a>
+</span> <span class="id">{T}</span> (<span id="r:6" class="id">
+  <a name="r:6" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:5">T</a></span>) <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span> <span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:6">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.hierarchy.html#skip">skip</a></span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cnewchk" class="id">
+  <a name="cnewchk" class="">cnewchk</a>
+</span> <span id="T:7" class="id">
+  <a name="T:7" class="">T</a>
+</span> <span id="s:8" class="id">
+  <a name="s:8" class="">s</a>
+</span> (<span id="A:9" class="id">
+  <a name="A:9" class="">A</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="k:10" class="id">
+  <a name="k:10" class="">k</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:7">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:9">A</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:7">T</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:8">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> (<span class="gallina-kwd">fun</span> <span id="r:11" class="id">
+  <a name="r:11" class="">r</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:11">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:10">k</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:11">r</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:7">T</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:8">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:10">k</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+<span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span>.<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#cnewget">cnewget</a></span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchknewC" class="id">
+  <a name="cchknewC" class="">cchknewC</a>
+</span> <span id="T1:12" class="id">
+  <a name="T1:12" class="">T1</a>
+</span> <span id="T2:13" class="id">
+  <a name="T2:13" class="">T2</a>
+</span> (<span id="r:14" class="id">
+  <a name="r:14" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T1:12">T1</a></span>) <span id="s:15" class="id">
+  <a name="s:15" class="">s</a>
+</span> (<span id="A:16" class="id">
+  <a name="A:16" class="">A</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="k:17" class="id">
+  <a name="k:17" class="">k</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:13">T2</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:16">A</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:14">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:13">T2</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:15">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="r':18" class="id">
+  <a name="r':18" class="">r'</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:14">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:17">k</a></span> <span class="id"><a href="monae.typed_store_lib.html#r':18">r'</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:14">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:13">T2</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:15">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:17">k</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+<span class="id">rewrite</span> <span class="id">!</span>(<span class="id"><a href="monae.hierarchy.html#bindA">bindA,bindskipf</a></span>).<br/>
+<span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span>.<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#cgetnewD">cgetnewD</a></span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchkgetC" class="id">
+  <a name="cchkgetC" class="">cchkgetC</a>
+</span> <span id="T1:19" class="id">
+  <a name="T1:19" class="">T1</a>
+</span> <span id="T2:20" class="id">
+  <a name="T2:20" class="">T2</a>
+</span> (<span id="r1:21" class="id">
+  <a name="r1:21" class="">r1:</a>
+</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T1:19">T1</a></span>) (<span id="r2:22" class="id">
+  <a name="r2:22" class="">r2:</a>
+</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:20">T2</a></span>) (<span id="A:23" class="id">
+  <a name="A:23" class="">A:</a>
+</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>)<br/>
+&nbsp;&nbsp;(<span id="k:24" class="id">
+  <a name="k:24" class="">k:</a>
+</span> <span class="id"><a href="monae.hierarchy.html#coq_type">coq_type</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.N">N</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:20">T2</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:23">A</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:21">r1</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:22">r2</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:24">k</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:22">r2</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> (<span class="gallina-kwd">fun</span> <span id="s:25" class="id">
+  <a name="s:25" class="">s</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:21">r1</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:24">k</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:25">s</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">under</span> <span class="id">[in</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssrmatching.ssrmatching.html#SsrMatchingSyntax.RHS">RHS]eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!</span>(<span class="id"><a href="monae.hierarchy.html#bindA">bindA,bindskipf</a></span>) <span class="id"><a href="monae.hierarchy.html#cgetC">cgetC</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchknewE" class="id">
+  <a name="cchknewE" class="">cchknewE</a>
+</span> <span id="T1:26" class="id">
+  <a name="T1:26" class="">T1</a>
+</span> <span id="T2:27" class="id">
+  <a name="T2:27" class="">T2</a>
+</span> (<span id="r1:28" class="id">
+  <a name="r1:28" class="">r1</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T1:26">T1</a></span>) <span id="s:29" class="id">
+  <a name="s:29" class="">s</a>
+</span> (<span id="A:30" class="id">
+  <a name="A:30" class="">A</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="k1:31" class="id">
+  <a name="k1:31" class="">k1</a>
+</span> <span id="k2:32" class="id">
+  <a name="k2:32" class="">k2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:27">T2</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:30">A</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span id="r2:33" class="id">
+  <a name="r2:33" class="">r2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:27">T2,</a></span> <span class="id"><a href="monae.hierarchy.html#loc_id">loc_id</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:28">r1</a></span> <span class="id">!=</span> <span class="id"><a href="monae.hierarchy.html#loc_id">loc_id</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:33">r2</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#k1:31">k1</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:33">r2</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k2:32">k2</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:33">r2</a></span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:28">r1</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:27">T2</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:29">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k1:31">k1</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:28">r1</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:27">T2</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:29">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k2:32">k2</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+ <span class="id">move=&gt;</span> <span class="id">Hk;</span> <span class="id">rewrite</span> <span class="id">!</span>(<span class="id"><a href="monae.hierarchy.html#bindA">bindA,bindskipf</a></span>)<span class="id">;</span> <span class="id">exact:</span> <span class="id"><a href="monae.hierarchy.html#cgetnewE">cgetnewE</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchknewget" class="id">
+  <a name="cchknewget" class="">cchknewget</a>
+</span> <span id="T:34" class="id">
+  <a name="T:34" class="">T</a>
+</span> <span id="T':35" class="id">
+  <a name="T':35" class="">T'</a>
+</span> (<span id="r:36" class="id">
+  <a name="r:36" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:34">T</a></span>) <span id="s:37" class="id">
+  <a name="s:37" class="">s</a>
+</span> (<span id="A:38" class="id">
+  <a name="A:38" class="">A</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) <span id="k:39" class="id">
+  <a name="k:39" class="">k</a>
+</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:36">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T':35">T'</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:37">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="r':40" class="id">
+  <a name="r':40" class="">r'</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:36">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:39">k</a></span> <span class="id"><a href="monae.typed_store_lib.html#r':40">r'</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">=</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:36">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> (<span class="gallina-kwd">fun</span> <span id="u:41" class="id">
+  <a name="u:41" class="">u</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T':35">T'</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:37">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:39">k</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'^~'_x">^~</a></span> <span class="id"><a href="monae.typed_store_lib.html#u:41">u</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">:&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:38">A</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span> <span class="id"><a href="monae.hierarchy.html#cgetnewD">cgetnewD</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchknewput" class="id">
+  <a name="cchknewput" class="">cchknewput</a>
+</span> <span id="T:42" class="id">
+  <a name="T:42" class="">T</a>
+</span> <span id="T':43" class="id">
+  <a name="T':43" class="">T'</a>
+</span> (<span id="r:44" class="id">
+  <a name="r:44" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:42">T</a></span>) <span id="s:45" class="id">
+  <a name="s:45" class="">s</a>
+</span> <span id="s':46" class="id">
+  <a name="s':46" class="">s'</a>
+</span> (<span id="A:47" class="id">
+  <a name="A:47" class="">A</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) <span id="k:48" class="id">
+  <a name="k:48" class="">k</a>
+</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:44">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T':43">T'</a></span> <span class="id"><a href="monae.typed_store_lib.html#s':46">s'</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="r':49" class="id">
+  <a name="r':49" class="">r'</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:44">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:45">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:48">k</a></span> <span class="id"><a href="monae.typed_store_lib.html#r':49">r'</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">=</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:44">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:45">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T':43">T'</a></span> <span class="id"><a href="monae.typed_store_lib.html#s':46">s'</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:48">k</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">:&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:47">A</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span> <span class="id"><a href="monae.hierarchy.html#cputnewC">cputnewC</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchkget" class="id">
+  <a name="cchkget" class="">cchkget</a>
+</span> <span id="T:50" class="id">
+  <a name="T:50" class="">T</a>
+</span> (<span id="r:51" class="id">
+  <a name="r:51" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:50">T</a></span>) (<span id="A:52" class="id">
+  <a name="A:52" class="">A</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="k:53" class="id">
+  <a name="k:53" class="">k</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#coq_type">coq_type</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.N">N</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:50">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:52">A</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:51">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> (<span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:51">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:53">k</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:51">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:53">k</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span> <span class="id"><a href="monae.hierarchy.html#cgetget">cgetget</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cgetchk" class="id">
+  <a name="cgetchk" class="">cgetchk</a>
+</span> <span id="T:54" class="id">
+  <a name="T:54" class="">T</a>
+</span> (<span id="r:55" class="id">
+  <a name="r:55" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:54">T</a></span>) (<span id="A:56" class="id">
+  <a name="A:56" class="">A:</a>
+</span> <span class="id"><a href="monae.hierarchy.html#UU0">UU0</a></span>) (<span id="k:57" class="id">
+  <a name="k:57" class="">k</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#coq_type">coq_type</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.N">N</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:54">T</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:56">A</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:55">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> (<span class="gallina-kwd">fun</span> <span id="s:58" class="id">
+  <a name="s:58" class="">s</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:55">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:57">k</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:58">s</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:55">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#k:57">k</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+ <span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf;</a></span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#cgetget">cgetget</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchkputC" class="id">
+  <a name="cchkputC" class="">cchkputC</a>
+</span> <span id="T1:59" class="id">
+  <a name="T1:59" class="">T1</a>
+</span> <span id="T2:60" class="id">
+  <a name="T2:60" class="">T2</a>
+</span> (<span id="r1:61" class="id">
+  <a name="r1:61" class="">r1</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T1:59">T1</a></span>) (<span id="r2:62" class="id">
+  <a name="r2:62" class="">r2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:60">T2</a></span>) (<span id="s:63" class="id">
+  <a name="s:63" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#coq_type">coq_type</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.N">N</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:60">T2</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:61">r1</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:62">r2</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:63">s</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:62">r2</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:63">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:61">r1</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span> <span class="id"><a href="monae.hierarchy.html#cgetputC">cgetputC</a></span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchkput" class="id">
+  <a name="cchkput" class="">cchkput</a>
+</span> <span id="T:64" class="id">
+  <a name="T:64" class="">T</a>
+</span> (<span id="r:65" class="id">
+  <a name="r:65" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:64">T</a></span>) (<span id="s:66" class="id">
+  <a name="s:66" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#coq_type">coq_type</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.N">N</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:64">T</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:65">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:65">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:66">s</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:65">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:66">s</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span> <span class="id"><a href="monae.hierarchy.html#cgetput">cgetput</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cputchk" class="id">
+  <a name="cputchk" class="">cputchk</a>
+</span> <span id="T:67" class="id">
+  <a name="T:67" class="">T</a>
+</span> (<span id="r:68" class="id">
+  <a name="r:68" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:67">T</a></span>) (<span id="s:69" class="id">
+  <a name="s:69" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#coq_type">coq_type</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.N">N</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:67">T</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:68">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:69">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:68">r</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:68">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:69">s</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#cputget">cputget</a></span> <span class="id"><a href="monae.hierarchy.html#bindmskip">bindmskip</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchkC" class="id">
+  <a name="cchkC" class="">cchkC</a>
+</span> <span id="T1:70" class="id">
+  <a name="T1:70" class="">T1</a>
+</span> <span id="T2:71" class="id">
+  <a name="T2:71" class="">T2</a>
+</span> (<span id="r1:72" class="id">
+  <a name="r1:72" class="">r1</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T1:70">T1</a></span>) (<span id="r2:73" class="id">
+  <a name="r2:73" class="">r2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:71">T2</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:72">r1</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:73">r2</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r2:73">r2</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r1:72">r1</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!</span>(<span class="id"><a href="monae.hierarchy.html#bindA">bindA,bindskipf</a></span>) <span class="id"><a href="monae.hierarchy.html#cgetC">cgetC</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cchkdup" class="id">
+  <a name="cchkdup" class="">cchkdup</a>
+</span> <span id="T:74" class="id">
+  <a name="T:74" class="">T</a>
+</span> (<span id="r:75" class="id">
+  <a name="r:75" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:74">T</a></span>) <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:75">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:75">r</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:75">r</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindA">bindA</a></span> <span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span> <span class="id"><a href="monae.hierarchy.html#cgetget">cgetget</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cgetret" class="id">
+  <a name="cgetret" class="">cgetret</a>
+</span> <span id="T:76" class="id">
+  <a name="T:76" class="">T</a>
+</span> (<span id="r:77" class="id">
+  <a name="r:77" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:76">T</a></span>) <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:77">r</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.hierarchy.html#Ret">Ret</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:77">r</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">:&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#bindmret">bindmret</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="crunnew0" class="id">
+  <a name="crunnew0" class="">crunnew0</a>
+</span> <span id="T:78" class="id">
+  <a name="T:78" class="">T</a>
+</span> <span id="s:79" class="id">
+  <a name="s:79" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:78">T</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:79">s</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id">T</span> <span class="id">s</span>)) <span class="id"><a href="monae.hierarchy.html#crunnew">crunnew</a></span> <span class="id">//</span> <span class="id"><a href="monae.hierarchy.html#crunskip">crunskip</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="crunchkget" class="id">
+  <a name="crunchkget" class="">crunchkget</a>
+</span> <span id="A:80" class="id">
+  <a name="A:80" class="">A</a>
+</span> <span id="T:81" class="id">
+  <a name="T:81" class="">T</a>
+</span> (<span id="m:82" class="id">
+  <a name="m:82" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:80">A</a></span>) (<span id="r:83" class="id">
+  <a name="r:83" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#A:80">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:81">T</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.typed_store_lib.html#m:82">m</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="x:84" class="id">
+  <a name="x:84" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> (<span class="id"><a href="monae.typed_store_lib.html#r:83">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:84">x</a></span>)) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.typed_store_lib.html#m:82">m</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="x:85" class="id">
+  <a name="x:85" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#cget">cget</a></span> (<span class="id"><a href="monae.typed_store_lib.html#r:83">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:85">x</a></span>)) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">:&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#bool">bool</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cchk</span> <span class="id">-bindA</span> <span class="id"><a href="monae.hierarchy.html#crunmskip">crunmskip</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="crunchkput" class="id">
+  <a name="crunchkput" class="">crunchkput</a>
+</span> <span id="A:86" class="id">
+  <a name="A:86" class="">A</a>
+</span> <span id="T:87" class="id">
+  <a name="T:87" class="">T</a>
+</span> (<span id="m:88" class="id">
+  <a name="m:88" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:86">A</a></span>) (<span id="r:89" class="id">
+  <a name="r:89" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#A:86">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:87">T</a></span>) <span id="s:90" class="id">
+  <a name="s:90" class="">s</a>
+</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.typed_store_lib.html#m:88">m</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="x:91" class="id">
+  <a name="x:91" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> (<span class="id"><a href="monae.typed_store_lib.html#r:89">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:91">x</a></span>)) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.typed_store_lib.html#m:88">m</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="x:92" class="id">
+  <a name="x:92" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#cput">cput</a></span> (<span class="id"><a href="monae.typed_store_lib.html#r:89">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:92">x</a></span>) (<span class="id"><a href="monae.typed_store_lib.html#s:90">s</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:92">x</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+ <span class="id">rewrite</span> <span class="id"><a href="monae.typed_store_lib.html#crunchkget">crunchkget;</a></span> <span class="id">exact:</span> <span class="id"><a href="monae.hierarchy.html#crungetput">crungetput</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="crunnewchkC" class="id">
+  <a name="crunnewchkC" class="">crunnewchkC</a>
+</span> <span id="A:93" class="id">
+  <a name="A:93" class="">A</a>
+</span> <span id="T1:94" class="id">
+  <a name="T1:94" class="">T1</a>
+</span> <span id="T2:95" class="id">
+  <a name="T2:95" class="">T2</a>
+</span> (<span id="m:96" class="id">
+  <a name="m:96" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:93">A</a></span>) (<span id="r:97" class="id">
+  <a name="r:97" class="">r</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#A:93">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#loc">loc</a></span> <span class="id"><a href="monae.typed_store_lib.html#T1:94">T1</a></span>) <span id="s:98" class="id">
+  <a name="s:98" class="">s</a>
+</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.typed_store_lib.html#m:96">m</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="x:99" class="id">
+  <a name="x:99" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> (<span class="id"><a href="monae.typed_store_lib.html#r:97">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:99">x</a></span>)) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.typed_store_lib.html#m:96">m</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="x:100" class="id">
+  <a name="x:100" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T2:95">T2</a></span> (<span class="id"><a href="monae.typed_store_lib.html#s:98">s</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:100">x</a></span>) <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> (<span class="id"><a href="monae.typed_store_lib.html#r:97">r</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:100">x</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">rewrite</span> <span class="id"><a href="monae.typed_store_lib.html#crunchkget">crunchkget</a></span> <span class="id">=&gt;</span> <span class="id">Hck</span>.<br/>
+<span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">-bindA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-bindA</span> <span class="id"><a href="monae.hierarchy.html#crunmskip">crunmskip</a></span>.<br/>
+<span class="id">exact:</span> <span class="id"><a href="monae.hierarchy.html#crunnewgetC">crunnewgetC</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="crunnewchk" class="id">
+  <a name="crunnewchk" class="">crunnewchk</a>
+</span> <span id="A:101" class="id">
+  <a name="A:101" class="">A</a>
+</span> <span id="T:102" class="id">
+  <a name="T:102" class="">T</a>
+</span> (<span id="m:103" class="id">
+  <a name="m:103" class="">m</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id"><a href="monae.typed_store_lib.html#A:101">A</a></span>) <span id="s:104" class="id">
+  <a name="s:104" class="">s</a>
+</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> <span class="id"><a href="monae.typed_store_lib.html#m:103">m</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.typed_store_lib.html#m:103">m</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="x:105" class="id">
+  <a name="x:105" class="">x</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:102">T</a></span> (<span class="id"><a href="monae.typed_store_lib.html#s:104">s</a></span> <span class="id"><a href="monae.typed_store_lib.html#x:105">x</a></span>) <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">/cchk</span> <span class="id"><a href="monae.hierarchy.html#cnewget">cnewget</a></span>.<br/>
+<span class="id">rewrite</span> <span class="id">-bindA</span> <span class="id"><a href="monae.hierarchy.html#crunmskip">crunmskip</a></span>.<br/>
+<span class="id">exact:</span> <span class="id"><a href="monae.hierarchy.html#crunnew">crunnew</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="crunnewchk0" class="id">
+  <a name="crunnewchk0" class="">crunnewchk0</a>
+</span> <span id="T:106" class="id">
+  <a name="T:106" class="">T</a>
+</span> <span id="s:107" class="id">
+  <a name="s:107" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#crun">crun</a></span> (<span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:106">T</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:107">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="gallina-kwd">fun</span> <span id="r:108" class="id">
+  <a name="r:108" class="">r</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id"><a href="monae.typed_store_lib.html#r:108">r</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id"><a href="monae.hierarchy.html#bindskipf">bindskipf</a></span> (<span class="id">_</span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id">_</span>)) <span class="id"><a href="monae.typed_store_lib.html#crunnewchk">crunnewchk</a></span> <span class="id">//</span> <span class="id"><a href="monae.hierarchy.html#crunskip">crunskip</a></span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="cnewgetret" class="id">
+  <a name="cnewgetret" class="">cnewgetret</a>
+</span> <span id="T:109" class="id">
+  <a name="T:109" class="">T</a>
+</span> <span id="s:110" class="id">
+  <a name="s:110" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:109">T</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:110">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>='_x">&gt;&gt;=</a></span> <span class="id">@cget</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">=</a></span> <span class="id"><a href="monae.hierarchy.html#cnew">cnew</a></span> <span class="id"><a href="monae.typed_store_lib.html#T:109">T</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:110">s</a></span> <span class="id"><a href="monae.hierarchy.html#::monae_scope:x_'>>'_x">&gt;&gt;</a></span> <span class="id"><a href="monae.hierarchy.html#Ret">Ret</a></span> <span class="id"><a href="monae.typed_store_lib.html#s:110">s</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x_':>'_x">:&gt;</a></span> <span class="id"><a href="monae.typed_store_lib.html#cchk.M">M</a></span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+ <span class="id">under</span> <span class="id"><a href="monae.hierarchy.html#eq_bind">eq_bind</a></span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">-cgetret;</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.hierarchy.html#cnewget">cnewget</a></span>. Qed.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="monae.typed_store_lib.html#cchk">cchk</a></span> <span class="id">{MLU</span> <span class="id">N</span> <span class="id">locT</span> <span class="id">M}</span> <span class="id">[T]</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

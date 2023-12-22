@@ -1,0 +1,1004 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module monae.category_ext</title>
+<meta name="description" content="Documentation of Coq module monae.category_ext" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module monae.category_ext</h1>
+<div class="coq">
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://math-comp.github.io/htmldoc/mathcomp.ssreflect.all_ssreflect.html">all_ssreflect</a></span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp">boolp</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="monae.monae_lib.html">monae_lib</a></span> <span class="id"><a href="monae.category.html">category</a></span>.<br/>
+<span class="vernacular">From</span> <span class="id">HB</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="NOTFOUND the module url for HB.structures">structures</a></span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                   Extra definitions in category theory                    
+                                                                           
+This file provides some constructions over categories.                     
+Module SliceCategory                                                       
+Module ProductCategory                                                     
+                                                                           
+TODO: bridge our definition to timany's abstract category:                 
+- define concretization (using yoneda embedding),                          
+- define opposite category (directly and by concretization),               
+- define presheaf category (directly?)                                     
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">category_scope</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="SliceCategory" class="id">
+  <a name="SliceCategory" class="">SliceCategory</a>
+</span>.<br/>
+<span class="vernacular">Section</span> <span id="SliceCategory.def" class="id">
+  <a name="SliceCategory.def" class="">def</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> (<span id="SliceCategory.def.C" class="id">
+  <a name="SliceCategory.def.C" class="">C</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>) (<span id="SliceCategory.def.a" class="id">
+  <a name="SliceCategory.def.a" class="">a</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#C:1">C</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="SliceCategory.slice" class="id">
+  <a name="SliceCategory.slice" class="">slice</a>
+</span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#::type_scope:'{'_x_':'_x_'&'_x_'}'">{</a></span> <span id="b:3" class="id">
+  <a name="b:3" class="">b</a>
+</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#::type_scope:'{'_x_':'_x_'&'_x_'}'">:</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.def.C">C</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#::type_scope:'{'_x_':'_x_'&'_x_'}'">&amp;</a></span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#b:3">b,</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.def.a">a}</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#::type_scope:'{'_x_':'_x_'&'_x_'}'">}</a></span>.<br/>
+<span class="vernacular">Definition</span> <span id="SliceCategory.slice_category_obj'" class="id">
+  <a name="SliceCategory.slice_category_obj'" class="">slice_category_obj'</a>
+</span> (<span id="s:4" class="id">
+  <a name="s:4" class="">s</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice">slice</a></span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">x</span> <span class="id">_</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#s:4">s</a></span> <span class="gallina-kwd">in</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id">x</span>.<br/>
+<span class="vernacular">Definition</span> <span id="SliceCategory.slice_category_obj" class="id">
+  <a name="SliceCategory.slice_category_obj" class="">slice_category_obj</a>
+</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_obj'">slice_category_obj'</a></span>.<br/>
+<span class="vernacular">Definition</span> <span id="SliceCategory.slice_category_inhom'" class="id">
+  <a name="SliceCategory.slice_category_inhom'" class="">slice_category_inhom'</a>
+</span> (<span id="b:6" class="id">
+  <a name="b:6" class="">b</a>
+</span> <span id="c:7" class="id">
+  <a name="c:7" class="">c</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice">slice</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_obj">slice_category_obj</a></span> <span class="id"><a href="monae.category_ext.html#b:6">b</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_obj">slice_category_obj</a></span> <span class="id"><a href="monae.category_ext.html#c:7">c</a></span>) <span class="id">-&gt;</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">_</span> <span class="id">gb</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#b:6">b</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">_</span> <span class="id">gc</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#c:7">c</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span id="f:10" class="id">
+  <a name="f:10" class="">f</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.category.html#Hom.sort">Hom.sort</a></span> <span class="id">gb</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id">gc</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#f:10">f</a></span>.<br/>
+<span class="vernacular">Definition</span> <span id="SliceCategory.slice_category_inhom" class="id">
+  <a name="SliceCategory.slice_category_inhom" class="">slice_category_inhom</a>
+</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_inhom'">slice_category_inhom'</a></span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span id="SliceCategory.el" class="id">
+  <a name="SliceCategory.el" class="">el</a>
+</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_obj">slice_category_obj</a></span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span id="SliceCategory.inhom" class="id">
+  <a name="SliceCategory.inhom" class="">inhom</a>
+</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_inhom">slice_category_inhom</a></span>.<br/>
+<span class="vernacular">Lemma</span> <span id="SliceCategory.slice_category_id" class="id">
+  <a name="SliceCategory.slice_category_id" class="">slice_category_id</a>
+</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span id="a:11" class="id">
+  <a name="a:11" class="">a</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice">slice,</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.inhom">inhom</a></span> (<span class="id">@idfun</span> (<span class="id"><a href="monae.category_ext.html#SliceCategory.el">el</a></span> <span class="id"><a href="monae.category_ext.html#a:11">a</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="gallina-kwd">by</span> <span class="id">case</span>. Qed.</div>
+<span class="vernacular">Lemma</span> <span id="SliceCategory.slice_category_comp" class="id">
+  <a name="SliceCategory.slice_category_comp" class="">slice_category_comp</a>
+</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="aa:12" class="id">
+  <a name="aa:12" class="">aa</a>
+</span> <span id="ba:13" class="id">
+  <a name="ba:13" class="">ba</a>
+</span> <span id="ca:14" class="id">
+  <a name="ca:14" class="">ca</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice">slice</a></span>) (<span id="f:15" class="id">
+  <a name="f:15" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.el">el</a></span> <span class="id"><a href="monae.category_ext.html#aa:12">aa</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.el">el</a></span> <span class="id"><a href="monae.category_ext.html#ba:13">ba</a></span>) (<span id="g:16" class="id">
+  <a name="g:16" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.el">el</a></span> <span class="id"><a href="monae.category_ext.html#ba:13">ba</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.el">el</a></span> <span class="id"><a href="monae.category_ext.html#ca:14">ca</a></span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#SliceCategory.inhom">inhom</a></span> <span class="id"><a href="monae.category_ext.html#f:15">f</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.inhom">inhom</a></span> <span class="id"><a href="monae.category_ext.html#g:16">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.inhom">inhom</a></span> (<span class="id"><a href="monae.category_ext.html#g:16">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#f:15">f</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="gallina-kwd">by</span> <span class="id">case=&gt;</span> <span class="id">aa</span> <span class="id">haa</span> <span class="id">[]</span> <span class="id">ba</span> <span class="id">hba</span> <span class="id">[]</span> <span class="id">ca</span> <span class="id">hca</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">g</span> <span class="id">-&gt;</span> <span class="id">-&gt;</span>. Qed.</div>
+<span id="SliceCategory.SliceCategory_slice__canonical__category_Category" class="id"><span id="SliceCategory.HB_unnamed_factory_1" class="id">
+  <a name="SliceCategory.SliceCategory_slice__canonical__category_Category" class="hierarchy-builder">HB.instance</a>
+</span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category.html#isCategory.Build">isCategory.Build</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice">slice</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_obj">slice_category_obj</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_inhom">slice_category_inhom</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_id">slice_category_id</a></span> <span class="id"><a href="monae.category_ext.html#SliceCategory.slice_category_comp">slice_category_comp</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#SliceCategory.def">def</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#SliceCategory">SliceCategory</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="ProductCategory" class="id">
+  <a name="ProductCategory" class="">ProductCategory</a>
+</span>.<br/>
+<span class="vernacular">Section</span> <span id="ProductCategory.def" class="id">
+  <a name="ProductCategory.def" class="">def</a>
+</span>.<br/>
+<span class="vernacular">Variable</span> <span id="ProductCategory.def.C" class="id">
+  <a name="ProductCategory.def.C" class="">C</a>
+</span> <span id="ProductCategory.def.D" class="id">
+  <a name="ProductCategory.def.D" class="">D</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>.<br/>
+<span class="vernacular">Notation</span> <span id="ProductCategory.obj" class="id">
+  <a name="ProductCategory.obj" class="">obj</a>
+</span> <span class="id">:=</span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.def.C">C</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.def.D">D</a></span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span id="ProductCategory.ele" class="id">
+  <a name="ProductCategory.ele" class="">ele</a>
+</span> (<span id="X:19" class="id">
+  <a name="X:19" class="">X</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> (<span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#X:19">X</a></span>.<span class="id">1</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'+'_x">+</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#X:19">X</a></span>.<span class="id">2</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span id="ProductCategory.separated" class="id">
+  <a name="ProductCategory.separated" class="">separated</a>
+</span> (<span id="X:20" class="id">
+  <a name="X:20" class="">X</a>
+</span> <span id="Y:21" class="id">
+  <a name="Y:21" class="">Y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span>) (<span id="f:22" class="id">
+  <a name="f:22" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:20">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:21">Y</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span id="x:23" class="id">
+  <a name="x:23" class="">x</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#X:20">X</a></span>.<span class="id">1,</span> <span class="gallina-kwd">exists</span> <span id="y:24" class="id">
+  <a name="y:24" class="">y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#Y:21">Y</a></span>.<span class="id">1,</span> <span class="id"><a href="monae.category_ext.html#f:22">f</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> <span class="id"><a href="monae.category_ext.html#x:23">x</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> <span class="id"><a href="monae.category_ext.html#y:24">y</a></span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span id="x:25" class="id">
+  <a name="x:25" class="">x</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#X:20">X</a></span>.<span class="id">2,</span> <span class="gallina-kwd">exists</span> <span id="y:26" class="id">
+  <a name="y:26" class="">y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#Y:21">Y</a></span>.<span class="id">2,</span> <span class="id"><a href="monae.category_ext.html#f:22">f</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> <span class="id"><a href="monae.category_ext.html#x:25">x</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> <span class="id"><a href="monae.category_ext.html#y:26">y</a></span>).<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="ProductCategory.def.sepfstsnd" class="id">
+  <a name="ProductCategory.def.sepfstsnd" class="">sepfstsnd</a>
+</span>.<br/>
+<span class="vernacular">Let</span> <span id="ProductCategory.def.sepfstsnd._sepfst" class="id">
+  <a name="ProductCategory.def.sepfstsnd._sepfst" class="">_sepfst</a>
+</span> (<span id="X:27" class="id">
+  <a name="X:27" class="">X</a>
+</span> <span id="Y:28" class="id">
+  <a name="Y:28" class="">Y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span>) (<span id="f:29" class="id">
+  <a name="f:29" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:27">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:28">Y</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#f:29">f</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#X:27">X</a></span>.<span class="id">1</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#Y:28">Y</a></span>.<span class="id">1</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">case=&gt;</span> <span class="id">H</span> <span class="id">_</span> <span class="id">x</span>.<br/>
+<span class="id">move/cid</span> <span class="id">:</span> (<span class="id">H</span> <span class="id">x</span>) <span class="id">=&gt;</span> <span class="id">[y</span> <span class="id">_]</span>.<br/>
+<span class="id">exact</span> <span class="id">y</span>.<br/>
+Defined.</div>
+<span class="vernacular">Definition</span> <span id="ProductCategory.sepfst" class="id">
+  <a name="ProductCategory.sepfst" class="">sepfst</a>
+</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.def.sepfstsnd._sepfst">_sepfst</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="ProductCategory.def.sepfstsnd._sepsnd" class="id">
+  <a name="ProductCategory.def.sepfstsnd._sepsnd" class="">_sepsnd</a>
+</span> (<span id="X:30" class="id">
+  <a name="X:30" class="">X</a>
+</span> <span id="Y:31" class="id">
+  <a name="Y:31" class="">Y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span>) (<span id="f:32" class="id">
+  <a name="f:32" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:30">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:31">Y</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#f:32">f</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#X:30">X</a></span>.<span class="id">2</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#Y:31">Y</a></span>.<span class="id">2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+<span class="id">case=&gt;</span> <span class="id">_</span> <span class="id">H</span> <span class="id">x</span>.<br/>
+<span class="id">move/cid</span> <span class="id">:</span> (<span class="id">H</span> <span class="id">x</span>) <span class="id">=&gt;</span> <span class="id">[y</span> <span class="id">_]</span>.<br/>
+<span class="id">exact</span> <span class="id">y</span>.<br/>
+Defined.</div>
+<span class="vernacular">Definition</span> <span id="ProductCategory.sepsnd" class="id">
+  <a name="ProductCategory.sepsnd" class="">sepsnd</a>
+</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.def.sepfstsnd._sepsnd">_sepsnd</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.def.sepfstsnd">sepfstsnd</a></span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.sepfstK" class="id">
+  <a name="ProductCategory.sepfstK" class="">sepfstK</a>
+</span> <span id="X:33" class="id">
+  <a name="X:33" class="">X</a>
+</span> <span id="Y:34" class="id">
+  <a name="Y:34" class="">Y</a>
+</span> (<span id="f:35" class="id">
+  <a name="f:35" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:33">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:34">Y</a></span>) (<span id="Hf:36" class="id">
+  <a name="Hf:36" class="">Hf</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#f:35">f</a></span>) (<span id="x:37" class="id">
+  <a name="x:37" class="">x</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#X:33">X</a></span>.<span class="id">1</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> <span class="id"><a href="monae.category_ext.html#Hf:36">Hf</a></span> <span class="id"><a href="monae.category_ext.html#x:37">x</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#f:35">f</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> <span class="id"><a href="monae.category_ext.html#x:37">x</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+<span class="id">move:</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">f</span> <span class="id">Hf</span> <span class="id">=&gt;</span> <span class="id">[X1</span> <span class="id">X2]</span> <span class="id">[Y1</span> <span class="id">Y2]</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">[/=</span> <span class="id">Hf1</span> <span class="id">Hf2]</span> <span class="gallina-kwd">in</span> <span class="id">x</span> <span class="id">*</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> (<span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> (<span class="id">Hf1</span> <span class="id">x</span>)) <span class="id">=&gt;</span> <span class="id">y</span> <span class="id">-&gt;</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.sepsndK" class="id">
+  <a name="ProductCategory.sepsndK" class="">sepsndK</a>
+</span> <span id="X:38" class="id">
+  <a name="X:38" class="">X</a>
+</span> <span id="Y:39" class="id">
+  <a name="Y:39" class="">Y</a>
+</span> (<span id="f:40" class="id">
+  <a name="f:40" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:38">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:39">Y</a></span>) (<span id="Hf:41" class="id">
+  <a name="Hf:41" class="">Hf</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#f:40">f</a></span>) (<span id="x:42" class="id">
+  <a name="x:42" class="">x</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#X:38">X</a></span>.<span class="id">2</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> <span class="id"><a href="monae.category_ext.html#Hf:41">Hf</a></span> <span class="id"><a href="monae.category_ext.html#x:42">x</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#f:40">f</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> <span class="id"><a href="monae.category_ext.html#x:42">x</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="id">move:</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">f</span> <span class="id">Hf</span> <span class="id">=&gt;</span> <span class="id">[X1</span> <span class="id">X2]</span> <span class="id">[Y1</span> <span class="id">Y2]</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">[/=</span> <span class="id">Hf1</span> <span class="id">Hf2]</span> <span class="gallina-kwd">in</span> <span class="id">x</span> <span class="id">*</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> (<span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> (<span class="id">Hf2</span> <span class="id">x</span>)) <span class="id">=&gt;</span> <span class="id">y</span> <span class="id">-&gt;</span>.<br/>
+Qed.</div>
+<span class="vernacular">Definition</span> <span id="ProductCategory.inhom" class="id">
+  <a name="ProductCategory.inhom" class="">inhom</a>
+</span> (<span id="A:43" class="id">
+  <a name="A:43" class="">A</a>
+</span> <span id="B:44" class="id">
+  <a name="B:44" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span>) (<span id="f:45" class="id">
+  <a name="f:45" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#A:43">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#B:44">B</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span id="H:46" class="id">
+  <a name="H:46" class="">H</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#f:45">f,</a></span> <span class="id"><a href="monae.category.html#inhom">inhom</a></span> <span class="id">_</span> <span class="id">_</span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> <span class="id"><a href="monae.category_ext.html#H:46">H</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'/\'_x">/\</a></span> <span class="id"><a href="monae.category.html#inhom">inhom</a></span> <span class="id">_</span> <span class="id">_</span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> <span class="id"><a href="monae.category_ext.html#H:46">H</a></span>).<br/>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.idfun_separated" class="id">
+  <a name="ProductCategory.idfun_separated" class="">idfun_separated</a>
+</span> (<span id="X:47" class="id">
+  <a name="X:47" class="">X</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span>) <span class="id">:</span> <span class="id">@separated</span> <span class="id"><a href="monae.category_ext.html#X:47">X</a></span> <span class="id"><a href="monae.category_ext.html#X:47">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="gallina-kwd">by</span> <span class="id">split;</span> <span class="id">move=&gt;</span> <span class="id">x;</span> <span class="gallina-kwd">exists</span> <span class="id">x</span>. Qed.</div>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.comp_separated" class="id">
+  <a name="ProductCategory.comp_separated" class="">comp_separated</a>
+</span> (<span id="X:48" class="id">
+  <a name="X:48" class="">X</a>
+</span> <span id="Y:49" class="id">
+  <a name="Y:49" class="">Y</a>
+</span> <span id="Z:50" class="id">
+  <a name="Z:50" class="">Z</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span>) (<span id="f:51" class="id">
+  <a name="f:51" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:48">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:49">Y</a></span>) (<span id="g:52" class="id">
+  <a name="g:52" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:49">Y</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Z:50">Z</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#f:51">f</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#g:52">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> (<span class="id"><a href="monae.category_ext.html#g:52">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#f:51">f</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">move:</span> <span class="id">f</span> <span class="id">g</span>.<br/>
+<span class="id">move:</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">Z</span> <span class="id">=&gt;</span> <span class="id">[X1</span> <span class="id">X2]</span> <span class="id">[Y1</span> <span class="id">Y2]</span> <span class="id">[Z1</span> <span class="id">Z2]</span> <span class="id">f</span> <span class="id">g</span> <span class="id">[/=</span> <span class="id">Hf1</span> <span class="id">Hf2]</span> <span class="id">[/=</span> <span class="id">Hg1</span> <span class="id">Hg2];</span> <span class="id">split=&gt;</span> <span class="id">x</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">case/cid:</span> (<span class="id">Hf1</span> <span class="id">x</span>)<span class="id">=&gt;</span> <span class="id">y</span> <span class="id">/=</span> <span class="id">-&gt;;</span> <span class="id">case/cid:</span> (<span class="id">Hg1</span> <span class="id">y</span>)<span class="id">=&gt;</span> <span class="id">z</span> <span class="id">/=</span> <span class="id">-&gt;;</span> <span class="gallina-kwd">exists</span> <span class="id">z</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">case/cid:</span> (<span class="id">Hf2</span> <span class="id">x</span>)<span class="id">=&gt;</span> <span class="id">y</span> <span class="id">/=</span> <span class="id">-&gt;;</span> <span class="id">case/cid:</span> (<span class="id">Hg2</span> <span class="id">y</span>)<span class="id">=&gt;</span> <span class="id">z</span> <span class="id">/=</span> <span class="id">-&gt;;</span> <span class="gallina-kwd">exists</span> <span class="id">z</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.sepfst_idfun" class="id">
+  <a name="ProductCategory.sepfst_idfun" class="">sepfst_idfun</a>
+</span> <span id="X:53" class="id">
+  <a name="X:53" class="">X</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.idfun_separated">idfun_separated</a></span> <span class="id"><a href="monae.category_ext.html#X:53">X</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">apply</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funext">funext=&gt;</a></span> <span class="id">x</span> <span class="id">/=</span>.<br/>
+<span class="id">suff:</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> (<span class="id">B:=el</span> <span class="id">X</span>.<span class="id">2</span>) (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.idfun_separated">idfun_separated</a></span> <span class="id">X</span>) <span class="id">x</span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> <span class="id">x</span> <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">[=]</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepfstK">sepfstK</a></span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.sepsnd_idfun" class="id">
+  <a name="ProductCategory.sepsnd_idfun" class="">sepsnd_idfun</a>
+</span> <span id="X:54" class="id">
+  <a name="X:54" class="">X</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.idfun_separated">idfun_separated</a></span> <span class="id"><a href="monae.category_ext.html#X:54">X</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">apply</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funext">funext=&gt;</a></span> <span class="id">x</span> <span class="id">/=</span>.<br/>
+<span class="id">suff:</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> (<span class="id">A:=el</span> <span class="id">X</span>.<span class="id">1</span>) (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.idfun_separated">idfun_separated</a></span> <span class="id">X</span>) <span class="id">x</span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> <span class="id">x</span> <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">[=]</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepsndK">sepsndK</a></span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.sepfst_comp" class="id">
+  <a name="ProductCategory.sepfst_comp" class="">sepfst_comp</a>
+</span> <span id="X:55" class="id">
+  <a name="X:55" class="">X</a>
+</span> <span id="Y:56" class="id">
+  <a name="Y:56" class="">Y</a>
+</span> <span id="Z:57" class="id">
+  <a name="Z:57" class="">Z</a>
+</span> (<span id="f:58" class="id">
+  <a name="f:58" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:55">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:56">Y</a></span>) (<span id="g:59" class="id">
+  <a name="g:59" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:56">Y</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Z:57">Z</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span id="Hf:60" class="id">
+  <a name="Hf:60" class="">Hf</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#f:58">f</a></span>) (<span id="Hg:61" class="id">
+  <a name="Hg:61" class="">Hg</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#g:59">g</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.comp_separated">comp_separated</a></span> <span class="id"><a href="monae.category_ext.html#Hf:60">Hf</a></span> <span class="id"><a href="monae.category_ext.html#Hg:61">Hg</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> <span class="id"><a href="monae.category_ext.html#Hg:61">Hg</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> <span class="id"><a href="monae.category_ext.html#Hf:60">Hf</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+<span class="id">apply</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funext">funext=&gt;</a></span> <span class="id">x</span> <span class="id">/=</span>.<br/>
+<span class="id">suff:</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> (<span class="id">B</span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id">Z</span>.<span class="id">2</span>) (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.comp_separated">comp_separated</a></span> <span class="id">Hf</span> <span class="id">Hg</span>) <span class="id">x</span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> <span class="id">Hg</span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst">sepfst</a></span> <span class="id">Hf</span> <span class="id">x</span>)) <span class="gallina-kwd">by</span> <span class="id">case</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">3!sepfstK</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.sepsnd_comp" class="id">
+  <a name="ProductCategory.sepsnd_comp" class="">sepsnd_comp</a>
+</span> <span id="X:62" class="id">
+  <a name="X:62" class="">X</a>
+</span> <span id="Y:63" class="id">
+  <a name="Y:63" class="">Y</a>
+</span> <span id="Z:64" class="id">
+  <a name="Z:64" class="">Z</a>
+</span> (<span id="f:65" class="id">
+  <a name="f:65" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:62">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:63">Y</a></span>) (<span id="g:66" class="id">
+  <a name="g:66" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:63">Y</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Z:64">Z</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="Hf:67" class="id">
+  <a name="Hf:67" class="">Hf</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#f:65">f</a></span>) (<span id="Hg:68" class="id">
+  <a name="Hg:68" class="">Hg</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.separated">separated</a></span> <span class="id"><a href="monae.category_ext.html#g:66">g</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.comp_separated">comp_separated</a></span> <span class="id"><a href="monae.category_ext.html#Hf:67">Hf</a></span> <span class="id"><a href="monae.category_ext.html#Hg:68">Hg</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> <span class="id"><a href="monae.category_ext.html#Hg:68">Hg</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> <span class="id"><a href="monae.category_ext.html#Hf:67">Hf</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+<span class="id">apply</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funext">funext=&gt;</a></span> <span class="id">x</span> <span class="id">/=</span>.<br/>
+<span class="id">suff:</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> (<span class="id">A</span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id">Z</span>.<span class="id">1</span>) (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.comp_separated">comp_separated</a></span> <span class="id">Hf</span> <span class="id">Hg</span>) <span class="id">x</span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> <span class="id">Hg</span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd">sepsnd</a></span> <span class="id">Hf</span> <span class="id">x</span>)) <span class="gallina-kwd">by</span> <span class="id">case</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">3!sepsndK</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.idfun_inhom" class="id">
+  <a name="ProductCategory.idfun_inhom" class="">idfun_inhom</a>
+</span> (<span id="X:69" class="id">
+  <a name="X:69" class="">X</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span>) <span class="id">:</span> <span class="id">@inhom</span> <span class="id"><a href="monae.category_ext.html#X:69">X</a></span> <span class="id"><a href="monae.category_ext.html#X:69">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+<span class="gallina-kwd">exists</span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.idfun_separated">idfun_separated</a></span> <span class="id">X</span>)<span class="id">;</span> <span class="id">rewrite</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst_idfun">sepfst_idfun</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd_idfun">sepsnd_idfun;</a></span><br/>
+&nbsp;&nbsp;<span class="id">split;</span> <span class="id">exact:</span> <span class="id"><a href="monae.category.html#idfun_inhom">idfun_inhom</a></span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="ProductCategory.comp_inhom" class="id">
+  <a name="ProductCategory.comp_inhom" class="">comp_inhom</a>
+</span> <span id="X:70" class="id">
+  <a name="X:70" class="">X</a>
+</span> <span id="Y:71" class="id">
+  <a name="Y:71" class="">Y</a>
+</span> <span id="Z:72" class="id">
+  <a name="Z:72" class="">Z</a>
+</span> (<span id="f:73" class="id">
+  <a name="f:73" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#X:70">X</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:71">Y</a></span>) (<span id="g:74" class="id">
+  <a name="g:74" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Y:71">Y</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span> <span class="id"><a href="monae.category_ext.html#Z:72">Z</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#ProductCategory.inhom">inhom</a></span> <span class="id"><a href="monae.category_ext.html#f:73">f</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.inhom">inhom</a></span> <span class="id"><a href="monae.category_ext.html#g:74">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.inhom">inhom</a></span> (<span class="id"><a href="monae.category_ext.html#g:74">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#f:73">f</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+<span class="id">move=&gt;</span> <span class="id">[]</span> <span class="id">sf</span> <span class="id">[]</span> <span class="id">homfl</span> <span class="id">homfr</span> <span class="id">[]</span> <span class="id">sg</span> <span class="id">[]</span> <span class="id">homgl</span> <span class="id">homgr</span>.<br/>
+<span class="gallina-kwd">exists</span> (<span class="id"><a href="monae.category_ext.html#ProductCategory.comp_separated">comp_separated</a></span> <span class="id">sf</span> <span class="id">sg</span>).<br/>
+<span class="id">rewrite</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepfst_comp">sepfst_comp</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.sepsnd_comp">sepsnd_comp;</a></span> <span class="id">split;</span> <span class="id">exact:</span> <span class="id"><a href="monae.category.html#funcomp_inhom">funcomp_inhom</a></span>.<br/>
+Qed.</div>
+<span id="ProductCategory.Datatypes_prod__canonical__category_Category" class="id"><span id="ProductCategory.HB_unnamed_factory_3" class="id">
+  <a name="ProductCategory.Datatypes_prod__canonical__category_Category" class="hierarchy-builder">HB.instance</a>
+</span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#isCategory.Build">isCategory.Build</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.obj">obj</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.ele">ele</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#ProductCategory.inhom">inhom</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.idfun_inhom">idfun_inhom</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategory.comp_inhom">comp_inhom</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#ProductCategory.def">def</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#ProductCategory">ProductCategory</a></span>.<br/>
+<span class="id">HB.export</span> <span class="id">ProductCategory</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="prodcat_homfstsnd" class="id">
+  <a name="prodcat_homfstsnd" class="">prodcat_homfstsnd</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> <span id="prodcat_homfstsnd.A" class="id">
+  <a name="prodcat_homfstsnd.A" class="">A</a>
+</span> <span id="prodcat_homfstsnd.B" class="id">
+  <a name="prodcat_homfstsnd.B" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>.<br/>
+<span class="vernacular">Section</span> <span id="prodcat_homfstsnd.homfstsnd" class="id">
+  <a name="prodcat_homfstsnd.homfstsnd" class="">homfstsnd</a>
+</span>.<br/>
+<span class="vernacular">Let</span> <span id="prodcat_homfstsnd.homfstsnd._homfst" class="id">
+  <a name="prodcat_homfstsnd.homfstsnd._homfst" class="">_homfst</a>
+</span> (<span id="x:77" class="id">
+  <a name="x:77" class="">x</a>
+</span> <span id="y:78" class="id">
+  <a name="y:78" class="">y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.B">B</a></span>) (<span id="f:79" class="id">
+  <a name="f:79" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:77">x,y}</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:77">x</a></span>.<span class="id">1,</span> <span class="id"><a href="monae.category_ext.html#y:78">y</a></span>.<span class="id">1}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+<span class="id">move:</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">[f</span> <span class="id">[[/cid[sf</span> <span class="id">[+</span> <span class="id">_]]]]]</span>.<br/>
+<span class="id">move/isHom</span>.<span class="id">Axioms_/Hom</span>.<span class="vernacular">Class</span>.<br/>
+<span class="id">exact:</span> <span class="id"><a href="monae.category.html#Hom.Pack">Hom.Pack</a></span>.<br/>
+Defined.</div>
+<span class="vernacular">Definition</span> <span id="homfst" class="id">
+  <a name="homfst" class="">homfst</a>
+</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.homfstsnd._homfst">_homfst</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="prodcat_homfstsnd.homfstsnd._homsnd" class="id">
+  <a name="prodcat_homfstsnd.homfstsnd._homsnd" class="">_homsnd</a>
+</span> (<span id="x:80" class="id">
+  <a name="x:80" class="">x</a>
+</span> <span id="y:81" class="id">
+  <a name="y:81" class="">y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.B">B</a></span>) (<span id="f:82" class="id">
+  <a name="f:82" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:80">x,y}</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:80">x</a></span>.<span class="id">2,</span> <span class="id"><a href="monae.category_ext.html#y:81">y</a></span>.<span class="id">2}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+<span class="id">move:</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">[f</span> <span class="id">[[/cid[sf</span> <span class="id">[_]]]]]</span>.<br/>
+<span class="id">move/isHom</span>.<span class="id">Axioms_/Hom</span>.<span class="vernacular">Class</span>.<br/>
+<span class="id">exact:</span> <span class="id"><a href="monae.category.html#Hom.Pack">Hom.Pack</a></span>.<br/>
+Defined.</div>
+<span class="vernacular">Definition</span> <span id="homsnd" class="id">
+  <a name="homsnd" class="">homsnd</a>
+</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.homfstsnd._homsnd">_homsnd</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.homfstsnd">homfstsnd</a></span>.<br/>
+<span class="vernacular">Lemma</span> <span id="homfst_idfun" class="id">
+  <a name="homfst_idfun" class="">homfst_idfun</a>
+</span> <span id="x:83" class="id">
+  <a name="x:83" class="">x</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> (<span class="id">x:=x</span>) <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+<span class="id">apply/hom_ext;</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span> <span class="id">=&gt;</span> <span class="id">x1</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">i</span> <span class="id">[i1</span> <span class="id">i2]</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">i</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#idfun_separated">ProductCategory.idfun_separated</a></span> <span class="id">_</span>)<span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.category_ext.html#sepfst_idfun">ProductCategory.sepfst_idfun</a></span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="homsnd_idfun" class="id">
+  <a name="homsnd_idfun" class="">homsnd_idfun</a>
+</span> <span id="x:84" class="id">
+  <a name="x:84" class="">x</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> (<span class="id">x:=x</span>) <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">apply/hom_ext;</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span> <span class="id">=&gt;</span> <span class="id">x1</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">i</span> <span class="id">[i1</span> <span class="id">i2]</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">i</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#idfun_separated">ProductCategory.idfun_separated</a></span> <span class="id">_</span>)<span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="monae.category_ext.html#sepsnd_idfun">ProductCategory.sepsnd_idfun</a></span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="homfst_comp" class="id">
+  <a name="homfst_comp" class="">homfst_comp</a>
+</span> (<span id="x:85" class="id">
+  <a name="x:85" class="">x</a>
+</span> <span id="y:86" class="id">
+  <a name="y:86" class="">y</a>
+</span> <span id="z:87" class="id">
+  <a name="z:87" class="">z</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.B">B</a></span>) (<span id="f:88" class="id">
+  <a name="f:88" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:85">x,y}</a></span>) (<span id="g:89" class="id">
+  <a name="g:89" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#y:86">y,z}</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="monae.category_ext.html#g:89">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#f:88">f]</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> <span class="id"><a href="monae.category_ext.html#g:89">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> <span class="id"><a href="monae.category_ext.html#f:88">f]</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="id">rewrite</span> <span class="id">/homfst</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">//=</span> <span class="id">gh</span> <span class="id">[gh1</span> <span class="id">gh2]</span>.<br/>
+<span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=</span>.<br/>
+<span class="id">destruct</span> <span class="id">g</span> <span class="gallina-kwd">as</span> <span class="id">[g</span> <span class="id">[[g']]]</span>.<br/>
+<span class="id">destruct</span> <span class="id">f</span> <span class="gallina-kwd">as</span> <span class="id">[f</span> <span class="id">[[f']]]</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">g_</span> <span class="id">[g1</span> <span class="id">g2]</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">f_</span> <span class="id">[f1</span> <span class="id">f2]</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-ProductCategory</span>.<span class="id">sepfst_comp</span>.<br/>
+<span class="id">congr</span> (<span class="id"><a href="monae.category_ext.html#sepfst">ProductCategory.sepfst</a></span> <span class="id">_</span> <span class="id">_</span>).<br/>
+<span class="id">exact/proof_irr</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="homsnd_comp" class="id">
+  <a name="homsnd_comp" class="">homsnd_comp</a>
+</span> (<span id="x:90" class="id">
+  <a name="x:90" class="">x</a>
+</span> <span id="y:91" class="id">
+  <a name="y:91" class="">y</a>
+</span> <span id="z:92" class="id">
+  <a name="z:92" class="">z</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.B">B</a></span>) (<span id="f:93" class="id">
+  <a name="f:93" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:90">x,y}</a></span>) (<span id="g:94" class="id">
+  <a name="g:94" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#y:91">y,z}</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="monae.category_ext.html#g:94">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#f:93">f]</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> <span class="id"><a href="monae.category_ext.html#g:94">g</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> <span class="id"><a href="monae.category_ext.html#f:93">f]</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+<span class="id">rewrite</span> <span class="id">/homsnd</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">//=</span> <span class="id">gh</span> <span class="id">[gh1</span> <span class="id">gh2]</span>.<br/>
+<span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=</span>.<br/>
+<span class="id">destruct</span> <span class="id">g</span> <span class="gallina-kwd">as</span> <span class="id">[g</span> <span class="id">[[g']]]</span>.<br/>
+<span class="id">destruct</span> <span class="id">f</span> <span class="gallina-kwd">as</span> <span class="id">[f</span> <span class="id">[[f']]]</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">g_</span> <span class="id">[g1</span> <span class="id">g2]</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">f_</span> <span class="id">[f1</span> <span class="id">f2]</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-ProductCategory</span>.<span class="id">sepsnd_comp</span>.<br/>
+<span class="id">congr</span> (<span class="id"><a href="monae.category_ext.html#sepsnd">ProductCategory.sepsnd</a></span> <span class="id">_</span> <span class="id">_</span>).<br/>
+<span class="id">exact/proof_irr</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="homfstK" class="id">
+  <a name="homfstK" class="">homfstK</a>
+</span> (<span id="x:95" class="id">
+  <a name="x:95" class="">x</a>
+</span> <span id="y:96" class="id">
+  <a name="y:96" class="">y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.B">B</a></span>) (<span id="f:97" class="id">
+  <a name="f:97" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:95">x,y}</a></span>) (<span id="i:98" class="id">
+  <a name="i:98" class="">i</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#x:95">x</a></span>.<span class="id">1</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> (<span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> <span class="id"><a href="monae.category_ext.html#f:97">f</a></span> <span class="id"><a href="monae.category_ext.html#i:98">i</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#f:97">f</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> <span class="id"><a href="monae.category_ext.html#i:98">i</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+<span class="id">case:</span> <span class="id">f=&gt;</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">[[Hf]]</span>.<br/>
+<span class="id">case:</span> (<span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">_</span>)<span class="id">=&gt;</span> <span class="id">-[]</span> <span class="id">sf1</span> <span class="id">sf2</span> <span class="id">[]</span> <span class="id">Hf1</span> <span class="id">Hf2</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> (<span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">_</span>)<span class="id">=&gt;</span> <span class="id">j</span> <span class="id">-&gt;</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span id="homsndK" class="id">
+  <a name="homsndK" class="">homsndK</a>
+</span> (<span id="x:99" class="id">
+  <a name="x:99" class="">x</a>
+</span> <span id="y:100" class="id">
+  <a name="y:100" class="">y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd.B">B</a></span>) (<span id="f:101" class="id">
+  <a name="f:101" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:99">x,y}</a></span>) (<span id="i:102" class="id">
+  <a name="i:102" class="">i</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#x:99">x</a></span>.<span class="id">2</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> (<span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> <span class="id"><a href="monae.category_ext.html#f:101">f</a></span> <span class="id"><a href="monae.category_ext.html#i:102">i</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#f:101">f</a></span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> <span class="id"><a href="monae.category_ext.html#i:102">i</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
+<div class="proofscript" id="proof22">
+<span class="id">case:</span> <span class="id">f=&gt;</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">[[Hf]]</span>.<br/>
+<span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">-[sf1</span> <span class="id">sf2]</span> <span class="id">[Hf1</span> <span class="id">Hf2]</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">j</span> <span class="id">-&gt;</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#prodcat_homfstsnd">prodcat_homfstsnd</a></span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="prodCat_pairhom" class="id">
+  <a name="prodCat_pairhom" class="">prodCat_pairhom</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> <span id="prodCat_pairhom.A" class="id">
+  <a name="prodCat_pairhom.A" class="">A</a>
+</span> <span id="prodCat_pairhom.B" class="id">
+  <a name="prodCat_pairhom.B" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>.<br/>
+<span class="vernacular">Variables</span> <span id="prodCat_pairhom.a1" class="id">
+  <a name="prodCat_pairhom.a1" class="">a1</a>
+</span> <span id="prodCat_pairhom.a2" class="id">
+  <a name="prodCat_pairhom.a2" class="">a2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.A">A</a></span>.<br/>
+<span class="vernacular">Variables</span> <span id="prodCat_pairhom.b1" class="id">
+  <a name="prodCat_pairhom.b1" class="">b1</a>
+</span> <span id="prodCat_pairhom.b2" class="id">
+  <a name="prodCat_pairhom.b2" class="">b2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.B">B</a></span>.<br/>
+<span class="vernacular">Variables</span> (<span id="prodCat_pairhom.f" class="id">
+  <a name="prodCat_pairhom.f" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a1">a1,</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a2">a2}</a></span>) (<span id="prodCat_pairhom.g" class="id">
+  <a name="prodCat_pairhom.g" class="">g</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b1">b1,</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b2">b2}</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="pairhom'" class="id">
+  <a name="pairhom'" class="">pairhom'</a>
+</span> (<span id="ab:111" class="id">
+  <a name="ab:111" class="">ab</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a1">a1</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'+'_x">+</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b1">b1</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a2">a2</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'+'_x">+</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b2">b2</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="monae.category_ext.html#ab:111">ab</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inl">inl</a></span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.f">f</a></span> <span class="id">a</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#inr">inr</a></span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.g">g</a></span> <span class="id">b</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<span class="vernacular">Lemma</span> <span id="pairhom'_in_hom" class="id">
+  <a name="pairhom'_in_hom" class="">pairhom'_in_hom</a>
+</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#inhom">inhom</a></span> (<span class="id"><a href="monae.category_ext.html#pairhom'">pairhom'</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a1">a1,</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b1">b1</a></span>).<span class="id">1</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'+'_x">+</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a1">a1,</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b1">b1</a></span>).<span class="id">2</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="monae.category.html#el">el</a></span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a2">a2,</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b2">b2</a></span>).<span class="id">1</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'+'_x">+</a></span> <span class="id"><a href="monae.category.html#el">el</a></span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a2">a2,</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b2">b2</a></span>).<span class="id">2</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
+<div class="proofscript" id="proof23">
+<span class="id">rewrite</span> <span class="id">/inhom</span> <span class="id">/=</span> <span class="id">/ProductCategory</span>.<span class="id">inhom</span> <span class="id">/=</span>.<br/>
+<span class="id">set</span> <span class="id">s</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#separated">ProductCategory.separated</a></span> <span class="id">_</span>.<br/>
+<span class="id">have</span> <span class="id">[/=</span> <span class="id">s1</span> <span class="id">s2]</span> <span class="id">:</span> <span class="id">s</span> <span class="gallina-kwd">by</span> <span class="id">split</span> <span class="id">=&gt;</span> <span class="id">/=</span> <span class="id">x;</span> <span class="id">[exists</span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.f">f</a></span> <span class="id">x</span>) <span class="id">|</span> <span class="gallina-kwd">exists</span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.g">g</a></span> <span class="id">x</span>)<span class="id">]</span>.<br/>
+<span class="gallina-kwd">exists</span> (<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#conj">conj</a></span> <span class="id">s1</span> <span class="id">s2</span>)<span class="id">;</span> <span class="id">split</span>.<br/>
+<span class="id">-</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#sepfst">ProductCategory.sepfst</a></span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">h</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.f">f</a></span>)<span class="id">;</span> <span class="id">first</span> <span class="id">exact:</span> <span class="id"><a href="monae.category.html#isHom_inhom">isHom_inhom</a></span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span> <span class="id">=&gt;</span> <span class="id">?;</span> <span class="id">rewrite</span> <span class="id">/h</span> <span class="id">/=;</span> <span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">?</span> <span class="id">[]</span>.<br/>
+<span class="id">-</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#sepsnd">ProductCategory.sepsnd</a></span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">h</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.g">g</a></span>)<span class="id">;</span> <span class="id">first</span> <span class="id">exact:</span> <span class="id"><a href="monae.category.html#isHom_inhom">isHom_inhom</a></span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span> <span class="id">=&gt;</span> <span class="id">?;</span> <span class="id">rewrite</span> <span class="id">/h</span> <span class="id">/=;</span> <span class="id">case:</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#cid">cid</a></span> <span class="id">=&gt;</span> <span class="id">?</span> <span class="id">[]</span>.<br/>
+Qed.</div>
+<span class="vernacular">Definition</span> <span id="pairhom" class="id">
+  <a name="pairhom" class="">pairhom</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a1">a1,</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b1">b1</a></span>)<span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">,</a></span> (<span class="id"><a href="monae.category_ext.html#prodCat_pairhom.a2">a2,</a></span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom.b2">b2</a></span>)<span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">}</a></span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#Hom.Pack">Hom.Pack</a></span> (<span class="id"><a href="monae.category.html#Hom.Class">Hom.Class</a></span> (<span class="id"><a href="monae.category.html#isHom.Axioms_">isHom.Axioms_</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="monae.category_ext.html#pairhom'_in_hom">pairhom'_in_hom</a></span>)).<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#prodCat_pairhom">prodCat_pairhom</a></span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="pairhom_idfun" class="id">
+  <a name="pairhom_idfun" class="">pairhom_idfun</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> (<span id="pairhom_idfun.A" class="id">
+  <a name="pairhom_idfun.A" class="">A</a>
+</span> <span id="pairhom_idfun.B" class="id">
+  <a name="pairhom_idfun.B" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>) (<span id="pairhom_idfun.a" class="id">
+  <a name="pairhom_idfun.a" class="">a</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#A:114">A</a></span>) (<span id="pairhom_idfun.b" class="id">
+  <a name="pairhom_idfun.b" class="">b</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#B:113">B</a></span>).<br/>
+<span class="vernacular">Lemma</span> <span id="pairhom_idfun" class="id">
+  <a name="pairhom_idfun" class="">pairhom_idfun</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> (<span class="id">a1:=a</span>) (<span class="id">b1:=b</span>) <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
+<div class="proofscript" id="proof24">
+ <span class="gallina-kwd">by</span> <span class="id">apply/hom_ext/funext=&gt;</span> <span class="id">-[]</span> <span class="id">x</span> <span class="id">/=</span>. Qed.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#pairhom_idfun">pairhom_idfun</a></span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="pairhom_comp" class="id">
+  <a name="pairhom_comp" class="">pairhom_comp</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> (<span id="pairhom_comp.A" class="id">
+  <a name="pairhom_comp.A" class="">A</a>
+</span> <span id="pairhom_comp.B" class="id">
+  <a name="pairhom_comp.B" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>) (<span id="pairhom_comp.a1" class="id">
+  <a name="pairhom_comp.a1" class="">a1</a>
+</span> <span id="pairhom_comp.a2" class="id">
+  <a name="pairhom_comp.a2" class="">a2</a>
+</span> <span id="pairhom_comp.a3" class="id">
+  <a name="pairhom_comp.a3" class="">a3</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#A:118">A</a></span>) (<span id="pairhom_comp.b1" class="id">
+  <a name="pairhom_comp.b1" class="">b1</a>
+</span> <span id="pairhom_comp.b2" class="id">
+  <a name="pairhom_comp.b2" class="">b2</a>
+</span> <span id="pairhom_comp.b3" class="id">
+  <a name="pairhom_comp.b3" class="">b3</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#B:117">B</a></span>).<br/>
+<span class="vernacular">Variables</span> (<span id="pairhom_comp.fa" class="id">
+  <a name="pairhom_comp.fa" class="">fa</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.a1">a1,</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.a2">a2}</a></span>) (<span id="pairhom_comp.ga" class="id">
+  <a name="pairhom_comp.ga" class="">ga</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.a2">a2,</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.a3">a3}</a></span>).<br/>
+<span class="vernacular">Variables</span> (<span id="pairhom_comp.fb" class="id">
+  <a name="pairhom_comp.fb" class="">fb</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.b1">b1,</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.b2">b2}</a></span>) (<span id="pairhom_comp.gb" class="id">
+  <a name="pairhom_comp.gb" class="">gb</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.b2">b2,</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.b3">b3}</a></span>).<br/>
+<span class="vernacular">Lemma</span> <span id="pairhom_comp" class="id">
+  <a name="pairhom_comp" class="">pairhom_comp</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.ga">ga</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.fa">fa]</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.gb">gb</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.fb">fb]</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.ga">ga</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.gb">gb</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#::fun_scope:x_'\o'_x">\o</a></span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.fa">fa</a></span> <span class="id"><a href="monae.category_ext.html#pairhom_comp.fb">fb]</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
+<div class="proofscript" id="proof25">
+ <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">/hom_ext/funext=&gt;</span> <span class="id">-[]</span> <span class="id">x</span>. Qed.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#pairhom_comp">pairhom_comp</a></span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="pairhomK" class="id">
+  <a name="pairhomK" class="">pairhomK</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> <span id="pairhomK.A" class="id">
+  <a name="pairhomK.A" class="">A</a>
+</span> <span id="pairhomK.B" class="id">
+  <a name="pairhomK.B" class="">B</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>.<br/>
+<span class="vernacular">Variables</span> <span id="pairhomK.x1" class="id">
+  <a name="pairhomK.x1" class="">x1</a>
+</span> <span id="pairhomK.x2" class="id">
+  <a name="pairhomK.x2" class="">x2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#pairhomK.A">A</a></span>.<br/>
+<span class="vernacular">Variables</span> <span id="pairhomK.y1" class="id">
+  <a name="pairhomK.y1" class="">y1</a>
+</span> <span id="pairhomK.y2" class="id">
+  <a name="pairhomK.y2" class="">y2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#pairhomK.B">B</a></span>.<br/>
+<span class="vernacular">Lemma</span> <span id="pairhomK" class="id">
+  <a name="pairhomK" class="">pairhomK</a>
+</span> (<span id="f:135" class="id">
+  <a name="f:135" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> (<span class="id"><a href="monae.category_ext.html#pairhomK.x1">x1,y1</a></span>)<span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">,</a></span>(<span class="id"><a href="monae.category_ext.html#pairhomK.x2">x2,y2</a></span>)<span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">}</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> (<span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> <span class="id"><a href="monae.category_ext.html#f:135">f</a></span>) (<span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> <span class="id"><a href="monae.category_ext.html#f:135">f</a></span>) <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category_ext.html#f:135">f</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
+<div class="proofscript" id="proof26">
+<span class="id">apply/hom_ext/funext=&gt;</span> <span class="id">-[]</span> <span class="id">i</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-homfstK</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-homsndK</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#pairhomK">pairhomK</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="papply_left" class="id">
+  <a name="papply_left" class="">papply_left</a>
+</span>.<br/>
+<span class="vernacular">Section</span> <span id="papply_left.def" class="id">
+  <a name="papply_left.def" class="">def</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> (<span id="papply_left.def.A" class="id">
+  <a name="papply_left.def.A" class="">A</a>
+</span> <span id="papply_left.def.B" class="id">
+  <a name="papply_left.def.B" class="">B</a>
+</span> <span id="papply_left.def.C" class="id">
+  <a name="papply_left.def.C" class="">C</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>) (<span id="papply_left.def.F" class="id">
+  <a name="papply_left.def.F" class="">F</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'functor'_x_'}'">{functor</a></span> <span class="id"><a href="monae.category_ext.html#A:138">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#B:137">B</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#C:136">C}</a></span>) (<span id="papply_left.def.a" class="id">
+  <a name="papply_left.def.a" class="">a</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#A:138">A</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="papply_left.acto" class="id">
+  <a name="papply_left.acto" class="">acto</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#papply_left.def.B">B</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#papply_left.def.C">C</a></span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span id="b:141" class="id">
+  <a name="b:141" class="">b</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.category_ext.html#papply_left.def.F">F</a></span> (<span class="id"><a href="monae.category_ext.html#papply_left.def.a">a,</a></span> <span class="id"><a href="monae.category_ext.html#b:141">b</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="papply_left.actm" class="id">
+  <a name="papply_left.actm" class="">actm</a>
+</span> (<span id="b1:142" class="id">
+  <a name="b1:142" class="">b1</a>
+</span> <span id="b2:143" class="id">
+  <a name="b2:143" class="">b2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#papply_left.def.B">B</a></span>) (<span id="f:144" class="id">
+  <a name="f:144" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#b1:142">b1,</a></span> <span class="id"><a href="monae.category_ext.html#b2:143">b2}</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#papply_left.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#b1:142">b1,</a></span> <span class="id"><a href="monae.category_ext.html#papply_left.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#b2:143">b2}</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#papply_left.def.F">F</a></span> <span class="id"><a href="monae.category.html#::category_scope:x_'#'_x">#</a></span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id"><a href="monae.category_ext.html#f:144">f</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="papply_left.def.actm_id" class="id">
+  <a name="papply_left.def.actm_id" class="">actm_id</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.id">FunctorLaws.id</a></span> <span class="id"><a href="monae.category_ext.html#papply_left.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
+<div class="proofscript" id="proof27">
+<span class="id">move=&gt;</span> <span class="id">D;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">h</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>) <span class="id">?functor_id_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span id="papply_left.def.actm_comp" class="id">
+  <a name="papply_left.def.actm_comp" class="">actm_comp</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.comp">FunctorLaws.comp</a></span> <span class="id"><a href="monae.category_ext.html#papply_left.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
+<div class="proofscript" id="proof28">
+<span class="id">move=&gt;</span> <span class="id">b</span> <span class="id">b0</span> <span class="id">b1</span> <span class="id">g</span> <span class="id">h;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">i</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">i</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> (<span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id">g</span>) <span class="id">\o</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id">h</span>)<span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">]</a></span>) <span class="id">?functor_o_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span id="papply_left.papply_left_acto__canonical__category_Functor" class="id"><span id="papply_left.HB_unnamed_factory_5" class="id">
+  <a name="papply_left.papply_left_acto__canonical__category_Functor" class="hierarchy-builder">HB.instance</a>
+</span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#isFunctor.Build">isFunctor.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="monae.category_ext.html#papply_left.def.actm_id">actm_id</a></span> <span class="id"><a href="monae.category_ext.html#papply_left.def.actm_comp">actm_comp</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#papply_left.def">def</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#papply_left">papply_left</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="papply_right" class="id">
+  <a name="papply_right" class="">papply_right</a>
+</span>.<br/>
+<span class="vernacular">Section</span> <span id="papply_right.def" class="id">
+  <a name="papply_right.def" class="">def</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> (<span id="papply_right.def.A" class="id">
+  <a name="papply_right.def.A" class="">A</a>
+</span> <span id="papply_right.def.B" class="id">
+  <a name="papply_right.def.B" class="">B</a>
+</span> <span id="papply_right.def.C" class="id">
+  <a name="papply_right.def.C" class="">C</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>) (<span id="papply_right.def.F" class="id">
+  <a name="papply_right.def.F" class="">F</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'functor'_x_'}'">{functor</a></span> <span class="id"><a href="monae.category_ext.html#A:147">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#B:146">B</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#C:145">C}</a></span>) (<span id="papply_right.def.b" class="id">
+  <a name="papply_right.def.b" class="">b</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#B:146">B</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="papply_right.acto" class="id">
+  <a name="papply_right.acto" class="">acto</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#papply_right.def.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#papply_right.def.C">C</a></span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span id="a:150" class="id">
+  <a name="a:150" class="">a</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.category_ext.html#papply_right.def.F">F</a></span> (<span class="id"><a href="monae.category_ext.html#a:150">a,</a></span> <span class="id"><a href="monae.category_ext.html#papply_right.def.b">b</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="papply_right.actm" class="id">
+  <a name="papply_right.actm" class="">actm</a>
+</span> (<span id="a1:151" class="id">
+  <a name="a1:151" class="">a1</a>
+</span> <span id="a2:152" class="id">
+  <a name="a2:152" class="">a2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#papply_right.def.A">A</a></span>) (<span id="f:153" class="id">
+  <a name="f:153" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#a1:151">a1,</a></span> <span class="id"><a href="monae.category_ext.html#a2:152">a2}</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#papply_right.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#a1:151">a1,</a></span> <span class="id"><a href="monae.category_ext.html#papply_right.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#a2:152">a2}</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#papply_right.def.F">F</a></span> <span class="id"><a href="monae.category.html#::category_scope:x_'#'_x">#</a></span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category_ext.html#f:153">f</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="papply_right.def.actm_id" class="id">
+  <a name="papply_right.def.actm_id" class="">actm_id</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.id">FunctorLaws.id</a></span> <span class="id"><a href="monae.category_ext.html#papply_right.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
+<div class="proofscript" id="proof29">
+<span class="id">move=&gt;</span> <span class="id">D;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">h</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>) <span class="id">?functor_id_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span id="papply_right.def.actm_comp" class="id">
+  <a name="papply_right.def.actm_comp" class="">actm_comp</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.comp">FunctorLaws.comp</a></span> <span class="id"><a href="monae.category_ext.html#papply_right.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
+<div class="proofscript" id="proof30">
+<span class="id">move=&gt;</span> <span class="id">a</span> <span class="id">a0</span> <span class="id">a1</span> <span class="id">g</span> <span class="id">h;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">i</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">i</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> (<span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id">g</span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>) <span class="id">\o</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id">h</span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>)<span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">]</a></span>) <span class="id">?functor_o_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span id="papply_right.papply_right_acto__canonical__category_Functor" class="id"><span id="papply_right.HB_unnamed_factory_7" class="id">
+  <a name="papply_right.papply_right_acto__canonical__category_Functor" class="hierarchy-builder">HB.instance</a>
+</span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#isFunctor.Build">isFunctor.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="monae.category_ext.html#papply_right.def.actm_id">actm_id</a></span> <span class="id"><a href="monae.category_ext.html#papply_right.def.actm_comp">actm_comp</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#papply_right.def">def</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#papply_right">papply_right</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="ProductFunctor" class="id">
+  <a name="ProductFunctor" class="">ProductFunctor</a>
+</span>.<br/>
+<span class="vernacular">Section</span> <span id="ProductFunctor.def" class="id">
+  <a name="ProductFunctor.def" class="">def</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> <span id="ProductFunctor.def.A1" class="id">
+  <a name="ProductFunctor.def.A1" class="">A1</a>
+</span> <span id="ProductFunctor.def.B1" class="id">
+  <a name="ProductFunctor.def.B1" class="">B1</a>
+</span> <span id="ProductFunctor.def.A2" class="id">
+  <a name="ProductFunctor.def.A2" class="">A2</a>
+</span> <span id="ProductFunctor.def.B2" class="id">
+  <a name="ProductFunctor.def.B2" class="">B2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>.<br/>
+<span class="vernacular">Variables</span> (<span id="ProductFunctor.def.F1" class="id">
+  <a name="ProductFunctor.def.F1" class="">F1</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'functor'_x_'}'">{functor</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def.A1">A1</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def.B1">B1}</a></span>) (<span id="ProductFunctor.def.F2" class="id">
+  <a name="ProductFunctor.def.F2" class="">F2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'functor'_x_'}'">{functor</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def.A2">A2</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def.B2">B2}</a></span>).<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span id="ProductFunctor.A" class="id">
+  <a name="ProductFunctor.A" class="">A</a>
+</span> <span class="id">:=</span> (<span class="id"><a href="monae.category_ext.html#ProductFunctor.def.A1">A1</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def.A2">A2</a></span>)<span class="id">%type</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span id="ProductFunctor.B" class="id">
+  <a name="ProductFunctor.B" class="">B</a>
+</span> <span class="id">:=</span> (<span class="id"><a href="monae.category_ext.html#ProductFunctor.def.B1">B1</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def.B2">B2</a></span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span id="ProductFunctor.acto" class="id">
+  <a name="ProductFunctor.acto" class="">acto</a>
+</span> (<span id="x:160" class="id">
+  <a name="x:160" class="">x</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.A">A</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.B">B</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#pair">pair</a></span> (<span class="id"><a href="monae.category_ext.html#ProductFunctor.def.F1">F1</a></span> <span class="id"><a href="monae.category_ext.html#x:160">x</a></span>.<span class="id">1</span>) (<span class="id"><a href="monae.category_ext.html#ProductFunctor.def.F2">F2</a></span> <span class="id"><a href="monae.category_ext.html#x:160">x</a></span>.<span class="id">2</span>).<br/>
+<span class="vernacular">Definition</span> <span id="ProductFunctor.actm" class="id">
+  <a name="ProductFunctor.actm" class="">actm</a>
+</span> (<span id="x:161" class="id">
+  <a name="x:161" class="">x</a>
+</span> <span id="y:162" class="id">
+  <a name="y:162" class="">y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.A">A</a></span>) (<span id="f:163" class="id">
+  <a name="f:163" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:161">x,y}</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#x:161">x,</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#y:162">y}</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> (<span class="id"><a href="monae.category_ext.html#ProductFunctor.def.F1">F1</a></span> <span class="id"><a href="monae.category.html#::category_scope:x_'#'_x">#</a></span> <span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> <span class="id"><a href="monae.category_ext.html#f:163">f</a></span>) (<span class="id"><a href="monae.category_ext.html#ProductFunctor.def.F2">F2</a></span> <span class="id"><a href="monae.category.html#::category_scope:x_'#'_x">#</a></span> <span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> <span class="id"><a href="monae.category_ext.html#f:163">f</a></span>).<br/>
+<span class="vernacular">Let</span> <span id="ProductFunctor.def.actm_id" class="id">
+  <a name="ProductFunctor.def.actm_id" class="">actm_id</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.id">FunctorLaws.id</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
+<div class="proofscript" id="proof31">
+<span class="id">move=&gt;</span> <span class="id">a</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/actm</span> <span class="id"><a href="monae.category_ext.html#homfst_idfun">homfst_idfun</a></span> <span class="id"><a href="monae.category_ext.html#homsnd_idfun">homsnd_idfun</a></span> <span class="id">2!functor_id_hom</span> <span class="id"><a href="monae.category_ext.html#pairhom_idfun">pairhom_idfun</a></span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span id="ProductFunctor.def.actm_comp" class="id">
+  <a name="ProductFunctor.def.actm_comp" class="">actm_comp</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.comp">FunctorLaws.comp</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof32')">Proof.</span></div>
+<div class="proofscript" id="proof32">
+<span class="id">move=&gt;</span> <span class="id">[]</span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">[]</span> <span class="id">b1</span> <span class="id">b2</span> <span class="id">[]</span> <span class="id">c1</span> <span class="id">c2</span> <span class="id">g</span> <span class="id">h</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/actm</span> <span class="id"><a href="monae.category_ext.html#homfst_comp">homfst_comp</a></span> <span class="id"><a href="monae.category_ext.html#homsnd_comp">homsnd_comp</a></span> <span class="id">2!functor_o_hom</span> <span class="id"><a href="monae.category_ext.html#pairhom_comp">pairhom_comp</a></span>.<br/>
+Qed.</div>
+<span id="ProductFunctor.ProductFunctor_acto__canonical__category_Functor" class="id"><span id="ProductFunctor.HB_unnamed_factory_9" class="id">
+  <a name="ProductFunctor.ProductFunctor_acto__canonical__category_Functor" class="hierarchy-builder">HB.instance</a>
+</span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#isFunctor.Build">isFunctor.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def.actm_id">actm_id</a></span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def.actm_comp">actm_comp</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#ProductFunctor.def">def</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#ProductFunctor">ProductFunctor</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="alpha_left" class="id">
+  <a name="alpha_left" class="">alpha_left</a>
+</span>.<br/>
+<span class="vernacular">Section</span> <span id="alpha_left.alpha_left" class="id">
+  <a name="alpha_left.alpha_left" class="">alpha_left</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> <span id="alpha_left.alpha_left.A" class="id">
+  <a name="alpha_left.alpha_left.A" class="">A</a>
+</span> <span id="alpha_left.alpha_left.B" class="id">
+  <a name="alpha_left.alpha_left.B" class="">B</a>
+</span> <span id="alpha_left.alpha_left.C" class="id">
+  <a name="alpha_left.alpha_left.C" class="">C</a>
+</span> <span id="alpha_left.alpha_left.D" class="id">
+  <a name="alpha_left.alpha_left.D" class="">D</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>.<br/>
+<span class="vernacular">Variable</span> <span id="alpha_left.alpha_left.F" class="id">
+  <a name="alpha_left.alpha_left.F" class="">F</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'functor'_x_'}'">{functor</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::form_scope:'['_'the'_x_'of'_x_']'">[the</a></span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span> <span class="id">of</span> ((<span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.B">B</a></span>) <span class="id">*</span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.C">C</a></span>)<span class="id">%type]</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.D">D}</a></span>.<br/>
+<span class="vernacular">Variables</span> (<span id="alpha_left.alpha_left.a" class="id">
+  <a name="alpha_left.alpha_left.a" class="">a</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.A">A</a></span>) (<span id="alpha_left.alpha_left.b" class="id">
+  <a name="alpha_left.alpha_left.b" class="">b</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.B">B</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="alpha_left.acto" class="id">
+  <a name="alpha_left.acto" class="">acto</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.C">C</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.D">D</a></span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#papply_left.acto">papply_left.acto</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.F">F</a></span> (<span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.a">a,</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.b">b</a></span>).<br/>
+<span class="vernacular">Definition</span> <span id="alpha_left.actm" class="id">
+  <a name="alpha_left.actm" class="">actm</a>
+</span> (<span id="c1:171" class="id">
+  <a name="c1:171" class="">c1</a>
+</span> <span id="c2:172" class="id">
+  <a name="c2:172" class="">c2</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.C">C</a></span>) (<span id="f:173" class="id">
+  <a name="f:173" class="">f</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#c1:171">c1,</a></span> <span class="id"><a href="monae.category_ext.html#c2:172">c2}</a></span>) <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#c1:171">c1,</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#c2:172">c2}</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.F">F</a></span> <span class="id"><a href="monae.category.html#::category_scope:x_'#'_x">#</a></span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id"><a href="monae.category_ext.html#f:173">f</a></span>.<br/>
+<span class="vernacular">Let</span> <span id="alpha_left.alpha_left.actm_id" class="id">
+  <a name="alpha_left.alpha_left.actm_id" class="">actm_id</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.id">FunctorLaws.id</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof33')">Proof.</span></div>
+<div class="proofscript" id="proof33">
+<span class="id">move=&gt;</span> <span class="id">c0;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">h</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span>) <span class="id">?functor_id_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span id="alpha_left.alpha_left.actm_comp" class="id">
+  <a name="alpha_left.alpha_left.actm_comp" class="">actm_comp</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.comp">FunctorLaws.comp</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof34')">Proof.</span></div>
+<div class="proofscript" id="proof34">
+<span class="id">move=&gt;</span> <span class="id">c</span> <span class="id">c0</span> <span class="id">c1</span> <span class="id">g</span> <span class="id">h;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">i</span> <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#::core_scope:x_':'_x">:</a></span> <span class="id">i</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'='_x">=</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> (<span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id">g</span>) <span class="id">\o</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> <span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">[hom</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]</a></span> <span class="id">h</span>)<span class="id"><a href="monae.category.html#::category_scope:'['_'hom'_x_']'">]</a></span>) <span class="id">?functor_o_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.classical.boolp#funeqE">boolp.funeqE</a></span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span id="alpha_left.alpha_left_acto__canonical__category_Functor" class="id"><span id="alpha_left.HB_unnamed_factory_11" class="id">
+  <a name="alpha_left.alpha_left_acto__canonical__category_Functor" class="hierarchy-builder">HB.instance</a>
+</span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#isFunctor.Build">isFunctor.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.actm_id">actm_id</a></span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left.actm_comp">actm_comp</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#alpha_left.alpha_left">alpha_left</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#alpha_left">alpha_left</a></span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="ProductCategoryAssoc" class="id">
+  <a name="ProductCategoryAssoc" class="">ProductCategoryAssoc</a>
+</span>.<br/>
+<span class="vernacular">Section</span> <span id="ProductCategoryAssoc.def" class="id">
+  <a name="ProductCategoryAssoc.def" class="">def</a>
+</span>.<br/>
+<span class="vernacular">Variables</span> <span id="ProductCategoryAssoc.def.A" class="id">
+  <a name="ProductCategoryAssoc.def.A" class="">A</a>
+</span> <span id="ProductCategoryAssoc.def.B" class="id">
+  <a name="ProductCategoryAssoc.def.B" class="">B</a>
+</span> <span id="ProductCategoryAssoc.def.C" class="id">
+  <a name="ProductCategoryAssoc.def.C" class="">C</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#Category.Exports.category">category</a></span>.<br/>
+<span class="vernacular">Definition</span> <span id="ProductCategoryAssoc.acto" class="id">
+  <a name="ProductCategoryAssoc.acto" class="">acto</a>
+</span> (<span id="x:177" class="id">
+  <a name="x:177" class="">x</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.B">B</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.C">C</a></span>)) <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.B">B</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.C">C</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> (<span class="id">a,</span> (<span class="id">b,</span> <span class="id">c</span>)) <span class="id">:=</span> <span class="id"><a href="monae.category_ext.html#x:177">x</a></span> <span class="gallina-kwd">in</span> ((<span class="id">a,</span> <span class="id">b</span>)<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::core_scope:'('_x_','_x_','_'..'_','_x_')'">,</a></span> <span class="id">c</span>).<br/>
+<span class="vernacular">Definition</span> <span id="ProductCategoryAssoc.actm" class="id">
+  <a name="ProductCategoryAssoc.actm" class="">actm</a>
+</span> (<span id="x:179" class="id">
+  <a name="x:179" class="">x</a>
+</span> <span id="y:180" class="id">
+  <a name="y:180" class="">y</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> (<span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.B">B</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Datatypes.html#::type_scope:x_'*'_x">*</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.C">C</a></span>)) <span class="id">:</span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#x:179">x,y}</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'->'_x">-&gt;</a></span> <span class="id"><a href="monae.category.html#::category_scope:'{'_'hom'_x_','_x_'}'">{hom</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#x:179">x,</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.acto">acto</a></span> <span class="id"><a href="monae.category_ext.html#y:180">y}</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="monae.category_ext.html#x:179">x,</a></span> <span class="id"><a href="monae.category_ext.html#y:180">y</a></span> <span class="gallina-kwd">with</span> (<span class="id">xa,</span> (<span class="id">xb,</span> <span class="id">xc</span>))<span class="id">,</span> (<span class="id">ya,</span> (<span class="id">yb,</span> <span class="id">yc</span>)) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span id="f:183" class="id">
+  <a name="f:183" class="">f</a>
+</span> <span class="id">=&gt;</span> <span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> (<span class="id"><a href="monae.category_ext.html#pairhom">pairhom</a></span> (<span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> <span class="id"><a href="monae.category_ext.html#f:183">f</a></span>) (<span class="id"><a href="monae.category_ext.html#homfst">homfst</a></span> (<span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> <span class="id"><a href="monae.category_ext.html#f:183">f</a></span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> (<span class="id"><a href="monae.category_ext.html#homsnd">homsnd</a></span> <span class="id"><a href="monae.category_ext.html#f:183">f</a></span>))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<span class="vernacular">Let</span> <span id="ProductCategoryAssoc.def.actm_id" class="id">
+  <a name="ProductCategoryAssoc.def.actm_id" class="">actm_id</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.id">FunctorLaws.id</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof35')">Proof.</span></div>
+<div class="proofscript" id="proof35">
+<span class="id">move=&gt;</span> <span class="id">[a</span> <span class="id">[b</span> <span class="id">c]]</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/actm</span> <span class="id">2!homsnd_idfun</span> <span class="id">2!homfst_idfun</span> <span class="id">2!pairhom_idfun</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span id="ProductCategoryAssoc.def.actm_comp" class="id">
+  <a name="ProductCategoryAssoc.def.actm_comp" class="">actm_comp</a>
+</span> <span class="id">:</span> <span class="id"><a href="monae.category.html#FunctorLaws.comp">FunctorLaws.comp</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.actm">actm</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof36')">Proof.</span></div>
+<div class="proofscript" id="proof36">
+<span class="id">move=&gt;</span> <span class="id">[xa</span> <span class="id">[xb</span> <span class="id">xc]]</span> <span class="id">[ya</span> <span class="id">[yb</span> <span class="id">yc]]</span> <span class="id">[za</span> <span class="id">[zb</span> <span class="id">zc]]</span> <span class="id">g</span> <span class="id">h</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/actm</span> <span class="id">!homsnd_comp</span> <span class="id">!homfst_comp</span> <span class="id">!pairhom_comp</span>.<br/>
+Qed.</div>
+<span id="ProductCategoryAssoc.ProductCategoryAssoc_acto__canonical__category_Functor" class="id"><span id="ProductCategoryAssoc.HB_unnamed_factory_13" class="id">
+  <a name="ProductCategoryAssoc.ProductCategoryAssoc_acto__canonical__category_Functor" class="hierarchy-builder">HB.instance</a>
+</span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id"><a href="monae.category.html#isFunctor.Build">isFunctor.Build</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.actm_id">actm_id</a></span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def.actm_comp">actm_comp</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc.def">def</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="monae.category_ext.html#ProductCategoryAssoc">ProductCategoryAssoc</a></span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

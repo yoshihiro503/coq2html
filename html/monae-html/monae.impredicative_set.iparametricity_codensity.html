@@ -1,0 +1,206 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module monae.impredicative_set.iparametricity_codensity</title>
+<meta name="description" content="Documentation of Coq module monae.impredicative_set.iparametricity_codensity" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module monae.impredicative_set.iparametricity_codensity</h1>
+<div class="coq">
+<span class="vernacular">From</span> <span class="id">Param</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Param</span>.<br/>
+<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span>.<br/>
+<span class="vernacular">From</span> <span class="id">HB</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">structures</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">imonae_lib</span> <span class="id">ihierarchy</span> <span class="id">imonad_lib</span> <span class="id">ifmt_lifting</span> <span class="id">imonad_model</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+Instantiations of uniform lifting (Theorem 27 of [Mauro Jaskelioff,        
+Modular Monad Transformers, ESOP 2009]) with:                              
+- the identity monad (Module Identity)                                     
+- the exception monad (Module Exception)                                   
+- the option monad (Module Option)                                         
+- the list monad (Module List)                                             
+- the state monad (Module State)                                           
+                                                                           
+WARNING: see fmt_lifting.v                                                 
+</pre>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="id">Bullet</span> <span class="id">Behavior</span> <span class="id">"Strict&nbsp;Subproofs"</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">Actm_exponenial_FE</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">X</span> <span class="id">Y</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">Y</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">A</span> <span class="id">eX,</span> (<span class="id">[the</span> <span class="id">functor</span> <span class="id">of</span> (<span class="id">exponential_F</span> <span class="id">A</span> <span class="id">\o</span> <span class="id">M</span>)<span class="id">]</span> <span class="id">#</span> <span class="id">f</span>) <span class="id">eX</span> <span class="id">=</span> <span class="id">M</span> <span class="id">#</span> <span class="id">f</span> <span class="id">\o</span> <span class="id">eX</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
+<br/>
+<pre class="ssrdoc">
+Module Identity.
+Section identity_naturality.
+Variable A : UU0.
+Realizer A as A_R := (@eq A).
+Let M := [the monad of idfun].
+Definition Mi (X : UU0) : UU0 := ltac:(
+  let t := constr:(M X) in
+  let t := eval cbn in t in
+  exact t).
+Definition T : UU0 := MK Mi A.
+Parametricity T arity 2.
+Variable m : T.
+Axiom param : T_R m m.
+Lemma naturality : naturality [the functor of (exponential_F A \o M)] M m.
+Proof.
+move=&gt; X Y f; apply funext =&gt; eX.
+by apply (param X Y (fun x y =&gt; (M # f) x = y)) =&gt; a _ &lt;-.
+Qed.
+End identity_naturality.
+End Identity.
+Check uniform_sigma_lifting (M := [the monad of idfun]) _ _ Identity.naturality.
+</pre>
+<br/>
+<span class="vernacular">Module</span> <span class="id">Exception</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">exception_naturality</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">Z</span> <span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>.<br/>
+<br/>
+<span class="id">Realizer</span> <span class="id">Z</span> <span class="gallina-kwd">as</span> <span class="id">Z_R</span> <span class="id">:=</span> (<span class="id">@eq</span> <span class="id">Z</span>).<br/>
+<span class="id">Realizer</span> <span class="id">A</span> <span class="gallina-kwd">as</span> <span class="id">A_R</span> <span class="id">:=</span> (<span class="id">@eq</span> <span class="id">A</span>).<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">M</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">ExceptMonad.acto</span> <span class="id">Z]</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">Me</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="id">ltac:</span>(<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">t</span> <span class="id">:=</span> <span class="id">constr:</span>(<span class="id">M</span> <span class="id">X</span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">t</span> <span class="id">:=</span> <span class="id">eval</span> <span class="id">cbn</span> <span class="gallina-kwd">in</span> <span class="id">t</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id">exact</span> <span class="id">t</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">T</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="id">MK</span> <span class="id">Me</span> <span class="id">A</span>.<br/>
+<br/>
+<span class="id">Parametricity</span> <span class="id">Recursive</span> <span class="id">T</span> <span class="id">arity</span> <span class="id">2</span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span class="id">m</span> <span class="id">:</span> <span class="id">T</span>.<br/>
+<br/>
+<span class="vernacular">Axiom</span> <span class="id">param</span> <span class="id">:</span> <span class="id">T_R</span> <span class="id">m</span> <span class="id">m</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">naturality</span> <span class="id">:</span> <span class="id">naturality</span> <span class="id">[the</span> <span class="id">functor</span> <span class="id">of</span> (<span class="id">exponential_F</span> <span class="id">A</span> <span class="id">\o</span> <span class="id">M</span>)<span class="id">]</span> <span class="id">M</span> <span class="id">m</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+<span class="id">move=&gt;</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">f;</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">eX</span>.<br/>
+<span class="id">set</span> <span class="id">rhs</span> <span class="id">:=</span> <span class="id">RHS</span>.<br/>
+<span class="id">have</span> <span class="id">:</span> <span class="id">Me_R</span> <span class="id">X</span> <span class="id">Y</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">x</span> <span class="id">=</span> <span class="id">y</span>) (<span class="id">m</span> <span class="id">X</span> <span class="id">eX</span>) <span class="id">rhs</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply:</span> <span class="id">param</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">_</span> <span class="id">&lt;-;</span> <span class="id">rewrite</span> <span class="id">Actm_exponenial_FE</span> <span class="id">compE</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">case:</span> (<span class="id">eX</span> <span class="id">a</span>) <span class="id">=&gt;</span> <span class="id">[e|x];</span> <span class="id">constructor</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">compE;</span> <span class="id">case=&gt;</span> <span class="id">[a</span> <span class="id">_</span> <span class="id">&lt;-|x</span> <span class="id">_</span> <span class="id">&lt;-]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">exception_naturality</span>.<br/>
+<span class="vernacular">End</span> <span class="id">Exception</span>.<br/>
+<br/>
+<span class="vernacular">Check</span> <span class="gallina-kwd">fun</span> <span class="id">Z</span> <span class="id">=&gt;</span> <span class="id">uniform_sigma_lifting</span><br/>
+&nbsp;&nbsp;(<span class="id">M</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">ExceptMonad.acto</span> <span class="id">Z]</span>) <span class="id">_</span> <span class="id">_</span> (<span class="id">Exception.naturality</span> <span class="id">Z</span>).<br/>
+<br/>
+<pre class="ssrdoc">
+Module Option.
+Section option_naturality.
+Variable A : UU0.
+Let M := [the monad of option_monad].
+Variable m : MK M A.
+Lemma naturality : naturality [the functor of (exponential_F A \o M)] M m.
+Proof. exact: Exception.naturality. Qed.
+End option_naturality.
+End Option.
+Check uniform_sigma_lifting (M := [the monad of option_monad]) _ _ Option.naturality.
+</pre>
+<br/>
+<span class="vernacular">Module</span> <span class="id">List</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">list_naturality</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>.<br/>
+<br/>
+<span class="id">Realizer</span> <span class="id">A</span> <span class="gallina-kwd">as</span> <span class="id">A_R</span> <span class="id">:=</span> (<span class="id">@eq</span> <span class="id">A</span>).<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">M</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">ListMonad.acto</span><span class="id">]</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">Ml</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="id">ltac:</span>(<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">t</span> <span class="id">:=</span> <span class="id">constr:</span>(<span class="id">M</span> <span class="id">X</span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">t</span> <span class="id">:=</span> <span class="id">eval</span> <span class="id">cbn</span> <span class="gallina-kwd">in</span> <span class="id">t</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id">exact</span> <span class="id">t</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">T</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="id">MK</span> <span class="id">Ml</span> <span class="id">A</span>.<br/>
+<br/>
+<span class="id">Parametricity</span> <span class="id">Recursive</span> <span class="id">T</span> <span class="id">arity</span> <span class="id">2</span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span class="id">m</span> <span class="id">:</span> <span class="id">T</span>.<br/>
+<br/>
+<span class="vernacular">Axiom</span> <span class="id">param</span> <span class="id">:</span> <span class="id">T_R</span> <span class="id">m</span> <span class="id">m</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">naturality</span> <span class="id">:</span> <span class="id">naturality</span> <span class="id">[the</span> <span class="id">functor</span> <span class="id">of</span> (<span class="id">exponential_F</span> <span class="id">A</span> <span class="id">\o</span> <span class="id">M</span>)<span class="id">]</span> <span class="id">M</span> <span class="id">m</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">move=&gt;</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">f</span> <span class="id">/=;</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">eX</span>.<br/>
+<span class="id">set</span> <span class="id">rhs</span> <span class="id">:=</span> <span class="id">RHS</span>.<br/>
+<span class="id">have</span> <span class="id">:</span> <span class="id">Ml_R</span> <span class="id">X</span> <span class="id">Y</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">x</span> <span class="id">=</span> <span class="id">y</span>) (<span class="id">m</span> <span class="id">X</span> <span class="id">eX</span>) <span class="id">rhs</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply:</span> <span class="id">param</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">_</span> <span class="id">&lt;-;</span> <span class="id">rewrite</span> <span class="id">Actm_exponenial_FE</span> <span class="id">compE</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">elim:</span> (<span class="id">eX</span> <span class="id">a</span>) <span class="id">=&gt;</span> <span class="id">[|?</span> <span class="id">?</span> <span class="id">?];</span> <span class="id">constructor</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">compE;</span> <span class="id">elim</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">x</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">l</span> <span class="id">_</span> <span class="id">_</span> <span class="id">&lt;-</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">list_naturality</span>.<br/>
+<span class="vernacular">End</span> <span class="id">List</span>.<br/>
+<br/>
+<span class="vernacular">Check</span> <span class="id">uniform_sigma_lifting</span> (<span class="id">M</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">ListMonad.acto</span><span class="id">]</span>) <span class="id">_</span> <span class="id">_</span> <span class="id">List.naturality</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+Module State.
+Section state_naturality.
+Variable S A : UU0.
+Realizer S as S_R := (@eq S).
+Realizer A as A_R := (@eq A).
+Let M := [the monad of StateMonad.acto S].
+Definition Ms X : UU0 := ltac:(
+  let t := constr:(M X) in
+  let t := eval cbn in t in
+  exact t).
+Definition T : UU0 := MK Ms A.
+Parametricity Recursive T arity 2.
+Variable m : T.
+Axiom param : T_R m m.
+Lemma Actm_ModelMonadStateE' (X Y : UU0) (f : X -&gt; Y) (eX : (exponential_F A \o M) X) a (s : S):
+  (M # f \o eX) a s = let (x, y) := eX a s in (f x, y).
+Proof. by []. Qed.
+Lemma Actm_ModelMonadStateE (X Y : UU0) (f : X -&gt; Y) (eX : A -&gt; S -&gt; (X * S)) (s : S)
+  (mX : (A -&gt; Ms X) -&gt; Ms X) :
+  (M # f \o mX) eX s = (let (x, y) := mX eX s in (f x, y)).
+Proof. by []. Qed.
+Lemma naturality : naturality [the functor of (exponential_F A \o M)] M m.
+Proof.
+move=&gt; X Y f; apply funext =&gt; eX.
+set rhs := RHS.
+have H : Ms_R X Y (fun x y =&gt; f x = y) (m X eX) rhs.
+  apply param =&gt; // a _ &lt;- s1 _ &lt;-.
+  rewrite Actm_exponenial_FE Actm_ModelMonadStateE'.
+  by case: (eX a) =&gt; x s2; exact: prod_R_pair_R.
+apply funext =&gt; s.
+have {}H : prod_R X Y (fun x y =&gt; f x = y) S S S_R (m X eX s) (rhs s) by exact: H.
+inversion H as [x y fxy s1 s2 s12 xs1 ys2].
+by rewrite Actm_ModelMonadStateE -xs1 fxy s12.
+Qed.
+End state_naturality.
+End State.
+Check fun S =&gt; uniform_sigma_lifting
+  (M := [the monad of StateMonad.acto S]) _ _ (State.naturality S).
+</pre>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>
