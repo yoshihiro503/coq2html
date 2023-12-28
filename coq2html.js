@@ -28,14 +28,23 @@ function renderMarkdowns()
     const md = markdownit({html:true})
           .use(texmath, { engine: katex,
                           delimiters: 'dollars'} );
-    const elements = document.querySelectorAll('.markdown');
+    const elements = document.querySelectorAll('.markdown,.md');
     for (let elem of elements) {
 	elem.innerHTML = md.render(elem.textContent);
     }
+}
+
+function showDarkmodeWidget()
+{
+    new Darkmode({
+	time: '0.1s',
+	label: '🌓',
+    }).showWidget();
 }
 
 function init(cls)
 {
     hideAll(cls);
     renderMarkdowns();
+    showDarkmodeWidget();
 }

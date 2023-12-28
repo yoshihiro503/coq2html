@@ -46,8 +46,17 @@ let add_reference curmod pos dp sp id ty =
 
 let add_definition curmod pos sp id ty =
   (*eprintf "add_definition %s %d %s %s %s\n" curmod pos sp id ty;*)
-  if not (Hashtbl.mem xref_table (curmod, pos))
-  then Hashtbl.add xref_table (curmod, pos) (Def(path sp id, ty))
+  match Hashtbl.find_opt xref_table (curmod, pos) with
+  | None ->
+     Hashtbl.add xref_table (curmod, pos) (Defs [path sp id, ty])
+  | Some (Defs defs) ->
+     Hashtbl.replace xref_table (curmod, pos) (Defs ((path sp id, ty) :: defs))
+  | Some (Ref (unit, path_, typ)) ->
+     (* ignore references if the glob file has a reference and definitions at a
+        same position.
+        issue: https://github.com/yoshihiro503/coq2html/issues/2
+      *)
+     Hashtbl.add xref_table (curmod, pos) (Defs [path sp id, ty])
 
 (* Map module names to URLs *)
 
@@ -74,7 +83,7 @@ let url_for_module m =
   (*eprintf "url_for_module %s\n" m;*)
   let rec url_for = function
   | [] ->
-      if Hashtbl.mem xref_modules m then m ^ ".html" else raise Not_found
+      if Hashtbl.mem xref_modules m then m ^ ".html" else ("NOTFOUND the module url for "^m)
   | (pref, url) :: rem ->
       if starts_with m pref then url_concat url m ^ ".html" else url_for rem
   in url_for !documentation_urls
@@ -97,23 +106,19 @@ let module_name_of_file_name f =
 
 (* Produce a HTML link if possible *)
 
-type link = Link of string | Anchor of string | Nolink
-
-let re_sane_path = Str.regexp "[A-Za-z0-9_.]+$"
+type link = Link of string | Anchors of string list | Nolink
 
 let crossref m pos =
   (*eprintf "crossref %s %d\n" m pos;*)
   try match Hashtbl.find xref_table (m, pos) with
-  | Def(p, _) ->
-      Anchor p
+  | Defs defs ->
+      Anchors (List.map fst defs)
   | Ref(m', p, _) ->
       let url = url_for_module m' in  (* can raise Not_found *)
       if p = "" then
         Link url
-      else if Str.string_match re_sane_path p 0 then
-        Link(url ^ "#" ^ p)
       else
-        Nolink
+        Link(url ^ "#" ^ p)
   with Not_found ->
     Nolink
 
@@ -123,17 +128,12 @@ module StringSet = Set.Make(String)
 
 let mkset l = List.fold_right StringSet.add l StringSet.empty
 
-let coq_keywords = mkset [
+let coq_vernaculars = mkset [
 (* "The following character sequences are keywords defined in the
     main Coq grammar that cannot be used as identifiers"
     (reference manual) *)
   "Axiom"; "CoFixpoint"; "Definition"; "Fixpoint"; "Hypothesis";
-  "Parameter"; "Prop"; "SProp"; "Set"; "Theorem"; "Type"; "Variable";
-  "as"; "at"; "cofix"; "else"; "end"; "fix"; "for"; "forall"; "fun";
-  "if"; "in"; "let"; "match"; "return"; "then"; "where"; "with";
-(* "The following are keywords defined in notations or plugins
-    loaded in the prelude" (reference manual) *)
-  "IF"; "by"; "exists"; "exists2"; "using";
+  "Parameter"; "Theorem"; "Variable";
 (* The commands from the "Command Index" part of the reference manual.
    Some commands I don't expect to see in .v files were removed. *)
   "Abort"; "About"; "Admitted"; "Arguments"; "Axiom"; "Axioms";
@@ -147,10 +147,24 @@ let coq_keywords = mkset [
   "Lemma"; "Let"; "Ltac"; "Ltac2"; "Module"; "Next"; "Notation";
   "Obligation"; "Obligations"; "Opaque"; "Open"; "Parameter";
   "Parameters"; "Proof"; "Proposition"; "Qed"; "Record"; "Remark";
-  "Require"; "Reserved"; "Scheme"; "Scope"; "Section"; "Set";
+  "Require"; "Reserved"; "Scheme"; "Scope"; "Section";
   "Strategy"; "Structure"; "SubClass"; "Tactic"; "Theorem";
-  "Transparent"; "Type"; "Universe"; "Variable"; "Variables"; "Variant";
-  "using"; "with"
+  "Transparent"; "Universe"; "Variable"; "Variables"; "Variant";
+]
+
+let coq_gallina_keywords = mkset [
+  "Prop"; "SProp"; "Set"; "Type"; 
+  "as"; "at"; "cofix"; "else"; "end"; "fix"; "for"; "forall"; "fun";
+  "if"; "in"; "let"; "match"; "return"; "then"; "where"; "with";
+  "using"; "with";
+(* "The following are keywords defined in notations or plugins
+    loaded in the prelude" (reference manual) *)
+  "IF"; "by"; "exists"; "exists2"; "using";
+]
+
+let mathcomp_hierarchy_builders = mkset [
+  "HB.instance"; "HB.builders"; "HB.factory"; "HB.mixin";
+  "HB.structure"
 ]
 
 (** HTML generation *)
@@ -202,16 +216,48 @@ let end_doc () =
   set_enum_depth 0;
   fprintf !oc "</div>\n"
 
+let nested_ids_anchor classes ids text =
+  let id0 = List.hd ids in
+  let opens = 
+    List.map (fun id ->sprintf "<span id=\"%s\" class=\"id\">"id ) ids
+    |> String.concat ""
+  in
+  let closes = List.map (fun _ -> "</span>") ids |> String.concat "" in
+  fprintf !oc {|%s
+  <a name="%s" class="%s">%s</a>
+%s|} opens id0 classes text closes
+
 let ident pos id =
-  if StringSet.mem id coq_keywords then
-    fprintf !oc "<span class=\"kwd\">%s</span>" id
+  if StringSet.mem id coq_gallina_keywords then
+    fprintf !oc "<span class=\"gallina-kwd\">%s</span>" id
+  else if StringSet.mem id coq_vernaculars then
+    fprintf !oc "<span class=\"vernacular\">%s</span>" id
   else match crossref !current_module pos with
   | Nolink ->
       fprintf !oc "<span class=\"id\">%s</span>" id
   | Link p ->
       fprintf !oc "<span class=\"id\"><a href=\"%s\">%s</a></span>" p id
-  | Anchor p ->
-      fprintf !oc "<span class=\"id\"><a name=\"%s\">%s</a></span>" p id
+  | Anchors ps ->
+       let classes =
+         if StringSet.mem id mathcomp_hierarchy_builders then
+           "hierarchy-builder" else ""
+       in
+       nested_ids_anchor classes ps id
+
+let ident_escape pos id = ident pos @@ Generate_index.html_escape id
+
+(* special hack:
+   The references of notations in glob file sometime include white space.
+   c.f. https://coq.zulipchat.com/#narrow/stream/237656-Coq-devs-.26-plugin-devs/topic/Bug.3F.3A.20position.20of.20reference.20of.20notations.20in.20glob.20file/near/406709205
+ *)
+let ident_escape_with_white pos id =
+  let pos' =
+    match crossref !current_module pos with
+    | Nolink -> pos+1
+    | _ -> pos
+  in
+  ident_escape pos' id
+     
 
 let space s =
   for _ = 1 to String.length s do fprintf !oc "&nbsp;" done
@@ -280,13 +326,22 @@ let ident = ['A'-'Z' 'a'-'z' '_'] ['A'-'Z' 'a'-'z' '0'-'9' '_']*
 let path = ident ("." ident)*
 let start_proof = ("Proof" space* ".") | ("Proof" space+ "with") | ("Next" space+ "Obligation.")
 let end_proof = "Qed." | "Defined." | "Save." | "Admitted." | "Abort."
+let quoted = ['\"'] [' '-'~']* ['\"']
+let symbol = ['!' '#'-'\'' '*'-'/' ':'-'?' '['-'`' '{'-'~']
+let non_whites = ['!' '#'-'\'' '*'-'-' '/'-'~']+
 
-let xref = ['A'-'Z' 'a'-'z' '0'-'9' '_' '.']+ | "<>"
+let xref = ['A'-'Z' 'a'-'z' '0'-'9' '#'-'~']+ | "<>"
 let integer = ['0'-'9']+
 
 rule coq_bol = parse
   | (space* as s) (start_proof as sp)
       { start_proof s sp;
+        skip_newline lexbuf }
+  (* Enter special syntax mode e.g. markdown syntax *)
+  | space* "(***" (['a'-'z' '-']+ as mode)
+      { fprintf !oc "<div class=\"doc %s\">" mode;
+        custom_mode lexbuf;
+        end_doc();
         skip_newline lexbuf }
   | space* "(** " ("*"+ as sect)
       { start_section sect;
@@ -309,8 +364,8 @@ rule coq_bol = parse
 	fprintf !oc "%s" "</pre>\n";
 	skip_newline lexbuf
       }
-  (* Enter ssrdoc markdown mode *)
-  | space* ("(***" (['a'-'z']+ as mode) "*"+ "***)" "\n" as s)
+  (* Enter ssrdoc with special syntax mode e.g. markdown syntax *)
+  | space* ("(***" (['a'-'z' '-']+ as mode) "*"+ "***)" "\n" as s)
       { fprintf !oc "<div class=\"ssrdoc %s\">\n" mode;
         ssr_doc_bol lexbuf;
 	fprintf !oc "%s" "</div>\n";
@@ -352,6 +407,13 @@ and coq = parse
       { newline(); coq_bol lexbuf }
   | eof
       { () }
+  | quoted as q
+      {ident_escape (Lexing.lexeme_start lexbuf) q; coq lexbuf}
+  | ' ' (symbol non_whites* as id)
+      {output_char !oc ' ';
+       ident_escape_with_white (Lexing.lexeme_start lexbuf) id; coq lexbuf}
+  | non_whites as id
+      {ident_escape (Lexing.lexeme_start lexbuf) id; coq lexbuf}
   | _ as c
       { character c; coq lexbuf }
 
@@ -413,6 +475,14 @@ and doc = parse
       { () }
   | _ as c
       { character c; doc lexbuf }
+
+and custom_mode = parse
+  | "*)"
+      { () }
+  | eof
+      { () }
+  | _ as c
+      { character c; custom_mode lexbuf }
 
 (* beginning of line *)
 and ssr_doc_bol = parse
