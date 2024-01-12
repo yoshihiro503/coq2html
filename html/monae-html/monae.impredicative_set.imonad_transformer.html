@@ -59,10 +59,10 @@ uniform_algebraic_lifting == Theorem: alifting is a lifting
 </pre>
 <br/>
 <span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
-<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
-<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Printing</span> <span class="vernacular">Implicit</span> <span class="vernacular">Defensive</span>.<br/>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
 <br/>
 <span class="vernacular">Module</span> <span class="id">MonadMLaws</span>.<br/>
 <span class="vernacular">Section</span> <span class="id">monadmlaws</span>.<br/>
@@ -235,7 +235,7 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">stateMonad_of_stateT</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">exception_monad_transformer</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">Z</span> <span class="id">:</span> <span class="id">UU0</span>)  (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">MX</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">=&gt;</span> <span class="id">M</span> (<span class="id">Z</span> <span class="id">+</span> <span class="id">X</span>)<span class="id">%type</span>.<br/>
@@ -368,7 +368,7 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">exceptMonad_of_exceptT</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">environment_monad_transformer</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">R</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">MEnv</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">=&gt;</span> <span class="id">R</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>.<br/>
@@ -430,7 +430,7 @@ Qed.</div>
 &nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MEnv</span> <span class="id">E</span> <span class="id">M]</span> <span class="id">of</span> <span class="id">@liftEnv</span> <span class="id">E</span> <span class="id">M]</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">output_monad_transformer</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">R</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">MO</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">M</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">R</span>)<span class="id">%type</span>.<br/>
@@ -510,7 +510,7 @@ Qed.</div>
 &nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MO</span> <span class="id">R</span> <span class="id">M]</span> <span class="id">of</span> <span class="id">@liftO</span> <span class="id">R</span> <span class="id">M]</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">continuation_monad_tranformer</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">MC</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">-&gt;</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">=&gt;</span> (<span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">r</span>) <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">r</span> <span class="id">%type</span>.<br/>

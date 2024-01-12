@@ -60,14 +60,14 @@ ref:
 - [4] mu2020flops                                                          
 </pre>
 <br/>
-<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">"m1&nbsp;`&lt;=`&nbsp;m2"</span> (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">70,</span> <span class="id">no</span> <span class="id">associativity</span>).<br/>
-<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">"f&nbsp;`&lt;.=`&nbsp;g"</span> (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">70,</span> <span class="id">no</span> <span class="id">associativity</span>).<br/>
+<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">&quot;m1 `&lt;=` m2&quot;</span> (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">70,</span> <span class="id">no</span> <span class="id">associativity</span>).<br/>
+<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">&quot;f `&lt;.=` g&quot;</span> (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">70,</span> <span class="id">no</span> <span class="id">associativity</span>).<br/>
 <br/>
 <span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
-<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
-<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Printing</span> <span class="vernacular">Implicit</span> <span class="vernacular">Defensive</span>.<br/>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">mem_rcons_cat</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">eqType</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>) <span class="id">h</span> <span class="id">:</span> <span class="id">h</span> <span class="id">\in</span> <span class="id">b</span> <span class="id">-&gt;</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">b1</span> <span class="id">b2,</span> <span class="id">b</span> <span class="id">=</span> <span class="id">rcons</span> <span class="id">b1</span> <span class="id">h</span> <span class="id">++</span> <span class="id">b2</span>.<br/>
@@ -123,7 +123,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">Section</span> <span class="id">unfoldM</span>.<br/>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">unfoldM_monad</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>).<br/>
@@ -343,7 +343,7 @@ Qed.</div>
 <span class="vernacular">Arguments</span> <span class="id">arbitrary_naturality</span> <span class="id">{M</span> <span class="id">T</span> <span class="id">U}</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">subsequences_of_a_list</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <br/>
 <span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">altMonad</span>) (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>).<br/>
 <br/>
@@ -382,7 +382,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">Section</span> <span class="id">insert</span>.<br/>
 <span class="vernacular">Context</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">altMonad}</span> <span class="id">{A</span> <span class="id">:</span> <span class="id">UU0}</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <br/>
 <span class="vernacular">Fixpoint</span> <span class="id">insert</span> (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">M</span> (<span class="id">seq</span> <span class="id">A</span>) <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">s</span> <span class="id">isn't</span> <span class="id">h</span> <span class="id">::</span> <span class="id">t</span> <span class="gallina-kwd">then</span> <span class="id">Ret</span> <span class="id">[::</span> <span class="id">a]</span> <span class="gallina-kwd">else</span><br/>
@@ -400,7 +400,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">Section</span> <span class="id">insert_altMonad</span>.<br/>
 <span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altMonad</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">insert_map</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">:</span><br/>
 &nbsp;&nbsp;<span class="id">insert</span> (<span class="id">f</span> <span class="id">a</span>) <span class="id">\o</span> <span class="id">map</span> <span class="id">f</span> <span class="id">=</span> <span class="id">map</span> <span class="id">f</span> (<span class="id">o</span>) <span class="id">insert</span> <span class="id">a</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>).<br/>
@@ -468,7 +468,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">Section</span> <span class="id">insert_altCIMonad</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">altCIMonad</span>) (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>).<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">insert_rcons</span> <span class="id">a'</span> <span class="id">s</span> <span class="id">:</span><br/>
 &nbsp;&nbsp;<span class="id">insert</span> <span class="id">a</span> (<span class="id">rcons</span> <span class="id">s</span> <span class="id">a'</span>) <span class="id">=</span><br/>
@@ -502,8 +502,8 @@ Qed.</div>
 &nbsp;&nbsp;<span class="id">a</span> <span class="id">[~]</span> (<span class="id">fail</span> <span class="id">&gt;&gt;=</span> <span class="id">b</span>) <span class="id">=</span> <span class="id">a</span> <span class="id">[~]</span> <span class="id">fail</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
 <div class="proofscript" id="proof26">
-<span class="gallina-kwd">Set</span> <span class="id">Printing</span> <span class="id">All</span>.<br/>
-<span class="id">Unset</span> <span class="id">Printing</span> <span class="id">All</span>.<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Printing</span> <span class="id">All</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Printing</span> <span class="id">All</span>.<br/>
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindfailf</span>.<br/>
 Abort.</div>
 <br/>
@@ -574,7 +574,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">Section</span> <span class="id">iperm_altMonad</span>.<br/>
 <span class="vernacular">Context</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">altMonad}</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">iperm_o_map</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) <span class="id">:</span><br/>
 &nbsp;&nbsp;<span class="id">iperm</span> <span class="id">\o</span> <span class="id">map</span> <span class="id">f</span> <span class="id">=</span> <span class="id">map</span> <span class="id">f</span> (<span class="id">o</span>) <span class="id">iperm</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>).<br/>
@@ -684,7 +684,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">Section</span> <span class="id">work</span>.<br/>
 <span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">failMonad</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">work</span> <span class="id">s</span> <span class="id">:</span> <span class="id">M</span> <span class="id">nat</span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">O</span> <span class="id">\in</span> <span class="id">s</span> <span class="gallina-kwd">then</span> <span class="id">fail</span> <span class="gallina-kwd">else</span> <span class="id">Ret</span> (<span class="id">product</span> <span class="id">s</span>).<br/>
@@ -721,11 +721,11 @@ Qed.</div>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">addM</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">M</span> <span class="id">nat</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">nat</span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="id">a</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">b</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">x</span> <span class="id">+</span> <span class="id">y</span>))).<br/>
-<span class="vernacular">Notation</span> <span class="id">"a&nbsp;+m&nbsp;b"&nbsp;:=&nbsp;(addM&nbsp;a&nbsp;b)&nbsp;(at&nbsp;level&nbsp;50,&nbsp;format&nbsp;"a&nbsp;&nbsp;+m&nbsp;&nbsp;b"</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;a +m b&quot; := (addM a b) (at level 50, format &quot;a  +m  b&quot;</span>).<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">mulM</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">M</span> <span class="id">nat</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">nat</span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="id">a</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">b</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">x</span> <span class="id">*</span> <span class="id">y</span>))).<br/>
-<span class="vernacular">Notation</span> <span class="id">"a&nbsp;*m&nbsp;b"&nbsp;:=&nbsp;(mulM&nbsp;a&nbsp;b)&nbsp;(at&nbsp;level&nbsp;50,&nbsp;format&nbsp;"a&nbsp;&nbsp;*m&nbsp;&nbsp;b"</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;a *m b&quot; := (mulM a b) (at level 50, format &quot;a  *m  b&quot;</span>).<br/>
 <br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">continuation_example</span>.<br/>
@@ -780,7 +780,7 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">shiftreset_examples</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">refin</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">altMonad}</span> <span class="id">A</span> (<span class="id">m1</span> <span class="id">m2</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span> <span class="id">m1</span> <span class="id">[~]</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">m2</span>.<br/>
-<span class="vernacular">Notation</span> <span class="id">"m1&nbsp;`&lt;=`&nbsp;m2"</span> <span class="id">:=</span> (<span class="id">refin</span> <span class="id">m1</span> <span class="id">m2</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;m1 `&lt;=` m2&quot;</span> <span class="id">:=</span> (<span class="id">refin</span> <span class="id">m1</span> <span class="id">m2</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">refin_bindr</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">altMonad</span>) <span class="id">A</span> <span class="id">B</span> (<span class="id">m1</span> <span class="id">m2</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">B</span>) <span class="id">:</span><br/>
 &nbsp;&nbsp;(<span class="id">m1</span> <span class="id">`&lt;=`</span> <span class="id">m2</span>) <span class="id">-&gt;</span> (<span class="id">m1</span> <span class="id">&gt;&gt;=</span> <span class="id">f</span> <span class="id">`&lt;=`</span> <span class="id">m2</span> <span class="id">&gt;&gt;=</span> <span class="id">f</span>).<br/>
@@ -796,7 +796,7 @@ Qed.</div>
  <span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">[+</span> <span class="id">_|_];</span> <span class="id">exact</span>. Qed.</div>
 <br/>
 <span class="vernacular">Import</span> <span class="id">Order.TTheory</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">order_scope</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">order_scope</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">refin_lemmas_altCIMonad</span>.<br/>
 <span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altCIMonad</span>.<br/>
@@ -836,7 +836,7 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">refin_lemmas_altCIMonad</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">lrefin</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">altMonad}</span> <span class="id">A</span> <span class="id">B</span> (<span class="id">f</span> <span class="id">g</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">B</span>) <span class="id">:=</span> <span class="gallina-kwd">forall</span> <span class="id">x,</span> <span class="id">f</span> <span class="id">x</span> <span class="id">`&lt;=`g</span> <span class="id">x</span>.<br/>
-<span class="vernacular">Notation</span> <span class="id">"f&nbsp;`&lt;.=`&nbsp;g"</span> <span class="id">:=</span> (<span class="id">lrefin</span> <span class="id">f</span> <span class="id">g</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;f `&lt;.=` g&quot;</span> <span class="id">:=</span> (<span class="id">lrefin</span> <span class="id">f</span> <span class="id">g</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">lrefin_lemmas_altCIMonad</span>.<br/>
 <span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altCIMonad</span>.<br/>

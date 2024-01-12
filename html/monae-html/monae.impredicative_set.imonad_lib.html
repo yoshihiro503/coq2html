@@ -58,16 +58,16 @@ forloop n1 n2 (b : nat -&gt; M unit) : M unit := for-loop
                                                                            
 </pre>
 <br/>
-<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">"f&nbsp;^`2"&nbsp;(format&nbsp;"f&nbsp;^`2"</span><span class="id">,</span> <span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">3</span>).<br/>
-<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">"F&nbsp;##&nbsp;g"</span> (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">11</span>).<br/>
-<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">"E&nbsp;.-operation&nbsp;M"&nbsp;(at&nbsp;level&nbsp;2,&nbsp;format&nbsp;"E&nbsp;&nbsp;.-operation&nbsp;&nbsp;M"</span>).<br/>
-<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">"E&nbsp;.-aoperation&nbsp;M"&nbsp;(at&nbsp;level&nbsp;2,&nbsp;format&nbsp;"E&nbsp;&nbsp;.-aoperation&nbsp;&nbsp;M"</span>).<br/>
+<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">&quot;f ^`2&quot; (format &quot;f ^`2&quot;</span><span class="id">,</span> <span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">3</span>).<br/>
+<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">&quot;F ## g&quot;</span> (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">11</span>).<br/>
+<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">&quot;E .-operation M&quot; (at level 2, format &quot;E  .-operation  M&quot;</span>).<br/>
+<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">&quot;E .-aoperation M&quot; (at level 2, format &quot;E  .-aoperation  M&quot;</span>).<br/>
 <br/>
 <span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
-<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
-<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Printing</span> <span class="vernacular">Implicit</span> <span class="vernacular">Defensive</span>.<br/>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">bind_if</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">bool</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">f</span> <span class="id">g</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">B</span>) <span class="id">:</span><br/>
 &nbsp;&nbsp;<span class="id">m</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id">b</span> <span class="gallina-kwd">then</span> <span class="id">f</span> <span class="id">x</span> <span class="gallina-kwd">else</span> <span class="id">g</span> <span class="id">x</span>) <span class="id">=</span> <span class="gallina-kwd">if</span> <span class="id">b</span> <span class="gallina-kwd">then</span> <span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="id">f</span> <span class="gallina-kwd">else</span> <span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="id">g</span>.<br/>
@@ -81,7 +81,7 @@ forloop n1 n2 (b : nat -&gt; M unit) : M unit := for-loop
 <div class="proofscript" id="proof2">
  <span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id">ifPn</span>. Qed.</div>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <span class="vernacular">Lemma</span> <span class="id">mfoldl_rev</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">monad}</span> (<span class="id">T</span> <span class="id">R</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">R</span> <span class="id">-&gt;</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">R</span>) (<span class="id">z</span> <span class="id">:</span> <span class="id">R</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> (<span class="id">seq</span> <span class="id">T</span>)) <span class="id">:</span><br/>
 &nbsp;&nbsp;<span class="id">foldl</span> <span class="id">f</span> <span class="id">z</span> (<span class="id">o</span>) (<span class="id">rev</span> (<span class="id">o</span>) <span class="id">s</span>) <span class="id">=</span> <span class="id">foldr</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">f^~</span> <span class="id">x</span>) <span class="id">z</span> (<span class="id">o</span>) <span class="id">s</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
@@ -89,7 +89,7 @@ forloop n1 n2 (b : nat -&gt; M unit) : M unit := for-loop
 <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">x;</span> <span class="id">rewrite</span> <span class="id">!fcompE</span> <span class="id">3!fmapE</span> <span class="id">!bindA</span>.<br/>
 <span class="id">bind_ext</span> <span class="id">=&gt;</span> <span class="id">?;</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindretf</span> <span class="id">/=</span> <span class="id">-foldl_rev</span>.<br/>
 Qed.</div>
-<span class="id">Local</span> <span class="vernacular">Close</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Close</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">liftM2</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">monad}</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">h</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">C</span>) <span class="id">m1</span> <span class="id">m2</span> <span class="id">:</span> <span class="id">M</span> <span class="id">C</span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="id">m1</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">m2</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">h</span> <span class="id">a</span> <span class="id">b</span>))).<br/>
@@ -143,7 +143,7 @@ Qed.</div>
 <span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="id">isFunctor.Build</span> <span class="id">Squaring</span> <span class="id">squaring_f_id</span> <span class="id">squaring_f_comp</span>.<br/>
 <span class="vernacular">Definition</span> <span class="id">squaring</span> <span class="id">:</span> <span class="id">functor</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">functor</span> <span class="id">of</span> <span class="id">Squaring]</span>.<br/>
-<span class="vernacular">Notation</span> <span class="id">"f&nbsp;^`2"</span> <span class="id">:=</span> (<span class="id">squaring</span> <span class="id">#</span> <span class="id">f</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;f ^`2&quot;</span> <span class="id">:=</span> (<span class="id">squaring</span> <span class="id">#</span> <span class="id">f</span>).<br/>
 <span class="vernacular">Lemma</span> <span class="id">squaringE</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) <span class="id">x</span> <span class="id">:</span> (<span class="id">f</span> <span class="id">^`2</span>) <span class="id">x</span> <span class="id">=</span> (<span class="id">f</span> <span class="id">x</span>.<span class="id">1,</span> <span class="id">f</span> <span class="id">x</span>.<span class="id">2</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
 <div class="proofscript" id="proof9">
@@ -300,7 +300,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">End</span> <span class="id">vertical_composition</span>.<br/>
 <br/>
-<span class="vernacular">Notation</span> <span class="id">"f&nbsp;\v&nbsp;g"</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">_</span> <span class="id">~&gt;</span> <span class="id">_</span> <span class="id">of</span> <span class="id">vcomp</span> <span class="id">f</span> <span class="id">g]</span>.<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;f \v g&quot;</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">_</span> <span class="id">~&gt;</span> <span class="id">_</span> <span class="id">of</span> <span class="id">vcomp</span> <span class="id">f</span> <span class="id">g]</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">vcompE</span> (<span class="id">F</span> <span class="id">G</span> <span class="id">H</span> <span class="id">:</span> <span class="id">functor</span>) (<span class="id">n1</span> <span class="id">:</span> <span class="id">F</span> <span class="id">~&gt;</span> <span class="id">H</span>) (<span class="id">n2</span> <span class="id">:</span> <span class="id">G</span> <span class="id">~&gt;</span> <span class="id">F</span>) <span class="id">X</span> <span class="id">:</span><br/>
 &nbsp;&nbsp;(<span class="id">n1</span> <span class="id">\v</span> <span class="id">n2</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">n1</span> <span class="id">X</span> <span class="id">\o</span> <span class="id">n2</span> <span class="id">X</span>.<br/>
@@ -337,7 +337,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">End</span> <span class="id">horizontal_composition</span>.<br/>
 <br/>
-<span class="vernacular">Notation</span> <span class="id">"f&nbsp;\h&nbsp;g"</span> <span class="id">:=</span> (<span class="id">HComp</span> <span class="id">g</span> <span class="id">f</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;f \h g&quot;</span> <span class="id">:=</span> (<span class="id">HComp</span> <span class="id">g</span> <span class="id">f</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">functor_natural_transformation</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">S</span> <span class="id">F</span> <span class="id">G</span> <span class="id">:</span> <span class="id">functor</span>) (<span class="id">nt</span> <span class="id">:</span> <span class="id">F</span> <span class="id">~&gt;</span> <span class="id">G</span>).<br/>
@@ -361,7 +361,7 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">functor_natural_transformation</span>.<br/>
 <br/>
 <span class="vernacular">Arguments</span> <span class="id">functor_app_natural</span> <span class="id">S</span> <span class="id">{_}</span> <span class="id">{_}</span>.<br/>
-<span class="vernacular">Notation</span> <span class="id">"F&nbsp;'##'&nbsp;g"</span> <span class="id">:=</span> (<span class="id">functor_app_natural</span> <span class="id">F</span> <span class="id">g</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;F '##' g&quot;</span> <span class="id">:=</span> (<span class="id">functor_app_natural</span> <span class="id">F</span> <span class="id">g</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">functor_app_naturalE</span> (<span class="id">S</span> <span class="id">F</span> <span class="id">G</span> <span class="id">:</span> <span class="id">functor</span>) (<span class="id">nt</span> <span class="id">:</span> <span class="id">F</span> <span class="id">~&gt;</span> <span class="id">G</span>) <span class="id">X</span> <span class="id">:</span><br/>
 &nbsp;&nbsp;(<span class="id">S</span> <span class="id">##</span> <span class="id">nt</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">S</span> <span class="id">#</span> <span class="id">nt</span> <span class="id">X</span>.<br/>
@@ -416,7 +416,7 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">AdjointFunctor</span>.<br/>
 <span class="vernacular">Arguments</span> <span class="id">AdjointFunctor.t</span> <span class="id">:</span> <span class="id">clear</span> <span class="id">implicits</span>.<br/>
 <br/>
-<span class="vernacular">Notation</span> <span class="id">"F&nbsp;-|&nbsp;G"</span> <span class="id">:=</span> (<span class="id">AdjointFunctor.t</span> <span class="id">F</span> <span class="id">G</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;F -| G&quot;</span> <span class="id">:=</span> (<span class="id">AdjointFunctor.t</span> <span class="id">F</span> <span class="id">G</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">adjoint_example</span>.<br/>
 <span class="vernacular">Variable</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>).<br/>
@@ -608,7 +608,7 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">composite_adjoint</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">operation</span> (<span class="id">E</span> <span class="id">:</span> <span class="id">functor</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) <span class="id">:=</span> <span class="id">[the</span> <span class="id">functor</span> <span class="id">of</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">M]</span> <span class="id">~&gt;</span> <span class="id">M</span>.<br/>
-<span class="vernacular">Notation</span> <span class="id">"E&nbsp;.-operation&nbsp;M"</span> <span class="id">:=</span> (<span class="id">operation</span> <span class="id">E</span> <span class="id">M</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;E .-operation M&quot;</span> <span class="id">:=</span> (<span class="id">operation</span> <span class="id">E</span> <span class="id">M</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">algebraicity</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">E</span> <span class="id">:</span> <span class="id">functor</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
@@ -626,7 +626,7 @@ Qed.</div>
 <span class="vernacular">Arguments</span> <span class="id">algebraic</span> <span class="id">{E}</span> <span class="id">{M}</span> <span class="id">s</span>.<br/>
 <br/>
 <br/>
-<span class="vernacular">Notation</span> <span class="id">"E&nbsp;.-aoperation&nbsp;M"</span> <span class="id">:=</span> (<span class="id">aoperation</span> <span class="id">E</span> <span class="id">M</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">&quot;E .-aoperation M&quot;</span> <span class="id">:=</span> (<span class="id">aoperation</span> <span class="id">E</span> <span class="id">M</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">algebraic_operation_interface</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">E</span> <span class="id">:</span> <span class="id">functor</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">op</span> <span class="id">:</span> <span class="id">E</span>.<span class="id">-aoperation</span> <span class="id">M</span>).<br/>

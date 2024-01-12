@@ -29,18 +29,18 @@
 </pre>
 <br/>
 <span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
-<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
-<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Printing</span> <span class="vernacular">Implicit</span> <span class="vernacular">Defensive</span>.<br/>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">marks</span> <span class="id">T</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">traceMonad</span> <span class="id">T}</span> (<span class="id">l</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">M</span> (<span class="id">seq</span> <span class="id">unit</span>) <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="id">sequence</span> (<span class="id">map</span> <span class="id">mark</span> <span class="id">l</span>).<br/>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">zarith_ext_scope</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">zarith_ext_scope</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">statetrace_program_equivalence_example</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">do_notation</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">do_notation</span>.<br/>
 <span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">stateTraceMonad</span> <span class="id">Z</span> <span class="id">nat</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">st_none1</span> <span class="id">:</span> <span class="id">M</span> <span class="id">Z</span> <span class="id">:=</span><br/>
@@ -69,7 +69,7 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">statetrace_program_equivalence_example</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">statetrace_example</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">do_notation</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">do_notation</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">stateTraceMonad</span> <span class="id">Z</span> <span class="id">T</span>).<br/>
 <span class="vernacular">Variables</span> (<span class="id">log0</span> <span class="id">log1</span> <span class="id">:</span> <span class="id">T</span>).<br/>
 <br/>
@@ -130,8 +130,8 @@ Qed.</div>
 <span class="vernacular">End</span> <span class="id">MonadTrans</span>.<br/>
 <span class="vernacular">Arguments</span> <span class="id">MonadTrans.lift</span> <span class="id">{m}</span> <span class="id">{u}</span> <span class="id">_</span> <span class="id">{_}</span>.<br/>
 <span class="vernacular">Arguments</span> <span class="id">MonadTrans.drop</span> <span class="id">{m}</span> <span class="id">{u}</span> <span class="id">_</span> <span class="id">{_}</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"'Lift'"</span> <span class="id">:=</span> <span class="id">MonadTrans.lift</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"'Drop'"</span> <span class="id">:=</span> <span class="id">MonadTrans.drop</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Notation</span> <span class="id">&quot;'Lift'&quot;</span> <span class="id">:=</span> <span class="id">MonadTrans.lift</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Notation</span> <span class="id">&quot;'Drop'&quot;</span> <span class="id">:=</span> <span class="id">MonadTrans.drop</span>.<br/>
 <br/>
 <span class="vernacular">Module</span> <span class="id">Tracer</span>.<br/>
 <span class="vernacular">Record</span> <span class="id">class</span> <span class="id">m</span> (<span class="id">v</span> <span class="id">:</span> <span class="id">traceMonad</span> <span class="id">unit</span>) (<span class="id">mv</span> <span class="id">:</span> <span class="id">MonadTrans.t</span> <span class="id">m</span> <span class="id">v</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="vernacular">Class</span> <span class="id">{</span><br/>
@@ -151,7 +151,7 @@ Qed.</div>
 <span class="vernacular">Coercion</span> <span class="id">Tracer.mv</span> <span class="id">:</span> <span class="id">Tracer.t</span> <span class="id">&gt;-&gt;</span> <span class="id">MonadTrans.t</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">tracer_example</span>.<br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">do_notation</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">do_notation</span>.<br/>
 <span class="vernacular">Variable</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">Tracer.t</span>).<br/>
 <span class="vernacular">Let</span> <span class="id">v</span> <span class="id">:</span> <span class="id">traceMonad</span> <span class="id">unit</span> <span class="id">:=</span> <span class="id">Tracer.v</span> <span class="id">M</span>.<br/>
 <span class="vernacular">Let</span> <span class="id">m</span> <span class="id">:</span> <span class="id">monad</span> <span class="id">:=</span> <span class="id">Tracer.m</span> <span class="id">M</span>.<br/>

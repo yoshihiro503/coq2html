@@ -1,0 +1,601 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module typed_store_model</title>
+<meta name="description" content="Documentation of Coq module typed_store_model" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module typed_store_model</h1>
+<div class="coq">
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">JMeq</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span> <span class="id">finmap</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="id">boolp</span>.<br/>
+<span class="id">#[local]</span> <span class="id">Remove</span> <span class="id">Hints</span> <span class="id">boolp.Prop_irrelevance</span> <span class="id">:</span> <span class="id">core</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monae_lib</span>.<br/>
+<span class="vernacular">From</span> <span class="id">HB</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">structures</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">hierarchy</span> <span class="id">monad_lib</span> <span class="id">fail_lib</span> <span class="id">state_lib</span> <span class="id">trace_lib</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monad_transformer</span> <span class="id">monad_model</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                       Model for typed store                               
+                                                                           
+Separate file as it requires disabling various sanity checks.              
+Reuses coerce and locT_nat from monad_model.v.                             
+Similarities with ModelTypedStore from monad_model.v                       
+                                                                           
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">ModelTypedStore</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">MLU</span> <span class="id">:</span> <span class="id">ML_universe</span>.<br/>
+<br/>
+<span class="vernacular">Record</span> <span class="id">binding</span> (<span class="id">M</span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">-&gt;</span> <span class="gallina-kwd">Type</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">mkbind</span> <span class="id">{</span> <span class="id">bind_type</span> <span class="id">:</span> <span class="id">MLU;</span> <span class="id">bind_val</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">M</span> <span class="id">bind_type</span> <span class="id">}</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">mkbind</span> <span class="id">{M</span> <span class="id">bind_type}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">M0</span> <span class="id">Env</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">MS</span> <span class="id">Env</span> <span class="id">option_monad</span> <span class="id">T</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">ModelTypedStore</span>.<br/>
+<br/>
+<span class="id">#[bypass_check</span>(<span class="id">positivity</span>)<span class="id">]</span><br/>
+<span class="vernacular">Inductive</span> <span class="id">Env</span> (<span class="id">MLU</span> <span class="id">:</span> <span class="id">ML_universe</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">mkEnv</span> <span class="id">:</span> <span class="id">seq</span> (<span class="id">binding</span> <span class="id">MLU</span> (<span class="id">M0</span> (<span class="id">Env</span> <span class="id">_</span>))) <span class="id">-&gt;</span> <span class="id">Env</span> <span class="id">_</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">ModelTypedStore_contd</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">MLU</span> <span class="id">:</span> <span class="id">ML_universe</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">ofEnv</span> (<span class="id">e</span> <span class="id">:</span> <span class="id">Env</span> <span class="id">MLU</span>) <span class="id">:=</span> <span class="id">let:</span> <span class="id">mkEnv</span> <span class="id">e</span> <span class="id">:=</span> <span class="id">e</span> <span class="gallina-kwd">in</span> <span class="id">e</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">sizeEnv</span> <span class="id">e</span> <span class="id">:=</span> <span class="id">size</span> (<span class="id">ofEnv</span> <span class="id">e</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">mkEnv</span> <span class="id">:=</span> (<span class="id">@mkEnv</span> <span class="id">MLU</span>).<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">Env</span> <span class="id">:=</span> (<span class="id">@Env</span> <span class="id">MLU</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">acto</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">-&gt;</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="id">MS</span> <span class="id">Env</span> <span class="id">option_monad</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">M</span> <span class="id">:=</span> <span class="id">acto</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">coq_type</span> <span class="id">:=</span> (<span class="id">@coq_type</span> <span class="id">MLU</span> <span class="id">M</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">val_nonundef</span> <span class="id">:=</span> (<span class="id">val_nonempty</span> <span class="id">MLU</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">def</span> <span class="id">:=</span> <span class="id">mkbind</span> (<span class="id">@val_nonempty</span> <span class="id">MLU</span> <span class="id">M</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">ml_type</span> <span class="id">:=</span> (<span class="id">MLU</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">nth_error</span> <span class="id">:=</span> <span class="id">List.nth_error</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">extend_env</span> <span class="id">T</span> (<span class="id">v</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) (<span class="id">e</span> <span class="id">:</span> <span class="id">Env</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">mkEnv</span> (<span class="id">rcons</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">mkbind</span> <span class="id">v</span>)).<br/>
+<span class="vernacular">Definition</span> <span class="id">fresh_loc</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">ml_type</span>) (<span class="id">e</span> <span class="id">:</span> <span class="id">Env</span>) <span class="id">:=</span> <span class="id">mkloc</span> <span class="id">T</span> (<span class="id">sizeEnv</span> <span class="id">e</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">loc</span> <span class="id">:=</span> (<span class="id">@loc</span> <span class="id">ml_type</span> <span class="id">locT_nat</span>).<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cnew</span> <span class="id">T</span> (<span class="id">v</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">M</span> (<span class="id">loc</span> <span class="id">T</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">e</span> <span class="id">=&gt;</span> <span class="id">inr</span> (<span class="id">fresh_loc</span> <span class="id">T</span> <span class="id">e,</span> <span class="id">extend_env</span> <span class="id">v</span> <span class="id">e</span>).<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cget</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">M</span> (<span class="id">coq_type</span> <span class="id">T</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">st</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">st</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">is</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">T'</span> <span class="id">v</span>) <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">coerce</span> <span class="id">T</span> <span class="id">v</span> <span class="id">is</span> <span class="id">Some</span> <span class="id">u</span> <span class="gallina-kwd">then</span> <span class="id">inr</span> (<span class="id">u,</span> <span class="id">st</span>) <span class="gallina-kwd">else</span> <span class="id">inl</span> <span class="id">tt</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id">inl</span> <span class="id">tt</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cput</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">v</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">st</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">n</span> <span class="id">:=</span> <span class="id">loc_id</span> <span class="id">r</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">st</span>) <span class="id">n</span> <span class="id">is</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">T'</span> <span class="id">_</span>) <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">coerce</span> <span class="id">T'</span> <span class="id">v</span> <span class="id">is</span> <span class="id">Some</span> <span class="id">u</span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">b</span> <span class="id">:=</span> <span class="id">mkbind</span> (<span class="id">u</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T'</span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">inr</span> (<span class="id">tt,</span> <span class="id">mkEnv</span> (<span class="id">set_nth</span> <span class="id">def</span> (<span class="id">ofEnv</span> <span class="id">st</span>) <span class="id">n</span> <span class="id">b</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id">inl</span> <span class="id">tt</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id">inl</span> <span class="id">tt</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">crun</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">option</span> <span class="id">A</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">m</span> (<span class="id">mkEnv</span> <span class="id">nil</span>) <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">inl</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">None</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">inr</span> (<span class="id">a,</span> <span class="id">_</span>) <span class="id">=&gt;</span> <span class="id">Some</span> <span class="id">a</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">bind_cnew</span> <span class="id">T</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">A</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">e</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>) <span class="id">e</span> <span class="id">=</span> <span class="id">k</span> (<span class="id">fresh_loc</span> <span class="id">T</span> <span class="id">e</span>) (<span class="id">extend_env</span> <span class="id">s</span> <span class="id">e</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id">e</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">Some_cget</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">e</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">f</span>) <span class="id">e</span> <span class="id">=</span> <span class="id">f</span> <span class="id">s</span> <span class="id">e</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">H;</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">/cget</span> <span class="id">H</span> <span class="id">coerce_Some</span>. Qed.</div>
+<span class="vernacular">Arguments</span> <span class="id">Some_cget</span> <span class="id">{T</span> <span class="id">r}</span> <span class="id">s</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">nocoerce_cget</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">T'</span> (<span class="id">s'</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T'</span>) <span class="id">e</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s'</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">~~</span> <span class="id">coercible</span> <span class="id">T</span> <span class="id">s'</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r</span> <span class="id">e</span> <span class="id">=</span> <span class="id">fail</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">H</span> <span class="id">Ts';</span> <span class="id">rewrite</span> <span class="id">/cget</span> <span class="id">H</span> <span class="id">not_coercible</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">None_cget</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">e</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">None</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r</span> <span class="id">e</span> <span class="id">=</span> <span class="id">fail</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">H;</span> <span class="id">rewrite</span> <span class="id">/cget</span> <span class="id">H</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cnewget</span> <span class="id">T</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">A</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">r</span> <span class="id">s</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bind_cnew</span> (<span class="id">Some_cget</span> <span class="id">s</span>)<span class="id">//</span> <span class="id">nth_error_rcons_size</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">nocoerce_cput</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">T'</span> (<span class="id">s'</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T'</span>) <span class="id">e</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s'</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">~~</span> <span class="id">coercible</span> <span class="id">T</span> <span class="id">s'</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">e</span> <span class="id">=</span> <span class="id">fail</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="id">move=&gt;</span> <span class="id">H</span> <span class="id">Ts';</span> <span class="id">move:</span> <span class="id">e</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">[e]</span> <span class="id">H;</span> <span class="id">rewrite</span> <span class="id">/cput</span> <span class="id">H</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">not_coercible//</span> (<span class="id">coercible_sym</span> <span class="id">_</span> <span class="id">s'</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">None_cput</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">e</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">None</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">e</span> <span class="id">=</span> <span class="id">fail</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">H;</span> <span class="id">move:</span> <span class="id">e</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">[e]</span> <span class="id">H;</span> <span class="id">rewrite</span> <span class="id">/cput</span> <span class="id">H</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cnewput</span> <span class="id">T</span> (<span class="id">s</span> <span class="id">t</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">A</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">t</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">cnew</span> <span class="id">t</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span>.<br/>
+<span class="id">rewrite</span> <span class="id">bind_cnew</span> <span class="id">2!MS_bindE</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cput/=</span> <span class="id">nth_error_rcons_size</span> <span class="id">coerce_Some</span> <span class="id">set_nth_rcons</span>.<br/>
+Qed.</div>
+<br/>
+<br/>
+<span class="vernacular">Variant</span> <span class="id">nth_error_spec</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">ml_type</span>) (<span class="id">e</span> <span class="id">:</span> <span class="id">Env</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">NthError</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s</span>) <span class="id">-&gt;</span> <span class="id">nth_error_spec</span> <span class="id">e</span> <span class="id">r</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">NthError_nocoerce</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">T'</span> (<span class="id">s'</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T'</span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s'</span>) <span class="id">-&gt;</span> <span class="id">~~</span> <span class="id">coercible</span> <span class="id">T</span> <span class="id">s'</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">nth_error_spec</span> <span class="id">e</span> <span class="id">r</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">NthError_None</span> <span class="id">:</span> <span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">None</span> <span class="id">-&gt;</span> <span class="id">nth_error_spec</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">ntherrorP</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">ml_type</span>) (<span class="id">e</span> <span class="id">:</span> <span class="id">Env</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">nth_error_spec</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">case</span> <span class="id">H</span> <span class="id">:</span> (<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>)) <span class="id">=&gt;</span> <span class="id">[[T'</span> <span class="id">s']|]</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[Ts'|Ts']</span> <span class="id">:=</span> <span class="id">boolP</span> (<span class="id">coercible</span> <span class="id">T</span> <span class="id">s'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">?</span> <span class="id">:=</span> <span class="id">coercible_eq</span> <span class="id">Ts';</span> <span class="id">subst</span> <span class="id">T'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exact:</span> <span class="id">NthError</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="id">exact:</span> <span class="id">NthError_nocoerce</span> <span class="id">H</span> <span class="id">Ts'</span>.<br/>
+<span class="id">exact:</span> <span class="id">NthError_None</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cgetput</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">=</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span>.<br/>
+<span class="id">have</span> <span class="id">[s'</span> <span class="id">H|T'</span> <span class="id">s'</span> <span class="id">H</span> <span class="id">Ts'|H]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">s'</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">H</span>)<span class="id">//</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">H</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cget//</span> <span class="id">None_cput</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">Some_cputE</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">s'</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">e</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s'</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">e</span> <span class="id">=</span> <span class="id">inr</span> (<span class="id">tt,</span> <span class="id">mkEnv</span> (<span class="id">set_nth</span> <span class="id">def</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) (<span class="id">mkbind</span> <span class="id">s</span>))).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">H;</span> <span class="id">rewrite</span> <span class="id">/cput/=</span> <span class="id">H</span> <span class="id">coerce_Some</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">Some_cput</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">e</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">e</span> <span class="id">=</span> (<span class="id">@skip</span> <span class="id">M</span>) <span class="id">e</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+<span class="id">move=&gt;</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/cput/=</span> <span class="id">H</span> <span class="id">coerce_Some/=</span> <span class="id">nth_error_set_nth_id//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">e</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">Some_cputget</span> <span class="id">T</span> (<span class="id">s'</span> <span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">A</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>)<br/>
+&nbsp;&nbsp;(<span class="id">e</span> <span class="id">:</span> <span class="id">Env</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s'</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> (<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>)) <span class="id">e</span> <span class="id">=</span> (<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">s</span>) <span class="id">e</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+<span class="id">move=&gt;</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!MS_bindE</span> (<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">H</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindE/=</span> (<span class="id">Some_cget</span> <span class="id">s</span>)<span class="id">//</span> <span class="id">nth_error_set_nth</span>.<br/>
+Qed.</div>
+<span class="vernacular">Arguments</span> <span class="id">Some_cputget</span> <span class="id">{T}</span> <span class="id">s'</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cgetputskip</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">=</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> <span class="id">skip</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span> <span class="id">/=</span>.<br/>
+<span class="id">have</span> <span class="id">[s'</span> <span class="id">H|T'</span> <span class="id">s'</span> <span class="id">H</span> <span class="id">Ts'|H]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">s'</span>)<span class="id">//</span> (<span class="id">Some_cget</span> <span class="id">s'</span>)<span class="id">//</span> (<span class="id">Some_cput</span> <span class="id">H</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">H</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> <span class="id">None_cget</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cgetget</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span> <span class="id">s</span>) <span class="id">=</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">s</span> <span class="id">s</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span> <span class="id">/=</span>.<br/>
+<span class="id">have</span> <span class="id">[s'</span> <span class="id">H|T'</span> <span class="id">s'</span> <span class="id">H</span> <span class="id">Ts'|H]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">do</span> <span class="id">3</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">s'</span>)<span class="id">//</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">H</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> <span class="id">None_cget</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cputget</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s:</span> <span class="id">coq_type</span> <span class="id">T</span>) (<span class="id">A:</span> <span class="id">UU0</span>) (<span class="id">k:</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> (<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>) <span class="id">=</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">s</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span> <span class="id">/=</span>.<br/>
+<span class="id">have</span> <span class="id">[s'</span> <span class="id">H|T'</span> <span class="id">s'</span> <span class="id">H</span> <span class="id">Ts'|H]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cputget</span> <span class="id">s'</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">H</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">2!MS_bindE</span> <span class="id">None_cput</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">Some_cputput</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">ml_type</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">s'</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>)<br/>
+&nbsp;&nbsp;(<span class="id">e</span> <span class="id">:</span> <span class="id">Env</span>) (<span class="id">s''</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s''</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s'</span>) <span class="id">e</span> <span class="id">=</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s'</span> <span class="id">e</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+<span class="id">move=&gt;</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> <span class="id">MS_bindE/=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">H</span>)<span class="id">//</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]</span>(<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">H</span>)<span class="id">//</span>.<br/>
+<span class="id">rewrite</span> <span class="id">bindE/=</span> <span class="id">/cput</span>.<br/>
+<span class="id">rewrite</span> <span class="id">nth_error_set_nth</span> <span class="id">coerce_Some/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">set_set_nth</span> <span class="id">eqxx</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cputput</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">s'</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s'</span> <span class="id">=</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s'</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span>.<br/>
+<span class="id">have</span> <span class="id">[s''</span> <span class="id">H|T''</span> <span class="id">s''</span> <span class="id">H</span> <span class="id">Ts''|H]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cputput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">H</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">H</span>)<span class="id">//</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">H</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">!None_cput</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cgetC</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span>) (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">k</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T1</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T2</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r1</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">u</span> <span class="id">=&gt;</span> <span class="id">cget</span> <span class="id">r2</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">v</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">u</span> <span class="id">v</span>)) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r2</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">v</span> <span class="id">=&gt;</span> <span class="id">cget</span> <span class="id">r1</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">u</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">u</span> <span class="id">v</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span> <span class="id">/=</span>.<br/>
+<span class="id">have</span> <span class="id">[u</span> <span class="id">Hr1|u</span> <span class="id">T1'</span> <span class="id">Hr1</span> <span class="id">T1u|Hr1]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r1</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">u</span>)<span class="id">//</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">Hr2|v</span> <span class="id">T2'</span> <span class="id">Hr2</span> <span class="id">T2v|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">v</span>)<span class="id">//</span> (<span class="id">Some_cget</span> <span class="id">v</span>)<span class="id">//</span> (<span class="id">Some_cget</span> <span class="id">u</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">2!MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">Hr2</span>)<span class="id">//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> <span class="id">None_cget</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">Hr1</span>)<span class="id">//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">Hr2|v</span> <span class="id">T2'</span> <span class="id">Hr2</span> <span class="id">T2v|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">v</span>)<span class="id">//</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">Hr1</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">Hr2</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cget</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cget//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">Hr2|v</span> <span class="id">T2'</span> <span class="id">Hr2</span> <span class="id">T2v|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">v</span>)<span class="id">//</span> <span class="id">MS_bindE</span> <span class="id">None_cget</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">Hr2</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">!None_cget</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cnewgetD_helper</span> <span class="id">e</span> <span class="id">T</span> <span class="id">T'</span> <span class="id">r</span> <span class="id">v</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T'</span>) <span class="id">A</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T'</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">v</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">r'</span> <span class="id">=&gt;</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span> <span class="id">r'</span>)) <span class="id">e</span> <span class="id">=</span> (<span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">r</span> <span class="id">v</span>)) <span class="id">e</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+<span class="id">move=&gt;</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> <span class="id">bind_cnew//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">v</span>) <span class="id">//</span> (<span class="id">nth_error_rcons_some</span> <span class="id">_</span> <span class="id">H</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cgetnewD</span> <span class="id">T</span> <span class="id">T'</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T'</span>) <span class="id">A</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">k</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T'</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">u</span> <span class="id">=&gt;</span> <span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">r'</span> <span class="id">=&gt;</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span> <span class="id">r'</span> <span class="id">u</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">u</span> <span class="id">=&gt;</span> <span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">r'</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">r'</span> <span class="id">u</span> <span class="id">u</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span>.<br/>
+<span class="id">have</span> <span class="id">[u</span> <span class="id">Hr|u</span> <span class="id">T1</span> <span class="id">Hr</span> <span class="id">T1u|Hr]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">u</span>)<span class="id">//</span> (<span class="id">Some_cget</span> <span class="id">u</span>)<span class="id">//</span> (<span class="id">cnewgetD_helper</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr</span>)<span class="id">//</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">Hr</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> <span class="id">None_cget</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cgetnewE</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T2</span>) (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">k1</span> <span class="id">k2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2,</span> <span class="id">loc_id</span> <span class="id">r1</span> <span class="id">!=</span> <span class="id">loc_id</span> <span class="id">r2</span> <span class="id">-&gt;</span> <span class="id">k1</span> <span class="id">r2</span> <span class="id">=</span> <span class="id">k2</span> <span class="id">r2</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">k1</span>) <span class="id">=</span> <span class="id">cget</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">k2</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
+<div class="proofscript" id="proof22">
+<span class="id">move=&gt;</span> <span class="id">Hk</span>.<br/>
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span>.<br/>
+<span class="id">have</span> <span class="id">[u</span> <span class="id">r1u|T'</span> <span class="id">s'</span> <span class="id">Hr1</span> <span class="id">T1s'|Hr]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r1</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">u</span>)<span class="id">//</span> (<span class="id">Some_cget</span> <span class="id">u</span>)<span class="id">//</span> <span class="id">!bind_cnew</span> <span class="id">Hk//</span> <span class="id">neq_ltn</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id">e</span> <span class="id">r1u</span> <span class="id">=&gt;</span> <span class="id">/=</span> <span class="id">e</span> <span class="id">/nth_error_size</span> <span class="id">-&gt;</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">Hr1</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!MS_bindE</span> <span class="id">None_cget</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cgetputC</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T2</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r2</span> <span class="id">s</span> <span class="id">=</span> <span class="id">cput</span> <span class="id">r2</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">cget</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> <span class="id">skip</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
+<div class="proofscript" id="proof23">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span> <span class="id">/=</span>.<br/>
+<span class="id">have</span> <span class="id">[u</span> <span class="id">r1u|T1'</span> <span class="id">v1</span> <span class="id">Hr1</span> <span class="id">T1v1|Hr1]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r1</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">u</span>)<span class="id">//</span> <span class="id">[in</span> <span class="id">RHS]bindA</span> <span class="id">MS_bindE</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">r2v|T'</span> <span class="id">v</span> <span class="id">r2v</span> <span class="id">T2v|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> (<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">r2v</span>) <span class="id">[in</span> <span class="id">RHS]bindE/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">[r12|r12]</span> <span class="id">:=</span> <span class="id">eqVneq</span> (<span class="id">loc_id</span> <span class="id">r1</span>) (<span class="id">loc_id</span> <span class="id">r2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> <span class="id">r2v;</span> <span class="id">rewrite</span> <span class="id">-r12</span> <span class="id">r1u</span> <span class="id">=&gt;</span> <span class="id">-[?]</span> <span class="id">_;</span> <span class="id">subst</span> <span class="id">T2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">/cget</span> <span class="id">nth_error_set_nth//</span> <span class="id">coerce_Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">u</span>)<span class="id">//</span> (<span class="id">nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">r12</span> <span class="id">r1u</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T2v</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">None_cput</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">[RHS]MS_bindE</span> <span class="id">bindA</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">r2v|T'</span> <span class="id">v</span> <span class="id">r2v</span> <span class="id">T2v|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">{1}/cget</span> <span class="id">Hr1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">[?|T1'T1]</span> <span class="id">:=</span> <span class="id">eqVneq</span> <span class="id">T1'</span> <span class="id">T1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">subst</span> <span class="id">T1';</span> <span class="id">rewrite</span> <span class="id">coerce_Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]bindE/=</span> (<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">r2v</span>) <span class="id">[in</span> <span class="id">RHS]bindE/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">[Hr|Hr]</span> <span class="id">:=</span> <span class="id">eqVneq</span> (<span class="id">loc_id</span> <span class="id">r1</span>) (<span class="id">loc_id</span> <span class="id">r2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> <span class="id">r2v;</span> <span class="id">rewrite</span> <span class="id">-Hr</span> <span class="id">Hr1</span> <span class="id">=&gt;</span> <span class="id">-[?]</span> <span class="id">_;</span> <span class="id">subst</span> <span class="id">T2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cget</span> <span class="id">nth_error_set_nth</span> <span class="id">coerce_Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cget</span> (<span class="id">nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr</span> <span class="id">Hr1</span>) <span class="id">coerce_Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">coerce_None//=</span> <span class="id">bindfailf</span> (<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">r2v</span>) <span class="id">[in</span> <span class="id">RHS]bindE/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">[r12|r12]</span> <span class="id">:=</span> <span class="id">eqVneq</span> (<span class="id">loc_id</span> <span class="id">r1</span>) (<span class="id">loc_id</span> <span class="id">r2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> <span class="id">r2v;</span> <span class="id">rewrite</span> <span class="id">-r12</span> <span class="id">Hr1</span> <span class="id">=&gt;</span> <span class="id">-[?]</span> <span class="id">_;</span> <span class="id">subst</span> <span class="id">T1'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cget</span> <span class="id">nth_error_set_nth</span> <span class="id">coerce_None</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cget</span> (<span class="id">nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">r12</span> <span class="id">Hr1</span>) <span class="id">coerce_None</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nocoerce_cget</span> <span class="id">_</span> <span class="id">T1v1</span>)<span class="id">//</span> <span class="id">bindfailf</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T2v</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nocoerce_cget</span> <span class="id">_</span> <span class="id">T1v1</span>)<span class="id">//</span> <span class="id">None_cput//</span> <span class="id">bindfailf</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cget//</span> <span class="id">bindfailf</span> <span class="id">bindA</span> <span class="id">MS_bindE</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">r2v|T'</span> <span class="id">v</span> <span class="id">r2v</span> <span class="id">T2v|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> (<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">r2v</span>)<span class="id">/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindE/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cget/=</span> <span class="id">?bindfailf//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nth_error_set_nth_none</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr1</span> <span class="id">r2v</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">r2v</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">None_cput</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cput_then_fail</span> <span class="id">T1</span> <span class="id">T2</span> <span class="id">T1'</span> <span class="id">e</span> (<span class="id">s1'</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T1'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span>) (<span class="id">s2</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">s1</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T1</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">nth_error</span> (<span class="id">ofEnv</span> <span class="id">e</span>) (<span class="id">loc_id</span> <span class="id">r1</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">mkbind</span> <span class="id">s1'</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">~~</span> <span class="id">coercible</span> <span class="id">T1</span> <span class="id">s1'</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">cput</span> <span class="id">r2</span> <span class="id">s2</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r1</span> <span class="id">s1</span>) <span class="id">e</span> <span class="id">=</span> <span class="id">fail</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
+<div class="proofscript" id="proof24">
+<span class="id">move=&gt;</span> <span class="id">Hr1</span> <span class="id">T1s'</span>.<br/>
+<span class="id">have</span> <span class="id">[v</span> <span class="id">Hr2|T2'</span> <span class="id">v</span> <span class="id">Hr2</span> <span class="id">T2v|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cput</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T2v</span>).<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">Hr2</span>).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindE/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[Hr|Hr]</span> <span class="id">:=</span> <span class="id">eqVneq</span> (<span class="id">loc_id</span> <span class="id">r1</span>) (<span class="id">loc_id</span> <span class="id">r2</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">{1}/cput</span> <span class="id">-Hr</span> <span class="id">/=</span> <span class="id">nth_error_set_nth</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">[HT|HT]</span> <span class="id">:=</span> <span class="id">eqVneq</span> <span class="id">T1</span> <span class="id">T2;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">coerce_None</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">subst</span> <span class="id">T2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">coerce_Some//=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> <span class="id">Hr1;</span> <span class="id">rewrite</span> <span class="id">Hr</span> <span class="id">Hr2</span> <span class="id">=&gt;</span> <span class="id">-[?];</span> <span class="id">subst</span> <span class="id">T1'</span> <span class="id">=&gt;</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">coercible_Some</span> <span class="id">//</span> <span class="gallina-kwd">in</span> <span class="id">T1s'</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T1s'</span>)<span class="id">//=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">@nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">mkbind</span> <span class="id">s1'</span>)).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cputC</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span>) (<span class="id">s1</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">s2</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T2</span>) (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">loc_id</span> <span class="id">r1</span> <span class="id">!=</span> <span class="id">loc_id</span> <span class="id">r2</span> <span class="id">\/</span> <span class="id">JMeq</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r1</span> <span class="id">s1</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r2</span> <span class="id">s2</span> <span class="id">=</span> <span class="id">cput</span> <span class="id">r2</span> <span class="id">s2</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r1</span> <span class="id">s1</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
+<div class="proofscript" id="proof25">
+<span class="id">move=&gt;</span> <span class="id">H;</span> <span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span> <span class="id">/=</span>.<br/>
+<span class="id">have</span> <span class="id">[u</span> <span class="id">Hr1|T1'</span> <span class="id">s'd</span> <span class="id">Hr1</span> <span class="id">T1s'|Hr1]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r1;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cput//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">Hr2|T2'</span> <span class="id">s'</span> <span class="id">Hr2</span> <span class="id">T2s'|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cput</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T2s'</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">Hr2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindE/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">None_cput//</span> (<span class="id">nth_error_set_nth_none</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr1</span> <span class="id">Hr2</span>).<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T1s'</span>)<span class="id">//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">cput_then_fail</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr1</span>).<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">Hr1</span>)<span class="id">/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindE/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">case/boolP:</span> (<span class="id">loc_id</span> <span class="id">r1</span> <span class="id">==</span> <span class="id">loc_id</span> <span class="id">r2</span>) <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">[/eqP|]</span> <span class="id">Hr</span> <span class="id">/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">case</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">MS_bindE</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">{2}/cput</span> <span class="id">-Hr</span> <span class="id">Hr1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case/boolP:</span> (<span class="id">T1</span> <span class="id">==</span> <span class="id">T2</span>) <span class="id">=&gt;</span> <span class="id">[/eqP</span> <span class="id">HT|HT];</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">coerce_None//;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">eq_sym</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cput/=</span> <span class="id">Hr</span> <span class="id">nth_error_set_nth//</span> <span class="id">coerce_None//</span> <span class="id">eq_sym</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">subst</span> <span class="id">T2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">coerce_Some</span> <span class="id">bindE/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">?</span> <span class="id">:=</span> <span class="id">JMeq_eq</span> <span class="id">H;</span> <span class="id">subst</span> <span class="id">s2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cput</span> <span class="id">-Hr</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">move=&gt;</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">r2v|T2'</span> <span class="id">s</span> <span class="id">Hr2</span> <span class="id">T2s|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cput/=;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nth_error_set_nth_none</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr2</span> <span class="id">Hr1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">None_cput</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]</span>(<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T2s</span>)<span class="id">//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T2s</span>)<span class="id">//=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr2</span>) <span class="id">1?eq_sym</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]</span>(<span class="id">Some_cputE</span> <span class="id">_</span> <span class="id">r2v</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">{1}/cput/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">r2v</span>) <span class="id">1?eq_sym//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">coerce_Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindE/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/cput</span> (<span class="id">nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr</span> <span class="id">Hr1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">coerce_Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">set_set_nth</span> (<span class="id">negbTE</span> <span class="id">Hr</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cputgetC</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span>) (<span class="id">s1</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T2</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">loc_id</span> <span class="id">r1</span> <span class="id">!=</span> <span class="id">loc_id</span> <span class="id">r2</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r1</span> <span class="id">s1</span> <span class="id">&gt;&gt;</span> <span class="id">cget</span> <span class="id">r2</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span> <span class="id">=</span> <span class="id">cget</span> <span class="id">r2</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">v</span> <span class="id">=&gt;</span> <span class="id">cput</span> <span class="id">r1</span> <span class="id">s1</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">v</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
+<div class="proofscript" id="proof26">
+<span class="id">move=&gt;</span> <span class="id">Hr;</span> <span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">!bindA</span>.<br/>
+<span class="id">have</span> <span class="id">[u</span> <span class="id">Hr1|T1'</span> <span class="id">s1'</span> <span class="id">Hr1</span> <span class="id">T1s'|Hr1]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r1</span>.<br/>
+<span class="id">-</span> <span class="id">have</span> <span class="id">[v</span> <span class="id">Hr2|T'</span> <span class="id">s'</span> <span class="id">Hr2</span> <span class="id">T2s'|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]MS_bindE</span> <span class="id">[in</span> <span class="id">RHS]MS_bindE</span> <span class="id">/cput</span> <span class="id">Hr1</span> <span class="id">coerce_Some</span> <span class="id">!bindretf/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">/cget</span> (<span class="id">nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr2</span>) <span class="id">1?eq_sym//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">coerce_Some</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">[RHS]MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">_</span> <span class="id">T2s'</span>)<span class="id">//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">!MS_bindE</span> <span class="id">/cput</span> <span class="id">Hr1</span> <span class="id">coerce_Some</span> <span class="id">bindretf//=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">/cget/=</span> (<span class="id">nth_error_set_nth_other</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr2</span>) <span class="id">1?eq_sym//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">not_coercible</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]MS_bindE</span> <span class="id">None_cget//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">/cput</span> <span class="id">Hr1</span> <span class="id">coerce_Some</span> <span class="id">bindretf/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">/cget</span> (<span class="id">nth_error_set_nth_none</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr2</span> <span class="id">Hr1</span>).<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T1s'</span>)<span class="id">//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">Hr2|T'</span> <span class="id">s'</span> <span class="id">Hr2</span> <span class="id">T2s'|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr2</span>) <span class="id">MS_bindE</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T1s'</span>).<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">_</span> <span class="id">T2s'</span>).<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cget</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">MS_bindE</span> <span class="id">None_cput//</span> <span class="id">bindfailf</span> <span class="id">MS_bindE</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[v</span> <span class="id">Hr2|T'</span> <span class="id">s'</span> <span class="id">Hr2</span> <span class="id">T2s'|Hr2]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cget</span> <span class="id">Hr2</span> <span class="id">coerce_Some</span> <span class="id">bindretf//=</span> <span class="id">MS_bindE</span> <span class="id">None_cput</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nocoerce_cget</span> <span class="id">Hr2</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">None_cget</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">cputnewC</span> <span class="id">T</span> <span class="id">T'</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T</span>) (<span class="id">s'</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">T'</span>) <span class="id">A</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">k</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T'</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">s'</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">r'</span> <span class="id">=&gt;</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">r'</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">s'</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
+<div class="proofscript" id="proof27">
+<span class="id">apply/boolp</span>.<span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">e</span> <span class="id">/=</span>.<br/>
+<span class="id">have</span> <span class="id">[u</span> <span class="id">Hr|T1</span> <span class="id">s1'</span> <span class="id">Hr</span> <span class="id">T1s'|Hr]</span> <span class="id">:=</span> <span class="id">ntherrorP</span> <span class="id">e</span> <span class="id">r</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> (<span class="id">Some_cget</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr</span>).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">[RHS]MS_bindE</span> <span class="id">[in</span> <span class="id">RHS]/cput</span> <span class="id">Hr</span> <span class="id">coerce_Some</span> <span class="id">bindretf/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">!MS_bindE</span> <span class="id">/cnew</span> <span class="id">!bindretf/=</span> <span class="id">!MS_bindE</span> <span class="id">/cput</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">nth_error_rcons_some</span> <span class="id">_</span> <span class="id">Hr</span>) <span class="id">coerce_Some</span> <span class="id">bindretf/=</span> <span class="id">/fresh_loc/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/sizeEnv/=</span> <span class="id">/extend_env/=</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nth_error_size_set_nth</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr</span>) (<span class="id">nth_error_set_nth_rcons</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hr</span>).<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">2!MS_bindE</span> (<span class="id">nocoerce_cget</span> <span class="id">_</span> <span class="id">T1s'</span>)<span class="id">//</span> <span class="id">bindfailf</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">nocoerce_cput</span> <span class="id">_</span> <span class="id">_</span> <span class="id">T1s'</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">2!MS_bindE</span> <span class="id">None_cget//</span> <span class="id">bindfailf</span> <span class="id">None_cput</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">crunret</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">B</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> <span class="id">m</span> <span class="id">-&gt;</span> <span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;</span> <span class="id">Ret</span> <span class="id">s</span>) <span class="id">=</span> <span class="id">Some</span> <span class="id">s</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
+<div class="proofscript" id="proof28">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/crun</span> <span class="id">/=</span> <span class="id">MS_bindE/=;</span> <span class="id">case:</span> (<span class="id">m</span> <span class="id">_</span>) <span class="id">=&gt;</span> <span class="id">//-</span> <span class="id">[]</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">crunskip</span> <span class="id">:</span> <span class="id">crun</span> <span class="id">skip</span> <span class="id">=</span> <span class="id">Some</span> <span class="id">tt</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
+<div class="proofscript" id="proof29">
+ <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">crunnew</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">T</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> <span class="id">m</span> <span class="id">-&gt;</span> <span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cnew</span> (<span class="id">s</span> <span class="id">x</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
+<div class="proofscript" id="proof30">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/crun</span> <span class="id">/=</span> <span class="id">MS_bindE;</span> <span class="id">case:</span> (<span class="id">m</span> <span class="id">_</span>) <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">-[]</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">crunnewgetC</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">T1</span> <span class="id">T2</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">loc</span> <span class="id">T1</span>)<br/>
+&nbsp;&nbsp;(<span class="id">s</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T2</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cget</span> (<span class="id">r</span> <span class="id">x</span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cnew</span> (<span class="id">s</span> <span class="id">x</span>) <span class="id">&gt;&gt;</span> <span class="id">cget</span> (<span class="id">r</span> <span class="id">x</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
+<div class="proofscript" id="proof31">
+<span class="id">rewrite</span> <span class="id">/crun</span> <span class="id">/=</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">/bindS</span> <span class="id">!MS_mapE</span> <span class="id">/=</span> <span class="id">!fmapE</span> <span class="id">/=</span> <span class="id">!bindA</span> <span class="id">/=</span>.<br/>
+<span class="id">case</span> <span class="id">Hm:</span> (<span class="id">m</span> <span class="id">_</span>) <span class="id">=&gt;</span> <span class="id">[|[a</span> <span class="id">b]]</span> <span class="id">//</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">/bindS</span> <span class="id">MS_mapE</span> <span class="id">/=</span> <span class="id">fmapE</span> <span class="id">/=</span> <span class="id">bindA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">/cget</span>.<br/>
+<span class="id">case</span> <span class="id">Hnth:</span> <span class="id">nth_error</span> <span class="id">=&gt;</span> <span class="id">[[]|]</span> <span class="id">//</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">nth_error_rcons_some</span> <span class="id">_</span> <span class="id">Hnth</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">case</span> <span class="id">Hcoe:</span> <span class="id">coerce</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">crungetput</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">T</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">coq_type</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cget</span> (<span class="id">r</span> <span class="id">x</span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cput</span> (<span class="id">r</span> <span class="id">x</span>) (<span class="id">s</span> <span class="id">x</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof32')">Proof.</span></div>
+<div class="proofscript" id="proof32">
+<span class="id">rewrite</span> <span class="id">/crun</span> <span class="id">/=</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">/bindS</span> <span class="id">!MS_mapE</span> <span class="id">/=</span> <span class="id">!fmapE</span> <span class="id">/=</span> <span class="id">!bindA</span> <span class="id">/=</span>.<br/>
+<span class="id">case</span> <span class="id">Hm:</span> (<span class="id">m</span> <span class="id">_</span>) <span class="id">=&gt;</span> <span class="id">[|[a</span> <span class="id">[b]]]</span> <span class="id">//=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">/cget</span> <span class="id">/cput</span> <span class="id">/=</span>.<br/>
+<span class="id">case</span> <span class="id">Hnth:</span> <span class="id">nth_error</span> <span class="id">=&gt;</span> <span class="id">[[T'</span> <span class="id">v]|]</span> <span class="id">//</span>.<br/>
+<span class="id">case:</span> (<span class="id">eqVneq</span> <span class="id">T'</span> <span class="id">T</span>) <span class="id">=&gt;</span> <span class="id">T'T;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">coerce_None//</span> <span class="id">1?eq_sym//</span> <span class="id">coerce_None</span>.<br/>
+<span class="id">subst</span> <span class="id">T'</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!coerce_Some</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">crunmskip</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;</span> <span class="id">skip</span>) <span class="id">=</span> <span class="id">crun</span> <span class="id">m</span> <span class="id">:&gt;</span> <span class="id">bool</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof33')">Proof.</span></div>
+<div class="proofscript" id="proof33">
+<span class="id">rewrite</span> <span class="id">/crun</span> <span class="id">/=</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">/bindS</span> <span class="id">!MS_mapE</span> <span class="id">/=</span> <span class="id">!fmapE</span> <span class="id">/=</span> <span class="id">!bindA</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case</span> <span class="id">Hm:</span> (<span class="id">m</span> <span class="id">_</span>) <span class="id">=&gt;</span> <span class="id">[|[]]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">Monad.on</span> <span class="id">M</span>.<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">isMonadTypedStoreModel</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">isMonadTypedStore.Build</span> <span class="id">_</span> <span class="id">M</span> <span class="id">_</span> <span class="id">M</span> <span class="id">cnewget</span> <span class="id">cnewput</span> <span class="id">cgetput</span> <span class="id">cgetputskip</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">cgetget</span> <span class="id">cputget</span> <span class="id">cputput</span> <span class="id">cgetC</span> <span class="id">cgetnewD</span> <span class="id">cgetnewE</span> <span class="id">cgetputC</span> <span class="id">cputC</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">cputgetC</span> <span class="id">cputnewC</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">crunret</span> <span class="id">crunskip</span> <span class="id">crunnew</span> <span class="id">crunnewgetC</span> <span class="id">crungetput</span> <span class="id">crunmskip</span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">W</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="id">option_monad</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">Env</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">Restart</span> <span class="id">A</span> <span class="id">B</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">W</span> <span class="id">A</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">M</span> <span class="id">B</span>) <span class="id">:</span> <span class="id">W</span> <span class="id">B</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">r</span> <span class="id">is</span> <span class="id">inr</span> (<span class="id">_,</span> <span class="id">env</span>) <span class="gallina-kwd">then</span> <span class="id">f</span> <span class="id">env</span> <span class="gallina-kwd">else</span> <span class="id">inl</span> <span class="id">tt</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">FromW</span> <span class="id">A</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">W</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">A</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">env</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id">r</span> <span class="id">is</span> <span class="id">inr</span> (<span class="id">a,</span> <span class="id">_</span>) <span class="gallina-kwd">then</span> <span class="id">inr</span> (<span class="id">a,</span> <span class="id">env</span>) <span class="gallina-kwd">else</span> <span class="id">inl</span> <span class="id">tt</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">ModelTypedStore_contd</span>.<br/>
+<br/>
+<span class="vernacular">Arguments</span> <span class="id">W</span> <span class="id">{MLU}</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

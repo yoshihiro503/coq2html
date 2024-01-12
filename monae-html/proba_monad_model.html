@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module proba_monad_model</title>
+<meta name="description" content="Documentation of Coq module proba_monad_model" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module proba_monad_model</h1>
+<div class="coq">
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Reals</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span> <span class="id">ssralg</span> <span class="id">ssrnum</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="id">boolp</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">reals</span> <span class="id">Rstruct</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Reals_ext</span> <span class="id">realType_ext</span> <span class="id">ssr_ext</span> <span class="id">fsdist</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">convex</span>.<br/>
+<span class="vernacular">From</span> <span class="id">HB</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">structures</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monae_lib</span> <span class="id">hierarchy</span> <span class="id">monad_lib</span> <span class="id">proba_lib</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                    Model for the probability monad                        
+</pre>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">proba_scope</span>.<br/>
+<br/>
+<span class="vernacular">Notation</span> <span class="id">choice_of_Type</span> <span class="id">:=</span> <span class="id">convex.choice_of_Type</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">MonadProbModel</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">monadprobmodel</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">acto</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">-&gt;</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">=&gt;</span> <span class="id">{dist</span> (<span class="id">choice_of_Type</span> <span class="id">A</span>)<span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">ret</span> <span class="id">:</span> <span class="id">idfun</span> <span class="id">~~&gt;</span> <span class="id">acto</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">fsdist1</span> (<span class="id">a</span> <span class="id">:</span> <span class="id">choice_of_Type</span> <span class="id">A</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">bind</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">A</span> <span class="id">B,</span> <span class="id">acto</span> <span class="id">A</span> <span class="id">-&gt;</span> (<span class="id">A</span> <span class="id">-&gt;</span> <span class="id">acto</span> <span class="id">B</span>) <span class="id">-&gt;</span> <span class="id">acto</span> <span class="id">B</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">B</span> <span class="id">m</span> <span class="id">f</span> <span class="id">=&gt;</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="id">f</span>)<span class="id">%fsdist</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">left_neutral</span> <span class="id">:</span> <span class="id">BindLaws.left_neutral</span> <span class="id">bind</span> <span class="id">ret</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">?</span> <span class="id">?</span> <span class="id">?</span> <span class="id">?;</span> <span class="id">exact:</span> <span class="id">fsdist1bind</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">right_neutral</span> <span class="id">:</span> <span class="id">BindLaws.right_neutral</span> <span class="id">bind</span> <span class="id">ret</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">?</span> <span class="id">?;</span> <span class="id">exact:</span> <span class="id">fsdistbind1</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">associative</span> <span class="id">:</span> <span class="id">BindLaws.associative</span> <span class="id">bind</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">m</span> <span class="id">f</span> <span class="id">g;</span> <span class="id">exact:</span> <span class="id">fsdistbindA</span>. Qed.</div>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">isMonad_ret_bind.Build</span><br/>
+&nbsp;&nbsp;<span class="id">acto</span> <span class="id">left_neutral</span> <span class="id">right_neutral</span> <span class="id">associative</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">BindE</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">choiceType</span>) <span class="id">m</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">acto]</span> <span class="id">B</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="id">f</span>) <span class="id">=</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="id">f</span>)<span class="id">%fsdist</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/hierarchy</span>.<span class="id">bind</span> <span class="id">/=</span> <span class="id">/bind</span>.<br/>
+Qed.</div>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">reals_ext_scope</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">choice</span> <span class="id">:=</span> (<span class="gallina-kwd">fun</span> <span class="id">p</span> <span class="id">A</span> <span class="id">=&gt;</span> <span class="id">@fsdist_conv</span> (<span class="id">choice_of_Type</span> <span class="id">A</span>) <span class="id">p</span>).<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">choice1</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="gallina-kwd">forall</span> (<span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">acto</span> <span class="id">T</span>)<span class="id">,</span> <span class="id">choice</span> <span class="id">1%R%:pr</span> <span class="id">_</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=</span> <span class="id">a</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">?</span> <span class="id">?;</span> <span class="id">exact:</span> <span class="id">conv1</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">choiceC</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">p</span> (<span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">acto</span> <span class="id">T</span>)<span class="id">,</span> <span class="id">choice</span> <span class="id">p</span> <span class="id">_</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=</span> <span class="id">choice</span> ((<span class="id">Prob.p</span> <span class="id">p</span>).<span class="id">~</span> <span class="id">%:pr</span>) <span class="id">_</span> <span class="id">b</span> <span class="id">a</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">?</span> <span class="id">?;</span> <span class="id">exact:</span> <span class="id">convC</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">choicemm</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> (<span class="id">T</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) <span class="id">p,</span> <span class="id">idempotent</span> (<span class="id">@choice</span> <span class="id">p</span> <span class="id">T</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">?</span> <span class="id">?</span> <span class="id">?;</span> <span class="id">exact:</span> <span class="id">convmm</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">choiceA</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> (<span class="id">T</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">p</span> <span class="id">q</span> <span class="id">r</span> <span class="id">s</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) (<span class="id">a</span> <span class="id">b</span> <span class="id">c</span> <span class="id">:</span> <span class="id">acto</span> <span class="id">T</span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">choice</span> <span class="id">p</span> <span class="id">_</span> <span class="id">a</span> (<span class="id">choice</span> <span class="id">q</span> <span class="id">_</span> <span class="id">b</span> <span class="id">c</span>) <span class="id">=</span> <span class="id">choice</span> <span class="id">[s_of</span> <span class="id">p,</span> <span class="id">q]</span> <span class="id">_</span> (<span class="id">choice</span> <span class="id">[r_of</span> <span class="id">p,</span> <span class="id">q]</span> <span class="id">_</span> <span class="id">a</span> <span class="id">b</span>) <span class="id">c</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">move=&gt;</span> <span class="id">?</span> <span class="id">p</span> <span class="id">q</span> <span class="id">r</span> <span class="id">s</span> <span class="id">a</span> <span class="id">b</span> <span class="id">c</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/choice</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[LHS]</span>(<span class="id">_</span> <span class="id">:</span> <span class="id">_</span> <span class="id">=</span> <span class="id">conv</span> <span class="id">p</span> <span class="id">a</span> (<span class="id">conv</span> <span class="id">q</span> <span class="id">b</span> <span class="id">c</span>))<span class="id">//</span>. <span class="comment">(*&nbsp;NB:&nbsp;this&nbsp;is&nbsp;slow&nbsp;*)</span><br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">convA</span>.<br/>
+Qed.</div>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">isMonadConvex.Build</span> <span class="id">real_realType</span><br/>
+&nbsp;&nbsp;<span class="id">acto</span> <span class="id">choice1</span> <span class="id">choiceC</span> <span class="id">choicemm</span> <span class="id">choiceA</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">prob_bindDl</span> <span class="id">p</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">BindLaws.left_distributive</span> (<span class="id">@hierarchy</span>.<span class="id">bind</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">acto]</span>) (<span class="id">choice</span> <span class="id">p</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">m1</span> <span class="id">m2</span> <span class="id">k</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!</span>(<span class="id">@BindE</span> (<span class="id">choice_of_Type</span> <span class="id">A</span>) (<span class="id">choice_of_Type</span> <span class="id">B</span>)).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">fsdist_conv_bind_left_distr</span>.<br/>
+Qed.</div>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">mixin</span> <span class="id">:=</span> <span class="id">isMonadProb.Build</span> <span class="id">real_realType</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">acto</span> <span class="id">prob_bindDl</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">t</span> <span class="id">:=</span> <span class="id">MonadProb.Pack</span> (<span class="id">MonadProb.Class</span> <span class="id">mixin</span>).<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">monadprobmodel</span>.<br/>
+<span class="vernacular">End</span> <span class="id">MonadProbModel</span>.<br/>
+<span class="id">HB.export</span> <span class="id">MonadProbModel</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

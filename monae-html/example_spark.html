@@ -1,0 +1,330 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module example_spark</title>
+<meta name="description" content="Documentation of Coq module example_spark" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module example_spark</h1>
+<div class="coq">
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="id">boolp</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monae_lib</span> <span class="id">hierarchy</span> <span class="id">monad_lib</span> <span class="id">fail_lib</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                             Spark example                                 
+                                                                           
+see Shin-Cheng Mu, Equational Reasoning for Non-deterministic Monad: A     
+Case study of Spark Aggregation, TR-IIS-19-002                             
+                                                                           
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">spark_aggregation</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">definitions</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altMonad</span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">deterministic</span> <span class="id">A</span> <span class="id">B</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">B</span>) <span class="id">:=</span> <span class="gallina-kwd">exists</span> <span class="id">g</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B,</span> <span class="id">f</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">g</span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>) (<span class="id">mul</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">add</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span>).<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">Partition</span> <span class="id">A</span> <span class="id">:=</span> <span class="id">seq</span> <span class="id">A</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">RDD</span> <span class="id">A</span> <span class="id">:=</span> <span class="id">seq</span> (<span class="id">Partition</span> <span class="id">A</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">aggregate</span> <span class="id">:</span> <span class="id">RDD</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">B</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">o</span>) (<span class="id">iperm</span> <span class="id">\o</span> <span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>)).<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">definitions</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">aggregate</span> <span class="id">{M</span> <span class="id">A</span> <span class="id">B}</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">aggregate_deterministic</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">foldl_perm_deterministic</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altCIMonad</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">op</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>).<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"x&nbsp;(.)&nbsp;y"</span> <span class="id">:=</span> (<span class="id">op</span> <span class="id">x</span> <span class="id">y</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">11</span>).<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">opP</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">w</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;(<span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> <span class="id">w</span> (.) <span class="id">x</span>) (.) <span class="id">y</span> <span class="id">=</span> (<span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> <span class="id">w</span> (.) <span class="id">y</span>) (.) <span class="id">x</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">lemma32</span> <span class="id">a</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> (<span class="id">o</span>) <span class="id">insert</span> <span class="id">a</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> <span class="id">\o</span> (<span class="id">rcons^~</span> <span class="id">a</span>) <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+<span class="id">rewrite</span> <span class="id">boolp.funeqE</span><span class="id">;</span> <span class="id">elim/last_ind</span> <span class="id">=&gt;</span> <span class="id">[/=|xs</span> <span class="id">y</span> <span class="id">IH]</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">fcompE</span> <span class="id">insertE</span> <span class="id">fmapE</span> <span class="id">bindretf</span>.<br/>
+<span class="id">rewrite</span> <span class="id">fcompE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">insert_rcons</span>.<br/>
+<span class="id">rewrite</span> <span class="id">alt_fmapDr</span> <span class="id">fmapE</span> <span class="id">bindretf</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-fmap_oE</span>.<br/>
+<span class="id">have</span> <span class="id">H</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">w,</span> <span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">rcons^~</span> <span class="id">w</span> <span class="id">=</span> <span class="id">op^~</span> <span class="id">w</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">w;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span> <span class="id">=&gt;</span> <span class="id">ws</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">-cats1</span> <span class="id">foldl_cat</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">H</span> <span class="id">y</span>).<br/>
+<span class="id">rewrite</span> <span class="id">fmap_oE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">fcompE</span> <span class="gallina-kwd">in</span> <span class="id">IH</span>.<br/>
+<span class="id">rewrite</span> <span class="id">IH</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-[in</span> <span class="id">X</span> <span class="gallina-kwd">in</span> <span class="id">_</span> <span class="id">[~]</span> <span class="id">X]bindretf</span>.<br/>
+<span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-{1}compA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">fmapE</span> <span class="id">bindretf</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">H</span> <span class="id">a</span>).<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">X</span> <span class="gallina-kwd">in</span> <span class="id">_</span> <span class="id">[~]</span> <span class="id">X]/=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">opP</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-!cats1</span> <span class="id">-catA</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">foldl_cat</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">altmm</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id">foldl_perm_deterministic</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">foldl_perm_deterministic_contd</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altCIMonad</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">op</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>).<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"x&nbsp;(.)&nbsp;y"</span> <span class="id">:=</span> (<span class="id">op</span> <span class="id">x</span> <span class="id">y</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">11</span>).<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">opP</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">w</span> <span class="id">:</span> <span class="id">B</span>)<span class="id">,</span> (<span class="id">w</span> (.) <span class="id">x</span>) (.) <span class="id">y</span> <span class="id">=</span> (<span class="id">w</span> (.) <span class="id">y</span>) (.) <span class="id">x</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">lemma31</span> <span class="id">b</span> <span class="id">:</span> <span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> (<span class="id">o</span>) <span class="id">iperm</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+<span class="id">rewrite</span> <span class="id">boolp.funeqE</span> <span class="id">=&gt;</span> <span class="id">xs;</span> <span class="id">move:</span> <span class="id">xs</span> <span class="id">b;</span> <span class="id">elim</span> <span class="id">=&gt;</span> <span class="id">[/=|x</span> <span class="id">xs</span> <span class="id">IH]</span> <span class="id">b</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">fcompE</span> <span class="id">fmapE</span> <span class="id">bindretf</span>.<br/>
+<span class="id">rewrite</span> <span class="id">fcompE</span> <span class="id">fmap_bind</span>.<br/>
+<span class="id">have</span> <span class="id">opP'</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">w</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>)<span class="id">,</span> (<span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> <span class="id">w</span> (.) <span class="id">x</span>) (.) <span class="id">y</span> <span class="id">=</span> (<span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> <span class="id">w</span> (.) <span class="id">y</span>) (.) <span class="id">x</span>.<br/>
+&nbsp;&nbsp;<span class="id">move=&gt;</span> <span class="id">?</span> <span class="id">?</span> <span class="id">?</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">opP</span>.<br/>
+<span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> (<span class="id">lemma32</span> <span class="id">M</span> <span class="id">opP'</span>).<br/>
+<span class="id">transitivity</span> ((<span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">op</span> (<span class="id">b</span> (.) <span class="id">x</span>)) <span class="id">xs</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>)<span class="id">;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">[]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-IH</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]fcompE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">fmapE</span>.<br/>
+<span class="id">bind_ext</span> <span class="id">=&gt;</span> <span class="id">ys</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-cats1</span> <span class="id">foldl_cat</span> <span class="id">/=</span>.<br/>
+<span class="id">congr</span> (<span class="id">Ret</span> <span class="id">_</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<span class="id">elim:</span> <span class="id">ys</span> <span class="id">b</span> <span class="id">opP'</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">y</span> <span class="id">ys</span> <span class="id">ih</span> <span class="id">/=</span> <span class="id">b</span> <span class="id">opP'</span>.<br/>
+<span class="id">rewrite</span> <span class="id">ih</span> <span class="id">//=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-/</span>(<span class="id">foldl</span> <span class="id">op</span> <span class="id">b</span> <span class="id">[::]</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">opP'</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id">foldl_perm_deterministic_contd</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">theorem43</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altCIMonad</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>) (<span class="id">mul</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">add</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span>).<br/>
+<span class="vernacular">Hypotheses</span> (<span class="id">addA</span> <span class="id">:</span> <span class="id">associative</span> <span class="id">add</span>) (<span class="id">addC</span> <span class="id">:</span> <span class="id">commutative</span> <span class="id">add</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">aggregateE</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">aggregate</span> <span class="id">b</span> <span class="id">mul</span> <span class="id">add</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">rewrite</span> <span class="id">-lemma31;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">x</span> <span class="id">??;</span> <span class="id">rewrite</span> <span class="id">-addA</span> (<span class="id">addC</span> <span class="id">x</span>) <span class="id">addA</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/aggregate</span> <span class="id">2!fcomp_def</span> <span class="id">-compA</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">deter_aggregate</span> <span class="id">:</span> <span class="id">deterministic</span> (<span class="id">aggregate</span> <span class="id">b</span> <span class="id">mul</span> <span class="id">add</span> <span class="id">:</span> <span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+ <span class="id">rewrite</span> <span class="id">/deterministic</span> <span class="id">aggregateE</span> <span class="id">//;</span> <span class="id">eexists;</span> <span class="id">reflexivity</span>. Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">theorem43</span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">aggregate_deterministic</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">determinism_implies_homomorphism</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">homomorphism</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">add</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">z</span> <span class="id">:</span> <span class="id">B</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">is_hom</span> (<span class="id">h</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">h</span> <span class="id">nil</span> <span class="id">=</span> <span class="id">z</span> <span class="id">/\</span> (<span class="gallina-kwd">forall</span> <span class="id">x</span> <span class="id">:</span> <span class="id">A,</span> <span class="id">h</span> <span class="id">[::</span> <span class="id">x]</span> <span class="id">=</span> <span class="id">k</span> <span class="id">x</span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;<span class="id">{morph</span> <span class="id">h</span> <span class="id">:</span> <span class="id">xs</span> <span class="id">ys</span> <span class="id">/</span> <span class="id">xs</span> <span class="id">++</span> <span class="id">ys</span> <span class="id">&gt;-&gt;</span> <span class="id">add</span> <span class="id">xs</span> <span class="id">ys}</span>.<br/>
+<span class="vernacular">End</span> <span class="id">homomorphism</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">lemma45</span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">nondetMonad</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>) (<span class="id">mul</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">add</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span>).<br/>
+<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">idempotent_converse</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">C</span> <span class="id">m1</span> <span class="id">m2</span> <span class="id">x,</span> <span class="id">m1</span> <span class="id">[~]</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">x</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">m1</span> <span class="id">=</span> <span class="id">ret</span> <span class="id">_</span> <span class="id">x</span> <span class="id">/\</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">ret</span> <span class="id">_</span> <span class="id">x</span>.<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">injective_return</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">C</span> <span class="id">x1</span> <span class="id">x2,</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">x1</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">x2</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">x1</span> <span class="id">=</span> <span class="id">x2</span>.<br/>
+<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">H</span> <span class="id">:</span> <span class="id">aggregate</span> <span class="id">b</span> <span class="id">mul</span> <span class="id">add</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">lemma45a</span> (<span class="id">xss</span> <span class="id">:</span> <span class="id">seq</span> (<span class="id">seq</span> <span class="id">A</span>)) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> (<span class="id">flatten</span> <span class="id">xss</span>) <span class="id">=</span> <span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">xss</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+<span class="id">case:</span> (<span class="id">@iperm_is_alt_ret</span> <span class="id">M</span> <span class="id">_</span> <span class="id">xss</span>) <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">Hm</span>.<br/>
+<span class="id">have</span> <span class="id">step1</span> <span class="id">:</span> (<span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span>) <span class="id">xss</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>)) <span class="id">xss</span> <span class="id">[~]</span><br/>
+&nbsp;&nbsp;<span class="id">fmap</span> (<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>)) (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-H</span> <span class="id">/aggregate</span> <span class="id">iperm_o_map</span> <span class="id">-fcomp_comp</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">fcompE</span> <span class="id">Hm</span> <span class="id">alt_fmapDr</span> <span class="id">fmapE</span> <span class="id">/=</span> <span class="id">bindretf</span>.<br/>
+<span class="id">apply</span> <span class="id">esym,</span> <span class="id">idempotent_converse</span> <span class="gallina-kwd">in</span> <span class="id">step1</span>.<br/>
+<span class="id">case:</span> <span class="id">step1</span> <span class="id">=&gt;</span> <span class="id">step11</span> <span class="id">step12</span>.<br/>
+<span class="id">apply</span> <span class="id">injective_return</span> <span class="gallina-kwd">in</span> <span class="id">step11</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-step11</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">lemma45b</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) (<span class="id">xss</span> <span class="id">yss</span> <span class="id">:</span> <span class="id">seq</span> (<span class="id">seq</span> <span class="id">A</span>)) <span class="id">:</span> <span class="id">iperm</span> <span class="id">xss</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">yss</span> <span class="id">[~]</span> <span class="id">m</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">xss</span>) <span class="id">=</span> <span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">yss</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="id">move=&gt;</span> <span class="id">K</span>.<br/>
+<span class="id">have</span> <span class="id">step1</span> <span class="id">:</span> (<span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span>) <span class="id">xss</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>)) <span class="id">yss</span> <span class="id">[~]</span><br/>
+&nbsp;&nbsp;<span class="id">fmap</span> (<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>)) <span class="id">m</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-H</span> <span class="id">/aggregate</span> <span class="id">iperm_o_map</span> <span class="id">-fcomp_comp</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">fcompE</span> <span class="id">K</span> <span class="id">alt_fmapDr</span> <span class="id">fmapE</span> <span class="id">/=</span> <span class="id">bindretf</span>.<br/>
+<span class="id">have</span> <span class="id">step2</span> <span class="id">:</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span>) <span class="id">xss</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>)) <span class="id">yss</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">esym,</span> <span class="id">idempotent_converse</span> <span class="gallina-kwd">in</span> <span class="id">step1</span>.<br/>
+&nbsp;&nbsp;<span class="id">case:</span> <span class="id">step1</span> <span class="id">=&gt;</span> <span class="id">step11</span> <span class="id">step12</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">injective_return</span> <span class="gallina-kwd">in</span> <span class="id">step11</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">compE</span> <span class="id">-step11</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-lemma45a</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">lemma45</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">theorem46</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">nondetMonad</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>) (<span class="id">mul</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">add</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span>).<br/>
+<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">idempotent_converse</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">C</span> <span class="id">m1</span> <span class="id">m2</span> <span class="id">x,</span> <span class="id">m1</span> <span class="id">[~]</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">x</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">m1</span> <span class="id">=</span> <span class="id">ret</span> <span class="id">_</span> <span class="id">x</span> <span class="id">/\</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">ret</span> <span class="id">_</span> <span class="id">x</span>.<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">injective_return</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">C</span> <span class="id">x1</span> <span class="id">x2,</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">x1</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">x2</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">x1</span> <span class="id">=</span> <span class="id">x2</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">theorem46lid</span> <span class="id">z</span> <span class="id">zs</span> <span class="id">:</span> <span class="id">z</span> <span class="id">=</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">zs</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">aggregate</span> <span class="id">b</span> <span class="id">mul</span> <span class="id">add</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">z</span> <span class="id">=</span> <span class="id">add</span> <span class="id">b</span> <span class="id">z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+<span class="id">move=&gt;</span> <span class="id">zzs</span> <span class="id">H</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> (<span class="id">flatten</span> <span class="id">[::</span> <span class="id">zs]</span>)).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">cats0</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">[::</span> <span class="id">zs]</span>)).<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">Hm</span> <span class="id">:</span> <span class="id">iperm</span> <span class="id">[::</span> <span class="id">zs]</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">[::</span> <span class="id">zs]</span> <span class="id">[~]</span> <span class="id">fail</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">bindretf</span> <span class="id">insertE</span> <span class="id">altmfail</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">lemma45a</span> <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">H</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-zzs</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">theorem46rid</span> <span class="id">z</span> <span class="id">zs</span> <span class="id">:</span> <span class="id">z</span> <span class="id">=</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">zs</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">aggregate</span> <span class="id">b</span> <span class="id">mul</span> <span class="id">add</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">z</span> <span class="id">=</span> <span class="id">add</span> <span class="id">z</span> <span class="id">b</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">move=&gt;</span> <span class="id">zzs</span> <span class="id">H</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> (<span class="id">flatten</span> <span class="id">[::</span> <span class="id">zs;</span> <span class="id">[::]]</span>)).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">cats0</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">[::</span> <span class="id">zs;</span> <span class="id">[::]]</span>)).<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[m</span> <span class="id">Hm]</span> <span class="id">:</span> <span class="gallina-kwd">exists</span> <span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_,</span> <span class="id">iperm</span> <span class="id">[::</span> <span class="id">zs;</span> <span class="id">[::]]</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">[::</span> <span class="id">zs;</span> <span class="id">[::]]</span> <span class="id">[~]</span> <span class="id">m</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exact:</span> <span class="id">iperm_is_alt_ret</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">lemma45a</span> <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">H</span>).<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-zzs</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id">@theorem46lid</span> <span class="id">_</span> <span class="id">zs</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">theorem46</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">theorem46_contd</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">nondetCIMonad</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>) (<span class="id">mul</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">add</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span>).<br/>
+<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">idempotent_converse</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">C</span> <span class="id">m1</span> <span class="id">m2</span> <span class="id">x,</span> <span class="id">m1</span> <span class="id">[~]</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">x</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">m1</span> <span class="id">=</span> <span class="id">ret</span> <span class="id">_</span> <span class="id">x</span> <span class="id">/\</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">ret</span> <span class="id">_</span> <span class="id">x</span>.<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">injective_return</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">C</span> <span class="id">x1</span> <span class="id">x2,</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">x1</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">x2</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">x1</span> <span class="id">=</span> <span class="id">x2</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">theorem46C</span> <span class="id">x</span> <span class="id">xs</span> <span class="id">y</span> <span class="id">ys</span> <span class="id">:</span><br/>
+&nbsp;<span class="id">x</span> <span class="id">=</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">xs</span> <span class="id">-&gt;</span> <span class="id">y</span> <span class="id">=</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">ys</span> <span class="id">-&gt;</span><br/>
+&nbsp;<span class="id">aggregate</span> <span class="id">b</span> <span class="id">mul</span> <span class="id">add</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">-&gt;</span><br/>
+&nbsp;<span class="id">add</span> <span class="id">x</span> <span class="id">y</span> <span class="id">=</span> <span class="id">add</span> <span class="id">y</span> <span class="id">x</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">move=&gt;</span> <span class="id">xxs</span> <span class="id">yys</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">add</span> <span class="id">x</span> (<span class="id">add</span> <span class="id">y</span> <span class="id">b</span>)).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id">theorem46rid</span> <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">yys</span>).<br/>
+<span class="id">transitivity</span> (<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">[::</span> <span class="id">xs;</span> <span class="id">ys]</span>)).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-xxs</span> <span class="id">-yys</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-</span>(<span class="id">theorem46rid</span> <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">yys</span>) <span class="id">//</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id">theorem46lid</span> <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">xxs</span>).<br/>
+<span class="id">transitivity</span> (<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">[::</span> <span class="id">ys;</span> <span class="id">xs]</span>)).<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">[m</span> <span class="id">Hm]</span> <span class="id">:</span> <span class="gallina-kwd">exists</span> <span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_,</span> <span class="id">iperm</span> <span class="id">[::</span> <span class="id">xs;</span> <span class="id">ys]</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">[::</span> <span class="id">ys;</span> <span class="id">xs]</span> <span class="id">[~]</span> <span class="id">m</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">[m</span> <span class="id">Hm]</span> <span class="id">:=</span> <span class="id">@iperm_is_alt_ret</span> <span class="id">M</span> <span class="id">_</span> <span class="id">[::</span> <span class="id">ys;</span> <span class="id">xs]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="gallina-kwd">exists</span> <span class="id">m;</span> <span class="id">rewrite</span> <span class="id">-Hm</span> <span class="id">/=</span> <span class="id">!bindretf</span> <span class="id">!insertE</span> <span class="id">!fmapE</span> <span class="id">!bindretf</span> <span class="id">/=</span> <span class="id">altC</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">lemma45b</span> <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">H</span> <span class="id">Hm</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-xxs</span> <span class="id">-yys</span> <span class="id">-</span>(<span class="id">theorem46lid</span> <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">yys</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">theorem46A</span> <span class="id">x</span> <span class="id">xs</span> <span class="id">y</span> <span class="id">ys</span> <span class="id">z</span> <span class="id">zs</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">x</span> <span class="id">=</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">xs</span> <span class="id">-&gt;</span> <span class="id">y</span> <span class="id">=</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">ys</span> <span class="id">-&gt;</span> <span class="id">z</span> <span class="id">=</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">zs</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">aggregate</span> <span class="id">b</span> <span class="id">mul</span> <span class="id">add</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">add</span> <span class="id">x</span> (<span class="id">add</span> <span class="id">y</span> <span class="id">z</span>) <span class="id">=</span> <span class="id">add</span> (<span class="id">add</span> <span class="id">x</span> <span class="id">y</span>) <span class="id">z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">move=&gt;</span> <span class="id">xxs</span> <span class="id">yys</span> <span class="id">zzs</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> <span class="id">{1}</span>(<span class="id">theorem46rid</span> (<span class="id">add</span> <span class="id">:=</span> <span class="id">add</span>) <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">zzs</span>) <span class="id">//</span>.<br/>
+Abort.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">theorem46_contd</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">theorem47</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">nondetCIMonad</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>) (<span class="id">mul</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) (<span class="id">add</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">B</span>).<br/>
+<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">idempotent_converse</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">C</span> <span class="id">m1</span> <span class="id">m2</span> <span class="id">x,</span> <span class="id">m1</span> <span class="id">[~]</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">x</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">m1</span> <span class="id">=</span> <span class="id">ret</span> <span class="id">_</span> <span class="id">x</span> <span class="id">/\</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">ret</span> <span class="id">_</span> <span class="id">x</span>.<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">injective_return</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">C</span> <span class="id">x1</span> <span class="id">x2,</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">x1</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">x2</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">x1</span> <span class="id">=</span> <span class="id">x2</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">theorem47</span> <span class="id">:</span><br/>
+&nbsp;<span class="id">aggregate</span> <span class="id">b</span> <span class="id">mul</span> <span class="id">add</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">\o</span> <span class="id">flatten</span> <span class="id">:&gt;</span> (<span class="id">_</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">-&gt;</span><br/>
+&nbsp;<span class="id">is_hom</span> <span class="id">add</span> (<span class="id">mul</span> <span class="id">b</span>) <span class="id">b</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+<span class="id">move=&gt;</span> <span class="id">H</span>.<br/>
+<span class="id">split;</span> <span class="id">first</span> <span class="gallina-kwd">by</span> <span class="id">[]</span>.<br/>
+<span class="id">split;</span> <span class="id">first</span> <span class="gallina-kwd">by</span> <span class="id">[]</span>.<br/>
+<span class="id">move=&gt;</span> <span class="id">xs</span> <span class="id">ys</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">xs</span> <span class="id">++</span> <span class="id">ys</span> <span class="id">=</span> <span class="id">flatten</span> <span class="id">[::</span> <span class="id">xs;</span> <span class="id">ys]</span>)<span class="id">;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">cats0</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">foldl</span> <span class="id">add</span> <span class="id">b</span> (<span class="id">map</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span>) <span class="id">[::</span> <span class="id">xs;</span> <span class="id">ys]</span>)).<br/>
+&nbsp;&nbsp;<span class="id">case:</span> (<span class="id">@iperm_is_alt_ret</span> <span class="id">M</span> <span class="id">_</span> <span class="id">[::</span> <span class="id">xs;</span> <span class="id">ys]</span>) <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">Hm</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">lemma45a</span> <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">H</span>).<br/>
+<span class="id">transitivity</span> (<span class="id">add</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">xs</span>) (<span class="id">add</span> (<span class="id">foldl</span> <span class="id">mul</span> <span class="id">b</span> <span class="id">ys</span>) <span class="id">b</span>)).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-</span>(<span class="id">theorem46lid</span> (<span class="id">zs</span> <span class="id">:=</span> <span class="id">xs</span>) (<span class="id">mul</span> <span class="id">:=</span> <span class="id">mul</span>) <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">_</span> <span class="id">H</span>) <span class="id">//</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-</span>(<span class="id">theorem46rid</span> (<span class="id">zs</span> <span class="id">:=</span> <span class="id">ys</span>) (<span class="id">mul</span> <span class="id">:=</span> <span class="id">mul</span>) <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">_</span> <span class="id">H</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-</span>(<span class="id">theorem46rid</span> (<span class="id">zs</span> <span class="id">:=</span> <span class="id">ys</span>) (<span class="id">mul</span> <span class="id">:=</span> <span class="id">mul</span>) <span class="id">idempotent_converse</span> <span class="id">injective_return</span> <span class="id">_</span> <span class="id">H</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">theorem47</span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">determinism_implies_homomorphism</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">spark_aggregation</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

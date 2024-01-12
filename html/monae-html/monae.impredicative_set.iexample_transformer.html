@@ -31,10 +31,10 @@ reference:
 </pre>
 <br/>
 <span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
-<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
-<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="vernacular">Unset</span> <span class="vernacular">Printing</span> <span class="vernacular">Implicit</span> <span class="vernacular">Defensive</span>.<br/>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">evalStateT</span> (<span class="id">N</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">S</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">stateRunMonad</span> <span class="id">S</span> <span class="id">N</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{A</span> <span class="id">:</span> <span class="id">UU0}</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">S</span>) <span class="id">:</span> <span class="id">N</span> <span class="id">A</span> <span class="id">:=</span><br/>
@@ -138,7 +138,7 @@ Qed.</div>
 <span class="vernacular">Arguments</span> <span class="id">get</span> <span class="id">{_}</span>.<br/>
 <span class="vernacular">Arguments</span> <span class="id">put</span> <span class="id">{_}</span> <span class="id">_</span>.<br/>
 <br/>
-<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"m&nbsp;&gt;&gt;&gt;&nbsp;f"</span> <span class="id">:=</span> (<span class="id">bind</span> <span class="id">m</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">f</span>)) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">49</span>).<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Notation</span> <span class="id">&quot;m &gt;&gt;&gt; f&quot;</span> <span class="id">:=</span> (<span class="id">bind</span> <span class="id">m</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">f</span>)) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">49</span>).<br/>
 <br/>
 <span class="vernacular">Goal</span><br/>
 &nbsp;&nbsp;<span class="id">runFailPState</span> (<span class="id">put</span> <span class="id">1</span> <span class="id">&gt;&gt;&gt;</span> <span class="id">catch</span> (<span class="id">put</span> <span class="id">2</span> <span class="id">&gt;&gt;&gt;</span> <span class="id">fail</span>) <span class="id">get</span>) <span class="id">0</span> <span class="id">=</span><br/>

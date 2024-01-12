@@ -1,0 +1,986 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module smallstep</title>
+<meta name="description" content="Documentation of Coq module smallstep" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module smallstep</h1>
+<div class="coq">
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Eqdep</span> <span class="id">JMeq</span> <span class="id">List</span> <span class="id">ssreflect</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">ListNotations</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">ssreflect</span> <span class="id">ssrfun</span> <span class="id">ssrbool</span> <span class="id">eqtype</span> <span class="id">ssrnat</span> <span class="id">seq</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">hierarchy</span> <span class="id">monad_lib</span> <span class="id">state_lib</span> <span class="id">trace_lib</span> <span class="id">monad_model</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+             Application of monadTrace to program semantics                
+                                                                           
+Inductive program, Inductive continuation:                                 
+  Syntax for an imperative language with a primitive to record execution   
+  trace                                                                    
+Section OperationalSemantics, Inductive step:                              
+  A small-step semantics                                                   
+DenotationalSemantics:                                                     
+  Denotation given in terms of the state/trace monad                       
+Section semantics_equivalence:                                             
+(*.  Prove that the small-step semantics is equivalent to the denotation      
+nonce, nonce_twice, countdown, etc.                                        
+  Examples of programs using traces and their small-step and denotational  
+semantics.                                                                 
+                                                                           
+reference:                                                                 
+- R. Affeldt, D. Nowak, T. Saikawa, A Hierarchy of Monadic Effects for     
+Program Verification using Equational Reasoning, MPC 2019                  
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Universe</span> <span class="id">Polymorphism</span>.<br/>
+<span class="id">Unset</span> <span class="vernacular">Universe</span> <span class="id">Minimization</span> <span class="id">ToSet</span>.<br/>
+<span class="gallina-kwd">Set</span> <span class="id">Polymorphic</span> <span class="vernacular">Inductive</span> <span class="id">Cumulativity</span>.<br/>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="id">Bullet</span> <span class="id">Behavior</span> <span class="id">"Strict&nbsp;Subproofs"</span>.<br/>
+<br/>
+<span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
+<br/>
+<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">"'p_do'&nbsp;x&nbsp;&lt;-&nbsp;m&nbsp;;&nbsp;e"</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">60,</span> <span class="id">x</span> <span class="id">name,</span> <span class="id">m</span> <span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">200,</span> <span class="id">e</span> <span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">60</span>).<br/>
+<span class="vernacular">Reserved</span> <span class="vernacular">Notation</span> <span class="id">"'p_do'&nbsp;x&nbsp;:&nbsp;T&nbsp;&lt;-&nbsp;m&nbsp;;&nbsp;e"</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">60,</span> <span class="id">x</span> <span class="id">name,</span> <span class="id">m</span> <span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">200,</span> <span class="id">e</span> <span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">60</span>).<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">Syntax</span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> <span class="id">T</span> <span class="id">S</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span class="id">program</span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">-&gt;</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">p_ret</span>  <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">{A},</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">A</span><br/>
+<span class="id">|</span> <span class="id">p_bind</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">{A</span> <span class="id">B},</span> <span class="id">program</span> <span class="id">A</span> <span class="id">-&gt;</span> (<span class="id">A</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">B</span>) <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">B</span><br/>
+<span class="id">|</span> <span class="id">p_cond</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">{A},</span> <span class="id">bool</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">A</span><br/>
+<span class="id">|</span> <span class="id">p_repeat</span> <span class="id">:</span> <span class="id">nat</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">unit</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">unit</span><br/>
+<span class="id">|</span> <span class="id">p_while</span> <span class="id">:</span> <span class="id">nat</span> <span class="id">-&gt;</span> (<span class="id">S</span> <span class="id">-&gt;</span> <span class="id">bool</span>) <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">unit</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">unit</span><br/>
+<span class="id">|</span> <span class="id">p_get</span>  <span class="id">:</span> <span class="id">program</span> <span class="id">S</span><br/>
+<span class="id">|</span> <span class="id">p_put</span>  <span class="id">:</span> <span class="id">S</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">unit</span><br/>
+<span class="id">|</span> <span class="id">p_mark</span> <span class="id">:</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">unit</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"'p_do'&nbsp;x&nbsp;&lt;-&nbsp;m&nbsp;;&nbsp;e"</span> <span class="id">:=</span> (<span class="id">p_bind</span> <span class="id">m</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">e</span>)).<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"'p_do'&nbsp;x&nbsp;:&nbsp;T&nbsp;&lt;-&nbsp;m&nbsp;;&nbsp;e"</span> <span class="id">:=</span>(<span class="id">p_bind</span> <span class="id">m</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">:</span> <span class="id">T</span> <span class="id">=&gt;</span> <span class="id">e</span>)).<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span class="id">continuation</span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">stop</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">A,</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">continuation</span><br/>
+<span class="id">|</span> <span class="id">cont</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">A,</span> <span class="id">program</span> <span class="id">A</span> <span class="id">-&gt;</span> (<span class="id">A</span> <span class="id">-&gt;</span> <span class="id">continuation</span>) <span class="id">-&gt;</span> <span class="id">continuation</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">Syntax</span>.<br/>
+<br/>
+<span class="vernacular">Arguments</span> <span class="id">program</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">p_ret</span> <span class="id">{_</span> <span class="id">_</span> <span class="id">_}</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">p_bind</span> <span class="id">{_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">p_cond</span> <span class="id">{_</span> <span class="id">_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">p_repeat</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">p_while</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">p_get</span> <span class="id">{_</span> <span class="id">_}</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">p_put</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">p_mark</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">continuation</span> <span class="id">{_</span> <span class="id">_}</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">stop</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">cont</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<br/>
+<span class="vernacular">Notation</span> <span class="id">"'p_do'&nbsp;x&nbsp;&lt;-&nbsp;m&nbsp;;&nbsp;e"</span> <span class="id">:=</span> (<span class="id">@p_bind</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">m</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">e</span>)).<br/>
+<span class="vernacular">Notation</span> <span class="id">"'p_do'&nbsp;x&nbsp;:&nbsp;T&nbsp;&lt;-&nbsp;m&nbsp;;&nbsp;e"</span> <span class="id">:=</span> (<span class="id">@p_bind</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">m</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">:</span> <span class="id">T</span> <span class="id">=&gt;</span> <span class="id">e</span>)).<br/>
+<br/>
+<span class="vernacular">Notation</span> <span class="id">"p&nbsp;`;&nbsp;k"</span> <span class="id">:=</span> (<span class="id">@cont</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">p</span> <span class="id">k</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">50</span>).<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">OperationalSemantics</span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> <span class="id">T</span> <span class="id">S</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">state</span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id">S</span> <span class="id">*</span> <span class="id">@continuation</span> <span class="id">T</span> <span class="id">S</span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span class="id">step</span> <span class="id">:</span> <span class="id">state</span> <span class="id">-&gt;</span> <span class="id">option</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">state</span> <span class="id">-&gt;</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">s_ret</span>  <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">A</span> <span class="id">a</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">_</span>)<span class="id">,</span> <span class="id">step</span> (<span class="id">s,</span> <span class="id">p_ret</span> <span class="id">a</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s,</span> <span class="id">k</span> <span class="id">a</span>)<br/>
+<span class="id">|</span> <span class="id">s_bind</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">A</span> <span class="id">B</span> <span class="id">p</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">program</span> <span class="id">B</span>) <span class="id">k,</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> (<span class="id">s,</span> <span class="id">p_bind</span> <span class="id">p</span> <span class="id">f</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">a</span> <span class="id">`;</span> <span class="id">k</span>)<br/>
+<span class="id">|</span> <span class="id">s_cond_true</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">A</span> <span class="id">p1</span> <span class="id">p2</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">_</span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> (<span class="id">s,</span> <span class="id">p_cond</span> <span class="id">true</span> <span class="id">p1</span> <span class="id">p2</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s,</span> <span class="id">p1</span> <span class="id">`;</span> <span class="id">k</span>)<br/>
+<span class="id">|</span> <span class="id">s_cond_false</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">A</span> <span class="id">p1</span> <span class="id">p2</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">_</span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> (<span class="id">s,</span> <span class="id">p_cond</span> <span class="id">false</span> <span class="id">p1</span> <span class="id">p2</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s,</span> <span class="id">p2</span> <span class="id">`;</span> <span class="id">k</span>)<br/>
+<span class="id">|</span> <span class="id">s_repeat_O</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">p</span> <span class="id">k,</span> <span class="id">step</span> (<span class="id">s,</span> <span class="id">p_repeat</span> <span class="id">O</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s,</span> <span class="id">k</span> <span class="id">tt</span>)<br/>
+<span class="id">|</span> <span class="id">s_repeat_S</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">n</span> <span class="id">p</span> <span class="id">k,</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> (<span class="id">s,</span> <span class="id">p_repeat</span> <span class="id">n</span>.<span class="id">+1</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">p_repeat</span> <span class="id">n</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">k</span>)<br/>
+<span class="id">|</span> <span class="id">s_while_true</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">fuel</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k,</span> <span class="id">c</span> <span class="id">s</span> <span class="id">=</span> <span class="id">true</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> (<span class="id">s,</span> <span class="id">p_while</span> <span class="id">fuel</span>.<span class="id">+1</span> <span class="id">c</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">p_while</span> <span class="id">fuel</span> <span class="id">c</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">k</span>)<br/>
+<span class="id">|</span> <span class="id">s_while_false</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">fuel</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k,</span> <span class="id">c</span> <span class="id">s</span> <span class="id">=</span> <span class="id">false</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> (<span class="id">s,</span> <span class="id">p_while</span> <span class="id">fuel</span>.<span class="id">+1</span> <span class="id">c</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s,</span> <span class="id">k</span> <span class="id">tt</span>)<br/>
+<span class="id">|</span> <span class="id">s_while_broke</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k,</span> <span class="id">step</span> (<span class="id">s,</span> <span class="id">p_while</span> <span class="id">O</span> <span class="id">c</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s,</span> <span class="id">k</span> <span class="id">tt</span>)<br/>
+<span class="id">|</span> <span class="id">s_get</span>  <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">k,</span> <span class="id">step</span> (<span class="id">s,</span> <span class="id">p_get</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s,</span> <span class="id">k</span> <span class="id">s</span>)<br/>
+<span class="id">|</span> <span class="id">s_put</span>  <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">k,</span> <span class="id">step</span> (<span class="id">s,</span> <span class="id">p_put</span> <span class="id">s'</span> <span class="id">`;</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s',</span> <span class="id">k</span> <span class="id">tt</span>)<br/>
+<span class="id">|</span> <span class="id">s_mark</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">t</span> <span class="id">k,</span> <span class="id">step</span> (<span class="id">s,</span> <span class="id">p_mark</span> <span class="id">t</span> <span class="id">`;</span> <span class="id">k</span>) (<span class="id">Some</span> <span class="id">t</span>) (<span class="id">s,</span> <span class="id">k</span> <span class="id">tt</span>).<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span class="id">step_n</span> <span class="id">:</span> <span class="id">nat</span> <span class="id">-&gt;</span> <span class="id">state</span> <span class="id">-&gt;</span> <span class="id">list</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">state</span> <span class="id">-&gt;</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">sn_0</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">sk,</span> <span class="id">step_n</span> <span class="id">O</span> <span class="id">sk</span> <span class="id">[]</span> <span class="id">sk</span><br/>
+<span class="id">|</span> <span class="id">sn_S_None</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">sk3</span> <span class="id">l,</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> <span class="id">sk1</span> <span class="id">None</span> <span class="id">sk2</span> <span class="id">-&gt;</span> <span class="id">step_n</span> <span class="id">n</span> <span class="id">sk2</span> <span class="id">l</span> <span class="id">sk3</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">step_n</span> <span class="id">n</span>.<span class="id">+1</span> <span class="id">sk1</span> <span class="id">l</span> <span class="id">sk3</span><br/>
+<span class="id">|</span> <span class="id">sn_S_Some</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">sk3</span> <span class="id">t</span> <span class="id">l,</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> <span class="id">sk1</span> (<span class="id">Some</span> <span class="id">t</span>) <span class="id">sk2</span> <span class="id">-&gt;</span> <span class="id">step_n</span> <span class="id">n</span> <span class="id">sk2</span> <span class="id">l</span> <span class="id">sk3</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">step_n</span> <span class="id">n</span>.<span class="id">+1</span> <span class="id">sk1</span> (<span class="id">t</span> <span class="id">::</span> <span class="id">l</span>) <span class="id">sk3</span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span class="id">step_star</span> <span class="id">:</span> <span class="id">state</span> <span class="id">-&gt;</span> <span class="id">list</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">state</span> <span class="id">-&gt;</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">ss_refl</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">sk,</span> <span class="id">step_star</span> <span class="id">sk</span> <span class="id">[]</span> <span class="id">sk</span><br/>
+<span class="id">|</span> <span class="id">ss_step_None</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">sk3</span> <span class="id">l,</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> <span class="id">sk1</span> <span class="id">None</span> <span class="id">sk2</span> <span class="id">-&gt;</span> <span class="id">step_star</span> <span class="id">sk2</span> <span class="id">l</span> <span class="id">sk3</span> <span class="id">-&gt;</span> <span class="id">step_star</span> <span class="id">sk1</span> <span class="id">l</span> <span class="id">sk3</span><br/>
+<span class="id">|</span> <span class="id">ss_step_Some</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">sk3</span> <span class="id">t</span> <span class="id">l,</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> <span class="id">sk1</span> (<span class="id">Some</span> <span class="id">t</span>) <span class="id">sk2</span> <span class="id">-&gt;</span> <span class="id">step_star</span> <span class="id">sk2</span> <span class="id">l</span> <span class="id">sk3</span> <span class="id">-&gt;</span> <span class="id">step_star</span> <span class="id">sk1</span> (<span class="id">t</span> <span class="id">::</span> <span class="id">l</span>) <span class="id">sk3</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_star_transitive</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">sk3</span> <span class="id">l</span> <span class="id">l'</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> <span class="id">sk1</span> <span class="id">l</span> <span class="id">sk2</span> <span class="id">-&gt;</span> <span class="id">step_star</span> <span class="id">sk2</span> <span class="id">l'</span> <span class="id">sk3</span> <span class="id">-&gt;</span> <span class="id">step_star</span> <span class="id">sk1</span> (<span class="id">l</span> <span class="id">++</span> <span class="id">l'</span>) <span class="id">sk3</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+<span class="id">intro</span> <span class="id">Hss1</span>.<br/>
+<span class="id">revert</span> <span class="id">sk3</span> <span class="id">l'</span>.<br/>
+<span class="id">induction</span> <span class="id">Hss1</span> <span class="gallina-kwd">as</span><br/>
+&nbsp;<span class="id">[</span> <span class="id">|</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">sk3</span> <span class="id">l</span> <span class="id">Hstep</span> <span class="id">Hss1</span> <span class="id">IH</span> <span class="id">|</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">sk3</span> <span class="id">t</span> <span class="id">l</span> <span class="id">Hstep</span> <span class="id">Hss1</span> <span class="id">IH</span> <span class="id">];</span><br/>
+&nbsp;<span class="id">intros</span> <span class="id">sk3'</span> <span class="id">l'</span> <span class="id">Hss2;</span> <span class="id">[</span> <span class="id">assumption</span> <span class="id">|</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">apply</span> <span class="id">ss_step_None</span> <span class="gallina-kwd">with</span> (<span class="id">sk2</span> <span class="id">:=</span> <span class="id">sk2</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">exact</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">apply</span> <span class="id">IH;</span> <span class="id">exact</span> <span class="id">Hss2</span>.<br/>
+<span class="id">-</span> <span class="id">apply</span> <span class="id">ss_step_Some</span> <span class="gallina-kwd">with</span> (<span class="id">sk2</span> <span class="id">:=</span> <span class="id">sk2</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">exact</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">apply</span> <span class="id">IH;</span> <span class="id">exact</span> <span class="id">Hss2</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_star_stop_inv</span> <span class="id">s</span> <span class="id">A</span> <span class="id">a</span> <span class="id">l</span> <span class="id">sk</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> (<span class="id">s,</span> <span class="id">stop</span> <span class="id">A</span> <span class="id">a</span>) <span class="id">l</span> <span class="id">sk</span> <span class="id">-&gt;</span> <span class="id">l</span> <span class="id">=</span> <span class="id">[]</span> <span class="id">/\</span> <span class="id">sk</span> <span class="id">=</span> (<span class="id">s,</span> <span class="id">stop</span> <span class="id">A</span> <span class="id">a</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+<span class="id">intro</span> <span class="id">Hss</span>.<br/>
+<span class="id">inversion</span> <span class="id">Hss</span>.<br/>
+<span class="id">-</span> <span class="id">split;</span> <span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span> <span class="id">H</span> <span class="id">:</span> <span class="id">step</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">|-</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">inversion</span> <span class="id">H</span> <span class="gallina-kwd">end</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span> <span class="id">H</span> <span class="id">:</span> <span class="id">step</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">|-</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">inversion</span> <span class="id">H</span> <span class="gallina-kwd">end</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_deterministic</span> <span class="id">ski</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> <span class="id">ski</span> <span class="id">l1</span> <span class="id">sk1</span> <span class="id">-&gt;</span> <span class="id">step</span> <span class="id">ski</span> <span class="id">l2</span> <span class="id">sk2</span> <span class="id">-&gt;</span> <span class="id">l1</span> <span class="id">=</span> <span class="id">l2</span> <span class="id">/\</span> <span class="id">sk1</span> <span class="id">=</span> <span class="id">sk2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">intro</span> <span class="id">Hstep1</span>.<br/>
+<span class="id">revert</span> <span class="id">l2</span> <span class="id">sk2</span>.<br/>
+<span class="id">induction</span> <span class="id">Hstep1;</span> <span class="id">intros</span> <span class="id">l2</span> <span class="id">sk2</span> <span class="id">Hstep2;</span><br/>
+<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+<span class="id">|</span> <span class="id">_</span> <span class="id">:</span> <span class="id">step</span> (<span class="id">?s,</span> <span class="id">?k</span>) <span class="id">_</span> <span class="id">_</span> <span class="id">|-</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">remember</span> (<span class="id">s,</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">sk1</span> <span class="id">eqn:</span> <span class="id">Heq2</span><br/>
+<span class="id">end;</span> <span class="id">inversion</span> <span class="id">Hstep2;</span> <span class="id">clear</span> <span class="id">Hstep2;</span> <span class="id">subst;</span> <span class="id">try</span> <span class="id">discriminate;</span><br/>
+<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+<span class="id">|</span> <span class="id">H</span> <span class="id">:</span> <span class="id">_</span> <span class="id">=</span> <span class="id">_</span> <span class="id">|-</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">injection</span> <span class="id">H;</span> <span class="id">clear</span> <span class="id">H;</span> <span class="id">intros</span><br/>
+<span class="id">end;</span> <span class="id">subst;</span><br/>
+<span class="id">repeat</span> <span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+<span class="id">|</span> <span class="id">H</span> <span class="id">:</span> <span class="id">existT</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">=</span> <span class="id">existT</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">|-</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id">inj_pair2</span> <span class="gallina-kwd">in</span> <span class="id">H</span><br/>
+<span class="id">end;</span> <span class="id">subst;</span> <span class="id">repeat</span> <span class="id">split;</span> <span class="id">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_star_confluent</span> <span class="id">ski</span> <span class="id">sk1</span> <span class="id">sk2</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> <span class="id">ski</span> <span class="id">l1</span> <span class="id">sk1</span> <span class="id">-&gt;</span> <span class="id">step_star</span> <span class="id">ski</span> <span class="id">l2</span> <span class="id">sk2</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">l1'</span> <span class="id">l2'</span> <span class="id">skf,</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> <span class="id">sk1</span> <span class="id">l1'</span> <span class="id">skf</span> <span class="id">/\</span> <span class="id">step_star</span> <span class="id">sk2</span> <span class="id">l2'</span> <span class="id">skf</span> <span class="id">/\</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l1'</span> <span class="id">=</span> <span class="id">l2</span> <span class="id">++</span> <span class="id">l2'</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+<span class="id">intro</span> <span class="id">Hss1</span>.<br/>
+<span class="id">revert</span> <span class="id">l2</span> <span class="id">sk2</span>.<br/>
+<span class="id">induction</span> <span class="id">Hss1</span> <span class="gallina-kwd">as</span> <span class="id">[</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">s</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">sk1</span> <span class="id">sk2'</span> <span class="id">sk3</span> <span class="id">l1</span> <span class="id">Hstep1</span> <span class="id">Hss1</span> <span class="id">IH</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">sk1</span> <span class="id">sk2'</span> <span class="id">sk3</span> <span class="id">t1</span> <span class="id">l1</span> <span class="id">Hstep1</span> <span class="id">Hss1</span> <span class="id">IH</span><br/>
+&nbsp;&nbsp;<span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">intros</span> <span class="id">l2</span> <span class="id">sk2</span> <span class="id">Hss2</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">l2</span>. <span class="gallina-kwd">exists</span> <span class="id">[]</span>. <span class="gallina-kwd">exists</span> <span class="id">sk2</span>.<br/>
+&nbsp;&nbsp;<span class="id">split;</span> <span class="id">[</span> <span class="id">|</span> <span class="id">split</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">exact</span> <span class="id">Hss2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">apply</span> <span class="id">ss_refl</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">cats0;</span> <span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">intros</span> <span class="id">l2</span> <span class="id">sk2</span> <span class="id">Hss2</span>.<br/>
+&nbsp;&nbsp;<span class="id">inversion</span> <span class="id">Hss2</span> <span class="gallina-kwd">as</span> <span class="id">[</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">sk1'</span> <span class="id">Hsk1</span> <span class="id">Hl2</span> <span class="id">Hsk2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">sk1'</span> <span class="id">sk2''</span> <span class="id">sk2'''</span> <span class="id">l2'</span> <span class="id">Hstep2</span> <span class="id">Hss2'</span> <span class="id">Hsk1</span> <span class="id">Hl2</span> <span class="id">Hsl2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">sk1'</span> <span class="id">sk2''</span> <span class="id">sk2'''</span> <span class="id">t2</span> <span class="id">l2'</span> <span class="id">Hstep2</span> <span class="id">Hss2'</span> <span class="id">Hsk1</span> <span class="id">Hl2</span> <span class="id">Hsl2</span><br/>
+&nbsp;&nbsp;<span class="id">]</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">subst</span> <span class="id">sk1'</span> <span class="id">l2</span> <span class="id">sk2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">3</span> <span class="id">eexists</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">split;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">split;</span> <span class="id">[</span> <span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">eassumption</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0;</span> <span class="id">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">subst</span> <span class="id">sk1'</span> <span class="id">l2'</span> <span class="id">sk2'''</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">step_deterministic</span> <span class="id">Hstep1</span> <span class="id">Hstep2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> <span class="id">[</span> <span class="id">[]</span> <span class="id">Heq2]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">subst</span> <span class="id">sk2''</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exact</span> <span class="id">Hss2'</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">subst</span> <span class="id">sk1'</span> <span class="id">l2</span> <span class="id">sk2'''</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">step_deterministic</span> <span class="id">Hstep1</span> <span class="id">Hstep2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> <span class="id">[</span> <span class="id">[=]</span> <span class="id">?]</span>.<br/>
+<span class="id">-</span> <span class="id">intros</span> <span class="id">l2</span> <span class="id">sk2</span> <span class="id">Hss2</span>.<br/>
+&nbsp;&nbsp;<span class="id">inversion</span> <span class="id">Hss2</span> <span class="gallina-kwd">as</span> <span class="id">[</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">sk1'</span> <span class="id">Hsk1</span> <span class="id">Hl2</span> <span class="id">Hsk2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">sk1'</span> <span class="id">sk2''</span> <span class="id">sk2'''</span> <span class="id">l2'</span> <span class="id">Hstep2</span> <span class="id">Hss2'</span> <span class="id">Hsk1</span> <span class="id">Hl2</span> <span class="id">Hsl2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">sk1'</span> <span class="id">sk2''</span> <span class="id">sk2'''</span> <span class="id">t2</span> <span class="id">l2'</span> <span class="id">Hstep2</span> <span class="id">Hss2'</span> <span class="id">Hsk1</span> <span class="id">Hl2</span> <span class="id">Hsl2</span><br/>
+&nbsp;&nbsp;<span class="id">]</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">subst</span> <span class="id">sk1'</span> <span class="id">l2</span> <span class="id">sk2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">3</span> <span class="id">eexists</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">split;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">split;</span> <span class="id">[</span> <span class="id">eapply</span> <span class="id">ss_step_Some;</span> <span class="id">eassumption</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0;</span> <span class="id">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">subst</span> <span class="id">sk1'</span> <span class="id">l2'</span> <span class="id">sk2'''</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">step_deterministic</span> <span class="id">Hstep1</span> <span class="id">Hstep2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> <span class="id">[</span> <span class="id">[=]</span> <span class="id">?]</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">subst</span> <span class="id">sk1'</span> <span class="id">l2</span> <span class="id">sk2'''</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">step_deterministic</span> <span class="id">Hstep1</span> <span class="id">Hstep2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> <span class="id">[</span> <span class="id">[=</span> <span class="id">Heq1]</span> <span class="id">Heq2]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">subst</span> <span class="id">t2</span> <span class="id">sk2''</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IH</span> <span class="gallina-kwd">in</span> <span class="id">Hss2'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">Hss2'</span> <span class="gallina-kwd">as</span> (<span class="id">l1'</span> <span class="id">&amp;</span> <span class="id">l2''</span> <span class="id">&amp;</span> <span class="id">skf</span> <span class="id">&amp;</span> <span class="id">Hss3</span> <span class="id">&amp;</span> <span class="id">Hss4</span> <span class="id">&amp;</span> <span class="id">Heq</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">3</span> <span class="id">eexists</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">2</span> (<span class="id">split;</span> <span class="id">[</span> <span class="id">eassumption</span> <span class="id">|</span> <span class="id">]</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exact</span> <span class="id">Heq</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_star_deterministic</span> <span class="id">ski</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">A1</span> <span class="id">A2</span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> <span class="id">ski</span> <span class="id">l1</span> (<span class="id">s1,</span> <span class="id">stop</span> <span class="id">A1</span> <span class="id">a1</span>) <span class="id">-&gt;</span> <span class="id">step_star</span> <span class="id">ski</span> <span class="id">l2</span> (<span class="id">s2,</span> <span class="id">stop</span> <span class="id">A2</span> <span class="id">a2</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">l1</span> <span class="id">=</span> <span class="id">l2</span> <span class="id">/\</span> <span class="id">s1</span> <span class="id">=</span> <span class="id">s2</span> <span class="id">/\</span> <span class="id">A1</span> <span class="id">=</span> <span class="id">A2</span> <span class="id">/\</span> <span class="id">JMeq</span> <span class="id">a1</span> <span class="id">a2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+<span class="id">intros</span> <span class="id">Hss1</span> <span class="id">Hss2</span>.<br/>
+<span class="id">specialize</span> (<span class="id">step_star_confluent</span> <span class="id">Hss1</span> <span class="id">Hss2</span>).<br/>
+<span class="id">intros</span> (<span class="id">l1'</span> <span class="id">&amp;</span> <span class="id">l2'</span> <span class="id">&amp;</span> <span class="id">skf</span> <span class="id">&amp;</span> <span class="id">Hss1'</span> <span class="id">&amp;</span> <span class="id">Hss2'</span> <span class="id">&amp;</span> <span class="id">Heq</span>).<br/>
+<span class="id">apply</span> <span class="id">step_star_stop_inv</span> <span class="gallina-kwd">in</span> <span class="id">Hss1'</span>.<br/>
+<span class="id">apply</span> <span class="id">step_star_stop_inv</span> <span class="gallina-kwd">in</span> <span class="id">Hss2'</span>.<br/>
+<span class="id">destruct</span> <span class="id">Hss1'</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">Heq11</span> <span class="id">Heq12</span> <span class="id">]</span>.<br/>
+<span class="id">destruct</span> <span class="id">Hss2'</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">Heq21</span> <span class="id">Heq22</span> <span class="id">]</span>.<br/>
+<span class="id">subst</span> <span class="id">l1'</span> <span class="id">l2'</span> <span class="id">skf</span> <span class="id">.</span><br/>
+<span class="id">do</span> <span class="id">2</span> <span class="id">rewrite</span> <span class="id">cats0</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+<span class="id">injection</span> <span class="id">Heq22;</span> <span class="id">clear</span> <span class="id">Heq22;</span> <span class="id">intros;</span> <span class="id">subst</span>.<br/>
+<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+<span class="id">|</span> <span class="id">H</span> <span class="id">:</span> <span class="id">existT</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">=</span> <span class="id">existT</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">|-</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id">inj_pair2</span> <span class="gallina-kwd">in</span> <span class="id">H</span><br/>
+<span class="gallina-kwd">end</span>.<br/>
+<span class="id">subst</span>.<br/>
+<span class="id">repeat</span> <span class="id">split</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">run_s</span> <span class="id">{A</span> <span class="id">:</span> <span class="id">Type}</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">program</span> <span class="id">A</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">continuation</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">S</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">{o</span> <span class="id">&amp;</span> <span class="id">{f'</span> <span class="id">&amp;</span> <span class="id">{s'</span> <span class="id">|</span> <span class="id">step</span> (<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">o</span> (<span class="id">s',</span> <span class="id">f'</span>) <span class="id">}</span> <span class="id">}</span> <span class="id">}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="id">destruct</span> <span class="id">p</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">A</span> <span class="id">a</span> <span class="id">|</span> <span class="id">A</span> <span class="id">B</span> <span class="id">p</span> <span class="id">g</span> <span class="id">|</span> <span class="id">A</span> <span class="id">b</span> <span class="id">p1</span> <span class="id">p2</span> <span class="id">|</span> <span class="id">n</span> <span class="id">p</span> <span class="id">|</span> <span class="id">fuel</span> <span class="id">c</span> <span class="id">p</span> <span class="id">|</span> <span class="id">|</span> <span class="id">s'</span> <span class="id">|</span> <span class="id">t</span> <span class="id">];</span><br/>
+&nbsp;<span class="id">try</span> (<span class="id">repeat</span> <span class="id">eexists;</span> <span class="id">constructor</span>).<br/>
+<span class="id">-</span> <span class="id">destruct</span> <span class="id">b;</span> <span class="id">repeat</span> <span class="id">eexists;</span> <span class="id">constructor</span>.<br/>
+<span class="id">-</span> <span class="id">destruct</span> <span class="id">n;</span> <span class="id">repeat</span> <span class="id">eexists;</span> <span class="id">constructor</span>.<br/>
+<span class="id">-</span> <span class="id">destruct</span> <span class="id">fuel</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">repeat</span> <span class="id">eexists;</span> <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">case_eq</span> (<span class="id">c</span> <span class="id">s</span>)<span class="id">;</span> <span class="id">intro</span> <span class="id">Hcs;</span> <span class="id">repeat</span> <span class="id">eexists</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">apply</span> <span class="id">s_while_true</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exact</span> <span class="id">Hcs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">apply</span> <span class="id">s_while_false</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exact</span> <span class="id">Hcs</span>.<br/>
+Defined.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">run_s_n</span> (<span class="id">n</span> <span class="id">:</span> <span class="id">nat</span>)<br/>
+&nbsp;&nbsp;<span class="id">{A</span> <span class="id">:</span> <span class="id">Type}</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">program</span> <span class="id">A</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">continuation</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">S</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">option</span> <span class="id">{l</span> <span class="id">&amp;</span> <span class="id">{f'</span> <span class="id">&amp;</span> <span class="id">{s'</span> <span class="id">|</span> <span class="id">step_n</span> <span class="id">n</span> (<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">l</span> (<span class="id">s',</span> <span class="id">f'</span>) <span class="id">}</span> <span class="id">}</span> <span class="id">}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+<span class="id">revert</span> <span class="id">n</span> <span class="id">A</span> <span class="id">p</span> <span class="id">f</span> <span class="id">s</span>.<br/>
+<span class="gallina-kwd">fix</span> <span class="id">run_s_n</span> <span class="id">1</span>.<br/>
+<span class="id">intros</span> <span class="id">[</span> <span class="id">|</span> <span class="id">n'</span> <span class="id">]</span> <span class="id">A</span> <span class="id">p</span> <span class="id">f</span> <span class="id">s</span>.<br/>
+<span class="id">-</span> <span class="id">apply</span> <span class="id">Some</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">[]</span>. <span class="gallina-kwd">exists</span> (<span class="id">cont</span> <span class="id">A</span> <span class="id">p</span> <span class="id">f</span>). <span class="gallina-kwd">exists</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">sn_0</span>.<br/>
+<span class="id">-</span> <span class="id">destruct</span> (<span class="id">run_s</span> <span class="id">p</span> <span class="id">f</span> <span class="id">s</span>) <span class="gallina-kwd">as</span> (<span class="id">o</span> <span class="id">&amp;</span> <span class="id">[</span> <span class="id">B</span> <span class="id">b</span> <span class="id">|</span> <span class="id">B</span> <span class="id">p'</span> <span class="id">f'</span> <span class="id">]</span> <span class="id">&amp;</span> <span class="id">s'</span> <span class="id">&amp;</span> <span class="id">Hstep</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> <span class="id">n'</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">n''</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">apply</span> <span class="id">Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">o</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">t</span> <span class="id">|</span> <span class="id">];</span> <span class="id">repeat</span> <span class="id">eexists</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">eapply</span> <span class="id">sn_S_Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">++</span> <span class="id">exact</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">++</span> <span class="id">apply</span> <span class="id">sn_0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">eapply</span> <span class="id">sn_S_None</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">++</span> <span class="id">exact</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">++</span> <span class="id">apply</span> <span class="id">sn_0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">apply</span> <span class="id">None</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> (<span class="id">run_s_n</span> <span class="id">n'</span> <span class="id">B</span> <span class="id">p'</span> <span class="id">f'</span> <span class="id">s'</span>) <span class="gallina-kwd">as</span> <span class="id">[</span> (<span class="id">l</span> <span class="id">&amp;</span> <span class="id">f''</span> <span class="id">&amp;</span> <span class="id">s''</span> <span class="id">&amp;</span> <span class="id">Hstep_n'</span>) <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">apply</span> <span class="id">Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">o</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">t</span> <span class="id">|</span> <span class="id">];</span> <span class="id">repeat</span> <span class="id">eexists</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">eapply</span> <span class="id">sn_S_Some</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">++</span> <span class="id">exact</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">++</span> <span class="id">exact</span> <span class="id">Hstep_n'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">eapply</span> <span class="id">sn_S_None</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">++</span> <span class="id">exact</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">++</span> <span class="id">exact</span> <span class="id">Hstep_n'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">exact</span> <span class="id">None</span>.<br/>
+Defined.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">run_gen</span><br/>
+&nbsp;&nbsp;<span class="id">{A</span> <span class="id">:</span> <span class="id">Type}</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">program</span> <span class="id">A</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">continuation</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">S</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">{l</span> <span class="id">&amp;</span> <span class="id">{a</span> <span class="id">:</span> <span class="id">A</span> <span class="id">&amp;</span> <span class="id">{s'</span> <span class="id">|</span> <span class="id">step_star</span> (<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">l</span> (<span class="id">s',</span> <span class="id">f</span> <span class="id">a</span>) <span class="id">}</span> <span class="id">}</span> <span class="id">}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">revert</span> <span class="id">f</span> <span class="id">s</span>.<br/>
+<span class="id">induction</span> <span class="id">p</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">A</span> <span class="id">a</span> <span class="id">|</span> <span class="id">A</span> <span class="id">B</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">g</span> <span class="id">IHg</span> <span class="id">|</span> <span class="id">A</span> <span class="id">b</span> <span class="id">p1</span> <span class="id">IHp1</span> <span class="id">p2</span> <span class="id">IHp2</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;<span class="id">n</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">|</span> <span class="id">fuel</span> <span class="id">c</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">|</span> <span class="id">|</span> <span class="id">s'</span> <span class="id">|</span> <span class="id">t</span> <span class="id">];</span><br/>
+&nbsp;<span class="id">intros</span> <span class="id">f</span> <span class="id">s</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>. <span class="gallina-kwd">exists</span> <span class="id">a</span>. <span class="gallina-kwd">exists</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_ret</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>).<br/>
+<span class="id">-</span> <span class="id">specialize</span> (<span class="id">IHp</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">g</span> <span class="id">a</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">s</span>).<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">IHp</span> <span class="gallina-kwd">as</span> (<span class="id">l1</span> <span class="id">&amp;</span> <span class="id">a</span> <span class="id">&amp;</span> <span class="id">s'</span> <span class="id">&amp;</span> <span class="id">Hss1</span>).<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">IHg</span> <span class="id">a</span> <span class="id">f</span> <span class="id">s'</span>).<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">IHg</span> <span class="gallina-kwd">as</span> (<span class="id">l2</span> <span class="id">&amp;</span> <span class="id">b</span> <span class="id">&amp;</span> <span class="id">s''</span> <span class="id">&amp;</span> <span class="id">Hss2</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">exists</span> (<span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>). <span class="gallina-kwd">exists</span> <span class="id">b</span>. <span class="gallina-kwd">exists</span> <span class="id">s''</span>.<br/>
+&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">step_star_transitive;</span> <span class="id">[</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_bind</span>  <span class="id">|</span> <span class="id">apply</span> <span class="id">Hss1</span> <span class="id">]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">exact</span> <span class="id">Hss2</span><br/>
+&nbsp;&nbsp;<span class="id">]</span>).<br/>
+<span class="id">-</span> <span class="id">case</span> <span class="id">b</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">specialize</span> (<span class="id">IHp1</span> <span class="id">f</span> <span class="id">s</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">IHp1</span> <span class="gallina-kwd">as</span> (<span class="id">l</span> <span class="id">&amp;</span> <span class="id">a</span> <span class="id">&amp;</span> <span class="id">s'</span> <span class="id">&amp;</span> <span class="id">Hss</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">l</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">a</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">s'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_cond_true</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">Hss</span> <span class="id">]</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">specialize</span> (<span class="id">IHp2</span> <span class="id">f</span> <span class="id">s</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">IHp2</span> <span class="gallina-kwd">as</span> (<span class="id">l</span> <span class="id">&amp;</span> <span class="id">a</span> <span class="id">&amp;</span> <span class="id">s'</span> <span class="id">&amp;</span> <span class="id">Hss</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">l</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">a</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">s'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_cond_false</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">Hss</span> <span class="id">]</span>).<br/>
+<span class="id">-</span> <span class="id">revert</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">n</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">n'</span> <span class="id">IHn</span> <span class="id">];</span> <span class="id">intro</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">exists</span> <span class="id">[];</span> <span class="gallina-kwd">exists</span> <span class="id">tt;</span> <span class="gallina-kwd">exists</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_repeat_O</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> (<span class="id">IHp</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">p_repeat</span> <span class="id">n'</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">s</span>) <span class="gallina-kwd">as</span> (<span class="id">l1</span> <span class="id">&amp;</span> <span class="id">a1</span> <span class="id">&amp;</span> <span class="id">s1</span> <span class="id">&amp;</span> <span class="id">Hss1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">IHn</span> <span class="id">s1</span>) <span class="gallina-kwd">as</span> (<span class="id">l2</span> <span class="id">&amp;</span> <span class="id">a2</span> <span class="id">&amp;</span> <span class="id">s2</span> <span class="id">&amp;</span> <span class="id">Hss2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> (<span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>)<span class="id">;</span> <span class="gallina-kwd">exists</span> <span class="id">a2;</span> <span class="gallina-kwd">exists</span> <span class="id">s2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_repeat_S</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">step_star_transitive;</span> <span class="id">[</span> <span class="id">eexact</span> <span class="id">Hss1</span> <span class="id">|</span> <span class="id">exact</span> <span class="id">Hss2</span> <span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">revert</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">fuel</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">fuel'</span> <span class="id">IHfuel</span> <span class="id">];</span> <span class="id">intro</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">exists</span> <span class="id">[];</span> <span class="gallina-kwd">exists</span> <span class="id">tt;</span> <span class="gallina-kwd">exists</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_while_broke</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">case_eq</span> (<span class="id">c</span> <span class="id">s</span>)<span class="id">;</span> <span class="id">[</span> <span class="id">intro</span> <span class="id">Htrue</span> <span class="id">|</span> <span class="id">intro</span> <span class="id">Hfalse</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">destruct</span> (<span class="id">IHp</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">p_while</span> <span class="id">fuel'</span> <span class="id">c</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">s</span>) <span class="gallina-kwd">as</span> (<span class="id">l1</span> <span class="id">&amp;</span> <span class="id">a1</span> <span class="id">&amp;</span> <span class="id">s1</span> <span class="id">&amp;</span> <span class="id">Hss1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">IHfuel</span> <span class="id">s1</span>) <span class="gallina-kwd">as</span> (<span class="id">l2</span> <span class="id">&amp;</span> <span class="id">a2</span> <span class="id">&amp;</span> <span class="id">s2</span> <span class="id">&amp;</span> <span class="id">Hss2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> (<span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>)<span class="id">;</span> <span class="gallina-kwd">exists</span> <span class="id">a2;</span> <span class="gallina-kwd">exists</span> <span class="id">s2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_while_true;</span> <span class="id">exact</span> <span class="id">Htrue</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">step_star_transitive;</span> <span class="id">[</span> <span class="id">eexact</span> <span class="id">Hss1</span> <span class="id">|</span> <span class="id">exact</span> <span class="id">Hss2</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="gallina-kwd">exists</span> <span class="id">[];</span> <span class="gallina-kwd">exists</span> <span class="id">tt;</span> <span class="gallina-kwd">exists</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_while_false;</span> <span class="id">exact</span> <span class="id">Hfalse</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>. <span class="gallina-kwd">exists</span> <span class="id">s</span>. <span class="gallina-kwd">exists</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_get</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>. <span class="gallina-kwd">exists</span> <span class="id">tt</span>. <span class="gallina-kwd">exists</span> <span class="id">s'</span>.<br/>
+&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_put</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>).<br/>
+<span class="id">-</span> <span class="gallina-kwd">exists</span> <span class="id">[t]</span>. <span class="gallina-kwd">exists</span> <span class="id">tt</span>. <span class="gallina-kwd">exists</span> <span class="id">s</span>.<br/>
+&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">eapply</span> <span class="id">ss_step_Some;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_mark</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>).<br/>
+Defined.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">run_ss</span> <span class="id">{A</span> <span class="id">:</span> <span class="id">Type}</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">program</span> <span class="id">A</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">S</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">{l</span> <span class="id">&amp;</span> <span class="id">{a</span> <span class="id">:</span> <span class="id">A</span> <span class="id">&amp;</span> <span class="id">{s'</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> (<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">stop</span> <span class="id">A</span>) <span class="id">l</span> (<span class="id">s',</span> <span class="id">stop</span> <span class="id">A</span> <span class="id">a</span>) <span class="id">}</span> <span class="id">}</span> <span class="id">}</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">run_gen</span> <span class="id">p</span> (<span class="id">stop</span> <span class="id">A</span>) <span class="id">s</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">OperationalSemantics</span>.<br/>
+<br/>
+<span class="vernacular">Arguments</span> <span class="id">step</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">step_star</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">run_s</span> <span class="id">{_</span> <span class="id">_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">run_s_n</span> <span class="id">{_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">{_}</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">run_ss</span> <span class="id">{_</span> <span class="id">_</span> <span class="id">_}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">DenotationalSemantics</span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> <span class="id">S</span> <span class="id">T</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">stateTraceMonad</span> <span class="id">S</span> <span class="id">T</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">denote</span> <span class="id">{A}</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">program</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">A</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">p</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p_ret</span> <span class="id">_</span> <span class="id">v</span> <span class="id">=&gt;</span> <span class="id">Ret</span> <span class="id">v</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p_bind</span> <span class="id">_</span> <span class="id">_</span> <span class="id">m</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">denote</span> <span class="id">m</span> <span class="id">&gt;&gt;=</span> (<span class="id">denote</span> <span class="id">\o</span> <span class="id">f</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p_cond</span> <span class="id">_</span> <span class="id">b</span> <span class="id">p1</span> <span class="id">p2</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id">b</span> <span class="gallina-kwd">then</span> <span class="id">denote</span> <span class="id">p1</span> <span class="gallina-kwd">else</span> <span class="id">denote</span> <span class="id">p2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p_repeat</span> <span class="id">n</span> <span class="id">p</span> <span class="id">=&gt;</span> (<span class="gallina-kwd">fix</span> <span class="id">loop</span> <span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">m</span> <span class="id">is</span> <span class="id">m'</span>.<span class="id">+1</span> <span class="gallina-kwd">then</span> <span class="id">denote</span> <span class="id">p</span> <span class="id">&gt;&gt;</span> <span class="id">loop</span> <span class="id">m'</span> <span class="gallina-kwd">else</span> <span class="id">Ret</span> <span class="id">tt</span>) <span class="id">n</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p_while</span> <span class="id">fuel</span> <span class="id">c</span> <span class="id">p</span> <span class="id">=&gt;</span> (<span class="gallina-kwd">fix</span> <span class="id">loop</span> <span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">m</span> <span class="id">is</span> <span class="id">m'</span>.<span class="id">+1</span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">st_get</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">s</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">c</span> <span class="id">s</span> <span class="gallina-kwd">then</span> <span class="id">denote</span> <span class="id">p</span> <span class="id">&gt;&gt;</span> <span class="id">loop</span> <span class="id">m'</span> <span class="gallina-kwd">else</span> <span class="id">Ret</span> <span class="id">tt</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id">Ret</span> <span class="id">tt</span>) <span class="id">fuel</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p_get</span> <span class="id">=&gt;</span> <span class="id">st_get</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p_put</span> <span class="id">s'</span> <span class="id">=&gt;</span> <span class="id">st_put</span> <span class="id">s'</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p_mark</span> <span class="id">t</span> <span class="id">=&gt;</span> <span class="id">st_mark</span> <span class="id">t</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Notation</span> <span class="id">"'Repeat'&nbsp;n&nbsp;{{&nbsp;p&nbsp;}}"</span> <span class="id">:=</span> (<br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">fix</span> <span class="id">loop</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">m</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">0</span> <span class="id">=&gt;</span> <span class="id">Ret</span> <span class="id">tt</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">m'</span>.<span class="id">+1</span> <span class="id">=&gt;</span> <span class="id">denote</span> <span class="id">p</span> <span class="id">&gt;&gt;</span> <span class="id">loop</span> <span class="id">m'</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>) <span class="id">n</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">200</span>).<br/>
+<br/>
+<span class="vernacular">Notation</span> <span class="id">"'While'&nbsp;fuel&nbsp;@&nbsp;c&nbsp;{{&nbsp;p&nbsp;}}"</span> <span class="id">:=</span> (<br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">fix</span> <span class="id">loop</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">m</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">0</span> <span class="id">=&gt;</span> <span class="id">Ret</span> <span class="id">tt</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">m'</span>.<span class="id">+1</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">st_get</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">s</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">c</span> <span class="id">s</span> <span class="gallina-kwd">then</span> <span class="id">denote</span> <span class="id">p</span> <span class="id">&gt;&gt;</span> <span class="id">loop</span> <span class="id">m'</span> <span class="gallina-kwd">else</span> <span class="id">Ret</span> <span class="id">tt</span>)<br/>
+&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>) <span class="id">fuel</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">200</span>).<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">denote_continuation</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">continuation</span>) <span class="id">:</span> <span class="id">M</span> (<span class="id">@continuation</span> <span class="id">T</span> <span class="id">S</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">k</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">stop</span> <span class="id">A</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">stop</span> <span class="id">A</span> <span class="id">a</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">denote</span> <span class="id">p</span> <span class="id">&gt;&gt;=</span> (<span class="id">denote_continuation</span> <span class="id">\o</span> <span class="id">f</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">stateTrace_sub</span> <span class="id">A</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">{</span> <span class="id">p</span> <span class="id">|</span> <span class="id">denote</span> <span class="id">p</span> <span class="id">=</span> <span class="id">m</span> <span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">continuation_sub</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">continuation</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">{k</span> <span class="id">|</span> <span class="id">denote_continuation</span> <span class="id">k</span> <span class="id">=</span> <span class="id">m</span> <span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">DenotationalSemantics</span>.<br/>
+<br/>
+<span class="vernacular">Arguments</span> <span class="id">denote</span> <span class="id">{S}</span> <span class="id">{T}</span> <span class="id">M</span> <span class="id">A</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">denote_continuation</span> <span class="id">{S}</span> <span class="id">{T}</span> <span class="id">M</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">semantics_equivalence</span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> <span class="id">S</span> <span class="id">T</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">stateTraceReifyMonad</span> <span class="id">S</span> <span class="id">T</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">denote_prefix_preserved</span> <span class="id">A</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">stateTrace_sub</span> <span class="id">m</span> <span class="id">-&gt;</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">l1</span> <span class="id">l</span> <span class="id">a,</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> <span class="id">m</span> (<span class="id">s,</span> <span class="id">l1</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">a,</span> (<span class="id">s',</span> <span class="id">l</span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">l2,</span> <span class="id">l</span> <span class="id">=</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">case=&gt;</span> <span class="id">p</span> <span class="id">&lt;-{m}</span>.<br/>
+<span class="id">induction</span> <span class="id">p</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">A</span> <span class="id">a</span> <span class="id">|</span> <span class="id">A</span> <span class="id">B</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">g</span> <span class="id">IHg</span> <span class="id">|</span> <span class="id">A</span> <span class="id">b</span> <span class="id">p1</span> <span class="id">IHp1</span> <span class="id">p2</span> <span class="id">IHp2</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;<span class="id">n</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">|</span> <span class="id">fuel</span> <span class="id">c</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">|</span> <span class="id">|</span> <span class="id">s0</span> <span class="id">|</span> <span class="id">t</span> <span class="id">];</span> <span class="id">cbn;</span><br/>
+&nbsp;<span class="id">intros</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">l1</span> <span class="id">l</span> <span class="id">a'</span> <span class="id">Heq</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifyret</span> <span class="id">=&gt;</span> <span class="id">-[]</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">reifybind</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l1</span>)).<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span> (<span class="id">a,</span> (<span class="id">s0,</span> <span class="id">l0</span>)) <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move/IHp</span> <span class="id">:</span> <span class="id">Hp</span> <span class="id">=&gt;</span> <span class="id">[l2</span> <span class="id">Hp]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move/IHg</span> <span class="id">:</span> <span class="id">Heq</span> <span class="id">=&gt;</span> <span class="id">[l2'</span> <span class="id">Heq]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> (<span class="id">l2</span> <span class="id">++</span> <span class="id">l2'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">Heq</span> <span class="id">Hp</span> <span class="id">catA</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">intro</span> <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">discriminate</span> <span class="id">Heq</span>.<br/>
+<span class="id">-</span> <span class="id">destruct</span> <span class="id">b;</span> <span class="id">[</span> <span class="id">eapply</span> <span class="id">IHp1</span> <span class="id">|</span> <span class="id">eapply</span> <span class="id">IHp2</span> <span class="id">];</span> <span class="id">exact</span> <span class="id">Heq</span>.<br/>
+<span class="id">-</span> <span class="id">revert</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">n</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">n'</span> <span class="id">IH</span> <span class="id">];</span> <span class="id">intros</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifyret</span> <span class="id">=&gt;</span> <span class="id">-[]</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">reifybind</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l1</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">intros</span> (<span class="id">a,</span> (<span class="id">s0,</span> <span class="id">l0</span>)) <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">IHp</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hp</span>) <span class="id">=&gt;</span> <span class="id">[l2</span> <span class="id">?]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">subst</span> <span class="id">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">IH</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Heq</span>) <span class="id">=&gt;</span> <span class="id">[l3</span> <span class="id">?]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> (<span class="id">l2</span> <span class="id">++</span> <span class="id">l3</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">catA</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">intro</span> <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">discriminate</span> <span class="id">Heq</span>.<br/>
+<span class="id">-</span> <span class="id">revert</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">fuel</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">fuel'</span> <span class="id">IH</span> <span class="id">];</span> <span class="id">intros</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifyret</span> <span class="id">=&gt;</span> <span class="id">-[]</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">reifybind</span> <span class="id">reifystget</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">c</span> <span class="id">s</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">reifybind</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l1</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">intros</span> (<span class="id">a</span> <span class="id">,</span>(<span class="id">s0,</span> <span class="id">l0</span>)) <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">IHp</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hp</span>) <span class="id">=&gt;</span> <span class="id">[l2</span> <span class="id">?]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">subst</span> <span class="id">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">IH</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Heq</span>) <span class="id">=&gt;</span> <span class="id">[l3</span> <span class="id">?]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> (<span class="id">l2</span> <span class="id">++</span> <span class="id">l3</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">catA</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">intro</span> <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">discriminate</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifyret</span> <span class="id">=&gt;</span> <span class="id">-[]</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifystget</span> <span class="id">=&gt;</span> <span class="id">-[]</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">exists</span> <span class="id">[]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifystput</span> <span class="id">=&gt;</span> <span class="id">-[]</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">exists</span> <span class="id">[t]</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifystmark</span> <span class="id">-cats1</span> <span class="id">=&gt;</span> <span class="id">-[]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">denote_prefix_independent</span> <span class="id">A</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">stateTrace_sub</span> <span class="id">m</span> <span class="id">-&gt;</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2,</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> <span class="id">m</span> (<span class="id">s,</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">res</span> <span class="id">:=</span> <span class="id">reify</span> <span class="id">m</span> (<span class="id">s,</span> <span class="id">l2</span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">res</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">None</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">res</span> <span class="id">=&gt;</span> <span class="id">Some</span> (<span class="id">res</span>.<span class="id">1,</span> (<span class="id">res</span>.<span class="id">2</span>.<span class="id">1,</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">res</span>.<span class="id">2</span>.<span class="id">2</span>))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">intros</span> <span class="id">[</span> <span class="id">p</span> <span class="id">Hp</span> <span class="id">]</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2</span>.<br/>
+<span class="id">subst</span> <span class="id">m</span>.<br/>
+<span class="id">elim:</span> <span class="id">p</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">=&gt;</span> <span class="id">/=</span> <span class="id">{A}</span> <span class="id">[A</span> <span class="id">a|A</span> <span class="id">B</span> <span class="id">p1</span> <span class="id">IH1</span> <span class="id">p2</span> <span class="id">IH2|A</span> <span class="id">b</span> <span class="id">p1</span> <span class="id">IH1</span> <span class="id">p2</span> <span class="id">IH2|</span><br/>
+&nbsp;&nbsp;<span class="id">n</span> <span class="id">p</span> <span class="id">IHp|fuel</span> <span class="id">c</span> <span class="id">p</span> <span class="id">IHp||s'|t]</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!reifyret</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]reifybind</span> <span class="id">[in</span> <span class="id">LHS]IH1</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]reifybind</span>.<br/>
+&nbsp;&nbsp;<span class="id">case:</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p1</span>) (<span class="id">s,</span> <span class="id">l2</span>)) <span class="id">=&gt;</span> <span class="id">[[a'</span> <span class="id">[s'</span> <span class="id">l']]</span> <span class="id">|</span> <span class="id">]</span> <span class="id">/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">IH2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id">ifPn</span> <span class="id">=&gt;</span> <span class="id">_;</span> <span class="id">[rewrite</span> <span class="id">IH1|rewrite</span> <span class="id">IH2]</span>.<br/>
+<span class="id">-</span> <span class="id">revert</span> <span class="id">s</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">n</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">n'</span> <span class="id">IH</span> <span class="id">];</span> <span class="id">intros</span> <span class="id">s</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!reifyret</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">do</span> <span class="id">2</span> <span class="id">rewrite</span> <span class="id">reifybind</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">{}IHp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l2</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">intros</span> (<span class="id">a,</span> (<span class="id">s0,</span> <span class="id">l0</span>)) <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exact:</span> <span class="id">IH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">revert</span> <span class="id">s</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">fuel</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">fuel'</span> <span class="id">IH</span> <span class="id">];</span> <span class="id">intros</span> <span class="id">s</span> <span class="id">l2</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!reifyret</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">do</span> <span class="id">2</span> <span class="id">rewrite</span> <span class="id">reifybind</span> <span class="id">reifystget</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">c</span> <span class="id">s</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">do</span> <span class="id">2</span> <span class="id">rewrite</span> <span class="id">reifybind</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">IHp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">clear</span> <span class="id">IHp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l2</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">intros</span> (<span class="id">a,</span> (<span class="id">s0,</span> <span class="id">l0</span>)) <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">exact:</span> <span class="id">IH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!reifyret</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!reifystget</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!reifystput</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!reifystmark</span> <span class="id">rcons_cat</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">denote_continuation_prefix_independent</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">continuation_sub</span> <span class="id">m</span> <span class="id">-&gt;</span> <span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2,</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> <span class="id">m</span> (<span class="id">s,</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">res</span> <span class="id">:=</span> <span class="id">reify</span> <span class="id">m</span> (<span class="id">s,</span> <span class="id">l2</span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">res</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">None</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">res</span> <span class="id">=&gt;</span> <span class="id">Some</span> (<span class="id">res</span>.<span class="id">1,</span> (<span class="id">res</span>.<span class="id">2</span>.<span class="id">1,</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">res</span>.<span class="id">2</span>.<span class="id">2</span>))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+<span class="id">intros</span> <span class="id">[</span> <span class="id">k</span> <span class="id">Hk</span> <span class="id">]</span>.<br/>
+<span class="id">subst</span> <span class="id">m</span>.<br/>
+<span class="id">elim:</span> <span class="id">k</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">[A</span> <span class="id">a</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2|A</span> <span class="id">p</span> <span class="id">k</span> <span class="id">IH</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2]</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!reifyret</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">!reifybind</span>.<br/>
+<span class="id">rewrite</span> <span class="id">denote_prefix_independent</span> <span class="id">/=;</span> <span class="id">[</span> <span class="id">|</span> <span class="id">now</span> <span class="gallina-kwd">exists</span> <span class="id">p</span> <span class="id">]</span>.<br/>
+<span class="id">destruct</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l2</span>)) <span class="gallina-kwd">as</span> <span class="id">[</span> (<span class="id">a,</span> (<span class="id">s',</span> <span class="id">l</span>)) <span class="id">|</span> <span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">IH</span>.<br/>
+<span class="id">-</span> <span class="id">reflexivity</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_None_correct</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">l</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> (<span class="id">s,</span> <span class="id">k</span>) <span class="id">None</span> (<span class="id">s',</span> <span class="id">k'</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote_continuation</span> <span class="id">M</span> <span class="id">k</span>) (<span class="id">s,</span> <span class="id">l</span>) <span class="id">=</span> <span class="id">reify</span> (<span class="id">denote_continuation</span> <span class="id">M</span> <span class="id">k'</span>) (<span class="id">s',</span> <span class="id">l</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+<span class="id">intro</span> <span class="id">Hstep</span>.<br/>
+<span class="id">remember</span> (<span class="id">s,</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">sk</span> <span class="id">eqn:</span> <span class="id">Heq</span>.<br/>
+<span class="id">remember</span> <span class="id">None</span> <span class="gallina-kwd">as</span> <span class="id">o</span> <span class="id">eqn:</span> <span class="id">Heqo</span>.<br/>
+<span class="id">remember</span> (<span class="id">s',</span> <span class="id">k'</span>) <span class="gallina-kwd">as</span> <span class="id">sk'</span> <span class="id">eqn:</span> <span class="id">Heq'</span>.<br/>
+<span class="id">revert</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">l</span> <span class="id">Heq</span> <span class="id">Heq'</span> <span class="id">Heqo</span>.<br/>
+<span class="id">induction</span> <span class="id">Hstep</span> <span class="gallina-kwd">as</span><br/>
+&nbsp;<span class="id">[</span> <span class="id">s</span> <span class="id">A</span> <span class="id">a</span> <span class="id">f</span> <span class="id">|</span> <span class="id">s</span> <span class="id">A</span> <span class="id">B</span> <span class="id">p</span> <span class="id">f</span> <span class="id">g</span> <span class="id">|</span> <span class="id">s</span> <span class="id">A</span> <span class="id">p1</span> <span class="id">p2</span> <span class="id">k</span> <span class="id">|</span> <span class="id">s</span> <span class="id">A</span> <span class="id">p1</span> <span class="id">p2</span> <span class="id">k</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">s</span> <span class="id">p</span> <span class="id">k</span> <span class="id">|</span> <span class="id">s</span> <span class="id">n</span> <span class="id">p</span> <span class="id">k</span> <span class="id">|</span> <span class="id">fuel</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k</span> <span class="id">Htrue</span> <span class="id">|</span> <span class="id">fuel</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k</span> <span class="id">Hfalse</span> <span class="id">|</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">s</span> <span class="id">f</span> <span class="id">|</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">f</span> <span class="id">|</span> <span class="id">s</span> <span class="id">t</span> <span class="id">f</span> <span class="id">];</span><br/>
+&nbsp;<span class="id">intros</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">l</span> <span class="id">[=</span> <span class="id">Hs1</span> <span class="id">Hk1]</span> <span class="id">[=</span> <span class="id">Hs2</span> <span class="id">Hk2]</span> <span class="id">Heqo</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span> <span class="id">s1</span> <span class="id">k1</span> <span class="id">s2</span> <span class="id">k2</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">reifybind</span> <span class="id">reifyret</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span> <span class="id">s1</span> <span class="id">k1</span> <span class="id">s2</span> <span class="id">k2</span>.<br/>
+&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindA</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">k1</span> <span class="id">k2</span>.<br/>
+&nbsp;&nbsp;<span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">k1</span> <span class="id">k2</span>.<br/>
+&nbsp;&nbsp;<span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
+&nbsp;&nbsp;<span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindA</span>.<br/>
+&nbsp;&nbsp;<span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">reifybind</span> <span class="id">reifystget</span> <span class="id">Htrue</span> <span class="id">bindA</span>.<br/>
+&nbsp;&nbsp;<span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">reifybind</span> <span class="id">reifystget</span> <span class="id">Hfalse</span> <span class="id">bindretf</span>.<br/>
+&nbsp;&nbsp;<span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
+&nbsp;&nbsp;<span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span> <span class="id">s1</span> <span class="id">k1</span> <span class="id">s2</span> <span class="id">k2</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">reifybind</span> <span class="id">reifystget</span>.<br/>
+<span class="id">-</span> <span class="id">subst</span> <span class="id">s1</span> <span class="id">k1</span> <span class="id">s2</span> <span class="id">k2</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">reifybind</span> <span class="id">reifystput</span>.<br/>
+<span class="id">-</span> <span class="id">discriminate</span> <span class="id">Heqo</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_Some_correct</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">t</span> <span class="id">l</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step</span> (<span class="id">s,</span> <span class="id">k</span>) (<span class="id">Some</span> <span class="id">t</span>) (<span class="id">s',</span> <span class="id">k'</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote_continuation</span> <span class="id">M</span> <span class="id">k</span>) (<span class="id">s,</span> <span class="id">l</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote_continuation</span> <span class="id">M</span> <span class="id">k'</span>) (<span class="id">s',</span> <span class="id">rcons</span> <span class="id">l</span> <span class="id">t</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+<span class="id">intro</span> <span class="id">Hstep</span>.<br/>
+<span class="id">remember</span> (<span class="id">s,</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">sk</span> <span class="id">eqn:</span> <span class="id">Heq</span>.<br/>
+<span class="id">remember</span> (<span class="id">Some</span> <span class="id">t</span>) <span class="gallina-kwd">as</span> <span class="id">o</span> <span class="id">eqn:</span> <span class="id">Heqo</span>.<br/>
+<span class="id">remember</span> (<span class="id">s',</span> <span class="id">k'</span>) <span class="gallina-kwd">as</span> <span class="id">sk'</span> <span class="id">eqn:</span> <span class="id">Heq'</span>.<br/>
+<span class="id">revert</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">l</span> <span class="id">Heq</span> <span class="id">Heq'</span> <span class="id">Heqo</span>.<br/>
+<span class="id">induction</span> <span class="id">Hstep</span> <span class="gallina-kwd">as</span><br/>
+&nbsp;<span class="id">[</span> <span class="id">s</span> <span class="id">A</span> <span class="id">a</span> <span class="id">f</span> <span class="id">|</span> <span class="id">s</span> <span class="id">A</span> <span class="id">B</span> <span class="id">p</span> <span class="id">f</span> <span class="id">g</span> <span class="id">|</span> <span class="id">s</span> <span class="id">A</span> <span class="id">p1</span> <span class="id">p2</span> <span class="id">k</span> <span class="id">|</span> <span class="id">s</span> <span class="id">A</span> <span class="id">p1</span> <span class="id">p2</span> <span class="id">k</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">s</span> <span class="id">p</span> <span class="id">k</span> <span class="id">|</span> <span class="id">s</span> <span class="id">n</span> <span class="id">p</span> <span class="id">k</span> <span class="id">|</span> <span class="id">fuel</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k</span> <span class="id">Htrue</span> <span class="id">|</span> <span class="id">fuel</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k</span> <span class="id">Hfalse</span> <span class="id">|</span> <span class="id">s</span> <span class="id">c</span> <span class="id">p</span> <span class="id">k</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">s</span> <span class="id">f</span> <span class="id">|</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">f</span> <span class="id">|</span> <span class="id">s</span> <span class="id">t'</span> <span class="id">f</span> <span class="id">];</span><br/>
+&nbsp;<span class="id">intros</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">l</span> <span class="id">[=</span> <span class="id">Hs1</span> <span class="id">Hk1]</span> <span class="id">[=</span> <span class="id">Hs2</span> <span class="id">Hk2]</span> <span class="id">Heqo;</span> <span class="id">try</span> <span class="id">discriminate</span> <span class="id">Heqo</span>.<br/>
+<span class="id">subst</span> <span class="id">s1</span> <span class="id">k1</span> <span class="id">s2</span> <span class="id">k2</span>.<br/>
+<span class="id">injection</span> <span class="id">Heqo;</span> <span class="id">intro;</span> <span class="id">subst</span> <span class="id">t</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">reifybind</span> <span class="id">reifystmark</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_star_correct_gen</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">l</span> <span class="id">l'</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> (<span class="id">s,</span> <span class="id">k</span>) <span class="id">l'</span> (<span class="id">s',</span> <span class="id">k'</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote_continuation</span> <span class="id">M</span> <span class="id">k</span>) (<span class="id">s,</span> <span class="id">l</span>) <span class="id">=</span> <span class="id">reify</span> (<span class="id">denote_continuation</span> <span class="id">M</span> <span class="id">k'</span>) (<span class="id">s',</span> <span class="id">l++l'</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+<span class="id">intro</span> <span class="id">Hstep_star</span>.<br/>
+<span class="id">remember</span> (<span class="id">s,</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">sk</span> <span class="id">eqn:</span> <span class="id">Heq</span>.<br/>
+<span class="id">remember</span> (<span class="id">s',</span> <span class="id">k'</span>) <span class="gallina-kwd">as</span> <span class="id">sk'</span> <span class="id">eqn:</span> <span class="id">Heq'</span>.<br/>
+<span class="id">revert</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">l</span> <span class="id">Heq</span> <span class="id">Heq'</span>.<br/>
+<span class="id">induction</span> <span class="id">Hstep_star</span> <span class="gallina-kwd">as</span><br/>
+&nbsp;<span class="id">[</span> <span class="id">s</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;(<span class="id">s,</span> <span class="id">k</span>) (<span class="id">s',</span> <span class="id">k'</span>) (<span class="id">s'',</span> <span class="id">k''</span>) <span class="id">l'</span> <span class="id">Hstep</span> <span class="id">Hstep_star</span> <span class="id">IH</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;(<span class="id">s,</span> <span class="id">k</span>) (<span class="id">s',</span> <span class="id">k'</span>) (<span class="id">s'',</span> <span class="id">k''</span>) <span class="id">t</span> <span class="id">l'</span> <span class="id">Hstep</span> <span class="id">Hstep_star</span> <span class="id">IH</span> <span class="id">];</span><br/>
+&nbsp;<span class="id">intros</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">l1</span> <span class="id">Heq1</span> <span class="id">Heq2</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">cats0</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">Heq2;</span> <span class="id">rewrite</span> <span class="id">Heq1</span> <span class="id">=&gt;</span> <span class="id">-[&lt;-</span> <span class="id">&lt;-]</span>.<br/>
+<span class="id">-</span> <span class="id">move:</span> <span class="id">Heq1</span> <span class="id">Heq2</span> <span class="id">=&gt;</span> <span class="id">[&lt;-</span> <span class="id">&lt;-]</span> <span class="id">[&lt;-</span> <span class="id">&lt;-]</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">step_None_correct</span> <span class="gallina-kwd">with</span> (<span class="id">l</span> <span class="id">:=</span> <span class="id">l1</span>) <span class="gallina-kwd">in</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IH;</span> <span class="id">reflexivity</span>.<br/>
+<span class="id">-</span> <span class="id">move:</span> <span class="id">Heq1</span> <span class="id">Heq2</span> <span class="id">=&gt;</span> <span class="id">[&lt;-</span> <span class="id">&lt;-]</span> <span class="id">[&lt;-</span> <span class="id">&lt;-]</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">step_Some_correct</span> <span class="gallina-kwd">with</span> (<span class="id">l</span> <span class="id">:=</span> <span class="id">[]</span>) <span class="gallina-kwd">in</span> <span class="id">Hstep</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">cats0</span> <span class="gallina-kwd">at</span> <span class="id">1</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">denote_continuation_prefix_independent;</span> <span class="id">[</span> <span class="id">|</span> <span class="id">now</span> <span class="gallina-kwd">exists</span> <span class="id">k</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-&gt;</span> <span class="id">Hstep,</span> (<span class="id">IH</span> <span class="id">_</span> <span class="id">s''</span> <span class="id">_</span> <span class="id">k''</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="id">[</span> <span class="id">|</span> <span class="id">reflexivity</span> <span class="id">|</span> <span class="id">reflexivity</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;<span class="id">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">denote_continuation_prefix_independent;</span> <span class="id">[</span> <span class="id">reflexivity</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="id">eexists</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Proposition</span> <span class="id">step_star_correct</span><br/>
+&nbsp;&nbsp;(<span class="id">s</span> <span class="id">s'</span> <span class="id">:</span> <span class="id">S</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">p</span> <span class="id">:</span> <span class="id">program</span> <span class="id">A</span>) (<span class="id">l</span> <span class="id">:</span> <span class="id">list</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> (<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">stop</span> <span class="id">A</span>) <span class="id">l</span> (<span class="id">s',</span> <span class="id">stop</span> <span class="id">A</span> <span class="id">a</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">[]</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">a,</span> (<span class="id">s',</span> <span class="id">l</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+<span class="id">intro</span> <span class="id">Hss</span>.<br/>
+<span class="id">apply</span> <span class="id">step_star_correct_gen</span> <span class="gallina-kwd">with</span> (<span class="id">l</span> <span class="id">:=</span> <span class="id">[]</span>) <span class="gallina-kwd">in</span> <span class="id">Hss</span>.<br/>
+<span class="id">move:</span> <span class="id">Hss</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">reifyret</span> <span class="id">reifybind</span>.<br/>
+<span class="id">destruct</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">[]</span>)) <span class="gallina-kwd">as</span> <span class="id">[[a''</span> <span class="id">[s''</span> <span class="id">l'']]</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">reifyret</span> <span class="id">=&gt;</span> <span class="id">-[Heq3</span> <span class="id">&lt;-</span> <span class="id">&lt;-]</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">inj_pair2</span> <span class="gallina-kwd">in</span> <span class="id">Heq3</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">Heq3</span>.<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_star_complete_gen</span><br/>
+&nbsp;&nbsp;(<span class="id">s</span> <span class="id">s'</span> <span class="id">:</span> <span class="id">S</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">p</span> <span class="id">:</span> <span class="id">program</span> <span class="id">A</span>) (<span class="id">l1</span> <span class="id">l2</span> <span class="id">:</span> <span class="id">list</span> <span class="id">T</span>) <span class="id">f</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l1</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">a,</span> (<span class="id">s',</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> (<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">l2</span> (<span class="id">s',</span> <span class="id">f</span> <span class="id">a</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+<span class="id">revert</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">a</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">f</span>.<br/>
+<span class="id">induction</span> <span class="id">p</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">A</span> <span class="id">a</span> <span class="id">|</span> <span class="id">A</span> <span class="id">B</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">g</span> <span class="id">IHg</span> <span class="id">|</span> <span class="id">A</span> <span class="id">b</span> <span class="id">p1</span> <span class="id">IHp1</span> <span class="id">p2</span> <span class="id">IHp2</span> <span class="id">|</span><br/>
+&nbsp;&nbsp;<span class="id">n</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">|</span> <span class="id">fuel</span> <span class="id">c</span> <span class="id">p</span> <span class="id">IHp</span> <span class="id">|</span> <span class="id">|</span> <span class="id">s0'</span> <span class="id">|</span> <span class="id">t</span> <span class="id">];</span> <span class="id">cbn;</span><br/>
+&nbsp;<span class="id">intros</span> <span class="id">s</span> <span class="id">s'</span> <span class="id">a'</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">f</span> <span class="id">Heq</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">reifyret</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">injection</span> <span class="id">Heq;</span> <span class="id">clear</span> <span class="id">Heq;</span> <span class="id">intros;</span> <span class="id">subst</span> <span class="id">a'</span> <span class="id">s'</span>.<br/>
+&nbsp;&nbsp;<span class="id">replace</span> <span class="id">l2</span> <span class="gallina-kwd">with</span> (<span class="id">@nil</span> <span class="id">T</span>) <span class="gallina-kwd">by</span><br/>
+&nbsp;&nbsp;&nbsp;(<span class="id">revert</span> <span class="id">l2</span> <span class="id">H;</span> <span class="id">induction</span> <span class="id">l1;</span> <span class="id">[</span> <span class="id">tauto</span> <span class="id">|</span> <span class="id">intros</span> <span class="id">?</span> <span class="id">[=];</span> <span class="id">firstorder</span> <span class="id">]</span>).<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_ret</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">eapply</span> <span class="id">ss_step_None</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">apply</span> <span class="id">s_bind</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">move:</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">reifybind</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l1</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> (<span class="id">a,</span> (<span class="id">s0,</span> <span class="id">l0</span>)) <span class="id">Hp</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">denote_prefix_preserved</span> <span class="id">ltac:</span>(<span class="id">now</span> <span class="id">eexists</span>) <span class="id">Hp</span>) <span class="id">=&gt;</span> <span class="id">[l3</span> <span class="id">Hl3]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hl3</span> <span class="gallina-kwd">in</span> <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IHp</span> <span class="gallina-kwd">with</span> (<span class="id">f</span> <span class="id">:=</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">g</span> <span class="id">a</span> <span class="id">`;</span> <span class="id">f</span>)) <span class="gallina-kwd">in</span> <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">clear</span> <span class="id">IHp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">denote_prefix_preserved</span> <span class="id">ltac:</span>(<span class="id">now</span> <span class="id">eexists</span>) <span class="id">Heq</span>) <span class="id">=&gt;</span> <span class="id">[l4</span> <span class="id">Hl4]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hl4</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IHg</span> <span class="gallina-kwd">with</span> (<span class="id">f</span> <span class="id">:=</span> <span class="id">f</span>) <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">clear</span> <span class="id">IHg</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">subst</span> <span class="id">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">replace</span> <span class="id">l2</span> <span class="gallina-kwd">with</span> (<span class="id">l3</span> <span class="id">++</span> <span class="id">l4</span>) <span class="gallina-kwd">by</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">induction</span> <span class="id">l1;</span> <span class="id">cbn</span> <span class="gallina-kwd">in</span> <span class="id">Hl4;</span> <span class="id">[</span> <span class="id">congruence</span> <span class="id">|</span> <span class="id">injection</span> <span class="id">Hl4;</span> <span class="id">tauto</span> <span class="id">]</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">step_star_transitive</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">exact</span> <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">exact</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">destruct</span> <span class="id">b;</span> <span class="id">[</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">s_cond_true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">apply</span> <span class="id">IHp1</span> <span class="gallina-kwd">with</span> (<span class="id">l1</span> <span class="id">:=</span> <span class="id">l1</span>)<span class="id">;</span> <span class="id">exact</span> <span class="id">Heq</span> <span class="id">]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">s_cond_false</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">apply</span> <span class="id">IHp2</span> <span class="gallina-kwd">with</span> (<span class="id">l1</span> <span class="id">:=</span> <span class="id">l1</span>)<span class="id">;</span> <span class="id">exact</span> <span class="id">Heq</span> <span class="id">]</span><br/>
+&nbsp;&nbsp;<span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">revert</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">n</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">n'</span> <span class="id">IHn</span> <span class="id">];</span> <span class="id">intros</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">reifyret</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">injection</span> <span class="id">Heq;</span> <span class="id">clear</span> <span class="id">Heq;</span> <span class="id">intros;</span> <span class="id">subst</span> <span class="id">a'</span> <span class="id">s'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">replace</span> <span class="id">l2</span> <span class="gallina-kwd">with</span> (<span class="id">@nil</span> <span class="id">T</span>) <span class="gallina-kwd">by</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">revert</span> <span class="id">l2</span> <span class="id">H;</span> <span class="id">induction</span> <span class="id">l1;</span> <span class="id">[</span> <span class="id">tauto</span> <span class="id">|</span> <span class="id">intros</span> <span class="id">?</span> <span class="id">[=];</span> <span class="id">firstorder</span> <span class="id">]</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_repeat_O</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">reifybind</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l1</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">intros</span> (<span class="id">a,</span> (<span class="id">s0,</span> <span class="id">l0</span>)) <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">denote_prefix_preserved</span> <span class="id">ltac:</span>(<span class="id">now</span> <span class="id">eexists</span>) <span class="id">Hp</span>) <span class="id">=&gt;</span> <span class="id">[l3</span> <span class="id">Hl3]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hl3</span> <span class="id">{l0</span> <span class="id">Hl3}</span> <span class="gallina-kwd">in</span> <span class="id">Hp,</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">IHp</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">p_repeat</span> <span class="id">n'</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">Hp</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Heq':</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> (<span class="id">p_repeat</span> <span class="id">n'</span> <span class="id">p</span>)) (<span class="id">s0,</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l3</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">a',</span> (<span class="id">s',</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">denote_prefix_preserved</span> <span class="id">ltac:</span>(<span class="id">now</span> <span class="id">eexists</span>) <span class="id">Heq'</span>) <span class="id">=&gt;</span> <span class="id">[l4</span> <span class="id">Hl4]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hl4</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_repeat_S</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">-&gt;</span> <span class="id">:</span> <span class="id">l2</span> <span class="id">=</span> <span class="id">l3</span> <span class="id">++</span> <span class="id">l4</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move/</span>(<span class="id">congr1</span> (<span class="id">drop</span> (<span class="id">size</span> <span class="id">l1</span>))) <span class="id">:</span> <span class="id">Hl4;</span> <span class="id">rewrite</span> <span class="id">-catA</span> <span class="id">?drop_size_cat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">step_star_transitive;</span> <span class="id">[</span> <span class="id">eexact</span> <span class="id">IHp</span> <span class="id">|</span> <span class="id">eapply</span> <span class="id">IHn;</span> <span class="id">eexact</span> <span class="id">Heq</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">intro</span> <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">revert</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">fuel</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">fuel'</span> <span class="id">IHn</span> <span class="id">];</span> <span class="id">intros</span> <span class="id">s</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">reifyret</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">injection</span> <span class="id">Heq;</span> <span class="id">clear</span> <span class="id">Heq;</span> <span class="id">intros;</span> <span class="id">subst</span> <span class="id">a'</span> <span class="id">s'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">replace</span> <span class="id">l2</span> <span class="gallina-kwd">with</span> (<span class="id">@nil</span> <span class="id">T</span>) <span class="gallina-kwd">by</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">revert</span> <span class="id">l2</span> <span class="id">H;</span> <span class="id">induction</span> <span class="id">l1;</span> <span class="id">[</span> <span class="id">tauto</span> <span class="id">|</span> <span class="id">intros</span> <span class="id">?</span> <span class="id">[=];</span> <span class="id">firstorder</span> <span class="id">]</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_while_broke</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">reifybind</span> <span class="id">reifystget</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">cbn</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">c</span> <span class="id">s</span>)<span class="id">;</span> <span class="id">[</span> <span class="id">intro</span> <span class="id">Htrue</span> <span class="id">|</span> <span class="id">intro</span> <span class="id">Hfalse</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">Htrue</span> <span class="id">reifybind</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">l1</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">intros</span> (<span class="id">a,</span> (<span class="id">s0,</span> <span class="id">l0</span>)) <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">denote_prefix_preserved</span> <span class="id">ltac:</span>(<span class="id">now</span> <span class="id">eexists</span>) <span class="id">Hp</span>) <span class="id">=&gt;</span> <span class="id">[l3</span> <span class="id">Hl3]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hl3</span> <span class="id">{l0</span> <span class="id">Hl3}</span> <span class="gallina-kwd">in</span> <span class="id">Hp,</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">IHp</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">p_while</span> <span class="id">fuel'</span> <span class="id">c</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">f</span>) <span class="id">Hp</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Heq':</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> (<span class="id">p_while</span> <span class="id">fuel'</span> <span class="id">c</span> <span class="id">p</span>)) (<span class="id">s0,</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l3</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">a',</span> (<span class="id">s',</span> <span class="id">l1</span> <span class="id">++</span> <span class="id">l2</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move:</span> (<span class="id">denote_prefix_preserved</span> <span class="id">ltac:</span>(<span class="id">now</span> <span class="id">eexists</span>) <span class="id">Heq'</span>) <span class="id">=&gt;</span> <span class="id">[l4</span> <span class="id">Hl4]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hl4</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_while_true;</span> <span class="id">exact</span> <span class="id">Htrue</span> <span class="id">|</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">have</span> <span class="id">-&gt;</span> <span class="id">:</span> <span class="id">l2</span> <span class="id">=</span> <span class="id">l3</span> <span class="id">++</span> <span class="id">l4</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move/</span>(<span class="id">congr1</span> (<span class="id">drop</span> (<span class="id">size</span> <span class="id">l1</span>))) <span class="id">:</span> <span class="id">Hl4;</span> <span class="id">rewrite</span> <span class="id">-catA</span> <span class="id">?drop_size_cat</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">step_star_transitive;</span> <span class="id">[</span> <span class="id">eexact</span> <span class="id">IHp</span> <span class="id">|</span> <span class="id">eapply</span> <span class="id">IHn;</span> <span class="id">eexact</span> <span class="id">Heq</span> <span class="id">]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">intro</span> <span class="id">Hp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hp</span> <span class="gallina-kwd">in</span> <span class="id">Heq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">Hfalse</span> <span class="id">reifyret</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move=&gt;</span> <span class="id">[&lt;-</span> <span class="id">&lt;-]</span> <span class="id">/</span>(<span class="id">congr1</span> (<span class="id">drop</span> (<span class="id">size</span> <span class="id">l1</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">drop_size_cat</span> <span class="id">//</span> <span class="id">drop_size</span> <span class="id">=&gt;</span> <span class="id">&lt;-</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_while_false;</span> <span class="id">exact</span> <span class="id">Hfalse</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifystget</span>.<br/>
+&nbsp;&nbsp;<span class="id">move=&gt;</span> <span class="id">[&lt;-</span> <span class="id">&lt;-]</span> <span class="id">/</span>(<span class="id">congr1</span> (<span class="id">drop</span> (<span class="id">size</span> <span class="id">l1</span>))).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">drop_size_cat</span> <span class="id">//</span> <span class="id">drop_size</span> <span class="id">=&gt;</span> <span class="id">&lt;-</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_get</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifystput</span>.<br/>
+&nbsp;&nbsp;<span class="id">move=&gt;</span> <span class="id">[&lt;-</span> <span class="id">&lt;-]</span> <span class="id">/</span>(<span class="id">congr1</span> (<span class="id">drop</span> (<span class="id">size</span> <span class="id">l1</span>))).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">drop_size_cat</span> <span class="id">//</span> <span class="id">drop_size</span> <span class="id">=&gt;</span> <span class="id">&lt;-</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_None;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_put</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>.<br/>
+<span class="id">-</span> <span class="id">move:</span> <span class="id">Heq;</span> <span class="id">rewrite</span> <span class="id">reifystmark</span>.<br/>
+&nbsp;&nbsp;<span class="id">move=&gt;</span> <span class="id">[&lt;-</span> <span class="id">&lt;-]</span> <span class="id">/</span>(<span class="id">congr1</span> (<span class="id">drop</span> (<span class="id">size</span> <span class="id">l1</span>))).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">drop_size_cat</span> <span class="id">//</span> <span class="id">drop_rcons</span> <span class="id">//</span> <span class="id">drop_size</span> <span class="id">=&gt;</span> <span class="id">&lt;-</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id">ss_step_Some;</span> <span class="id">[</span> <span class="id">apply</span> <span class="id">s_mark</span> <span class="id">|</span> <span class="id">apply</span> <span class="id">ss_refl</span> <span class="id">]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Proposition</span> <span class="id">step_star_complete</span><br/>
+&nbsp;&nbsp;(<span class="id">s</span> <span class="id">s'</span> <span class="id">:</span> <span class="id">S</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">p</span> <span class="id">:</span> <span class="id">program</span> <span class="id">A</span>) (<span class="id">l</span> <span class="id">:</span> <span class="id">list</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">reify</span> (<span class="id">denote</span> <span class="id">M</span> <span class="id">_</span> <span class="id">p</span>) (<span class="id">s,</span> <span class="id">[]</span>) <span class="id">=</span> <span class="id">Some</span> (<span class="id">a,</span> (<span class="id">s',</span> <span class="id">l</span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">step_star</span> (<span class="id">s,</span> <span class="id">p</span> <span class="id">`;</span> <span class="id">stop</span> <span class="id">A</span>) <span class="id">l</span> (<span class="id">s',</span> <span class="id">stop</span> <span class="id">A</span> <span class="id">a</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+<span class="id">intro</span> <span class="id">Hp</span>.<br/>
+<span class="id">apply</span> <span class="id">step_star_complete_gen</span> <span class="gallina-kwd">with</span> (<span class="id">l1</span> <span class="id">:=</span> <span class="id">[]</span>).<br/>
+<span class="id">exact</span> <span class="id">Hp</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">semantics_equivalence</span>.<br/>
+<br/>
+<span class="vernacular">Notation</span> <span class="id">"'eT'&nbsp;x&nbsp;y"</span> <span class="id">:=</span> (<span class="id">@existT</span> <span class="id">_</span> <span class="id">_</span> <span class="id">x</span> <span class="id">y</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">200</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">"'e'&nbsp;x"</span> <span class="id">:=</span> (<span class="id">@exist</span> <span class="id">_</span> <span class="id">_</span> <span class="id">x</span> <span class="id">_</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">200</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">p_nonce</span> <span class="id">:</span> <span class="id">program</span> <span class="id">nat</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">n</span> <span class="id">&lt;-</span> <span class="id">p_get;</span><br/>
+&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">p_put</span> (<span class="id">S</span> <span class="id">n</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">p_mark</span> <span class="id">n;</span><br/>
+&nbsp;&nbsp;<span class="id">p_ret</span> <span class="id">n</span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">Eval</span> <span class="id">unfold</span> <span class="id">denote,</span> <span class="id">p_nonce</span> <span class="gallina-kwd">in</span> <span class="id">denote</span> <span class="id">_</span> <span class="id">nat</span> <span class="id">p_nonce</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">do_notation</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">nonce</span> <span class="id">:</span> (<span class="id">StateMonad.acto</span> (<span class="id">nat</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">nat</span>)<span class="id">%type</span>) <span class="id">nat</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">do</span> <span class="id">n</span> <span class="id">:</span> <span class="id">nat</span> <span class="id">&lt;-</span> <span class="id">st_get;</span><br/>
+&nbsp;&nbsp;<span class="id">do</span> <span class="id">_</span> <span class="id">:</span> <span class="id">unit</span> <span class="id">&lt;-</span> <span class="id">st_put</span> (<span class="id">S</span> <span class="id">n</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">do</span> <span class="id">_</span> <span class="id">:</span> <span class="id">unit</span> <span class="id">&lt;-</span> <span class="id">st_mark</span> <span class="id">n;</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">n</span>.<br/>
+<br/>
+<span class="vernacular">Compute</span> <span class="id">nonce</span> (<span class="id">0,</span> <span class="id">[]</span>).<br/>
+<span class="vernacular">Compute</span> (<span class="id">denote</span> (<span class="id">[the</span> <span class="id">stateTraceMonad</span> <span class="id">nat</span> <span class="id">nat</span> <span class="id">of</span> (<span class="id">StateMonad.acto</span> (<span class="id">nat</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">nat</span>)<span class="id">%type</span>)<span class="id">]</span>) <span class="id">nat</span> <span class="id">p_nonce</span>) (<span class="id">0,</span> <span class="id">[]</span>).<br/>
+<span class="vernacular">Compute</span> <span class="id">run_ss</span> <span class="id">p_nonce</span> <span class="id">0</span>.<br/>
+<br/>
+<span class="vernacular">Remark</span> <span class="id">denote_p_nonce</span> <span class="id">:</span> <span class="id">denote</span> <span class="id">_</span> <span class="id">nat</span> <span class="id">p_nonce</span> <span class="id">=</span> <span class="id">nonce</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+ <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
+<br/>
+<span class="id">Program</span> <span class="vernacular">Example</span> <span class="id">p_nonce_twice</span> <span class="id">:</span> <span class="id">program</span> <span class="id">bool_eqType</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">nonce</span> <span class="id">&lt;-</span> <span class="id">p_ret</span> (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">n</span> <span class="id">:</span> <span class="id">nat</span> <span class="id">&lt;-</span> <span class="id">p_get;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">_</span> <span class="id">:</span> <span class="id">unit</span> <span class="id">&lt;-</span> <span class="id">p_put</span> (<span class="id">S</span> <span class="id">n</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">_</span> <span class="id">:</span> <span class="id">unit</span> <span class="id">&lt;-</span> <span class="id">p_mark</span> <span class="id">n;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_ret</span> <span class="id">n</span> ) <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">x</span> <span class="id">&lt;-</span> <span class="id">nonce</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">y</span> <span class="id">&lt;-</span> <span class="id">nonce</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">p_ret</span> (<span class="id">x</span> <span class="id">==</span> <span class="id">y</span>).<br/>
+<br/>
+<span class="vernacular">Example</span> <span class="id">nonce_twice</span> <span class="id">:</span> <span class="id">[the</span> <span class="id">stateTraceMonad</span> <span class="id">nat</span> <span class="id">nat</span> <span class="id">of</span> (<span class="id">StateMonad.acto</span> (<span class="id">nat</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">nat</span>)<span class="id">%type</span>)<span class="id">]</span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">do</span> <span class="id">nonce</span> <span class="id">&lt;-</span> <span class="id">Ret</span> (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">n</span> <span class="id">:</span> <span class="id">nat</span> <span class="id">&lt;-</span> <span class="id">st_get;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">_</span> <span class="id">:</span> <span class="id">unit</span> <span class="id">&lt;-</span> <span class="id">st_put</span> (<span class="id">S</span> <span class="id">n</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">_</span> <span class="id">:</span> <span class="id">unit</span> <span class="id">&lt;-</span> <span class="id">st_mark</span> <span class="id">n;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">n</span> ) <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">do</span> <span class="id">x</span> <span class="id">&lt;-</span> <span class="id">nonce</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">do</span> <span class="id">y</span> <span class="id">&lt;-</span> <span class="id">nonce</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> (<span class="id">Nat.eqb</span> <span class="id">x</span> <span class="id">y</span>).<br/>
+<br/>
+<span class="vernacular">Compute</span> <span class="id">nonce_twice</span> (<span class="id">0,</span> <span class="id">[]</span>).<br/>
+<span class="vernacular">Compute</span> (<span class="id">denote</span> (<span class="id">[the</span> <span class="id">stateTraceMonad</span> <span class="id">nat</span> <span class="id">nat</span> <span class="id">of</span> (<span class="id">StateMonad.acto</span> (<span class="id">nat</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">nat</span>)<span class="id">%type</span>)<span class="id">]</span>) <span class="id">bool</span> <span class="id">p_nonce_twice</span>) (<span class="id">0,</span> <span class="id">[]</span>).<br/>
+<span class="vernacular">Compute</span> <span class="id">run_ss</span> <span class="id">p_nonce_twice</span> <span class="id">0</span>.<br/>
+<br/>
+<span class="vernacular">Remark</span> <span class="id">denote_p_nonce_twice</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">denote</span> <span class="id">_</span> <span class="id">bool</span> <span class="id">p_nonce_twice</span> <span class="id">=</span> <span class="id">nonce_twice</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+ <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">countdown</span> (<span class="id">fuel</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">:</span> <span class="id">[the</span> <span class="id">stateTraceMonad</span> <span class="id">nat</span> <span class="id">bool</span> <span class="id">of</span> (<span class="id">StateMonad.acto</span> (<span class="id">nat</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">bool</span>)<span class="id">%type</span>)<span class="id">]</span> <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">fuel</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">O</span> <span class="id">=&gt;</span> <span class="id">Ret</span> <span class="id">tt</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">S</span> <span class="id">fuel'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">n</span> <span class="id">&lt;-</span> <span class="id">st_get</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> (<span class="id">n</span> <span class="id">==</span> <span class="id">0</span>) <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">st_mark</span> <span class="id">true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">do</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">st_mark</span> <span class="id">false</span> <span class="id">;</span> <span class="id">do</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">st_put</span> (<span class="id">n-1</span>) <span class="id">;</span> <span class="id">countdown</span> <span class="id">fuel'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">p_countdown</span> (<span class="id">fuel</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">:</span> <span class="id">program</span> <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">fuel</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">O</span> <span class="id">=&gt;</span> <span class="id">p_ret</span> <span class="id">tt</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">S</span> <span class="id">fuel'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">n</span> <span class="id">&lt;-</span> <span class="id">p_get</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_cond</span> (<span class="id">n</span> <span class="id">==</span> <span class="id">0</span>) (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_mark</span> <span class="id">true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;) (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">p_mark</span> <span class="id">false</span> <span class="id">;</span> <span class="id">p_do</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">p_put</span> (<span class="id">n-1</span>) <span class="id">;</span> <span class="id">p_countdown</span> <span class="id">fuel'</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Compute</span> (<span class="id">countdown</span> <span class="id">100</span>) (<span class="id">5,</span> <span class="id">[]</span>).<br/>
+<span class="vernacular">Compute</span> (<span class="id">denote</span> <span class="id">[the</span> <span class="id">stateTraceMonad</span> <span class="id">nat</span> <span class="id">bool</span> <span class="id">of</span> (<span class="id">StateMonad.acto</span> (<span class="id">nat</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">bool</span>)<span class="id">%type</span>)<span class="id">]</span> <span class="id">unit</span> (<span class="id">p_countdown</span> <span class="id">100</span>)) (<span class="id">5,</span> <span class="id">[]</span>).<br/>
+<span class="vernacular">Compute</span> <span class="id">run_ss</span> (<span class="id">p_countdown</span> <span class="id">100</span>) <span class="id">5</span>.<br/>
+<br/>
+<span class="vernacular">Remark</span> <span class="id">denote_countdown</span> <span class="id">fuel</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">denote</span> (<span class="id">[the</span> <span class="id">stateTraceMonad</span> <span class="id">nat</span> <span class="id">bool</span> <span class="id">of</span> (<span class="id">StateMonad.acto</span> (<span class="id">nat</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">bool</span>)<span class="id">%type</span>)<span class="id">]</span>) <span class="id">unit</span> (<span class="id">p_countdown</span> <span class="id">fuel</span>) <span class="id">=</span> <span class="id">countdown</span> <span class="id">fuel</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+<span class="id">elim:</span> <span class="id">fuel</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">n</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[countdown</span> (<span class="id">S</span> <span class="id">n</span>)<span class="id">]/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">move</span> <span class="id">&lt;-</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Example</span> <span class="id">p_multiply</span> (<span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">:</span> <span class="id">program</span> (<span class="id">T</span> <span class="id">:=</span> <span class="id">unit</span>) <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">p_put</span> <span class="id">0</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">p_repeat</span> <span class="id">b</span> (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">x</span> <span class="id">&lt;-</span> <span class="id">p_get</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_put</span> (<span class="id">a</span> <span class="id">+</span> <span class="id">x</span>)<br/>
+&nbsp;&nbsp;).<br/>
+<br/>
+<span class="vernacular">Compute</span> <span class="id">run_ss</span> (<span class="id">p_multiply</span> <span class="id">3</span> <span class="id">7</span>) <span class="id">0</span>.<br/>
+<br/>
+<span class="vernacular">Example</span> <span class="id">p_division</span> (<span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">:</span> <span class="id">program</span> (<span class="id">T</span> <span class="id">:=</span> <span class="id">unit</span>) <span class="id">unit</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">_</span> <span class="id">&lt;-</span> <span class="id">p_put</span> (<span class="id">a,</span> <span class="id">0</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">p_while</span> <span class="id">a</span> (<span class="gallina-kwd">fun</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">b</span> <span class="id">&lt;=</span> <span class="id">fst</span> <span class="id">s</span>) (<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_do</span> <span class="id">s</span> <span class="id">&lt;-</span> <span class="id">p_get</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">p_put</span> (<span class="id">fst</span> <span class="id">s</span> <span class="id">-</span> <span class="id">b,</span> <span class="id">S</span> (<span class="id">snd</span> <span class="id">s</span>))<br/>
+&nbsp;&nbsp;).<br/>
+<br/>
+<span class="vernacular">Compute</span> <span class="id">run_ss</span> (<span class="id">p_division</span> <span class="id">22</span> <span class="id">7</span>) (<span class="id">0,</span> <span class="id">0</span>).<br/>
+<br/>
+<span class="vernacular">Compute</span> <span class="id">run_s_n</span> <span class="id">15</span> (<span class="id">p_division</span> <span class="id">22</span> <span class="id">7</span>) (<span class="id">stop</span> <span class="id">unit</span>) (<span class="id">0,</span> <span class="id">0</span>).<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

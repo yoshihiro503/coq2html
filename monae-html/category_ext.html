@@ -1,0 +1,466 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module category_ext</title>
+<meta name="description" content="Documentation of Coq module category_ext" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module category_ext</h1>
+<div class="coq">
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">boolp</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monae_lib</span> <span class="id">category</span>.<br/>
+<span class="vernacular">From</span> <span class="id">HB</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">structures</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                   Extra definitions in category theory                    
+                                                                           
+This file provides some constructions over categories.                     
+Module SliceCategory                                                       
+Module ProductCategory                                                     
+                                                                           
+TODO: bridge our definition to timany's abstract category:                 
+- define concretization (using yoneda embedding),                          
+- define opposite category (directly and by concretization),               
+- define presheaf category (directly?)                                     
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">category_scope</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">SliceCategory</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">def</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">C</span> <span class="id">:</span> <span class="id">category</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">C</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">slice</span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id">{</span> <span class="id">b</span> <span class="id">:</span> <span class="id">C</span> <span class="id">&amp;</span> <span class="id">{hom</span> <span class="id">b,</span> <span class="id">a}</span> <span class="id">}</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">slice_category_obj'</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">slice</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> <span class="id">existT</span> <span class="id">x</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">s</span> <span class="gallina-kwd">in</span> <span class="id">el</span> <span class="id">x</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">slice_category_obj</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id">slice_category_obj'</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">slice_category_inhom'</span> (<span class="id">b</span> <span class="id">c</span> <span class="id">:</span> <span class="id">slice</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">slice_category_obj</span> <span class="id">b</span> <span class="id">-&gt;</span> <span class="id">slice_category_obj</span> <span class="id">c</span>) <span class="id">-&gt;</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> <span class="id">existT</span> <span class="id">_</span> <span class="id">gb</span> <span class="id">:=</span> <span class="id">b</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> <span class="id">existT</span> <span class="id">_</span> <span class="id">gc</span> <span class="id">:=</span> <span class="id">c</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">Hom.sort</span> <span class="id">gb</span> <span class="id">=</span> <span class="id">gc</span> <span class="id">\o</span> <span class="id">f</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">slice_category_inhom</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id">slice_category_inhom'</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">el</span> <span class="id">:=</span> <span class="id">slice_category_obj</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">inhom</span> <span class="id">:=</span> <span class="id">slice_category_inhom</span>.<br/>
+<span class="vernacular">Lemma</span> <span class="id">slice_category_id</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">a</span> <span class="id">:</span> <span class="id">slice,</span> <span class="id">inhom</span> (<span class="id">@idfun</span> (<span class="id">el</span> <span class="id">a</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="gallina-kwd">by</span> <span class="id">case</span>. Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">slice_category_comp</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span class="id">aa</span> <span class="id">ba</span> <span class="id">ca</span> <span class="id">:</span> <span class="id">slice</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">el</span> <span class="id">aa</span> <span class="id">-&gt;</span> <span class="id">el</span> <span class="id">ba</span>) (<span class="id">g</span> <span class="id">:</span> <span class="id">el</span> <span class="id">ba</span> <span class="id">-&gt;</span> <span class="id">el</span> <span class="id">ca</span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">inhom</span> <span class="id">f</span> <span class="id">-&gt;</span> <span class="id">inhom</span> <span class="id">g</span> <span class="id">-&gt;</span> <span class="id">inhom</span> (<span class="id">g</span> <span class="id">\o</span> <span class="id">f</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="gallina-kwd">by</span> <span class="id">case=&gt;</span> <span class="id">aa</span> <span class="id">haa</span> <span class="id">[]</span> <span class="id">ba</span> <span class="id">hba</span> <span class="id">[]</span> <span class="id">ca</span> <span class="id">hca</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">g</span> <span class="id">-&gt;</span> <span class="id">-&gt;</span>. Qed.</div>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">isCategory.Build</span> <span class="id">slice</span> <span class="id">slice_category_obj</span> <span class="id">slice_category_inhom</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">slice_category_id</span> <span class="id">slice_category_comp</span>.<br/>
+<span class="vernacular">End</span> <span class="id">def</span>.<br/>
+<span class="vernacular">End</span> <span class="id">SliceCategory</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">ProductCategory</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">def</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">C</span> <span class="id">D</span> <span class="id">:</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Notation</span> <span class="id">obj</span> <span class="id">:=</span> (<span class="id">C</span> <span class="id">*</span> <span class="id">D</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">ele</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">obj</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> (<span class="id">el</span> <span class="id">X</span>.<span class="id">1</span> <span class="id">+</span> <span class="id">el</span> <span class="id">X</span>.<span class="id">2</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">separated</span> (<span class="id">X</span> <span class="id">Y</span> <span class="id">:</span> <span class="id">obj</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">x</span> <span class="id">:</span> <span class="id">el</span> <span class="id">X</span>.<span class="id">1,</span> <span class="gallina-kwd">exists</span> <span class="id">y</span> <span class="id">:</span> <span class="id">el</span> <span class="id">Y</span>.<span class="id">1,</span> <span class="id">f</span> (<span class="id">inl</span> <span class="id">x</span>) <span class="id">=</span> <span class="id">inl</span> <span class="id">y</span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">x</span> <span class="id">:</span> <span class="id">el</span> <span class="id">X</span>.<span class="id">2,</span> <span class="gallina-kwd">exists</span> <span class="id">y</span> <span class="id">:</span> <span class="id">el</span> <span class="id">Y</span>.<span class="id">2,</span> <span class="id">f</span> (<span class="id">inr</span> <span class="id">x</span>) <span class="id">=</span> <span class="id">inr</span> <span class="id">y</span>).<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">sepfstsnd</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">_sepfst</span> (<span class="id">X</span> <span class="id">Y</span> <span class="id">:</span> <span class="id">obj</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) <span class="id">:</span> <span class="id">separated</span> <span class="id">f</span> <span class="id">-&gt;</span> <span class="id">el</span> <span class="id">X</span>.<span class="id">1</span> <span class="id">-&gt;</span> <span class="id">el</span> <span class="id">Y</span>.<span class="id">1</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">case=&gt;</span> <span class="id">H</span> <span class="id">_</span> <span class="id">x</span>.<br/>
+<span class="id">move/cid</span> <span class="id">:</span> (<span class="id">H</span> <span class="id">x</span>) <span class="id">=&gt;</span> <span class="id">[y</span> <span class="id">_]</span>.<br/>
+<span class="id">exact</span> <span class="id">y</span>.<br/>
+Defined.</div>
+<span class="vernacular">Definition</span> <span class="id">sepfst</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id">_sepfst</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">_sepsnd</span> (<span class="id">X</span> <span class="id">Y</span> <span class="id">:</span> <span class="id">obj</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) <span class="id">:</span> <span class="id">separated</span> <span class="id">f</span> <span class="id">-&gt;</span> <span class="id">el</span> <span class="id">X</span>.<span class="id">2</span> <span class="id">-&gt;</span> <span class="id">el</span> <span class="id">Y</span>.<span class="id">2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+<span class="id">case=&gt;</span> <span class="id">_</span> <span class="id">H</span> <span class="id">x</span>.<br/>
+<span class="id">move/cid</span> <span class="id">:</span> (<span class="id">H</span> <span class="id">x</span>) <span class="id">=&gt;</span> <span class="id">[y</span> <span class="id">_]</span>.<br/>
+<span class="id">exact</span> <span class="id">y</span>.<br/>
+Defined.</div>
+<span class="vernacular">Definition</span> <span class="id">sepsnd</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id">_sepsnd</span>.<br/>
+<span class="vernacular">End</span> <span class="id">sepfstsnd</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">sepfstK</span> <span class="id">X</span> <span class="id">Y</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) (<span class="id">Hf</span> <span class="id">:</span> <span class="id">separated</span> <span class="id">f</span>) (<span class="id">x</span> <span class="id">:</span> <span class="id">el</span> <span class="id">X</span>.<span class="id">1</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">inl</span> (<span class="id">sepfst</span> <span class="id">Hf</span> <span class="id">x</span>) <span class="id">=</span> <span class="id">f</span> (<span class="id">inl</span> <span class="id">x</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+<span class="id">move:</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">f</span> <span class="id">Hf</span> <span class="id">=&gt;</span> <span class="id">[X1</span> <span class="id">X2]</span> <span class="id">[Y1</span> <span class="id">Y2]</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">[/=</span> <span class="id">Hf1</span> <span class="id">Hf2]</span> <span class="gallina-kwd">in</span> <span class="id">x</span> <span class="id">*</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> (<span class="id">cid</span> (<span class="id">Hf1</span> <span class="id">x</span>)) <span class="id">=&gt;</span> <span class="id">y</span> <span class="id">-&gt;</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">sepsndK</span> <span class="id">X</span> <span class="id">Y</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) (<span class="id">Hf</span> <span class="id">:</span> <span class="id">separated</span> <span class="id">f</span>) (<span class="id">x</span> <span class="id">:</span> <span class="id">el</span> <span class="id">X</span>.<span class="id">2</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">inr</span> (<span class="id">sepsnd</span> <span class="id">Hf</span> <span class="id">x</span>) <span class="id">=</span> <span class="id">f</span> (<span class="id">inr</span> <span class="id">x</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="id">move:</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">f</span> <span class="id">Hf</span> <span class="id">=&gt;</span> <span class="id">[X1</span> <span class="id">X2]</span> <span class="id">[Y1</span> <span class="id">Y2]</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">[/=</span> <span class="id">Hf1</span> <span class="id">Hf2]</span> <span class="gallina-kwd">in</span> <span class="id">x</span> <span class="id">*</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> (<span class="id">cid</span> (<span class="id">Hf2</span> <span class="id">x</span>)) <span class="id">=&gt;</span> <span class="id">y</span> <span class="id">-&gt;</span>.<br/>
+Qed.</div>
+<span class="vernacular">Definition</span> <span class="id">inhom</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">obj</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">B</span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">H</span> <span class="id">:</span> <span class="id">separated</span> <span class="id">f,</span> <span class="id">inhom</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">sepfst</span> <span class="id">H</span>) <span class="id">/\</span> <span class="id">inhom</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">sepsnd</span> <span class="id">H</span>).<br/>
+<span class="vernacular">Lemma</span> <span class="id">idfun_separated</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">obj</span>) <span class="id">:</span> <span class="id">@separated</span> <span class="id">X</span> <span class="id">X</span> <span class="id">idfun</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="gallina-kwd">by</span> <span class="id">split;</span> <span class="id">move=&gt;</span> <span class="id">x;</span> <span class="gallina-kwd">exists</span> <span class="id">x</span>. Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">comp_separated</span> (<span class="id">X</span> <span class="id">Y</span> <span class="id">Z</span> <span class="id">:</span> <span class="id">obj</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) (<span class="id">g</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">Y</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Z</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">separated</span> <span class="id">f</span> <span class="id">-&gt;</span> <span class="id">separated</span> <span class="id">g</span> <span class="id">-&gt;</span> <span class="id">separated</span> (<span class="id">g</span> <span class="id">\o</span> <span class="id">f</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">move:</span> <span class="id">f</span> <span class="id">g</span>.<br/>
+<span class="id">move:</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">Z</span> <span class="id">=&gt;</span> <span class="id">[X1</span> <span class="id">X2]</span> <span class="id">[Y1</span> <span class="id">Y2]</span> <span class="id">[Z1</span> <span class="id">Z2]</span> <span class="id">f</span> <span class="id">g</span> <span class="id">[/=</span> <span class="id">Hf1</span> <span class="id">Hf2]</span> <span class="id">[/=</span> <span class="id">Hg1</span> <span class="id">Hg2];</span> <span class="id">split=&gt;</span> <span class="id">x</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">case/cid:</span> (<span class="id">Hf1</span> <span class="id">x</span>)<span class="id">=&gt;</span> <span class="id">y</span> <span class="id">/=</span> <span class="id">-&gt;;</span> <span class="id">case/cid:</span> (<span class="id">Hg1</span> <span class="id">y</span>)<span class="id">=&gt;</span> <span class="id">z</span> <span class="id">/=</span> <span class="id">-&gt;;</span> <span class="gallina-kwd">exists</span> <span class="id">z</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">case/cid:</span> (<span class="id">Hf2</span> <span class="id">x</span>)<span class="id">=&gt;</span> <span class="id">y</span> <span class="id">/=</span> <span class="id">-&gt;;</span> <span class="id">case/cid:</span> (<span class="id">Hg2</span> <span class="id">y</span>)<span class="id">=&gt;</span> <span class="id">z</span> <span class="id">/=</span> <span class="id">-&gt;;</span> <span class="gallina-kwd">exists</span> <span class="id">z</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">sepfst_idfun</span> <span class="id">X</span> <span class="id">:</span> <span class="id">sepfst</span> (<span class="id">idfun_separated</span> <span class="id">X</span>) <span class="id">=</span> <span class="id">idfun</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">apply</span> <span class="id">funext=&gt;</span> <span class="id">x</span> <span class="id">/=</span>.<br/>
+<span class="id">suff:</span> <span class="id">inl</span> (<span class="id">B:=el</span> <span class="id">X</span>.<span class="id">2</span>) (<span class="id">sepfst</span> (<span class="id">idfun_separated</span> <span class="id">X</span>) <span class="id">x</span>) <span class="id">=</span> <span class="id">inl</span> <span class="id">x</span> <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">[=]</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">sepfstK</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">sepsnd_idfun</span> <span class="id">X</span> <span class="id">:</span> <span class="id">sepsnd</span> (<span class="id">idfun_separated</span> <span class="id">X</span>) <span class="id">=</span> <span class="id">idfun</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">apply</span> <span class="id">funext=&gt;</span> <span class="id">x</span> <span class="id">/=</span>.<br/>
+<span class="id">suff:</span> <span class="id">inr</span> (<span class="id">A:=el</span> <span class="id">X</span>.<span class="id">1</span>) (<span class="id">sepsnd</span> (<span class="id">idfun_separated</span> <span class="id">X</span>) <span class="id">x</span>) <span class="id">=</span> <span class="id">inr</span> <span class="id">x</span> <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">[=]</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">sepsndK</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">sepfst_comp</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">Z</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) (<span class="id">g</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">Y</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Z</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">Hf</span> <span class="id">:</span> <span class="id">separated</span> <span class="id">f</span>) (<span class="id">Hg</span> <span class="id">:</span> <span class="id">separated</span> <span class="id">g</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">sepfst</span> (<span class="id">comp_separated</span> <span class="id">Hf</span> <span class="id">Hg</span>) <span class="id">=</span> <span class="id">sepfst</span> <span class="id">Hg</span> <span class="id">\o</span> <span class="id">sepfst</span> <span class="id">Hf</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+<span class="id">apply</span> <span class="id">funext=&gt;</span> <span class="id">x</span> <span class="id">/=</span>.<br/>
+<span class="id">suff:</span> <span class="id">inl</span> (<span class="id">B</span> <span class="id">:=</span> <span class="id">el</span> <span class="id">Z</span>.<span class="id">2</span>) (<span class="id">sepfst</span> (<span class="id">comp_separated</span> <span class="id">Hf</span> <span class="id">Hg</span>) <span class="id">x</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">inl</span> (<span class="id">sepfst</span> <span class="id">Hg</span> (<span class="id">sepfst</span> <span class="id">Hf</span> <span class="id">x</span>)) <span class="gallina-kwd">by</span> <span class="id">case</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">3!sepfstK</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">sepsnd_comp</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">Z</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) (<span class="id">g</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">Y</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Z</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">Hf</span> <span class="id">:</span> <span class="id">separated</span> <span class="id">f</span>) (<span class="id">Hg</span> <span class="id">:</span> <span class="id">separated</span> <span class="id">g</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">sepsnd</span> (<span class="id">comp_separated</span> <span class="id">Hf</span> <span class="id">Hg</span>) <span class="id">=</span> <span class="id">sepsnd</span> <span class="id">Hg</span> <span class="id">\o</span> <span class="id">sepsnd</span> <span class="id">Hf</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+<span class="id">apply</span> <span class="id">funext=&gt;</span> <span class="id">x</span> <span class="id">/=</span>.<br/>
+<span class="id">suff:</span> <span class="id">inr</span> (<span class="id">A</span> <span class="id">:=</span> <span class="id">el</span> <span class="id">Z</span>.<span class="id">1</span>) (<span class="id">sepsnd</span> (<span class="id">comp_separated</span> <span class="id">Hf</span> <span class="id">Hg</span>) <span class="id">x</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">inr</span> (<span class="id">sepsnd</span> <span class="id">Hg</span> (<span class="id">sepsnd</span> <span class="id">Hf</span> <span class="id">x</span>)) <span class="gallina-kwd">by</span> <span class="id">case</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">3!sepsndK</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">idfun_inhom</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">obj</span>) <span class="id">:</span> <span class="id">@inhom</span> <span class="id">X</span> <span class="id">X</span> <span class="id">idfun</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+<span class="gallina-kwd">exists</span> (<span class="id">idfun_separated</span> <span class="id">X</span>)<span class="id">;</span> <span class="id">rewrite</span> <span class="id">sepfst_idfun</span> <span class="id">sepsnd_idfun;</span><br/>
+&nbsp;&nbsp;<span class="id">split;</span> <span class="id">exact:</span> <span class="id">idfun_inhom</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">comp_inhom</span> <span class="id">X</span> <span class="id">Y</span> <span class="id">Z</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">X</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Y</span>) (<span class="id">g</span> <span class="id">:</span> <span class="id">ele</span> <span class="id">Y</span> <span class="id">-&gt;</span> <span class="id">ele</span> <span class="id">Z</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">inhom</span> <span class="id">f</span> <span class="id">-&gt;</span> <span class="id">inhom</span> <span class="id">g</span> <span class="id">-&gt;</span> <span class="id">inhom</span> (<span class="id">g</span> <span class="id">\o</span> <span class="id">f</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+<span class="id">move=&gt;</span> <span class="id">[]</span> <span class="id">sf</span> <span class="id">[]</span> <span class="id">homfl</span> <span class="id">homfr</span> <span class="id">[]</span> <span class="id">sg</span> <span class="id">[]</span> <span class="id">homgl</span> <span class="id">homgr</span>.<br/>
+<span class="gallina-kwd">exists</span> (<span class="id">comp_separated</span> <span class="id">sf</span> <span class="id">sg</span>).<br/>
+<span class="id">rewrite</span> <span class="id">sepfst_comp</span> <span class="id">sepsnd_comp;</span> <span class="id">split;</span> <span class="id">exact:</span> <span class="id">funcomp_inhom</span>.<br/>
+Qed.</div>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">isCategory.Build</span> <span class="id">obj</span> <span class="id">ele</span><br/>
+&nbsp;&nbsp;<span class="id">inhom</span> <span class="id">idfun_inhom</span> <span class="id">comp_inhom</span>.<br/>
+<span class="vernacular">End</span> <span class="id">def</span>.<br/>
+<span class="vernacular">End</span> <span class="id">ProductCategory</span>.<br/>
+<span class="id">HB.export</span> <span class="id">ProductCategory</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">prodcat_homfstsnd</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">homfstsnd</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">_homfst</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">x,y}</span>) <span class="id">:</span> <span class="id">{hom</span> <span class="id">x</span>.<span class="id">1,</span> <span class="id">y</span>.<span class="id">1}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+<span class="id">move:</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">[f</span> <span class="id">[[/cid[sf</span> <span class="id">[+</span> <span class="id">_]]]]]</span>.<br/>
+<span class="id">move/isHom</span>.<span class="id">Axioms_/Hom</span>.<span class="vernacular">Class</span>.<br/>
+<span class="id">exact:</span> <span class="id">Hom.Pack</span>.<br/>
+Defined.</div>
+<span class="vernacular">Definition</span> <span class="id">homfst</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id">_homfst</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">_homsnd</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">x,y}</span>) <span class="id">:</span> <span class="id">{hom</span> <span class="id">x</span>.<span class="id">2,</span> <span class="id">y</span>.<span class="id">2}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+<span class="id">move:</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">[f</span> <span class="id">[[/cid[sf</span> <span class="id">[_]]]]]</span>.<br/>
+<span class="id">move/isHom</span>.<span class="id">Axioms_/Hom</span>.<span class="vernacular">Class</span>.<br/>
+<span class="id">exact:</span> <span class="id">Hom.Pack</span>.<br/>
+Defined.</div>
+<span class="vernacular">Definition</span> <span class="id">homsnd</span> <span class="id">:=</span> <span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id">_homsnd</span>.<br/>
+<span class="vernacular">End</span> <span class="id">homfstsnd</span>.<br/>
+<span class="vernacular">Lemma</span> <span class="id">homfst_idfun</span> <span class="id">x</span> <span class="id">:</span> <span class="id">homfst</span> (<span class="id">x:=x</span>) <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">=</span> <span class="id">[hom</span> <span class="id">idfun]</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+<span class="id">apply/hom_ext;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span> <span class="id">=&gt;</span> <span class="id">x1</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">i</span> <span class="id">[i1</span> <span class="id">i2]</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">i</span> <span class="id">=</span> <span class="id">ProductCategory.idfun_separated</span> <span class="id">_</span>)<span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">ProductCategory.sepfst_idfun</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">homsnd_idfun</span> <span class="id">x</span> <span class="id">:</span> <span class="id">homsnd</span> (<span class="id">x:=x</span>) <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">=</span> <span class="id">[hom</span> <span class="id">idfun]</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">apply/hom_ext;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span> <span class="id">=&gt;</span> <span class="id">x1</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">i</span> <span class="id">[i1</span> <span class="id">i2]</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">i</span> <span class="id">=</span> <span class="id">ProductCategory.idfun_separated</span> <span class="id">_</span>)<span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">ProductCategory.sepsnd_idfun</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">homfst_comp</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">z</span> <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">x,y}</span>) (<span class="id">g</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">y,z}</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">homfst</span> <span class="id">[hom</span> <span class="id">g</span> <span class="id">\o</span> <span class="id">f]</span> <span class="id">=</span> <span class="id">[hom</span> <span class="id">homfst</span> <span class="id">g</span> <span class="id">\o</span> <span class="id">homfst</span> <span class="id">f]</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="id">rewrite</span> <span class="id">/homfst</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">//=</span> <span class="id">gh</span> <span class="id">[gh1</span> <span class="id">gh2]</span>.<br/>
+<span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=</span>.<br/>
+<span class="id">destruct</span> <span class="id">g</span> <span class="gallina-kwd">as</span> <span class="id">[g</span> <span class="id">[[g']]]</span>.<br/>
+<span class="id">destruct</span> <span class="id">f</span> <span class="gallina-kwd">as</span> <span class="id">[f</span> <span class="id">[[f']]]</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">g_</span> <span class="id">[g1</span> <span class="id">g2]</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">f_</span> <span class="id">[f1</span> <span class="id">f2]</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-ProductCategory</span>.<span class="id">sepfst_comp</span>.<br/>
+<span class="id">congr</span> (<span class="id">ProductCategory.sepfst</span> <span class="id">_</span> <span class="id">_</span>).<br/>
+<span class="id">exact/proof_irr</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">homsnd_comp</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">z</span> <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">x,y}</span>) (<span class="id">g</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">y,z}</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">homsnd</span> <span class="id">[hom</span> <span class="id">g</span> <span class="id">\o</span> <span class="id">f]</span> <span class="id">=</span> <span class="id">[hom</span> <span class="id">homsnd</span> <span class="id">g</span> <span class="id">\o</span> <span class="id">homsnd</span> <span class="id">f]</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+<span class="id">rewrite</span> <span class="id">/homsnd</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">//=</span> <span class="id">gh</span> <span class="id">[gh1</span> <span class="id">gh2]</span>.<br/>
+<span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=</span>.<br/>
+<span class="id">destruct</span> <span class="id">g</span> <span class="gallina-kwd">as</span> <span class="id">[g</span> <span class="id">[[g']]]</span>.<br/>
+<span class="id">destruct</span> <span class="id">f</span> <span class="gallina-kwd">as</span> <span class="id">[f</span> <span class="id">[[f']]]</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">g_</span> <span class="id">[g1</span> <span class="id">g2]</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">f_</span> <span class="id">[f1</span> <span class="id">f2]</span> <span class="id">/=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-ProductCategory</span>.<span class="id">sepsnd_comp</span>.<br/>
+<span class="id">congr</span> (<span class="id">ProductCategory.sepsnd</span> <span class="id">_</span> <span class="id">_</span>).<br/>
+<span class="id">exact/proof_irr</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">homfstK</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">x,y}</span>) (<span class="id">i</span> <span class="id">:</span> <span class="id">el</span> <span class="id">x</span>.<span class="id">1</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">inl</span> (<span class="id">homfst</span> <span class="id">f</span> <span class="id">i</span>) <span class="id">=</span> <span class="id">f</span> (<span class="id">inl</span> <span class="id">i</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+<span class="id">case:</span> <span class="id">f=&gt;</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">[[Hf]]</span>.<br/>
+<span class="id">case:</span> (<span class="id">cid</span> <span class="id">_</span>)<span class="id">=&gt;</span> <span class="id">-[]</span> <span class="id">sf1</span> <span class="id">sf2</span> <span class="id">[]</span> <span class="id">Hf1</span> <span class="id">Hf2</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> (<span class="id">cid</span> <span class="id">_</span>)<span class="id">=&gt;</span> <span class="id">j</span> <span class="id">-&gt;</span>.<br/>
+Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">homsndK</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">x,y}</span>) (<span class="id">i</span> <span class="id">:</span> <span class="id">el</span> <span class="id">x</span>.<span class="id">2</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">inr</span> (<span class="id">homsnd</span> <span class="id">f</span> <span class="id">i</span>) <span class="id">=</span> <span class="id">f</span> (<span class="id">inr</span> <span class="id">i</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
+<div class="proofscript" id="proof22">
+<span class="id">case:</span> <span class="id">f=&gt;</span> <span class="id">/=</span> <span class="id">f</span> <span class="id">[[Hf]]</span>.<br/>
+<span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">-[sf1</span> <span class="id">sf2]</span> <span class="id">[Hf1</span> <span class="id">Hf2]</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">j</span> <span class="id">-&gt;</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id">prodcat_homfstsnd</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">prodCat_pairhom</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">:</span> <span class="id">A</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">b1</span> <span class="id">b2</span> <span class="id">:</span> <span class="id">B</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">a1,</span> <span class="id">a2}</span>) (<span class="id">g</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">b1,</span> <span class="id">b2}</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">pairhom'</span> (<span class="id">ab</span> <span class="id">:</span> <span class="id">el</span> <span class="id">a1</span> <span class="id">+</span> <span class="id">el</span> <span class="id">b1</span>) <span class="id">:</span> <span class="id">el</span> <span class="id">a2</span> <span class="id">+</span> <span class="id">el</span> <span class="id">b2</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ab</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">inl</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">inl</span> (<span class="id">f</span> <span class="id">a</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">inr</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">inr</span> (<span class="id">g</span> <span class="id">b</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<span class="vernacular">Lemma</span> <span class="id">pairhom'_in_hom</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">inhom</span> (<span class="id">pairhom'</span> <span class="id">:</span> <span class="id">el</span> (<span class="id">a1,</span> <span class="id">b1</span>).<span class="id">1</span> <span class="id">+</span> <span class="id">el</span> (<span class="id">a1,</span> <span class="id">b1</span>).<span class="id">2</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">el</span> (<span class="id">a2,</span> <span class="id">b2</span>).<span class="id">1</span> <span class="id">+</span> <span class="id">el</span> (<span class="id">a2,</span> <span class="id">b2</span>).<span class="id">2</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
+<div class="proofscript" id="proof23">
+<span class="id">rewrite</span> <span class="id">/inhom</span> <span class="id">/=</span> <span class="id">/ProductCategory</span>.<span class="id">inhom</span> <span class="id">/=</span>.<br/>
+<span class="id">set</span> <span class="id">s</span> <span class="id">:=</span> <span class="id">ProductCategory.separated</span> <span class="id">_</span>.<br/>
+<span class="id">have</span> <span class="id">[/=</span> <span class="id">s1</span> <span class="id">s2]</span> <span class="id">:</span> <span class="id">s</span> <span class="gallina-kwd">by</span> <span class="id">split</span> <span class="id">=&gt;</span> <span class="id">/=</span> <span class="id">x;</span> <span class="id">[exists</span> (<span class="id">f</span> <span class="id">x</span>) <span class="id">|</span> <span class="gallina-kwd">exists</span> (<span class="id">g</span> <span class="id">x</span>)<span class="id">]</span>.<br/>
+<span class="gallina-kwd">exists</span> (<span class="id">conj</span> <span class="id">s1</span> <span class="id">s2</span>)<span class="id">;</span> <span class="id">split</span>.<br/>
+<span class="id">-</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id">ProductCategory.sepfst</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">h</span> <span class="id">=</span> <span class="id">f</span>)<span class="id">;</span> <span class="id">first</span> <span class="id">exact:</span> <span class="id">isHom_inhom</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span> <span class="id">=&gt;</span> <span class="id">?;</span> <span class="id">rewrite</span> <span class="id">/h</span> <span class="id">/=;</span> <span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">?</span> <span class="id">[]</span>.<br/>
+<span class="id">-</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id">ProductCategory.sepsnd</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">h</span> <span class="id">=</span> <span class="id">g</span>)<span class="id">;</span> <span class="id">first</span> <span class="id">exact:</span> <span class="id">isHom_inhom</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span> <span class="id">=&gt;</span> <span class="id">?;</span> <span class="id">rewrite</span> <span class="id">/h</span> <span class="id">/=;</span> <span class="id">case:</span> <span class="id">cid</span> <span class="id">=&gt;</span> <span class="id">?</span> <span class="id">[]</span>.<br/>
+Qed.</div>
+<span class="vernacular">Definition</span> <span class="id">pairhom</span> <span class="id">:</span> <span class="id">{hom</span> (<span class="id">a1,</span> <span class="id">b1</span>)<span class="id">,</span> (<span class="id">a2,</span> <span class="id">b2</span>)<span class="id">}</span> <span class="id">:=</span> <span class="id">Hom.Pack</span> (<span class="id">Hom.Class</span> (<span class="id">isHom.Axioms_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">pairhom'_in_hom</span>)).<br/>
+<span class="vernacular">End</span> <span class="id">prodCat_pairhom</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">pairhom_idfun</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">category</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>).<br/>
+<span class="vernacular">Lemma</span> <span class="id">pairhom_idfun</span> <span class="id">:</span> <span class="id">pairhom</span> (<span class="id">a1:=a</span>) (<span class="id">b1:=b</span>) <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">=</span> <span class="id">[hom</span> <span class="id">idfun]</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
+<div class="proofscript" id="proof24">
+ <span class="gallina-kwd">by</span> <span class="id">apply/hom_ext/funext=&gt;</span> <span class="id">-[]</span> <span class="id">x</span> <span class="id">/=</span>. Qed.</div>
+<span class="vernacular">End</span> <span class="id">pairhom_idfun</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">pairhom_comp</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">category</span>) (<span class="id">a1</span> <span class="id">a2</span> <span class="id">a3</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">b1</span> <span class="id">b2</span> <span class="id">b3</span> <span class="id">:</span> <span class="id">B</span>).<br/>
+<span class="vernacular">Variables</span> (<span class="id">fa</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">a1,</span> <span class="id">a2}</span>) (<span class="id">ga</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">a2,</span> <span class="id">a3}</span>).<br/>
+<span class="vernacular">Variables</span> (<span class="id">fb</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">b1,</span> <span class="id">b2}</span>) (<span class="id">gb</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">b2,</span> <span class="id">b3}</span>).<br/>
+<span class="vernacular">Lemma</span> <span class="id">pairhom_comp</span> <span class="id">:</span> <span class="id">pairhom</span> <span class="id">[hom</span> <span class="id">ga</span> <span class="id">\o</span> <span class="id">fa]</span> <span class="id">[hom</span> <span class="id">gb</span> <span class="id">\o</span> <span class="id">fb]</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">[hom</span> <span class="id">pairhom</span> <span class="id">ga</span> <span class="id">gb</span> <span class="id">\o</span> <span class="id">pairhom</span> <span class="id">fa</span> <span class="id">fb]</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
+<div class="proofscript" id="proof25">
+ <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">/hom_ext/funext=&gt;</span> <span class="id">-[]</span> <span class="id">x</span>. Qed.</div>
+<span class="vernacular">End</span> <span class="id">pairhom_comp</span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">pairhomK</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">x1</span> <span class="id">x2</span> <span class="id">:</span> <span class="id">A</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">y1</span> <span class="id">y2</span> <span class="id">:</span> <span class="id">B</span>.<br/>
+<span class="vernacular">Lemma</span> <span class="id">pairhomK</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> (<span class="id">x1,y1</span>)<span class="id">,</span>(<span class="id">x2,y2</span>)<span class="id">}</span>) <span class="id">:</span> <span class="id">pairhom</span> (<span class="id">homfst</span> <span class="id">f</span>) (<span class="id">homsnd</span> <span class="id">f</span>) <span class="id">=</span> <span class="id">f</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
+<div class="proofscript" id="proof26">
+<span class="id">apply/hom_ext/funext=&gt;</span> <span class="id">-[]</span> <span class="id">i</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-homfstK</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-homsndK</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id">pairhomK</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">papply_left</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">def</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">:</span> <span class="id">category</span>) (<span class="id">F</span> <span class="id">:</span> <span class="id">{functor</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">C}</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">acto</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">C</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">F</span> (<span class="id">a,</span> <span class="id">b</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">actm</span> (<span class="id">b1</span> <span class="id">b2</span> <span class="id">:</span> <span class="id">B</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">b1,</span> <span class="id">b2}</span>) <span class="id">:</span> <span class="id">{hom</span> <span class="id">acto</span> <span class="id">b1,</span> <span class="id">acto</span> <span class="id">b2}</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">F</span> <span class="id">#</span> <span class="id">pairhom</span> <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">f</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">actm_id</span> <span class="id">:</span> <span class="id">FunctorLaws.id</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
+<div class="proofscript" id="proof27">
+<span class="id">move=&gt;</span> <span class="id">D;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id">pairhom</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">h</span> <span class="id">=</span> <span class="id">[hom</span> <span class="id">idfun]</span>) <span class="id">?functor_id_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span class="id">actm_comp</span> <span class="id">:</span> <span class="id">FunctorLaws.comp</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
+<div class="proofscript" id="proof28">
+<span class="id">move=&gt;</span> <span class="id">b</span> <span class="id">b0</span> <span class="id">b1</span> <span class="id">g</span> <span class="id">h;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">i</span> <span class="id">:=</span> <span class="id">pairhom</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">i</span> <span class="id">=</span> <span class="id">[hom</span> (<span class="id">pairhom</span> <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">g</span>) <span class="id">\o</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">pairhom</span> <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">h</span>)<span class="id">]</span>) <span class="id">?functor_o_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">isFunctor.Build</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">actm_id</span> <span class="id">actm_comp</span>.<br/>
+<span class="vernacular">End</span> <span class="id">def</span>.<br/>
+<span class="vernacular">End</span> <span class="id">papply_left</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">papply_right</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">def</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">:</span> <span class="id">category</span>) (<span class="id">F</span> <span class="id">:</span> <span class="id">{functor</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">C}</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">acto</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">C</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">F</span> (<span class="id">a,</span> <span class="id">b</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">actm</span> (<span class="id">a1</span> <span class="id">a2</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">a1,</span> <span class="id">a2}</span>) <span class="id">:</span> <span class="id">{hom</span> <span class="id">acto</span> <span class="id">a1,</span> <span class="id">acto</span> <span class="id">a2}</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">F</span> <span class="id">#</span> <span class="id">pairhom</span> <span class="id">f</span> <span class="id">[hom</span> <span class="id">idfun]</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">actm_id</span> <span class="id">:</span> <span class="id">FunctorLaws.id</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
+<div class="proofscript" id="proof29">
+<span class="id">move=&gt;</span> <span class="id">D;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id">pairhom</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">h</span> <span class="id">=</span> <span class="id">[hom</span> <span class="id">idfun]</span>) <span class="id">?functor_id_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span class="id">actm_comp</span> <span class="id">:</span> <span class="id">FunctorLaws.comp</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
+<div class="proofscript" id="proof30">
+<span class="id">move=&gt;</span> <span class="id">a</span> <span class="id">a0</span> <span class="id">a1</span> <span class="id">g</span> <span class="id">h;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">i</span> <span class="id">:=</span> <span class="id">pairhom</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">i</span> <span class="id">=</span> <span class="id">[hom</span> (<span class="id">pairhom</span> <span class="id">g</span> <span class="id">[hom</span> <span class="id">idfun]</span>) <span class="id">\o</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">pairhom</span> <span class="id">h</span> <span class="id">[hom</span> <span class="id">idfun]</span>)<span class="id">]</span>) <span class="id">?functor_o_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">isFunctor.Build</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">actm_id</span> <span class="id">actm_comp</span>.<br/>
+<span class="vernacular">End</span> <span class="id">def</span>.<br/>
+<span class="vernacular">End</span> <span class="id">papply_right</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">ProductFunctor</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">def</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">A1</span> <span class="id">B1</span> <span class="id">A2</span> <span class="id">B2</span> <span class="id">:</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">F1</span> <span class="id">:</span> <span class="id">{functor</span> <span class="id">A1</span> <span class="id">-&gt;</span> <span class="id">B1}</span>) (<span class="id">F2</span> <span class="id">:</span> <span class="id">{functor</span> <span class="id">A2</span> <span class="id">-&gt;</span> <span class="id">B2}</span>).<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">A</span> <span class="id">:=</span> (<span class="id">A1</span> <span class="id">*</span> <span class="id">A2</span>)<span class="id">%type</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">B</span> <span class="id">:=</span> (<span class="id">B1</span> <span class="id">*</span> <span class="id">B2</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">acto</span> (<span class="id">x</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">B</span> <span class="id">:=</span> <span class="id">pair</span> (<span class="id">F1</span> <span class="id">x</span>.<span class="id">1</span>) (<span class="id">F2</span> <span class="id">x</span>.<span class="id">2</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">actm</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">x,y}</span>) <span class="id">:</span> <span class="id">{hom</span> <span class="id">acto</span> <span class="id">x,</span> <span class="id">acto</span> <span class="id">y}</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">pairhom</span> (<span class="id">F1</span> <span class="id">#</span> <span class="id">homfst</span> <span class="id">f</span>) (<span class="id">F2</span> <span class="id">#</span> <span class="id">homsnd</span> <span class="id">f</span>).<br/>
+<span class="vernacular">Let</span> <span class="id">actm_id</span> <span class="id">:</span> <span class="id">FunctorLaws.id</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
+<div class="proofscript" id="proof31">
+<span class="id">move=&gt;</span> <span class="id">a</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/actm</span> <span class="id">homfst_idfun</span> <span class="id">homsnd_idfun</span> <span class="id">2!functor_id_hom</span> <span class="id">pairhom_idfun</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span class="id">actm_comp</span> <span class="id">:</span> <span class="id">FunctorLaws.comp</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof32')">Proof.</span></div>
+<div class="proofscript" id="proof32">
+<span class="id">move=&gt;</span> <span class="id">[]</span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">[]</span> <span class="id">b1</span> <span class="id">b2</span> <span class="id">[]</span> <span class="id">c1</span> <span class="id">c2</span> <span class="id">g</span> <span class="id">h</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/actm</span> <span class="id">homfst_comp</span> <span class="id">homsnd_comp</span> <span class="id">2!functor_o_hom</span> <span class="id">pairhom_comp</span>.<br/>
+Qed.</div>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">isFunctor.Build</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">actm_id</span> <span class="id">actm_comp</span>.<br/>
+<span class="vernacular">End</span> <span class="id">def</span>.<br/>
+<span class="vernacular">End</span> <span class="id">ProductFunctor</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">alpha_left</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">alpha_left</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">D</span> <span class="id">:</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">F</span> <span class="id">:</span> <span class="id">{functor</span> <span class="id">[the</span> <span class="id">category</span> <span class="id">of</span> ((<span class="id">A</span> <span class="id">*</span> <span class="id">B</span>) <span class="id">*</span> <span class="id">C</span>)<span class="id">%type]</span> <span class="id">-&gt;</span> <span class="id">D}</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">acto</span> <span class="id">:</span> <span class="id">C</span> <span class="id">-&gt;</span> <span class="id">D</span> <span class="id">:=</span> <span class="id">papply_left.acto</span> <span class="id">F</span> (<span class="id">a,</span> <span class="id">b</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">actm</span> (<span class="id">c1</span> <span class="id">c2</span> <span class="id">:</span> <span class="id">C</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">{hom</span> <span class="id">c1,</span> <span class="id">c2}</span>) <span class="id">:</span> <span class="id">{hom</span> <span class="id">acto</span> <span class="id">c1,</span> <span class="id">acto</span> <span class="id">c2}</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">F</span> <span class="id">#</span> <span class="id">pairhom</span> <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">f</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">actm_id</span> <span class="id">:</span> <span class="id">FunctorLaws.id</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof33')">Proof.</span></div>
+<div class="proofscript" id="proof33">
+<span class="id">move=&gt;</span> <span class="id">c0;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id">pairhom</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">h</span> <span class="id">=</span> <span class="id">[hom</span> <span class="id">idfun]</span>) <span class="id">?functor_id_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span class="id">actm_comp</span> <span class="id">:</span> <span class="id">FunctorLaws.comp</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof34')">Proof.</span></div>
+<div class="proofscript" id="proof34">
+<span class="id">move=&gt;</span> <span class="id">c</span> <span class="id">c0</span> <span class="id">c1</span> <span class="id">g</span> <span class="id">h;</span> <span class="id">rewrite</span> <span class="id">/actm;</span> <span class="id">set</span> <span class="id">i</span> <span class="id">:=</span> <span class="id">pairhom</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">i</span> <span class="id">=</span> <span class="id">[hom</span> (<span class="id">pairhom</span> <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">g</span>) <span class="id">\o</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">pairhom</span> <span class="id">[hom</span> <span class="id">idfun]</span> <span class="id">h</span>)<span class="id">]</span>) <span class="id">?functor_o_hom</span> <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply/hom_ext</span> <span class="id">=&gt;</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">boolp.funeqE</span><span class="id">;</span> <span class="id">case</span>.<br/>
+Qed.</div>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">isFunctor.Build</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">actm_id</span> <span class="id">actm_comp</span>.<br/>
+<span class="vernacular">End</span> <span class="id">alpha_left</span>.<br/>
+<span class="vernacular">End</span> <span class="id">alpha_left</span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">ProductCategoryAssoc</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">def</span>.<br/>
+<span class="vernacular">Variables</span> <span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">:</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">acto</span> (<span class="id">x</span> <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> (<span class="id">B</span> <span class="id">*</span> <span class="id">C</span>)) <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> <span class="id">B</span> <span class="id">*</span> <span class="id">C</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> (<span class="id">a,</span> (<span class="id">b,</span> <span class="id">c</span>)) <span class="id">:=</span> <span class="id">x</span> <span class="gallina-kwd">in</span> ((<span class="id">a,</span> <span class="id">b</span>)<span class="id">,</span> <span class="id">c</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">actm</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">A</span> <span class="id">*</span> (<span class="id">B</span> <span class="id">*</span> <span class="id">C</span>)) <span class="id">:</span> <span class="id">{hom</span> <span class="id">x,y}</span> <span class="id">-&gt;</span> <span class="id">{hom</span> <span class="id">acto</span> <span class="id">x,</span> <span class="id">acto</span> <span class="id">y}</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">x,</span> <span class="id">y</span> <span class="gallina-kwd">with</span> (<span class="id">xa,</span> (<span class="id">xb,</span> <span class="id">xc</span>))<span class="id">,</span> (<span class="id">ya,</span> (<span class="id">yb,</span> <span class="id">yc</span>)) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">pairhom</span> (<span class="id">pairhom</span> (<span class="id">homfst</span> <span class="id">f</span>) (<span class="id">homfst</span> (<span class="id">homsnd</span> <span class="id">f</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">homsnd</span> (<span class="id">homsnd</span> <span class="id">f</span>))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">actm_id</span> <span class="id">:</span> <span class="id">FunctorLaws.id</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof35')">Proof.</span></div>
+<div class="proofscript" id="proof35">
+<span class="id">move=&gt;</span> <span class="id">[a</span> <span class="id">[b</span> <span class="id">c]]</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/actm</span> <span class="id">2!homsnd_idfun</span> <span class="id">2!homfst_idfun</span> <span class="id">2!pairhom_idfun</span>.<br/>
+Qed.</div>
+<span class="vernacular">Let</span> <span class="id">actm_comp</span> <span class="id">:</span> <span class="id">FunctorLaws.comp</span> <span class="id">actm</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof36')">Proof.</span></div>
+<div class="proofscript" id="proof36">
+<span class="id">move=&gt;</span> <span class="id">[xa</span> <span class="id">[xb</span> <span class="id">xc]]</span> <span class="id">[ya</span> <span class="id">[yb</span> <span class="id">yc]]</span> <span class="id">[za</span> <span class="id">[zb</span> <span class="id">zc]]</span> <span class="id">g</span> <span class="id">h</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/actm</span> <span class="id">!homsnd_comp</span> <span class="id">!homfst_comp</span> <span class="id">!pairhom_comp</span>.<br/>
+Qed.</div>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">isFunctor.Build</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">actm_id</span> <span class="id">actm_comp</span>.<br/>
+<span class="vernacular">End</span> <span class="id">def</span>.<br/>
+<span class="vernacular">End</span> <span class="id">ProductCategoryAssoc</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

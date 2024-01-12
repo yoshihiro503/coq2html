@@ -1,0 +1,257 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module altprob_model</title>
+<meta name="description" content="Documentation of Coq module altprob_model" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module altprob_model</h1>
+<div class="coq">
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Reals</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span> <span class="id">ssralg</span> <span class="id">ssrnum</span> <span class="id">finmap</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">boolp</span> <span class="id">classical_sets</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">reals</span> <span class="id">Rstruct</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">classical_sets_ext</span> <span class="id">Reals_ext</span> <span class="id">ssrR</span> <span class="id">fdist</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">ssrR</span> <span class="id">Reals_ext</span> <span class="id">proba</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Reals_ext</span> <span class="id">realType_ext</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">fsdist</span> <span class="id">convex</span> <span class="id">necset</span>.<br/>
+<span class="vernacular">Require</span> <span class="id">category</span>.<br/>
+<span class="vernacular">From</span> <span class="id">HB</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">structures</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monae_lib</span> <span class="id">hierarchy</span> <span class="id">monad_lib</span> <span class="id">proba_lib</span> <span class="id">monad_model</span> <span class="id">gcm_model</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">category</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                 Model of the monad type altProbMonad                      
+                                                                           
+gcmAP == model of a monad that combines non-deterministic choice and       
+         probability, built on top of the geometrically convex monad       
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">proba_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">category_scope</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">P_delta_altProbMonad</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">R_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">reals_ext_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">classical_set_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">convex_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">latt_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">alt</span> <span class="id">A</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span> <span class="id">:=</span> <span class="id">x</span> <span class="id">[+]</span> <span class="id">y</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">choice</span> <span class="id">p</span> <span class="id">A</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span> <span class="id">:=</span> <span class="id">x</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> <span class="id">y</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">altA</span> <span class="id">A</span> <span class="id">:</span> <span class="id">ssrfun.associative</span> (<span class="id">@alt</span> <span class="id">A</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">x</span> <span class="id">y</span> <span class="id">z;</span> <span class="id">rewrite</span> <span class="id">/alt</span> <span class="id">lubA</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">image_fsdistmap</span> <span class="id">A</span> <span class="id">B</span> (<span class="id">x</span> <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">choice_of_Type</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">gcm</span> <span class="id">B</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">fsdistmap</span> <span class="id">k</span> <span class="id">@`</span> <span class="id">x</span> <span class="id">=</span> (<span class="id">gcm</span> <span class="id">#</span> <span class="id">k</span>) <span class="id">x</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+<span class="id">rewrite</span> <span class="id">/hierarchy</span>.<span class="id">actm/=</span> <span class="id">/actm</span> <span class="id">5!FCompE</span> <span class="id">/category</span>.<span class="id">actm/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/free_semiCompSemiLattConvType_mor/=;</span> <span class="id">unlock</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Section</span> <span class="id">funalt_funchoice</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">comps_notation</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F1</span> <span class="id">:=</span> <span class="id">free_semiCompSemiLattConvType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F0</span> <span class="id">:=</span> <span class="id">free_convType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">FC</span> <span class="id">:=</span> <span class="id">free_choiceType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">UC</span> <span class="id">:=</span> <span class="id">forget_choiceType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">U0</span> <span class="id">:=</span> <span class="id">forget_convType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">U1</span> <span class="id">:=</span> <span class="id">forget_semiCompSemiLattConvType</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">FunaltDr</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">gcm</span> <span class="id">B</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">gcm</span> <span class="id">#</span> <span class="id">k</span>) (<span class="id">x</span> <span class="id">[+]</span> <span class="id">y</span>) <span class="id">=</span> (<span class="id">gcm</span> <span class="id">#</span> <span class="id">k</span>) <span class="id">x</span> <span class="id">[+]</span> (<span class="id">gcm</span> <span class="id">#</span> <span class="id">k</span>) <span class="id">y</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">rewrite</span> <span class="id">/hierarchy</span>.<span class="id">actm</span> <span class="id">/=</span> <span class="id">/Monad_of_category_monad</span>.<span class="id">actm</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">scsl_hom_is_lubmorph</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">FunpchoiceDr</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">gcm</span> <span class="id">B</span>) <span class="id">p</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">gcm</span> <span class="id">#</span> <span class="id">k</span>) (<span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span>) <span class="id">=</span> (<span class="id">gcm</span> <span class="id">#</span> <span class="id">k</span>) <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> (<span class="id">gcm</span> <span class="id">#</span> <span class="id">k</span>) <span class="id">y</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+<span class="id">rewrite</span> <span class="id">/hierarchy</span>.<span class="id">actm</span> <span class="id">/=</span> <span class="id">/Monad_of_category_monad</span>.<span class="id">actm</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">scsl_hom_is_affine</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id">funalt_funchoice</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">bindaltDl</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">comps_notation</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F1</span> <span class="id">:=</span> <span class="id">free_semiCompSemiLattConvType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F0</span> <span class="id">:=</span> <span class="id">free_convType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">FC</span> <span class="id">:=</span> <span class="id">free_choiceType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">UC</span> <span class="id">:=</span> <span class="id">forget_choiceType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">U0</span> <span class="id">:=</span> <span class="id">forget_convType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">U1</span> <span class="id">:=</span> <span class="id">forget_semiCompSemiLattConvType</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">affine_F1e0U1PD_alt</span> <span class="id">T</span> (<span class="id">u</span> <span class="id">v</span> <span class="id">:</span> <span class="id">gcm</span> (<span class="id">gcm</span> <span class="id">T</span>)) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">F1</span> <span class="id">#</span> <span class="id">eps0</span> (<span class="id">U1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)))<span class="id">%category</span> (<span class="id">u</span> <span class="id">[+]</span> <span class="id">v</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">F1</span> <span class="id">#</span> <span class="id">eps0</span> (<span class="id">U1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)))<span class="id">%category</span> <span class="id">u</span> <span class="id">[+]</span><br/>
+&nbsp;&nbsp;(<span class="id">F1</span> <span class="id">#</span> <span class="id">eps0</span> (<span class="id">U1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)))<span class="id">%category</span> <span class="id">v</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+ <span class="id">exact:</span> <span class="id">scsl_hom_is_lubmorph</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">affine_e1PD_alt</span> <span class="id">T</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">el</span> (<span class="id">F1</span> (<span class="id">FId</span> (<span class="id">U1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>))))) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">eps1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)) (<span class="id">x</span> <span class="id">[+]</span> <span class="id">y</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">eps1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)) <span class="id">x</span> <span class="id">[+]</span> (<span class="id">eps1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)) <span class="id">y</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+ <span class="id">exact:</span> <span class="id">scsl_hom_is_lubmorph</span>. Qed.</div>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F0o</span> <span class="id">:=</span> <span class="id">FSDist_t__canonical__isConvexSpace__ConvexSpace</span>. <br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">FCo</span> <span class="id">:=</span> <span class="id">choice_of_Type</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F1m</span> <span class="id">:=</span> <span class="id">free_semiCompSemiLattConvType_mor</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F0m</span> <span class="id">:=</span> <span class="id">free_convType_mor</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">bindaltDl</span> <span class="id">:</span> <span class="id">BindLaws.left_distributive</span> (<span class="id">@hierarchy</span>.<span class="id">bind</span> <span class="id">gcm</span>) <span class="id">alt</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+<span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">x</span> <span class="id">y</span> <span class="id">k</span>.<br/>
+<span class="id">rewrite</span> <span class="id">hierarchy.bindE</span> <span class="id">/=</span> <span class="id">/join_</span> <span class="id">-category</span>.<span class="id">bindE</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">scsl_hom_is_lubmorph</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id">bindaltDl</span>.<br/>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">@isMonadAlt</span>.<span class="id">Build</span> (<span class="id">Monad_of_category_monad.acto</span> <span class="id">Mgcm</span>) <span class="id">alt</span> <span class="id">altA</span> <span class="id">bindaltDl</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">altxx</span> <span class="id">A</span> <span class="id">:</span> <span class="id">idempotent</span> (<span class="id">@alt</span> <span class="id">A</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">x;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/alt</span> <span class="id">lubxx</span>. Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">altC</span> <span class="id">A</span> <span class="id">:</span> <span class="id">commutative</span> (<span class="id">@alt</span> <span class="id">A</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">a</span> <span class="id">b;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/alt</span> <span class="id">/=</span> <span class="id">lubC</span>. Qed.</div>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">@isMonadAltCI</span>.<span class="id">Build</span> (<span class="id">Monad_of_category_monad.acto</span> <span class="id">Mgcm</span>) <span class="id">altxx</span> <span class="id">altC</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">gcmACI</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">altCIMonad</span> <span class="id">of</span> <span class="id">gcm]</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">choice1</span> <span class="id">A</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">x</span> <span class="id">&lt;|</span> <span class="id">1%:pr</span> <span class="id">|&gt;</span> <span class="id">y</span> <span class="id">=</span> <span class="id">x</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">conv1</span>. Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">choiceC</span> <span class="id">A</span> <span class="id">p</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span> <span class="id">=</span> <span class="id">y</span> <span class="id">&lt;|</span>(<span class="id">Prob.p</span> <span class="id">p</span>).<span class="id">~%:pr|&gt;</span> <span class="id">x</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">convC</span>. Qed.</div>
+<span class="vernacular">Lemma</span> <span class="id">choicemm</span> <span class="id">A</span> <span class="id">p</span> <span class="id">:</span> <span class="id">idempotent</span> (<span class="id">@choice</span> <span class="id">p</span> <span class="id">A</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">m;</span> <span class="id">rewrite</span> <span class="id">/choice</span> <span class="id">convmm</span>. Qed.</div>
+<br/>
+<span class="vernacular">Let</span> <span class="id">choiceA</span> <span class="id">A</span> (<span class="id">p</span> <span class="id">q</span> <span class="id">r</span> <span class="id">s</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">[realType</span> <span class="id">of</span> <span class="id">R]}</span>) (<span class="id">x</span> <span class="id">y</span> <span class="id">z</span> <span class="id">:</span> <span class="id">gcm</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">x</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> (<span class="id">y</span> <span class="id">&lt;|</span> <span class="id">q</span> <span class="id">|&gt;</span> <span class="id">z</span>) <span class="id">=</span> (<span class="id">x</span> <span class="id">&lt;|</span> <span class="id">[r_of</span> <span class="id">p,</span> <span class="id">q]</span> <span class="id">|&gt;</span> <span class="id">y</span>) <span class="id">&lt;|</span> <span class="id">[s_of</span> <span class="id">p,</span> <span class="id">q]</span> <span class="id">|&gt;</span> <span class="id">z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+ <span class="id">exact:</span> <span class="id">convA</span>. Qed.</div>
+<br/>
+<span class="vernacular">Section</span> <span class="id">bindchoiceDl</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">category</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">comps_notation</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F1</span> <span class="id">:=</span> <span class="id">free_semiCompSemiLattConvType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F0</span> <span class="id">:=</span> <span class="id">free_convType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">FC</span> <span class="id">:=</span> <span class="id">free_choiceType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">UC</span> <span class="id">:=</span> <span class="id">forget_choiceType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">U0</span> <span class="id">:=</span> <span class="id">forget_convType</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">U1</span> <span class="id">:=</span> <span class="id">forget_semiCompSemiLattConvType</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">affine_F1e0U1PD_conv</span> <span class="id">T</span> (<span class="id">u</span> <span class="id">v</span> <span class="id">:</span> <span class="id">gcm</span> (<span class="id">gcm</span> <span class="id">T</span>)) <span class="id">p</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;((<span class="id">F1</span> <span class="id">#</span> <span class="id">eps0</span> (<span class="id">U1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>))) (<span class="id">u</span> <span class="id">&lt;|p|&gt;</span> <span class="id">v</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;(<span class="id">F1</span> <span class="id">#</span> <span class="id">eps0</span> (<span class="id">U1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>))) <span class="id">u</span> <span class="id">&lt;|p|&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;(<span class="id">F1</span> <span class="id">#</span> <span class="id">eps0</span> (<span class="id">U1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>))) <span class="id">v</span>)<span class="id">%category</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+ <span class="id">exact:</span> <span class="id">scsl_hom_is_affine</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">affine_e1PD_conv</span> <span class="id">T</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">el</span> (<span class="id">F1</span> (<span class="id">FId</span> (<span class="id">U1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>))))) <span class="id">p</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">eps1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)) (<span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">eps1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)) <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> (<span class="id">eps1</span> (<span class="id">P_delta_left</span> <span class="id">T</span>)) <span class="id">y</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+ <span class="id">exact:</span> <span class="id">scsl_hom_is_affine</span>. Qed.</div>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F0o</span> <span class="id">:=</span> <span class="id">FSDist_t__canonical__isConvexSpace__ConvexSpace</span>. <br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">FCo</span> <span class="id">:=</span> <span class="id">choice_of_Type</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F1m</span> <span class="id">:=</span> <span class="id">free_semiCompSemiLattConvType_mor</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">F0m</span> <span class="id">:=</span> <span class="id">free_convType_mor</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">bindchoiceDl</span> <span class="id">p</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">BindLaws.left_distributive</span> (<span class="id">@hierarchy</span>.<span class="id">bind</span> <span class="id">gcm</span>) (<span class="id">@choice</span> <span class="id">p</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+<span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">x</span> <span class="id">y</span> <span class="id">k</span>.<br/>
+<span class="id">rewrite</span> <span class="id">hierarchy.bindE</span> <span class="id">/=</span> <span class="id">/join_</span> <span class="id">-category</span>.<span class="id">bindE</span>.<br/>
+<span class="id">exact:</span> <span class="id">scsl_hom_is_affine</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">bindchoiceDl</span>.<br/>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">isMonadConvex.Build</span> <span class="id">real_realType</span> (<span class="id">Monad_of_category_monad.acto</span> <span class="id">Mgcm</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">choice1</span> <span class="id">choiceC</span> <span class="id">choicemm</span> <span class="id">choiceA</span>.<br/>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">isMonadProb.Build</span> <span class="id">real_realType</span> (<span class="id">Monad_of_category_monad.acto</span> <span class="id">Mgcm</span>) <span class="id">bindchoiceDl</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">choicealtDr</span> <span class="id">A</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">right_distributive</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">Mgcm</span> <span class="id">A</span> <span class="id">=&gt;</span> <span class="id">x</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> <span class="id">y</span>) (<span class="id">@alt</span> <span class="id">A</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">x</span> <span class="id">y</span> <span class="id">z;</span> <span class="id">rewrite</span> <span class="id">/choice</span> <span class="id">lubDr</span>. Qed.</div>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">@isMonadAltProb</span>.<span class="id">Build</span> <span class="id">real_realType</span> (<span class="id">Monad_of_category_monad.acto</span> <span class="id">Mgcm</span>) <span class="id">choicealtDr</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">gcmAP</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">altProbMonad</span> <span class="id">real_realType</span> <span class="id">of</span> <span class="id">gcm]</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">P_delta_altProbMonad</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">probabilisctic_choice_not_trivial</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">proba_monad_scope</span>.<br/>
+<br/>
+<span class="vernacular">Example</span> <span class="id">gcmAP_choice_nontrivial</span> (<span class="id">p</span> <span class="id">q</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">p</span> <span class="id">&lt;&gt;</span> <span class="id">q</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">true</span> <span class="id">&lt;|p|&gt;</span> <span class="id">Ret</span> <span class="id">false</span> <span class="id">&lt;&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">true</span> <span class="id">&lt;|q|&gt;</span> <span class="id">Ret</span> <span class="id">false</span> <span class="id">:&gt;</span> (<span class="id">Monad_of_category_monad.acto</span> <span class="id">Mgcm</span>) <span class="id">bool</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">apply</span> <span class="id">contra_not</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!gcm_retE</span> <span class="id">/Choice</span> <span class="id">/=</span> <span class="id">=&gt;</span> <span class="id">/</span>(<span class="id">congr1</span> (<span class="id">@NECSet</span>.<span class="id">car</span> <span class="id">_</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">!necset_convType</span>.<span class="id">convE</span> <span class="id">!conv_cset1</span> <span class="id">/=</span>.<br/>
+<span class="id">move/</span>(<span class="id">@set1_inj</span> <span class="id">_</span> (<span class="id">conv</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>))<span class="id">/</span>(<span class="id">congr1</span> (<span class="id">@FSDist</span>.<span class="id">f</span> <span class="id">_</span>))<span class="id">/fsfunP/</span>(<span class="id">_</span> <span class="id">true</span>).<br/>
+<span class="id">rewrite</span> <span class="id">!fsdist_convE</span> <span class="id">!fsdist1xx</span> <span class="id">!fsdist10//;</span> <span class="id">last</span> <span class="id">exact/eqP</span>. <span class="comment">(*TODO:&nbsp;we&nbsp;should&nbsp;not&nbsp;need&nbsp;that*)</span><br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!avgRE</span> <span class="id">!mulR1</span> <span class="id">?mulR0</span> <span class="id">?addR0</span> <span class="id">=&gt;</span> <span class="id">/val_inj</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">probabilisctic_choice_not_trivial</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

@@ -1,0 +1,687 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module proba_lib</title>
+<meta name="description" content="Documentation of Coq module proba_lib" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module proba_lib</h1>
+<div class="coq">
+<span class="vernacular">From</span> <span class="id">HB</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">structures</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Reals</span> <span class="id">Lra</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span> <span class="id">ssralg</span> <span class="id">ssrnum</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="id">boolp</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">reals</span> <span class="id">mathcomp_extra</span> <span class="id">Rstruct</span> <span class="id">lra</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">ssrR</span> <span class="id">realType_ext</span> <span class="id">Reals_ext</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">proba</span> <span class="id">convex</span> <span class="id">necset</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monae_lib</span> <span class="id">hierarchy</span> <span class="id">monad_lib</span> <span class="id">fail_lib</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+            Definitions and lemmas for probability monads                  
+                                                                           
+uniform s == uniform choice from a sequence s with a probMonad             
+mpair_uniform ==                                                           
+  uniform choices are independent, in the sense that choosing              
+  consecutively from two uniform distributions is equivalent to choosing   
+  simultaneously from their cartesian product                              
+bcoin p == a biased coin with probability p                                
+Sample programs:                                                           
+  arbcoin == arbitrary choice followed by probabilistic choice             
+  coinarb == probabilistic choice followed by arbitrary choice             
+                                                                           
+</pre>
+<br/>
+<span class="id">Declare</span> <span class="vernacular">Scope</span> <span class="id">proba_monad_scope</span>.<br/>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">reals_ext_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">proba_monad_scope</span>.<br/>
+<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">fdist</span>.<br/>
+<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">reals</span> <span class="id">Rstruct</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">convex</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">proba_scope</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">choiceA_real_realType</span> (<span class="id">p</span> <span class="id">q</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) (<span class="id">a</span> <span class="id">b</span> <span class="id">c</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">conv</span> <span class="id">:=</span> (<span class="gallina-kwd">fun</span> <span class="id">p</span> (<span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">choice_of_Type</span> (<span class="id">M</span> <span class="id">A</span>)) <span class="id">=&gt;</span> <span class="id">choice</span> <span class="id">p</span> <span class="id">A</span> <span class="id">a</span> <span class="id">b</span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id">conv</span> <span class="id">p</span> <span class="id">a</span> (<span class="id">conv</span> <span class="id">q</span> <span class="id">b</span> <span class="id">c</span>) <span class="id">=</span> <span class="id">conv</span> <span class="id">[s_of</span> <span class="id">p,</span> <span class="id">q]</span> (<span class="id">conv</span> <span class="id">[r_of</span> <span class="id">p,</span> <span class="id">q]</span> <span class="id">a</span> <span class="id">b</span>) <span class="id">c</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="id">exact:</span> (<span class="id">choiceA</span> <span class="id">p</span> <span class="id">q</span>). Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">prob_convType</span> <span class="id">:=</span> <span class="id">M</span> <span class="id">A</span>.<br/>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">@isConvexSpace</span>.<span class="id">Build</span> <span class="id">prob_convType</span><br/>
+&nbsp;&nbsp;(<span class="id">Choice.class</span> (<span class="id">choice_of_Type</span> (<span class="id">M</span> <span class="id">A</span>))) (<span class="gallina-kwd">fun</span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">choice</span> <span class="id">p</span> <span class="id">A</span>)<br/>
+&nbsp;&nbsp;(<span class="id">choice1</span> <span class="id">_</span>)<br/>
+&nbsp;&nbsp;<span class="id">choicemm</span><br/>
+&nbsp;&nbsp;<span class="id">choiceC</span><br/>
+&nbsp;&nbsp;<span class="id">choiceA_real_realType</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">choice_conv</span> <span class="id">p</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">prob_convType</span>) <span class="id">:</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span> <span class="id">=</span> <span class="id">conv</span> <span class="id">p</span> <span class="id">x</span> <span class="id">y</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">convex</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">choiceACA</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType}</span> <span class="id">T</span> <span class="id">q</span> <span class="id">p</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">@interchange</span> (<span class="id">prob_convType</span> <span class="id">M</span> <span class="id">T</span>) (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">&lt;|p|&gt;</span> <span class="id">b</span>) (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">&lt;|q|&gt;</span> <span class="id">b</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+ <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">*;</span> <span class="id">exact:</span> <span class="id">convACA</span>. Qed.</div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">uniform</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType}</span> <span class="id">{A</span> <span class="id">:</span> <span class="id">Type}</span> (<span class="id">def</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">A</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">s</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">[::]</span> <span class="id">=&gt;</span> <span class="id">Ret</span> <span class="id">def</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">[::</span> <span class="id">x]</span> <span class="id">=&gt;</span> <span class="id">Ret</span> <span class="id">x</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">x</span> <span class="id">::</span> <span class="id">xs</span> <span class="id">=&gt;</span> <span class="id">Ret</span> <span class="id">x</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">IZR</span> (<span class="id">Z_of_nat</span> (<span class="id">size</span> (<span class="id">x</span> <span class="id">::</span> <span class="id">xs</span>))))<span class="id">%coqR%:pr</span> <span class="id">|&gt;</span> <span class="id">uniform</span> <span class="id">def</span> <span class="id">xs</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform_nil</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">def</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">def</span> <span class="id">[::]</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">def</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">A</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+ <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">choice_ext</span> (<span class="id">q</span> <span class="id">p</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) <span class="id">A</span> (<span class="id">m1</span> <span class="id">m2</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">Prob.p</span> <span class="id">p</span> <span class="id">=</span> <span class="id">Prob.p</span> <span class="id">q</span> <span class="id">:&gt;</span> <span class="id">R</span> <span class="id">-&gt;</span> <span class="id">m1</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> <span class="id">m2</span> <span class="id">=</span> <span class="id">m1</span> <span class="id">&lt;|</span> <span class="id">q</span> <span class="id">|&gt;</span> <span class="id">m2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+ <span class="gallina-kwd">by</span> <span class="id">move/val_inj</span> <span class="id">=&gt;</span> <span class="id">-&gt;</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform_cons</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">def</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">h</span> <span class="id">s</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">def</span> (<span class="id">h</span> <span class="id">::</span> <span class="id">s</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">h</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">IZR</span> (<span class="id">Z_of_nat</span> (<span class="id">size</span> (<span class="id">h</span> <span class="id">::</span> <span class="id">s</span>))))<span class="id">%coqR%:pr</span> <span class="id">|&gt;</span> <span class="id">uniform</span> <span class="id">def</span> <span class="id">s</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">A</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">//=;</span> <span class="id">rewrite</span> (<span class="id">@choice_ext</span> <span class="id">1%:pr</span>) <span class="id">//</span> <span class="id">?choice1</span> <span class="id">//=</span> <span class="id">Rinv_1</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform_singl</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">def</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">h</span> <span class="id">:</span> <span class="id">size</span> <span class="id">h</span> <span class="id">=</span> <span class="id">1%nat</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">def</span> <span class="id">h</span> <span class="id">=</span> <span class="id">Ret</span> (<span class="id">head</span> <span class="id">def</span> <span class="id">h</span>) <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">A</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+<span class="id">case:</span> <span class="id">h</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">h</span> <span class="id">[|//]</span> <span class="id">_</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">uniform_cons</span> <span class="id">uniform_nil</span> (<span class="id">@choice_ext</span> <span class="id">1%:pr</span>) <span class="id">?choice1</span> <span class="id">//=</span> <span class="id">invR1</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform_nseq</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">def</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">h</span> <span class="id">n</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">def</span> (<span class="id">nseq</span> <span class="id">n</span>.<span class="id">+1</span> <span class="id">h</span>) <span class="id">=</span> <span class="id">Ret</span> <span class="id">h</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">A</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">elim:</span> <span class="id">n</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">n</span> <span class="id">IH</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">nseq</span> <span class="id">_</span> <span class="id">_</span> <span class="id">=</span> <span class="id">h</span> <span class="id">::</span> <span class="id">nseq</span> <span class="id">n</span>.<span class="id">+1</span> <span class="id">h</span>) <span class="id">//</span> <span class="id">uniform_cons</span> <span class="id">IH</span> <span class="id">choicemm</span>.<br/>
+Qed.</div>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Reals_ext</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform_cat</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">s</span> <span class="id">t</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">m</span> <span class="id">:=</span> <span class="id">size</span> <span class="id">s</span> <span class="gallina-kwd">in</span> <span class="gallina-kwd">let</span> <span class="id">n</span> <span class="id">:=</span> <span class="id">size</span> <span class="id">t</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">a</span> (<span class="id">s</span> <span class="id">++</span> <span class="id">t</span>) <span class="id">=</span> <span class="id">uniform</span> <span class="id">a</span> <span class="id">s</span> <span class="id">&lt;|</span> (<span class="id">divRnnm</span> <span class="id">m</span> <span class="id">n</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">uniform</span> <span class="id">a</span> <span class="id">t</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">elim:</span> <span class="id">s</span> <span class="id">t</span> <span class="id">=&gt;</span> <span class="id">[t</span> <span class="id">m</span> <span class="id">n|s1</span> <span class="id">s2</span> <span class="id">IH</span> <span class="id">t</span> <span class="id">m</span> <span class="id">n]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cat0s</span> <span class="id">uniform_nil</span> <span class="id">/=</span> <span class="id">[X</span> <span class="gallina-kwd">in</span> <span class="id">_</span> <span class="id">&lt;|</span> <span class="id">X</span> <span class="id">|&gt;</span> <span class="id">_]</span>(<span class="id">_</span> <span class="id">:</span> <span class="id">_</span> <span class="id">=</span> <span class="id">0%:pr</span>) <span class="id">?choice0</span> <span class="id">//</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">val_inj;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/divRnnm</span> <span class="id">div0R</span>.<br/>
+<span class="id">case/boolP</span> <span class="id">:</span> (<span class="id">m</span>.<span class="id">-1</span> <span class="id">+</span> <span class="id">n</span> <span class="id">==</span> <span class="id">0</span>)<span class="id">%nat</span> <span class="id">=&gt;</span> <span class="id">[{IH}|]</span> <span class="id">m1n0</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">s20</span> <span class="id">:</span> <span class="id">s2</span> <span class="id">=</span> <span class="id">[::]</span> <span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">m1n0;</span> <span class="id">rewrite</span> <span class="id">{}/m</span> <span class="id">/=;</span> <span class="id">case:</span> <span class="id">s2</span>.<br/>
+&nbsp;&nbsp;<span class="id">have</span> <span class="id">t0</span> <span class="id">:</span> <span class="id">t</span> <span class="id">=</span> <span class="id">[::]</span> <span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">m1n0;</span> <span class="id">rewrite</span> <span class="id">{}/n</span> <span class="id">/=</span> <span class="id">addnC;</span> <span class="id">case:</span> <span class="id">t</span>.<br/>
+&nbsp;&nbsp;<span class="id">subst</span> <span class="id">s2</span> <span class="id">t</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">cats0</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">Prob.mk</span> <span class="id">_</span> <span class="id">=</span> <span class="id">1%:pr</span>) <span class="id">?choice1</span> <span class="id">//</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">val_inj;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/divRnnm</span> <span class="id">div1R</span> <span class="id">invR1</span>.<br/>
+<span class="id">rewrite</span> <span class="id">cat_cons</span> <span class="id">uniform_cons</span> <span class="id">uniform_cons</span>.<br/>
+<span class="id">set</span> <span class="id">pv</span> <span class="id">:=</span> ((<span class="id">/</span> <span class="id">_</span>)<span class="id">%coqR</span>).<br/>
+<span class="id">set</span> <span class="id">v</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span> <span class="id">:=</span> <span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> <span class="id">pv</span> <span class="id">_</span>.<br/>
+<span class="comment">(*set&nbsp;u&nbsp;:&nbsp;{prob&nbsp;real_realType}&nbsp;:=&nbsp;((size&nbsp;s2)%:R&nbsp;/&nbsp;(size&nbsp;s2&nbsp;+&nbsp;size&nbsp;t)%:R)%coqR%:pr.*)</span><br/>
+<span class="id">set</span> <span class="id">u</span> <span class="id">:=</span> <span class="id">@Prob</span>.<span class="id">mk_</span> <span class="id">_</span> ((<span class="id">size</span> <span class="id">s2</span>)<span class="id">%:R</span> <span class="id">/</span> (<span class="id">size</span> <span class="id">s2</span> <span class="id">+</span> <span class="id">size</span> <span class="id">t</span>)<span class="id">%:R</span>)<span class="id">%coqR</span> (<span class="id">prob_divRnnm_subproof</span> <span class="id">_</span> <span class="id">_</span>).<br/>
+<span class="id">rewrite</span> <span class="id">-[RHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">v</span> <span class="id">u</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">IH</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-RmultE</span>. <span class="id">split</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">3!probpK</span> <span class="id">-INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">INR</span> <span class="id">_</span> <span class="id">=</span> <span class="id">INR</span> <span class="id">m</span>) <span class="id">//</span> <span class="id">mulRA</span> <span class="id">mulVR;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">INR_eq0'</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">mul1R</span> <span class="id">/pv</span> <span class="id">-INR_IZR_INZ</span> <span class="id">[size</span> <span class="id">_]/=</span> <span class="id">size_cat</span> <span class="id">-addSn</span>.<br/>
+<span class="id">rewrite</span> <span class="id">3!probpK</span>.<br/>
+<span class="id">transitivity</span> ( (<span class="id">1</span> <span class="id">-</span> <span class="id">1</span> <span class="id">/</span> <span class="id">INR</span> (<span class="id">m</span> <span class="id">+</span> <span class="id">n</span>)) <span class="id">*</span> (<span class="id">1</span> <span class="id">-</span> <span class="id">INR</span> (<span class="id">m</span>.<span class="id">-1</span>) <span class="id">/</span> <span class="id">INR</span> (<span class="id">m</span>.<span class="id">-1</span> <span class="id">+</span> <span class="id">n</span>)))<span class="id">%coqR;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">congr</span> (<span class="id">_</span> <span class="id">.~</span> <span class="id">*</span> <span class="id">_</span>)<span class="id">%R</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/v</span> <span class="id">/pv</span> <span class="id">probpK</span> <span class="id">INR_IZR_INZ</span> <span class="id">[size</span> <span class="id">_]/=</span> <span class="id">size_cat</span> <span class="id">-addSn</span> <span class="id">div1R</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">INR</span> <span class="id">n</span> <span class="id">/</span> <span class="id">INR</span> (<span class="id">m</span> <span class="id">+</span> <span class="id">n</span>))<span class="id">%coqR</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">{1}/onem</span> <span class="id">-RminusE</span> <span class="id">-R1E</span> <span class="id">-{1}</span>(<span class="id">Rinv_r</span> (<span class="id">INR</span> (<span class="id">m+n</span>)))<span class="id">;</span> <span class="id">last</span> <span class="id">exact/not_0_INR</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-mulRBl</span> <span class="id">-minus_INR;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">apply/leP;</span> <span class="id">rewrite</span> <span class="id">leq_addr</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">minusE</span> <span class="id">addnC</span> <span class="id">addnK</span>.<br/>
+<span class="id">rewrite</span> <span class="id">{1}/Rdiv</span> <span class="id">mulRC</span>.<br/>
+<span class="id">rewrite</span> <span class="id">{1}/Rdiv</span> <span class="id">-[in</span> <span class="id">LHS]</span>(<span class="id">mul1R</span> (<span class="id">INR</span> <span class="id">n</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">-{1}</span>(<span class="id">mulRV</span> (<span class="id">INR</span> (<span class="id">m</span>.<span class="id">-1</span> <span class="id">+</span> <span class="id">n</span>)))<span class="id">;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">INR_eq0'</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!mulRA</span> <span class="id">-</span>(<span class="id">mulRA</span> (<span class="id">_</span> <span class="id">*</span> <span class="id">_</span>)<span class="id">%coqR</span>)<span class="id">;</span> <span class="id">congr</span> <span class="id">Rmult</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">mulRC</span> <span class="id">-subn1</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">addnC</span> <span class="id">addnBA</span> <span class="id">//</span> <span class="id">minus_INR;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">apply/leP;</span> <span class="id">rewrite</span> <span class="id">addn_gt0</span> <span class="id">orbT</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-/</span>(<span class="id">_</span> <span class="id">/</span> <span class="id">INR</span> (<span class="id">m</span> <span class="id">+</span> <span class="id">n</span>))<span class="id">%coqR</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Rdiv_minus_distr</span> <span class="id">{1}/Rdiv</span> <span class="id">addnC</span> <span class="id">Rinv_r</span> <span class="id">//;</span> <span class="id">exact/not_0_INR</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-{1}</span>(<span class="id">Rinv_r</span> (<span class="id">INR</span> (<span class="id">m</span>.<span class="id">-1</span> <span class="id">+</span> <span class="id">n</span>)))<span class="id">;</span> <span class="id">last</span> <span class="id">exact/not_0_INR/eqP</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-Rdiv_minus_distr</span> <span class="id">mulRC;</span> <span class="id">congr</span> (<span class="id">_</span> <span class="id">*</span> <span class="id">_</span>)<span class="id">%R</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-minus_INR;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">apply/leP;</span> <span class="id">rewrite</span> <span class="id">leq_addr</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">addnC</span> <span class="id">minusE</span> <span class="id">-subnBA</span> <span class="id">//</span> <span class="id">subnn</span> <span class="id">subn0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform2</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">def</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">a</span> <span class="id">b</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">def</span> <span class="id">[::</span> <span class="id">a;</span> <span class="id">b]</span> <span class="id">=</span> <span class="id">uniform</span> <span class="id">def</span> <span class="id">[::</span> <span class="id">b;</span> <span class="id">a]</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">rewrite</span> <span class="id">uniform_cons</span> <span class="id">uniform_singl</span> <span class="id">//</span> <span class="id">uniform_cons</span> <span class="id">uniform_singl</span> <span class="id">//</span>.<br/>
+<span class="id">set</span> <span class="id">pa</span> <span class="id">:=</span> <span class="id">Prob.mk</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> <span class="id">choiceC</span> <span class="id">/=</span> (<span class="id">@choice_ext</span> <span class="id">pa</span>) <span class="id">//=</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/onem</span> <span class="id">-RminusE</span> <span class="id">-R1E;</span> <span class="id">field</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform_inde</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) <span class="id">a</span> (<span class="id">x</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>) <span class="id">{B}</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">B</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">a</span> <span class="id">x</span> <span class="id">&gt;&gt;</span> <span class="id">m</span> <span class="id">=</span> <span class="id">m</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+<span class="id">elim:</span> <span class="id">x</span> <span class="id">m</span> <span class="id">=&gt;</span> <span class="id">[/=</span> <span class="id">m|x</span> <span class="id">xs</span> <span class="id">IH</span> <span class="id">m];</span> <span class="id">first</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">uniform_cons</span> <span class="id">choice_bindDl</span> <span class="id">IH</span> <span class="id">bindretf</span> <span class="id">choicemm</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform_naturality</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">b</span> <span class="id">:</span> <span class="id">B</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">x,</span> (<span class="id">0</span> <span class="id">&lt;</span> <span class="id">size</span> <span class="id">x</span>)<span class="id">%nat</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;((<span class="id">@uniform</span> <span class="id">M</span> <span class="id">_</span> <span class="id">b</span>) <span class="id">\o</span> <span class="id">map</span> <span class="id">f</span>) <span class="id">x</span> <span class="id">=</span> ((<span class="id">M</span> <span class="id">#</span> <span class="id">f</span>) <span class="id">\o</span> <span class="id">uniform</span> <span class="id">a</span>) <span class="id">x</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+<span class="id">elim=&gt;</span> <span class="id">//</span> <span class="id">x</span> <span class="id">[_</span> <span class="id">_|x'</span> <span class="id">xs];</span> <span class="id">first</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]compE</span> <span class="id">fmapE</span> <span class="id">bindretf</span>.<br/>
+<span class="id">move/</span>(<span class="id">_</span> <span class="id">isT</span>) <span class="id">=&gt;</span> <span class="id">IH</span> <span class="id">_</span>.<br/>
+<span class="id">rewrite</span> <span class="id">compE</span> <span class="id">[in</span> <span class="id">RHS]compE</span> <span class="id">[in</span> <span class="id">LHS]uniform_cons</span> <span class="id">[in</span> <span class="id">RHS]uniform_cons</span>.<br/>
+<span class="id">set</span> <span class="id">p</span> <span class="id">:=</span> (<span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">IZR</span> (<span class="id">Z.of_nat</span> (<span class="id">size</span> <span class="id">_</span>)))<span class="id">%coqR</span> <span class="id">_</span> <span class="gallina-kwd">in</span> <span class="id">X</span> <span class="gallina-kwd">in</span> <span class="id">_</span> <span class="id">=</span> <span class="id">X</span>).<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">_</span>)<span class="id">%coqR</span> <span class="id">_</span> <span class="id">=</span> <span class="id">p</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">val_inj;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">size_map</span>.<br/>
+<span class="id">move:</span> <span class="id">IH;</span> <span class="id">rewrite</span> <span class="id">2!compE</span> <span class="id">=&gt;</span> <span class="id">-&gt;</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]fmapE</span> <span class="id">choice_bindDl</span> <span class="id">bindretf</span> <span class="id">fmapE</span>.<br/>
+Qed.</div>
+<span class="vernacular">Arguments</span> <span class="id">uniform_naturality</span> <span class="id">{M</span> <span class="id">A</span> <span class="id">B}</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">mpair_uniform_base_case</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) <span class="id">a</span> <span class="id">x</span> (<span class="id">y</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;</span> <span class="id">size</span> <span class="id">y</span>)<span class="id">%nat</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> (<span class="id">a,</span> <span class="id">a</span>) (<span class="id">cp</span> <span class="id">[::</span> <span class="id">x]</span> <span class="id">y</span>) <span class="id">=</span> <span class="id">mpair</span> (<span class="id">uniform</span> <span class="id">a</span> <span class="id">[::</span> <span class="id">x],</span> <span class="id">uniform</span> <span class="id">a</span> <span class="id">y</span>) <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+<span class="id">move=&gt;</span> <span class="id">y0;</span> <span class="id">rewrite</span> <span class="id">cp1</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">@uniform</span> <span class="id">M</span> <span class="id">_</span> <span class="id">a</span> <span class="id">y</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">y'</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">x,</span> <span class="id">y'</span>))).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id">compE</span> (<span class="id">uniform</span> <span class="id">_</span>)) (<span class="id">uniform_naturality</span> <span class="id">a</span>) <span class="id">//</span> <span class="id">compE</span> <span class="id">fmapE</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">do</span> <span class="id">z</span> <span class="id">&lt;-</span> <span class="id">Ret</span> <span class="id">x;</span> <span class="id">do</span> <span class="id">y'</span> <span class="id">&lt;-</span> <span class="id">uniform</span> <span class="id">a</span> <span class="id">y;</span> <span class="id">Ret</span> (<span class="id">z,</span> <span class="id">y'</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>)<span class="id">%Do</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">[]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">mpair_uniform</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) <span class="id">a</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;</span> <span class="id">size</span> <span class="id">x</span>)<span class="id">%nat</span> <span class="id">-&gt;</span> (<span class="id">0</span> <span class="id">&lt;</span> <span class="id">size</span> <span class="id">y</span>)<span class="id">%nat</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">mpair</span> (<span class="id">uniform</span> <span class="id">a</span> <span class="id">x,</span> <span class="id">uniform</span> <span class="id">a</span> <span class="id">y</span>) <span class="id">=</span> <span class="id">uniform</span> (<span class="id">a,</span> <span class="id">a</span>) (<span class="id">cp</span> <span class="id">x</span> <span class="id">y</span>) <span class="id">:&gt;</span> <span class="id">M</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">A</span>)<span class="id">%type</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+<span class="id">elim:</span> <span class="id">x</span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">x;</span> <span class="id">case=&gt;</span> <span class="id">[_</span> <span class="id">y</span> <span class="id">_</span> <span class="id">size_y|x'</span> <span class="id">xs</span> <span class="id">IH</span> <span class="id">y</span> <span class="id">_</span> <span class="id">size_y];</span> <span class="id">apply/esym</span>.<br/>
+&nbsp;&nbsp;<span class="id">exact/mpair_uniform_base_case</span>.<br/>
+<span class="id">set</span> <span class="id">xxs</span> <span class="id">:=</span> <span class="id">x'</span> <span class="id">::</span> <span class="id">xs</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/cp</span> <span class="id">-cat1s</span> <span class="id">allpairs_cat</span> <span class="id">-/</span>(<span class="id">cp</span> <span class="id">_</span> <span class="id">_</span>) <span class="id">cp1</span> <span class="id">uniform_cat</span>.<br/>
+<span class="id">pose</span> <span class="id">n</span> <span class="id">:=</span> <span class="id">size</span> <span class="id">y</span>.<br/>
+<span class="id">pose</span> <span class="id">l</span> <span class="id">:=</span> <span class="id">size</span> (<span class="id">cp</span> <span class="id">xxs</span> <span class="id">y</span>).<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">size</span> <span class="id">_</span> <span class="id">=</span> <span class="id">n</span>)<span class="id">;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">size_map</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">Prob.mk</span> <span class="id">_</span> <span class="id">=</span> <span class="id">probdivRnnm</span> <span class="id">n</span> <span class="id">l</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-/</span>(<span class="id">cp</span> <span class="id">_</span> <span class="id">_</span>) <span class="id">-/l;</span> <span class="id">exact/val_inj</span>.<br/>
+<span class="id">pose</span> <span class="id">m</span> <span class="id">:=</span> <span class="id">size</span> <span class="id">xxs</span>.<br/>
+<span class="id">have</span> <span class="id">lmn</span> <span class="id">:</span> (<span class="id">l</span> <span class="id">=</span> <span class="id">m</span> <span class="id">*</span> <span class="id">n</span>)<span class="id">%nat</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/l</span> <span class="id">/m</span> <span class="id">/n</span> <span class="id">size_allpairs</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">probdivRnnm</span> <span class="id">_</span> <span class="id">_</span> <span class="id">=</span> <span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">/</span> (<span class="id">1</span> <span class="id">+</span> <span class="id">m</span>)<span class="id">%:R</span>) (<span class="id">prob_invn</span> <span class="id">_</span>))<span class="id">%coqR;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">val_inj</span> <span class="id">=&gt;</span> <span class="id">/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">lmn</span> <span class="id">/divRnnm</span> <span class="id">-mulSn</span> <span class="id">mult_INR</span> <span class="id">{1}/Rdiv</span> <span class="id">Rinv_mult</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">mulRC</span> <span class="id">-mulRA</span> <span class="id">mulVR;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">INR_eq0'</span> <span class="id">-lt0n</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">mulR1</span> <span class="id">-addn1</span> <span class="id">addnC</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-IH</span> <span class="id">//</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-/xxs</span>.<br/>
+<span class="id">move:</span> (<span class="id">@mpair_uniform_base_case</span> <span class="id">M</span> <span class="id">_</span> <span class="id">a</span> <span class="id">x</span> <span class="id">_</span> <span class="id">size_y</span>).<br/>
+<span class="id">rewrite</span> <span class="id">{1}/cp</span> <span class="id">[in</span> <span class="id">X</span> <span class="gallina-kwd">in</span> <span class="id">uniform</span> <span class="id">_</span> <span class="id">X]/=</span> <span class="id">cats0</span> <span class="id">=&gt;</span> <span class="id">-&gt;</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-choice_bindDl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]/mpair</span> <span class="id">uniform_cat</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]</span>(<span class="id">_</span> <span class="id">:</span> <span class="id">Prob.mk</span> <span class="id">_</span> <span class="id">=</span> <span class="id">probinvn</span> <span class="id">m</span>) <span class="id">//</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">val_inj;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/divRnnm</span> <span class="id">div1R</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Section</span> <span class="id">altprob_semilattconvtype</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altProbMonad</span> <span class="id">real_realType</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">T</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">convex</span> <span class="id">necset</span> <span class="id">SemiLattice</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">altProb_semiLattConvType</span> <span class="id">:=</span> <span class="id">M</span> <span class="id">T</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">axiom</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) (<span class="id">x</span> <span class="id">y</span> <span class="id">z</span> <span class="id">:</span> <span class="id">altProb_semiLattConvType</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">x</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> (<span class="id">y</span> <span class="id">[~]</span> <span class="id">z</span>) <span class="id">=</span> (<span class="id">x</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> <span class="id">y</span>) <span class="id">[~]</span> (<span class="id">x</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> <span class="id">z</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">choiceDr</span>. Qed.</div>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">@isSemiLattice</span>.<span class="id">Build</span> <span class="id">altProb_semiLattConvType</span><br/>
+&nbsp;&nbsp;(<span class="id">Choice.class</span> (<span class="id">choice_of_Type</span> (<span class="id">M</span> <span class="id">T</span>)))<br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span>)<br/>
+&nbsp;&nbsp;(<span class="id">@altC</span> <span class="id">M</span> <span class="id">T</span>) (<span class="id">@altA</span> <span class="id">M</span> <span class="id">T</span>) (<span class="id">@altmm</span> <span class="id">M</span> <span class="id">T</span>).<br/>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">@isConvexSpace_</span>.<span class="id">isConvexSpace.Build</span> <span class="id">altProb_semiLattConvType</span><br/>
+&nbsp;&nbsp;(<span class="id">Choice.class</span> (<span class="id">choice_of_Type</span> (<span class="id">M</span> <span class="id">T</span>))) (<span class="gallina-kwd">fun</span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">choice</span> <span class="id">p</span> <span class="id">T</span>)<br/>
+&nbsp;&nbsp;(<span class="id">choice1</span> <span class="id">_</span>) <span class="id">choicemm</span> <span class="id">choiceC</span> (<span class="id">@choiceA_real_realType</span> <span class="id">M</span> <span class="id">T</span>).<br/>
+<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">@isSemiLattConv</span>.<span class="id">Build</span> <span class="id">altProb_semiLattConvType</span> <span class="id">axiom</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">altprob_semilattconvtype</span>.<br/>
+<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">convexity_property</span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">altProbMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>) (<span class="id">p</span> <span class="id">q</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">convexity</span> <span class="id">w</span> <span class="id">:</span> <span class="id">p</span> <span class="id">[~]</span> <span class="id">q</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">p</span> <span class="id">&lt;|</span> <span class="id">w</span> <span class="id">|&gt;</span> <span class="id">p</span>) <span class="id">[~]</span> (<span class="id">q</span> <span class="id">&lt;|</span> <span class="id">w</span> <span class="id">|&gt;</span> <span class="id">p</span>) <span class="id">[~]</span> (<span class="id">p</span> <span class="id">&lt;|</span> <span class="id">w</span> <span class="id">|&gt;</span> <span class="id">q</span>) <span class="id">[~]</span> (<span class="id">q</span> <span class="id">&lt;|</span> <span class="id">w</span> <span class="id">|&gt;</span> <span class="id">q</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+<span class="id">rewrite</span> <span class="id">-[LHS]</span>(<span class="id">choicemm</span> (<span class="id">probcplt</span> <span class="id">w</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">choiceDr</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-[in</span> <span class="id">RHS]altA</span> <span class="id">altACA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-2![in</span> <span class="id">RHS]choiceDr</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-2!choiceC</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">convexity_property</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">bcoin</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType}</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">bool</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">true</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> <span class="id">Ret</span> <span class="id">false</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">bcoin</span> <span class="id">:</span> <span class="id">simpl</span> <span class="id">never</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">prob_only</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">p</span> <span class="id">q</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">two_coins</span> <span class="id">:</span> <span class="id">M</span> (<span class="id">bool</span> <span class="id">*</span> <span class="id">bool</span>)<span class="id">%type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;(<span class="id">do</span> <span class="id">a</span> <span class="id">&lt;-</span> <span class="id">bcoin</span> <span class="id">p;</span> (<span class="id">do</span> <span class="id">b</span> <span class="id">&lt;-</span> <span class="id">bcoin</span> <span class="id">q;</span> <span class="id">Ret</span> (<span class="id">a,</span> <span class="id">b</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>))<span class="id">%Do</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">two_coins'</span> <span class="id">:</span> <span class="id">M</span> (<span class="id">bool</span> <span class="id">*</span> <span class="id">bool</span>)<span class="id">%type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;(<span class="id">do</span> <span class="id">a</span> <span class="id">&lt;-</span> <span class="id">bcoin</span> <span class="id">q;</span> (<span class="id">do</span> <span class="id">b</span> <span class="id">&lt;-</span> <span class="id">bcoin</span> <span class="id">p;</span> <span class="id">Ret</span> (<span class="id">b,</span> <span class="id">a</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>))<span class="id">%Do</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">two_coinsE</span> <span class="id">:</span> <span class="id">two_coins</span> <span class="id">=</span> <span class="id">two_coins'</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+<span class="id">rewrite</span> <span class="id">/two_coins</span> <span class="id">/two_coins'</span> <span class="id">/bcoin</span>.<br/>
+<span class="id">rewrite</span> <span class="id">![in</span> <span class="id">LHS]</span>(<span class="id">choice_bindDl,bindretf</span>).<br/>
+<span class="id">rewrite</span> <span class="id">-choiceACA</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">![in</span> <span class="id">RHS]</span>(<span class="id">choice_bindDl,bindretf</span>).<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id">prob_only</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">mixing_choices</span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">altProbMonad</span> <span class="id">real_realType</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">arbcoin</span> <span class="id">p</span> <span class="id">:</span> <span class="id">M</span> <span class="id">bool</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;(<span class="id">do</span> <span class="id">a</span> <span class="id">&lt;-</span> <span class="id">arb</span> <span class="id">;</span> (<span class="id">do</span> <span class="id">c</span> <span class="id">&lt;-</span> <span class="id">bcoin</span> <span class="id">p;</span> <span class="id">Ret</span> (<span class="id">a</span> <span class="id">==</span> <span class="id">c</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>))<span class="id">%Do</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">coinarb</span> <span class="id">p</span> <span class="id">:</span> <span class="id">M</span> <span class="id">bool</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;(<span class="id">do</span> <span class="id">c</span> <span class="id">&lt;-</span> <span class="id">bcoin</span> <span class="id">p</span> <span class="id">;</span> (<span class="id">do</span> <span class="id">a</span> <span class="id">&lt;-</span> <span class="id">arb;</span> <span class="id">Ret</span> (<span class="id">a</span> <span class="id">==</span> <span class="id">c</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>))<span class="id">%Do</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">arbcoin_spec</span> <span class="id">p</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">arbcoin</span> <span class="id">p</span> <span class="id">=</span> (<span class="id">bcoin</span> <span class="id">p</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">[~]</span> <span class="id">bcoin</span> (<span class="id">Prob.p</span> <span class="id">p</span>).<span class="id">~%:pr</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">rewrite</span> <span class="id">/arbcoin</span> <span class="id">/arb</span> <span class="id">alt_bindDl</span> <span class="id">2!bindretf</span> <span class="id">bindmret;</span> <span class="id">congr</span> (<span class="id">_</span> <span class="id">[~]</span> <span class="id">_</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/bcoin</span> <span class="id">choiceC</span> <span class="id">choice_bindDl</span> <span class="id">2!bindretf</span> <span class="id">eqxx</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Section</span> <span class="id">arbcoin_spec_convexity</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">latt_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">convex_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">R_scope</span>.<br/>
+<br/>
+<span class="vernacular">Import</span> <span class="id">Order.POrderTheory</span> <span class="id">Order.TotalTheory</span> <span class="id">GRing.Theory</span> <span class="id">Num.Theory</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">magnified_weight_proof</span> (<span class="id">p</span> <span class="id">q</span> <span class="id">r</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">Prob.p</span> <span class="id">p</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">q</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">r</span> <span class="id">-&gt;</span> (<span class="id">0</span> <span class="id">&lt;=</span> (<span class="id">Prob.p</span> <span class="id">r</span> <span class="id">-</span> <span class="id">Prob.p</span> <span class="id">q</span>) <span class="id">/</span> (<span class="id">Prob.p</span> <span class="id">r</span> <span class="id">-</span> <span class="id">Prob.p</span> <span class="id">p</span>) <span class="id">&lt;=</span> <span class="id">1</span>)<span class="id">%mcR</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="id">case</span> <span class="id">=&gt;</span> <span class="id">/RltP</span> <span class="id">pq</span> <span class="id">/RltP</span> <span class="id">qr</span>.<br/>
+<span class="id">have</span> <span class="id">rp</span> <span class="id">:</span> (<span class="id">0</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">r</span> <span class="id">-</span> <span class="id">Prob.p</span> <span class="id">p</span>)<span class="id">%mcR</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">subr_gt0</span> (<span class="id">lt_trans</span> <span class="id">pq</span>).<br/>
+<span class="id">have</span> <span class="id">rp'</span> <span class="id">:</span> (<span class="id">Prob.p</span> <span class="id">r</span> <span class="id">-</span> <span class="id">Prob.p</span> <span class="id">p</span> <span class="id">!=</span> <span class="id">0</span>)<span class="id">%mcR</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">subr_eq0</span> <span class="id">gt_eqF//</span> <span class="id">-subr_gt0</span>.<br/>
+<span class="id">have</span> <span class="id">rq</span> <span class="id">:</span> (<span class="id">0</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">r</span> <span class="id">-</span> <span class="id">Prob.p</span> <span class="id">q</span>)<span class="id">%mcR</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">subr_gt0</span>.<br/>
+<span class="id">apply/andP;</span> <span class="id">split;</span> <span class="id">first</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">divr_ge0//</span> <span class="id">ltW</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-</span>(<span class="id">ler_pM2r</span> <span class="id">rp</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">mulrAC</span> <span class="id">-mulrA</span> <span class="id">mulrV</span> <span class="id">//</span> <span class="id">mulr1</span> <span class="id">mul1r</span> <span class="id">lerD2l</span> <span class="id">lerNl</span> <span class="id">opprK;</span> <span class="id">exact/ltW</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">magnified_weight</span> (<span class="id">p</span> <span class="id">q</span> <span class="id">r</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">H</span> <span class="id">:</span> <span class="id">Prob.p</span> <span class="id">p</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">q</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">r</span>) <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="vernacular">Eval</span> <span class="id">hnf</span> <span class="gallina-kwd">in</span> <span class="id">Prob.mk_</span> (<span class="id">magnified_weight_proof</span> <span class="id">H</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">m</span> <span class="id">:=</span> <span class="id">magnified_weight</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"x&nbsp;+'&nbsp;y"</span> <span class="id">:=</span> (<span class="id">addpt</span> <span class="id">x</span> <span class="id">y</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">50</span>).<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">"a&nbsp;*'&nbsp;x"</span> <span class="id">:=</span> (<span class="id">scalept</span> <span class="id">a</span> <span class="id">x</span>) (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">40</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">magnify_conv</span> (<span class="id">T</span> <span class="id">:</span> <span class="id">isConvexSpace_.ConvexSpace.Exports.convType</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">p</span> <span class="id">q</span> <span class="id">r</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">T</span>) (<span class="id">H</span> <span class="id">:</span> <span class="id">Prob.p</span> <span class="id">p</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">q</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">r</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span>) <span class="id">&lt;|</span> <span class="id">magnified_weight</span> <span class="id">H</span> <span class="id">|&gt;</span> (<span class="id">x</span> <span class="id">&lt;|r|&gt;</span> <span class="id">y</span>) <span class="id">=</span> <span class="id">x</span> <span class="id">&lt;|q|&gt;</span> <span class="id">y</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+<span class="id">case:</span> (<span class="id">H</span>) <span class="id">=&gt;</span> <span class="id">pq</span> <span class="id">qr</span>.<br/>
+<span class="id">have</span> <span class="id">rp</span> <span class="id">:</span> <span class="id">0</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">r</span> <span class="id">-</span> <span class="id">Prob.p</span> <span class="id">p</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">subR_gt0;</span> <span class="id">apply</span> (<span class="id">ltR_trans</span> <span class="id">pq</span>).<br/>
+<span class="id">have</span> <span class="id">rp'</span> <span class="id">:</span> <span class="id">Prob.p</span> <span class="id">r</span> <span class="id">-</span> <span class="id">Prob.p</span> <span class="id">p</span> <span class="id">!=</span> <span class="id">0</span> <span class="gallina-kwd">by</span> <span class="id">apply/gtR_eqF</span>.<br/>
+<span class="id">apply:</span> <span class="id">S1_inj;</span> <span class="id">rewrite</span> <span class="id">![in</span> <span class="id">LHS]affine_conv/=</span> <span class="id">!convptE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!scaleptDr</span> <span class="id">!scaleptA</span> <span class="id">//</span> (<span class="id">addptC</span> ((<span class="id">Prob.p</span> (<span class="id">m</span> (<span class="id">conj</span> <span class="id">pq</span> <span class="id">qr</span>)) <span class="id">*</span> <span class="id">Prob.p</span> <span class="id">p</span>) <span class="id">*'</span> <span class="id">S1</span> <span class="id">x</span>)) <span class="id">addptA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">addptC</span> <span class="id">!addptA</span> <span class="id">-scaleptDl//;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply:</span> <span class="id">mulR_ge0</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply:</span> <span class="id">mulR_ge0</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-!addptA</span> <span class="id">-scaleptDl//;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply:</span> <span class="id">mulR_ge0</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply:</span> <span class="id">mulR_ge0</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">conj</span> <span class="id">pq</span> <span class="id">qr</span> <span class="id">=</span> <span class="id">H</span>)<span class="id">//</span>.<br/>
+<span class="id">have</span> <span class="id">-&gt;</span> <span class="id">:</span> ((<span class="id">Prob.p</span> (<span class="id">m</span> <span class="id">H</span>)).<span class="id">~</span> <span class="id">*</span> (<span class="id">Prob.p</span> <span class="id">r</span>).<span class="id">~</span> <span class="id">+</span> <span class="id">Prob.p</span> (<span class="id">m</span> <span class="id">H</span>) <span class="id">*</span> (<span class="id">Prob.p</span> <span class="id">p</span>).<span class="id">~</span> <span class="id">=</span> (<span class="id">Prob.p</span> (<span class="id">m</span> <span class="id">H</span>) <span class="id">*</span> <span class="id">Prob.p</span> <span class="id">p</span> <span class="id">+</span> (<span class="id">Prob.p</span> (<span class="id">m</span> <span class="id">H</span>)).<span class="id">~</span> <span class="id">*</span> <span class="id">Prob.p</span> <span class="id">r</span>).<span class="id">~</span>)<span class="id">%coqR</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/onem</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!RminusE</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-R1E</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-RplusE</span> <span class="id">-2!RmultE</span>.<br/>
+&nbsp;&nbsp;<span class="id">ring</span>.<br/>
+<span class="id">pose</span> <span class="id">tmp</span> <span class="id">:=</span> (<span class="id">Prob.p</span> (<span class="id">m</span> <span class="id">H</span>) <span class="id">*</span> <span class="id">Prob.p</span> <span class="id">p</span> <span class="id">+</span> (<span class="id">Prob.p</span> (<span class="id">m</span> <span class="id">H</span>)).<span class="id">~</span> <span class="id">*</span> <span class="id">Prob.p</span> <span class="id">r</span>).<br/>
+<span class="id">rewrite</span> <span class="id">-[X</span> <span class="gallina-kwd">in</span> <span class="id">X</span>.<span class="id">~</span> <span class="id">*'</span> <span class="id">_</span> <span class="id">+'</span> <span class="id">_]/tmp</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-/tmp</span>.<br/>
+<span class="id">suff</span> <span class="id">-&gt;</span> <span class="id">:</span> <span class="id">tmp</span> <span class="id">=</span> <span class="id">Prob.p</span> <span class="id">q</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">affine_conv</span> <span class="id">convptE</span> <span class="id">addptC</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/tmp</span> <span class="id">/m</span> <span class="id">/=</span> <span class="id">/onem</span>.<br/>
+<span class="id">rewrite</span> <span class="id">mulRDl</span> <span class="id">mul1R</span> <span class="id">addRCA</span> <span class="id">-Rmult_opp_opp</span> <span class="id">-mulRDr</span> (<span class="id">addRC</span> (<span class="id">-</span> <span class="id">Prob.p</span> <span class="id">p</span>)) <span class="id">addR_opp</span>.<br/>
+<span class="id">rewrite</span> <span class="id">mulNR</span> <span class="id">mulRAC</span> <span class="id">-mulRA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!RmultE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">mulrV</span> <span class="id">//</span> <span class="id">mulr1</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-RminusE</span>.<br/>
+<span class="id">ring</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">arbcoin_spec_convexity</span> (<span class="id">p</span> <span class="id">q</span> <span class="id">:</span> <span class="id">{prob</span> <span class="id">real_realType}</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">Prob.p</span> <span class="id">p</span> <span class="id">&lt;</span> <span class="id">Prob.p</span> <span class="id">q</span> <span class="id">&lt;</span> (<span class="id">Prob.p</span> <span class="id">p</span>).<span class="id">~</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">arbcoin</span> <span class="id">p</span> <span class="id">=</span> (<span class="id">bcoin</span> <span class="id">p</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">[~]</span> <span class="id">bcoin</span> (<span class="id">Prob.p</span> <span class="id">p</span>).<span class="id">~%:pr</span> <span class="id">[~]</span> <span class="id">bcoin</span> <span class="id">q</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+<span class="id">move=&gt;</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> <span class="id">arbcoin_spec</span> <span class="id">!alt_lub</span>.<br/>
+<span class="id">rewrite</span> <span class="id">{1}</span>(<span class="id">@lub_absorbs_conv</span><br/>
+&nbsp;&nbsp;<span class="id">[the</span> <span class="id">semiLattConvType</span> <span class="id">of</span> <span class="id">altProb_semiLattConvType</span> <span class="id">M</span> <span class="id">bool]</span><span class="comment">(*NB:&nbsp;FIXME*)</span> <span class="id">_</span> <span class="id">_</span><br/>
+&nbsp;&nbsp;(<span class="id">magnified_weight</span> <span class="id">H</span>)).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">magnify_conv</span>.<br/>
+Qed.</div>
+<span class="vernacular">End</span> <span class="id">arbcoin_spec_convexity</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">coinarb_spec</span> <span class="id">p</span> <span class="id">:</span> <span class="id">coinarb</span> <span class="id">p</span> <span class="id">=</span> <span class="id">arb</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
+<div class="proofscript" id="proof22">
+<span class="id">rewrite</span> <span class="id">/coinarb</span> <span class="id">/bcoin</span>.<br/>
+<span class="id">rewrite</span> <span class="id">choice_bindDl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!bindretf</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/arb</span> <span class="id">!alt_bindDl</span> <span class="id">!bindretf</span> <span class="id">eqxx</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">eq_sym</span> <span class="id">altC</span> <span class="id">choicemm</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">alt_absorbs_choice</span> <span class="id">T</span> (<span class="id">x</span> <span class="id">y</span> <span class="id">:</span> <span class="id">M</span> <span class="id">T</span>) <span class="id">p</span> <span class="id">:</span> <span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">=</span> <span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
+<div class="proofscript" id="proof23">
+<span class="id">have</span> <span class="id">H</span> <span class="id">:</span> <span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">=</span> (<span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span>) <span class="id">[~]</span> <span class="id">y</span> <span class="id">&lt;|p|&gt;</span> <span class="id">x</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-[in</span> <span class="id">LHS]</span>(<span class="id">choicemm</span> <span class="id">p</span> (<span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span>)) <span class="id">choiceDl</span> <span class="id">2!choiceDr</span> <span class="id">2!choicemm</span> <span class="id">altCA</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">altC</span> (<span class="id">altAC</span> <span class="id">x</span>).<br/>
+<span class="id">rewrite</span> <span class="id">{1}H</span>.<br/>
+<span class="id">have</span> <span class="id">{2}&lt;-</span> <span class="id">:</span> <span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">[~]</span> (<span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span>) <span class="id">=</span> <span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">altA</span> <span class="id">altmm</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]altC</span>.<br/>
+<span class="id">have</span> <span class="id">&lt;-</span> <span class="id">:</span> <span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span> <span class="id">[~]</span> (<span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">&lt;|p|&gt;</span> <span class="id">x</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">x</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">x</span> <span class="id">&lt;|p|&gt;</span> <span class="id">y</span> <span class="id">[~]</span> <span class="id">y</span> <span class="id">&lt;|p|&gt;</span> <span class="id">x</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">altA</span> <span class="id">altmm</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-H</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Corollary</span> <span class="id">arb_spec_convexity</span> <span class="id">p</span> <span class="id">:</span> <span class="id">arb</span> <span class="id">=</span> (<span class="id">arb</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">[~]</span> <span class="id">bcoin</span> <span class="id">p</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
+<div class="proofscript" id="proof24">
+ <span class="id">exact:</span> <span class="id">alt_absorbs_choice</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">coinarb_spec_convexity'</span> <span class="id">p</span> <span class="id">w</span> <span class="id">:</span> <span class="id">coinarb</span> <span class="id">p</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">Ret</span> <span class="id">false</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">[~]</span> (<span class="id">Ret</span> <span class="id">true</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">[~]</span> (<span class="id">bcoin</span> <span class="id">w</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
+<div class="proofscript" id="proof25">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">coinarb_spec</span> <span class="id">/arb</span> <span class="id">/bcoin</span> <span class="id">choiceC</span> <span class="id">-</span>(<span class="id">alt_absorbs_choice</span>) <span class="id">altC</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">coinarb_spec_convexity</span> <span class="id">p</span> <span class="id">w</span> <span class="id">:</span> <span class="id">coinarb</span> <span class="id">p</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">bcoin</span> <span class="id">w</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">[~]</span> (<span class="id">Ret</span> <span class="id">false</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">[~]</span> (<span class="id">Ret</span> <span class="id">true</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">[~]</span> <span class="id">bcoin</span> (<span class="id">Prob.p</span> <span class="id">w</span>).<span class="id">~%:pr</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
+<div class="proofscript" id="proof26">
+<span class="id">rewrite</span> <span class="id">coinarb_spec</span> <span class="id">[in</span> <span class="id">LHS]/arb</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">convexity</span> <span class="id">_</span> <span class="id">_</span> <span class="id">w</span>) <span class="id">2!choicemm</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-/</span>(<span class="id">bcoin</span> <span class="id">w</span>) <span class="id">-altA</span> <span class="id">altCA</span> <span class="id">-!altA;</span> <span class="id">congr</span> (<span class="id">_</span> <span class="id">[~]</span> <span class="id">_</span>).<br/>
+<span class="id">rewrite</span> <span class="id">altA</span> <span class="id">altC;</span> <span class="id">congr</span> (<span class="id">_</span> <span class="id">[~]</span> (<span class="id">_</span> <span class="id">[~]</span> <span class="id">_</span>)).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">choiceC</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">mixing_choices</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">coins23</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">exceptProbMonad</span> <span class="id">real_realType}</span> <span class="id">:</span> <span class="id">M</span> <span class="id">bool</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> <span class="id">true</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%coqR%:pr</span> <span class="id">|&gt;</span> (<span class="id">Ret</span> <span class="id">false</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%coqR%:pr</span> <span class="id">|&gt;</span> <span class="id">fail</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">R_scope</span>.<br/>
+<span class="vernacular">Lemma</span> <span class="id">choiceA_compute</span> <span class="id">{N</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType}</span> (<span class="id">T</span> <span class="id">F</span> <span class="id">:</span> <span class="id">bool</span>) (<span class="id">f</span> <span class="id">:</span> <span class="id">bool</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">bool</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">f</span> <span class="id">T</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">9</span>)<span class="id">%:pr|&gt;</span> (<span class="id">f</span> <span class="id">F</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">8</span>)<span class="id">%:pr|&gt;</span> (<span class="id">f</span> <span class="id">F</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">7</span>)<span class="id">%:pr|&gt;</span> (<span class="id">f</span> <span class="id">F</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">6</span>)<span class="id">%:pr|&gt;</span><br/>
+&nbsp;(<span class="id">f</span> <span class="id">T</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">5</span>)<span class="id">%:pr|&gt;</span> (<span class="id">f</span> <span class="id">F</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">4</span>)<span class="id">%:pr|&gt;</span> (<span class="id">f</span> <span class="id">F</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr|&gt;</span> (<span class="id">f</span> <span class="id">F</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr|&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">f</span> <span class="id">T</span>))))))) <span class="id">=</span> <span class="id">f</span> <span class="id">F</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr|&gt;</span> (<span class="id">f</span> <span class="id">F</span> <span class="id">&lt;|</span>(<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr|&gt;</span> <span class="id">f</span> <span class="id">T</span>) <span class="id">:&gt;</span> <span class="id">N</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
+<div class="proofscript" id="proof27">
+<span class="id">have</span> <span class="id">H27</span> <span class="id">:</span> (<span class="id">0</span> <span class="id">&lt;=</span> (<span class="id">2/7</span> <span class="id">:</span> <span class="id">R</span>) <span class="id">&lt;=</span> <span class="id">1</span>)<span class="id">%mcR</span> <span class="gallina-kwd">by</span> <span class="id">apply/andP;</span> <span class="id">split;</span> <span class="id">lra</span>.<br/>
+<span class="id">have</span> <span class="id">H721</span> <span class="id">:</span> (<span class="id">0</span> <span class="id">&lt;=</span> (<span class="id">7/21</span> <span class="id">:</span> <span class="id">R</span>) <span class="id">&lt;=</span> <span class="id">1</span>)<span class="id">%mcR</span> <span class="gallina-kwd">by</span> <span class="id">apply/andP;</span> <span class="id">split;</span> <span class="id">lra</span>.<br/>
+<span class="id">have</span> <span class="id">H2156</span> <span class="id">:</span> (<span class="id">0</span> <span class="id">&lt;=</span> (<span class="id">21/56</span> <span class="id">:</span> <span class="id">R</span>) <span class="id">&lt;=</span> <span class="id">1</span>)<span class="id">%mcR</span> <span class="gallina-kwd">by</span> <span class="id">apply/andP;</span> <span class="id">split;</span> <span class="id">lra</span>.<br/>
+<span class="id">have</span> <span class="id">H25</span> <span class="id">:</span> (<span class="id">0</span> <span class="id">&lt;=</span> (<span class="id">2/5</span> <span class="id">:</span> <span class="id">R</span>) <span class="id">&lt;=</span> <span class="id">1</span>)<span class="id">%mcR</span> <span class="gallina-kwd">by</span> <span class="id">apply/andP;</span> <span class="id">split;</span> <span class="id">lra</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">3</span>).<span class="id">~%:pr</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">3!probpK</span> <span class="id">/=</span> <span class="id">/onem</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!</span>(<span class="id">RmultE,RminusE,R1E</span>).<br/>
+&nbsp;&nbsp;<span class="id">split;</span> <span class="id">field</span>.<br/>
+<span class="id">rewrite</span> <span class="id">choicemm</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">3</span>).<span class="id">~%:pr</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">3!probpK</span> <span class="id">/=</span> <span class="id">/onem</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!</span>(<span class="id">RmultE,RminusE,R1E</span>).<br/>
+&nbsp;&nbsp;<span class="id">split;</span> <span class="id">field</span>.<br/>
+<span class="id">rewrite</span> <span class="id">choicemm</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">4</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">3</span>).<span class="id">~%:pr</span> (<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">4</span>).<span class="id">~%:pr</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">4!probpK</span> <span class="id">/=</span> <span class="id">/onem</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!</span>(<span class="id">RmultE,RminusE,R1E</span>).<br/>
+&nbsp;&nbsp;<span class="id">split;</span> <span class="id">field</span>.<br/>
+<span class="id">rewrite</span> <span class="id">choicemm</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">7</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">6</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> (<span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">2/7</span>) <span class="id">H27</span>))<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">4!probpK</span> <span class="id">/=</span> <span class="id">/onem;</span> <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-RmultE</span> <span class="id">-RdivE'</span> <span class="id">-2!INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">field</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!</span>(<span class="id">RmultE,RminusE</span>).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-RinvE'</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">7%mcR</span> <span class="id">=</span> <span class="id">7</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">2%mcR</span> <span class="id">=</span> <span class="id">2</span>)<span class="id">//</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-R1E</span>.<br/>
+&nbsp;&nbsp;<span class="id">field</span>.<br/>
+<span class="id">rewrite</span> <span class="id">choicemm</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">8</span>)<span class="id">%:pr</span> (<span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">2/7</span>) <span class="id">H27</span>) (<span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">7/21</span>) <span class="id">H721</span>) (<span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">21/56</span>) <span class="id">H2156</span>))<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">probpK</span> <span class="id">/=</span> <span class="id">/onem;</span> <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-RmultE</span> <span class="id">-2!RdivE'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">21%mcR</span> <span class="id">=</span> <span class="id">21</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">56%mcR</span> <span class="id">=</span> <span class="id">56</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">7%mcR</span> <span class="id">=</span> <span class="id">7</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">field</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-2!RmultE</span> <span class="id">-!RminusE</span> <span class="id">-RdivE'</span> <span class="id">-RinvE'</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">56%mcR</span> <span class="id">=</span> <span class="id">56</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">7%mcR</span> <span class="id">=</span> <span class="id">7</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">21%mcR</span> <span class="id">=</span> <span class="id">21</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">2%mcR</span> <span class="id">=</span> <span class="id">2</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-R1E</span>.<br/>
+&nbsp;&nbsp;<span class="id">field</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">choiceC</span> (<span class="id">/</span> <span class="id">4</span>).<span class="id">~%:pr</span>).<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">5</span>)<span class="id">%:pr</span> (<span class="id">probcplt</span> (<span class="id">/</span> <span class="id">4</span>).<span class="id">~%:pr</span>) (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> (<span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">2/5</span>) <span class="id">H25</span>))<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">3!probpK</span> <span class="id">/=</span> <span class="id">/onem;</span> <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-2!RmultE</span> <span class="id">-RinvE'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">2%mcR</span> <span class="id">=</span> <span class="id">2</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">5%mcR</span> <span class="id">=</span> <span class="id">5</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">field</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!RmultE</span> <span class="id">-!RminusE</span> <span class="id">-RinvE'</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">5%mcR</span> <span class="id">=</span> <span class="id">5</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">2%mcR</span> <span class="id">=</span> <span class="id">2</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-R1E</span>.<br/>
+&nbsp;&nbsp;<span class="id">field</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!choicemm</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">choiceC</span> (<span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">2/5</span>) <span class="id">H25</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">@Prob</span>.<span class="id">mk</span> <span class="id">_</span> (<span class="id">21/56</span>) <span class="id">H2156</span>) (<span class="id">probcplt</span> (<span class="id">Prob.mk</span> <span class="id">H25</span>)) (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">4</span>).<span class="id">~%:pr</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">3!probpK</span> <span class="id">/=</span> <span class="id">/onem;</span> <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!RmultE</span> <span class="id">-RminusE</span> <span class="id">-RinvE'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">56%mcR</span> <span class="id">=</span> <span class="id">56</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">21%mcR</span> <span class="id">=</span> <span class="id">21</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-R1E</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">field</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!</span>(<span class="id">RmultE,RminusE</span>) <span class="id">-2!RinvE'</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">56%mcR</span> <span class="id">=</span> <span class="id">56</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">21%mcR</span> <span class="id">=</span> <span class="id">21</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">5%mcR</span> <span class="id">=</span> <span class="id">5</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">2%mcR</span> <span class="id">=</span> <span class="id">2</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-INRE</span> <span class="id">!INR_IZR_INZ</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-R1E</span>.<br/>
+&nbsp;&nbsp;<span class="id">field</span>.<br/>
+<span class="id">rewrite</span> <span class="id">choicemm</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">choiceC</span> (<span class="id">/</span> <span class="id">4</span>).<span class="id">~%:pr</span>).<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]</span>(<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">9</span>)<span class="id">%:pr</span> (<span class="id">probcplt</span> (<span class="id">/</span> <span class="id">4</span>).<span class="id">~%:pr</span>) (<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">3!probpK</span> <span class="id">/=</span> <span class="id">/onem;</span> <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-RmultE</span>. <span class="id">field</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-RmultE</span> <span class="id">-!RminusE</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-R1E</span>.<br/>
+&nbsp;&nbsp;<span class="id">field</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">choicemm</span> <span class="id">choiceC</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">uFFT</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType}</span> <span class="id">:</span> <span class="id">M</span> <span class="id">bool</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">true</span> <span class="id">[::</span> <span class="id">false;</span> <span class="id">false;</span> <span class="id">true]</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uFFTE</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) <span class="id">:</span> <span class="id">uFFT</span> <span class="id">=</span> <span class="id">bcoin</span> (<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
+<div class="proofscript" id="proof28">
+<span class="id">rewrite</span> <span class="id">/uFFT</span> <span class="id">/bcoin</span> <span class="id">uniform_cons</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">_%:pr</span> <span class="id">=</span> (<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr</span>)<span class="id">%R;</span> <span class="id">last</span> <span class="id">exact/val_inj</span>.<br/>
+<span class="id">rewrite</span> <span class="id">uniform_cons</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">X</span> <span class="gallina-kwd">in</span> <span class="id">_</span> <span class="id">&lt;|</span> <span class="id">_</span> <span class="id">|&gt;</span> <span class="id">X]</span>(<span class="id">_</span> <span class="id">:</span> <span class="id">_%:pr</span> <span class="id">=</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span>)<span class="id">%R;</span> <span class="id">last</span> <span class="id">exact/val_inj</span>.<br/>
+<span class="id">rewrite</span> <span class="id">uniform_singl</span> <span class="id">//=</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">3</span>).<span class="id">~%:pr</span>)<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/onem;</span> <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-RmultE</span> <span class="id">-RminusE</span> <span class="id">-R1E;</span> <span class="id">field</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-!RmultE</span> <span class="id">-!RminusE</span> <span class="id">-R1E;</span> <span class="id">field</span>.<br/>
+<span class="id">rewrite</span> <span class="id">choicemm</span> <span class="id">choiceC;</span> <span class="id">congr</span> (<span class="id">Ret</span> <span class="id">true</span> <span class="id">&lt;|</span> <span class="id">_</span> <span class="id">|&gt;</span> <span class="id">Ret</span> <span class="id">false</span>).<br/>
+<span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">val_inj;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">onemK</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">uTTF</span> <span class="id">{M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType}</span> <span class="id">:</span> <span class="id">M</span> <span class="id">bool</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">true</span> <span class="id">[::</span> <span class="id">true;</span> <span class="id">true;</span> <span class="id">false]</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uTTFE</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) <span class="id">:</span> <span class="id">uTTF</span> <span class="id">=</span> <span class="id">bcoin</span> (<span class="id">/</span> <span class="id">3</span>).<span class="id">~%:pr</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
+<div class="proofscript" id="proof29">
+<span class="id">rewrite</span> <span class="id">/uTTF</span> <span class="id">/bcoin</span> <span class="id">uniform_cons</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">_%:pr</span> <span class="id">=</span> (<span class="id">/</span> <span class="id">3</span>)<span class="id">%:pr</span>)<span class="id">%R;</span> <span class="id">last</span> <span class="id">exact/val_inj</span>.<br/>
+<span class="id">rewrite</span> <span class="id">uniform_cons</span>.<br/>
+<span class="id">rewrite</span> <span class="id">[in</span> <span class="id">X</span> <span class="gallina-kwd">in</span> <span class="id">_</span> <span class="id">&lt;|</span> <span class="id">_</span> <span class="id">|&gt;</span> <span class="id">X]</span>(<span class="id">_</span> <span class="id">:</span> <span class="id">_%:pr</span> <span class="id">=</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span>)<span class="id">%R;</span> <span class="id">last</span> <span class="id">exact/val_inj</span>.<br/>
+<span class="id">rewrite</span> <span class="id">uniform_singl</span> <span class="id">//=</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">@choiceA_alternative</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> (<span class="id">/</span> <span class="id">3</span>).<span class="id">~%:pr</span>) <span class="id">?choicemm</span> <span class="id">//</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/onem;</span> <span class="id">split</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-RmultE</span> <span class="id">-RminusE</span> <span class="id">-R1E</span>. <span class="id">field</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-!RminusE</span> <span class="id">-RmultE</span> <span class="id">-R1E</span>. <span class="id">field</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">uniform_notin</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="id">eqType</span>) (<span class="id">def</span> <span class="id">:</span> <span class="id">A</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">A</span>) <span class="id">B</span><br/>
+&nbsp;&nbsp;(<span class="id">ma</span> <span class="id">mb</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">B</span>) (<span class="id">p</span> <span class="id">:</span> <span class="id">pred</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">s</span> <span class="id">!=</span> <span class="id">[::]</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">x,</span> <span class="id">x</span> <span class="id">\in</span> <span class="id">s</span> <span class="id">-&gt;</span> <span class="id">~~</span> <span class="id">p</span> <span class="id">x</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">def</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">t</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id">p</span> <span class="id">t</span> <span class="gallina-kwd">then</span> <span class="id">ma</span> <span class="id">t</span> <span class="gallina-kwd">else</span> <span class="id">mb</span> <span class="id">t</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">uniform</span> <span class="id">def</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">mb</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
+<div class="proofscript" id="proof30">
+<span class="id">elim:</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">[//|h</span> <span class="id">t</span> <span class="id">IH</span> <span class="id">_</span> <span class="id">H]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">uniform_cons</span>.<br/>
+<span class="id">case/boolP</span> <span class="id">:</span> (<span class="id">t</span> <span class="id">==</span> <span class="id">[::]</span>) <span class="id">=&gt;</span> <span class="id">[/eqP</span> <span class="id">-&gt;</span> <span class="id">{IH}|t0]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">uniform_nil</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id">_</span> <span class="id">:</span> <span class="id">_%:pr</span> <span class="id">=</span> <span class="id">1%:pr</span>)<span class="id">;</span> <span class="id">last</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">val_inj;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">Rinv_1</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">choice1</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">2!bindretf</span> <span class="id">ifF</span> <span class="id">//;</span> <span class="id">apply/negbTE/H;</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">mem_head</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!choice_bindDl;</span> <span class="id">congr</span> (<span class="id">_</span> <span class="id">&lt;|</span> <span class="id">_</span> <span class="id">|&gt;</span> <span class="id">_</span>).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">2!bindretf</span> <span class="id">ifF</span> <span class="id">//;</span> <span class="id">apply/negbTE/H;</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">mem_head</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">IH</span> <span class="id">//</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">ta;</span> <span class="id">rewrite</span> <span class="id">H</span> <span class="id">//</span> <span class="id">in_cons</span> <span class="id">ta</span> <span class="id">orbT</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">choice_halfC</span> <span class="id">A</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">a</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">b</span> <span class="id">=</span> <span class="id">b</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">a</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
+<div class="proofscript" id="proof31">
+<span class="id">rewrite</span> <span class="id">choiceC</span> (<span class="id">_</span> <span class="id">:</span> (<span class="id">_</span>.<span class="id">~</span>)<span class="id">%:pr</span> <span class="id">=</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span>) <span class="id">//</span>.<br/>
+<span class="id">apply</span> <span class="id">val_inj;</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">/onem</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-RminusE</span> <span class="id">-R1E;</span> <span class="id">field</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">choice_halfACA</span> <span class="id">A</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">probMonad</span> <span class="id">real_realType</span>) (<span class="id">a</span> <span class="id">b</span> <span class="id">c</span> <span class="id">d</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">a</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">b</span>) <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> (<span class="id">c</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">d</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">a</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">c</span>) <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> (<span class="id">b</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">d</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof32')">Proof.</span></div>
+<div class="proofscript" id="proof32">
+<span class="id">rewrite</span> <span class="id">choice_conv</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-convex</span>.<span class="id">convACA</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-choice_conv</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Section</span> <span class="id">keimel_plotkin_instance</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">altProbMonad</span> <span class="id">real_realType</span>) (<span class="id">A</span> <span class="id">:</span> <span class="gallina-kwd">Type</span>).<br/>
+<span class="vernacular">Variables</span> (<span class="id">p</span> <span class="id">q</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">keimel_plotkin_instance</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">T</span> <span class="id">p,</span> <span class="id">right_distributive</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">M</span> <span class="id">T</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">[~]</span> <span class="id">b</span>) (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">&lt;|</span> <span class="id">p</span> <span class="id">|&gt;</span> <span class="id">b</span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">p</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">q</span> <span class="id">=</span> (<span class="id">p</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">q</span>) <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> (<span class="id">p</span> <span class="id">[~]</span> <span class="id">q</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof33')">Proof.</span></div>
+<div class="proofscript" id="proof33">
+<span class="id">move=&gt;</span> <span class="id">altDr</span>.<br/>
+<span class="id">have</span> <span class="id">altDl</span> <span class="id">T</span> <span class="id">r</span> <span class="id">:</span> <span class="id">left_distributive</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">:</span> <span class="id">M</span> <span class="id">T</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">[~]</span> <span class="id">b</span>) (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">&lt;|</span> <span class="id">r</span> <span class="id">|&gt;</span> <span class="id">b</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">a</span> <span class="id">b</span> <span class="id">c;</span> <span class="id">rewrite</span> <span class="id">altC</span> <span class="id">altDr</span> (<span class="id">altC</span> <span class="id">a</span>) (<span class="id">altC</span> <span class="id">b</span>).<br/>
+<span class="id">rewrite</span> <span class="id">-[LHS]</span>(<span class="id">altmm</span> (<span class="id">p</span> <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> <span class="id">q</span>)).<br/>
+<span class="id">transitivity</span> (((<span class="id">p</span> <span class="id">[~]</span> <span class="id">p</span>) <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr|&gt;</span> (<span class="id">q</span> <span class="id">[~]</span> <span class="id">p</span>)) <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> ((<span class="id">p</span> <span class="id">[~]</span> <span class="id">q</span>) <span class="id">&lt;|</span> (<span class="id">/</span> <span class="id">2</span>)<span class="id">%:pr</span> <span class="id">|&gt;</span> (<span class="id">q</span> <span class="id">[~]</span> <span class="id">q</span>))).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">altDr</span> <span class="id">altDl</span> <span class="id">altDl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!altmm</span> (<span class="id">altC</span> <span class="id">q</span>).<br/>
+<span class="id">rewrite</span> (<span class="id">choice_halfC</span> (<span class="id">p</span> <span class="id">[~]</span> <span class="id">q</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">choiceACA</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">choicemm</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">keimel_plotkin_instance</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

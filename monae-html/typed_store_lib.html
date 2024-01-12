@@ -1,0 +1,196 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module typed_store_lib</title>
+<meta name="description" content="Documentation of Coq module typed_store_lib" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module typed_store_lib</h1>
+<div class="coq">
+<span class="vernacular">Ltac</span> <span class="id">typeof</span> <span class="id">X</span> <span class="id">:=</span> <span class="id">type</span> <span class="id">of</span> <span class="id">X</span>.<br/>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">ssrmatching</span> <span class="id">Reals</span> <span class="id">JMeq</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="id">boolp</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Reals_ext</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monae_lib</span> <span class="id">hierarchy</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                     Lemmas using the typed store monad                    
+                                                                           
+    cchk T (r : loc T) := cget r &gt;&gt; skip.                                  
+                                                                           
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">cchk</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">MLU</span> <span class="id">:</span> <span class="id">ML_universe</span>) (<span class="id">N</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">locT</span> <span class="id">:</span> <span class="id">eqType</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">typedStoreMonad</span> <span class="id">MLU</span> <span class="id">N</span> <span class="id">locT</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">loc</span> <span class="id">:=</span> (<span class="id">@loc</span> <span class="id">MLU</span> <span class="id">locT</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">cchk</span> <span class="id">{T}</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">unit</span> <span class="id">:=</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> <span class="id">skip</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cnewchk</span> <span class="id">T</span> <span class="id">s</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cnew</span> <span class="id">T</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">r</span>) <span class="id">=</span> <span class="id">cnew</span> <span class="id">T</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+<span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">bindA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">cnewget</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">bindskipf</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchknewC</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) <span class="id">s</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">T2</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">r'</span> <span class="id">=&gt;</span> <span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">r'</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">T2</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+<span class="id">rewrite</span> <span class="id">!</span>(<span class="id">bindA,bindskipf</span>).<br/>
+<span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">bindA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">cgetnewD</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">bindskipf</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchkgetC</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">r2:</span> <span class="id">loc</span> <span class="id">T2</span>) (<span class="id">A:</span> <span class="id">UU0</span>)<br/>
+&nbsp;&nbsp;(<span class="id">k:</span> <span class="id">coq_type</span> <span class="id">N</span> <span class="id">T2</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> (<span class="id">cget</span> <span class="id">r2</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>) <span class="id">=</span> <span class="id">cget</span> <span class="id">r2</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">cchk</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">s</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">under</span> <span class="id">[in</span> <span class="id">RHS]eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">bindskipf</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!</span>(<span class="id">bindA,bindskipf</span>) <span class="id">cgetC</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchknewE</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) <span class="id">s</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">k1</span> <span class="id">k2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2,</span> <span class="id">loc_id</span> <span class="id">r1</span> <span class="id">!=</span> <span class="id">loc_id</span> <span class="id">r2</span> <span class="id">-&gt;</span> <span class="id">k1</span> <span class="id">r2</span> <span class="id">=</span> <span class="id">k2</span> <span class="id">r2</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">T2</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">k1</span>) <span class="id">=</span> <span class="id">cchk</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">T2</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">k2</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+ <span class="id">move=&gt;</span> <span class="id">Hk;</span> <span class="id">rewrite</span> <span class="id">!</span>(<span class="id">bindA,bindskipf</span>)<span class="id">;</span> <span class="id">exact:</span> <span class="id">cgetnewE</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchknewget</span> <span class="id">T</span> <span class="id">T'</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">s</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">k</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">T'</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">r'</span> <span class="id">=&gt;</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span> <span class="id">r'</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">u</span> <span class="id">=&gt;</span> <span class="id">cnew</span> <span class="id">T'</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span> <span class="id">^~</span> <span class="id">u</span>) <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">A</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">bindskipf</span> <span class="id">cgetnewD</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchknewput</span> <span class="id">T</span> <span class="id">T'</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">s</span> <span class="id">s'</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">k</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">T'</span> <span class="id">s'</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">r'</span> <span class="id">=&gt;</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">r'</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> (<span class="id">cnew</span> <span class="id">T'</span> <span class="id">s'</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>) <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">A</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">bindskipf</span> <span class="id">cputnewC</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchkget</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">N</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> (<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>) <span class="id">=</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">bindskipf</span> <span class="id">cgetget</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cgetchk</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">A:</span> <span class="id">UU0</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">N</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> <span class="id">k</span> <span class="id">s</span>) <span class="id">=</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+ <span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">bindskipf;</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">cgetget</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchkputC</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">N</span> <span class="id">T2</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r2</span> <span class="id">s</span> <span class="id">=</span> <span class="id">cput</span> <span class="id">r2</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">cchk</span> <span class="id">r1</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">bindskipf</span> <span class="id">cgetputC</span> <span class="id">bindA</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchkput</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">N</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">=</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">bindskipf</span> <span class="id">cgetput</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cputchk</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) (<span class="id">s</span> <span class="id">:</span> <span class="id">coq_type</span> <span class="id">N</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cput</span> <span class="id">r</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">cchk</span> <span class="id">r</span> <span class="id">=</span> <span class="id">cput</span> <span class="id">r</span> <span class="id">s</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">cputget</span> <span class="id">bindmskip</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchkC</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">r1</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T1</span>) (<span class="id">r2</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T2</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">cchk</span> <span class="id">r1</span> <span class="id">&gt;&gt;</span> <span class="id">cchk</span> <span class="id">r2</span> <span class="id">=</span> <span class="id">cchk</span> <span class="id">r2</span> <span class="id">&gt;&gt;</span> <span class="id">cchk</span> <span class="id">r1</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!</span>(<span class="id">bindA,bindskipf</span>) <span class="id">cgetC</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cchkdup</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">cchk</span> <span class="id">r</span> <span class="id">&gt;&gt;</span> <span class="id">cchk</span> <span class="id">r</span> <span class="id">=</span> <span class="id">cchk</span> <span class="id">r</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindA</span> <span class="id">bindskipf</span> <span class="id">cgetget</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cgetret</span> <span class="id">T</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">&gt;&gt;=</span> <span class="id">Ret</span> <span class="id">=</span> <span class="id">cget</span> <span class="id">r</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindmret</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">crunnew0</span> <span class="id">T</span> <span class="id">s</span> <span class="id">:</span> <span class="id">crun</span> (<span class="id">cnew</span> <span class="id">T</span> <span class="id">s</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id">bindskipf</span> (<span class="id">cnew</span> <span class="id">T</span> <span class="id">s</span>)) <span class="id">crunnew</span> <span class="id">//</span> <span class="id">crunskip</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">crunchkget</span> <span class="id">A</span> <span class="id">T</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cchk</span> (<span class="id">r</span> <span class="id">x</span>)) <span class="id">=</span> <span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cget</span> (<span class="id">r</span> <span class="id">x</span>)) <span class="id">:&gt;</span> <span class="id">bool</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cchk</span> <span class="id">-bindA</span> <span class="id">crunmskip</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">crunchkput</span> <span class="id">A</span> <span class="id">T</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">loc</span> <span class="id">T</span>) <span class="id">s</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cchk</span> (<span class="id">r</span> <span class="id">x</span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cput</span> (<span class="id">r</span> <span class="id">x</span>) (<span class="id">s</span> <span class="id">x</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+ <span class="id">rewrite</span> <span class="id">crunchkget;</span> <span class="id">exact:</span> <span class="id">crungetput</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">crunnewchkC</span> <span class="id">A</span> <span class="id">T1</span> <span class="id">T2</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) (<span class="id">r</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">loc</span> <span class="id">T1</span>) <span class="id">s</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cchk</span> (<span class="id">r</span> <span class="id">x</span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cnew</span> <span class="id">T2</span> (<span class="id">s</span> <span class="id">x</span>) <span class="id">&gt;&gt;</span> <span class="id">cchk</span> (<span class="id">r</span> <span class="id">x</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">rewrite</span> <span class="id">crunchkget</span> <span class="id">=&gt;</span> <span class="id">Hck</span>.<br/>
+<span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">-bindA</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-bindA</span> <span class="id">crunmskip</span>.<br/>
+<span class="id">exact:</span> <span class="id">crunnewgetC</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">crunnewchk</span> <span class="id">A</span> <span class="id">T</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">s</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">crun</span> <span class="id">m</span> <span class="id">-&gt;</span> <span class="id">crun</span> (<span class="id">m</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">cnew</span> <span class="id">T</span> (<span class="id">s</span> <span class="id">x</span>) <span class="id">&gt;&gt;=</span> <span class="id">cchk</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">/cchk</span> <span class="id">cnewget</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-bindA</span> <span class="id">crunmskip</span>.<br/>
+<span class="id">exact:</span> <span class="id">crunnew</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">crunnewchk0</span> <span class="id">T</span> <span class="id">s</span> <span class="id">:</span> <span class="id">crun</span> (<span class="id">cnew</span> <span class="id">T</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id">cchk</span> <span class="id">r</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id">bindskipf</span> (<span class="id">_</span> <span class="id">&gt;&gt;=</span> <span class="id">_</span>)) <span class="id">crunnewchk</span> <span class="id">//</span> <span class="id">crunskip</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">cnewgetret</span> <span class="id">T</span> <span class="id">s</span> <span class="id">:</span> <span class="id">cnew</span> <span class="id">T</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">@cget</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">=</span> <span class="id">cnew</span> <span class="id">T</span> <span class="id">s</span> <span class="id">&gt;&gt;</span> <span class="id">Ret</span> <span class="id">s</span> <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+ <span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">-cgetret;</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">cnewget</span>. Qed.</div>
+<span class="vernacular">End</span> <span class="id">cchk</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">cchk</span> <span class="id">{MLU</span> <span class="id">N</span> <span class="id">locT</span> <span class="id">M}</span> <span class="id">[T]</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>

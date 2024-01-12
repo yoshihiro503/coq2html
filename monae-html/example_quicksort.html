@@ -1,0 +1,365 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module example_quicksort</title>
+<meta name="description" content="Documentation of Coq module example_quicksort" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+<h1 class="title">Module example_quicksort</h1>
+<div class="coq">
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">all_ssreflect</span>.<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="id">boolp</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">monae_lib</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">hierarchy</span> <span class="id">monad_lib</span> <span class="id">fail_lib</span> <span class="id">state_lib</span>.<br/>
+<span class="vernacular">From</span> <span class="id">infotheo</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">ssr_ext</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Recdef</span>.<br/>
+<span class="vernacular">From</span> <span class="id">Equations</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Equations</span>.<br/>
+<br/>
+<pre class="ssrdoc">
+                           Quicksort example                               
+                                                                           
+This file provides a formalization of quicksort on lists as proved in      
+[1, Sect. 4]. The main lemmas is quicksort_slowsort.                       
+                                                                           
+is_partition p (s, t) == elements of s are smaller or equal to p, and      
+                         elements of t are greater of equal to p           
+        partition p s == partitions s into a partition w.r.t. p            
+                         type: T -&gt; seq T -&gt; seq T * seq T                 
+           slowsort s == choose a sorted list among all permutations of s  
+              qsort s == sort s by quicksort                               
+                         type: seq T -&gt; seq T                              
+                                                                           
+Reference:                                                                 
+- [1] Shin-Cheng Mu, Tsung-Ju Chiang, Declarative Pearl: Deriving Monadic  
+      Quicksort, FLOPS 2020                                                
+</pre>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<span class="id">Unset</span> <span class="id">Strict</span> <span class="vernacular">Implicit</span>.<br/>
+<span class="id">Unset</span> <span class="id">Printing</span> <span class="vernacular">Implicit</span> <span class="id">Defensive</span>.<br/>
+<br/>
+<span class="vernacular">Import</span> <span class="id">Order.TTheory</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">order_scope</span>.<br/>
+<br/>
+<span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">ssrnat</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">sorted</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">d</span> <span class="id">:</span> <span class="id">unit</span>) (<span class="id">T</span> <span class="id">:</span> <span class="id">orderType</span> <span class="id">d</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">sorted</span> <span class="id">:=</span> (<span class="id">sorted</span> <span class="id">&lt;=%O</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">sorted_cat_cons</span> (<span class="id">x</span> <span class="id">:</span> <span class="id">T</span>) (<span class="id">ys</span> <span class="id">zs</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">sorted</span> (<span class="id">ys</span> <span class="id">++</span> <span class="id">x</span> <span class="id">::</span> <span class="id">zs</span>) <span class="id">=</span> <span class="id">[&amp;&amp;</span> <span class="id">sorted</span> <span class="id">ys,</span> <span class="id">sorted</span> <span class="id">zs,</span> <span class="id">all</span> (<span class="id">&lt;=</span> <span class="id">x</span>) <span class="id">ys</span> <span class="id">&amp;</span> <span class="id">all</span> (<span class="id">&gt;=</span> <span class="id">x</span>) <span class="id">zs]</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+<span class="id">apply/idP/idP</span> <span class="id">=&gt;</span> <span class="id">[|]</span>.<br/>
+<span class="id">elim:</span> <span class="id">ys</span> <span class="id">=&gt;</span> <span class="id">/=</span> <span class="id">[|h</span> <span class="id">t</span> <span class="id">ih];</span> <span class="id">first</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">le_path_sortedE</span> <span class="id">andbC</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!le_path_sortedE</span> <span class="id">all_cat</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">/andP[/andP[-&gt;</span> <span class="id">/=</span> <span class="id">/andP[-&gt;</span> <span class="id">_]]</span> <span class="id">hs];</span> <span class="id">move:</span> (<span class="id">ih</span> <span class="id">hs</span>) <span class="id">=&gt;</span> <span class="id">-&gt;</span>.<br/>
+<span class="id">case/and4P</span> <span class="id">=&gt;</span> <span class="id">ss</span> <span class="id">ss'</span> <span class="id">ps</span> <span class="id">ps';</span> <span class="id">apply</span> (<span class="id">@sorted_cat</span> <span class="id">_</span>) <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">/=</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">le_path_sortedE</span> <span class="id">ss'</span> <span class="id">ps'</span>.<br/>
+<span class="id">move</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">ain</span> <span class="id">b</span> <span class="id">bin;</span> <span class="id">apply:</span> <span class="id">le_trans</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">ps</span> <span class="id">=&gt;</span> <span class="id">/allP;</span> <span class="id">apply</span>.<br/>
+<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">move:</span> <span class="id">bin</span> <span class="id">ps';</span> <span class="id">rewrite</span> <span class="id">inE</span> <span class="id">=&gt;</span> <span class="id">/orP[/eqP</span> <span class="id">-&gt;//|]</span> <span class="id">=&gt;</span> <span class="id">/allP;</span> <span class="id">apply</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">sorted</span>.<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">monae_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">tuple_ext_scope</span>.<br/>
+<span class="id">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">mprog</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">partition</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">plusMonad</span>) (<span class="id">d</span> <span class="id">:</span> <span class="id">unit</span>) (<span class="id">T</span> <span class="id">:</span> <span class="id">orderType</span> <span class="id">d</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">is_partition</span> <span class="id">p</span> (<span class="id">yz</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">all</span> (<span class="id">&lt;=</span> <span class="id">p</span>) <span class="id">yz</span>.<span class="id">1</span> <span class="id">&amp;&amp;</span> <span class="id">all</span> (<span class="id">&gt;=</span> <span class="id">p</span>) <span class="id">yz</span>.<span class="id">2</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">is_partition_consL</span> <span class="id">p</span> <span class="id">x</span> (<span class="id">ys</span> <span class="id">zs</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">is_partition</span> <span class="id">p</span> (<span class="id">x</span> <span class="id">::</span> <span class="id">ys,</span> <span class="id">zs</span>) <span class="id">=</span> (<span class="id">x</span> <span class="id">&lt;=</span> <span class="id">p</span>) <span class="id">&amp;&amp;</span> <span class="id">is_partition</span> <span class="id">p</span> (<span class="id">ys,</span> <span class="id">zs</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/is_partition</span> <span class="id">andbA</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">is_partition_consR</span> <span class="id">p</span> <span class="id">x</span> (<span class="id">ys</span> <span class="id">zs</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">is_partition</span> <span class="id">p</span> (<span class="id">ys,</span> <span class="id">x</span> <span class="id">::</span> <span class="id">zs</span>) <span class="id">=</span> (<span class="id">x</span> <span class="id">&gt;=</span> <span class="id">p</span>) <span class="id">&amp;&amp;</span> <span class="id">is_partition</span> <span class="id">p</span> (<span class="id">ys,</span> <span class="id">zs</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/is_partition</span> <span class="id">andbCA</span>. Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">is_partition_consE</span> <span class="id">:=</span> (<span class="id">is_partition_consL,</span> <span class="id">is_partition_consR</span>).<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">partition</span> <span class="id">p</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">T</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">s</span> <span class="id">isn't</span> <span class="id">x</span> <span class="id">::</span> <span class="id">xs</span> <span class="gallina-kwd">then</span> (<span class="id">[::],</span> <span class="id">[::]</span>) <span class="gallina-kwd">else</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> <span class="id">yz</span> <span class="id">:=</span> <span class="id">partition</span> <span class="id">p</span> <span class="id">xs</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">x</span> <span class="id">&lt;=</span> <span class="id">p</span> <span class="gallina-kwd">then</span> (<span class="id">x</span> <span class="id">::</span> <span class="id">yz</span>.<span class="id">1,</span> <span class="id">yz</span>.<span class="id">2</span>) <span class="gallina-kwd">else</span> (<span class="id">yz</span>.<span class="id">1,</span> <span class="id">x</span> <span class="id">::</span> <span class="id">yz</span>.<span class="id">2</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">size_partition</span> <span class="id">p</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">size</span> (<span class="id">partition</span> <span class="id">p</span> <span class="id">s</span>).<span class="id">1</span> <span class="id">+</span> <span class="id">size</span> (<span class="id">partition</span> <span class="id">p</span> <span class="id">s</span>).<span class="id">2</span> <span class="id">=</span> <span class="id">size</span> <span class="id">s</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+<span class="id">elim:</span> <span class="id">s</span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">//=</span> <span class="id">x</span> <span class="id">xs</span> <span class="id">ih</span> <span class="id">p;</span> <span class="id">have</span> <span class="id">{ih}</span> <span class="id">:=</span> <span class="id">ih</span> <span class="id">p</span>.<br/>
+<span class="id">move</span> <span class="id">H</span> <span class="id">:</span> (<span class="id">partition</span> <span class="id">p</span> <span class="id">xs</span>) <span class="id">=&gt;</span> <span class="id">h;</span> <span class="id">case:</span> <span class="id">h</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">b</span> <span class="id">ab</span> <span class="id">/=</span> <span class="id">abxs</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">case:</span> <span class="id">ifPn</span> <span class="id">=&gt;</span> <span class="id">xp;</span> <span class="id">rewrite</span> <span class="id">!</span>(<span class="id">addSn,addnS</span>) <span class="id">abxs</span>.<br/>
+<span class="comment">(*&nbsp;!&nbsp;was&nbsp;?&nbsp;:conflict&nbsp;with&nbsp;Equations&nbsp;TODO&nbsp;bug&nbsp;report&nbsp;*)</span><br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">partition_spec</span> (<span class="id">p</span> <span class="id">:</span> <span class="id">T</span>) (<span class="id">xs</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;((<span class="id">@ret</span> <span class="id">M</span> <span class="id">_</span>) <span class="id">\o</span> <span class="id">partition</span> <span class="id">p</span>) <span class="id">xs</span> <span class="id">`&lt;=`</span> <span class="id">splits</span> <span class="id">xs</span> <span class="id">&gt;&gt;=</span> <span class="id">assert</span> (<span class="id">is_partition</span> <span class="id">p</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+<span class="id">elim:</span> <span class="id">xs</span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">[/=|x</span> <span class="id">xs</span> <span class="id">ih]</span> <span class="id">p</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindretf</span> <span class="id">!assertE</span> <span class="id">/is_partition</span> <span class="id">guardT</span> <span class="id">bindskipf;</span> <span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">bindA</span>.<br/>
+<span class="id">apply:</span> (<span class="id">refin_trans</span> <span class="id">_</span> (<span class="id">refin_bindl</span> <span class="id">_</span> <span class="id">_</span>))<span class="id">;</span> <span class="id">last</span> <span class="id">first</span> <span class="id">=&gt;</span> <span class="id">[yz|]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">alt_bindDl</span> <span class="id">2!bindretf</span> <span class="id">2!assertE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!is_partition_consE</span> <span class="id">2!guard_and</span> <span class="id">2!bindA</span>.<br/>
+<span class="id">exact/</span>(<span class="id">refin_alt</span> (<span class="id">refin_refl</span> <span class="id">_</span>))<span class="id">/refin_bindr/refin_guard_le</span>.<br/>
+<span class="comment">(*&nbsp;under&nbsp;eq_bind&nbsp;do&nbsp;rewrite&nbsp;alt_bindDl&nbsp;2!bindretf&nbsp;2!assertE.<br/>
+under&nbsp;eq_bind&nbsp;do&nbsp;rewrite&nbsp;2!is_partition_consE&nbsp;2!guard_and&nbsp;2!bindA.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;apply:&nbsp;(refin_trans&nbsp;_&nbsp;(refin_bindl&nbsp;_&nbsp;_));&nbsp;last&nbsp;first&nbsp;=&gt;&nbsp;[yz|].&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;apply&nbsp;(refin_alt).&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;exact/(refin_alt&nbsp;(refin_refl&nbsp;_))/refin_bindr/refin_guard_le.&nbsp;*)</span><br/>
+<span class="id">apply:</span> (<span class="id">refin_trans</span> <span class="id">_</span> (<span class="id">refin_bindl</span> <span class="id">_</span> <span class="id">_</span>))<span class="id">;</span> <span class="id">last</span> <span class="id">first</span> <span class="id">=&gt;</span> <span class="id">[yz|]</span>.<br/>
+&nbsp;&nbsp;<span class="id">exact:</span> <span class="id">refin_if_guard</span>.<br/>
+<span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">-bind_if</span>.<br/>
+<span class="id">apply:</span> (<span class="id">@refin_trans</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">splits</span> <span class="id">xs</span> <span class="id">&gt;&gt;=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">guard</span> (<span class="id">is_partition</span> <span class="id">p</span> <span class="id">a</span>) <span class="id">&gt;&gt;</span> (<span class="id">Ret</span> <span class="id">a</span> <span class="id">&gt;&gt;=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> (<span class="gallina-kwd">if</span> <span class="id">x</span> <span class="id">&lt;=</span> <span class="id">p</span> <span class="gallina-kwd">then</span> <span class="id">Ret</span> (<span class="id">x</span> <span class="id">::</span> <span class="id">a</span>.<span class="id">1,</span> <span class="id">a</span>.<span class="id">2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id">Ret</span> (<span class="id">a</span>.<span class="id">1,</span> <span class="id">x</span> <span class="id">::</span> <span class="id">a</span>.<span class="id">2</span>)))))<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply:</span> <span class="id">refin_bindl</span> <span class="id">=&gt;</span> <span class="id">?;</span> <span class="id">apply:</span> <span class="id">refin_bindl</span> <span class="id">=&gt;</span> <span class="id">?</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindretf;</span> <span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+<span class="id">under</span> <span class="id">eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">-bindA</span> <span class="id">-assertE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-bindA;</span> <span class="id">apply:</span> (<span class="id">refin_trans</span> <span class="id">_</span> (<span class="id">refin_bindr</span> <span class="id">_</span> (<span class="id">ih</span> <span class="id">_</span>))).<br/>
+<span class="id">rewrite</span> <span class="id">bindretf;</span> <span class="id">case:</span> <span class="id">ifPn</span> <span class="id">=&gt;</span> <span class="id">?;</span> <span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">partition</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">slowsort</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">plusMonad</span>) (<span class="id">d</span> <span class="id">:</span> <span class="id">unit</span>) (<span class="id">T</span> <span class="id">:</span> <span class="id">orderType</span> <span class="id">d</span>).<br/>
+<br/>
+<span class="id">Local</span> <span class="vernacular">Notation</span> <span class="id">sorted</span> <span class="id">:=</span> (<span class="id">sorted</span> <span class="id">&lt;=%O</span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">slowsort</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> (<span class="id">seq</span> <span class="id">T</span>) <span class="id">:=</span> (<span class="id">qperm</span> <span class="id">&gt;=&gt;</span> <span class="id">assert</span> <span class="id">sorted</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">slowsort_nil</span> <span class="id">:</span> <span class="id">slowsort</span> <span class="id">[::]</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">[::]</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/slowsort</span> <span class="id">kleisliE</span> <span class="id">qpermE</span> <span class="id">bindretf</span> <span class="id">assertE</span> <span class="id">guardT</span> <span class="id">bindskipf</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">slowsort_cons</span> <span class="id">p</span> <span class="id">xs</span> <span class="id">:</span> <span class="id">slowsort</span> (<span class="id">p</span> <span class="id">::</span> <span class="id">xs</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">splits</span> <span class="id">xs</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">'</span>(<span class="id">ys,</span> <span class="id">zs</span>) <span class="id">=&gt;</span> <span class="id">qperm</span> <span class="id">ys</span> <span class="id">&gt;&gt;=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">ys'</span> <span class="id">=&gt;</span> <span class="id">qperm</span> <span class="id">zs</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">zs'</span> <span class="id">=&gt;</span> <span class="id">assert</span> <span class="id">sorted</span> (<span class="id">ys'</span> <span class="id">++</span> <span class="id">p</span> <span class="id">::</span> <span class="id">zs'</span>)))).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+<span class="id">rewrite</span> <span class="id">/slowsort</span> <span class="id">kleisliE</span> <span class="id">qperm_cons</span> <span class="id">bindA</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">bind_ext</span> <span class="id">=&gt;</span> <span class="id">-[a</span> <span class="id">b];</span> <span class="id">rewrite</span> <span class="id">liftM2E</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">slowsort_splits</span> <span class="id">p</span> <span class="id">s</span> <span class="id">:</span> <span class="id">slowsort</span> (<span class="id">p</span> <span class="id">::</span> <span class="id">s</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;<span class="id">splits</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">guard</span> (<span class="id">is_partition</span> <span class="id">p</span> <span class="id">x</span>) <span class="id">&gt;&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">slowsort</span> <span class="id">x</span>.<span class="id">1</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">slowsort</span> <span class="id">x</span>.<span class="id">2</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">a</span> <span class="id">++</span> <span class="id">p</span> <span class="id">::</span> <span class="id">b</span>)))).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">rewrite</span> <span class="id">slowsort_cons;</span> <span class="id">bind_ext=&gt;</span> <span class="id">{s}</span> <span class="id">-[a</span> <span class="id">b]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/is_partition</span> <span class="id">/slowsort</span> <span class="id">!kleisliE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">guard_and</span> <span class="id">!bindA/=</span> (<span class="id">plus_commute</span> (<span class="id">guard</span> (<span class="id">all</span> (<span class="id">&gt;=</span> <span class="id">p</span>) <span class="id">b</span>)))<span class="id">//=</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">plus_commute</span> (<span class="id">guard</span> (<span class="id">all</span> (<span class="id">&lt;=</span> <span class="id">p</span>) <span class="id">a</span>)))<span class="id">//</span> <span class="id">guard_all_qperm</span>.<br/>
+<span class="id">bind_ext=&gt;</span> <span class="id">a'</span>.<br/>
+<span class="id">rewrite</span> <span class="id">plus_commute//</span> <span class="id">assertE</span> <span class="id">bindA</span> <span class="id">bindretf</span> <span class="id">bindA</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">plus_commute</span> (<span class="id">guard</span> (<span class="id">sorted</span> <span class="id">a'</span>)))<span class="id">//</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">plus_commute</span> (<span class="id">guard</span> (<span class="id">all</span> (<span class="id">&lt;=</span> <span class="id">p</span>) <span class="id">a'</span>)))<span class="id">//</span> <span class="id">plus_commute//</span> <span class="id">guard_all_qperm</span>.<br/>
+<span class="id">bind_ext=&gt;</span> <span class="id">b'</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">plus_commute</span> (<span class="id">guard</span> (<span class="id">all</span> (<span class="id">&gt;=</span> <span class="id">p</span>) <span class="id">b'</span>)))<span class="id">//</span> <span class="id">!assertE</span> <span class="id">bindA</span> <span class="id">bindretf</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">sorted_cat_cons</span> <span class="id">andbC</span> <span class="id">-!andbA</span> <span class="id">andbC</span> <span class="id">!guard_and</span> <span class="id">!bindA</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">refin_partition_slowsort</span> <span class="id">p</span> <span class="id">s</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">Ret</span> (<span class="id">partition</span> <span class="id">p</span> <span class="id">s</span>) <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">'</span>(<span class="id">a,</span> <span class="id">b</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">slowsort</span> <span class="id">a</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">a'</span> <span class="id">=&gt;</span> <span class="id">slowsort</span> <span class="id">b</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">b'</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">a'</span> <span class="id">++</span> <span class="id">p</span> <span class="id">::</span> <span class="id">b'</span>))))<br/>
+&nbsp;&nbsp;<span class="id">`&lt;=`</span><br/>
+&nbsp;&nbsp;(<span class="id">slowsort</span> (<span class="id">p</span> <span class="id">::</span> <span class="id">s</span>) <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">rewrite</span> <span class="id">slowsort_splits</span>.<br/>
+<span class="id">apply:</span> <span class="id">refin_trans;</span> <span class="id">first</span> <span class="id">exact/refin_bindr/</span>(<span class="id">partition_spec</span> <span class="id">M</span> <span class="id">p</span> <span class="id">s</span>).<br/>
+<span class="id">rewrite</span> <span class="id">bindA;</span> <span class="id">apply:</span> <span class="id">refin_bindl</span> <span class="id">=&gt;</span> <span class="id">-[a</span> <span class="id">b]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">assertE</span> (<span class="id">bindA</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">a,</span> <span class="id">b</span>))) <span class="id">bindretf</span> <span class="id">/=</span> <span class="id">bindA</span>.<br/>
+<span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">slowsort_isNondet</span> <span class="id">s</span> <span class="id">:</span> <span class="id">plus_isNondet</span> (<span class="id">slowsort</span> <span class="id">s</span> <span class="id">:</span> <span class="id">M</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">rewrite</span> <span class="id">/slowsort</span> <span class="id">kleisliE</span>.<br/>
+<span class="id">have</span> <span class="id">[syn</span> <span class="id">syn_qperm]</span> <span class="id">:=</span> <span class="id">@qperm_isNondet</span> <span class="id">M</span> <span class="id">_</span> <span class="id">s</span>.<br/>
+<span class="gallina-kwd">exists</span> (<span class="id">ndBind</span> <span class="id">syn</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">ndBind</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">if</span> <span class="id">sorted</span> <span class="id">a</span> <span class="gallina-kwd">then</span> <span class="id">ndRet</span> <span class="id">tt</span> <span class="gallina-kwd">else</span> <span class="id">ndFail</span> <span class="id">unit</span>)<br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">:</span> <span class="id">unit</span> <span class="id">=&gt;</span> <span class="id">ndRet</span> <span class="id">a</span>))).<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">syn_qperm;</span> <span class="id">bind_ext</span> <span class="id">=&gt;</span> <span class="id">s'</span> <span class="id">/=</span>.<br/>
+<span class="id">case:</span> <span class="id">ifPn</span> <span class="id">=&gt;</span> <span class="id">sorteds'</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">bindretf</span> <span class="id">assertE</span> <span class="id">sorteds'</span> <span class="id">guardT</span> <span class="id">bindskipf</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">assertE</span> (<span class="id">negbTE</span> <span class="id">sorteds'</span>) <span class="id">guardF</span> <span class="id">bindfailf</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">qperm_slowsort</span> <span class="id">:</span> (<span class="id">qperm</span> <span class="id">&gt;=&gt;</span> <span class="id">slowsort</span>) <span class="id">=</span> <span class="id">slowsort</span> <span class="id">:&gt;</span> (<span class="id">seq</span> <span class="id">T</span> <span class="id">-&gt;</span> <span class="id">M</span> (<span class="id">seq</span> <span class="id">T</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/slowsort</span> <span class="id">-kleisliA</span> <span class="id">qperm_idempotent</span>. Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">slowsort</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id">slowsort</span> <span class="id">{M}</span> <span class="id">{_}</span> <span class="id">{_}</span>.<br/>
+<br/>
+<span class="id">#[global]</span> <span class="vernacular">Hint</span> <span class="id">Extern</span> <span class="id">0</span> (<span class="id">plus_isNondet</span> (<span class="id">slowsort</span> <span class="id">_</span>)) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">solve[exact:</span> <span class="id">slowsort_isNondet]</span> <span class="id">:</span> <span class="id">core</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">slowsort_example</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">plusMonad</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">bindskipE</span> <span class="id">:=</span> (<span class="id">bindskipf,</span> <span class="id">bindmskip</span>).<br/>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">sub</span> <span class="id">:=</span> <span class="id">repeat</span> <span class="id">rewrite</span> <span class="id">!alt_bindDl</span> <span class="id">!bindretf;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">bindA;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">repeat</span> <span class="id">rewrite</span> <span class="id">!qpermE</span> <span class="id">!bindA</span> <span class="id">!bindretf</span> <span class="id">/=</span>.<br/>
+<span class="vernacular">Ltac</span> <span class="id">bindSF</span> <span class="id">:=</span> <span class="id">rewrite</span> <span class="id">!bindskipf</span> <span class="id">!bindfailf</span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> (<span class="id">d</span> <span class="id">:</span> <span class="id">unit</span>) (<span class="id">T</span> <span class="id">:</span> <span class="id">orderType</span> <span class="id">d</span>).<br/>
+<br/>
+<span class="vernacular">Example</span> <span class="id">slowsort2</span> <span class="id">:</span> <span class="id">@slowsort</span> <span class="id">M</span> <span class="id">_</span> <span class="id">_</span> <span class="id">[::</span> <span class="id">2;</span> <span class="id">1]%N</span> <span class="id">=</span> <span class="id">Ret</span> <span class="id">[::</span> <span class="id">1;</span> <span class="id">2]%N</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+<span class="id">rewrite</span> <span class="id">/slowsort</span> <span class="id">kleisliE</span>.<br/>
+<span class="id">rewrite</span> <span class="id">!qpermE</span> <span class="id">/bindA</span> <span class="id">/=</span> <span class="id">!bindretf</span>.<br/>
+<span class="id">repeat</span> <span class="id">sub</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/sorted</span> <span class="id">/assert</span> <span class="id">/guard</span> <span class="id">/path</span> <span class="id">/=;</span> <span class="id">unlock</span>.<br/>
+<span class="id">bindSF</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">altmfail</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">slowsort_example</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">slowsort_preserves</span>.<br/>
+<span class="vernacular">Context</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">plusMonad</span>) <span class="id">{d</span> <span class="id">:</span> <span class="id">unit}</span> <span class="id">{E</span> <span class="id">:</span> <span class="id">orderType</span> <span class="id">d}</span>.<br/>
+<br/>
+<span class="vernacular">Let</span> <span class="id">slowsort_preserves_size</span> <span class="id">:</span> <span class="id">preserves</span> (<span class="id">@slowsort</span> <span class="id">M</span> <span class="id">_</span> <span class="id">E</span>) <span class="id">size</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+<span class="id">move=&gt;</span> <span class="id">s;</span> <span class="id">have</span> <span class="id">[n</span> <span class="id">ns]</span> <span class="id">:=</span> <span class="id">ubnP</span> (<span class="id">size</span> <span class="id">s</span>)<span class="id">;</span> <span class="id">elim:</span> <span class="id">n</span> <span class="id">s</span> <span class="id">ns</span> <span class="id">=&gt;</span> <span class="id">//</span> <span class="id">n</span> <span class="id">ih</span> <span class="id">s</span> <span class="id">ns</span>.<br/>
+<span class="id">move:</span> <span class="id">s</span> <span class="id">ns</span> <span class="id">=&gt;</span> <span class="id">[ns|p</span> <span class="id">s];</span> <span class="id">first</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">slowsort_nil</span> <span class="id">2!bindretf</span>.<br/>
+<span class="id">rewrite</span> <span class="id">/=</span> <span class="id">ltnS</span> <span class="id">=&gt;</span> <span class="id">ns</span>. <span class="id">rewrite</span> <span class="id">/slowsort</span> <span class="id">kleisliE</span> <span class="id">bindA</span> <span class="id">[RHS]bindA</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">qperm_preserves_size2</span> <span class="id">_</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">assert</span> (<span class="id">sorted</span> <span class="id">&lt;=%O</span>) <span class="id">a</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">x'</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">x',</span> <span class="id">b</span>)))).<br/>
+<span class="id">bind_ext</span> <span class="id">=&gt;</span> <span class="id">ht;</span> <span class="id">rewrite</span> <span class="id">assertE</span> <span class="id">2!bindA;</span> <span class="id">apply:</span> <span class="id">bind_ext_guard</span> <span class="id">=&gt;</span> <span class="id">_</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">2!bindretf</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">slowsort_preserves_size2</span> (<span class="id">x</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">E</span>) <span class="id">B</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">E</span> <span class="id">-&gt;</span> <span class="id">nat</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">B</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">slowsort</span> <span class="id">x</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x'</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">x'</span> (<span class="id">size</span> <span class="id">x</span>)) <span class="id">=</span><br/>
+&nbsp;&nbsp;(<span class="id">slowsort</span> <span class="id">x</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">x'</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">x'</span> (<span class="id">size</span> <span class="id">x'</span>)) <span class="id">:&gt;</span> <span class="id">M</span> <span class="id">_</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+<span class="id">transitivity</span> (<span class="id">slowsort</span> <span class="id">x</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">y,</span> <span class="id">size</span> <span class="id">y</span>)) <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">z</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">z</span>.<span class="id">1</span> <span class="id">z</span>.<span class="id">2</span>)).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slowsort_preserves_size</span> <span class="id">bindA;</span> <span class="id">bind_ext</span> <span class="id">=&gt;</span> <span class="id">s;</span> <span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindA;</span> <span class="id">bind_ext</span> <span class="id">=&gt;</span> <span class="id">s;</span> <span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">bind_slowsort_guard</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">E</span>) <span class="id">B</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">E</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">B</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">slowsort</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">f</span>) <span class="id">=</span> <span class="id">slowsort</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">guard</span> (<span class="id">size</span> <span class="id">s</span> <span class="id">==</span> <span class="id">size</span> <span class="id">x</span>) <span class="id">&gt;&gt;</span> <span class="id">f</span> <span class="id">x</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+<span class="id">rewrite</span> <span class="id">-</span>(<span class="id">slowsort_preserves_size2</span> <span class="id">s</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">guard</span> (<span class="id">size</span> <span class="id">s</span> <span class="id">==</span> <span class="id">b</span>) <span class="id">&gt;&gt;</span> <span class="id">f</span> <span class="id">a</span>)).<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">eqxx</span> <span class="id">guardT;</span> <span class="id">under</span> <span class="id">[in</span> <span class="id">RHS]eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">bindskipf</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">slowsort_preserves</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span class="id">qsort</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">plusMonad</span>).<br/>
+<span class="vernacular">Variables</span> (<span class="id">d</span> <span class="id">:</span> <span class="id">unit</span>) (<span class="id">T</span> <span class="id">:</span> <span class="id">orderType</span> <span class="id">d</span>).<br/>
+<br/>
+<span class="id">Equations?</span> <span class="id">qsort</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span> <span class="gallina-kwd">by</span> <span class="id">wf</span> (<span class="id">size</span> <span class="id">s</span>) <span class="id">lt</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">[::]</span> <span class="id">=&gt;</span> <span class="id">[::]</span><br/>
+<span class="id">|</span> <span class="id">h</span> <span class="id">::</span> <span class="id">t</span> <span class="id">=&gt;</span> <span class="id">qsort</span> (<span class="id">partition</span> <span class="id">h</span> <span class="id">t</span>).<span class="id">1</span> <span class="id">++</span> <span class="id">h</span> <span class="id">::</span> <span class="id">qsort</span> (<span class="id">partition</span> <span class="id">h</span> <span class="id">t</span>).<span class="id">2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+<span class="id">have</span> <span class="id">:=</span> <span class="id">size_partition</span> <span class="id">h</span> <span class="id">t</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">&lt;-;</span> <span class="id">apply</span> <span class="id">/ltP;</span> <span class="id">rewrite</span> <span class="id">ltnS</span> <span class="id">leq_addr</span>.<br/>
+<span class="id">have</span> <span class="id">:=</span> <span class="id">size_partition</span> <span class="id">h</span> <span class="id">t</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">&lt;-;</span> <span class="id">apply</span> <span class="id">/ltP;</span> <span class="id">rewrite</span> <span class="id">ltnS</span> <span class="id">leq_addl</span>.<br/>
+Defined.</div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">partition_slowsort</span> (<span class="id">xs</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">:</span> <span class="id">M</span> (<span class="id">seq</span> <span class="id">T</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">xs</span> <span class="id">isn't</span> <span class="id">h</span> <span class="id">::</span> <span class="id">t</span> <span class="gallina-kwd">then</span> <span class="id">Ret</span> <span class="id">[::]</span> <span class="gallina-kwd">else</span><br/>
+&nbsp;&nbsp;<span class="id">let:</span> (<span class="id">ys,</span> <span class="id">zs</span>) <span class="id">:=</span> <span class="id">partition</span> <span class="id">h</span> <span class="id">t</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id">liftM2</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">a</span> <span class="id">++</span> <span class="id">h</span> <span class="id">::</span> <span class="id">b</span>) (<span class="id">slowsort</span> <span class="id">ys</span>) (<span class="id">slowsort</span> <span class="id">zs</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">partition_slowsort_spec</span> <span class="id">:</span> <span class="id">partition_slowsort</span> <span class="id">`&lt;</span>.<span class="id">=`</span> <span class="id">slowsort</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+<span class="id">move;</span> <span class="id">elim</span> <span class="id">=&gt;</span> <span class="id">[/=|h</span> <span class="id">t</span> <span class="id">ih]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">slowsort_nil;</span> <span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">slowsort_splits</span>.<br/>
+<span class="id">apply:</span> (<span class="id">@refin_trans</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">splits</span> <span class="id">t</span> <span class="id">&gt;&gt;=</span> <span class="gallina-kwd">fun</span> <span class="id">yz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">is_partition</span> <span class="id">h</span>) <span class="id">yz</span> <span class="id">&gt;&gt;=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">'</span>(<span class="id">ys,</span> <span class="id">zs</span>) <span class="id">=&gt;</span> <span class="id">slowsort</span> <span class="id">ys</span> <span class="id">&gt;&gt;=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">ys'</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span> <span class="id">=&gt;</span> <span class="id">slowsort</span> <span class="id">zs</span> <span class="id">&gt;&gt;=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">zs'</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">ys'</span> <span class="id">++</span> <span class="id">h</span> <span class="id">::</span> <span class="id">zs'</span>)))<span class="id">;</span> <span class="id">last</span> <span class="id">first</span>.<br/>
+<span class="id">apply:</span> <span class="id">refin_bindl</span> <span class="id">=&gt;</span> <span class="id">-[?</span> <span class="id">?]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">assertE</span> <span class="id">!bindA</span> <span class="id">bindretf;</span> <span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">-bindA;</span> <span class="id">apply:</span> <span class="id">refin_trans;</span> <span class="id">last</span> <span class="id">exact/refin_bindr/partition_spec</span>.<br/>
+<span class="id">rewrite</span> <span class="id">bindretf</span> <span class="id">/partition_slowsort;</span> <span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">qsort_spec</span> <span class="id">:</span> <span class="id">Ret</span> <span class="id">\o</span> <span class="id">qsort</span> <span class="id">`&lt;</span>.<span class="id">=`</span> (<span class="id">@slowsort</span> <span class="id">M</span> <span class="id">_</span> <span class="id">_</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">move=&gt;</span> <span class="id">s</span> <span class="id">/=</span>.<br/>
+<span class="id">apply</span> <span class="id">qsort_elim</span> <span class="id">=&gt;</span> <span class="id">[|h</span> <span class="id">t</span> <span class="id">ihys</span> <span class="id">ihzs]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">slowsort_nil;</span> <span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+<span class="id">apply:</span> (<span class="id">refin_trans</span> <span class="id">_</span> (<span class="id">partition_slowsort_spec</span> <span class="id">_</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">/=</span>.<br/>
+<span class="id">move</span> <span class="id">H</span> <span class="id">:</span> (<span class="id">partition</span> <span class="id">h</span> <span class="id">t</span>) <span class="id">=&gt;</span> <span class="id">ht</span>.<br/>
+<span class="id">move:</span> <span class="id">ht</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">[ys</span> <span class="id">zs]</span> <span class="id">/=</span> <span class="id">pht</span>.<br/>
+<span class="id">rewrite</span> <span class="id">pht</span> <span class="gallina-kwd">in</span> <span class="id">ihys</span> <span class="id">ihzs</span>.<br/>
+<span class="id">apply:</span> (<span class="id">refin_trans</span> <span class="id">_</span> (<span class="id">refin_liftM2</span> <span class="id">ihys</span> <span class="id">ihzs</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">liftM2_ret;</span> <span class="id">exact:</span> <span class="id">refin_refl</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">qsort</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">qsort_function</span>.<br/>
+<span class="vernacular">Section</span> <span class="id">qsort_function</span>.<br/>
+<span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">plusMonad</span>) (<span class="id">d</span> <span class="id">:</span> <span class="id">unit</span>) (<span class="id">T</span> <span class="id">:</span> <span class="id">orderType</span> <span class="id">d</span>).<br/>
+<span class="vernacular">Function</span> <span class="id">qsort</span> (<span class="id">s</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span>) <span class="id">{measure</span> <span class="id">size</span> <span class="id">s}</span> <span class="id">:</span> <span class="id">seq</span> <span class="id">T</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">s</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[::]</span> <span class="id">=&gt;</span> <span class="id">[::]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">h</span> <span class="id">::</span> <span class="id">t</span> <span class="id">=&gt;</span> <span class="id">let:</span> (<span class="id">ys,</span> <span class="id">zs</span>) <span class="id">:=</span> <span class="id">partition</span> <span class="id">h</span> <span class="id">t</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">qsort</span> <span class="id">ys</span> <span class="id">++</span> <span class="id">h</span> <span class="id">::</span> <span class="id">qsort</span> <span class="id">zs</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="id">move=&gt;</span> <span class="id">s</span> <span class="id">h</span> <span class="id">t</span> <span class="id">_</span> <span class="id">ys</span> <span class="id">zs</span> <span class="id">pht_yz;</span> <span class="id">have</span> <span class="id">:=</span> <span class="id">size_partition</span> <span class="id">h</span> <span class="id">t</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">pht_yz</span> <span class="id">/=</span> <span class="id">=&gt;</span> <span class="id">&lt;-;</span> <span class="id">apply/ltP;</span> <span class="id">rewrite</span> <span class="id">ltnS</span> <span class="id">leq_addl</span>.<br/>
+<span class="id">move=&gt;</span> <span class="id">s</span> <span class="id">h</span> <span class="id">t</span> <span class="id">_</span> <span class="id">ys</span> <span class="id">zs</span> <span class="id">pht_yz;</span> <span class="id">have</span> <span class="id">:=</span> <span class="id">size_partition</span> <span class="id">h</span> <span class="id">t</span>.<br/>
+<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">pht_yz</span> <span class="id">/=</span> <span class="id">=&gt;</span> <span class="id">&lt;-;</span> <span class="id">apply/ltP;</span> <span class="id">rewrite</span> <span class="id">ltnS</span> <span class="id">leq_addr</span>.<br/>
+Defined.</div>
+<span class="vernacular">End</span> <span class="id">qsort_function</span>.<br/>
+<span class="vernacular">End</span> <span class="id">qsort_function</span>.<br/>
+
+</div>
+<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+</body>
+</html>
