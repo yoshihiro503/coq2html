@@ -79,7 +79,7 @@ uniform_algebraic_lifting == Theorem: alifting is a lifting
 <br/>
 <span class="id">#[short</span>(<span class="id">type=monadM</span>)<span class="id">]</span><br/>
 <span class="id">HB.structure</span> <span class="vernacular">Definition</span> <span class="id">MonadM</span> (<span class="id">M</span> <span class="id">N</span> <span class="id">:</span> <span class="id">monad</span>) <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="id">{e</span> <span class="id">of</span> <span class="id">isMonadM</span> <span class="id">M</span> <span class="id">N</span> <span class="id">e</span> <span class="id">&amp;</span> <span class="id">isNatural</span> <span class="id">M</span> <span class="id">N</span> <span class="id">e}</span>.<br/>
+&nbsp;&nbsp;<span class="id">{e</span> <span class="id">of</span> <span class="id">isMonadM</span> <span class="id">M</span> <span class="id">N</span> <span class="id">e</span> &amp; <span class="id">isNatural</span> <span class="id">M</span> <span class="id">N</span> <span class="id">e}</span>.<br/>
 <br/>
 <span class="id">HB.factory</span> <span class="vernacular">Record</span> <span class="id">isMonadM_ret_bind</span> (<span class="id">M</span> <span class="id">N</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">e</span> <span class="id">:</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">N</span>) <span class="id">:=</span> <span class="id">{</span><br/>
 &nbsp;&nbsp;<span class="id">monadMret</span> <span class="id">:</span> <span class="id">MonadMLaws.ret</span> <span class="id">e</span> <span class="id">;</span><br/>
@@ -108,7 +108,7 @@ Qed.</div>
 <span class="vernacular">Section</span> <span class="id">state_monad_transformer</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">S</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
 <br/>
-<span class="vernacular">Definition</span> <span class="id">MS</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">=&gt;</span> <span class="id">S</span> <span class="id">-&gt;</span> <span class="id">M</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">MS</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">=&gt;</span> <span class="id">S</span> <span class="id">-&gt;</span> <span class="id">M</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)%<span class="id">type</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">retS</span> <span class="id">:</span> <span class="id">FId</span> <span class="id">~~&gt;</span> <span class="id">MS</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">=&gt;</span> <span class="id">curry</span> <span class="id">Ret</span>.<br/>
 <br/>
@@ -162,7 +162,7 @@ Qed.</div>
 <div class="proofscript" id="proof7">
 <span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">m</span> <span class="id">f;</span> <span class="id">rewrite</span> <span class="id">{1}/liftS;</span> <span class="id">apply:</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">s</span>.<br/>
 <span class="id">rewrite</span> <span class="id">[in</span> <span class="id">LHS]bindA</span>.<br/>
-<span class="id">transitivity</span> (<span class="id">liftS</span> <span class="id">m</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">uncurry</span> (<span class="id">@liftS</span> <span class="id">B</span> <span class="id">\o</span> <span class="id">f</span>)) <span class="id">=&gt;</span> <span class="id">//</span>.<br/>
+<span class="id">transitivity</span> (<span class="id">liftS</span> <span class="id">m</span> <span class="id">s</span> <span class="id">&gt;&gt;=</span> <span class="id">uncurry</span> (@<span class="id">liftS</span> <span class="id">B</span> <span class="id">\o</span> <span class="id">f</span>)) <span class="id">=&gt;</span> <span class="id">//</span>.<br/>
 <span class="id">rewrite</span> <span class="id">[in</span> <span class="id">RHS]bindA</span>.<br/>
 <span class="gallina-kwd">by</span> <span class="id">under</span> <span class="id">[RHS]eq_bind</span> <span class="id">do</span> <span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
 Qed.</div>
@@ -181,10 +181,10 @@ Qed.</div>
 <span class="vernacular">Definition</span> <span class="id">stateT</span> (<span class="id">S</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="id">monad</span> <span class="id">-&gt;</span> <span class="id">monad</span> <span class="id">:=</span> <span class="id">MS</span> <span class="id">S</span>.<br/>
 <br/>
 <span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span class="id">S</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">isMonadT.Build</span><br/>
-&nbsp;&nbsp;(<span class="id">stateT</span> <span class="id">S</span>) (<span class="id">@liftS</span> <span class="id">S</span>).<br/>
+&nbsp;&nbsp;(<span class="id">stateT</span> <span class="id">S</span>) (@<span class="id">liftS</span> <span class="id">S</span>).<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">mapStateT2</span> (<span class="id">A</span> <span class="id">S</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">N1</span> <span class="id">N2</span> <span class="id">N3</span> <span class="id">:</span> <span class="id">monad</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">f</span> <span class="id">:</span> <span class="id">N1</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)<span class="id">%type</span> <span class="id">-&gt;</span> <span class="id">N2</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)<span class="id">%type</span> <span class="id">-&gt;</span> <span class="id">N3</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)<span class="id">%type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">f</span> <span class="id">:</span> <span class="id">N1</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)%<span class="id">type</span> <span class="id">-&gt;</span> <span class="id">N2</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)%<span class="id">type</span> <span class="id">-&gt;</span> <span class="id">N3</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)%<span class="id">type</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">m1</span> <span class="id">:</span> <span class="id">stateT</span> <span class="id">S</span> <span class="id">N1</span> <span class="id">A</span>) (<span class="id">m2</span> <span class="id">:</span> <span class="id">stateT</span> <span class="id">S</span> <span class="id">N2</span> <span class="id">A</span>) <span class="id">:</span> <span class="id">stateT</span> <span class="id">S</span> <span class="id">N3</span> <span class="id">A</span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">f</span> (<span class="id">m1</span> <span class="id">s</span>) (<span class="id">m2</span> <span class="id">s</span>).<br/>
 <br/>
@@ -229,7 +229,7 @@ Qed.</div>
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bind_fmap</span> <span class="id">bindretf</span>.<br/>
 Qed.</div>
 <br/>
-<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">@isMonadState</span>.<span class="id">Build</span><br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> @<span class="id">isMonadState.Build</span><br/>
 &nbsp;&nbsp;<span class="id">S</span> (<span class="id">MS</span> <span class="id">S</span> <span class="id">M</span>) <span class="id">Get</span> <span class="id">Put</span> <span class="id">bindputput</span> <span class="id">bindputget</span> <span class="id">bindgetput</span> <span class="id">bindgetget</span>.<br/>
 <br/>
 <span class="vernacular">End</span> <span class="id">stateMonad_of_stateT</span>.<br/>
@@ -238,7 +238,7 @@ Qed.</div>
 <span class="vernacular">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">Z</span> <span class="id">:</span> <span class="id">UU0</span>)  (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
 <br/>
-<span class="vernacular">Definition</span> <span class="id">MX</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">=&gt;</span> <span class="id">M</span> (<span class="id">Z</span> <span class="id">+</span> <span class="id">X</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">MX</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">=&gt;</span> <span class="id">M</span> (<span class="id">Z</span> <span class="id">+</span> <span class="id">X</span>)%<span class="id">type</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">retX</span> <span class="id">:</span> <span class="id">FId</span> <span class="id">~~&gt;</span> <span class="id">MX</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">inr</span> <span class="id">x</span>).<br/>
 <br/>
@@ -276,7 +276,7 @@ Qed.</div>
 <span class="gallina-kwd">by</span> <span class="id">apply:</span> <span class="id">funext;</span> <span class="id">case</span>.<br/>
 Qed.</div>
 <br/>
-<span class="vernacular">Definition</span> <span class="id">liftX</span> <span class="id">X</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">X</span>) <span class="id">:</span> <span class="id">MX</span> <span class="id">X</span> <span class="id">:=</span> <span class="id">m</span> <span class="id">&gt;&gt;=</span> (<span class="id">@ret</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MX]</span> <span class="id">_</span>).<br/>
+<span class="vernacular">Definition</span> <span class="id">liftX</span> <span class="id">X</span> (<span class="id">m</span> <span class="id">:</span> <span class="id">M</span> <span class="id">X</span>) <span class="id">:</span> <span class="id">MX</span> <span class="id">X</span> <span class="id">:=</span> <span class="id">m</span> <span class="id">&gt;&gt;=</span> (@<span class="id">ret</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MX]</span> <span class="id">_</span>).<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">retliftX</span> <span class="id">:</span> <span class="id">MonadMLaws.ret</span> <span class="id">liftX</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
@@ -306,35 +306,35 @@ Qed.</div>
 <span class="vernacular">Definition</span> <span class="id">exceptT</span> (<span class="id">Z</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MX</span> <span class="id">Z</span> <span class="id">M]</span>.<br/>
 <br/>
 <span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span class="id">Z</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">isMonadT.Build</span><br/>
-&nbsp;&nbsp;(<span class="id">exceptT</span> <span class="id">Z</span>) (<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MX</span> <span class="id">Z</span> <span class="id">M]</span> <span class="id">of</span> <span class="id">@liftX</span> <span class="id">Z</span> <span class="id">M]</span>).<br/>
+&nbsp;&nbsp;(<span class="id">exceptT</span> <span class="id">Z</span>) (<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MX</span> <span class="id">Z</span> <span class="id">M]</span> <span class="id">of</span> @<span class="id">liftX</span> <span class="id">Z</span> <span class="id">M]</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">failMonad_of_exceptT</span>.<br/>
 <span class="vernacular">Variable</span> <span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>.<br/>
-<span class="vernacular">Let</span> <span class="id">N</span> (<span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">M</span> (<span class="id">unit</span> <span class="id">+</span> <span class="id">B</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">N</span> (<span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">M</span> (<span class="id">unit</span> <span class="id">+</span> <span class="id">B</span>)%<span class="id">type</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="vernacular">Fail</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">B,</span> <span class="id">N</span> <span class="id">B</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">B</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">inl</span> <span class="id">tt</span>).<br/>
 <br/>
-<span class="vernacular">Let</span> <span class="id">bindfail</span> <span class="id">:</span> <span class="id">BindLaws.left_zero</span> (<span class="id">@bind</span> (<span class="id">exceptT</span> <span class="id">unit</span> <span class="id">M</span>)) <span class="vernacular">Fail</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">bindfail</span> <span class="id">:</span> <span class="id">BindLaws.left_zero</span> (@<span class="id">bind</span> (<span class="id">exceptT</span> <span class="id">unit</span> <span class="id">M</span>)) <span class="vernacular">Fail</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
 <div class="proofscript" id="proof19">
 <span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">g;</span> <span class="id">rewrite</span> <span class="id">/Fail</span>.<br/>
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">bindE</span> <span class="id">/=</span> <span class="id">/join_of_bind</span> <span class="id">/bindX</span> <span class="id">/=</span> <span class="id">fmapE</span> <span class="id">/=</span> <span class="id">bindA</span> <span class="id">2!bindretf</span>.<br/>
 Qed.</div>
 <br/>
-<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">@isMonadFail</span>.<span class="id">Build</span> (<span class="id">MX</span> <span class="id">unit</span> <span class="id">M</span>) <span class="vernacular">Fail</span> <span class="id">bindfail</span>.<br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> @<span class="id">isMonadFail.Build</span> (<span class="id">MX</span> <span class="id">unit</span> <span class="id">M</span>) <span class="vernacular">Fail</span> <span class="id">bindfail</span>.<br/>
 <br/>
 <span class="vernacular">End</span> <span class="id">failMonad_of_exceptT</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">exceptMonad_of_exceptT</span>.<br/>
 <span class="vernacular">Variable</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
-<span class="vernacular">Let</span> <span class="id">N</span> (<span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">M</span> (<span class="id">unit</span> <span class="id">+</span> <span class="id">B</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">N</span> (<span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">M</span> (<span class="id">unit</span> <span class="id">+</span> <span class="id">B</span>)%<span class="id">type</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">Catch</span> (<span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">x</span> <span class="id">:</span> <span class="id">N</span> <span class="id">B</span>) (<span class="id">y</span> <span class="id">:</span> <span class="id">N</span> <span class="id">B</span>) <span class="id">:</span> <span class="id">N</span> <span class="id">B</span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="id">x</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">u</span> <span class="id">=&gt;</span> (<span class="gallina-kwd">fun</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">=&gt;</span> <span class="gallina-kwd">match</span> <span class="id">u</span> <span class="gallina-kwd">with</span> <span class="id">|</span> <span class="id">inl</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">a</span> <span class="id">|</span> <span class="id">inr</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">k'</span> <span class="id">b</span> <span class="gallina-kwd">end</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">fun=&gt;</span> <span class="id">y</span>) (<span class="gallina-kwd">fun</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">inr</span> <span class="id">b</span>))).<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">Catchmfail</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">right_id</span> (<span class="id">@fail</span> <span class="id">[the</span> <span class="id">failMonad</span> <span class="id">of</span> <span class="id">MX</span> <span class="id">unit</span> <span class="id">M]</span> <span class="id">A</span>) (<span class="id">@Catch</span> <span class="id">A</span>).<br/>
+&nbsp;&nbsp;<span class="id">right_id</span> (@<span class="id">fail</span> <span class="id">[the</span> <span class="id">failMonad</span> <span class="id">of</span> <span class="id">MX</span> <span class="id">unit</span> <span class="id">M]</span> <span class="id">A</span>) (@<span class="id">Catch</span> <span class="id">A</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
 <div class="proofscript" id="proof20">
 <span class="id">move=&gt;</span> <span class="id">x;</span> <span class="id">rewrite</span> <span class="id">/Catch</span> <span class="id">/=</span> <span class="id">/fail</span> <span class="id">/=</span> <span class="id">-[in</span> <span class="id">RHS]</span>(<span class="id">bindmret</span> <span class="id">x</span>)<span class="id">;</span> <span class="id">bind_ext</span>.<br/>
@@ -342,27 +342,27 @@ Qed.</div>
 Qed.</div>
 <br/>
 <span class="vernacular">Let</span> <span class="id">Catchfailm</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">left_id</span> (<span class="id">@fail</span> <span class="id">[the</span> <span class="id">failMonad</span> <span class="id">of</span> <span class="id">MX</span> <span class="id">unit</span> <span class="id">M]</span> <span class="id">A</span>) (<span class="id">@Catch</span> <span class="id">A</span>).<br/>
+&nbsp;&nbsp;<span class="id">left_id</span> (@<span class="id">fail</span> <span class="id">[the</span> <span class="id">failMonad</span> <span class="id">of</span> <span class="id">MX</span> <span class="id">unit</span> <span class="id">M]</span> <span class="id">A</span>) (@<span class="id">Catch</span> <span class="id">A</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
 <div class="proofscript" id="proof21">
 <span class="id">move=&gt;</span> <span class="id">x;</span> <span class="id">rewrite</span> <span class="id">/N</span> <span class="gallina-kwd">in</span> <span class="id">x</span> <span class="id">*</span>.<br/>
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/Catch</span> <span class="id">/=</span> <span class="id">/fail</span> <span class="id">/=</span> <span class="id">bindretf</span>.<br/>
 Qed.</div>
 <br/>
-<span class="vernacular">Let</span> <span class="id">CatchA</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="id">associative</span> (<span class="id">@Catch</span> <span class="id">A</span>).<br/>
+<span class="vernacular">Let</span> <span class="id">CatchA</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="id">associative</span> (@<span class="id">Catch</span> <span class="id">A</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
 <div class="proofscript" id="proof22">
 <span class="id">move=&gt;</span> <span class="id">x</span> <span class="id">y</span> <span class="id">z;</span> <span class="id">rewrite</span> <span class="id">/Catch</span> <span class="id">bindA;</span> <span class="id">bind_ext</span>.<br/>
 <span class="gallina-kwd">by</span> <span class="id">case=&gt;</span> <span class="id">[[]//|b];</span> <span class="id">rewrite</span> <span class="id">bindretf</span>.<br/>
 Qed.</div>
 <br/>
-<span class="vernacular">Let</span> <span class="id">Catchret</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">ua</span> <span class="id">:</span> <span class="id">A%type</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">@left_zero</span> (<span class="id">N</span> <span class="id">A</span>) (<span class="id">N</span> <span class="id">A</span>) (<span class="id">Ret</span> (<span class="id">inr</span> <span class="id">ua</span>)) (<span class="id">@Catch</span> <span class="id">A</span>).<br/>
+<span class="vernacular">Let</span> <span class="id">Catchret</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">ua</span> <span class="id">:</span> <span class="id">A</span>%<span class="id">type</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;@<span class="id">left_zero</span> (<span class="id">N</span> <span class="id">A</span>) (<span class="id">N</span> <span class="id">A</span>) (<span class="id">Ret</span> (<span class="id">inr</span> <span class="id">ua</span>)) (@<span class="id">Catch</span> <span class="id">A</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
 <div class="proofscript" id="proof23">
  <span class="gallina-kwd">by</span> <span class="id">move=&gt;</span> <span class="id">n</span> <span class="id">;</span> <span class="id">rewrite</span> <span class="id">/Catch</span> <span class="id">/=</span> <span class="id">bindretf</span>. Qed.</div>
 <br/>
-<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">@isMonadExcept</span>.<span class="id">Build</span><br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> @<span class="id">isMonadExcept.Build</span><br/>
 &nbsp;&nbsp;(<span class="id">MX</span> <span class="id">unit</span> <span class="id">M</span>) <span class="id">Catch</span> <span class="id">Catchmfail</span> <span class="id">Catchfailm</span> <span class="id">CatchA</span> <span class="id">Catchret</span>.<br/>
 <br/>
 <span class="vernacular">End</span> <span class="id">exceptMonad_of_exceptT</span>.<br/>
@@ -427,13 +427,13 @@ Qed.</div>
 <span class="vernacular">Definition</span> <span class="id">envT</span> (<span class="id">E</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MEnv</span> <span class="id">E</span> <span class="id">M]</span>.<br/>
 <br/>
 <span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span class="id">E</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">isMonadT.Build</span> (<span class="id">envT</span> <span class="id">E</span>)<br/>
-&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MEnv</span> <span class="id">E</span> <span class="id">M]</span> <span class="id">of</span> <span class="id">@liftEnv</span> <span class="id">E</span> <span class="id">M]</span>).<br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MEnv</span> <span class="id">E</span> <span class="id">M]</span> <span class="id">of</span> @<span class="id">liftEnv</span> <span class="id">E</span> <span class="id">M]</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">output_monad_transformer</span>.<br/>
 <span class="vernacular">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">R</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
 <br/>
-<span class="vernacular">Definition</span> <span class="id">MO</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">M</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">R</span>)<span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">MO</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">M</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">R</span>)%<span class="id">type</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">retO</span> <span class="id">:</span> <span class="id">FId</span> <span class="id">~~&gt;</span> <span class="id">MO</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">Ret</span> (<span class="id">a,</span> <span class="id">[::]</span>).<br/>
 <br/>
@@ -507,13 +507,13 @@ Qed.</div>
 <span class="vernacular">Definition</span> <span class="id">outputT</span> (<span class="id">R</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MO</span> <span class="id">R</span> <span class="id">M]</span>.<br/>
 <br/>
 <span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span class="id">R</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">isMonadT.Build</span> (<span class="id">outputT</span> <span class="id">R</span>)<br/>
-&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MO</span> <span class="id">R</span> <span class="id">M]</span> <span class="id">of</span> <span class="id">@liftO</span> <span class="id">R</span> <span class="id">M]</span>).<br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MO</span> <span class="id">R</span> <span class="id">M]</span> <span class="id">of</span> @<span class="id">liftO</span> <span class="id">R</span> <span class="id">M]</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">continuation_monad_tranformer</span>.<br/>
 <span class="vernacular">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">idtac</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>).<br/>
 <br/>
-<span class="vernacular">Definition</span> <span class="id">MC</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">-&gt;</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">=&gt;</span> (<span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">r</span>) <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">r</span> <span class="id">%type</span>.<br/>
+<span class="vernacular">Definition</span> <span class="id">MC</span> <span class="id">:</span> <span class="id">UU0</span> <span class="id">-&gt;</span> <span class="id">UU0</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">A</span> <span class="id">=&gt;</span> (<span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">r</span>) <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">r</span> %<span class="id">type</span>.<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">retC</span> <span class="id">:</span> <span class="id">FId</span> <span class="id">~~&gt;</span> <span class="id">MC</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">a</span> <span class="id">:</span> <span class="id">A</span>) <span class="id">k</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">a</span>.<br/>
 <br/>
@@ -567,7 +567,7 @@ Qed.</div>
 <span class="vernacular">Definition</span> <span class="id">contT</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MC</span> <span class="id">r</span> <span class="id">M]</span>.<br/>
 <br/>
 <span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span class="id">r</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:=</span> <span class="id">isMonadT.Build</span> (<span class="id">contT</span> <span class="id">r</span>)<br/>
-&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MC</span> <span class="id">r</span> <span class="id">M]</span> <span class="id">of</span> <span class="id">@liftC</span> <span class="id">r</span> <span class="id">M]</span>).<br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MC</span> <span class="id">r</span> <span class="id">M]</span> <span class="id">of</span> @<span class="id">liftC</span> <span class="id">r</span> <span class="id">M]</span>).<br/>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">abortT</span> <span class="id">r</span> <span class="id">X</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) <span class="id">A</span> <span class="id">:</span> <span class="id">contT</span> <span class="id">r</span> <span class="id">M</span> <span class="id">A</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">M</span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id">Ret</span> <span class="id">X</span>.<br/>
 <span class="vernacular">Arguments</span> <span class="id">abortT</span> <span class="id">{r}</span> <span class="id">_</span> <span class="id">{M}</span> <span class="id">{A}</span>.<br/>
@@ -580,30 +580,30 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">k</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">k</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">fun=&gt;</span> <span class="id">f</span> <span class="id">a</span>) <span class="id">f</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">Callcc0</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">g</span> <span class="id">:</span> (<span class="id">A</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">B</span>) <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">A</span>) (<span class="id">k</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">B</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">@Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">g</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">x</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>)) <span class="id">=</span> <span class="id">@Callcc</span> <span class="id">_</span> <span class="id">_</span> <span class="id">g</span>.<br/>
+&nbsp;&nbsp;@<span class="id">Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">g</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">x</span> <span class="id">&gt;&gt;=</span> <span class="id">k</span>)) <span class="id">=</span> @<span class="id">Callcc</span> <span class="id">_</span> <span class="id">_</span> <span class="id">g</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof42')">Proof.</span></div>
 <div class="proofscript" id="proof42">
  <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
 <br/>
-<span class="vernacular">Let</span> <span class="id">Callcc1</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">N</span> <span class="id">B</span>) <span class="id">:</span> <span class="id">@Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">A</span> <span class="id">=&gt;</span> <span class="id">m</span>) <span class="id">=</span> <span class="id">m</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">Callcc1</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">N</span> <span class="id">B</span>) <span class="id">:</span> @<span class="id">Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">A</span> <span class="id">=&gt;</span> <span class="id">m</span>) <span class="id">=</span> <span class="id">m</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof43')">Proof.</span></div>
 <div class="proofscript" id="proof43">
  <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
 <br/>
 <span class="vernacular">Let</span> <span class="id">Callcc2</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">C</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">N</span> <span class="id">A</span>) <span class="id">x</span> (<span class="id">k</span> <span class="id">:</span> <span class="id">A</span> <span class="id">-&gt;</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">C</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">@Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">:</span> <span class="id">_</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">x</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">a</span> <span class="id">b</span>))) <span class="id">=</span><br/>
-&nbsp;&nbsp;<span class="id">@Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">:</span> <span class="id">_</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">&gt;&gt;</span> <span class="id">f</span> <span class="id">x</span>).<br/>
+&nbsp;&nbsp;@<span class="id">Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">:</span> <span class="id">_</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id">f</span> <span class="id">x</span> <span class="id">&gt;&gt;=</span> (<span class="gallina-kwd">fun</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">a</span> <span class="id">b</span>))) <span class="id">=</span><br/>
+&nbsp;&nbsp;@<span class="id">Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">:</span> <span class="id">_</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">&gt;&gt;</span> <span class="id">f</span> <span class="id">x</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof44')">Proof.</span></div>
 <div class="proofscript" id="proof44">
  <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
 <br/>
 <span class="vernacular">Let</span> <span class="id">Callcc3</span> (<span class="id">A</span> <span class="id">B</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">N</span> <span class="id">A</span>) <span class="id">b</span> <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">@Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">B</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">&gt;&gt;</span> <span class="id">f</span> <span class="id">b</span>) <span class="id">=</span> <span class="id">@Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">B</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">&gt;&gt;</span> <span class="id">Ret</span> <span class="id">b</span>).<br/>
+&nbsp;&nbsp;@<span class="id">Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">f</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">B</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">&gt;&gt;</span> <span class="id">f</span> <span class="id">b</span>) <span class="id">=</span> @<span class="id">Callcc</span> <span class="id">_</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">:</span> <span class="id">B</span> <span class="id">-&gt;</span> <span class="id">N</span> <span class="id">B</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">&gt;&gt;</span> <span class="id">Ret</span> <span class="id">b</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof45')">Proof.</span></div>
 <div class="proofscript" id="proof45">
  <span class="gallina-kwd">by</span> <span class="id">[]</span>. Qed.</div>
 <br/>
-<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> <span class="id">@isMonadContinuation</span>.<span class="id">Build</span><br/>
+<span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span> @<span class="id">isMonadContinuation.Build</span><br/>
 &nbsp;&nbsp;(<span class="id">MC</span> <span class="id">r</span> <span class="id">M</span>) <span class="id">Callcc</span> <span class="id">Callcc0</span> <span class="id">Callcc1</span> <span class="id">Callcc2</span> <span class="id">Callcc3</span>.<br/>
 <br/>
 <span class="vernacular">End</span> <span class="id">contMonad_of_contT</span>.<br/>
@@ -696,7 +696,7 @@ Qed.</div>
 <br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">bindLfailf</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">failMonad</span>) <span class="id">S</span> <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">BindLaws.left_zero</span> (<span class="id">@bind</span> (<span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span>)) (<span class="id">Lift</span> <span class="id">_</span> <span class="id">_</span> <span class="id">^~</span> <span class="id">fail</span>).<br/>
+&nbsp;&nbsp;<span class="id">BindLaws.left_zero</span> (@<span class="id">bind</span> (<span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span>)) (<span class="id">Lift</span> <span class="id">_</span> <span class="id">_</span> <span class="id">^~</span> <span class="id">fail</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof50')">Proof.</span></div>
 <div class="proofscript" id="proof50">
 <span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">g</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">/liftS;</span> <span class="id">apply:</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">s;</span> <span class="id">rewrite</span> <span class="id">bindfailf</span>.<br/>
@@ -705,7 +705,7 @@ Qed.</div>
 Qed.</div>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">bindmLfail</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">failR0Monad</span>) <span class="id">S</span> <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">BindLaws.right_zero</span> (<span class="id">@bind</span> (<span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span>)) (<span class="id">Lift</span> <span class="id">_</span> <span class="id">_</span> <span class="id">^~</span> <span class="id">fail</span>).<br/>
+&nbsp;&nbsp;<span class="id">BindLaws.right_zero</span> (@<span class="id">bind</span> (<span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span>)) (<span class="id">Lift</span> <span class="id">_</span> <span class="id">_</span> <span class="id">^~</span> <span class="id">fail</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof51')">Proof.</span></div>
 <div class="proofscript" id="proof51">
 <span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">m</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">/liftS/=;</span> <span class="id">apply/funext</span> <span class="id">=&gt;</span> <span class="id">s;</span> <span class="id">rewrite</span> <span class="id">bindfailf</span>.<br/>
@@ -796,7 +796,7 @@ Qed.</div>
 <span class="id">rewrite</span> <span class="id">-[in</span> <span class="id">RHS]compA</span>.<br/>
 <span class="id">congr</span> (<span class="id">_</span> <span class="id">\o</span> <span class="id">_</span>).<br/>
 <span class="id">rewrite</span> <span class="id">/=</span>.<br/>
-<span class="id">rewrite</span> <span class="id">-2!</span>(<span class="id">@functor_o</span> <span class="id">E</span>).<br/>
+<span class="id">rewrite</span> <span class="id">-2!</span>(@<span class="id">functor_o</span> <span class="id">E</span>).<br/>
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> (<span class="id">natural</span> <span class="id">ret</span>) <span class="id">FIdE</span>.<br/>
 Qed.</div>
 <br/>
@@ -896,7 +896,7 @@ Qed.</div>
 <span class="id">HB.structure</span> <span class="vernacular">Definition</span> <span class="id">Functorial</span> <span class="id">:=</span> <span class="id">{t</span> <span class="id">of</span> <span class="id">isFunctorial</span> <span class="id">t}</span>.<br/>
 <span class="vernacular">Arguments</span> <span class="id">hmap</span> <span class="id">_</span> <span class="id">{M</span> <span class="id">N}</span> <span class="id">_</span>.<br/>
 <br/>
-<span class="id">HB.mixin</span> <span class="vernacular">Record</span> <span class="id">isFMT</span> (<span class="id">t</span> <span class="id">:</span> <span class="id">monad</span> <span class="id">-&gt;</span> <span class="id">monad</span>) <span class="id">of</span> <span class="id">MonadT</span> <span class="id">t</span> <span class="id">&amp;</span> <span class="id">Functorial</span> <span class="id">t</span> <span class="id">:=</span> <span class="id">{</span><br/>
+<span class="id">HB.mixin</span> <span class="vernacular">Record</span> <span class="id">isFMT</span> (<span class="id">t</span> <span class="id">:</span> <span class="id">monad</span> <span class="id">-&gt;</span> <span class="id">monad</span>) <span class="id">of</span> <span class="id">MonadT</span> <span class="id">t</span> &amp; <span class="id">Functorial</span> <span class="id">t</span> <span class="id">:=</span> <span class="id">{</span><br/>
 &nbsp;&nbsp;<span class="id">fmt_ret</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">M</span> <span class="id">N</span> (<span class="id">e</span> <span class="id">:</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">N</span>)<span class="id">,</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id">MonadMLaws.ret</span> (<span class="id">hmap</span> <span class="id">[the</span> <span class="id">functorial</span> <span class="id">of</span> <span class="id">t]</span> <span class="id">e</span>) <span class="id">;</span><br/>
 &nbsp;&nbsp;<span class="id">fmt_bind</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span class="id">M</span> <span class="id">N</span> (<span class="id">e</span> <span class="id">:</span> <span class="id">monadM</span> <span class="id">M</span> <span class="id">N</span>)<span class="id">,</span><br/>
@@ -906,7 +906,7 @@ Qed.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Lift</span> <span class="id">[the</span> <span class="id">monadT</span> <span class="id">of</span> <span class="id">t]</span> <span class="id">N</span> <span class="id">\v</span> <span class="id">n</span> <span class="id">}</span>.<br/>
 <br/>
 <span class="id">#[short</span>(<span class="id">type=fmt</span>)<span class="id">]</span><br/>
-<span class="id">HB.structure</span> <span class="vernacular">Definition</span> <span class="id">FMT</span> <span class="id">:=</span> <span class="id">{t</span> <span class="id">of</span> <span class="id">isFMT</span> <span class="id">t</span> <span class="id">&amp;</span> <span class="id">isFunctorial</span> <span class="id">t</span> <span class="id">&amp;</span> <span class="id">isMonadT</span> <span class="id">t}</span>.<br/>
+<span class="id">HB.structure</span> <span class="vernacular">Definition</span> <span class="id">FMT</span> <span class="id">:=</span> <span class="id">{t</span> <span class="id">of</span> <span class="id">isFMT</span> <span class="id">t</span> &amp; <span class="id">isFunctorial</span> <span class="id">t</span> &amp; <span class="id">isMonadT</span> <span class="id">t}</span>.<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">fmt_lemmas</span>.<br/>
 <br/>
@@ -914,7 +914,7 @@ Qed.</div>
 &nbsp;&nbsp;<span class="id">hmap</span> <span class="id">t</span> <span class="id">n</span> <span class="id">X</span> <span class="id">\o</span> <span class="id">Lift</span> <span class="id">t</span> <span class="id">M</span> <span class="id">X</span> <span class="id">=</span> <span class="id">Lift</span> <span class="id">t</span> <span class="id">N</span> <span class="id">X</span> <span class="id">\o</span> <span class="id">n</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof61')">Proof.</span></div>
 <div class="proofscript" id="proof61">
-<span class="id">have</span> <span class="id">/nattrans_ext/</span>(<span class="id">_</span> <span class="id">X</span>)<span class="id">/=</span> <span class="id">:=</span> <span class="id">@natural_hmap</span> <span class="id">t</span> <span class="id">M</span> <span class="id">N</span> <span class="id">n</span>.<br/>
+<span class="id">have</span> <span class="id">/nattrans_ext/</span>(<span class="id">_</span> <span class="id">X</span>)<span class="id">/=</span> <span class="id">:=</span> @<span class="id">natural_hmap</span> <span class="id">t</span> <span class="id">M</span> <span class="id">N</span> <span class="id">n</span>.<br/>
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">!vcompE</span>.<br/>
 Qed.</div>
 <br/>
@@ -967,7 +967,7 @@ Qed.</div>
 <span class="id">move=&gt;</span> <span class="id">A</span> <span class="id">B</span> <span class="id">m</span> <span class="id">f;</span> <span class="id">rewrite</span> <span class="id">/hmapX'</span> <span class="id">/=</span>.<br/>
 <span class="id">rewrite</span> <span class="id">!bindE</span> <span class="id">/=</span> <span class="id">!MX_mapE</span> <span class="id">/bindX</span> <span class="id">/=</span> <span class="id">!bind_fmap</span>.<br/>
 <span class="id">rewrite</span> <span class="id">!monadMbind</span> <span class="id">/=</span>.<br/>
-<span class="id">congr</span> (<span class="id">bind</span> (<span class="id">e</span> (<span class="id">X</span> <span class="id">+</span> <span class="id">A</span>)<span class="id">%type</span> <span class="id">m</span>) <span class="id">_</span>).<br/>
+<span class="id">congr</span> (<span class="id">bind</span> (<span class="id">e</span> (<span class="id">X</span> <span class="id">+</span> <span class="id">A</span>)%<span class="id">type</span> <span class="id">m</span>) <span class="id">_</span>).<br/>
 <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">-[x/=|//]</span>.<br/>
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-</span>(<span class="id">compE</span> (<span class="id">e</span> <span class="id">_</span>)) <span class="id">monadMret</span>.<br/>
 Qed.</div>
@@ -1015,7 +1015,7 @@ Qed.</div>
 <span class="id">apply:</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">/=</span>.<br/>
 <span class="id">rewrite</span> <span class="id">!MS_mapE</span>.<br/>
 <span class="id">apply:</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">s</span> <span class="id">/=</span>.<br/>
-<span class="id">rewrite</span> <span class="id">-</span>(<span class="id">compE</span>  <span class="id">_</span> (<span class="id">tau</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)<span class="id">%type</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">-</span>(<span class="id">compE</span>  <span class="id">_</span> (<span class="id">tau</span> (<span class="id">A</span> <span class="id">*</span> <span class="id">S</span>)%<span class="id">type</span>)).<br/>
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">natural</span>.<br/>
 Qed.</div>
 <br/>

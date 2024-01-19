@@ -107,7 +107,7 @@ Qed.</div>
 <span class="vernacular">Definition</span> <span class="id">codensityT</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">:</span> <span class="id">monad</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">MK</span> <span class="id">M]</span>.<br/>
 <br/>
 <span class="id">HB.instance</span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="id">isMonadT.Build</span> <span class="id">codensityT</span> (<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">_</span> <span class="id">_</span> <span class="id">of</span> <span class="id">@liftK</span> <span class="id">M]</span>).<br/>
+&nbsp;&nbsp;<span class="id">isMonadT.Build</span> <span class="id">codensityT</span> (<span class="gallina-kwd">fun</span> <span class="id">M</span> <span class="id">=&gt;</span> <span class="id">[the</span> <span class="id">monadM</span> <span class="id">_</span> <span class="id">_</span> <span class="id">of</span> @<span class="id">liftK</span> <span class="id">M]</span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span class="id">kappa</span>.<br/>
 <span class="vernacular">Variables</span> (<span class="id">M</span> <span class="id">:</span> <span class="id">monad</span>) (<span class="id">E</span> <span class="id">:</span> <span class="id">functor</span>) (<span class="id">op</span> <span class="id">:</span> <span class="id">E</span>.<span class="id">-operation</span> <span class="id">M</span>).<br/>
@@ -165,7 +165,7 @@ Qed.</div>
 <span class="vernacular">Definition</span> <span class="id">from</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">_</span> <span class="id">~&gt;</span> <span class="id">_</span> <span class="id">of</span> <span class="id">from_component]</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">from_component_liftK</span> <span class="id">A</span> <span class="id">:</span><br/>
-&nbsp;&nbsp;<span class="id">@from_component</span> <span class="id">A</span> <span class="id">\o</span> <span class="id">Lift</span> <span class="id">[the</span> <span class="id">monadT</span> <span class="id">of</span> <span class="id">codensityT]</span> <span class="id">M</span> <span class="id">A</span> <span class="id">=</span> <span class="id">id</span>.<br/>
+&nbsp;&nbsp;@<span class="id">from_component</span> <span class="id">A</span> <span class="id">\o</span> <span class="id">Lift</span> <span class="id">[the</span> <span class="id">monadT</span> <span class="id">of</span> <span class="id">codensityT]</span> <span class="id">M</span> <span class="id">A</span> <span class="id">=</span> <span class="id">id</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
 <div class="proofscript" id="proof9">
 <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">m</span> <span class="id">/=;</span> <span class="id">rewrite</span> <span class="id">/from_component/=</span> <span class="id">/liftK</span> <span class="id">/=</span> <span class="id">bindmret</span>.<br/>
@@ -178,7 +178,7 @@ Qed.</div>
 <br/>
 <span class="vernacular">Definition</span> <span class="id">psik</span> <span class="id">:</span> <span class="id">E</span>.<span class="id">-aoperation</span> (<span class="id">codensityT</span> <span class="id">M</span>) <span class="id">:=</span> <span class="id">psi</span> (<span class="id">kappa</span> <span class="id">op</span>).<br/>
 <br/>
-<span class="vernacular">Lemma</span> <span class="id">psikE</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="id">op</span> <span class="id">A</span> <span class="id">=</span> (<span class="id">@from_component</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">\o</span> (<span class="id">@psik</span> <span class="id">A</span>) <span class="id">\o</span><br/>
+<span class="vernacular">Lemma</span> <span class="id">psikE</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span> <span class="id">op</span> <span class="id">A</span> <span class="id">=</span> (@<span class="id">from_component</span> <span class="id">M</span> <span class="id">A</span>) <span class="id">\o</span> (@<span class="id">psik</span> <span class="id">A</span>) <span class="id">\o</span><br/>
 &nbsp;&nbsp;((<span class="id">E</span> <span class="id">##</span> <span class="id">Lift</span> <span class="id">[the</span> <span class="id">monadT</span> <span class="id">of</span> <span class="id">codensityT]</span> <span class="id">M</span>) <span class="id">A</span>).<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
 <div class="proofscript" id="proof10">
@@ -219,7 +219,7 @@ Qed.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;((<span class="id">E</span> <span class="id">#</span> <span class="id">Lift</span> <span class="id">t</span> (<span class="id">codensityT</span> <span class="id">M</span>) <span class="id">X</span>) <span class="id">\o</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">E</span> <span class="id">#</span> <span class="id">Lift</span> <span class="id">[the</span> <span class="id">monadT</span> <span class="id">of</span> <span class="id">codensityT]</span> <span class="id">M</span> <span class="id">X</span>))).<br/>
 &nbsp;&nbsp;<span class="id">congr</span> (<span class="id">_</span> <span class="id">\o</span> <span class="id">_</span>)<span class="id">;</span> <span class="id">rewrite</span> <span class="id">/op3</span>.<br/>
-&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-functor_o</span> <span class="id">-natural_hmapE</span> <span class="id">functor_app_naturalE</span> <span class="id">-</span>(<span class="id">@functor_o</span> <span class="id">E</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-functor_o</span> <span class="id">-natural_hmapE</span> <span class="id">functor_app_naturalE</span> <span class="id">-</span>(@<span class="id">functor_o</span> <span class="id">E</span>).<br/>
 <span class="id">transitivity</span> (<span class="id">op1</span> <span class="id">X</span> <span class="id">\o</span><br/>
 &nbsp;&nbsp;(<span class="id">op2</span> <span class="id">X</span> <span class="id">\o</span> <span class="id">E</span> <span class="id">#</span> <span class="id">Lift</span> <span class="id">t</span> (<span class="id">codensityT</span> <span class="id">M</span>) <span class="id">X</span>) <span class="id">\o</span> <span class="id">E</span> <span class="id">#</span> <span class="id">Lift</span> <span class="id">[the</span> <span class="id">monadT</span> <span class="id">of</span> <span class="id">codensityT]</span> <span class="id">M</span> <span class="id">X</span>).<br/>
 &nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">vcompE</span> <span class="id">-compA</span>.<br/>
@@ -242,13 +242,13 @@ Qed.</div>
 <span class="vernacular">Section</span> <span class="id">slifting_stateT</span>.<br/>
 <span class="vernacular">Variable</span> <span class="id">S</span> <span class="id">:</span> <span class="id">UU0</span>.<br/>
 <br/>
-<span class="vernacular">Let</span> <span class="id">tau</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">s</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">S</span> <span class="id">-&gt;</span> <span class="id">M</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">S</span>)<span class="id">%type</span>) <span class="id">:=</span> <span class="id">f</span> <span class="id">s</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">tau</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">s</span> (<span class="id">f</span> <span class="id">:</span> <span class="id">S</span> <span class="id">-&gt;</span> <span class="id">M</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">S</span>)%<span class="id">type</span>) <span class="id">:=</span> <span class="id">f</span> <span class="id">s</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">op'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span> <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">t</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">op</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">S</span>)<span class="id">%type</span> ((<span class="id">E</span> <span class="id">#</span> <span class="id">tau</span> <span class="id">s</span>) <span class="id">t</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">t</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">op</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">S</span>)%<span class="id">type</span> ((<span class="id">E</span> <span class="id">#</span> <span class="id">tau</span> <span class="id">s</span>) <span class="id">t</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">slifting_stateT</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">op</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">stateT</span> <span class="id">S]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@op'</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">op</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">stateT</span> <span class="id">S]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">op'</span> <span class="id">_</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
 <div class="proofscript" id="proof12">
 <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">emx</span>.<br/>
@@ -281,15 +281,15 @@ Qed.</div>
 <span class="vernacular">Section</span> <span class="id">slifting_exceptT</span>.<br/>
 <span class="vernacular">Variable</span> <span class="id">Z</span> <span class="id">:</span> <span class="id">UU0</span>.<br/>
 <br/>
-<span class="vernacular">Let</span> <span class="id">op'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">exceptT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">exceptT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> (<span class="id">Y</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">@op</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">op'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">exceptT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">exceptT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> (<span class="id">Y</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> @<span class="id">op</span> <span class="id">_</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">slifting_exceptT</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">op</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">exceptT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@op'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">op</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">exceptT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">op'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
 <div class="proofscript" id="proof13">
 <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">emx</span>.<br/>
 <span class="id">rewrite</span> <span class="id">/op'</span>.<br/>
-<span class="id">rewrite</span> (<span class="id">psikE</span> <span class="id">op</span> (<span class="id">Z</span> <span class="id">+</span> <span class="id">X</span>)<span class="id">%type</span>).<br/>
+<span class="id">rewrite</span> (<span class="id">psikE</span> <span class="id">op</span> (<span class="id">Z</span> <span class="id">+</span> <span class="id">X</span>)%<span class="id">type</span>).<br/>
 <span class="id">rewrite</span> <span class="id">/slifting</span>.<br/>
 <span class="id">rewrite</span> <span class="id">2!vcompE</span>.<br/>
 <span class="id">set</span> <span class="id">h</span> <span class="id">:=</span> <span class="id">hmap</span> <span class="id">_</span>.<br/>
@@ -319,7 +319,7 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">t</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">e</span> <span class="id">=&gt;</span> <span class="id">op</span> <span class="id">X</span> ((<span class="id">E</span> <span class="id">#</span> <span class="id">tau</span> <span class="id">e</span>) <span class="id">t</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">slifting_envT</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">op</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">envT</span> <span class="id">Env]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@op'</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">op</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">envT</span> <span class="id">Env]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">op'</span> <span class="id">_</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
 <div class="proofscript" id="proof14">
 <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">emx</span>.<br/>
@@ -353,10 +353,10 @@ Qed.</div>
 <span class="vernacular">Variable</span> <span class="id">R</span> <span class="id">:</span> <span class="id">UU0</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">op'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">outputT</span> <span class="id">R</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">outputT</span> <span class="id">R</span> <span class="id">M</span> <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">@op</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">R</span>)<span class="id">%type</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> @<span class="id">op</span> (<span class="id">X</span> <span class="id">*</span> <span class="id">seq</span> <span class="id">R</span>)%<span class="id">type</span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">slifting_outputT</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">op</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">outputT</span> <span class="id">R]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@op'</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">op</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">outputT</span> <span class="id">R]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">op'</span> <span class="id">_</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
 <div class="proofscript" id="proof15">
 <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">emx</span>.<br/>
@@ -523,10 +523,10 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">t</span> <span class="id">s</span> <span class="id">e</span> <span class="id">=&gt;</span> <span class="id">t</span> <span class="id">s</span> (<span class="id">f</span> <span class="id">e</span>).<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">local_stateT'</span> <span class="id">:</span> (<span class="id">E</span> <span class="id">\o</span> <span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span>) <span class="id">~~&gt;</span> (<span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span>) <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">=&gt;</span> <span class="id">uncurry</span> (<span class="id">@local_stateT</span> <span class="id">^~</span> <span class="id">X</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">=&gt;</span> <span class="id">uncurry</span> (@<span class="id">local_stateT</span> <span class="id">^~</span> <span class="id">X</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">local_stateTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">local</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">stateT</span> <span class="id">S]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@local_stateT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">local</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">stateT</span> <span class="id">S]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">local_stateT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
 <div class="proofscript" id="proof20">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_stateT;</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">-[]</span>. Qed.</div>
@@ -538,10 +538,10 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">t</span> <span class="id">e</span> <span class="id">=&gt;</span> <span class="id">t</span> (<span class="id">f</span> <span class="id">e</span>).<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">local_exceptT'</span> <span class="id">:</span> (<span class="id">E</span> <span class="id">\o</span> <span class="id">exceptT</span> <span class="id">Z</span> <span class="id">M</span>) <span class="id">~~&gt;</span> (<span class="id">exceptT</span> <span class="id">Z</span> <span class="id">M</span>) <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">=&gt;</span> <span class="id">uncurry</span> (<span class="id">@local_exceptT</span> <span class="id">^~</span> <span class="id">X</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">=&gt;</span> <span class="id">uncurry</span> (@<span class="id">local_exceptT</span> <span class="id">^~</span> <span class="id">X</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">local_exceptTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">local</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">exceptT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@local_exceptT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">local</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">exceptT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">local_exceptT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
 <div class="proofscript" id="proof21">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_exceptT;</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">-[]</span>. Qed.</div>
@@ -554,10 +554,10 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">t</span> <span class="id">e</span> <span class="id">e'</span> <span class="id">=&gt;</span> <span class="id">t</span> <span class="id">e</span> (<span class="id">f</span> <span class="id">e'</span>).<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">local_envT'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">envT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">envT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">=&gt;</span> <span class="id">uncurry</span> (<span class="id">@local_envT</span> <span class="id">^~</span> <span class="id">X</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">X</span> <span class="id">=&gt;</span> <span class="id">uncurry</span> (@<span class="id">local_envT</span> <span class="id">^~</span> <span class="id">X</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">local_envTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">local</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">envT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@local_envT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">local</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">envT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">local_envT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
 <div class="proofscript" id="proof22">
 <span class="id">rewrite</span> <span class="id">slifting_envT</span>.<br/>
@@ -571,10 +571,10 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">t</span> <span class="id">e</span> <span class="id">=&gt;</span> <span class="id">t</span> (<span class="id">f</span> <span class="id">e</span>).<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">local_outputT'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">outputT</span> <span class="id">R</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">outputT</span> <span class="id">R</span> <span class="id">M</span> <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (<span class="id">@local_outputT</span> <span class="id">^~</span> <span class="id">X</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (@<span class="id">local_outputT</span> <span class="id">^~</span> <span class="id">X</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">local_outputTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">local</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">outputT</span> <span class="id">R]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@local_outputT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">local</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">outputT</span> <span class="id">R]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">local_outputT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
 <div class="proofscript" id="proof23">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_outputT;</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">-[]</span>. Qed.</div>
@@ -585,7 +585,7 @@ Qed.</div>
 <span class="vernacular">Section</span> <span class="id">slifting_handle</span>. <br/>
 <span class="vernacular">Let</span> <span class="id">E</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">functor</span> <span class="id">of</span> <span class="id">Handle.acto</span> <span class="id">unit]</span>.<br/>
 <span class="vernacular">Let</span> <span class="id">M</span> <span class="id">:=</span> <span class="id">[the</span> <span class="id">monad</span> <span class="id">of</span> <span class="id">ExceptMonad.acto</span> <span class="id">unit]</span>.<br/>
-<span class="vernacular">Let</span> <span class="id">handle</span> <span class="id">:</span> <span class="id">E</span>.<span class="id">-operation</span> <span class="id">M</span> <span class="id">:=</span> <span class="id">@handle_op</span> <span class="id">unit</span>.<br/>
+<span class="vernacular">Let</span> <span class="id">handle</span> <span class="id">:</span> <span class="id">E</span>.<span class="id">-operation</span> <span class="id">M</span> <span class="id">:=</span> @<span class="id">handle_op</span> <span class="id">unit</span>.<br/>
 <span class="vernacular">Hypothesis</span> <span class="id">naturality_MK</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> (<span class="id">A</span> <span class="id">:</span> <span class="id">UU0</span>) (<span class="id">m</span> <span class="id">:</span> <span class="id">MK</span> <span class="id">M</span> <span class="id">A</span>)<span class="id">,</span><br/>
 &nbsp;&nbsp;<span class="id">naturality_MK</span> <span class="id">m</span>.<br/>
 <br/>
@@ -598,10 +598,10 @@ Qed.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">handle_stateT'</span> <span class="id">:</span> (<span class="id">E</span> <span class="id">\o</span> <span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span>) <span class="id">~~&gt;</span> (<span class="id">stateT</span> <span class="id">S</span> <span class="id">M</span>) <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (<span class="id">@handle_stateT</span> <span class="id">X</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (@<span class="id">handle_stateT</span> <span class="id">X</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">handle_stateTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">handle</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">stateT</span> <span class="id">S]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@handle_stateT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">handle</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">stateT</span> <span class="id">S]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">handle_stateT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
 <div class="proofscript" id="proof24">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_stateT;</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">-[m</span> <span class="id">f]</span>. Qed.</div>
@@ -616,10 +616,10 @@ Qed.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">handle_exceptT'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">exceptT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">exceptT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (<span class="id">@handle_exceptT</span> <span class="id">X</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (@<span class="id">handle_exceptT</span> <span class="id">X</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">handle_exceptTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">handle</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">exceptT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@handle_exceptT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">handle</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">exceptT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">handle_exceptT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
 <div class="proofscript" id="proof25">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_exceptT;</span> <span class="id">exact:</span> <span class="id">funext</span>. Qed.</div>
@@ -634,10 +634,10 @@ Qed.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">handle_envT'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">envT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">envT</span> <span class="id">Z</span> <span class="id">M</span> <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (<span class="id">@handle_envT</span> <span class="id">X</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (@<span class="id">handle_envT</span> <span class="id">X</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">handle_envTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">handle</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">envT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@handle_envT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">handle</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">envT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">handle_envT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
 <div class="proofscript" id="proof26">
 <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_envT;</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">-[m</span> <span class="id">f];</span> <span class="id">exact:</span> <span class="id">funext</span>.<br/>
@@ -653,10 +653,10 @@ Qed.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <br/>
 <span class="vernacular">Let</span> <span class="id">handle_outputT'</span> <span class="id">:</span> <span class="id">E</span> <span class="id">\o</span> <span class="id">outputT</span> <span class="id">R</span> <span class="id">M</span> <span class="id">~~&gt;</span> <span class="id">outputT</span> <span class="id">R</span> <span class="id">M</span> <span class="id">:=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (<span class="id">@handle_outputT</span> <span class="id">X</span>).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">=&gt;</span> <span class="id">uncurry</span> (@<span class="id">handle_outputT</span> <span class="id">X</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">handle_outputTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">handle</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">outputT</span> <span class="id">R]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@handle_outputT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">handle</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">outputT</span> <span class="id">R]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">handle_outputT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
 <div class="proofscript" id="proof27">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_outputT;</span> <span class="id">apply</span> <span class="id">funext</span> <span class="id">=&gt;</span> <span class="id">-[]</span>. Qed.</div>
@@ -678,7 +678,7 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">t</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id">let:</span> (<span class="id">x,</span> <span class="id">_</span>) <span class="id">:=</span> <span class="id">t</span> <span class="id">s</span> <span class="gallina-kwd">in</span> (<span class="id">x,</span> <span class="id">[::]</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">flush_stateTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">flush</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">stateT</span> <span class="id">S]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@flush_stateT</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">flush</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">stateT</span> <span class="id">S]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">flush_stateT</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
 <div class="proofscript" id="proof28">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_stateT</span>. Qed.</div>
@@ -694,7 +694,7 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">c</span> <span class="id">=&gt;</span> <span class="gallina-kwd">let</span> <span class="id">:</span> (<span class="id">x,</span> <span class="id">_</span>) <span class="id">:=</span> <span class="id">c</span> <span class="gallina-kwd">in</span> (<span class="id">x,</span> <span class="id">[::]</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">flush_exceptTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">flush</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">exceptT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@flush_exceptT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">flush</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">exceptT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">flush_exceptT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
 <div class="proofscript" id="proof29">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_exceptT</span>. Qed.</div>
@@ -706,7 +706,7 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">t</span> <span class="id">e</span> <span class="id">=&gt;</span> <span class="id">let:</span> (<span class="id">x,</span> <span class="id">_</span>) <span class="id">:=</span> <span class="id">t</span> <span class="id">e</span> <span class="gallina-kwd">in</span> (<span class="id">x,</span> <span class="id">[::]</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">flush_envTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">flush</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">envT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@flush_envT</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">flush</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">envT</span> <span class="id">Z]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">flush_envT</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
 <div class="proofscript" id="proof30">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_envT</span>. Qed.</div>
@@ -721,7 +721,7 @@ Qed.</div>
 &nbsp;&nbsp;<span class="gallina-kwd">fun</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">e</span> <span class="id">=&gt;</span> <span class="id">let:</span> (<span class="id">pw,</span> <span class="id">w'</span>) <span class="id">:=</span> <span class="id">e</span> <span class="gallina-kwd">in</span> (<span class="id">pw,</span> <span class="id">[::]</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span class="id">flush_outputTE</span> (<span class="id">X</span> <span class="id">:</span> <span class="id">UU0</span>) <span class="id">:</span><br/>
-&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">flush</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">outputT</span> <span class="id">R]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> <span class="id">@flush_outputT'</span> <span class="id">X</span>.<br/>
+&nbsp;&nbsp;(<span class="id">slifting</span> <span class="id">flush</span> <span class="id">[the</span> <span class="id">fmt</span> <span class="id">of</span> <span class="id">outputT</span> <span class="id">R]</span> <span class="id">naturality_MK</span>) <span class="id">X</span> <span class="id">=</span> @<span class="id">flush_outputT'</span> <span class="id">X</span>.<br/>
 <div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
 <div class="proofscript" id="proof31">
  <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">slifting_outputT;</span> <span class="id">exact:</span> <span class="id">funext</span>. Qed.</div>

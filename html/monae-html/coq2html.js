@@ -1,4 +1,10 @@
 
+
+
+
+
+
+
 function toggleDisplay(id)
 {
    var elt = document.getElementById(id);
