@@ -16,8 +16,75 @@
 </head>
 
 <body onload="init('proofscript')">
-<h1 class="title">Module mathcomp.analysis.lebesgue_measure</h1>
-<div class="coq">
+
+  <header>
+    <p><a href="./index.html">coq2html</a></p>
+    <h1 class="title">Module mathcomp.analysis.lebesgue_measure</h1>
+    <p><a href="">source</a></p>
+  </header>
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details><summary>mathcomp</summary>
+          <ul>
+          <li><details><summary>analysis</summary>
+          <ul>
+          <li><a href="mathcomp.analysis.real_interval.html">real_interval</a></li>
+<li><a href="mathcomp.analysis.landau.html">landau</a></li>
+<li><a href="mathcomp.analysis.itv.html">itv</a></li>
+<li><a href="mathcomp.analysis.derive.html">derive</a></li>
+<li><a href="mathcomp.analysis.trigo.html">trigo</a></li>
+<li><a href="mathcomp.analysis.topology.html">topology</a></li>
+<li><a href="mathcomp.analysis.sequences.html">sequences</a></li>
+<li><a href="mathcomp.analysis.hoelder.html">hoelder</a></li>
+<li><a href="mathcomp.analysis.exp.html">exp</a></li>
+<li><a href="mathcomp.analysis.convex.html">convex</a></li>
+<li><a href="mathcomp.analysis.Rstruct.html">Rstruct</a></li>
+<li><a href="mathcomp.analysis.reals.html">reals</a></li>
+<li><a href="mathcomp.analysis.realfun.html">realfun</a></li>
+<li><a href="mathcomp.analysis.kernel.html">kernel</a></li>
+<li><a href="mathcomp.analysis.charge.html">charge</a></li>
+<li><a href="mathcomp.analysis.forms.html">forms</a></li>
+<li><a href="mathcomp.analysis.probability.html">probability</a></li>
+<li><a href="mathcomp.analysis.normedtype.html">normedtype</a></li>
+<li><a href="mathcomp.analysis.lebesgue_measure.html">lebesgue_measure</a></li>
+<li><a href="mathcomp.analysis.measure.html">measure</a></li>
+<li><a href="mathcomp.analysis.signed.html">signed</a></li>
+<li><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html">lebesgue_stieltjes_measure</a></li>
+<li><a href="mathcomp.analysis.esum.html">esum</a></li>
+<li><a href="mathcomp.analysis.ereal.html">ereal</a></li>
+<li><a href="mathcomp.analysis.numfun.html">numfun</a></li>
+<li><a href="mathcomp.analysis.constructive_ereal.html">constructive_ereal</a></li>
+<li><a href="mathcomp.analysis.cantor.html">cantor</a></li>
+<li><a href="mathcomp.analysis.lebesgue_integral.html">lebesgue_integral</a></li>
+<li><a href="mathcomp.analysis.nsatz_realtype.html">nsatz_realtype</a></li>
+<li><a href="mathcomp.analysis.summability.html">summability</a></li>
+<li><a href="mathcomp.analysis.prodnormedzmodule.html">prodnormedzmodule</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details><summary>classical</summary>
+          <ul>
+          <li><a href="mathcomp.classical.boolp.html">boolp</a></li>
+<li><a href="mathcomp.classical.classical_sets.html">classical_sets</a></li>
+<li><a href="mathcomp.classical.set_interval.html">set_interval</a></li>
+<li><a href="mathcomp.classical.cardinality.html">cardinality</a></li>
+<li><a href="mathcomp.classical.functions.html">functions</a></li>
+<li><a href="mathcomp.classical.fsbigop.html">fsbigop</a></li>
+<li><a href="mathcomp.classical.all_classical.html">all_classical</a></li>
+<li><a href="mathcomp.classical.mathcomp_extra.html">mathcomp_extra</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
 <span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://math-comp.github.io/htmldoc_1_18_0/mathcomp.ssreflect.all_ssreflect.html">all_ssreflect</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc_1_18_0/mathcomp.algebra.ssralg.html">ssralg</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc_1_18_0/mathcomp.algebra.ssrnum.html">ssrnum</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc_1_18_0/mathcomp.algebra.ssrint.html">ssrint</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc_1_18_0/mathcomp.algebra.interval.html">interval</a></span>.<br/>
 <span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap">finmap</a></span> <span class="id"><a href="NOTFOUND the module url for mathcomp.fingroup.fingroup">fingroup</a></span> <span class="id"><a href="NOTFOUND the module url for mathcomp.fingroup.perm">perm</a></span> <span class="id"><a href="https://math-comp.github.io/htmldoc_1_18_0/mathcomp.algebra.rat.html">rat</a></span>.<br/>
 <span class="vernacular">From</span> <span class="id">mathcomp</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="mathcomp.classical.mathcomp_extra.html">mathcomp_extra</a></span> <span class="id"><a href="mathcomp.classical.boolp.html">boolp</a></span> <span class="id"><a href="mathcomp.classical.classical_sets.html">classical_sets</a></span> <span class="id"><a href="mathcomp.classical.functions.html">functions</a></span>.<br/>
@@ -360,8 +427,8 @@ Qed.</div>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#dd4e793ea9d0dbe0a320346aa74c809d">[the</a></span> <span class="id"><a href="mathcomp.analysis.measure.html#Measurable.Exports.measurableType">measurableType</a></span> <span class="id">_</span>.<span class="id">-sigma</span> <span class="id">of</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.measure.html#salgebraType">salgebraType</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#R:40">R</a></span>.<span class="id">-ocitv</span>.<span class="id">-measurable]</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="mathcomp.analysis.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#R:40">R</a></span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#dd4e793ea9d0dbe0a320346aa74c809d">[the</a></span> <span class="id"><a href="mathcomp.analysis.measure.html#Measure.Exports.measure">measure</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">of</span> <span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#lebesgue_stieltjes_measure">lebesgue_stieltjes_measure</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssreflect.html#dd4e793ea9d0dbe0a320346aa74c809d">[the</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#Cumulative.Exports.cumulative">cumulative</a></span> <span class="id">_</span> <span class="id">of</span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.ssr.ssrfun.html#idfun">idfun]]</a></span>.<br/>
-<span id="lebesgue_measure_lebesgue_measure__canonical__measure_Measure" class="id"><span id="HB_unnamed_mixin_18" class="id"><span id="lebesgue_measure_lebesgue_measure__canonical__measure_Content" class="id"><span id="HB_unnamed_mixin_17" class="id"><span id="measure_Measure__to__measure_Content_isMeasure" class="id"><span id="measure_Measure__to__measure_isContent" class="id"><span id="HB_unnamed_factory_14" class="id"><span id="hb_instance_13.R" class="id"><span id="hb_instance_13" class="id"><a name="lebesgue_measure_lebesgue_measure__canonical__measure_Measure" class="hierarchy-builder">HB.instance</a></span></span></span></span></span></span></span></span></span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span id="R:41" class="id"><a name="R:41" class="">R</a></span> <span class="id">:</span> <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>) <span class="id">:=</span> <span class="id"><a href="mathcomp.analysis.measure.html#Measure.on">Measure.on</a></span> (@<span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#lebesgue_measure">lebesgue_measure</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#R:41">R</a></span>).<br/>
-<span id="lebesgue_measure_lebesgue_measure__canonical__measure_SigmaFiniteContent" class="id"><span id="HB_unnamed_mixin_23" class="id"><span id="measure_SigmaFiniteContent__to__measure_isContent" class="id"><span id="measure_SigmaFiniteContent__to__measure_isSigmaFinite" class="id"><span id="HB_unnamed_factory_20" class="id"><span id="hb_instance_19.R" class="id"><span id="hb_instance_19" class="id"><a name="lebesgue_measure_lebesgue_measure__canonical__measure_SigmaFiniteContent" class="hierarchy-builder">HB.instance</a></span></span></span></span></span></span></span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span id="R:42" class="id"><a name="R:42" class="">R</a></span> <span class="id">:</span> <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>) <span class="id">:=</span><br/>
+<span id="lebesgue_measure_lebesgue_measure__canonical__measure_Measure" class="id"><span id="HB_unnamed_mixin_18" class="id"><span id="lebesgue_measure_lebesgue_measure__canonical__measure_Content" class="id"><span id="HB_unnamed_mixin_17" class="id"><span id="measure_Measure__to__measure_Content_isMeasure" class="id"><span id="measure_Measure__to__measure_isContent" class="id"><span id="HB_unnamed_factory_14" class="id"><span id="hb_instance_13.R" class="id"><span id="hb_instance_13.hb_instance_13" class="id"><a name="lebesgue_measure_lebesgue_measure__canonical__measure_Measure" class="hierarchy-builder">HB.instance</a></span></span></span></span></span></span></span></span></span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span id="R:41" class="id"><a name="R:41" class="">R</a></span> <span class="id">:</span> <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>) <span class="id">:=</span> <span class="id"><a href="mathcomp.analysis.measure.html#Measure.on">Measure.on</a></span> (@<span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#lebesgue_measure">lebesgue_measure</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#R:41">R</a></span>).<br/>
+<span id="lebesgue_measure_lebesgue_measure__canonical__measure_SigmaFiniteContent" class="id"><span id="HB_unnamed_mixin_23" class="id"><span id="measure_SigmaFiniteContent__to__measure_isContent" class="id"><span id="measure_SigmaFiniteContent__to__measure_isSigmaFinite" class="id"><span id="HB_unnamed_factory_20" class="id"><span id="hb_instance_19.R" class="id"><span id="hb_instance_19.hb_instance_19" class="id"><a name="lebesgue_measure_lebesgue_measure__canonical__measure_SigmaFiniteContent" class="hierarchy-builder">HB.instance</a></span></span></span></span></span></span></span> <span class="vernacular">Definition</span> <span class="id">_</span> (<span id="R:42" class="id"><a name="R:42" class="">R</a></span> <span class="id">:</span> <span class="id"><a href="mathcomp.analysis.reals.html#Real.Exports.realType">realType</a></span>) <span class="id">:=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.measure.html#SigmaFiniteContent.on">SigmaFiniteContent.on</a></span> (@<span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#lebesgue_measure">lebesgue_measure</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#R:42">R</a></span>).<br/>
 <br/>
 <span class="vernacular">Section</span> <span id="ps_infty" class="id"><a name="ps_infty" class="">ps_infty</a></span>.<br/>
@@ -505,7 +572,7 @@ Qed.</div>
 <span class="vernacular">Definition</span> <span id="measurableR" class="id"><a name="measurableR" class="">measurableR</a></span> <span class="id">:</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#salgebra_R_ssets.R">R</a></span>) <span class="id">:=</span><br/>
 &nbsp;&nbsp;(<span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#salgebra_R_ssets.R">R</a></span>.<span class="id">-ocitv</span>.<span class="id">-measurable</span>).<span class="id">-sigma</span>.<span class="id">-measurable</span>.<br/>
 <br/>
-<span id="Real_sort__canonical__measure_Measurable" class="id"><span id="HB_unnamed_mixin_31" class="id"><span id="Real_sort__canonical__measure_AlgebraOfSets" class="id"><span id="HB_unnamed_mixin_30" class="id"><span id="Real_sort__canonical__measure_RingOfSets" class="id"><span id="HB_unnamed_mixin_29" class="id"><span id="Real_sort__canonical__measure_SemiRingOfSets" class="id"><span id="HB_unnamed_mixin_28" class="id"><span id="measure_isMeasurable__to__measure_RingOfSets_isAlgebraOfSets" class="id"><span id="measure_isMeasurable__to__measure_isSemiRingOfSets" class="id"><span id="measure_isMeasurable__to__measure_SemiRingOfSets_isRingOfSets" class="id"><span id="measure_isMeasurable__to__measure_AlgebraOfSets_isMeasurable" class="id"><span id="R_isMeasurable" class="id"><a name="Real_sort__canonical__measure_Measurable" class="hierarchy-builder">HB.instance</a></span></span></span></span></span></span></span></span></span></span></span></span></span> <span class="vernacular">Definition</span> <span class="id">R_isMeasurable</span> <span class="id">:</span><br/>
+<span id="Real_sort__canonical__measure_Measurable" class="id"><span id="HB_unnamed_mixin_31" class="id"><span id="Real_sort__canonical__measure_AlgebraOfSets" class="id"><span id="HB_unnamed_mixin_30" class="id"><span id="Real_sort__canonical__measure_RingOfSets" class="id"><span id="HB_unnamed_mixin_29" class="id"><span id="Real_sort__canonical__measure_SemiRingOfSets" class="id"><span id="HB_unnamed_mixin_28" class="id"><span id="measure_isMeasurable__to__measure_isSemiRingOfSets" class="id"><span id="measure_isMeasurable__to__measure_RingOfSets_isAlgebraOfSets" class="id"><span id="measure_isMeasurable__to__measure_SemiRingOfSets_isRingOfSets" class="id"><span id="measure_isMeasurable__to__measure_AlgebraOfSets_isMeasurable" class="id"><span id="R_isMeasurable" class="id"><a name="Real_sort__canonical__measure_Measurable" class="hierarchy-builder">HB.instance</a></span></span></span></span></span></span></span></span></span></span></span></span></span> <span class="vernacular">Definition</span> <span class="id">R_isMeasurable</span> <span class="id">:</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.measure.html#isMeasurable">isMeasurable</a></span> <span class="id"><a href="mathcomp.analysis.measure.html#default_measure_display">default_measure_display</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#salgebra_R_ssets.R">R</a></span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;@<span class="id"><a href="mathcomp.analysis.measure.html#isMeasurable.Build">isMeasurable.Build</a></span> <span class="id">_</span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#measurableTypeR">measurableTypeR</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#Pointed.class">Pointed.class</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#salgebra_R_ssets.R">R</a></span>) <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#measurableR">measurableR</a></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.measure.html#measurable0">measurable0</a></span> (@<span class="id"><a href="mathcomp.analysis.measure.html#measurableC">measurableC</a></span> <span class="id">_</span> <span class="id">_</span>) (@<span class="id"><a href="mathcomp.analysis.measure.html#bigcupT_measurable">bigcupT_measurable</a></span> <span class="id">_</span> <span class="id">_</span>).<br/>
@@ -546,7 +613,7 @@ Qed.</div>
 <span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="mathcomp.classical.set_interval.html#set_itv_infty_infty">set_itv_infty_infty</a></span>.<br/>
 Qed.</div>
 <br/>
-<span id="constructive_ereal_extended__canonical__measure_Measurable" class="id"><span id="HB_unnamed_mixin_44" class="id"><span id="constructive_ereal_extended__canonical__measure_AlgebraOfSets" class="id"><span id="HB_unnamed_mixin_43" class="id"><span id="constructive_ereal_extended__canonical__measure_RingOfSets" class="id"><span id="HB_unnamed_mixin_42" class="id"><span id="constructive_ereal_extended__canonical__measure_SemiRingOfSets" class="id"><span id="HB_unnamed_mixin_41" class="id"><span id="measure_isMeasurable__to__measure_RingOfSets_isAlgebraOfSets__40" class="id"><span id="measure_isMeasurable__to__measure_isSemiRingOfSets__38" class="id"><span id="measure_isMeasurable__to__measure_SemiRingOfSets_isRingOfSets__36" class="id"><span id="measure_isMeasurable__to__measure_AlgebraOfSets_isMeasurable__34" class="id"><span id="HB_unnamed_factory_32" class="id"><a name="constructive_ereal_extended__canonical__measure_Measurable" class="hierarchy-builder">HB.instance</a></span></span></span></span></span></span></span></span></span></span></span></span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
+<span id="constructive_ereal_extended__canonical__measure_Measurable" class="id"><span id="HB_unnamed_mixin_44" class="id"><span id="constructive_ereal_extended__canonical__measure_AlgebraOfSets" class="id"><span id="HB_unnamed_mixin_43" class="id"><span id="constructive_ereal_extended__canonical__measure_RingOfSets" class="id"><span id="HB_unnamed_mixin_42" class="id"><span id="constructive_ereal_extended__canonical__measure_SemiRingOfSets" class="id"><span id="HB_unnamed_mixin_41" class="id"><span id="measure_isMeasurable__to__measure_isSemiRingOfSets__40" class="id"><span id="measure_isMeasurable__to__measure_RingOfSets_isAlgebraOfSets__38" class="id"><span id="measure_isMeasurable__to__measure_SemiRingOfSets_isRingOfSets__36" class="id"><span id="measure_isMeasurable__to__measure_AlgebraOfSets_isMeasurable__34" class="id"><span id="HB_unnamed_factory_32" class="id"><a name="constructive_ereal_extended__canonical__measure_Measurable" class="hierarchy-builder">HB.instance</a></span></span></span></span></span></span></span></span></span></span></span></span></span> <span class="vernacular">Definition</span> <span class="id">_</span> <span class="id">:=</span><br/>
 &nbsp;&nbsp;(<span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#ereal_isMeasurable">ereal_isMeasurable</a></span> (<span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#salgebra_R_ssets.R">R</a></span>.<span class="id">-ocitv</span>.<span class="id">-measurable</span>)).<br/>
 <br/>
 <span class="vernacular">Lemma</span> <span id="measurable_image_EFin" class="id"><a name="measurable_image_EFin" class="">measurable_image_EFin</a></span> (<span id="A:94" class="id"><a name="A:94" class="">A</a></span> <span class="id">:</span> <span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#salgebra_R_ssets.R">R</a></span>) <span class="id">:</span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#measurableR">measurableR</a></span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#A:94">A</a></span> <span class="id"><a href="https://coq.inria.fr/doc/V8.18.0/stdlib/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="mathcomp.analysis.measure.html#measurable">measurable</a></span> (<span class="id"><a href="mathcomp.analysis.constructive_ereal.html#EFin">EFin</a></span> @<span class="id">`</span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#A:94">A</a></span>).<br/>
@@ -2572,7 +2639,9 @@ Qed.</div>
 <br/>
 <span class="vernacular">End</span> <span class="id"><a href="mathcomp.analysis.lebesgue_measure.html#vitali_theorem">vitali_theorem</a></span>.<br/>
 
-</div>
-<div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
 </body>
 </html>
