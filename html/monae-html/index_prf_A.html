@@ -12,59 +12,54 @@
 <script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 <link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="coq2html.js"> </script>
 </head>
 
 <body onload="init('proofscript')">
 
-  <header>
-    <p><a href="./index.html">coq2html</a></p>
-    <h1>'A' (Lemmas)</h1>
-    <p><a href="">source</a></p>
-  </header>
-
   <main>
     <div class="sidebar">
       <h2>Files</h2>
-      <li><details><summary>monae</summary>
+      <li><details id="monae"><summary>monae</summary>
           <ul>
-          <li><a href="monae.proba_monad_model.html">proba_monad_model</a></li>
-<li><a href="monae.example_monty.html">example_monty</a></li>
-<li><a href="monae.typed_store_lib.html">typed_store_lib</a></li>
-<li><a href="monae.monae_lib.html">monae_lib</a></li>
-<li><a href="monae.example_spark.html">example_spark</a></li>
-<li><a href="monae.example_quicksort.html">example_quicksort</a></li>
-<li><a href="monae.monad_model.html">monad_model</a></li>
-<li><a href="monae.fail_lib.html">fail_lib</a></li>
-<li><a href="monae.category.html">category</a></li>
-<li><a href="monae.altprob_model.html">altprob_model</a></li>
-<li><a href="monae.typed_store_model.html">typed_store_model</a></li>
-<li><a href="monae.category_ext.html">category_ext</a></li>
-<li><a href="monae.proba_lib.html">proba_lib</a></li>
-<li><a href="monae.monad_composition.html">monad_composition</a></li>
-<li><a href="monae.example_transformer.html">example_transformer</a></li>
-<li><a href="monae.hierarchy.html">hierarchy</a></li>
-<li><a href="monae.example_typed_store.html">example_typed_store</a></li>
-<li><a href="monae.example_relabeling.html">example_relabeling</a></li>
-<li><a href="monae.monad_lib.html">monad_lib</a></li>
-<li><a href="monae.example_nqueens.html">example_nqueens</a></li>
-<li><a href="monae.smallstep.html">smallstep</a></li>
+          <li><a href="monae.altprob_model.html">altprob_model</a></li>
 <li><a href="monae.array_lib.html">array_lib</a></li>
-<li><a href="monae.state_lib.html">state_lib</a></li>
-<li><a href="monae.monad_transformer.html">monad_transformer</a></li>
+<li><a href="monae.category.html">category</a></li>
+<li><a href="monae.category_ext.html">category_ext</a></li>
 <li><a href="monae.example_iquicksort.html">example_iquicksort</a></li>
+<li><a href="monae.example_monty.html">example_monty</a></li>
+<li><a href="monae.example_nqueens.html">example_nqueens</a></li>
+<li><a href="monae.example_quicksort.html">example_quicksort</a></li>
+<li><a href="monae.example_relabeling.html">example_relabeling</a></li>
+<li><a href="monae.example_spark.html">example_spark</a></li>
+<li><a href="monae.example_transformer.html">example_transformer</a></li>
+<li><a href="monae.example_typed_store.html">example_typed_store</a></li>
+<li><a href="monae.fail_lib.html">fail_lib</a></li>
 <li><a href="monae.gcm_model.html">gcm_model</a></li>
+<li><a href="monae.hierarchy.html">hierarchy</a></li>
+<li><a href="monae.monad_composition.html">monad_composition</a></li>
+<li><a href="monae.monad_lib.html">monad_lib</a></li>
+<li><a href="monae.monad_model.html">monad_model</a></li>
+<li><a href="monae.monad_transformer.html">monad_transformer</a></li>
+<li><a href="monae.monae_lib.html">monae_lib</a></li>
+<li><a href="monae.proba_lib.html">proba_lib</a></li>
+<li><a href="monae.proba_monad_model.html">proba_monad_model</a></li>
+<li><a href="monae.smallstep.html">smallstep</a></li>
+<li><a href="monae.state_lib.html">state_lib</a></li>
 <li><a href="monae.trace_lib.html">trace_lib</a></li>
+<li><a href="monae.typed_store_lib.html">typed_store_lib</a></li>
+<li><a href="monae.typed_store_model.html">typed_store_model</a></li>
           </ul>
           </details>
           </li>
-<li><details><summary>monaeImpredicativeSet</summary>
+<li><details id="monaeImpredicativeSet"><summary>monaeImpredicativeSet</summary>
           <ul>
-          <li><a href="monaeImpredicativeSet.imonad_composition.html">imonad_composition</a></li>
+          <li><a href="monaeImpredicativeSet.ifail_lib.html">ifail_lib</a></li>
 <li><a href="monaeImpredicativeSet.ihierarchy.html">ihierarchy</a></li>
+<li><a href="monaeImpredicativeSet.imonad_composition.html">imonad_composition</a></li>
 <li><a href="monaeImpredicativeSet.imonad_lib.html">imonad_lib</a></li>
 <li><a href="monaeImpredicativeSet.imonae_lib.html">imonae_lib</a></li>
-<li><a href="monaeImpredicativeSet.ifail_lib.html">ifail_lib</a></li>
           </ul>
           </details>
           </li>
@@ -73,6 +68,8 @@
   <div class="coq">
 
     <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1>'A' (Lemmas)</h1>
 <table><tbody><tr><td>Files</td><td><a href="index_file_A.html">A</a></td><td>B</td><td><a href="index_file_C.html">C</a></td><td>D</td><td><a href="index_file_E.html">E</a></td><td><a href="index_file_F.html">F</a></td><td><a href="index_file_G.html">G</a></td><td><a href="index_file_H.html">H</a></td><td><a href="index_file_I.html">I</a></td><td>J</td><td>K</td><td>L</td><td><a href="index_file_M.html">M</a></td><td>N</td><td>O</td><td><a href="index_file_P.html">P</a></td><td>Q</td><td>R</td><td><a href="index_file_S.html">S</a></td><td><a href="index_file_T.html">T</a></td><td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>_</td><td>*</td></tr><tr><td>Definitions</td><td><a href="index_def_A.html">A</a></td><td><a href="index_def_B.html">B</a></td><td><a href="index_def_C.html">C</a></td><td><a href="index_def_D.html">D</a></td><td><a href="index_def_E.html">E</a></td><td><a href="index_def_F.html">F</a></td><td><a href="index_def_G.html">G</a></td><td><a href="index_def_H.html">H</a></td><td><a href="index_def_I.html">I</a></td><td><a href="index_def_J.html">J</a></td><td><a href="index_def_K.html">K</a></td><td><a href="index_def_L.html">L</a></td><td><a href="index_def_M.html">M</a></td><td><a href="index_def_N.html">N</a></td><td><a href="index_def_O.html">O</a></td><td><a href="index_def_P.html">P</a></td><td><a href="index_def_Q.html">Q</a></td><td><a href="index_def_R.html">R</a></td><td><a href="index_def_S.html">S</a></td><td><a href="index_def_T.html">T</a></td><td><a href="index_def_U.html">U</a></td><td><a href="index_def_V.html">V</a></td><td><a href="index_def_W.html">W</a></td><td>X</td><td>Y</td><td><a href="index_def_Z.html">Z</a></td><td><a href="index_def__.html">_</a></td><td>*</td></tr><tr><td>Lemmas</td><td><a href="index_prf_A.html">A</a></td><td><a href="index_prf_B.html">B</a></td><td><a href="index_prf_C.html">C</a></td><td><a href="index_prf_D.html">D</a></td><td><a href="index_prf_E.html">E</a></td><td><a href="index_prf_F.html">F</a></td><td><a href="index_prf_G.html">G</a></td><td><a href="index_prf_H.html">H</a></td><td><a href="index_prf_I.html">I</a></td><td><a href="index_prf_J.html">J</a></td><td><a href="index_prf_K.html">K</a></td><td><a href="index_prf_L.html">L</a></td><td><a href="index_prf_M.html">M</a></td><td><a href="index_prf_N.html">N</a></td><td><a href="index_prf_O.html">O</a></td><td><a href="index_prf_P.html">P</a></td><td><a href="index_prf_Q.html">Q</a></td><td><a href="index_prf_R.html">R</a></td><td><a href="index_prf_S.html">S</a></td><td><a href="index_prf_T.html">T</a></td><td><a href="index_prf_U.html">U</a></td><td><a href="index_prf_V.html">V</a></td><td><a href="index_prf_W.html">W</a></td><td>X</td><td>Y</td><td>Z</td><td><a href="index_prf__.html">_</a></td><td>*</td></tr><tr><td>Abbreviations</td><td><a href="index_abbrev_A.html">A</a></td><td><a href="index_abbrev_B.html">B</a></td><td><a href="index_abbrev_C.html">C</a></td><td>D</td><td><a href="index_abbrev_E.html">E</a></td><td><a href="index_abbrev_F.html">F</a></td><td>G</td><td>H</td><td>I</td><td><a href="index_abbrev_J.html">J</a></td><td>K</td><td><a href="index_abbrev_L.html">L</a></td><td><a href="index_abbrev_M.html">M</a></td><td><a href="index_abbrev_N.html">N</a></td><td><a href="index_abbrev_O.html">O</a></td><td><a href="index_abbrev_P.html">P</a></td><td>Q</td><td><a href="index_abbrev_R.html">R</a></td><td><a href="index_abbrev_S.html">S</a></td><td>T</td><td><a href="index_abbrev_U.html">U</a></td><td><a href="index_abbrev_V.html">V</a></td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>_</td><td>*</td></tr><tr><td>Global Index</td><td><a href="index_global_A.html">A</a></td><td><a href="index_global_B.html">B</a></td><td><a href="index_global_C.html">C</a></td><td><a href="index_global_D.html">D</a></td><td><a href="index_global_E.html">E</a></td><td><a href="index_global_F.html">F</a></td><td><a href="index_global_G.html">G</a></td><td><a href="index_global_H.html">H</a></td><td><a href="index_global_I.html">I</a></td><td><a href="index_global_J.html">J</a></td><td><a href="index_global_K.html">K</a></td><td><a href="index_global_L.html">L</a></td><td><a href="index_global_M.html">M</a></td><td><a href="index_global_N.html">N</a></td><td><a href="index_global_O.html">O</a></td><td><a href="index_global_P.html">P</a></td><td><a href="index_global_Q.html">Q</a></td><td><a href="index_global_R.html">R</a></td><td><a href="index_global_S.html">S</a></td><td><a href="index_global_T.html">T</a></td><td><a href="index_global_U.html">U</a></td><td><a href="index_global_V.html">V</a></td><td><a href="index_global_W.html">W</a></td><td>X</td><td>Y</td><td><a href="index_global_Z.html">Z</a></td><td><a href="index_global__.html">_</a></td><td><a href="index_global_*.html">*</a></td></tr></tbody></table><h2>A (Lemmas)</h2><a href="monae.gcm_model.html#actmE">actmE</a> [prf, in monae.gcm_model]<br><a href="monae.category.html#AdjComp.EpsE">AdjComp.EpsE</a> [prf, in monae.category]<br><a href="monae.category.html#AdjComp.EpsE_hom">AdjComp.EpsE_hom</a> [prf, in monae.category]<br><a href="monae.category.html#AdjComp.EtaE">AdjComp.EtaE</a> [prf, in monae.category]<br><a href="monae.category.html#AdjComp.EtaE_hom">AdjComp.EtaE_hom</a> [prf, in monae.category]<br><a href="monae.category.html#AdjComp.triL">AdjComp.triL</a> [prf, in monae.category]<br><a href="monae.category.html#AdjComp.triR">AdjComp.triR</a> [prf, in monae.category]<br><a href="monaeImpredicativeSet.imonad_lib.html#adjoint_currry">adjoint_currry</a> [prf, in monaeImpredicativeSet.imonad_lib]<br><a href="monae.monad_lib.html#adjoint_currry">adjoint_currry</a> [prf, in monae.monad_lib]<br><a href="monae.category.html#AdjointFunctors.eps_hom_inv">AdjointFunctors.eps_hom_inv</a> [prf, in monae.category]<br><a href="monae.category.html#AdjointFunctors.eta_hom_iso">AdjointFunctors.eta_hom_iso</a> [prf, in monae.category]<br><a href="monae.category.html#AdjointFunctors.ext">AdjointFunctors.ext</a> [prf, in monae.category]<br><a href="monae.category.html#AdjointFunctors.hom_inv_inj">AdjointFunctors.hom_inv_inj</a> [prf, in monae.category]<br><a href="monae.category.html#AdjointFunctors.hom_invK">AdjointFunctors.hom_invK</a> [prf, in monae.category]<br><a href="monae.category.html#AdjointFunctors.hom_iso_inj">AdjointFunctors.hom_iso_inj</a> [prf, in monae.category]<br><a href="monae.category.html#AdjointFunctors.hom_isoK">AdjointFunctors.hom_isoK</a> [prf, in monae.category]<br><a href="monae.altprob_model.html#affine_e1PD_alt">affine_e1PD_alt</a> [prf, in monae.altprob_model]<br><a href="monae.altprob_model.html#affine_e1PD_conv">affine_e1PD_conv</a> [prf, in monae.altprob_model]<br><a href="monae.altprob_model.html#affine_F1e0U1PD_alt">affine_F1e0U1PD_alt</a> [prf, in monae.altprob_model]<br><a href="monae.altprob_model.html#affine_F1e0U1PD_conv">affine_F1e0U1PD_conv</a> [prf, in monae.altprob_model]<br><a href="monae.example_spark.html#aggregateE">aggregateE</a> [prf, in monae.example_spark]<br><a href="monae.monad_model.html#algebraic_append">algebraic_append</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraic_ask">algebraic_ask</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraic_empty">algebraic_empty</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraic_flush">algebraic_flush</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraic_get">algebraic_get</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraic_handle">algebraic_handle</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraic_local">algebraic_local</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraic_output">algebraic_output</a> [prf, in monae.monad_model]<br><a href="monae.monad_transformer.html#algebraic_psi'">algebraic_psi'</a> [prf, in monae.monad_transformer]<br><a href="monae.monad_model.html#algebraic_put">algebraic_put</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraic_throw">algebraic_throw</a> [prf, in monae.monad_model]<br><a href="monae.monad_model.html#algebraicity_abort">algebraicity_abort</a> [prf, in monae.monad_model]<br><a href="monae.monad_transformer.html#aliftingE">aliftingE</a> [prf, in monae.monad_transformer]<br><a href="monae.monad_model.html#Alt.setUDl">Alt.setUDl</a> [prf, in monae.monad_model]<br><a href="monae.proba_lib.html#alt_absorbs_choice">alt_absorbs_choice</a> [prf, in monae.proba_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#alt_fmapDr">alt_fmapDr</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monae.fail_lib.html#alt_fmapDr">alt_fmapDr</a> [prf, in monae.fail_lib]<br><a href="monae.altprob_model.html#altA">altA</a> [prf, in monae.altprob_model]<br><a href="monaeImpredicativeSet.ihierarchy.html#altAC">altAC</a> [prf, in monaeImpredicativeSet.ihierarchy]<br><a href="monae.hierarchy.html#altAC">altAC</a> [prf, in monae.hierarchy]<br><a href="monae.hierarchy.html#altACA">altACA</a> [prf, in monae.hierarchy]<br><a href="monaeImpredicativeSet.ihierarchy.html#altACA">altACA</a> [prf, in monaeImpredicativeSet.ihierarchy]<br><a href="monae.altprob_model.html#altC">altC</a> [prf, in monae.altprob_model]<br><a href="monaeImpredicativeSet.ihierarchy.html#altCA">altCA</a> [prf, in monaeImpredicativeSet.ihierarchy]<br><a href="monae.hierarchy.html#altCA">altCA</a> [prf, in monae.hierarchy]<br><a href="monae.altprob_model.html#altxx">altxx</a> [prf, in monae.altprob_model]<br><a href="monae.monad_lib.html#aoperation_ext">aoperation_ext</a> [prf, in monae.monad_lib]<br><a href="monaeImpredicativeSet.imonad_lib.html#aoperation_ext">aoperation_ext</a> [prf, in monaeImpredicativeSet.imonad_lib]<br><a href="monaeImpredicativeSet.imonad_lib.html#apply_pair_sndE">apply_pair_sndE</a> [prf, in monaeImpredicativeSet.imonad_lib]<br><a href="monae.monad_lib.html#apply_pair_sndE">apply_pair_sndE</a> [prf, in monae.monad_lib]<br><a href="monae.monad_lib.html#apply_triple_snd_kleisli">apply_triple_snd_kleisli</a> [prf, in monae.monad_lib]<br><a href="monaeImpredicativeSet.imonad_lib.html#apply_triple_snd_kleisli">apply_triple_snd_kleisli</a> [prf, in monaeImpredicativeSet.imonad_lib]<br><a href="monaeImpredicativeSet.imonad_lib.html#apply_triple_sndE">apply_triple_sndE</a> [prf, in monaeImpredicativeSet.imonad_lib]<br><a href="monae.monad_lib.html#apply_triple_sndE">apply_triple_sndE</a> [prf, in monae.monad_lib]<br><a href="monae.array_lib.html#aput_writeList_rcons">aput_writeList_rcons</a> [prf, in monae.array_lib]<br><a href="monae.array_lib.html#aput_writeListC">aput_writeListC</a> [prf, in monae.array_lib]<br><a href="monae.array_lib.html#aput_writeListCR">aput_writeListCR</a> [prf, in monae.array_lib]<br><a href="monae.proba_lib.html#arb_spec_convexity">arb_spec_convexity</a> [prf, in monae.proba_lib]<br><a href="monae.proba_lib.html#arbcoin_spec">arbcoin_spec</a> [prf, in monae.proba_lib]<br><a href="monae.proba_lib.html#arbcoin_spec_convexity">arbcoin_spec_convexity</a> [prf, in monae.proba_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#arbitrary1">arbitrary1</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monae.fail_lib.html#arbitrary1">arbitrary1</a> [prf, in monae.fail_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#arbitrary2">arbitrary2</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monae.fail_lib.html#arbitrary2">arbitrary2</a> [prf, in monae.fail_lib]<br><a href="monae.fail_lib.html#arbitrary_cat">arbitrary_cat</a> [prf, in monae.fail_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#arbitrary_cat">arbitrary_cat</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monae.fail_lib.html#arbitrary_cons">arbitrary_cons</a> [prf, in monae.fail_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#arbitrary_cons">arbitrary_cons</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monae.fail_lib.html#arbitrary_flatten">arbitrary_flatten</a> [prf, in monae.fail_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#arbitrary_flatten">arbitrary_flatten</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monae.fail_lib.html#arbitrary_flatten2">arbitrary_flatten2</a> [prf, in monae.fail_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#arbitrary_flatten2">arbitrary_flatten2</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monae.fail_lib.html#arbitrary_inde">arbitrary_inde</a> [prf, in monae.fail_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#arbitrary_inde">arbitrary_inde</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monaeImpredicativeSet.ifail_lib.html#arbitrary_naturality">arbitrary_naturality</a> [prf, in monaeImpredicativeSet.ifail_lib]<br><a href="monae.fail_lib.html#arbitrary_naturality">arbitrary_naturality</a> [prf, in monae.fail_lib]<br><a href="monae.state_lib.html#assert_all_scanl">assert_all_scanl</a> [prf, in monae.state_lib]<br><a href="monaeImpredicativeSet.ihierarchy.html#assertE">assertE</a> [prf, in monaeImpredicativeSet.ihierarchy]<br><a href="monae.hierarchy.html#assertE">assertE</a> [prf, in monae.hierarchy]<br><a href="monaeImpredicativeSet.ihierarchy.html#assertF">assertF</a> [prf, in monaeImpredicativeSet.ihierarchy]<br><a href="monae.hierarchy.html#assertF">assertF</a> [prf, in monae.hierarchy]<br><a href="monaeImpredicativeSet.ihierarchy.html#assertPn">assertPn</a> [prf, in monaeImpredicativeSet.ihierarchy]<br><a href="monae.hierarchy.html#assertPn">assertPn</a> [prf, in monae.hierarchy]<br><a href="monae.hierarchy.html#assertT">assertT</a> [prf, in monae.hierarchy]<br><a href="monaeImpredicativeSet.ihierarchy.html#assertT">assertT</a> [prf, in monaeImpredicativeSet.ihierarchy]<br><a href="monae.array_lib.html#aswapxx">aswapxx</a> [prf, in monae.array_lib]<br><a href="monaeImpredicativeSet.imonad_composition.html#AV">AV</a> [prf, in monaeImpredicativeSet.imonad_composition]<br><a href="monae.monad_composition.html#AV">AV</a> [prf, in monae.monad_composition]<br><a href="monaeImpredicativeSet.imonad_composition.html#AV'">AV'</a> [prf, in monaeImpredicativeSet.imonad_composition]<br><a href="monae.monad_composition.html#AV'">AV'</a> [prf, in monae.monad_composition]
       <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
     </div>
