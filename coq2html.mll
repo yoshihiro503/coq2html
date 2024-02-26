@@ -300,9 +300,10 @@ let end_proof kwd =
 let global_replace re subst txt =
   Str.global_substitute re (fun _ -> subst) txt
   
-let start_html_page modname =
-  output_string !oc
-    (global_replace (Str.regexp "\\$NAME") modname Resources.header)
+let start_html_page modname all_files =
+  global_replace (Str.regexp "\\$NAME") modname Resources.header
+  |> global_replace (Str.regexp_string "$FILES") (sidebar_files all_files)
+  |> output_string !oc
 
 let end_html_page () =
   output_string !oc Resources.footer
@@ -315,8 +316,8 @@ let path = ident ("." ident)*
 let start_proof = ("Proof" space* ".") | ("Proof" space+ "with") | ("Next" space+ "Obligation.")
 let end_proof = "Qed." | "Defined." | "Save." | "Admitted." | "Abort."
 let quoted = ['\"'] [' '-'~']* ['\"']
-let symbol = ['!' '#'-'\'' '*'-'/' ':'-'?' '['-'`' '{'-'~']
-let non_whites = ['!' '#'-'\'' '*'-'-' '/'-'~']+
+let symbol = ['!' '#' '$' '*' '\'' '*'-'-' '/' ':'-'?' '['-'`' '{'-'~'] (*'"', '%', '.', '(', ')' *)
+let non_whites = (['A'-'Z' 'a'-'z' '0'-'9'] | symbol)+
 
 let xref = ['A'-'Z' 'a'-'z' '0'-'9' '#'-'~']+ | "<>"
 let integer = ['0'-'9']+
@@ -354,6 +355,12 @@ rule coq_bol = parse
       }
   (* Enter ssrdoc with special syntax mode e.g. markdown syntax *)
   | space* ("(**" (['a'-'z' '-']+ as mode) "*"+ "***)" "\n" as s)
+      { fprintf !oc "<div class=\"ssrdoc %s\">\n" mode;
+        ssr_doc_bol lexbuf;
+	fprintf !oc "%s" "</div>\n";
+	skip_newline lexbuf
+      }
+  | space* ("(***" (['a'-'z' '-']+ as mode) "*"+ "***)" "\n" as s)
       { fprintf !oc "<div class=\"ssrdoc %s\">\n" mode;
         ssr_doc_bol lexbuf;
 	fprintf !oc "%s" "</div>\n";
@@ -553,7 +560,7 @@ let generate_css = ref true
 let use_short_names = ref false
 let generate_redirects = ref false
 
-let process_v_file f =
+let process_v_file all_files f =
   let pref_f = Filename.chop_suffix f ".v" in
   let base_f = Filename.basename pref_f in
   let module_name = !logical_name_base ^ module_name_of_file_name pref_f in
@@ -562,7 +569,7 @@ let process_v_file f =
   let ic = open_in f in
   oc := open_out (Filename.concat !output_dir (module_name ^ ".html"));
   enum_depth := 0; in_proof := false; proof_counter := 0;
-  start_html_page friendly_name;
+  start_html_page friendly_name all_files;
   coq_bol (Lexing.from_channel ic);
   end_html_page();
   close_out !oc; oc := stdout;
@@ -633,7 +640,8 @@ let _ =
     exit 2
   end;
   List.iter process_glob_file (List.rev !glob_files);
-  List.iter process_v_file (List.rev !v_files);
+  let all_files = Generate_index.all_files xref_modules in
+  List.iter (process_v_file all_files) (List.rev !v_files);
   Generate_index.generate !output_dir xref_table xref_modules !title;
   write_file Resources.js (Filename.concat !output_dir "coq2html.js");
   if !generate_css then
