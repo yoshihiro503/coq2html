@@ -1,0 +1,580 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module SimplLocals</title>
+<meta name="description" content="Documentation of Coq module SimplLocals" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module SimplLocals</h1>
+<br/>
+<div class="doc">Pulling local scalar variables whose address is not taken
+  into temporary variables. </div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.FSets.FSets.html">FSets</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.FSets.FSetAVL.html">FSetAVL</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span> <span class="id"><a href="compcert.lib.Ordered.html">Ordered</a></span> <span class="id"><a href="compcert.common.Errors.html">Errors</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.common.AST.html">AST</a></span> <span class="id"><a href="compcert.common.Linking.html">Linking</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></span> <span class="id"><a href="compcert.cfrontend.Cop.html">Cop</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html">Clight</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="id"><a href="compcert.driver.Compopts.html">Compopts</a></span> <span class="id"><a href="compcert.x86.Conventions1.html">Conventions1</a></span>.<br/>
+<br/>
+<span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">error_monad_scope</span>.<br/>
+<span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">string_scope</span>.<br/>
+<span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">list_scope</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="VSet" class="id"><a name="VSet" class="">VSet</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.FSets.FSetAVL.html#Make">FSetAVL.Make</a></span>(<span class="id"><a href="compcert.lib.Ordered.html#OrderedPositive">OrderedPositive</a></span>).<br/>
+<br/>
+<div class="doc">The set of local variables that can be lifted to temporaries,
+  because they are scalar and their address is not taken. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="compilenv" class="id"><a name="compilenv" class="">compilenv</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#t">VSet.t</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="is_liftable_var" class="id"><a name="is_liftable_var" class="">is_liftable_var</a></span> (<span id="cenv:1" class="id"><a name="cenv:1" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="a:2" class="id"><a name="a:2" class="">a:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:2">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Evar">Evar</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#mem">VSet.mem</a></span> <span class="id">id</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:1">cenv</a></span> <span class="gallina-kwd">then</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">id</span> <span class="gallina-kwd">else</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Smart constructor for casts </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="make_cast" class="id"><a name="make_cast" class="">make_cast</a></span> (<span id="a:4" class="id"><a name="a:4" class="">a:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span>) (<span id="tto:5" class="id"><a name="tto:5" class="">tto:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.Cop.html#classify_cast">classify_cast</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#typeof">typeof</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#tto:5">tto</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#cast_case_pointer">cast_case_pointer</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#cast_case_i2i">cast_case_i2i</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#I32">I32</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#cast_case_f2f">cast_case_f2f</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#cast_case_s2s">cast_case_s2s</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#cast_case_l2l">cast_case_l2l</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#cast_case_struct">cast_case_struct</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#cast_case_union">cast_case_union</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#cast_case_void">cast_case_void</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ecast">Ecast</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:4">a</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#tto:5">tto</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Insertion of debug annotations </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="Sdebug_temp" class="id"><a name="Sdebug_temp" class="">Sdebug_temp</a></span> (<span id="id:6" class="id"><a name="id:6" class="">id:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="ty:7" class="id"><a name="ty:7" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Clight.html#Sbuiltin">Sbuiltin</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> (<span class="id"><a href="compcert.common.AST.html#EF_debug">EF_debug</a></span> <span class="id">2</span>%<span class="id">positive</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:6">id</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#typ_of_type">typ_of_type</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:7">ty</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tcons">Tcons</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#typeconv">typeconv</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:7">ty</a></span>) <span class="id"><a href="compcert.cfrontend.Ctypes.html#Tnil">Tnil</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.Clight.html#Etempvar">Etempvar</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:6">id</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:7">ty</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="Sdebug_var" class="id"><a name="Sdebug_var" class="">Sdebug_var</a></span> (<span id="id:8" class="id"><a name="id:8" class="">id:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="ty:9" class="id"><a name="ty:9" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Clight.html#Sbuiltin">Sbuiltin</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> (<span class="id"><a href="compcert.common.AST.html#EF_debug">EF_debug</a></span> <span class="id">5</span>%<span class="id">positive</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:8">id</a></span> (<span class="id"><a href="compcert.common.AST.html#Tptr">AST.Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tcons">Tcons</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tpointer">Tpointer</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:9">ty</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#noattr">noattr</a></span>) <span class="id"><a href="compcert.cfrontend.Ctypes.html#Tnil">Tnil</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.Clight.html#Eaddrof">Eaddrof</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Evar">Evar</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:8">id</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:9">ty</a></span>) (<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tpointer">Tpointer</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:9">ty</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#noattr">noattr</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="Sset_debug" class="id"><a name="Sset_debug" class="">Sset_debug</a></span> (<span id="id:10" class="id"><a name="id:10" class="">id:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="ty:11" class="id"><a name="ty:11" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) (<span id="a:12" class="id"><a name="a:12" class="">a:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.driver.Compopts.html#debug">Compopts.debug</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#tt">tt</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ssequence">Ssequence</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sset">Sset</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:10">id</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#make_cast">make_cast</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:12">a</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:11">ty</a></span>)) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#Sdebug_temp">Sdebug_temp</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:10">id</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:11">ty</a></span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sset">Sset</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:10">id</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#make_cast">make_cast</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:12">a</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:11">ty</a></span>).<br/>
+<br/>
+<div class="doc">Rewriting of expressions and statements. </div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="simpl_expr" class="id"><a name="simpl_expr" class="">simpl_expr</a></span> (<span id="cenv:13" class="id"><a name="cenv:13" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="a:14" class="id"><a name="a:14" class="">a:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:14">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Econst_int">Econst_int</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:14">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Econst_float">Econst_float</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:14">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Econst_single">Econst_single</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:14">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Econst_long">Econst_long</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:14">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Evar">Evar</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#mem">VSet.mem</a></span> <span class="id">id</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:13">cenv</a></span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Etempvar">Etempvar</a></span> <span class="id">id</span> <span class="id">ty</span> <span class="gallina-kwd">else</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Evar">Evar</a></span> <span class="id">id</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Etempvar">Etempvar</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Etempvar">Etempvar</a></span> <span class="id">id</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ederef">Ederef</a></span> <span class="id">a1</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ederef">Ederef</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr:15">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:13">cenv</a></span> <span class="id">a1</span>) <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Eaddrof">Eaddrof</a></span> <span class="id">a1</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Eaddrof">Eaddrof</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr:15">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:13">cenv</a></span> <span class="id">a1</span>) <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Eunop">Eunop</a></span> <span class="id">op</span> <span class="id">a1</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Eunop">Eunop</a></span> <span class="id">op</span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr:15">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:13">cenv</a></span> <span class="id">a1</span>) <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ebinop">Ebinop</a></span> <span class="id">op</span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ebinop">Ebinop</a></span> <span class="id">op</span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr:15">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:13">cenv</a></span> <span class="id">a1</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr:15">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:13">cenv</a></span> <span class="id">a2</span>) <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ecast">Ecast</a></span> <span class="id">a1</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ecast">Ecast</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr:15">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:13">cenv</a></span> <span class="id">a1</span>) <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Efield">Efield</a></span> <span class="id">a1</span> <span class="id">fld</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Efield">Efield</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr:15">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:13">cenv</a></span> <span class="id">a1</span>) <span class="id">fld</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Esizeof">Esizeof</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:14">a</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ealignof">Ealignof</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:14">a</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="simpl_exprlist" class="id"><a name="simpl_exprlist" class="">simpl_exprlist</a></span> (<span id="cenv:17" class="id"><a name="cenv:17" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="al:18" class="id"><a name="al:18" class="">al:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:17">cenv</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#al:18">al</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="check_temp" class="id"><a name="check_temp" class="">check_temp</a></span> (<span id="cenv:19" class="id"><a name="cenv:19" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="id:20" class="id"><a name="id:20" class="">id:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#mem">VSet.mem</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:20">id</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:19">cenv</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.common.Errors.html#Error">Error</a></span> (<span class="id"><a href="compcert.common.Errors.html#MSG">MSG</a></span> <span class="id">&quot;bad temporary &quot;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="compcert.common.Errors.html#CTX">CTX</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:20">id</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#tt">tt</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="check_opttemp" class="id"><a name="check_opttemp" class="">check_opttemp</a></span> (<span id="cenv:21" class="id"><a name="cenv:21" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="optid:22" class="id"><a name="optid:22" class="">optid:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#optid:22">optid</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#check_temp">check_temp</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:21">cenv</a></span> <span class="id">id</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#tt">tt</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="simpl_stmt" class="id"><a name="simpl_stmt" class="">simpl_stmt</a></span> (<span id="cenv:24" class="id"><a name="cenv:24" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="s:25" class="id"><a name="s:25" class="">s:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:25">s</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sskip">Sskip</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sskip">Sskip</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sassign">Sassign</a></span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#is_liftable_var">is_liftable_var</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">a1</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#Sset_debug">Sset_debug</a></span> <span class="id">id</span> (<span class="id"><a href="compcert.cfrontend.Clight.html#typeof">typeof</a></span> <span class="id">a1</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">a2</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sassign">Sassign</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">a1</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">a2</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sset">Sset</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">a</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="x:31" class="id"><a name="x:31" class="">x</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#check_temp">check_temp</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">id;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sset">Sset</a></span> <span class="id">id</span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">a</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Scall">Scall</a></span> <span class="id">optid</span> <span class="id">a</span> <span class="id">al</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="x:32" class="id"><a name="x:32" class="">x</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#check_opttemp">check_opttemp</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">optid;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Scall">Scall</a></span> <span class="id">optid</span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">a</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_exprlist">simpl_exprlist</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">al</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sbuiltin">Sbuiltin</a></span> <span class="id">optid</span> <span class="id">ef</span> <span class="id">tyargs</span> <span class="id">al</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="x:33" class="id"><a name="x:33" class="">x</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#check_opttemp">check_opttemp</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">optid;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sbuiltin">Sbuiltin</a></span> <span class="id">optid</span> <span class="id">ef</span> <span class="id">tyargs</span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_exprlist">simpl_exprlist</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">al</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ssequence">Ssequence</a></span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="s1':34" class="id"><a name="s1':34" class="">s1'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt:28">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">s1;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="s2':35" class="id"><a name="s2':35" class="">s2'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt:28">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">s2;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Ssequence">Ssequence</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s1':34">s1'</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s2':35">s2'</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sifthenelse">Sifthenelse</a></span> <span class="id">a</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="s1':36" class="id"><a name="s1':36" class="">s1'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt:28">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">s1;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="s2':37" class="id"><a name="s2':37" class="">s2'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt:28">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">s2;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sifthenelse">Sifthenelse</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">a</span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s1':36">s1'</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s2':37">s2'</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sloop">Sloop</a></span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="s1':38" class="id"><a name="s1':38" class="">s1'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt:28">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">s1;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="s2':39" class="id"><a name="s2':39" class="">s2'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt:28">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">s2;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sloop">Sloop</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s1':38">s1'</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s2':39">s2'</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sbreak">Sbreak</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sbreak">Sbreak</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Scontinue">Scontinue</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#Scontinue">Scontinue</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sreturn">Sreturn</a></span> <span class="id">opta</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sreturn">Sreturn</a></span> (<span class="id"><a href="compcert.lib.Coqlib.html#option_map">option_map</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span>) <span class="id">opta</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sswitch">Sswitch</a></span> <span class="id">a</span> <span class="id">ls</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="ls':40" class="id"><a name="ls':40" class="">ls'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_lblstmt:29">simpl_lblstmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">ls;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sswitch">Sswitch</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_expr">simpl_expr</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id">a</span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ls':40">ls'</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Slabel">Slabel</a></span> <span class="id">lbl</span> <span class="id">s</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="s':41" class="id"><a name="s':41" class="">s'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt:28">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:24">cenv</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:25">s;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Slabel">Slabel</a></span> <span class="id">lbl</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s':41">s'</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sgoto">Sgoto</a></span> <span class="id">lbl</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sgoto">Sgoto</a></span> <span class="id">lbl</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+<br/>
+<span class="gallina-kwd">with</span> <span id="simpl_lblstmt" class="id"><a name="simpl_lblstmt" class="">simpl_lblstmt</a></span> (<span id="cenv:26" class="id"><a name="cenv:26" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="ls:27" class="id"><a name="ls:27" class="">ls:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#labeled_statements">labeled_statements</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#labeled_statements">labeled_statements</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ls:27">ls</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#LSnil">LSnil</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#LSnil">LSnil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#LScons">LScons</a></span> <span class="id">c</span> <span class="id">s</span> <span class="id">ls1</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="s':43" class="id"><a name="s':43" class="">s'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt:28">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:26">cenv</a></span> <span class="id">s;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="ls1':44" class="id"><a name="ls1':44" class="">ls1'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_lblstmt:29">simpl_lblstmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:26">cenv</a></span> <span class="id">ls1;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#LScons">LScons</a></span> <span class="id">c</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s':43">s'</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ls1':44">ls1'</a></span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Function parameters that are not lifted to temporaries must be
+  stored in the corresponding local variable at function entry.
+  The other function parameters may need to be normalized to their types,
+  to support interoperability with code generated by other C compilers. </div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="store_params" class="id"><a name="store_params" class="">store_params</a></span> (<span id="cenv:45" class="id"><a name="cenv:45" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="params:46" class="id"><a name="params:46" class="">params:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="s:47" class="id"><a name="s:47" class="">s:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span>)<span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#params:46">params</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:47">s</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id,</a></span> <span class="id">ty</span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">params'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#mem">VSet.mem</a></span> <span class="id">id</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:45">cenv</a></span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.x86.Conventions1.html#parameter_needs_normalization">Conventions1.parameter_needs_normalization</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#rettype_of_type">rettype_of_type</a></span> <span class="id">ty</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ssequence">Ssequence</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sset">Sset</a></span> <span class="id">id</span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#make_cast">make_cast</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Etempvar">Etempvar</a></span> <span class="id">id</span> <span class="id">ty</span>) <span class="id">ty</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.SimplLocals.html#store_params:48">store_params</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:45">cenv</a></span> <span class="id">params'</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:47">s</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#store_params:48">store_params</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:45">cenv</a></span> <span class="id">params'</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:47">s</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ssequence">Ssequence</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Sassign">Sassign</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Evar">Evar</a></span> <span class="id">id</span> <span class="id">ty</span>) (<span class="id"><a href="compcert.cfrontend.Clight.html#Etempvar">Etempvar</a></span> <span class="id">id</span> <span class="id">ty</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.SimplLocals.html#store_params:48">store_params</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:45">cenv</a></span> <span class="id">params'</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:47">s</a></span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Compute the set of variables whose address is taken </div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="addr_taken_expr" class="id"><a name="addr_taken_expr" class="">addr_taken_expr</a></span> (<span id="a:50" class="id"><a name="a:50" class="">a:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span>)<span class="id">:</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#t">VSet.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#a:50">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Econst_int">Econst_int</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Econst_float">Econst_float</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Econst_single">Econst_single</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Econst_long">Econst_long</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Evar">Evar</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Etempvar">Etempvar</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ederef">Ederef</a></span> <span class="id">a1</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr:51">addr_taken_expr</a></span> <span class="id">a1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Eaddrof">Eaddrof</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#Evar">Evar</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ty1</span>) <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#singleton">VSet.singleton</a></span> <span class="id">id</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Eaddrof">Eaddrof</a></span> <span class="id">a1</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr:51">addr_taken_expr</a></span> <span class="id">a1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Eunop">Eunop</a></span> <span class="id">op</span> <span class="id">a1</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr:51">addr_taken_expr</a></span> <span class="id">a1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ebinop">Ebinop</a></span> <span class="id">op</span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr:51">addr_taken_expr</a></span> <span class="id">a1</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr:51">addr_taken_expr</a></span> <span class="id">a2</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ecast">Ecast</a></span> <span class="id">a1</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr:51">addr_taken_expr</a></span> <span class="id">a1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Efield">Efield</a></span> <span class="id">a1</span> <span class="id">fld</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr:51">addr_taken_expr</a></span> <span class="id">a1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Esizeof">Esizeof</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ealignof">Ealignof</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="addr_taken_exprlist" class="id"><a name="addr_taken_exprlist" class="">addr_taken_exprlist</a></span> (<span id="l:53" class="id"><a name="l:53" class="">l:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#expr">expr</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#t">VSet.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#l:53">l</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">a</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">l'</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr">addr_taken_expr</a></span> <span class="id">a</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_exprlist:54">addr_taken_exprlist</a></span> <span class="id">l'</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="addr_taken_stmt" class="id"><a name="addr_taken_stmt" class="">addr_taken_stmt</a></span> (<span id="s:56" class="id"><a name="s:56" class="">s:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#t">VSet.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:56">s</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sskip">Sskip</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sassign">Sassign</a></span> <span class="id">a</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr">addr_taken_expr</a></span> <span class="id">a</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr">addr_taken_expr</a></span> <span class="id">b</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sset">Sset</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">a</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr">addr_taken_expr</a></span> <span class="id">a</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Scall">Scall</a></span> <span class="id">optid</span> <span class="id">a</span> <span class="id">bl</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr">addr_taken_expr</a></span> <span class="id">a</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_exprlist">addr_taken_exprlist</a></span> <span class="id">bl</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sbuiltin">Sbuiltin</a></span> <span class="id">optid</span> <span class="id">ef</span> <span class="id">tyargs</span> <span class="id">bl</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_exprlist">addr_taken_exprlist</a></span> <span class="id">bl</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ssequence">Ssequence</a></span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt:58">addr_taken_stmt</a></span> <span class="id">s1</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt:58">addr_taken_stmt</a></span> <span class="id">s2</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sifthenelse">Sifthenelse</a></span> <span class="id">a</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr">addr_taken_expr</a></span> <span class="id">a</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt:58">addr_taken_stmt</a></span> <span class="id">s1</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt:58">addr_taken_stmt</a></span> <span class="id">s2</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sloop">Sloop</a></span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt:58">addr_taken_stmt</a></span> <span class="id">s1</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt:58">addr_taken_stmt</a></span> <span class="id">s2</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sbreak">Sbreak</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Scontinue">Scontinue</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sreturn">Sreturn</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sreturn">Sreturn</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">a</span>) <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr">addr_taken_expr</a></span> <span class="id">a</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sswitch">Sswitch</a></span> <span class="id">a</span> <span class="id">ls</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_expr">addr_taken_expr</a></span> <span class="id">a</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_lblstmt:59">addr_taken_lblstmt</a></span> <span class="id">ls</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Slabel">Slabel</a></span> <span class="id">lbl</span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt:58">addr_taken_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:56">s</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Sgoto">Sgoto</a></span> <span class="id">lbl</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+<br/>
+<span class="gallina-kwd">with</span> <span id="addr_taken_lblstmt" class="id"><a name="addr_taken_lblstmt" class="">addr_taken_lblstmt</a></span> (<span id="ls:57" class="id"><a name="ls:57" class="">ls:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#labeled_statements">labeled_statements</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#t">VSet.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ls:57">ls</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#LSnil">LSnil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#LScons">LScons</a></span> <span class="id">c</span> <span class="id">s</span> <span class="id">ls'</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#union">VSet.union</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt:58">addr_taken_stmt</a></span> <span class="id">s</span>) (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_lblstmt:59">addr_taken_lblstmt</a></span> <span class="id">ls'</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">The compilation environment for a function is the set of local variables
+  that are scalars and whose addresses are not taken. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_local_variable" class="id"><a name="add_local_variable" class="">add_local_variable</a></span> (<span id="atk:62" class="id"><a name="atk:62" class="">atk:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#t">VSet.t</a></span>) (<span id="id_ty:63" class="id"><a name="id_ty:63" class="">id_ty:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="cenv:64" class="id"><a name="cenv:64" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="id:65" class="id"><a name="id:65" class="">id,</a></span> <span id="ty:66" class="id"><a name="ty:66" class="">ty</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id_ty:63">id_ty</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#access_mode">access_mode</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:66">ty</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#By_value">By_value</a></span> <span class="id">chunk</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#mem">VSet.mem</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:65">id</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#atk:62">atk</a></span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:64">cenv</a></span> <span class="gallina-kwd">else</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#add">VSet.add</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:65">id</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:64">cenv</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:64">cenv</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="cenv_for" class="id"><a name="cenv_for" class="">cenv_for</a></span> (<span id="f:67" class="id"><a name="f:67" class="">f:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#function">function</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="atk:68" class="id"><a name="atk:68" class="">atk</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#addr_taken_stmt">addr_taken_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:67">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_body">fn_body</a></span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#fold_right">List.fold_right</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#add_local_variable">add_local_variable</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#atk:68">atk</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#empty">VSet.empty</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:67">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_params">fn_params</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:67">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_vars">fn_vars</a></span>)).<br/>
+<br/>
+<div class="doc">Transform a function </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_debug_var" class="id"><a name="add_debug_var" class="">add_debug_var</a></span> (<span id="id_ty:69" class="id"><a name="id_ty:69" class="">id_ty:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) (<span id="s:70" class="id"><a name="s:70" class="">s:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="id:71" class="id"><a name="id:71" class="">id,</a></span> <span id="ty:72" class="id"><a name="ty:72" class="">ty</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id_ty:69">id_ty</a></span> <span class="gallina-kwd">in</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ssequence">Ssequence</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#Sdebug_var">Sdebug_var</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:71">id</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:72">ty</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:70">s</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_debug_vars" class="id"><a name="add_debug_vars" class="">add_debug_vars</a></span> (<span id="vars:73" class="id"><a name="vars:73" class="">vars:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)) (<span id="s:74" class="id"><a name="s:74" class="">s:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.driver.Compopts.html#debug">Compopts.debug</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#tt">tt</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#fold_right">List.fold_right</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#add_debug_var">add_debug_var</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:74">s</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#vars:73">vars</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:74">s</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_debug_param" class="id"><a name="add_debug_param" class="">add_debug_param</a></span> (<span id="id_ty:75" class="id"><a name="id_ty:75" class="">id_ty:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) (<span id="s:76" class="id"><a name="s:76" class="">s:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="id:77" class="id"><a name="id:77" class="">id,</a></span> <span id="ty:78" class="id"><a name="ty:78" class="">ty</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id_ty:75">id_ty</a></span> <span class="gallina-kwd">in</span> <span class="id"><a href="compcert.cfrontend.Clight.html#Ssequence">Ssequence</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#Sdebug_temp">Sdebug_temp</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id:77">id</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#ty:78">ty</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:76">s</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_debug_params" class="id"><a name="add_debug_params" class="">add_debug_params</a></span> (<span id="params:79" class="id"><a name="params:79" class="">params:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)) (<span id="s:80" class="id"><a name="s:80" class="">s:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#statement">statement</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.driver.Compopts.html#debug">Compopts.debug</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#tt">tt</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#fold_right">List.fold_right</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#add_debug_param">add_debug_param</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:80">s</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#params:79">params</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#s:80">s</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="remove_lifted" class="id"><a name="remove_lifted" class="">remove_lifted</a></span> (<span id="cenv:81" class="id"><a name="cenv:81" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="vars:82" class="id"><a name="vars:82" class="">vars:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#filter">List.filter</a></span> (<span class="gallina-kwd">fun</span> <span id="id_ty:83" class="id"><a name="id_ty:83" class="">id_ty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#negb">negb</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#mem">VSet.mem</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id_ty:83">id_ty</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:81">cenv</a></span>)) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#vars:82">vars</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_lifted" class="id"><a name="add_lifted" class="">add_lifted</a></span> (<span id="cenv:84" class="id"><a name="cenv:84" class="">cenv:</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#compilenv">compilenv</a></span>) (<span id="vars1:85" class="id"><a name="vars1:85" class="">vars1</a></span> <span id="vars2:86" class="id"><a name="vars2:86" class="">vars2:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#filter">List.filter</a></span> (<span class="gallina-kwd">fun</span> <span id="id_ty:87" class="id"><a name="id_ty:87" class="">id_ty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#mem">VSet.mem</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#id_ty:87">id_ty</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:84">cenv</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#vars1:85">vars1</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#vars2:86">vars2</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_function" class="id"><a name="transf_function" class="">transf_function</a></span> (<span id="f:88" class="id"><a name="f:88" class="">f:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#function">function</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#function">function</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="cenv:89" class="id"><a name="cenv:89" class="">cenv</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv_for">cenv_for</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#12216c5245592abf529ce37a686618d9">assertion</a></span> (<span class="id"><a href="compcert.lib.Coqlib.html#list_disjoint_dec">list_disjoint_dec</a></span> <span class="id"><a href="compcert.common.AST.html#ident_eq">ident_eq</a></span> (<span class="id"><a href="compcert.cfrontend.Clight.html#var_names">var_names</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_params">fn_params</a></span>)) (<span class="id"><a href="compcert.cfrontend.Clight.html#var_names">var_names</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_temps">fn_temps</a></span>)))<span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="body':90" class="id"><a name="body':90" class="">body'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#simpl_stmt">simpl_stmt</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:89">cenv</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_body">fn_body</a></span>)<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">;</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="vars':91" class="id"><a name="vars':91" class="">vars'</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#remove_lifted">remove_lifted</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:89">cenv</a></span> (<span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_params">fn_params</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_vars">fn_vars</a></span>)) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="temps':92" class="id"><a name="temps':92" class="">temps'</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#add_lifted">add_lifted</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:89">cenv</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_vars">fn_vars</a></span>) <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_temps">fn_temps</a></span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id">{|</span> <span class="id"><a href="compcert.cfrontend.Clight.html#fn_return">fn_return</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_return">fn_return</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Clight.html#fn_callconv">fn_callconv</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_callconv">fn_callconv</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Clight.html#fn_params">fn_params</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_params">fn_params</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Clight.html#fn_vars">fn_vars</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#vars':91">vars';</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Clight.html#fn_temps">fn_temps</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#temps':92">temps';</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Clight.html#fn_body">fn_body</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#add_debug_params">add_debug_params</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_params">fn_params</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.SimplLocals.html#store_params">store_params</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#cenv:89">cenv</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#f:88">f</a></span>.(<span class="id"><a href="compcert.cfrontend.Clight.html#fn_params">fn_params</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.SimplLocals.html#add_debug_vars">add_debug_vars</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#vars':91">vars'</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#body':90">body'</a></span>)) <span class="id">|}</span>.<br/>
+<br/>
+<div class="doc">Whole-program transformation </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_fundef" class="id"><a name="transf_fundef" class="">transf_fundef</a></span> (<span id="fd:93" class="id"><a name="fd:93" class="">fd:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#fundef">fundef</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#fundef">fundef</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#fd:93">fd</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#Internal">Internal</a></span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="tf:95" class="id"><a name="tf:95" class="">tf</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#transf_function">transf_function</a></span> <span class="id">f;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#Internal">Internal</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#tf:95">tf</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#External">External</a></span> <span class="id">ef</span> <span class="id">targs</span> <span class="id">tres</span> <span class="id">cconv</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#External">External</a></span> <span class="id">ef</span> <span class="id">targs</span> <span class="id">tres</span> <span class="id">cconv</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_program" class="id"><a name="transf_program" class="">transf_program</a></span> (<span id="p:96" class="id"><a name="p:96" class="">p:</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#program">program</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.cfrontend.Clight.html#program">program</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="p1:97" class="id"><a name="p1:97" class="">p1</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.common.AST.html#transform_partial_program">AST.transform_partial_program</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#transf_fundef">transf_fundef</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#p:96">p;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id">{|</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_defs">prog_defs</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.common.AST.html#prog_defs">AST.prog_defs</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#p1:97">p1;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_public">prog_public</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.common.AST.html#prog_public">AST.prog_public</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#p1:97">p1;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_main">prog_main</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.common.AST.html#prog_main">AST.prog_main</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#p1:97">p1;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_types">prog_types</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_types">prog_types</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#p:96">p;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_comp_env">prog_comp_env</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_comp_env">prog_comp_env</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#p:96">p;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_comp_env_eq">prog_comp_env_eq</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#prog_comp_env_eq">prog_comp_env_eq</a></span> <span class="id"><a href="compcert.cfrontend.SimplLocals.html#p:96">p</a></span> <span class="id">|}</span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,386 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Tailcall</title>
+<meta name="description" content="Documentation of Coq module Tailcall" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Tailcall</h1>
+<br/>
+<div class="doc">Recognition of tail calls. </div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span> <span class="id"><a href="compcert.lib.Maps.html">Maps</a></span> <span class="id"><a href="compcert.common.AST.html">AST</a></span> <span class="id"><a href="compcert.backend.Registers.html">Registers</a></span> <span class="id"><a href="compcert.x86.Op.html">Op</a></span> <span class="id"><a href="compcert.backend.RTL.html">RTL</a></span> <span class="id"><a href="compcert.backend.Conventions.html">Conventions</a></span>.<br/>
+<br/>
+<div class="doc">An <span class="bracket"><span class="id">Icall</span></span> instruction that stores its result in register <span class="bracket"><span class="id">rreg</span></span>
+  can be turned into a tail call if:
+<ul>
+<li>
+ its successor is a <span class="bracket"><span class="id">Ireturn</span> <span class="id">None</span></span> or <span class="bracket"><span class="id">Ireturn</span> (<span class="id">Some</span> <span class="id">rreg</span>)</span> instruction;
+</li>
+<li>
+ the stack block of the current function is empty: <span class="bracket"><span class="id">stacksize</span> = 0</span>.
+</li>
+</ul>
+If the current function had a non-empty stack block, it could be that
+the called function accesses it, for instance if a pointer into the
+stack block is passed as an argument.  In this case, it would be
+semantically incorrect to deallocate the stack block before the call,
+as <span class="bracket"><span class="id">Itailcall</span></span> does.  Therefore, the optimization can only be performed if
+the stack block of the current function is empty, in which case it makes
+no semantic difference to deallocate it before or after the call.
+Another complication is that the <span class="bracket"><span class="id">Ireturn</span></span> instruction does not, in general,
+follow immediately the <span class="bracket"><span class="id">Icall</span></span> instruction: the RTL code generator
+can have inserted moves and no-ops between these instructions.
+The general pattern we recognize is therefore:
+<pre>
+       r1 &lt;- call(....)
+       nop
+       r2 &lt;- r1
+       r3 &lt;- r2
+       return r3</pre>
+The <span class="bracket"><span class="id">is_return</span></span> function below recognizes this pattern.
+</div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="is_return" class="id"><a name="is_return" class="">is_return</a></span> (<span id="n:1" class="id"><a name="n:1" class="">n:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) (<span id="f:2" class="id"><a name="f:2" class="">f:</a></span> <span class="id"><a href="compcert.backend.RTL.html#function">function</a></span>) (<span id="pc:3" class="id"><a name="pc:3" class="">pc:</a></span> <span class="id"><a href="compcert.backend.RTL.html#node">node</a></span>) (<span id="rret:4" class="id"><a name="rret:4" class="">rret:</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{struct</span> <span class="id">n}:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Tailcall.html#n:1">n</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#O">O</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id">n'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Tailcall.html#f:2">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_code">fn_code</a></span>)<span class="id">!pc</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Ireturn">Ireturn</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span>) <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Ireturn">Ireturn</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">r</span>)) <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Registers.html#Reg.eq">Reg.eq</a></span> <span class="id">r</span> <span class="id"><a href="compcert.backend.Tailcall.html#rret:4">rret</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Inop">Inop</a></span> <span class="id">s</span>) <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Tailcall.html#is_return:5">is_return</a></span> <span class="id">n'</span> <span class="id"><a href="compcert.backend.Tailcall.html#f:2">f</a></span> <span class="id">s</span> <span class="id"><a href="compcert.backend.Tailcall.html#rret:4">rret</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Iop">Iop</a></span> <span class="id">op</span> <span class="id">args</span> <span class="id">dst</span> <span class="id">s</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.x86.Op.html#is_move_operation">is_move_operation</a></span> <span class="id">op</span> <span class="id">args</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">src</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Registers.html#Reg.eq">Reg.eq</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#rret:4">rret</a></span> <span class="id">src</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.Tailcall.html#is_return:5">is_return</a></span> <span class="id">n'</span> <span class="id"><a href="compcert.backend.Tailcall.html#f:2">f</a></span> <span class="id">s</span> <span class="id">dst</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">To ensure termination, we bound arbitrarily the number of iterations
+of the <span class="bracket"><span class="id">is_return</span></span> function: we look ahead for a nop/move/return of length
+at most <span class="bracket"><span class="id">niter</span></span> instructions. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="niter" class="id"><a name="niter" class="">niter</a></span> <span class="id">:=</span> <span class="id">5</span>%<span class="id">nat</span>.<br/>
+<br/>
+<div class="doc">The code transformation is straightforward: call instructions
+  followed by an appropriate nop/move/return sequence become
+  tail calls; other instructions are unchanged.
+  To ensure that the resulting RTL code is well typed, we
+  restrict the transformation to the cases where a tail call is
+  allowed by the calling conventions, and where the result signatures
+  match. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_instr" class="id"><a name="transf_instr" class="">transf_instr</a></span> (<span id="f:7" class="id"><a name="f:7" class="">f:</a></span> <span class="id"><a href="compcert.backend.RTL.html#function">function</a></span>) (<span id="pc:8" class="id"><a name="pc:8" class="">pc:</a></span> <span class="id"><a href="compcert.backend.RTL.html#node">node</a></span>) (<span id="instr:9" class="id"><a name="instr:9" class="">instr:</a></span> <span class="id"><a href="compcert.backend.RTL.html#instruction">instruction</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Tailcall.html#instr:9">instr</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.RTL.html#Icall">Icall</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#sig">sig</a></span> <span class="id">ros</span> <span class="id">args</span> <span class="id">res</span> <span class="id">s</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Tailcall.html#is_return">is_return</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#niter">niter</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#f:7">f</a></span> <span class="id">s</span> <span class="id">res</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp; <span class="id"><a href="compcert.backend.Conventions.html#tailcall_is_possible">tailcall_is_possible</a></span> <span class="id">sig</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp; <span class="id"><a href="compcert.common.AST.html#rettype_eq">rettype_eq</a></span> <span class="id">sig</span>.(<span class="id"><a href="compcert.common.AST.html#sig_res">sig_res</a></span>) <span class="id"><a href="compcert.backend.Tailcall.html#f:7">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_sig">fn_sig</a></span>).(<span class="id"><a href="compcert.common.AST.html#sig_res">sig_res</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.RTL.html#Itailcall">Itailcall</a></span> <span class="id">sig</span> <span class="id">ros</span> <span class="id">args</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.backend.Tailcall.html#instr:9">instr</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Tailcall.html#instr:9">instr</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">A function is transformed only if its stack block is empty,
+    as explained above.  </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_function" class="id"><a name="transf_function" class="">transf_function</a></span> (<span id="f:11" class="id"><a name="f:11" class="">f:</a></span> <span class="id"><a href="compcert.backend.RTL.html#function">function</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.RTL.html#function">function</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.lib.Coqlib.html#zeq">zeq</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#f:11">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_stacksize">fn_stacksize</a></span>) <span class="id">0</span><br/>
+&nbsp;&nbsp;&amp;&amp; <span class="id"><a href="compcert.lib.Coqlib.html#option_eq">option_eq</a></span> <span class="id"><a href="compcert.lib.Coqlib.html#zeq">zeq</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#f:11">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_sig">fn_sig</a></span>).(<span class="id"><a href="compcert.common.AST.html#sig_cc">sig_cc</a></span>).(<span class="id"><a href="compcert.common.AST.html#cc_vararg">cc_vararg</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.RTL.html#transf_function">RTL.transf_function</a></span> (<span class="id"><a href="compcert.backend.Tailcall.html#transf_instr">transf_instr</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#f:11">f</a></span>) <span class="id"><a href="compcert.backend.Tailcall.html#f:11">f</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.backend.Tailcall.html#f:11">f</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_fundef" class="id"><a name="transf_fundef" class="">transf_fundef</a></span> (<span id="fd:12" class="id"><a name="fd:12" class="">fd:</a></span> <span class="id"><a href="compcert.backend.RTL.html#fundef">fundef</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.RTL.html#fundef">fundef</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transf_fundef">AST.transf_fundef</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#transf_function">transf_function</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#fd:12">fd</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_program" class="id"><a name="transf_program" class="">transf_program</a></span> (<span id="p:13" class="id"><a name="p:13" class="">p:</a></span> <span class="id"><a href="compcert.backend.RTL.html#program">program</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.RTL.html#program">program</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transform_program">transform_program</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#transf_fundef">transf_fundef</a></span> <span class="id"><a href="compcert.backend.Tailcall.html#p:13">p</a></span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

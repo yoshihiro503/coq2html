@@ -1,0 +1,499 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module CSEdomain</title>
+<meta name="description" content="Documentation of Coq module CSEdomain" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module CSEdomain</h1>
+<br/>
+<div class="doc">The abstract domain for value numbering, used in common
+    subexpression elimination. </div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span> <span class="id"><a href="compcert.lib.Maps.html">Maps</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.common.AST.html">AST</a></span> <span class="id"><a href="compcert.lib.Integers.html">Integers</a></span> <span class="id"><a href="compcert.common.Values.html">Values</a></span> <span class="id"><a href="compcert.common.Memory.html">Memory</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.x86.Op.html">Op</a></span> <span class="id"><a href="compcert.backend.Registers.html">Registers</a></span> <span class="id"><a href="compcert.backend.RTL.html">RTL</a></span>.<br/>
+<br/>
+<div class="doc">Value numbers are represented by positive integers.  Equations are
+  of the form <span class="bracket"><span class="id">valnum</span> = <span class="id">rhs</span></span> or <span class="bracket"><span class="id">valnum</span> &gt;= <span class="id">rhs</span></span>, where the right-hand
+  sides <span class="bracket"><span class="id">rhs</span></span> are either arithmetic operations or memory loads, <span class="bracket">=</span> is
+  strict equality of values, and <span class="bracket">&gt;=</span> is the "more defined than" relation
+  over values. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="valnum" class="id"><a name="valnum" class="">valnum</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#positive">positive</a></span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span id="rhs" class="id"><a name="rhs" class="">rhs</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Op" class="id"><a name="Op" class="">Op:</a></span> <span class="id"><a href="compcert.x86.Op.html#operation">operation</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#rhs:1">rhs</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Load" class="id"><a name="Load" class="">Load:</a></span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.x86.Op.html#addressing">addressing</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#rhs:1">rhs</a></span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span id="equation" class="id"><a name="equation" class="">equation</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eq" class="id"><a name="Eq" class="">Eq</a></span> (<span id="v:5" class="id"><a name="v:5" class="">v:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span>) (<span id="strict:6" class="id"><a name="strict:6" class="">strict:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>) (<span id="r:7" class="id"><a name="r:7" class="">r:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#rhs">rhs</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="eq_valnum" class="id"><a name="eq_valnum" class="">eq_valnum:</a></span> <span class="gallina-kwd">forall</span> (<span id="x:8" class="id"><a name="x:8" class="">x</a></span> <span id="y:9" class="id"><a name="y:9" class="">y:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}+{x&lt;&gt;y}</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="eq_list_valnum" class="id"><a name="eq_list_valnum" class="">eq_list_valnum:</a></span> <span class="gallina-kwd">forall</span> (<span id="x:10" class="id"><a name="x:10" class="">x</a></span> <span id="y:11" class="id"><a name="y:11" class="">y:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}+{x&lt;&gt;y}</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#list_eq_dec">list_eq_dec</a></span> <span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="eq_rhs" class="id"><a name="eq_rhs" class="">eq_rhs</a></span> (<span id="x:12" class="id"><a name="x:12" class="">x</a></span> <span id="y:13" class="id"><a name="y:13" class="">y:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#rhs">rhs</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}+{x&lt;&gt;y}</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+&nbsp;&nbsp;<span class="id">generalize</span> <span class="id"><a href="compcert.common.AST.html#chunk_eq">chunk_eq</a></span> <span class="id"><a href="compcert.x86.Op.html#eq_operation">eq_operation</a></span> <span class="id"><a href="compcert.x86.Op.html#eq_addressing">eq_addressing</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#eq_valnum">eq_valnum</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#eq_list_valnum">eq_list_valnum</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">decide</span> <span class="id">equality</span>.<br/>
+Defined.</div>
+<br/>
+<div class="doc">A value numbering is a collection of equations between value numbers
+  plus a partial map from registers to value numbers.  Additionally,
+  we maintain the next unused value number, so as to easily generate
+  fresh value numbers.  We also maintain a reverse mapping from value
+  numbers to registers, redundant with the mapping from registers to
+  value numbers, in order to speed up some operations. </div>
+<br/>
+<span class="vernacular">Record</span> <span id="numbering" class="id"><a name="numbering" class="">numbering</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id">mknumbering</span> <span class="id">{</span><br/>
+&nbsp;&nbsp;<span id="num_next" class="id"><a name="num_next" class="">num_next:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum;</a></span>                  <span class="docright">(* first unused value number  *)</span><br/>
+&nbsp;&nbsp;<span id="num_eqs" class="id"><a name="num_eqs" class="">num_eqs:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#equation">equation;</a></span>            <span class="docright">(* valid equations  *)</span><br/>
+&nbsp;&nbsp;<span id="num_reg" class="id"><a name="num_reg" class="">num_reg:</a></span> <span class="id"><a href="compcert.lib.Maps.html#PTree.t">PTree.t</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum;</a></span>           <span class="docright">(* mapping register to valnum  *)</span><br/>
+&nbsp;&nbsp;<span id="num_val" class="id"><a name="num_val" class="">num_val:</a></span> <span class="id"><a href="compcert.lib.Maps.html#PMap.t">PMap.t</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>)         <span class="docright">(* reverse mapping valnum to regs containing it  *)</span><br/>
+<span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="empty_numbering" class="id"><a name="empty_numbering" class="">empty_numbering</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">{|</span> <span class="id"><a href="compcert.backend.CSEdomain.html#num_next">num_next</a></span> <span class="id">:=</span> <span class="id">1</span>%<span class="id">positive;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#num_eqs">num_eqs</a></span>  <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#num_reg">num_reg</a></span>  <span class="id">:=</span> <span class="id"><a href="compcert.lib.Maps.html#PTree.empty">PTree.empty</a></span> <span class="id">_;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#num_val">num_val</a></span>  <span class="id">:=</span> <span class="id"><a href="compcert.lib.Maps.html#PMap.init">PMap.init</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">|}</span>.<br/>
+<br/>
+<div class="doc">A numbering is well formed if all value numbers mentioned are below
+  <span class="bracket"><span class="id">num_next</span></span>.  Moreover, the <span class="bracket"><span class="id">num_val</span></span> reverse mapping must be consistent
+  with the <span class="bracket"><span class="id">num_reg</span></span> direct mapping. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="valnums_rhs" class="id"><a name="valnums_rhs" class="">valnums_rhs</a></span> (<span id="r:19" class="id"><a name="r:19" class="">r:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#rhs">rhs</a></span>)<span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:19">r</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.CSEdomain.html#Op">Op</a></span> <span class="id">op</span> <span class="id">vl</span> <span class="id">=&gt;</span> <span class="id">vl</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.CSEdomain.html#Load">Load</a></span> <span class="id">chunk</span> <span class="id">addr</span> <span class="id">vl</span> <span class="id">=&gt;</span> <span class="id">vl</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="wf_rhs" class="id"><a name="wf_rhs" class="">wf_rhs</a></span> (<span id="next:21" class="id"><a name="next:21" class="">next:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span>) (<span id="r:22" class="id"><a name="r:22" class="">r:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#rhs">rhs</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+<span class="gallina-kwd">forall</span> <span id="v:23" class="id"><a name="v:23" class="">v,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:23">v</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#valnums_rhs">valnums_rhs</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:22">r</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Coqlib.html#Plt">Plt</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:23">v</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#next:21">next</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="wf_equation" class="id"><a name="wf_equation" class="">wf_equation</a></span> (<span id="next:24" class="id"><a name="next:24" class="">next:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span>) (<span id="e:25" class="id"><a name="e:25" class="">e:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#equation">equation</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.CSEdomain.html#e:25">e</a></span> <span class="gallina-kwd">with</span> <span class="id"><a href="compcert.backend.CSEdomain.html#Eq">Eq</a></span> <span class="id">l</span> <span class="id">str</span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Coqlib.html#Plt">Plt</a></span> <span class="id">l</span> <span class="id"><a href="compcert.backend.CSEdomain.html#next:24">next</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#wf_rhs">wf_rhs</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#next:24">next</a></span> <span class="id">r</span> <span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Record</span> <span id="wf_numbering" class="id"><a name="wf_numbering" class="">wf_numbering</a></span> (<span id="n:27" class="id"><a name="n:27" class="">n:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#numbering">numbering</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span> <span class="id">{</span><br/>
+&nbsp;&nbsp;<span id="wf_num_eqs" class="id"><a name="wf_num_eqs" class="">wf_num_eqs:</a></span> <span class="gallina-kwd">forall</span> <span id="e:29" class="id"><a name="e:29" class="">e,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#e:29">e</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#n:27">n</a></span>.(<span class="id"><a href="compcert.backend.CSEdomain.html#num_eqs">num_eqs</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#wf_equation">wf_equation</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#n:27">n</a></span>.(<span class="id"><a href="compcert.backend.CSEdomain.html#num_next">num_next</a></span>) <span class="id"><a href="compcert.backend.CSEdomain.html#e:29">e;</a></span><br/>
+&nbsp;&nbsp;<span id="wf_num_reg" class="id"><a name="wf_num_reg" class="">wf_num_reg:</a></span> <span class="gallina-kwd">forall</span> <span id="r:31" class="id"><a name="r:31" class="">r</a></span> <span id="v:32" class="id"><a name="v:32" class="">v,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Maps.html#PTree.get">PTree.get</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:31">r</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#n:27">n</a></span>.(<span class="id"><a href="compcert.backend.CSEdomain.html#num_reg">num_reg</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:32">v</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Coqlib.html#Plt">Plt</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:32">v</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#n:27">n</a></span>.(<span class="id"><a href="compcert.backend.CSEdomain.html#num_next">num_next</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;<span id="wf_num_val" class="id"><a name="wf_num_val" class="">wf_num_val:</a></span> <span class="gallina-kwd">forall</span> <span id="r:34" class="id"><a name="r:34" class="">r</a></span> <span id="v:35" class="id"><a name="v:35" class="">v,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:34">r</a></span> (<span class="id"><a href="compcert.lib.Maps.html#PMap.get">PMap.get</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:35">v</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#n:27">n</a></span>.(<span class="id"><a href="compcert.backend.CSEdomain.html#num_val">num_val</a></span>)) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Maps.html#PTree.get">PTree.get</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:34">r</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#n:27">n</a></span>.(<span class="id"><a href="compcert.backend.CSEdomain.html#num_reg">num_reg</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:35">v</a></span><br/>
+<span class="id">}</span>.<br/>
+<br/>
+<span class="id">Global</span> <span class="vernacular">Hint</span> <span class="id">Resolve</span> <span class="id">wf_num_eqs</span> <span class="id">wf_num_reg</span> <span class="id">wf_num_val:</span> <span class="id">cse</span>.<br/>
+<br/>
+<div class="doc">Satisfiability of numberings.  A numbering holds in a concrete
+  execution state if there exists a valuation assigning values to
+  value numbers that satisfies the equations and register mapping
+  of the numbering. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="valuation" class="id"><a name="valuation" class="">valuation</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span id="rhs_eval_to" class="id"><a name="rhs_eval_to" class="">rhs_eval_to</a></span> (<span id="valu:37" class="id"><a name="valu:37" class="">valu:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valuation">valuation</a></span>) (<span id="ge:38" class="id"><a name="ge:38" class="">ge:</a></span> <span class="id"><a href="compcert.backend.RTL.html#genv">genv</a></span>) (<span id="sp:39" class="id"><a name="sp:39" class="">sp:</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>) (<span id="m:40" class="id"><a name="m:40" class="">m:</a></span> <span class="id"><a href="compcert.common.Memory.html#mem">mem</a></span>)<span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#rhs">rhs</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="op_eval_to" class="id"><a name="op_eval_to" class="">op_eval_to:</a></span> <span class="gallina-kwd">forall</span> <span id="op:43" class="id"><a name="op:43" class="">op</a></span> <span id="vl:44" class="id"><a name="vl:44" class="">vl</a></span> <span id="v:45" class="id"><a name="v:45" class="">v,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.x86.Op.html#eval_operation">eval_operation</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:38">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:39">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#op:43">op</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:37">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#vl:44">vl</a></span>) <span class="id"><a href="compcert.backend.CSEdomain.html#m:40">m</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:45">v</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#rhs_eval_to:41">rhs_eval_to</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:37">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:38">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:39">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:40">m</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#Op">Op</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#op:43">op</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#vl:44">vl</a></span>) <span class="id"><a href="compcert.backend.CSEdomain.html#v:45">v</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="load_eval_to" class="id"><a name="load_eval_to" class="">load_eval_to:</a></span> <span class="gallina-kwd">forall</span> <span id="chunk:46" class="id"><a name="chunk:46" class="">chunk</a></span> <span id="addr:47" class="id"><a name="addr:47" class="">addr</a></span> <span id="vl:48" class="id"><a name="vl:48" class="">vl</a></span> <span id="a:49" class="id"><a name="a:49" class="">a</a></span> <span id="v:50" class="id"><a name="v:50" class="">v,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.x86.Op.html#eval_addressing">eval_addressing</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:38">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:39">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#addr:47">addr</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:37">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#vl:48">vl</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#a:49">a</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Memory.html#Mem.loadv">Mem.loadv</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#chunk:46">chunk</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:40">m</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#a:49">a</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:50">v</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#rhs_eval_to:41">rhs_eval_to</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:37">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:38">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:39">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:40">m</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#Load">Load</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#chunk:46">chunk</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#addr:47">addr</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#vl:48">vl</a></span>) <span class="id"><a href="compcert.backend.CSEdomain.html#v:50">v</a></span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span id="equation_holds" class="id"><a name="equation_holds" class="">equation_holds</a></span> (<span id="valu:51" class="id"><a name="valu:51" class="">valu:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valuation">valuation</a></span>) (<span id="ge:52" class="id"><a name="ge:52" class="">ge:</a></span> <span class="id"><a href="compcert.backend.RTL.html#genv">genv</a></span>) (<span id="sp:53" class="id"><a name="sp:53" class="">sp:</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>) (<span id="m:54" class="id"><a name="m:54" class="">m:</a></span> <span class="id"><a href="compcert.common.Memory.html#mem">mem</a></span>)<span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#equation">equation</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="eq_holds_strict" class="id"><a name="eq_holds_strict" class="">eq_holds_strict:</a></span> <span class="gallina-kwd">forall</span> <span id="l:57" class="id"><a name="l:57" class="">l</a></span> <span id="r:58" class="id"><a name="r:58" class="">r,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#rhs_eval_to">rhs_eval_to</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:51">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:52">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:53">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:54">m</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:58">r</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:51">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#l:57">l</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#equation_holds:55">equation_holds</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:51">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:52">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:53">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:54">m</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#Eq">Eq</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#l:57">l</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:58">r</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="eq_holds_lessdef" class="id"><a name="eq_holds_lessdef" class="">eq_holds_lessdef:</a></span> <span class="gallina-kwd">forall</span> <span id="l:59" class="id"><a name="l:59" class="">l</a></span> <span id="r:60" class="id"><a name="r:60" class="">r</a></span> <span id="v:61" class="id"><a name="v:61" class="">v,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#rhs_eval_to">rhs_eval_to</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:51">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:52">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:53">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:54">m</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:60">r</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:61">v</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Values.html#Val.lessdef">Val.lessdef</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:61">v</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:51">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#l:59">l</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#equation_holds:55">equation_holds</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:51">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:52">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:53">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:54">m</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#Eq">Eq</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#l:59">l</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#r:60">r</a></span>).<br/>
+<br/>
+<span class="vernacular">Record</span> <span id="numbering_holds" class="id"><a name="numbering_holds" class="">numbering_holds</a></span> (<span id="valu:62" class="id"><a name="valu:62" class="">valu:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valuation">valuation</a></span>) (<span id="ge:63" class="id"><a name="ge:63" class="">ge:</a></span> <span class="id"><a href="compcert.backend.RTL.html#genv">genv</a></span>) (<span id="sp:64" class="id"><a name="sp:64" class="">sp:</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="rs:65" class="id"><a name="rs:65" class="">rs:</a></span> <span class="id"><a href="compcert.backend.RTL.html#regset">regset</a></span>) (<span id="m:66" class="id"><a name="m:66" class="">m:</a></span> <span class="id"><a href="compcert.common.Memory.html#mem">mem</a></span>) (<span id="n:67" class="id"><a name="n:67" class="">n:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#numbering">numbering</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span> <span class="id">{</span><br/>
+&nbsp;&nbsp;<span id="num_holds_wf" class="id"><a name="num_holds_wf" class="">num_holds_wf:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#wf_numbering">wf_numbering</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#n:67">n;</a></span><br/>
+&nbsp;&nbsp;<span id="num_holds_eq" class="id"><a name="num_holds_eq" class="">num_holds_eq:</a></span> <span class="gallina-kwd">forall</span> <span id="eq:70" class="id"><a name="eq:70" class="">eq,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#eq:70">eq</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#n:67">n</a></span>.(<span class="id"><a href="compcert.backend.CSEdomain.html#num_eqs">num_eqs</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#equation_holds">equation_holds</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:62">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:63">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:64">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:66">m</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#eq:70">eq;</a></span><br/>
+&nbsp;&nbsp;<span id="num_holds_reg" class="id"><a name="num_holds_reg" class="">num_holds_reg:</a></span> <span class="gallina-kwd">forall</span> <span id="r:72" class="id"><a name="r:72" class="">r</a></span> <span id="v:73" class="id"><a name="v:73" class="">v,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#n:67">n</a></span>.(<span class="id"><a href="compcert.backend.CSEdomain.html#num_reg">num_reg</a></span>)<span class="id">!r</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:73">v</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#rs:65">rs#r</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:62">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#v:73">v</a></span><br/>
+<span class="id">}</span>.<br/>
+<br/>
+<span class="id">Global</span> <span class="vernacular">Hint</span> <span class="id">Resolve</span> <span class="id">num_holds_wf</span> <span class="id">num_holds_eq</span> <span class="id">num_holds_reg:</span> <span class="id">cse</span>.<br/>
+<br/>
+<div class="doc">The initial value numbering, at function entry. </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="empty_numbering_holds" class="id"><a name="empty_numbering_holds" class="">empty_numbering_holds:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="valu:75" class="id"><a name="valu:75" class="">valu</a></span> <span id="ge:76" class="id"><a name="ge:76" class="">ge</a></span> <span id="sp:77" class="id"><a name="sp:77" class="">sp</a></span> <span id="rs:78" class="id"><a name="rs:78" class="">rs</a></span> <span id="m:79" class="id"><a name="m:79" class="">m,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#numbering_holds">numbering_holds</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valu:75">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#ge:76">ge</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#sp:77">sp</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#rs:78">rs</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:79">m</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#empty_numbering">empty_numbering</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+&nbsp;&nbsp;<span class="id">intros;</span> <span class="id">split;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+<span class="id">-</span> <span class="id">split;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">contradiction</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id"><a href="compcert.lib.Maps.html#PTree.gempty">PTree.gempty</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;<span class="id">+</span> <span class="id">contradiction</span>.<br/>
+<span class="id">-</span> <span class="id">contradiction</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id"><a href="compcert.lib.Maps.html#PTree.gempty">PTree.gempty</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">discriminate</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Simplification of comparisons when the two arguments have the same value number,
+    and therefore are equal. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="combine_comparison" class="id"><a name="combine_comparison" class="">combine_comparison</a></span> (<span id="c:80" class="id"><a name="c:80" class="">c:</a></span> <span class="id"><a href="compcert.lib.Integers.html#comparison">comparison</a></span>) (<span id="x:81" class="id"><a name="x:81" class="">x</a></span> <span id="y:82" class="id"><a name="y:82" class="">y:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.CSEdomain.html#eq_valnum">eq_valnum</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:81">x</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:82">y</a></span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.CSEdomain.html#c:80">c</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Integers.html#Ceq">Ceq</a></span> <span class="id">|</span> <span class="id"><a href="compcert.lib.Integers.html#Cle">Cle</a></span> <span class="id">|</span> <span class="id"><a href="compcert.lib.Integers.html#Cge">Cge</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Integers.html#Cne">Cne</a></span> <span class="id">|</span> <span class="id"><a href="compcert.lib.Integers.html#Clt">Clt</a></span> <span class="id">|</span> <span class="id"><a href="compcert.lib.Integers.html#Cgt">Cgt</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="combine_comparison_cmp_sound" class="id"><a name="combine_comparison_cmp_sound" class="">combine_comparison_cmp_sound:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="valu:84" class="id"><a name="valu:84" class="">valu:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>) <span id="c:85" class="id"><a name="c:85" class="">c</a></span> <span id="x:86" class="id"><a name="x:86" class="">x</a></span> <span id="y:87" class="id"><a name="y:87" class="">y</a></span> <span id="res:88" class="id"><a name="res:88" class="">res</a></span> <span id="res':89" class="id"><a name="res':89" class="">res',</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#combine_comparison">combine_comparison</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#c:85">c</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:86">x</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:87">y</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res':89">res'</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Values.html#Val.cmp_bool">Val.cmp_bool</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#c:85">c</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:84">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:86">x</a></span>) (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:84">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:87">y</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res:88">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#res:88">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res':89">res'</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.backend.CSEdomain.html#combine_comparison">combine_comparison;</a></span> <span class="id">intros</span>. <span class="id">destruct</span> (<span class="id"><a href="compcert.backend.CSEdomain.html#eq_valnum">eq_valnum</a></span> <span class="id">x</span> <span class="id">y</span>)<span class="id">;</span> <span class="id">inv</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">valu</span> <span class="id">y</span>)<span class="id">;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">H0;</span> <span class="id">inv</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">c;</span> <span class="id">simpl;</span> <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Integers.html#Int.lt">Int.lt</a></span><span class="id">;</span> <span class="id">rewrite</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Integers.html#Int.eq_true">Int.eq_true</a></span><span class="id">,</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Coqlib.html#zlt_false">zlt_false</a></span> <span class="gallina-kwd">by</span> <span class="id">lia;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="combine_comparison_cmpu_sound" class="id"><a name="combine_comparison_cmpu_sound" class="">combine_comparison_cmpu_sound:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="valu:90" class="id"><a name="valu:90" class="">valu:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>) <span id="m:91" class="id"><a name="m:91" class="">m</a></span> <span id="c:92" class="id"><a name="c:92" class="">c</a></span> <span id="x:93" class="id"><a name="x:93" class="">x</a></span> <span id="y:94" class="id"><a name="y:94" class="">y</a></span> <span id="res:95" class="id"><a name="res:95" class="">res</a></span> <span id="res':96" class="id"><a name="res':96" class="">res',</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#combine_comparison">combine_comparison</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#c:92">c</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:93">x</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:94">y</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res':96">res'</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Values.html#Val.cmpu_bool">Val.cmpu_bool</a></span> (<span class="id"><a href="compcert.common.Memory.html#Mem.valid_pointer">Mem.valid_pointer</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:91">m</a></span>) <span class="id"><a href="compcert.backend.CSEdomain.html#c:92">c</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:90">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:93">x</a></span>) (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:90">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:94">y</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res:95">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#res:95">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res':96">res'</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.backend.CSEdomain.html#combine_comparison">combine_comparison,</a></span> <span class="id"><a href="compcert.common.Values.html#Val.cmpu_bool">Val.cmpu_bool</a></span><span class="id">;</span> <span class="id">intros</span>. <span class="id">destruct</span> (<span class="id"><a href="compcert.backend.CSEdomain.html#eq_valnum">eq_valnum</a></span> <span class="id">x</span> <span class="id">y</span>)<span class="id">;</span> <span class="id">inv</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">valu</span> <span class="id">y</span>).<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">inv</span> <span class="id">H0</span>. <span class="id">destruct</span> <span class="id">c;</span> <span class="id">simpl;</span> <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Integers.html#Int.ltu">Int.ltu</a></span><span class="id">;</span> <span class="id">rewrite</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Integers.html#Int.eq_true">Int.eq_true</a></span><span class="id">,</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Coqlib.html#zlt_false">zlt_false</a></span> <span class="gallina-kwd">by</span> <span class="id">lia;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">destruct</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span><span class="id">;</span> <span class="id">try</span> <span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id"><a href="compcert.lib.Coqlib.html#dec_eq_true">dec_eq_true</a></span> <span class="gallina-kwd">in</span> <span class="id">H0</span>. <span class="id">destruct</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#andb">andb</a></span> <span class="gallina-kwd">in</span> <span class="id">H0;</span> <span class="id">inv</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">c;</span> <span class="id">simpl;</span> <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Integers.html#Ptrofs.ltu">Ptrofs.ltu</a></span><span class="id">;</span> <span class="id">rewrite</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Integers.html#Ptrofs.eq_true">Ptrofs.eq_true</a></span><span class="id">,</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Coqlib.html#zlt_false">zlt_false</a></span> <span class="gallina-kwd">by</span> <span class="id">lia;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="combine_comparison_cmpl_sound" class="id"><a name="combine_comparison_cmpl_sound" class="">combine_comparison_cmpl_sound:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="valu:97" class="id"><a name="valu:97" class="">valu:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>) <span id="c:98" class="id"><a name="c:98" class="">c</a></span> <span id="x:99" class="id"><a name="x:99" class="">x</a></span> <span id="y:100" class="id"><a name="y:100" class="">y</a></span> <span id="res:101" class="id"><a name="res:101" class="">res</a></span> <span id="res':102" class="id"><a name="res':102" class="">res',</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#combine_comparison">combine_comparison</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#c:98">c</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:99">x</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:100">y</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res':102">res'</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Values.html#Val.cmpl_bool">Val.cmpl_bool</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#c:98">c</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:97">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:99">x</a></span>) (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:97">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:100">y</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res:101">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#res:101">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res':102">res'</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.backend.CSEdomain.html#combine_comparison">combine_comparison;</a></span> <span class="id">intros</span>. <span class="id">destruct</span> (<span class="id"><a href="compcert.backend.CSEdomain.html#eq_valnum">eq_valnum</a></span> <span class="id">x</span> <span class="id">y</span>)<span class="id">;</span> <span class="id">inv</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">valu</span> <span class="id">y</span>)<span class="id">;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">H0;</span> <span class="id">inv</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">c;</span> <span class="id">simpl;</span> <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Integers.html#Int64.lt">Int64.lt</a></span><span class="id">;</span> <span class="id">rewrite</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Integers.html#Int64.eq_true">Int64.eq_true</a></span><span class="id">,</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Coqlib.html#zlt_false">zlt_false</a></span> <span class="gallina-kwd">by</span> <span class="id">lia;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="combine_comparison_cmplu_sound" class="id"><a name="combine_comparison_cmplu_sound" class="">combine_comparison_cmplu_sound:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="valu:103" class="id"><a name="valu:103" class="">valu:</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#valnum">valnum</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>) <span id="m:104" class="id"><a name="m:104" class="">m</a></span> <span id="c:105" class="id"><a name="c:105" class="">c</a></span> <span id="x:106" class="id"><a name="x:106" class="">x</a></span> <span id="y:107" class="id"><a name="y:107" class="">y</a></span> <span id="res:108" class="id"><a name="res:108" class="">res</a></span> <span id="res':109" class="id"><a name="res':109" class="">res',</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#combine_comparison">combine_comparison</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#c:105">c</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:106">x</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:107">y</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res':109">res'</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Values.html#Val.cmplu_bool">Val.cmplu_bool</a></span> (<span class="id"><a href="compcert.common.Memory.html#Mem.valid_pointer">Mem.valid_pointer</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#m:104">m</a></span>) <span class="id"><a href="compcert.backend.CSEdomain.html#c:105">c</a></span> (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:103">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#x:106">x</a></span>) (<span class="id"><a href="compcert.backend.CSEdomain.html#valu:103">valu</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#y:107">y</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res:108">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.CSEdomain.html#res:108">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.backend.CSEdomain.html#res':109">res'</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.backend.CSEdomain.html#combine_comparison">combine_comparison,</a></span> <span class="id"><a href="compcert.common.Values.html#Val.cmplu_bool">Val.cmplu_bool</a></span><span class="id">;</span> <span class="id">intros</span>. <span class="id">destruct</span> (<span class="id"><a href="compcert.backend.CSEdomain.html#eq_valnum">eq_valnum</a></span> <span class="id">x</span> <span class="id">y</span>)<span class="id">;</span> <span class="id">inv</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">valu</span> <span class="id">y</span>).<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">inv</span> <span class="id">H0</span>. <span class="id">destruct</span> <span class="id">c;</span> <span class="id">simpl;</span> <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Integers.html#Int64.ltu">Int64.ltu</a></span><span class="id">;</span> <span class="id">rewrite</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Integers.html#Int64.eq_true">Int64.eq_true</a></span><span class="id">,</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Coqlib.html#zlt_false">zlt_false</a></span> <span class="gallina-kwd">by</span> <span class="id">lia;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">discriminate</span>.<br/>
+<span class="id">-</span> <span class="id">destruct</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#negb">negb</a></span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span>)<span class="id">;</span> <span class="id">try</span> <span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id"><a href="compcert.lib.Coqlib.html#dec_eq_true">dec_eq_true</a></span> <span class="gallina-kwd">in</span> <span class="id">H0</span>. <span class="id">destruct</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#andb">andb</a></span> <span class="gallina-kwd">in</span> <span class="id">H0;</span> <span class="id">inv</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">c;</span> <span class="id">simpl;</span> <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Integers.html#Ptrofs.ltu">Ptrofs.ltu</a></span><span class="id">;</span> <span class="id">rewrite</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Integers.html#Ptrofs.eq_true">Ptrofs.eq_true</a></span><span class="id">,</span> <span class="id">?</span> <span class="id"><a href="compcert.lib.Coqlib.html#zlt_false">zlt_false</a></span> <span class="gallina-kwd">by</span> <span class="id">lia;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,474 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Tunneling</title>
+<meta name="description" content="Documentation of Coq module Tunneling" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Tunneling</h1>
+<br/>
+<div class="doc">Branch tunneling (optimization of branches to branches). </div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.funind.FunInd.html">FunInd</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span> <span class="id"><a href="compcert.lib.Maps.html">Maps</a></span> <span class="id"><a href="compcert.lib.UnionFind.html">UnionFind</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.common.AST.html">AST</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.backend.LTL.html">LTL</a></span>.<br/>
+<br/>
+<div class="doc">Branch tunneling shortens sequences of branches (with no intervening
+  computations) by rewriting the branch and conditional branch instructions
+  so that they jump directly to the end of the branch sequence.
+  For example:
+<pre>
+     L1: branch L2;                       L1: branch L3;
+     L2; branch L3;            becomes    L2: branch L3;
+     L3: instr;                           L3: instr;
+     L4: if (cond) goto L1;               L4: if (cond) goto L3;</pre>
+  This optimization can be applied to several of our intermediate
+  languages.  We choose to perform it on the <span class="bracket"><span class="id">LTL</span></span> language,
+  after register allocation but before code linearization.
+  Register allocation can delete instructions (such as dead
+  computations or useless moves), therefore there are more
+  opportunities for tunneling after allocation than before.
+  Symmetrically, prior tunneling helps linearization to produce
+  better code, e.g. by revealing that some <span class="bracket"><span class="id">branch</span></span> instructions are
+  dead code (as the "branch L3" in the example above).
+</div>
+<br/>
+<div class="doc">The naive implementation of branch tunneling would replace
+  any branch to a node <span class="bracket"><span class="id">pc</span></span> by a branch to the node
+  <span class="bracket"><span class="id">branch_target</span> <span class="id">f</span> <span class="id">pc</span></span>, defined as follows:
+<pre>
+  branch_target f pc = branch_target f pc'  if f(pc) = branch pc'
+                     = pc                   otherwise</pre>
+  However, this definition can fail to terminate if
+  the program can contain loops consisting only of branches, as in
+<pre>
+     L1: branch L1;</pre>
+  or
+<pre>
+     L1: branch L2;
+     L2: branch L1;</pre>
+  Coq warns us of this fact by not accepting the definition
+  of <span class="bracket"><span class="id">branch_target</span></span> above.
+  To handle this problem, we proceed in two passes:
+<ul>
+<li>
+ The first pass populates a union-find data structure, adding equalities
+  between PCs of blocks that are connected by branches and no other
+  computation.
+</li>
+</ul>
+<ul>
+<li>
+ The second pass rewrites the code, replacing every branch to a node <span class="bracket"><span class="id">pc</span></span>
+  by a branch to the canonical representative of the equivalence class of <span class="bracket"><span class="id">pc</span></span>.
+</li>
+</ul>
+</div>
+<br/>
+<h1> Construction of the union-find data structure </h1>
+<br/>
+<span class="vernacular">Module</span> <span id="U" class="id"><a name="U" class="">U</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.UnionFind.html#UF">UnionFind.UF</a></span>(<span class="id"><a href="compcert.lib.Maps.html#PTree">PTree</a></span>).<br/>
+<br/>
+<div class="doc">We start populating the union-find data structure by adding
+    equalities <span class="bracket"><span class="id">pc</span> = <span class="id">pc</span>'</span> for every block <span class="bracket"><span class="id">pc</span>: <span class="id">branch</span> <span class="id">pc</span>'</span> in the function. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="record_branch" class="id"><a name="record_branch" class="">record_branch</a></span> (<span id="uf:1" class="id"><a name="uf:1" class="">uf:</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span>) (<span id="pc:2" class="id"><a name="pc:2" class="">pc:</a></span> <span class="id"><a href="compcert.backend.LTL.html#node">node</a></span>) (<span id="b:3" class="id"><a name="b:3" class="">b:</a></span> <span class="id"><a href="compcert.backend.LTL.html#bblock">bblock</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Tunneling.html#b:3">b</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.LTL.html#Lbranch">Lbranch</a></span> <span class="id">s</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Tunneling.html#union">U.union</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#uf:1">uf</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#pc:2">pc</a></span> <span class="id">s</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Tunneling.html#uf:1">uf</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="record_branches" class="id"><a name="record_branches" class="">record_branches</a></span> (<span id="f:5" class="id"><a name="f:5" class="">f:</a></span> <span class="id"><a href="compcert.backend.LTL.html#function">LTL.function</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Maps.html#PTree.fold">PTree.fold</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#record_branch">record_branch</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#f:5">f</a></span>.(<span class="id"><a href="compcert.backend.LTL.html#fn_code">fn_code</a></span>) <span class="id"><a href="compcert.backend.Tunneling.html#empty">U.empty</a></span>.<br/>
+<br/>
+<div class="doc">An additional optimization opportunity comes from conditional branches.
+    Consider a block <span class="bracket"><span class="id">pc</span>: <span class="id">cond</span> <span class="id">ifso</span> <span class="id">ifnot</span></span>.  If the <span class="bracket"><span class="id">ifso</span></span> case
+    and the <span class="bracket"><span class="id">ifnot</span></span> case jump to the same block <span class="bracket"><span class="id">pc</span>'</span>
+    (modulo intermediate branches), the block can be simplified into
+    <span class="bracket"><span class="id">pc</span>: <span class="id">branch</span> <span class="id">pc</span>'</span>, and the equality <span class="bracket"><span class="id">pc</span> = <span class="id">pc</span>'</span> can be added to the
+    union-find data structure. </div>
+<br/>
+<div class="doc">In rare cases, the extra equation <span class="bracket"><span class="id">pc</span> = <span class="id">pc</span>'</span> introduced by the
+    simplification of a conditional branch can trigger further simplifications
+    of other conditional branches.  We therefore iterate the analysis
+    until no optimizable conditional branch remains. </div>
+<br/>
+<div class="doc">The code <span class="bracket"><span class="id">c</span></span> (first component of the <span class="bracket"><span class="id">st</span></span> triple) starts identical
+    to the code <span class="bracket"><span class="id">fn</span>.(<span class="id">fn_code</span>)</span> of the current function, but each time
+    conditional branch at <span class="bracket"><span class="id">pc</span></span> is optimized, we remove the block at
+    <span class="bracket"><span class="id">pc</span></span> from the code <span class="bracket"><span class="id">c</span></span>.  This guarantees termination of the
+    iteration. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="record_cond" class="id"><a name="record_cond" class="">record_cond</a></span> (<span id="st:6" class="id"><a name="st:6" class="">st:</a></span> <span class="id"><a href="compcert.backend.LTL.html#code">code</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>) (<span id="pc:7" class="id"><a name="pc:7" class="">pc:</a></span> <span class="id"><a href="compcert.backend.LTL.html#node">node</a></span>) (<span id="b:8" class="id"><a name="b:8" class="">b:</a></span> <span class="id"><a href="compcert.backend.LTL.html#bblock">bblock</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.LTL.html#code">code</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Tunneling.html#b:8">b</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.LTL.html#Lcond">Lcond</a></span> <span class="id">cond</span> <span class="id">args</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">'</span>(<span class="id">c,</span> <span class="id">u,</span> <span class="id">_</span>) <span class="id">:=</span> <span class="id"><a href="compcert.backend.Tunneling.html#st:6">st</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id">u</span> <span class="id">s1</span>) (<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id">u</span> <span class="id">s2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">then</span> (<span class="id"><a href="compcert.lib.Maps.html#PTree.remove">PTree.remove</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#pc:7">pc</a></span> <span class="id">c,</span> <span class="id"><a href="compcert.backend.Tunneling.html#union">U.union</a></span> <span class="id">u</span> <span class="id"><a href="compcert.backend.Tunneling.html#pc:7">pc</a></span> <span class="id">s1,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.backend.Tunneling.html#st:6">st</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Tunneling.html#st:6">st</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="record_conds_1" class="id"><a name="record_conds_1" class="">record_conds_1</a></span> (<span id="cu:11" class="id"><a name="cu:11" class="">cu:</a></span> <span class="id"><a href="compcert.backend.LTL.html#code">code</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.LTL.html#code">code</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="c:12" class="id"><a name="c:12" class="">c,</a></span> <span id="u:13" class="id"><a name="u:13" class="">u</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.backend.Tunneling.html#cu:11">cu</a></span> <span class="gallina-kwd">in</span> <span class="id"><a href="compcert.lib.Maps.html#PTree.fold">PTree.fold</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#record_cond">record_cond</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#c:12">c</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#c:12">c,</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#u:13">u,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="measure_state" class="id"><a name="measure_state" class="">measure_state</a></span> (<span id="cu:14" class="id"><a name="cu:14" class="">cu:</a></span> <span class="id"><a href="compcert.backend.LTL.html#code">code</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.cardinal">PTree_Properties.cardinal</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#cu:14">cu</a></span>).<br/>
+<br/>
+<span class="vernacular">Function</span> <span class="id">record_conds</span> (<span id="cu:26" class="id"><span id="cu:25" class="id"><span id="cu:22" class="id"><span id="cu:20" class="id"><span id="cu:19" class="id"><span id="cu:15" class="id"><a name="cu:26" class="">cu:</a></span></span></span></span></span></span> <span class="id"><a href="compcert.backend.LTL.html#code">code</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span>) <span class="id">{measure</span> <span class="id"><a href="compcert.backend.Tunneling.html#measure_state">measure_state</a></span> <span class="id">cu}</span> <span class="id">:</span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="cu':27" class="id"><span id="cu':23" class="id"><span id="cu':17" class="id"><a name="cu':27" class="">cu',</a></span></span></span> <span id="changed:28" class="id"><span id="changed:24" class="id"><span id="changed:18" class="id"><a name="changed:28" class="">changed</a></span></span></span>) <span class="id">:=</span> <span class="id"><a href="compcert.backend.Tunneling.html#record_conds_1">record_conds_1</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#cu:15">cu</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Tunneling.html#changed:18">changed</a></span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.Tunneling.html#record_conds:16">record_conds</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#cu':17">cu'</a></span> <span class="gallina-kwd">else</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#cu:15">cu</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">[c0</span> <span class="id">u0]</span> <span class="id">[c1</span> <span class="id">u1]</span>.<br/>
+&nbsp;&nbsp;<span class="id">set</span> (<span class="id">P</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> (<span id="c:33" class="id"><span id="c:30" class="id"><a name="c:33" class="">c:</a></span></span> <span class="id"><a href="compcert.backend.LTL.html#code">code</a></span>) (<span id="s:34" class="id"><span id="s:31" class="id"><a name="s:34" class="">s:</a></span></span> <span class="id"><a href="compcert.backend.LTL.html#code">code</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span id="pc:35" class="id"><span id="pc:32" class="id"><a name="pc:35" class="">pc,</a></span></span> <span class="id"><a href="compcert.backend.Tunneling.html#c:30">c!pc</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#s:31">s</a></span>))<span class="id">!pc</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id">c0!pc</span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.cardinal">PTree_Properties.cardinal</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#s:31">s</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> (<span class="gallina-kwd">if</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#s:31">s</a></span> <span class="gallina-kwd">then</span> <span class="id">1</span> <span class="gallina-kwd">else</span> <span class="id">0</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">&lt;=</span> <span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.cardinal">PTree_Properties.cardinal</a></span> <span class="id">c0</span>)%<span class="id">nat</span>).<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">A:</span> <span class="id">P</span> <span class="id">c0</span> (<span class="id"><a href="compcert.lib.Maps.html#PTree.fold">PTree.fold</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#record_cond">record_cond</a></span> <span class="id">c0</span> (<span class="id">c0,</span> <span class="id">u0,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span>))).<br/>
+&nbsp;&nbsp;<span class="id">{</span> <span class="id">apply</span> <span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.fold_rec">PTree_Properties.fold_rec</a></span><span class="id">;</span> <span class="id">unfold</span> <span class="id">P</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span>. <span class="id">destruct</span> <span class="id">H0;</span> <span class="id">split;</span> <span class="id">auto</span>. <span class="id">intros</span>. <span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">H</span> <span class="gallina-kwd">in</span> <span class="id">H2</span>. <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">simpl;</span> <span class="id">split;</span> <span class="id">intros</span>. <span class="id">auto</span>.  <span class="id">simpl;</span> <span class="id">lia</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">cd</span> <span class="id">[[c</span> <span class="id">u]</span> <span class="id">changed]</span> <span class="id">pc</span> <span class="id">b</span> <span class="id">NONE</span> <span class="id">SOME</span> <span class="id">[HR1</span> <span class="id">HR2]</span>. <span class="id">simpl</span>. <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span> <span class="id">p</span> <span class="id">EQ</span>. <span class="id">rewrite</span> <span class="id"><a href="compcert.lib.Maps.html#PTree.gsspec">PTree.gsspec</a></span> <span class="gallina-kwd">in</span> <span class="id">EQ</span>. <span class="id">destruct</span> (<span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span> <span class="id">p</span> <span class="id">pc</span>)<span class="id">;</span> <span class="id">try</span> <span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.backend.Tunneling.html#record_cond">record_cond</a></span>. <span class="id">destruct</span> <span class="id">b</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">[]</span> <span class="id">b</span> <span class="id">];</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id">u</span> <span class="id">s1</span>) (<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id">u</span> <span class="id">s2</span>))<span class="id">;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">simpl</span>. <span class="id">rewrite</span> <span class="id"><a href="compcert.lib.Maps.html#PTree.gro">PTree.gro</a></span> <span class="gallina-kwd">by</span> <span class="id">auto</span>. <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">unfold</span> <span class="id"><a href="compcert.backend.Tunneling.html#record_cond">record_cond</a></span>. <span class="id">destruct</span> <span class="id">b</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">[]</span> <span class="id">b</span> <span class="id">];</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id">u</span> <span class="id">s1</span>) (<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id">u</span> <span class="id">s2</span>))<span class="id">;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">SOME':</span> <span class="id">c!pc</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="compcert.backend.LTL.html#Lcond">Lcond</a></span> <span class="id">cond</span> <span class="id">args</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">b</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{</span> <span class="id">rewrite</span> <span class="id">HR1</span> <span class="gallina-kwd">by</span> <span class="id">auto</span>. <span class="id">auto</span>. <span class="id">}</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.cardinal_remove">PTree_Properties.cardinal_remove</a></span> <span class="id">SOME'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">changed;</span> <span class="id">lia</span>.<br/>
+&nbsp;&nbsp;<span class="id">}</span><br/>
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.backend.Tunneling.html#record_conds_1">record_conds_1,</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#measure_state">measure_state;</a></span> <span class="id">intros</span>. <br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">A</span> <span class="gallina-kwd">as</span> <span class="id">[_</span> <span class="id">A]</span>. <span class="id">rewrite</span> <span class="id">teq</span> <span class="gallina-kwd">in</span> <span class="id">A</span>. <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>.<br/>
+&nbsp;&nbsp;<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span id="record_gotos" class="id"><a name="record_gotos" class="">record_gotos</a></span> (<span id="f:47" class="id"><a name="f:47" class="">f:</a></span> <span class="id"><a href="compcert.backend.LTL.html#function">LTL.function</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Tunneling.html#record_conds">record_conds</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#f:47">f</a></span>.(<span class="id"><a href="compcert.backend.LTL.html#fn_code">fn_code</a></span>)<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#record_branches">record_branches</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#f:47">f</a></span>).<br/>
+<br/>
+<h1> Code transformation </h1>
+<br/>
+<div class="doc">The code transformation rewrites all LTL instruction, replacing every
+  successor <span class="bracket"><span class="id">s</span></span> of every instruction by the canonical representative
+  of its equivalence class in the union-find data structure.
+  Additionally, <span class="bracket"><span class="id">Lcond</span></span> conditional branches are turned into <span class="bracket"><span class="id">Lbranch</span></span>
+  unconditional branches whenever possible. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="tunnel_instr" class="id"><a name="tunnel_instr" class="">tunnel_instr</a></span> (<span id="u:48" class="id"><a name="u:48" class="">u:</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span>) (<span id="i:49" class="id"><a name="i:49" class="">i:</a></span> <span class="id"><a href="compcert.backend.LTL.html#instruction">instruction</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.LTL.html#instruction">instruction</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Tunneling.html#i:49">i</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.LTL.html#Lbranch">Lbranch</a></span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.LTL.html#Lbranch">Lbranch</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#u:48">u</a></span> <span class="id">s</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.LTL.html#Lcond">Lcond</a></span> <span class="id">cond</span> <span class="id">args</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="s1':51" class="id"><a name="s1':51" class="">s1'</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#u:48">u</a></span> <span class="id">s1</span> <span class="gallina-kwd">in</span> <span class="gallina-kwd">let</span> <span id="s2':52" class="id"><a name="s2':52" class="">s2'</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#u:48">u</a></span> <span class="id">s2</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#s1':51">s1'</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#s2':52">s2'</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.LTL.html#Lbranch">Lbranch</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#s1':51">s1'</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.backend.LTL.html#Lcond">Lcond</a></span> <span class="id">cond</span> <span class="id">args</span> <span class="id"><a href="compcert.backend.Tunneling.html#s1':51">s1'</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#s2':52">s2'</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.LTL.html#Ljumptable">Ljumptable</a></span> <span class="id">arg</span> <span class="id">tbl</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.LTL.html#Ljumptable">Ljumptable</a></span> <span class="id">arg</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#u:48">u</a></span>) <span class="id">tbl</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Tunneling.html#i:49">i</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="tunnel_block" class="id"><a name="tunnel_block" class="">tunnel_block</a></span> (<span id="u:53" class="id"><a name="u:53" class="">u:</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#t">U.t</a></span>) (<span id="b:54" class="id"><a name="b:54" class="">b:</a></span> <span class="id"><a href="compcert.backend.LTL.html#bblock">bblock</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.LTL.html#bblock">bblock</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#tunnel_instr">tunnel_instr</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#u:53">u</a></span>) <span class="id"><a href="compcert.backend.Tunneling.html#b:54">b</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="tunnel_function" class="id"><a name="tunnel_function" class="">tunnel_function</a></span> (<span id="f:55" class="id"><a name="f:55" class="">f:</a></span> <span class="id"><a href="compcert.backend.LTL.html#function">LTL.function</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.LTL.html#function">LTL.function</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="u:56" class="id"><a name="u:56" class="">u</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.Tunneling.html#record_gotos">record_gotos</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#f:55">f</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.LTL.html#mkfunction">mkfunction</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.LTL.html#fn_sig">fn_sig</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#f:55">f</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.LTL.html#fn_stacksize">fn_stacksize</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#f:55">f</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.lib.Maps.html#PTree.map1">PTree.map1</a></span> (<span class="id"><a href="compcert.backend.Tunneling.html#tunnel_block">tunnel_block</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#u:56">u</a></span>) (<span class="id"><a href="compcert.backend.LTL.html#fn_code">fn_code</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#f:55">f</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Tunneling.html#repr">U.repr</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#u:56">u</a></span> (<span class="id"><a href="compcert.backend.LTL.html#fn_entrypoint">fn_entrypoint</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#f:55">f</a></span>)).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="tunnel_fundef" class="id"><a name="tunnel_fundef" class="">tunnel_fundef</a></span> (<span id="f:57" class="id"><a name="f:57" class="">f:</a></span> <span class="id"><a href="compcert.backend.LTL.html#fundef">LTL.fundef</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.LTL.html#fundef">LTL.fundef</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transf_fundef">transf_fundef</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#tunnel_function">tunnel_function</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#f:57">f</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="tunnel_program" class="id"><a name="tunnel_program" class="">tunnel_program</a></span> (<span id="p:58" class="id"><a name="p:58" class="">p:</a></span> <span class="id"><a href="compcert.backend.LTL.html#program">LTL.program</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.LTL.html#program">LTL.program</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transform_program">transform_program</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#tunnel_fundef">tunnel_fundef</a></span> <span class="id"><a href="compcert.backend.Tunneling.html#p:58">p</a></span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

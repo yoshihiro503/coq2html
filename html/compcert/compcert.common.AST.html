@@ -1,0 +1,1067 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module AST</title>
+<meta name="description" content="Documentation of Coq module AST" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module AST</h1>
+<br/>
+<div class="doc">This file defines a number of data types and operations used in
+  the abstract syntax trees of many of the intermediate languages. </div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html">String</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span> <span class="id"><a href="compcert.lib.Maps.html">Maps</a></span> <span class="id"><a href="compcert.common.Errors.html">Errors</a></span> <span class="id"><a href="compcert.lib.Integers.html">Integers</a></span> <span class="id"><a href="compcert.lib.Floats.html">Floats</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="id"><a href="compcert.x86_64.Archi.html">Archi</a></span>.<br/>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="vernacular">Implicit</span> <span class="vernacular">Arguments</span>.<br/>
+<br/>
+<h1> Syntactic elements </h1>
+<br/>
+<div class="doc">Identifiers (names of local variables, of global symbols and functions,
+  etc) are represented by the type <span class="bracket"><span class="id">positive</span></span> of positive integers. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="ident" class="id"><a name="ident" class="">ident</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#positive">positive</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="ident_eq" class="id"><a name="ident_eq" class="">ident_eq</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span>.<br/>
+<br/>
+<div class="doc">The intermediate languages are weakly typed, using the following types: </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="typ" class="id"><a name="typ" class="">typ</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tint" class="id"><a name="Tint" class="">Tint</a></span>                <span class="docright">(* 32-bit integers or pointers  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tfloat" class="id"><a name="Tfloat" class="">Tfloat</a></span>              <span class="docright">(* 64-bit double-precision floats  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tlong" class="id"><a name="Tlong" class="">Tlong</a></span>               <span class="docright">(* 64-bit integers  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tsingle" class="id"><a name="Tsingle" class="">Tsingle</a></span>             <span class="docright">(* 32-bit single-precision floats  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tany32" class="id"><a name="Tany32" class="">Tany32</a></span>              <span class="docright">(* any 32-bit value  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tany64" class="id"><a name="Tany64" class="">Tany64</a></span>.             <span class="docright">(* any 64-bit value, i.e. any value  *)</span><br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="typ_eq" class="id"><a name="typ_eq" class="">typ_eq:</a></span> <span class="gallina-kwd">forall</span> (<span id="t1:3" class="id"><a name="t1:3" class="">t1</a></span> <span id="t2:4" class="id"><a name="t2:4" class="">t2:</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{t1=t2}</a></span> <span class="id">+</span> <span class="id">{t1&lt;&gt;t2}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="id">decide</span> <span class="id">equality</span>. Defined.</div>
+<span class="id">Global</span> <span class="vernacular">Opaque</span> <span class="id"><a href="compcert.common.AST.html#typ_eq">typ_eq</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="list_typ_eq" class="id"><a name="list_typ_eq" class="">list_typ_eq:</a></span> <span class="gallina-kwd">forall</span> (<span id="l1:5" class="id"><a name="l1:5" class="">l1</a></span> <span id="l2:6" class="id"><a name="l2:6" class="">l2:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{l1=l2}</a></span> <span class="id">+</span> <span class="id">{l1&lt;&gt;l2}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#list_eq_dec">list_eq_dec</a></span> <span class="id"><a href="compcert.common.AST.html#typ_eq">typ_eq</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="Tptr" class="id"><a name="Tptr" class="">Tptr</a></span> <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span> <span class="id">:=</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.common.AST.html#Tlong">Tlong</a></span> <span class="gallina-kwd">else</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="typesize" class="id"><a name="typesize" class="">typesize</a></span> (<span id="ty:7" class="id"><a name="ty:7" class="">ty:</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#ty:7">ty</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span> <span class="id">=&gt;</span> <span class="id">4</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tfloat">Tfloat</a></span> <span class="id">=&gt;</span> <span class="id">8</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tlong">Tlong</a></span> <span class="id">=&gt;</span> <span class="id">8</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tsingle">Tsingle</a></span> <span class="id">=&gt;</span> <span class="id">4</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tany32">Tany32</a></span> <span class="id">=&gt;</span> <span class="id">4</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tany64">Tany64</a></span> <span class="id">=&gt;</span> <span class="id">8</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="typesize_pos" class="id"><a name="typesize_pos" class="">typesize_pos:</a></span> <span class="gallina-kwd">forall</span> <span id="ty:9" class="id"><a name="ty:9" class="">ty,</a></span> <span class="id"><a href="compcert.common.AST.html#typesize">typesize</a></span> <span class="id"><a href="compcert.common.AST.html#ty:9">ty</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.ZArith.BinInt.html#::Z_scope:x_'&gt;'_x">&gt;</a></span> <span class="id">0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="id">destruct</span> <span class="id">ty;</span> <span class="id">simpl;</span> <span class="id">lia</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="typesize_Tptr" class="id"><a name="typesize_Tptr" class="">typesize_Tptr:</a></span> <span class="id"><a href="compcert.common.AST.html#typesize">typesize</a></span> <span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span> <span class="gallina-kwd">then</span> <span class="id">8</span> <span class="gallina-kwd">else</span> <span class="id">4</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+ <span class="id">unfold</span> <span class="id"><a href="compcert.common.AST.html#Tptr">Tptr;</a></span> <span class="id">destruct</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span><span class="id">;</span> <span class="id">auto</span>. Qed.</div>
+<br/>
+<div class="doc">All values of size 32 bits are also of type <span class="bracket"><span class="id">Tany32</span></span>.  All values
+  are of type <span class="bracket"><span class="id">Tany64</span></span>.  This corresponds to the following subtyping
+  relation over types. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="subtype" class="id"><a name="subtype" class="">subtype</a></span> (<span id="ty1:10" class="id"><a name="ty1:10" class="">ty1</a></span> <span id="ty2:11" class="id"><a name="ty2:11" class="">ty2:</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#ty1:10">ty1,</a></span> <span class="id"><a href="compcert.common.AST.html#ty2:11">ty2</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint,</a></span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tlong">Tlong,</a></span> <span class="id"><a href="compcert.common.AST.html#Tlong">Tlong</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tfloat">Tfloat,</a></span> <span class="id"><a href="compcert.common.AST.html#Tfloat">Tfloat</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tsingle">Tsingle,</a></span> <span class="id"><a href="compcert.common.AST.html#Tsingle">Tsingle</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> (<span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tsingle">Tsingle</a></span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tany32">Tany32</a></span>)<span class="id">,</span> <span class="id"><a href="compcert.common.AST.html#Tany32">Tany32</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_,</span> <span class="id"><a href="compcert.common.AST.html#Tany64">Tany64</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_,</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="subtype_list" class="id"><a name="subtype_list" class="">subtype_list</a></span> (<span id="tyl1:14" class="id"><a name="tyl1:14" class="">tyl1</a></span> <span id="tyl2:15" class="id"><a name="tyl2:15" class="">tyl2:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#tyl1:14">tyl1,</a></span> <span class="id"><a href="compcert.common.AST.html#tyl2:15">tyl2</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">ty1::tys1,</span> <span class="id">ty2::tys2</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#subtype">subtype</a></span> <span class="id">ty1</span> <span class="id">ty2</span> &amp;&amp; <span class="id"><a href="compcert.common.AST.html#subtype_list:16">subtype_list</a></span> <span class="id">tys1</span> <span class="id">tys2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_,</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">To describe the values returned by functions, we use the more precise
+    types below. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="rettype" class="id"><a name="rettype" class="">rettype</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tret" class="id"><a name="Tret" class="">Tret</a></span> (<span id="t:21" class="id"><a name="t:21" class="">t:</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>)                       <span class="docright">(* like type <span class="bracket"><span class="id">t</span></span>  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tint8signed" class="id"><a name="Tint8signed" class="">Tint8signed</a></span>                         <span class="docright">(* 8-bit signed integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tint8unsigned" class="id"><a name="Tint8unsigned" class="">Tint8unsigned</a></span>                       <span class="docright">(* 8-bit unsigned integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tint16signed" class="id"><a name="Tint16signed" class="">Tint16signed</a></span>                        <span class="docright">(* 16-bit signed integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tint16unsigned" class="id"><a name="Tint16unsigned" class="">Tint16unsigned</a></span>                      <span class="docright">(* 16-bit unsigned integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Tvoid" class="id"><a name="Tvoid" class="">Tvoid</a></span>.                              <span class="docright">(* no value returned  *)</span><br/>
+<br/>
+<span class="vernacular">Coercion</span> <span class="id">Tret:</span> <span class="id">typ</span> <span class="id">&gt;-&gt;</span> <span class="id">rettype</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="rettype_eq" class="id"><a name="rettype_eq" class="">rettype_eq:</a></span> <span class="gallina-kwd">forall</span> (<span id="t1:22" class="id"><a name="t1:22" class="">t1</a></span> <span id="t2:23" class="id"><a name="t2:23" class="">t2:</a></span> <span class="id"><a href="compcert.common.AST.html#rettype">rettype</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{t1=t2}</a></span> <span class="id">+</span> <span class="id">{t1&lt;&gt;t2}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+ <span class="id">generalize</span> <span class="id"><a href="compcert.common.AST.html#typ_eq">typ_eq;</a></span> <span class="id">decide</span> <span class="id">equality</span>. Defined.</div>
+<span class="id">Global</span> <span class="vernacular">Opaque</span> <span class="id"><a href="compcert.common.AST.html#rettype_eq">rettype_eq</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="proj_rettype" class="id"><a name="proj_rettype" class="">proj_rettype</a></span> (<span id="r:24" class="id"><a name="r:24" class="">r:</a></span> <span class="id"><a href="compcert.common.AST.html#rettype">rettype</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#r:24">r</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tret">Tret</a></span> <span class="id">t</span> <span class="id">=&gt;</span> <span class="id">t</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tint8signed">Tint8signed</a></span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tint8unsigned">Tint8unsigned</a></span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tint16signed">Tint16signed</a></span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tint16unsigned">Tint16unsigned</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tvoid">Tvoid</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Additionally, function definitions and function calls are annotated
+  by function signatures indicating:
+<ul>
+<li>
+ the number and types of arguments;
+</li>
+<li>
+ the type of the returned value;
+</li>
+<li>
+ additional information on which calling convention to use.
+</li>
+</ul>
+These signatures are used in particular to determine appropriate
+calling conventions for the function. </div>
+<br/>
+<span class="vernacular">Record</span> <span id="calling_convention" class="id"><a name="calling_convention" class="">calling_convention</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id">mkcallconv</span> <span class="id">{</span><br/>
+&nbsp;&nbsp;<span id="cc_vararg" class="id"><a name="cc_vararg" class="">cc_vararg:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z;</a></span>  <span class="docright">(* variable-arity function (+ number of fixed args)  *)</span><br/>
+&nbsp;&nbsp;<span id="cc_unproto" class="id"><a name="cc_unproto" class="">cc_unproto:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool;</a></span>     <span class="docright">(* old-style unprototyped function  *)</span><br/>
+&nbsp;&nbsp;<span id="cc_structret" class="id"><a name="cc_structret" class="">cc_structret:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>    <span class="docright">(* function returning a struct   *)</span><br/>
+<span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="cc_default" class="id"><a name="cc_default" class="">cc_default</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">{|</span> <span class="id"><a href="compcert.common.AST.html#cc_vararg">cc_vararg</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None;</a></span> <span class="id"><a href="compcert.common.AST.html#cc_unproto">cc_unproto</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false;</a></span> <span class="id"><a href="compcert.common.AST.html#cc_structret">cc_structret</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span> <span class="id">|}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="calling_convention_eq" class="id"><a name="calling_convention_eq" class="">calling_convention_eq</a></span> (<span id="x:30" class="id"><a name="x:30" class="">x</a></span> <span id="y:31" class="id"><a name="y:31" class="">y:</a></span> <span class="id"><a href="compcert.common.AST.html#calling_convention">calling_convention</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}</a></span> <span class="id">+</span> <span class="id">{x&lt;&gt;y}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+&nbsp;&nbsp;<span class="id">decide</span> <span class="id">equality;</span> <span class="id">try</span> (<span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Bool.Bool.html#bool_dec">bool_dec</a></span>). <span class="id">decide</span> <span class="id">equality;</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.ZArith.BinInt.html#Z.eq_dec">Z.eq_dec</a></span>.<br/>
+Defined.</div>
+<span class="id">Global</span> <span class="vernacular">Opaque</span> <span class="id"><a href="compcert.common.AST.html#calling_convention_eq">calling_convention_eq</a></span>.<br/>
+<br/>
+<span class="vernacular">Record</span> <span id="signature" class="id"><a name="signature" class="">signature</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id">mksignature</span> <span class="id">{</span><br/>
+&nbsp;&nbsp;<span id="sig_args" class="id"><a name="sig_args" class="">sig_args:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ;</a></span><br/>
+&nbsp;&nbsp;<span id="sig_res" class="id"><a name="sig_res" class="">sig_res:</a></span> <span class="id"><a href="compcert.common.AST.html#rettype">rettype;</a></span><br/>
+&nbsp;&nbsp;<span id="sig_cc" class="id"><a name="sig_cc" class="">sig_cc:</a></span> <span class="id"><a href="compcert.common.AST.html#calling_convention">calling_convention</a></span><br/>
+<span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="proj_sig_res" class="id"><a name="proj_sig_res" class="">proj_sig_res</a></span> (<span id="s:36" class="id"><a name="s:36" class="">s:</a></span> <span class="id"><a href="compcert.common.AST.html#signature">signature</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.common.AST.html#proj_rettype">proj_rettype</a></span> <span class="id"><a href="compcert.common.AST.html#s:36">s</a></span>.(<span class="id"><a href="compcert.common.AST.html#sig_res">sig_res</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="signature_eq" class="id"><a name="signature_eq" class="">signature_eq:</a></span> <span class="gallina-kwd">forall</span> (<span id="s1:37" class="id"><a name="s1:37" class="">s1</a></span> <span id="s2:38" class="id"><a name="s2:38" class="">s2:</a></span> <span class="id"><a href="compcert.common.AST.html#signature">signature</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{s1=s2}</a></span> <span class="id">+</span> <span class="id">{s1&lt;&gt;s2}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+&nbsp;&nbsp;<span class="id">generalize</span> <span class="id"><a href="compcert.common.AST.html#rettype_eq">rettype_eq,</a></span> <span class="id"><a href="compcert.common.AST.html#list_typ_eq">list_typ_eq,</a></span> <span class="id"><a href="compcert.common.AST.html#calling_convention_eq">calling_convention_eq;</a></span> <span class="id">decide</span> <span class="id">equality</span>.<br/>
+Defined.</div>
+<span class="id">Global</span> <span class="vernacular">Opaque</span> <span class="id"><a href="compcert.common.AST.html#signature_eq">signature_eq</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="signature_main" class="id"><a name="signature_main" class="">signature_main</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">{|</span> <span class="id"><a href="compcert.common.AST.html#sig_args">sig_args</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil;</a></span> <span class="id"><a href="compcert.common.AST.html#sig_res">sig_res</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint;</a></span> <span class="id"><a href="compcert.common.AST.html#sig_cc">sig_cc</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span> <span class="id">|}</span>.<br/>
+<br/>
+<div class="doc">Memory accesses (load and store instructions) are annotated by
+  a ``memory chunk'' indicating the type, size and signedness of the
+  chunk of memory being accessed. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="memory_chunk" class="id"><a name="memory_chunk" class="">memory_chunk</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Mint8signed" class="id"><a name="Mint8signed" class="">Mint8signed</a></span>     <span class="docright">(* 8-bit signed integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Mint8unsigned" class="id"><a name="Mint8unsigned" class="">Mint8unsigned</a></span>   <span class="docright">(* 8-bit unsigned integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Mint16signed" class="id"><a name="Mint16signed" class="">Mint16signed</a></span>    <span class="docright">(* 16-bit signed integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Mint16unsigned" class="id"><a name="Mint16unsigned" class="">Mint16unsigned</a></span>  <span class="docright">(* 16-bit unsigned integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Mint32" class="id"><a name="Mint32" class="">Mint32</a></span>          <span class="docright">(* 32-bit integer, or pointer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Mint64" class="id"><a name="Mint64" class="">Mint64</a></span>          <span class="docright">(* 64-bit integer  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Mfloat32" class="id"><a name="Mfloat32" class="">Mfloat32</a></span>        <span class="docright">(* 32-bit single-precision float  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Mfloat64" class="id"><a name="Mfloat64" class="">Mfloat64</a></span>        <span class="docright">(* 64-bit double-precision float  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Many32" class="id"><a name="Many32" class="">Many32</a></span>          <span class="docright">(* any value that fits in 32 bits  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Many64" class="id"><a name="Many64" class="">Many64</a></span>.         <span class="docright">(* any value  *)</span><br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="chunk_eq" class="id"><a name="chunk_eq" class="">chunk_eq:</a></span> <span class="gallina-kwd">forall</span> (<span id="c1:41" class="id"><a name="c1:41" class="">c1</a></span> <span id="c2:42" class="id"><a name="c2:42" class="">c2:</a></span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{c1=c2}</a></span> <span class="id">+</span> <span class="id">{c1&lt;&gt;c2}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="id">decide</span> <span class="id">equality</span>. Defined.</div>
+<span class="id">Global</span> <span class="vernacular">Opaque</span> <span class="id"><a href="compcert.common.AST.html#chunk_eq">chunk_eq</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="Mptr" class="id"><a name="Mptr" class="">Mptr</a></span> <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span> <span class="id">:=</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.common.AST.html#Mint64">Mint64</a></span> <span class="gallina-kwd">else</span> <span class="id"><a href="compcert.common.AST.html#Mint32">Mint32</a></span>.<br/>
+<br/>
+<div class="doc">The type (integer/pointer or float) of a chunk. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="type_of_chunk" class="id"><a name="type_of_chunk" class="">type_of_chunk</a></span> (<span id="c:43" class="id"><a name="c:43" class="">c:</a></span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#c:43">c</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint8signed">Mint8signed</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint8unsigned">Mint8unsigned</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint16signed">Mint16signed</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint16unsigned">Mint16unsigned</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint32">Mint32</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint64">Mint64</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tlong">Tlong</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mfloat32">Mfloat32</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tsingle">Tsingle</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mfloat64">Mfloat64</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tfloat">Tfloat</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Many32">Many32</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tany32">Tany32</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Many64">Many64</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tany64">Tany64</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="type_of_Mptr" class="id"><a name="type_of_Mptr" class="">type_of_Mptr:</a></span> <span class="id"><a href="compcert.common.AST.html#type_of_chunk">type_of_chunk</a></span> <span class="id"><a href="compcert.common.AST.html#Mptr">Mptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+ <span class="id">unfold</span> <span class="id"><a href="compcert.common.AST.html#Mptr">Mptr,</a></span> <span class="id"><a href="compcert.common.AST.html#Tptr">Tptr;</a></span> <span class="id">destruct</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span><span class="id">;</span> <span class="id">auto</span>. Qed.</div>
+<br/>
+<div class="doc">Same, as a return type. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="rettype_of_chunk" class="id"><a name="rettype_of_chunk" class="">rettype_of_chunk</a></span> (<span id="c:45" class="id"><a name="c:45" class="">c:</a></span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#rettype">rettype</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#c:45">c</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint8signed">Mint8signed</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint8signed">Tint8signed</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint8unsigned">Mint8unsigned</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint8unsigned">Tint8unsigned</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint16signed">Mint16signed</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint16signed">Tint16signed</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint16unsigned">Mint16unsigned</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint16unsigned">Tint16unsigned</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint32">Mint32</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mint64">Mint64</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tlong">Tlong</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mfloat32">Mfloat32</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tsingle">Tsingle</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Mfloat64">Mfloat64</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tfloat">Tfloat</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Many32">Many32</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tany32">Tany32</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Many64">Many64</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tany64">Tany64</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="proj_rettype_of_chunk" class="id"><a name="proj_rettype_of_chunk" class="">proj_rettype_of_chunk:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="chunk:47" class="id"><a name="chunk:47" class="">chunk,</a></span> <span class="id"><a href="compcert.common.AST.html#proj_rettype">proj_rettype</a></span> (<span class="id"><a href="compcert.common.AST.html#rettype_of_chunk">rettype_of_chunk</a></span> <span class="id"><a href="compcert.common.AST.html#chunk:47">chunk</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.common.AST.html#type_of_chunk">type_of_chunk</a></span> <span class="id"><a href="compcert.common.AST.html#chunk:47">chunk</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">chunk;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">The chunk that is appropriate to store and reload a value of
+  the given type, without losing information. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="chunk_of_type" class="id"><a name="chunk_of_type" class="">chunk_of_type</a></span> (<span id="ty:48" class="id"><a name="ty:48" class="">ty:</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#ty:48">ty</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tint">Tint</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Mint32">Mint32</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tfloat">Tfloat</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Mfloat64">Mfloat64</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tlong">Tlong</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Mint64">Mint64</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tsingle">Tsingle</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Mfloat32">Mfloat32</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tany32">Tany32</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Many32">Many32</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Tany64">Tany64</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Many64">Many64</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="chunk_of_Tptr" class="id"><a name="chunk_of_Tptr" class="">chunk_of_Tptr:</a></span> <span class="id"><a href="compcert.common.AST.html#chunk_of_type">chunk_of_type</a></span> <span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.common.AST.html#Mptr">Mptr</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+ <span class="id">unfold</span> <span class="id"><a href="compcert.common.AST.html#Mptr">Mptr,</a></span> <span class="id"><a href="compcert.common.AST.html#Tptr">Tptr;</a></span> <span class="id">destruct</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span><span class="id">;</span> <span class="id">auto</span>. Qed.</div>
+<br/>
+<div class="doc">Initialization data for global variables. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="init_data" class="id"><a name="init_data" class="">init_data:</a></span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Init_int8" class="id"><a name="Init_int8" class="">Init_int8:</a></span> <span class="id"><a href="compcert.lib.Integers.html#int">int</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#init_data:50">init_data</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Init_int16" class="id"><a name="Init_int16" class="">Init_int16:</a></span> <span class="id"><a href="compcert.lib.Integers.html#int">int</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#init_data:50">init_data</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Init_int32" class="id"><a name="Init_int32" class="">Init_int32:</a></span> <span class="id"><a href="compcert.lib.Integers.html#int">int</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#init_data:50">init_data</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Init_int64" class="id"><a name="Init_int64" class="">Init_int64:</a></span> <span class="id"><a href="compcert.lib.Integers.html#int64">int64</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#init_data:50">init_data</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Init_float32" class="id"><a name="Init_float32" class="">Init_float32:</a></span> <span class="id"><a href="compcert.lib.Floats.html#float32">float32</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#init_data:50">init_data</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Init_float64" class="id"><a name="Init_float64" class="">Init_float64:</a></span> <span class="id"><a href="compcert.lib.Floats.html#float">float</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#init_data:50">init_data</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Init_space" class="id"><a name="Init_space" class="">Init_space:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#init_data:50">init_data</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Init_addrof" class="id"><a name="Init_addrof" class="">Init_addrof:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Integers.html#ptrofs">ptrofs</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#init_data:50">init_data</a></span>.  <span class="docright">(* address of symbol + offset  *)</span><br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="init_data_size" class="id"><a name="init_data_size" class="">init_data_size</a></span> (<span id="i:52" class="id"><a name="i:52" class="">i:</a></span> <span class="id"><a href="compcert.common.AST.html#init_data">init_data</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#i:52">i</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Init_int8">Init_int8</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Init_int16">Init_int16</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Init_int32">Init_int32</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">4</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Init_int64">Init_int64</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">8</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Init_float32">Init_float32</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">4</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Init_float64">Init_float64</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">8</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Init_addrof">Init_addrof</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span> <span class="gallina-kwd">then</span> <span class="id">8</span> <span class="gallina-kwd">else</span> <span class="id">4</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Init_space">Init_space</a></span> <span class="id">n</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.ZArith.BinInt.html#Z.max">Z.max</a></span> <span class="id">n</span> <span class="id">0</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="init_data_list_size" class="id"><a name="init_data_list_size" class="">init_data_list_size</a></span> (<span id="il:54" class="id"><a name="il:54" class="">il:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#init_data">init_data</a></span>) <span class="id">{struct</span> <span class="id">il}</span> <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#il:54">il</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id">0</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">i</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">il'</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#init_data_size">init_data_size</a></span> <span class="id">i</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.ZArith.BinInt.html#46584eddd5fdb16176a10a2843177d3a">+</a></span> <span class="id"><a href="compcert.common.AST.html#init_data_list_size:55">init_data_list_size</a></span> <span class="id">il'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="init_data_size_pos" class="id"><a name="init_data_size_pos" class="">init_data_size_pos:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="i:57" class="id"><a name="i:57" class="">i,</a></span> <span class="id"><a href="compcert.common.AST.html#init_data_size">init_data_size</a></span> <span class="id"><a href="compcert.common.AST.html#i:57">i</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.ZArith.BinInt.html#b1f0780291abe9bd18804d2c9a5039d4">&gt;=</a></span> <span class="id">0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">i;</span> <span class="id">simpl;</span> <span class="id">try</span> <span class="id">extlia</span>. <span class="id">destruct</span> <span class="id"><a href="compcert.x86_64.Archi.html#ptr64">Archi.ptr64</a></span><span class="id">;</span> <span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="init_data_list_size_pos" class="id"><a name="init_data_list_size_pos" class="">init_data_list_size_pos:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="il:58" class="id"><a name="il:58" class="">il,</a></span> <span class="id"><a href="compcert.common.AST.html#init_data_list_size">init_data_list_size</a></span> <span class="id"><a href="compcert.common.AST.html#il:58">il</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.ZArith.BinInt.html#b1f0780291abe9bd18804d2c9a5039d4">&gt;=</a></span> <span class="id">0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">il;</span> <span class="id">simpl</span>. <span class="id">lia</span>. <span class="id">generalize</span> (<span class="id"><a href="compcert.common.AST.html#init_data_size_pos">init_data_size_pos</a></span> <span class="id">a</span>)<span class="id">;</span> <span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Information attached to global variables. </div>
+<br/>
+<span class="vernacular">Record</span> <span id="globvar" class="id"><a name="globvar" class="">globvar</a></span> (<span id="V:59" class="id"><a name="V:59" class="">V:</a></span> <span class="gallina-kwd">Type</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id">mkglobvar</span> <span class="id">{</span><br/>
+&nbsp;&nbsp;<span id="gvar_info" class="id"><a name="gvar_info" class="">gvar_info:</a></span> <span class="id"><a href="compcert.common.AST.html#V:59">V;</a></span>                    <span class="docright">(* language-dependent info, e.g. a type  *)</span><br/>
+&nbsp;&nbsp;<span id="gvar_init" class="id"><a name="gvar_init" class="">gvar_init:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#init_data">init_data;</a></span>       <span class="docright">(* initialization data  *)</span><br/>
+&nbsp;&nbsp;<span id="gvar_readonly" class="id"><a name="gvar_readonly" class="">gvar_readonly:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool;</a></span>             <span class="docright">(* read-only variable? (const)  *)</span><br/>
+&nbsp;&nbsp;<span id="gvar_volatile" class="id"><a name="gvar_volatile" class="">gvar_volatile:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>              <span class="docright">(* volatile variable?  *)</span><br/>
+<span class="id">}</span>.<br/>
+<br/>
+<div class="doc">Whole programs consist of:
+<ul>
+<li>
+ a collection of global definitions (name and description);
+</li>
+<li>
+ a set of public names (the names that are visible outside
+  this compilation unit);
+</li>
+<li>
+ the name of the ``main'' function that serves as entry point in the program.
+</li>
+</ul>
+A global definition is either a global function or a global variable.
+The type of function descriptions and that of additional information
+for variables vary among the various intermediate languages and are
+taken as parameters to the <span class="bracket"><span class="id">program</span></span> type.  The other parts of whole
+programs are common to all languages. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="globdef" class="id"><a name="globdef" class="">globdef</a></span> (<span id="F:65" class="id"><a name="F:65" class="">F</a></span> <span id="V:66" class="id"><a name="V:66" class="">V:</a></span> <span class="gallina-kwd">Type</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Gfun" class="id"><a name="Gfun" class="">Gfun</a></span> (<span id="f:69" class="id"><a name="f:69" class="">f:</a></span> <span class="id"><a href="compcert.common.AST.html#F:65">F</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Gvar" class="id"><a name="Gvar" class="">Gvar</a></span> (<span id="v:70" class="id"><a name="v:70" class="">v:</a></span> <span class="id"><a href="compcert.common.AST.html#globvar">globvar</a></span> <span class="id"><a href="compcert.common.AST.html#V:66">V</a></span>).<br/>
+<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="compcert.common.AST.html#Gfun">Gfun</a></span> <span class="id">[F</span> <span class="id">V]</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="compcert.common.AST.html#Gvar">Gvar</a></span> <span class="id">[F</span> <span class="id">V]</span>.<br/>
+<br/>
+<span class="vernacular">Record</span> <span id="program" class="id"><a name="program" class="">program</a></span> (<span id="F:71" class="id"><a name="F:71" class="">F</a></span> <span id="V:72" class="id"><a name="V:72" class="">V:</a></span> <span class="gallina-kwd">Type</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id">mkprogram</span> <span class="id">{</span><br/>
+&nbsp;&nbsp;<span id="prog_defs" class="id"><a name="prog_defs" class="">prog_defs:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.common.AST.html#globdef">globdef</a></span> <span class="id"><a href="compcert.common.AST.html#F:71">F</a></span> <span class="id"><a href="compcert.common.AST.html#V:72">V</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;<span id="prog_public" class="id"><a name="prog_public" class="">prog_public:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident;</a></span><br/>
+&nbsp;&nbsp;<span id="prog_main" class="id"><a name="prog_main" class="">prog_main:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span><br/>
+<span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="prog_defs_names" class="id"><a name="prog_defs_names" class="">prog_defs_names</a></span> (<span id="F:77" class="id"><a name="F:77" class="">F</a></span> <span id="V:78" class="id"><a name="V:78" class="">V:</a></span> <span class="gallina-kwd">Type</span>) (<span id="p:79" class="id"><a name="p:79" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#F:77">F</a></span> <span class="id"><a href="compcert.common.AST.html#V:78">V</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.common.AST.html#p:79">p</a></span>.(<span class="id"><a href="compcert.common.AST.html#prog_defs">prog_defs</a></span>).<br/>
+<br/>
+<div class="doc">The "definition map" of a program maps names of globals to their definitions.
+  If several definitions have the same name, the one appearing last in <span class="bracket"><span class="id">p</span>.(<span class="id">prog_defs</span>)</span> wins. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="prog_defmap" class="id"><a name="prog_defmap" class="">prog_defmap</a></span> (<span id="F:80" class="id"><a name="F:80" class="">F</a></span> <span id="V:81" class="id"><a name="V:81" class="">V:</a></span> <span class="gallina-kwd">Type</span>) (<span id="p:82" class="id"><a name="p:82" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#F:80">F</a></span> <span class="id"><a href="compcert.common.AST.html#V:81">V</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.lib.Maps.html#PTree.t">PTree.t</a></span> (<span class="id"><a href="compcert.common.AST.html#globdef">globdef</a></span> <span class="id"><a href="compcert.common.AST.html#F:80">F</a></span> <span class="id"><a href="compcert.common.AST.html#V:81">V</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.of_list">PTree_Properties.of_list</a></span> <span class="id"><a href="compcert.common.AST.html#p:82">p</a></span>.(<span class="id"><a href="compcert.common.AST.html#prog_defs">prog_defs</a></span>).<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="DEFMAP" class="id"><a name="DEFMAP" class="">DEFMAP</a></span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> <span id="DEFMAP.F" class="id"><a name="DEFMAP.F" class="">F</a></span> <span id="DEFMAP.V" class="id"><a name="DEFMAP.V" class="">V:</a></span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Variable</span> <span id="DEFMAP.p" class="id"><a name="DEFMAP.p" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.F">F</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.V">V</a></span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="in_prog_defmap" class="id"><a name="in_prog_defmap" class="">in_prog_defmap:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="id:86" class="id"><a name="id:86" class="">id</a></span> <span id="g:87" class="id"><a name="g:87" class="">g,</a></span> (<span class="id"><a href="compcert.common.AST.html#prog_defmap">prog_defmap</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span>)<span class="id">!id</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.common.AST.html#g:87">g</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> (<span class="id"><a href="compcert.common.AST.html#id:86">id,</a></span> <span class="id"><a href="compcert.common.AST.html#g:87">g</a></span>) (<span class="id"><a href="compcert.common.AST.html#prog_defs">prog_defs</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.in_of_list">PTree_Properties.in_of_list</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="prog_defmap_dom" class="id"><a name="prog_defmap_dom" class="">prog_defmap_dom:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="id:88" class="id"><a name="id:88" class="">id,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.common.AST.html#id:88">id</a></span> (<span class="id"><a href="compcert.common.AST.html#prog_defs_names">prog_defs_names</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">exists</span> <span id="g:89" class="id"><a name="g:89" class="">g,</a></span> (<span class="id"><a href="compcert.common.AST.html#prog_defmap">prog_defmap</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span>)<span class="id">!id</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.common.AST.html#g:89">g</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.of_list_dom">PTree_Properties.of_list_dom</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="prog_defmap_unique" class="id"><a name="prog_defmap_unique" class="">prog_defmap_unique:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="defs1:90" class="id"><a name="defs1:90" class="">defs1</a></span> <span id="id:91" class="id"><a name="id:91" class="">id</a></span> <span id="g:92" class="id"><a name="g:92" class="">g</a></span> <span id="defs2:93" class="id"><a name="defs2:93" class="">defs2,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#prog_defs">prog_defs</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.common.AST.html#defs1:90">defs1</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> (<span class="id"><a href="compcert.common.AST.html#id:91">id,</a></span> <span class="id"><a href="compcert.common.AST.html#g:92">g</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="compcert.common.AST.html#defs2:93">defs2</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181">~In</a></span> <span class="id"><a href="compcert.common.AST.html#id:91">id</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.common.AST.html#defs2:93">defs2</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="compcert.common.AST.html#prog_defmap">prog_defmap</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span>)<span class="id">!id</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.common.AST.html#g:92">g</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.common.AST.html#prog_defmap">prog_defmap;</a></span> <span class="id">intros</span>. <span class="id">rewrite</span> <span class="id">H</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.of_list_unique">PTree_Properties.of_list_unique</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="prog_defmap_norepet" class="id"><a name="prog_defmap_norepet" class="">prog_defmap_norepet:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="id:94" class="id"><a name="id:94" class="">id</a></span> <span id="g:95" class="id"><a name="g:95" class="">g,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Coqlib.html#list_norepet">list_norepet</a></span> (<span class="id"><a href="compcert.common.AST.html#prog_defs_names">prog_defs_names</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> (<span class="id"><a href="compcert.common.AST.html#id:94">id,</a></span> <span class="id"><a href="compcert.common.AST.html#g:95">g</a></span>) (<span class="id"><a href="compcert.common.AST.html#prog_defs">prog_defs</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="compcert.common.AST.html#prog_defmap">prog_defmap</a></span> <span class="id"><a href="compcert.common.AST.html#DEFMAP.p">p</a></span>)<span class="id">!id</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.common.AST.html#g:95">g</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Maps.html#PTree_Properties.of_list_norepet">PTree_Properties.of_list_norepet</a></span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.common.AST.html#DEFMAP">DEFMAP</a></span>.<br/>
+<br/>
+<h1> Generic transformations over programs </h1>
+<br/>
+<div class="doc">We now define a general iterator over programs that applies a given
+  code transformation function to all function descriptions and leaves
+  the other parts of the program unchanged. </div>
+<br/>
+<span class="vernacular">Section</span> <span id="TRANSF_PROGRAM" class="id"><a name="TRANSF_PROGRAM" class="">TRANSF_PROGRAM</a></span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_PROGRAM.A" class="id"><a name="TRANSF_PROGRAM.A" class="">A</a></span> <span id="TRANSF_PROGRAM.B" class="id"><a name="TRANSF_PROGRAM.B" class="">B</a></span> <span id="TRANSF_PROGRAM.V" class="id"><a name="TRANSF_PROGRAM.V" class="">V:</a></span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_PROGRAM.transf" class="id"><a name="TRANSF_PROGRAM.transf" class="">transf:</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.B">B</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transform_program_globdef" class="id"><a name="transform_program_globdef" class="">transform_program_globdef</a></span> (<span id="idg:100" class="id"><a name="idg:100" class="">idg:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.common.AST.html#globdef">globdef</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.A">A</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.V">V</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.common.AST.html#globdef">globdef</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.B">B</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.V">V</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#idg:100">idg</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id,</a></span> <span class="id"><a href="compcert.common.AST.html#Gfun">Gfun</a></span> <span class="id">f</span>) <span class="id">=&gt;</span> (<span class="id">id,</span> <span class="id"><a href="compcert.common.AST.html#Gfun">Gfun</a></span> (<span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.transf">transf</a></span> <span class="id">f</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id,</a></span> <span class="id"><a href="compcert.common.AST.html#Gvar">Gvar</a></span> <span class="id">v</span>) <span class="id">=&gt;</span> (<span class="id">id,</span> <span class="id"><a href="compcert.common.AST.html#Gvar">Gvar</a></span> <span class="id">v</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transform_program" class="id"><a name="transform_program" class="">transform_program</a></span> (<span id="p:102" class="id"><a name="p:102" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.A">A</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.V">V</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.B">B</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM.V">V</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#mkprogram">mkprogram</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span> <span class="id"><a href="compcert.common.AST.html#transform_program_globdef">transform_program_globdef</a></span> <span class="id"><a href="compcert.common.AST.html#p:102">p</a></span>.(<span class="id"><a href="compcert.common.AST.html#prog_defs">prog_defs</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#p:102">p</a></span>.(<span class="id"><a href="compcert.common.AST.html#prog_public">prog_public</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#p:102">p</a></span>.(<span class="id"><a href="compcert.common.AST.html#prog_main">prog_main</a></span>).<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM">TRANSF_PROGRAM</a></span>.<br/>
+<br/>
+<div class="doc">The following is a more general presentation of <span class="bracket"><span class="id">transform_program</span></span>:
+<ul>
+<li>
+ Global variable information can be transformed, in addition to function
+  definitions.
+</li>
+<li>
+ The transformation functions can fail and return an error message.
+</li>
+<li>
+ The transformation for function definitions receives a global context
+  (derived from the compilation unit being transformed) as additiona
+  argument.
+</li>
+<li>
+ The transformation functions receive the name of the global as
+  additional argument. </li>
+</ul>
+</div>
+<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Open</span> <span class="vernacular">Scope</span> <span class="id">error_monad_scope</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="TRANSF_PROGRAM_GEN" class="id"><a name="TRANSF_PROGRAM_GEN" class="">TRANSF_PROGRAM_GEN</a></span>.<br/>
+<br/>
+<span class="vernacular">Variables</span> <span id="TRANSF_PROGRAM_GEN.A" class="id"><a name="TRANSF_PROGRAM_GEN.A" class="">A</a></span> <span id="TRANSF_PROGRAM_GEN.B" class="id"><a name="TRANSF_PROGRAM_GEN.B" class="">B</a></span> <span id="TRANSF_PROGRAM_GEN.V" class="id"><a name="TRANSF_PROGRAM_GEN.V" class="">V</a></span> <span id="TRANSF_PROGRAM_GEN.W" class="id"><a name="TRANSF_PROGRAM_GEN.W" class="">W:</a></span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_PROGRAM_GEN.transf_fun" class="id"><a name="TRANSF_PROGRAM_GEN.transf_fun" class="">transf_fun:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.B">B</a></span>.<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_PROGRAM_GEN.transf_var" class="id"><a name="TRANSF_PROGRAM_GEN.transf_var" class="">transf_var:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.V">V</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.W">W</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_globvar" class="id"><a name="transf_globvar" class="">transf_globvar</a></span> (<span id="i:109" class="id"><a name="i:109" class="">i:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="g:110" class="id"><a name="g:110" class="">g:</a></span> <span class="id"><a href="compcert.common.AST.html#globvar">globvar</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.V">V</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> (<span class="id"><a href="compcert.common.AST.html#globvar">globvar</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.W">W</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="info':111" class="id"><a name="info':111" class="">info'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.transf_var">transf_var</a></span> <span class="id"><a href="compcert.common.AST.html#i:109">i</a></span> <span class="id"><a href="compcert.common.AST.html#g:110">g</a></span>.(<span class="id"><a href="compcert.common.AST.html#gvar_info">gvar_info</a></span>)<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.common.AST.html#mkglobvar">mkglobvar</a></span> <span class="id"><a href="compcert.common.AST.html#info':111">info'</a></span> <span class="id"><a href="compcert.common.AST.html#g:110">g</a></span>.(<span class="id"><a href="compcert.common.AST.html#gvar_init">gvar_init</a></span>) <span class="id"><a href="compcert.common.AST.html#g:110">g</a></span>.(<span class="id"><a href="compcert.common.AST.html#gvar_readonly">gvar_readonly</a></span>) <span class="id"><a href="compcert.common.AST.html#g:110">g</a></span>.(<span class="id"><a href="compcert.common.AST.html#gvar_volatile">gvar_volatile</a></span>)).<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="transf_globdefs" class="id"><a name="transf_globdefs" class="">transf_globdefs</a></span> (<span id="l:112" class="id"><a name="l:112" class="">l:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.common.AST.html#globdef">globdef</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.A">A</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.V">V</a></span>)) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.common.AST.html#globdef">globdef</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.B">B</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.W">W</a></span>)) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#l:112">l</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id,</a></span> <span class="id"><a href="compcert.common.AST.html#Gfun">Gfun</a></span> <span class="id">f</span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">l'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.transf_fun">transf_fun</a></span> <span class="id">id</span> <span class="id">f</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.Errors.html#Error">Error</a></span> <span class="id"><a href="compcert.common.Errors.html#msg">msg</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#Error">Error</a></span> (<span class="id"><a href="compcert.common.Errors.html#MSG">MSG</a></span> <span class="id">&quot;In function &quot; :: CTX id :: MSG &quot;: &quot;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">msg</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id">tf</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="tl':115" class="id"><a name="tl':115" class="">tl'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.common.AST.html#transf_globdefs:113">transf_globdefs</a></span> <span class="id">l';</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> ((<span class="id">id,</span> <span class="id"><a href="compcert.common.AST.html#Gfun">Gfun</a></span> <span class="id">tf</span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="compcert.common.AST.html#tl':115">tl'</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id,</a></span> <span class="id"><a href="compcert.common.AST.html#Gvar">Gvar</a></span> <span class="id">v</span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">l'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#transf_globvar">transf_globvar</a></span> <span class="id">id</span> <span class="id">v</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.Errors.html#Error">Error</a></span> <span class="id"><a href="compcert.common.Errors.html#msg">msg</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#Error">Error</a></span> (<span class="id"><a href="compcert.common.Errors.html#MSG">MSG</a></span> <span class="id">&quot;In variable &quot; :: CTX id :: MSG &quot;: &quot;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">msg</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id">tv</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="tl':116" class="id"><a name="tl':116" class="">tl'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.common.AST.html#transf_globdefs:113">transf_globdefs</a></span> <span class="id">l';</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> ((<span class="id">id,</span> <span class="id"><a href="compcert.common.AST.html#Gvar">Gvar</a></span> <span class="id">tv</span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="compcert.common.AST.html#tl':116">tl'</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transform_partial_program2" class="id"><a name="transform_partial_program2" class="">transform_partial_program2</a></span> (<span id="p:117" class="id"><a name="p:117" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.A">A</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.V">V</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> (<span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.B">B</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN.W">W</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="gl':118" class="id"><a name="gl':118" class="">gl'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.common.AST.html#transf_globdefs">transf_globdefs</a></span> <span class="id"><a href="compcert.common.AST.html#p:117">p</a></span>.(<span class="id"><a href="compcert.common.AST.html#prog_defs">prog_defs</a></span>)<span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.common.AST.html#mkprogram">mkprogram</a></span> <span class="id"><a href="compcert.common.AST.html#gl':118">gl'</a></span> <span class="id"><a href="compcert.common.AST.html#p:117">p</a></span>.(<span class="id"><a href="compcert.common.AST.html#prog_public">prog_public</a></span>) <span class="id"><a href="compcert.common.AST.html#p:117">p</a></span>.(<span class="id"><a href="compcert.common.AST.html#prog_main">prog_main</a></span>)).<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PROGRAM_GEN">TRANSF_PROGRAM_GEN</a></span>.<br/>
+<br/>
+<div class="doc">The following is a special case of <span class="bracket"><span class="id">transform_partial_program2</span></span>,
+  where only function definitions are transformed, but not variable definitions. </div>
+<br/>
+<span class="vernacular">Section</span> <span id="TRANSF_PARTIAL_PROGRAM" class="id"><a name="TRANSF_PARTIAL_PROGRAM" class="">TRANSF_PARTIAL_PROGRAM</a></span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_PARTIAL_PROGRAM.A" class="id"><a name="TRANSF_PARTIAL_PROGRAM.A" class="">A</a></span> <span id="TRANSF_PARTIAL_PROGRAM.B" class="id"><a name="TRANSF_PARTIAL_PROGRAM.B" class="">B</a></span> <span id="TRANSF_PARTIAL_PROGRAM.V" class="id"><a name="TRANSF_PARTIAL_PROGRAM.V" class="">V:</a></span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_PARTIAL_PROGRAM.transf_fun" class="id"><a name="TRANSF_PARTIAL_PROGRAM.transf_fun" class="">transf_fun:</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_PROGRAM.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_PROGRAM.B">B</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transform_partial_program" class="id"><a name="transform_partial_program" class="">transform_partial_program</a></span> (<span id="p:123" class="id"><a name="p:123" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_PROGRAM.A">A</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_PROGRAM.V">V</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> (<span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_PROGRAM.B">B</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_PROGRAM.V">V</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transform_partial_program2">transform_partial_program2</a></span> (<span class="gallina-kwd">fun</span> <span id="i:126" class="id"><a name="i:126" class="">i</a></span> <span id="f:127" class="id"><a name="f:127" class="">f</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_PROGRAM.transf_fun">transf_fun</a></span> <span class="id"><a href="compcert.common.AST.html#f:127">f</a></span>) (<span class="gallina-kwd">fun</span> <span id="i:124" class="id"><a name="i:124" class="">i</a></span> <span id="v:125" class="id"><a name="v:125" class="">v</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="compcert.common.AST.html#v:125">v</a></span>) <span class="id"><a href="compcert.common.AST.html#p:123">p</a></span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_PROGRAM">TRANSF_PARTIAL_PROGRAM</a></span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="transform_program_partial_program" class="id"><a name="transform_program_partial_program" class="">transform_program_partial_program:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="A:128" class="id"><a name="A:128" class="">A</a></span> <span id="B:129" class="id"><a name="B:129" class="">B</a></span> <span id="V:130" class="id"><a name="V:130" class="">V:</a></span> <span class="gallina-kwd">Type</span>) (<span id="transf_fun:131" class="id"><a name="transf_fun:131" class="">transf_fun:</a></span> <span class="id"><a href="compcert.common.AST.html#A:128">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#B:129">B</a></span>) (<span id="p:132" class="id"><a name="p:132" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#program">program</a></span> <span class="id"><a href="compcert.common.AST.html#A:128">A</a></span> <span class="id"><a href="compcert.common.AST.html#V:130">V</a></span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transform_partial_program">transform_partial_program</a></span> (<span class="gallina-kwd">fun</span> <span id="f:133" class="id"><a name="f:133" class="">f</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.common.AST.html#transf_fun:131">transf_fun</a></span> <span class="id"><a href="compcert.common.AST.html#f:133">f</a></span>)) <span class="id"><a href="compcert.common.AST.html#p:132">p</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.common.AST.html#transform_program">transform_program</a></span> <span class="id"><a href="compcert.common.AST.html#transf_fun:131">transf_fun</a></span> <span class="id"><a href="compcert.common.AST.html#p:132">p</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+&nbsp;&nbsp;<span class="id">intros</span>. <span class="id">unfold</span> <span class="id"><a href="compcert.common.AST.html#transform_partial_program">transform_partial_program,</a></span> <span class="id"><a href="compcert.common.AST.html#transform_partial_program2">transform_partial_program2</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">EQ:</span> <span class="gallina-kwd">forall</span> <span id="l:139" class="id"><span id="l:134" class="id"><a name="l:139" class="">l,</a></span></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transf_globdefs">transf_globdefs</a></span> (<span class="gallina-kwd">fun</span> <span id="i:142" class="id"><span id="i:137" class="id"><a name="i:142" class="">i</a></span></span> <span id="f:143" class="id"><span id="f:138" class="id"><a name="f:143" class="">f</a></span></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id">transf_fun</span> <span class="id"><a href="compcert.common.AST.html#f:138">f</a></span>)) (<span class="gallina-kwd">fun</span> <span id="i:140" class="id"><span id="i:135" class="id"><a name="i:140" class="">i</a></span></span> (<span id="v:141" class="id"><span id="v:136" class="id"><a name="v:141" class="">v:</a></span></span> <span class="id">V</span>) <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id"><a href="compcert.common.AST.html#v:136">v</a></span>) <span class="id"><a href="compcert.common.AST.html#l:134">l</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span> (<span class="id"><a href="compcert.common.AST.html#transform_program_globdef">transform_program_globdef</a></span> <span class="id">transf_fun</span>) <span class="id"><a href="compcert.common.AST.html#l:134">l</a></span>)).<br/>
+&nbsp;&nbsp;<span class="id">{</span> <span class="id">induction</span> <span class="id">l</span> <span class="gallina-kwd">as</span> <span class="id">[</span> <span class="id">|</span> <span class="id">[id</span> <span class="id">g]</span> <span class="id">l];</span> <span class="id">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">g;</span> <span class="id">simpl;</span> <span class="id">rewrite</span> <span class="id">IHl;</span> <span class="id">simpl</span>. <span class="id">auto</span>. <span class="id">destruct</span> <span class="id">v;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">}</span><br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">EQ;</span> <span class="id">simpl</span>. <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<h1> External functions </h1>
+<br/>
+<div class="doc">For most languages, the functions composing the program are either
+  internal functions, defined within the language, or external functions,
+  defined outside.  External functions include system calls but also
+  compiler built-in functions.  We define a type for external functions
+  and associated operations. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="external_function" class="id"><a name="external_function" class="">external_function</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_external" class="id"><a name="EF_external" class="">EF_external</a></span> (<span id="name:146" class="id"><a name="name:146" class="">name:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span id="sg:147" class="id"><a name="sg:147" class="">sg:</a></span> <span class="id"><a href="compcert.common.AST.html#signature">signature</a></span>)<br/>
+<div class="doc">A system call or library function.  Produces an event
+         in the trace. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_builtin" class="id"><a name="EF_builtin" class="">EF_builtin</a></span> (<span id="name:148" class="id"><a name="name:148" class="">name:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span id="sg:149" class="id"><a name="sg:149" class="">sg:</a></span> <span class="id"><a href="compcert.common.AST.html#signature">signature</a></span>)<br/>
+<div class="doc">A compiler built-in function.  Behaves like an external, but
+         can be inlined by the compiler. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_runtime" class="id"><a name="EF_runtime" class="">EF_runtime</a></span> (<span id="name:150" class="id"><a name="name:150" class="">name:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span id="sg:151" class="id"><a name="sg:151" class="">sg:</a></span> <span class="id"><a href="compcert.common.AST.html#signature">signature</a></span>)<br/>
+<div class="doc">A function from the run-time library.  Behaves like an
+         external, but must not be redefined. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_vload" class="id"><a name="EF_vload" class="">EF_vload</a></span> (<span id="chunk:152" class="id"><a name="chunk:152" class="">chunk:</a></span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span>)<br/>
+<div class="doc">A volatile read operation.  If the address given as first argument
+         points within a volatile global variable, generate an
+         event and return the value found in this event.  Otherwise,
+         produce no event and behave like a regular memory load. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_vstore" class="id"><a name="EF_vstore" class="">EF_vstore</a></span> (<span id="chunk:153" class="id"><a name="chunk:153" class="">chunk:</a></span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span>)<br/>
+<div class="doc">A volatile store operation.   If the address given as first argument
+         points within a volatile global variable, generate an event.
+         Otherwise, produce no event and behave like a regular memory store. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_malloc" class="id"><a name="EF_malloc" class="">EF_malloc</a></span><br/>
+<div class="doc">Dynamic memory allocation.  Takes the requested size in bytes
+         as argument; returns a pointer to a fresh block of the given size.
+         Produces no observable event. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_free" class="id"><a name="EF_free" class="">EF_free</a></span><br/>
+<div class="doc">Dynamic memory deallocation.  Takes a pointer to a block
+         allocated by an <span class="bracket"><span class="id">EF_malloc</span></span> external call and frees the
+         corresponding block.
+         Produces no observable event. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_memcpy" class="id"><a name="EF_memcpy" class="">EF_memcpy</a></span> (<span id="sz:154" class="id"><a name="sz:154" class="">sz:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span>) (<span id="al:155" class="id"><a name="al:155" class="">al:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span>)<br/>
+<div class="doc">Block copy, of <span class="bracket"><span class="id">sz</span></span> bytes, between addresses that are <span class="bracket"><span class="id">al</span></span>-aligned. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_annot" class="id"><a name="EF_annot" class="">EF_annot</a></span> (<span id="kind:156" class="id"><a name="kind:156" class="">kind:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#positive">positive</a></span>) (<span id="text:157" class="id"><a name="text:157" class="">text:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span id="targs:158" class="id"><a name="targs:158" class="">targs:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>)<br/>
+<div class="doc">A programmer-supplied annotation.  Takes zero, one or several arguments,
+         produces an event carrying the text and the values of these arguments,
+         and returns no value. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_annot_val" class="id"><a name="EF_annot_val" class="">EF_annot_val</a></span> (<span id="kind:159" class="id"><a name="kind:159" class="">kind:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#positive">positive</a></span>) (<span id="text:160" class="id"><a name="text:160" class="">text:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span id="targ:161" class="id"><a name="targ:161" class="">targ:</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>)<br/>
+<div class="doc">Another form of annotation that takes one argument, produces
+         an event carrying the text and the value of this argument,
+         and returns the value of the argument. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_inline_asm" class="id"><a name="EF_inline_asm" class="">EF_inline_asm</a></span> (<span id="text:162" class="id"><a name="text:162" class="">text:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>) (<span id="sg:163" class="id"><a name="sg:163" class="">sg:</a></span> <span class="id"><a href="compcert.common.AST.html#signature">signature</a></span>) (<span id="clobbers:164" class="id"><a name="clobbers:164" class="">clobbers:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html#string">string</a></span>)<br/>
+<div class="doc">Inline <span class="bracket"><span class="id">asm</span></span> statements.  Semantically, treated like an
+         annotation with no parameters (<span class="bracket"><span class="id">EF_annot</span> <span class="id">text</span> <span class="id">nil</span></span>).  To be
+         used with caution, as it can invalidate the semantic
+         preservation theorem.  Generated only if <span class="bracket">-<span class="id">finline</span>-<span class="id">asm</span></span> is
+         given. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="EF_debug" class="id"><a name="EF_debug" class="">EF_debug</a></span> (<span id="kind:165" class="id"><a name="kind:165" class="">kind:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#positive">positive</a></span>) (<span id="text:166" class="id"><a name="text:166" class="">text:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="targs:167" class="id"><a name="targs:167" class="">targs:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>).<br/>
+<div class="doc">Transport debugging information from the front-end to the generated
+         assembly.  Takes zero, one or several arguments like <span class="bracket"><span class="id">EF_annot</span></span>.
+         Unlike <span class="bracket"><span class="id">EF_annot</span></span>, produces no observable event. </div>
+<br/>
+<div class="doc">The type signature of an external function. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="ef_sig" class="id"><a name="ef_sig" class="">ef_sig</a></span> (<span id="ef:168" class="id"><a name="ef:168" class="">ef:</a></span> <span class="id"><a href="compcert.common.AST.html#external_function">external_function</a></span>)<span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#signature">signature</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#ef:168">ef</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_external">EF_external</a></span> <span class="id">name</span> <span class="id">sg</span> <span class="id">=&gt;</span> <span class="id">sg</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_builtin">EF_builtin</a></span> <span class="id">name</span> <span class="id">sg</span> <span class="id">=&gt;</span> <span class="id">sg</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_runtime">EF_runtime</a></span> <span class="id">name</span> <span class="id">sg</span> <span class="id">=&gt;</span> <span class="id">sg</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_vload">EF_vload</a></span> <span class="id">chunk</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> (<span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) (<span class="id"><a href="compcert.common.AST.html#rettype_of_chunk">rettype_of_chunk</a></span> <span class="id">chunk</span>) <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_vstore">EF_vstore</a></span> <span class="id">chunk</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> (<span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="compcert.common.AST.html#type_of_chunk">type_of_chunk</a></span> <span class="id">chunk</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) <span class="id"><a href="compcert.common.AST.html#Tvoid">Tvoid</a></span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_malloc">EF_malloc</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> (<span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) <span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_free">EF_free</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> (<span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) <span class="id"><a href="compcert.common.AST.html#Tvoid">Tvoid</a></span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_memcpy">EF_memcpy</a></span> <span class="id">sz</span> <span class="id">al</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> (<span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="compcert.common.AST.html#Tptr">Tptr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) <span class="id"><a href="compcert.common.AST.html#Tvoid">Tvoid</a></span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_annot">EF_annot</a></span> <span class="id">kind</span> <span class="id">text</span> <span class="id">targs</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> <span class="id">targs</span> <span class="id"><a href="compcert.common.AST.html#Tvoid">Tvoid</a></span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_annot_val">EF_annot_val</a></span> <span class="id">kind</span> <span class="id">text</span> <span class="id">targ</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> (<span class="id">targ</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) <span class="id">targ</span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_inline_asm">EF_inline_asm</a></span> <span class="id">text</span> <span class="id">sg</span> <span class="id">clob</span> <span class="id">=&gt;</span> <span class="id">sg</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_debug">EF_debug</a></span> <span class="id">kind</span> <span class="id">text</span> <span class="id">targs</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> <span class="id">targs</span> <span class="id"><a href="compcert.common.AST.html#Tvoid">Tvoid</a></span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Whether an external function should be inlined by the compiler. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="ef_inline" class="id"><a name="ef_inline" class="">ef_inline</a></span> (<span id="ef:170" class="id"><a name="ef:170" class="">ef:</a></span> <span class="id"><a href="compcert.common.AST.html#external_function">external_function</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#ef:170">ef</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_external">EF_external</a></span> <span class="id">name</span> <span class="id">sg</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_builtin">EF_builtin</a></span> <span class="id">name</span> <span class="id">sg</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_runtime">EF_runtime</a></span> <span class="id">name</span> <span class="id">sg</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_vload">EF_vload</a></span> <span class="id">chunk</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_vstore">EF_vstore</a></span> <span class="id">chunk</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_malloc">EF_malloc</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_free">EF_free</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_memcpy">EF_memcpy</a></span> <span class="id">sz</span> <span class="id">al</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_annot">EF_annot</a></span> <span class="id">kind</span> <span class="id">text</span> <span class="id">targs</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_annot_val">EF_annot_val</a></span> <span class="id">kind</span> <span class="id">Text</span> <span class="id">rg</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_inline_asm">EF_inline_asm</a></span> <span class="id">text</span> <span class="id">sg</span> <span class="id">clob</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_debug">EF_debug</a></span> <span class="id">kind</span> <span class="id">text</span> <span class="id">targs</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Whether an external function must reload its arguments. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="ef_reloads" class="id"><a name="ef_reloads" class="">ef_reloads</a></span> (<span id="ef:172" class="id"><a name="ef:172" class="">ef:</a></span> <span class="id"><a href="compcert.common.AST.html#external_function">external_function</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#ef:172">ef</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_annot">EF_annot</a></span> <span class="id">kind</span> <span class="id">text</span> <span class="id">targs</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_debug">EF_debug</a></span> <span class="id">kind</span> <span class="id">text</span> <span class="id">targs</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Equality between external functions.  Used in module <span class="bracket"><span class="id">Allocation</span></span>. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="external_function_eq" class="id"><a name="external_function_eq" class="">external_function_eq:</a></span> <span class="gallina-kwd">forall</span> (<span id="ef1:174" class="id"><a name="ef1:174" class="">ef1</a></span> <span id="ef2:175" class="id"><a name="ef2:175" class="">ef2:</a></span> <span class="id"><a href="compcert.common.AST.html#external_function">external_function</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{ef1=ef2}</a></span> <span class="id">+</span> <span class="id">{ef1&lt;&gt;ef2}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+&nbsp;&nbsp;<span class="id">generalize</span> <span class="id"><a href="compcert.common.AST.html#ident_eq">ident_eq</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Strings.String.html#string_dec">string_dec</a></span> <span class="id"><a href="compcert.common.AST.html#signature_eq">signature_eq</a></span> <span class="id"><a href="compcert.common.AST.html#chunk_eq">chunk_eq</a></span> <span class="id"><a href="compcert.common.AST.html#typ_eq">typ_eq</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#list_eq_dec">list_eq_dec</a></span> <span class="id"><a href="compcert.lib.Coqlib.html#zeq">zeq</a></span> <span class="id"><a href="compcert.lib.Integers.html#Int.eq_dec">Int.eq_dec</a></span><span class="id">;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">decide</span> <span class="id">equality</span>.<br/>
+Defined.</div>
+<span class="id">Global</span> <span class="vernacular">Opaque</span> <span class="id"><a href="compcert.common.AST.html#external_function_eq">external_function_eq</a></span>.<br/>
+<br/>
+<div class="doc">Function definitions are the union of internal and external functions. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="fundef" class="id"><a name="fundef" class="">fundef</a></span> (<span id="F:176" class="id"><a name="F:176" class="">F:</a></span> <span class="gallina-kwd">Type</span>)<span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Internal" class="id"><a name="Internal" class="">Internal:</a></span> <span class="id"><a href="compcert.common.AST.html#F:176">F</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#fundef:177">fundef</a></span> <span class="id"><a href="compcert.common.AST.html#F:176">F</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="External" class="id"><a name="External" class="">External:</a></span> <span class="id"><a href="compcert.common.AST.html#external_function">external_function</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#fundef:177">fundef</a></span> <span class="id"><a href="compcert.common.AST.html#F:176">F</a></span>.<br/>
+<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="compcert.common.AST.html#External">External</a></span> <span class="id">[F]</span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="TRANSF_FUNDEF" class="id"><a name="TRANSF_FUNDEF" class="">TRANSF_FUNDEF</a></span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_FUNDEF.A" class="id"><a name="TRANSF_FUNDEF.A" class="">A</a></span> <span id="TRANSF_FUNDEF.B" class="id"><a name="TRANSF_FUNDEF.B" class="">B:</a></span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_FUNDEF.transf" class="id"><a name="TRANSF_FUNDEF.transf" class="">transf:</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_FUNDEF.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_FUNDEF.B">B</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_fundef" class="id"><a name="transf_fundef" class="">transf_fundef</a></span> (<span id="fd:182" class="id"><a name="fd:182" class="">fd:</a></span> <span class="id"><a href="compcert.common.AST.html#fundef">fundef</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_FUNDEF.A">A</a></span>)<span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#fundef">fundef</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_FUNDEF.B">B</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#fd:182">fd</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Internal">Internal</a></span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Internal">Internal</a></span> (<span class="id"><a href="compcert.common.AST.html#TRANSF_FUNDEF.transf">transf</a></span> <span class="id">f</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#External">External</a></span> <span class="id">ef</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#External">External</a></span> <span class="id">ef</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.common.AST.html#TRANSF_FUNDEF">TRANSF_FUNDEF</a></span>.<br/>
+<br/>
+<span class="vernacular">Section</span> <span id="TRANSF_PARTIAL_FUNDEF" class="id"><a name="TRANSF_PARTIAL_FUNDEF" class="">TRANSF_PARTIAL_FUNDEF</a></span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_PARTIAL_FUNDEF.A" class="id"><a name="TRANSF_PARTIAL_FUNDEF.A" class="">A</a></span> <span id="TRANSF_PARTIAL_FUNDEF.B" class="id"><a name="TRANSF_PARTIAL_FUNDEF.B" class="">B:</a></span> <span class="gallina-kwd">Type</span>.<br/>
+<span class="vernacular">Variable</span> <span id="TRANSF_PARTIAL_FUNDEF.transf_partial" class="id"><a name="TRANSF_PARTIAL_FUNDEF.transf_partial" class="">transf_partial:</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_FUNDEF.A">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_FUNDEF.B">B</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_partial_fundef" class="id"><a name="transf_partial_fundef" class="">transf_partial_fundef</a></span> (<span id="fd:187" class="id"><a name="fd:187" class="">fd:</a></span> <span class="id"><a href="compcert.common.AST.html#fundef">fundef</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_FUNDEF.A">A</a></span>)<span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> (<span class="id"><a href="compcert.common.AST.html#fundef">fundef</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_FUNDEF.B">B</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#fd:187">fd</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Internal">Internal</a></span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">do</a></span> <span id="f':189" class="id"><a name="f':189" class="">f'</a></span> <span class="id"><a href="compcert.common.Errors.html#31429f277ebd19fb111a24091d40088a">&lt;-</a></span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_FUNDEF.transf_partial">transf_partial</a></span> <span class="id">f;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.common.AST.html#Internal">Internal</a></span> <span class="id"><a href="compcert.common.AST.html#f':189">f'</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#External">External</a></span> <span class="id">ef</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> (<span class="id"><a href="compcert.common.AST.html#External">External</a></span> <span class="id">ef</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.common.AST.html#TRANSF_PARTIAL_FUNDEF">TRANSF_PARTIAL_FUNDEF</a></span>.<br/>
+<br/>
+<h1> Register pairs </h1>
+<br/>
+<span class="gallina-kwd">Set</span> <span class="id">Contextual</span> <span class="vernacular">Implicit</span>.<br/>
+<br/>
+<div class="doc">In some intermediate languages (LTL, Mach), 64-bit integers can be
+  split into two 32-bit halves and held in a pair of registers.
+  Syntactically, this is captured by the type <span class="bracket"><span class="id">rpair</span></span> below. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="rpair" class="id"><a name="rpair" class="">rpair</a></span> (<span id="A:190" class="id"><a name="A:190" class="">A:</a></span> <span class="gallina-kwd">Type</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="One" class="id"><a name="One" class="">One</a></span> (<span id="r:193" class="id"><a name="r:193" class="">r:</a></span> <span class="id"><a href="compcert.common.AST.html#A:190">A</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Twolong" class="id"><a name="Twolong" class="">Twolong</a></span> (<span id="rhi:194" class="id"><a name="rhi:194" class="">rhi</a></span> <span id="rlo:195" class="id"><a name="rlo:195" class="">rlo:</a></span> <span class="id"><a href="compcert.common.AST.html#A:190">A</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="typ_rpair" class="id"><a name="typ_rpair" class="">typ_rpair</a></span> (<span id="A:196" class="id"><a name="A:196" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="typ_of:197" class="id"><a name="typ_of:197" class="">typ_of:</a></span> <span class="id"><a href="compcert.common.AST.html#A:196">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span>) (<span id="p:198" class="id"><a name="p:198" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#rpair">rpair</a></span> <span class="id"><a href="compcert.common.AST.html#A:196">A</a></span>)<span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#typ">typ</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#p:198">p</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#One">One</a></span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#typ_of:197">typ_of</a></span> <span class="id">r</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Twolong">Twolong</a></span> <span class="id">rhi</span> <span class="id">rlo</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Tlong">Tlong</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="map_rpair" class="id"><a name="map_rpair" class="">map_rpair</a></span> (<span id="A:200" class="id"><a name="A:200" class="">A</a></span> <span id="B:201" class="id"><a name="B:201" class="">B:</a></span> <span class="gallina-kwd">Type</span>) (<span id="f:202" class="id"><a name="f:202" class="">f:</a></span> <span class="id"><a href="compcert.common.AST.html#A:200">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#B:201">B</a></span>) (<span id="p:203" class="id"><a name="p:203" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#rpair">rpair</a></span> <span class="id"><a href="compcert.common.AST.html#A:200">A</a></span>)<span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#rpair">rpair</a></span> <span class="id"><a href="compcert.common.AST.html#B:201">B</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#p:203">p</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#One">One</a></span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#One">One</a></span> (<span class="id"><a href="compcert.common.AST.html#f:202">f</a></span> <span class="id">r</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Twolong">Twolong</a></span> <span class="id">rhi</span> <span class="id">rlo</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#Twolong">Twolong</a></span> (<span class="id"><a href="compcert.common.AST.html#f:202">f</a></span> <span class="id">rhi</span>) (<span class="id"><a href="compcert.common.AST.html#f:202">f</a></span> <span class="id">rlo</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="regs_of_rpair" class="id"><a name="regs_of_rpair" class="">regs_of_rpair</a></span> (<span id="A:205" class="id"><a name="A:205" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="p:206" class="id"><a name="p:206" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#rpair">rpair</a></span> <span class="id"><a href="compcert.common.AST.html#A:205">A</a></span>)<span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#A:205">A</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#p:206">p</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#One">One</a></span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id">r</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Twolong">Twolong</a></span> <span class="id">rhi</span> <span class="id">rlo</span> <span class="id">=&gt;</span> <span class="id">rhi</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">rlo</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="regs_of_rpairs" class="id"><a name="regs_of_rpairs" class="">regs_of_rpairs</a></span> (<span id="A:208" class="id"><a name="A:208" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="l:209" class="id"><a name="l:209" class="">l:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#rpair">rpair</a></span> <span class="id"><a href="compcert.common.AST.html#A:208">A</a></span>))<span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#A:208">A</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#l:209">l</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">p</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">l</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#regs_of_rpair">regs_of_rpair</a></span> <span class="id">p</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.common.AST.html#regs_of_rpairs:210">regs_of_rpairs</a></span> <span class="id"><a href="compcert.common.AST.html#l:209">l</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="in_regs_of_rpairs" class="id"><a name="in_regs_of_rpairs" class="">in_regs_of_rpairs:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="A:212" class="id"><a name="A:212" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="x:213" class="id"><a name="x:213" class="">x:</a></span> <span class="id"><a href="compcert.common.AST.html#A:212">A</a></span>) <span id="p:214" class="id"><a name="p:214" class="">p,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.common.AST.html#x:213">x</a></span> (<span class="id"><a href="compcert.common.AST.html#regs_of_rpair">regs_of_rpair</a></span> <span class="id"><a href="compcert.common.AST.html#p:214">p</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">forall</span> <span id="l:215" class="id"><a name="l:215" class="">l,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.common.AST.html#p:214">p</a></span> <span class="id"><a href="compcert.common.AST.html#l:215">l</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.common.AST.html#x:213">x</a></span> (<span class="id"><a href="compcert.common.AST.html#regs_of_rpairs">regs_of_rpairs</a></span> <span class="id"><a href="compcert.common.AST.html#l:215">l</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">l;</span> <span class="id">simpl;</span> <span class="id">intros</span>. <span class="id">auto</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Coqlib.html#in_app">in_app</a></span>. <span class="id">destruct</span> <span class="id">H0;</span> <span class="id">auto</span>. <span class="id">subst</span> <span class="id">a</span>. <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="in_regs_of_rpairs_inv" class="id"><a name="in_regs_of_rpairs_inv" class="">in_regs_of_rpairs_inv:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="A:216" class="id"><a name="A:216" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="x:217" class="id"><a name="x:217" class="">x:</a></span> <span class="id"><a href="compcert.common.AST.html#A:216">A</a></span>) <span id="l:218" class="id"><a name="l:218" class="">l,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.common.AST.html#x:217">x</a></span> (<span class="id"><a href="compcert.common.AST.html#regs_of_rpairs">regs_of_rpairs</a></span> <span class="id"><a href="compcert.common.AST.html#l:218">l</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">exists</span> <span id="p:219" class="id"><a name="p:219" class="">p,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.common.AST.html#p:219">p</a></span> <span class="id"><a href="compcert.common.AST.html#l:218">l</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#In">In</a></span> <span class="id"><a href="compcert.common.AST.html#x:217">x</a></span> (<span class="id"><a href="compcert.common.AST.html#regs_of_rpair">regs_of_rpair</a></span> <span class="id"><a href="compcert.common.AST.html#p:219">p</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">l;</span> <span class="id">simpl;</span> <span class="id">intros</span>. <span class="id">contradiction</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#in_app_iff">in_app_iff</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">destruct</span> <span class="id">H</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">a;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IHl</span> <span class="gallina-kwd">in</span> <span class="id">H</span>. <span class="id">firstorder</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Definition</span> <span id="forall_rpair" class="id"><a name="forall_rpair" class="">forall_rpair</a></span> (<span id="A:220" class="id"><a name="A:220" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="P:221" class="id"><a name="P:221" class="">P:</a></span> <span class="id"><a href="compcert.common.AST.html#A:220">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">Prop</span>) (<span id="p:222" class="id"><a name="p:222" class="">p:</a></span> <span class="id"><a href="compcert.common.AST.html#rpair">rpair</a></span> <span class="id"><a href="compcert.common.AST.html#A:220">A</a></span>)<span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#p:222">p</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#One">One</a></span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#P:221">P</a></span> <span class="id">r</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#Twolong">Twolong</a></span> <span class="id">rhi</span> <span class="id">rlo</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#P:221">P</a></span> <span class="id">rhi</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.common.AST.html#P:221">P</a></span> <span class="id">rlo</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<h1> Arguments and results to builtin functions </h1>
+<br/>
+<span class="vernacular">Inductive</span> <span id="builtin_arg" class="id"><a name="builtin_arg" class="">builtin_arg</a></span> (<span id="A:224" class="id"><a name="A:224" class="">A:</a></span> <span class="gallina-kwd">Type</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA" class="id"><a name="BA" class="">BA</a></span> (<span id="x:227" class="id"><a name="x:227" class="">x:</a></span> <span class="id"><a href="compcert.common.AST.html#A:224">A</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_int" class="id"><a name="BA_int" class="">BA_int</a></span> (<span id="n:228" class="id"><a name="n:228" class="">n:</a></span> <span class="id"><a href="compcert.lib.Integers.html#int">int</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_long" class="id"><a name="BA_long" class="">BA_long</a></span> (<span id="n:229" class="id"><a name="n:229" class="">n:</a></span> <span class="id"><a href="compcert.lib.Integers.html#int64">int64</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_float" class="id"><a name="BA_float" class="">BA_float</a></span> (<span id="f:230" class="id"><a name="f:230" class="">f:</a></span> <span class="id"><a href="compcert.lib.Floats.html#float">float</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_single" class="id"><a name="BA_single" class="">BA_single</a></span> (<span id="f:231" class="id"><a name="f:231" class="">f:</a></span> <span class="id"><a href="compcert.lib.Floats.html#float32">float32</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_loadstack" class="id"><a name="BA_loadstack" class="">BA_loadstack</a></span> (<span id="chunk:232" class="id"><a name="chunk:232" class="">chunk:</a></span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span>) (<span id="ofs:233" class="id"><a name="ofs:233" class="">ofs:</a></span> <span class="id"><a href="compcert.lib.Integers.html#ptrofs">ptrofs</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_addrstack" class="id"><a name="BA_addrstack" class="">BA_addrstack</a></span> (<span id="ofs:234" class="id"><a name="ofs:234" class="">ofs:</a></span> <span class="id"><a href="compcert.lib.Integers.html#ptrofs">ptrofs</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_loadglobal" class="id"><a name="BA_loadglobal" class="">BA_loadglobal</a></span> (<span id="chunk:235" class="id"><a name="chunk:235" class="">chunk:</a></span> <span class="id"><a href="compcert.common.AST.html#memory_chunk">memory_chunk</a></span>) (<span id="id:236" class="id"><a name="id:236" class="">id:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="ofs:237" class="id"><a name="ofs:237" class="">ofs:</a></span> <span class="id"><a href="compcert.lib.Integers.html#ptrofs">ptrofs</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_addrglobal" class="id"><a name="BA_addrglobal" class="">BA_addrglobal</a></span> (<span id="id:238" class="id"><a name="id:238" class="">id:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="ofs:239" class="id"><a name="ofs:239" class="">ofs:</a></span> <span class="id"><a href="compcert.lib.Integers.html#ptrofs">ptrofs</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_splitlong" class="id"><a name="BA_splitlong" class="">BA_splitlong</a></span> (<span id="hi:240" class="id"><a name="hi:240" class="">hi</a></span> <span id="lo:241" class="id"><a name="lo:241" class="">lo:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_arg:225">builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#A:224">A</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BA_addptr" class="id"><a name="BA_addptr" class="">BA_addptr</a></span> (<span id="a1:242" class="id"><a name="a1:242" class="">a1</a></span> <span id="a2:243" class="id"><a name="a2:243" class="">a2:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_arg:225">builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#A:224">A</a></span>).<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span id="builtin_res" class="id"><a name="builtin_res" class="">builtin_res</a></span> (<span id="A:244" class="id"><a name="A:244" class="">A:</a></span> <span class="gallina-kwd">Type</span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BR" class="id"><a name="BR" class="">BR</a></span> (<span id="x:247" class="id"><a name="x:247" class="">x:</a></span> <span class="id"><a href="compcert.common.AST.html#A:244">A</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BR_none" class="id"><a name="BR_none" class="">BR_none</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="BR_splitlong" class="id"><a name="BR_splitlong" class="">BR_splitlong</a></span> (<span id="hi:248" class="id"><a name="hi:248" class="">hi</a></span> <span id="lo:249" class="id"><a name="lo:249" class="">lo:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_res:245">builtin_res</a></span> <span class="id"><a href="compcert.common.AST.html#A:244">A</a></span>).<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="globals_of_builtin_arg" class="id"><a name="globals_of_builtin_arg" class="">globals_of_builtin_arg</a></span> (<span id="A:250" class="id"><a name="A:250" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="a:251" class="id"><a name="a:251" class="">a:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#A:250">A</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#a:251">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_loadglobal">BA_loadglobal</a></span> <span class="id">chunk</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ofs</span> <span class="id">=&gt;</span> <span class="id">id</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addrglobal">BA_addrglobal</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ofs</span> <span class="id">=&gt;</span> <span class="id">id</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_splitlong">BA_splitlong</a></span> <span class="id">hi</span> <span class="id">lo</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#globals_of_builtin_arg:252">globals_of_builtin_arg</a></span> <span class="id">hi</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.common.AST.html#globals_of_builtin_arg:252">globals_of_builtin_arg</a></span> <span class="id">lo</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addptr">BA_addptr</a></span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#globals_of_builtin_arg:252">globals_of_builtin_arg</a></span> <span class="id">a1</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.common.AST.html#globals_of_builtin_arg:252">globals_of_builtin_arg</a></span> <span class="id">a2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="globals_of_builtin_args" class="id"><a name="globals_of_builtin_args" class="">globals_of_builtin_args</a></span> (<span id="A:254" class="id"><a name="A:254" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="al:255" class="id"><a name="al:255" class="">al:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#A:254">A</a></span>)) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#fold_right">List.fold_right</a></span> (<span class="gallina-kwd">fun</span> <span id="a:256" class="id"><a name="a:256" class="">a</a></span> <span id="l:257" class="id"><a name="l:257" class="">l</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#globals_of_builtin_arg">globals_of_builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#a:256">a</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.common.AST.html#l:257">l</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id"><a href="compcert.common.AST.html#al:255">al</a></span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="params_of_builtin_arg" class="id"><a name="params_of_builtin_arg" class="">params_of_builtin_arg</a></span> (<span id="A:258" class="id"><a name="A:258" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="a:259" class="id"><a name="a:259" class="">a:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#A:258">A</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#A:258">A</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#a:259">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA">BA</a></span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">x</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_splitlong">BA_splitlong</a></span> <span class="id">hi</span> <span class="id">lo</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#params_of_builtin_arg:260">params_of_builtin_arg</a></span> <span class="id">hi</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.common.AST.html#params_of_builtin_arg:260">params_of_builtin_arg</a></span> <span class="id">lo</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addptr">BA_addptr</a></span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#params_of_builtin_arg:260">params_of_builtin_arg</a></span> <span class="id">a1</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.common.AST.html#params_of_builtin_arg:260">params_of_builtin_arg</a></span> <span class="id">a2</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="params_of_builtin_args" class="id"><a name="params_of_builtin_args" class="">params_of_builtin_args</a></span> (<span id="A:262" class="id"><a name="A:262" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="al:263" class="id"><a name="al:263" class="">al:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#A:262">A</a></span>)) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#A:262">A</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#fold_right">List.fold_right</a></span> (<span class="gallina-kwd">fun</span> <span id="a:264" class="id"><a name="a:264" class="">a</a></span> <span id="l:265" class="id"><a name="l:265" class="">l</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#params_of_builtin_arg">params_of_builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#a:264">a</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.common.AST.html#l:265">l</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id"><a href="compcert.common.AST.html#al:263">al</a></span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="params_of_builtin_res" class="id"><a name="params_of_builtin_res" class="">params_of_builtin_res</a></span> (<span id="A:266" class="id"><a name="A:266" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="a:267" class="id"><a name="a:267" class="">a:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_res">builtin_res</a></span> <span class="id"><a href="compcert.common.AST.html#A:266">A</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#A:266">A</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#a:267">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BR">BR</a></span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">x</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BR_none">BR_none</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BR_splitlong">BR_splitlong</a></span> <span class="id">hi</span> <span class="id">lo</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#params_of_builtin_res:268">params_of_builtin_res</a></span> <span class="id">hi</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="compcert.common.AST.html#params_of_builtin_res:268">params_of_builtin_res</a></span> <span class="id">lo</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="map_builtin_arg" class="id"><a name="map_builtin_arg" class="">map_builtin_arg</a></span> (<span id="A:270" class="id"><a name="A:270" class="">A</a></span> <span id="B:271" class="id"><a name="B:271" class="">B:</a></span> <span class="gallina-kwd">Type</span>) (<span id="f:272" class="id"><a name="f:272" class="">f:</a></span> <span class="id"><a href="compcert.common.AST.html#A:270">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#B:271">B</a></span>) (<span id="a:273" class="id"><a name="a:273" class="">a:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#A:270">A</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#B:271">B</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#a:273">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA">BA</a></span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA">BA</a></span> (<span class="id"><a href="compcert.common.AST.html#f:272">f</a></span> <span class="id">x</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_int">BA_int</a></span> <span class="id">n</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA_int">BA_int</a></span> <span class="id">n</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_long">BA_long</a></span> <span class="id">n</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA_long">BA_long</a></span> <span class="id">n</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_float">BA_float</a></span> <span class="id">n</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA_float">BA_float</a></span> <span class="id">n</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_single">BA_single</a></span> <span class="id">n</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA_single">BA_single</a></span> <span class="id">n</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_loadstack">BA_loadstack</a></span> <span class="id">chunk</span> <span class="id">ofs</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA_loadstack">BA_loadstack</a></span> <span class="id">chunk</span> <span class="id">ofs</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addrstack">BA_addrstack</a></span> <span class="id">ofs</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA_addrstack">BA_addrstack</a></span> <span class="id">ofs</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_loadglobal">BA_loadglobal</a></span> <span class="id">chunk</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ofs</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA_loadglobal">BA_loadglobal</a></span> <span class="id">chunk</span> <span class="id">id</span> <span class="id">ofs</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addrglobal">BA_addrglobal</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ofs</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BA_addrglobal">BA_addrglobal</a></span> <span class="id">id</span> <span class="id">ofs</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_splitlong">BA_splitlong</a></span> <span class="id">hi</span> <span class="id">lo</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#BA_splitlong">BA_splitlong</a></span> (<span class="id"><a href="compcert.common.AST.html#map_builtin_arg:274">map_builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#f:272">f</a></span> <span class="id">hi</span>) (<span class="id"><a href="compcert.common.AST.html#map_builtin_arg:274">map_builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#f:272">f</a></span> <span class="id">lo</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addptr">BA_addptr</a></span> <span class="id">a1</span> <span class="id">a2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#BA_addptr">BA_addptr</a></span> (<span class="id"><a href="compcert.common.AST.html#map_builtin_arg:274">map_builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#f:272">f</a></span> <span class="id">a1</span>) (<span class="id"><a href="compcert.common.AST.html#map_builtin_arg:274">map_builtin_arg</a></span> <span class="id"><a href="compcert.common.AST.html#f:272">f</a></span> <span class="id">a2</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="map_builtin_res" class="id"><a name="map_builtin_res" class="">map_builtin_res</a></span> (<span id="A:276" class="id"><a name="A:276" class="">A</a></span> <span id="B:277" class="id"><a name="B:277" class="">B:</a></span> <span class="gallina-kwd">Type</span>) (<span id="f:278" class="id"><a name="f:278" class="">f:</a></span> <span class="id"><a href="compcert.common.AST.html#A:276">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.common.AST.html#B:277">B</a></span>) (<span id="a:279" class="id"><a name="a:279" class="">a:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_res">builtin_res</a></span> <span class="id"><a href="compcert.common.AST.html#A:276">A</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.AST.html#builtin_res">builtin_res</a></span> <span class="id"><a href="compcert.common.AST.html#B:277">B</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.common.AST.html#a:279">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BR">BR</a></span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BR">BR</a></span> (<span class="id"><a href="compcert.common.AST.html#f:278">f</a></span> <span class="id">x</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BR_none">BR_none</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.common.AST.html#BR_none">BR_none</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BR_splitlong">BR_splitlong</a></span> <span class="id">hi</span> <span class="id">lo</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#BR_splitlong">BR_splitlong</a></span> (<span class="id"><a href="compcert.common.AST.html#map_builtin_res:280">map_builtin_res</a></span> <span class="id"><a href="compcert.common.AST.html#f:278">f</a></span> <span class="id">hi</span>) (<span class="id"><a href="compcert.common.AST.html#map_builtin_res:280">map_builtin_res</a></span> <span class="id"><a href="compcert.common.AST.html#f:278">f</a></span> <span class="id">lo</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Which kinds of builtin arguments are supported by which external function. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="builtin_arg_constraint" class="id"><a name="builtin_arg_constraint" class="">builtin_arg_constraint</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="OK_default" class="id"><a name="OK_default" class="">OK_default</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="OK_const" class="id"><a name="OK_const" class="">OK_const</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="OK_addrstack" class="id"><a name="OK_addrstack" class="">OK_addrstack</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="OK_addressing" class="id"><a name="OK_addressing" class="">OK_addressing</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="OK_all" class="id"><a name="OK_all" class="">OK_all</a></span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

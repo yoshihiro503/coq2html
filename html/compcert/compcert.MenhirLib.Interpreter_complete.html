@@ -1,0 +1,1154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Interpreter_complete</title>
+<meta name="description" content="Documentation of Coq module Interpreter_complete" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Interpreter_complete</h1>
+<pre class="ssrdoc">
+                                                                         
+                                  Menhir                                 
+                                                                         
+          Jacques-Henri Jourdan, CNRS, LRI, Université Paris Sud         
+                                                                         
+ Copyright Inria. All rights reserved. This file is distributed under    
+ the terms of the GNU Lesser General Public License as published by the  
+ Free Software Foundation, either version 3 of the License, or (at your  
+ option) any later version, as described in the file LICENSE.            
+                                                                         
+</pre>
+<br/>
+<span class="vernacular">From</span> <span class="id">Coq</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">List</span> <span class="id">Arith</span>.<br/>
+<span class="vernacular">Import</span> <span class="id">ListNotations</span>.<br/>
+<span class="vernacular">From</span> <span class="id">Coq.ssr</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">ssreflect</span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Alphabet</span> <span class="id">Grammar</span>.<br/>
+<span class="vernacular">Require</span> <span class="id">Automaton</span> <span class="id">Interpreter</span> <span class="id">Validator_complete</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="id">Make</span>(<span class="vernacular">Import</span> <span class="id">A:Automaton</span>.<span class="id">T</span>) (<span class="vernacular">Import</span> <span class="id">Inter:Interpreter</span>.<span class="id">T</span> <span class="id">A</span>).<br/>
+<span class="vernacular">Module</span> <span class="vernacular">Import</span> <span class="id">Valid</span> <span class="id">:=</span> <span class="id">Validator_complete.Make</span> <span class="id">A</span>.<br/>
+<br/>
+<h1> Completeness Proof *</h1>
+<br/>
+<span class="vernacular">Section</span> <span class="id">Completeness_Proof</span>.<br/>
+<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">safe:</span> <span class="id">Inter.ValidSafe.safe</span>.<br/>
+<span class="vernacular">Hypothesis</span> <span class="id">complete:</span> <span class="id">complete</span>.<br/>
+<br/>
+<span class="vernacular">Proposition</span> <span class="id">nullable_stable:</span> <span class="id">nullable_stable</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id">complete;</span> <span class="id">unfold</span> <span class="id">Valid.complete</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span class="id">first_stable:</span> <span class="id">first_stable</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id">complete;</span> <span class="id">unfold</span> <span class="id">Valid.complete</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span class="id">start_future:</span> <span class="id">start_future</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id">complete;</span> <span class="id">unfold</span> <span class="id">Valid.complete</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span class="id">terminal_shift:</span> <span class="id">terminal_shift</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id">complete;</span> <span class="id">unfold</span> <span class="id">Valid.complete</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span class="id">end_reduce:</span> <span class="id">end_reduce</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id">complete;</span> <span class="id">unfold</span> <span class="id">Valid.complete</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span class="id">start_goto:</span> <span class="id">start_goto</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id">complete;</span> <span class="id">unfold</span> <span class="id">Valid.complete</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span class="id">non_terminal_goto:</span> <span class="id">non_terminal_goto</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id">complete;</span> <span class="id">unfold</span> <span class="id">Valid.complete</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span class="id">non_terminal_closed:</span> <span class="id">non_terminal_closed</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id">complete;</span> <span class="id">unfold</span> <span class="id">Valid.complete</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<br/>
+<div class="doc">If the nullable predicate has been validated, then it is correct. *</div>
+<span class="vernacular">Lemma</span> <span class="id">nullable_correct</span> <span class="id">head</span> <span class="id">word</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">word</span> <span class="id">=</span> <span class="id">[]</span> <span class="id">-&gt;</span> <span class="id">parse_tree</span> <span class="id">head</span> <span class="id">word</span> <span class="id">-&gt;</span> <span class="id">nullable_symb</span> <span class="id">head</span> <span class="id">=</span> <span class="id">true</span><br/>
+<span class="gallina-kwd">with</span> <span class="id">nullable_correct_list</span> <span class="id">heads</span> <span class="id">word</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">word</span> <span class="id">=</span> <span class="id">[]</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">parse_tree_list</span> <span class="id">heads</span> <span class="id">word</span> <span class="id">-&gt;</span> <span class="id">nullable_word</span> <span class="id">heads</span> <span class="id">=</span> <span class="id">true</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">2=&gt;//</span>. <span class="id">assert</span> (<span class="id">Hnull</span> <span class="id">:=</span> <span class="id">nullable_stable</span> <span class="id">prod</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">erewrite</span> <span class="id">nullable_correct_list</span> <span class="gallina-kwd">in</span> <span class="id">Hnull;</span> <span class="id">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">Hword</span>. <span class="id">destruct</span> <span class="id">1=&gt;//=</span>. <span class="id">destruct</span> (<span class="id">app_eq_nil</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hword</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eauto</span> <span class="gallina-kwd">using</span> <span class="id">andb_true_intro</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Auxiliary lemma for first_correct.  </div>
+<span class="vernacular">Lemma</span> <span class="id">first_word_set_app</span> <span class="id">t</span> <span class="id">word1</span> <span class="id">word2</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">TerminalSet.In</span> <span class="id">t</span> (<span class="id">first_word_set</span> (<span class="id">word1</span> <span class="id">++</span> <span class="id">word2</span>)) <span class="id">&lt;-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">TerminalSet.In</span> <span class="id">t</span> (<span class="id">first_word_set</span> <span class="id">word1</span>) <span class="id">\/</span><br/>
+&nbsp;&nbsp;<span class="id">TerminalSet.In</span> <span class="id">t</span> (<span class="id">first_word_set</span> <span class="id">word2</span>) <span class="id">/\</span> <span class="id">nullable_word</span> (<span class="id">rev</span> <span class="id">word1</span>) <span class="id">=</span> <span class="id">true</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">word1</span> <span class="gallina-kwd">as</span> <span class="id">[|s</span> <span class="id">word1</span> <span class="id">IH]=&gt;/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">split;</span> <span class="id">[tauto|]</span>. <span class="id">move=&gt;[/TerminalSet</span>.<span class="id">empty_1</span> <span class="id">?|[?</span> <span class="id">_]]//</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">rewrite</span> <span class="id">/nullable_word</span> <span class="id">forallb_app</span> <span class="id">/=</span>. <span class="id">destruct</span> <span class="id">nullable_symb=&gt;/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">Bool.andb_true_r</span>. <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">move=&gt;/TerminalSet</span>.<span class="id">union_1</span>. <span class="id">rewrite</span> <span class="id">IH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move=&gt;[?|[?|[??]]];</span> <span class="id">auto</span> <span class="gallina-kwd">using</span> <span class="id">TerminalSet.union_2</span><span class="id">,</span> <span class="id">TerminalSet.union_3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">destruct</span> <span class="id">IH</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move=&gt;[/TerminalSet</span>.<span class="id">union_1</span> <span class="id">[?|?]|[??]];</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">auto</span> <span class="gallina-kwd">using</span> <span class="id">TerminalSet.union_2</span><span class="id">,</span> <span class="id">TerminalSet.union_3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">Bool.andb_false_r</span>. <span class="gallina-kwd">by</span> <span class="id">intuition</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">If the first predicate has been validated, then it is correct. *</div>
+<span class="vernacular">Lemma</span> <span class="id">first_correct</span> <span class="id">head</span> <span class="id">word</span> <span class="id">t</span> <span class="id">q</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">word</span> <span class="id">=</span> <span class="id">t::q</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">parse_tree</span> <span class="id">head</span> <span class="id">word</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">TerminalSet.In</span> (<span class="id">token_term</span> <span class="id">t</span>) (<span class="id">first_symb_set</span> <span class="id">head</span>)<br/>
+<span class="gallina-kwd">with</span> <span class="id">first_correct_list</span> <span class="id">heads</span> <span class="id">word</span> <span class="id">t</span> <span class="id">q</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">word</span> <span class="id">=</span> <span class="id">t::q</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">parse_tree_list</span> <span class="id">heads</span> <span class="id">word</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">TerminalSet.In</span> (<span class="id">token_term</span> <span class="id">t</span>) (<span class="id">first_word_set</span> (<span class="id">rev'</span> <span class="id">heads</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">Hword</span>. <span class="id">destruct</span> <span class="id">1=&gt;//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">inversion</span> <span class="id">Hword</span>. <span class="id">subst</span>. <span class="id">apply</span> <span class="id">TerminalSet.singleton_2</span><span class="id">,</span> <span class="id">compare_refl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">eapply</span> <span class="id">first_stable</span>. <span class="id">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">Hword</span>. <span class="id">destruct</span> <span class="id">1</span> <span class="gallina-kwd">as</span> <span class="id">[|symq</span> <span class="id">wordq</span> <span class="id">ptl</span> <span class="id">symt</span> <span class="id">wordt</span> <span class="id">pt]=&gt;//=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">/rev'</span> <span class="id">-rev_alt</span> <span class="id">/=</span> <span class="id">first_word_set_app</span> <span class="id">/=</span> <span class="id">rev_involutive</span> <span class="id">rev_alt</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">wordq;</span> <span class="id">[right|left]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> <span class="id">nullable_symb;</span> <span class="id">eauto</span> <span class="gallina-kwd">using</span> <span class="id">TerminalSet.union_2</span><span class="id">,</span> <span class="id">nullable_correct_list</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">inversion</span> <span class="id">Hword</span>. <span class="id">subst</span>. <span class="id">fold</span> (<span class="id">rev'</span> <span class="id">symq</span>). <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">A PTL is compatible with a stack if the top of the stack contains
+  data representing to this PTL. </div>
+<span class="vernacular">Fixpoint</span> <span class="id">ptl_stack_compat</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">stk0</span> <span class="id">:</span> <span class="id">stack</span>) (<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">stk</span> <span class="id">:</span> <span class="id">stack</span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptl</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Nil_ptl</span> <span class="id">=&gt;</span> <span class="id">stk0</span> <span class="id">=</span> <span class="id">stk</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> @<span class="id">Cons_ptl</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ptl</span> <span class="id">sym</span> <span class="id">_</span> <span class="id">pt</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">stk</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">[]</span> <span class="id">=&gt;</span> <span class="id">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">existT</span> <span class="id">_</span> <span class="id">_</span> <span class="id">sem::stk</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_stack_compat</span> <span class="id">stk0</span> <span class="id">ptl</span> <span class="id">stk</span> <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">e,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">sem</span> <span class="id">=</span> <span class="id">eq_rect</span> <span class="id">_</span> <span class="id">symbol_semantic_type</span> (<span class="id">pt_sem</span> <span class="id">pt</span>) <span class="id">_</span> <span class="id">e</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">.. and when a PTL is compatible with a stack, then calling the pop
+  function return the semantic value of this PTL. </div>
+<span class="vernacular">Lemma</span> <span class="id">pop_stack_compat_pop_spec</span> <span class="id">{A</span> <span class="id">symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl:parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">stk:stack</span>) (<span class="id">stk0:stack</span>) <span class="id">action</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptl_stack_compat</span> <span class="id">stk0</span> <span class="id">ptl</span> <span class="id">stk</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">pop_spec</span> <span class="id">symbs</span> <span class="id">stk</span> <span class="id">action</span> <span class="id">stk0</span> (<span class="id">ptl_sem</span> (<span class="id">A:=A</span>) <span class="id">ptl</span> <span class="id">action</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">stk</span>. <span class="id">induction</span> <span class="id">ptl=&gt;stk</span> <span class="id">/=</span> <span class="id">Hstk</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">subst</span>. <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">stk</span> <span class="gallina-kwd">as</span> <span class="id">[|[st</span> <span class="id">sem]</span> <span class="id">stk]=&gt;//</span>. <span class="id">destruct</span> <span class="id">Hstk</span> <span class="gallina-kwd">as</span> <span class="id">[Hstk</span> <span class="id">[??]]</span>. <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">simpl</span>. <span class="id">constructor</span>. <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Variable</span> <span class="id">init:</span> <span class="id">initstate</span>.<br/>
+<br/>
+<div class="doc">In order to prove compleness, we first fix a word to be parsed
+  together with the content of the parser at the end of the parsing. </div>
+<span class="vernacular">Variable</span> <span class="id">full_word:</span> <span class="id">list</span> <span class="id">token</span>.<br/>
+<span class="vernacular">Variable</span> <span class="id">buffer_end:</span> <span class="id">buffer</span>.<br/>
+<br/>
+<div class="doc">Completeness is proved by following the traversal of the parse
+  tree which is performed by the parser. Each step of parsing
+  correspond to one step of traversal. In order to represent the state
+  of the traversal, we define the notion of "dotted" parse tree, which
+  is a parse tree with one dot on one of its node. The place of the
+  dot represents the place of the next action to be executed.
+  Such a dotted parse tree is decomposed into two part: a "regular"
+  parse tree, which is the parse tree placed under the dot, and a
+  "parse tree zipper", which is the part of the parse tree placed
+  above the dot. Therefore, a parse tree zipper is a parse tree with a
+  hole. Moreover, for easier manipulation, a parse tree zipper is
+  represented "upside down". That is, the root of the parse tree is
+  actually a leaf of the zipper, while the root of the zipper is the
+  hole.
+ </div>
+<span class="vernacular">Inductive</span> <span class="id">pt_zipper:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span class="id">hole_symb:symbol</span>) (<span class="id">hole_word:list</span> <span class="id">token</span>)<span class="id">,</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">Top_ptz:</span><br/>
+&nbsp;&nbsp;<span class="id">pt_zipper</span> (<span class="id">NT</span> (<span class="id">start_nt</span> <span class="id">init</span>)) <span class="id">full_word</span><br/>
+<span class="id">|</span> <span class="id">Cons_ptl_ptz:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">{head_symbolsq:list</span> <span class="id">symbol}</span> <span class="id">{wordq:list</span> <span class="id">token},</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">parse_tree_list</span> <span class="id">head_symbolsq</span> <span class="id">wordq</span> <span class="id">-&gt;</span><br/>
+<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">{head_symbolt:symbol}</span> <span class="id">{wordt:list</span> <span class="id">token},</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_zipper</span> (<span class="id">head_symbolt::head_symbolsq</span>) (<span class="id">wordq++wordt</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">pt_zipper</span> <span class="id">head_symbolt</span> <span class="id">wordt</span><br/>
+<span class="gallina-kwd">with</span> <span class="id">ptl_zipper:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span class="id">hole_symbs:list</span> <span class="id">symbol</span>) (<span class="id">hole_word:list</span> <span class="id">token</span>)<span class="id">,</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">Non_terminal_pt_ptlz:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">{p:production}</span> <span class="id">{word:list</span> <span class="id">token},</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">pt_zipper</span> (<span class="id">NT</span> (<span class="id">prod_lhs</span> <span class="id">p</span>)) <span class="id">word</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_zipper</span> (<span class="id">prod_rhs_rev</span> <span class="id">p</span>) <span class="id">word</span><br/>
+<br/>
+<span class="id">|</span> <span class="id">Cons_ptl_ptlz:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">{head_symbolsq:list</span> <span class="id">symbol}</span> <span class="id">{wordq:list</span> <span class="id">token},</span><br/>
+<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">{head_symbolt:symbol}</span> <span class="id">{wordt:list</span> <span class="id">token},</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">parse_tree</span> <span class="id">head_symbolt</span> <span class="id">wordt</span> <span class="id">-&gt;</span><br/>
+<br/>
+&nbsp;&nbsp;<span class="id">ptl_zipper</span> (<span class="id">head_symbolt::head_symbolsq</span>) (<span class="id">wordq++wordt</span>) <span class="id">-&gt;</span><br/>
+<br/>
+&nbsp;&nbsp;<span class="id">ptl_zipper</span> <span class="id">head_symbolsq</span> <span class="id">wordq</span>.<br/>
+<br/>
+<div class="doc">A dotted parse tree is the combination of a parse tree zipper with
+  a parse tree. It can be intwo flavors, depending on which is the next
+  action to be executed (shift or reduce). </div>
+<span class="vernacular">Inductive</span> <span class="id">pt_dot:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+<span class="id">|</span> <span class="id">Reduce_ptd:</span> <span class="gallina-kwd">forall</span> <span class="id">{prod</span> <span class="id">word},</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">parse_tree_list</span> (<span class="id">prod_rhs_rev</span> <span class="id">prod</span>) <span class="id">word</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">pt_zipper</span> (<span class="id">NT</span> (<span class="id">prod_lhs</span> <span class="id">prod</span>)) <span class="id">word</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">pt_dot</span><br/>
+<span class="id">|</span> <span class="id">Shift_ptd:</span> <span class="gallina-kwd">forall</span> (<span class="id">tok</span> <span class="id">:</span> <span class="id">token</span>) <span class="id">{symbolsq</span> <span class="id">wordq},</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">parse_tree_list</span> <span class="id">symbolsq</span> <span class="id">wordq</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_zipper</span> (<span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>)<span class="id">::symbolsq</span>) (<span class="id">wordq++[tok]</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">pt_dot</span>.<br/>
+<br/>
+<div class="doc">We can compute the full semantic value of a parse tree when
+  represented as a dotted ptd. </div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">ptlz_sem</span> <span class="id">{hole_symbs</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz:ptl_zipper</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">A,</span> <span class="id">arrows_right</span> <span class="id">A</span> (<span class="id">map</span> <span class="id">symbol_semantic_type</span> <span class="id">hole_symbs</span>) <span class="id">-&gt;</span> <span class="id">A</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">symbol_semantic_type</span> (<span class="id">NT</span> (<span class="id">start_nt</span> <span class="id">init</span>))) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptlz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> @<span class="id">Non_terminal_pt_ptlz</span> <span class="id">prod</span> <span class="id">_</span> <span class="id">ptz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">k</span> <span class="id">=&gt;</span> <span class="id">ptz_sem</span> <span class="id">ptz</span> (<span class="id">k</span> <span class="id">_</span> (<span class="id">prod_action</span> <span class="id">prod</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptlz</span> <span class="id">pt</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">k</span> <span class="id">=&gt;</span> <span class="id">ptlz_sem</span> <span class="id">ptlz</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">k</span> <span class="id">_</span> (<span class="id">f</span> (<span class="id">pt_sem</span> <span class="id">pt</span>)))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+<span class="gallina-kwd">with</span> <span class="id">ptz_sem</span> <span class="id">{hole_symb</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptz:pt_zipper</span> <span class="id">hole_symb</span> <span class="id">hole_word</span>)<span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">symbol_semantic_type</span> <span class="id">hole_symb</span> <span class="id">-&gt;</span> <span class="id">symbol_semantic_type</span> (<span class="id">NT</span> (<span class="id">start_nt</span> <span class="id">init</span>)) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Top_ptz</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">sem</span> <span class="id">=&gt;</span> <span class="id">sem</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptz</span> <span class="id">ptl</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">sem</span> <span class="id">=&gt;</span> <span class="id">ptlz_sem</span> <span class="id">ptlz</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">ptl_sem</span> <span class="id">ptl</span> (<span class="id">f</span> <span class="id">sem</span>))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">ptd_sem</span> (<span class="id">ptd</span> <span class="id">:</span> <span class="id">pt_dot</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptd</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> @<span class="id">Reduce_ptd</span> <span class="id">prod</span> <span class="id">_</span> <span class="id">ptl</span> <span class="id">ptz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptz_sem</span> <span class="id">ptz</span> (<span class="id">ptl_sem</span> <span class="id">ptl</span> (<span class="id">prod_action</span> <span class="id">prod</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Shift_ptd</span> <span class="id">tok</span> <span class="id">ptl</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptlz_sem</span> <span class="id">ptlz</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">ptl_sem</span> <span class="id">ptl</span> (<span class="id">f</span> (<span class="id">token_sem</span> <span class="id">tok</span>)))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">The buffer associated with a dotted parse tree corresponds to the
+  buffer left to be read by the parser when at the state represented
+  by the dotted parse tree. </div>
+<span class="vernacular">Fixpoint</span> <span class="id">ptlz_buffer</span> <span class="id">{hole_symbs</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz:ptl_zipper</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span>)<span class="id">:</span> <span class="id">buffer</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptlz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Non_terminal_pt_ptlz</span> <span class="id">ptz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptz_buffer</span> <span class="id">ptz</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> @<span class="id">Cons_ptl_ptlz</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">wordt</span> <span class="id">_</span> <span class="id">ptlz'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">wordt</span> <span class="id">++</span> <span class="id">ptlz_buffer</span> <span class="id">ptlz'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+<span class="gallina-kwd">with</span> <span class="id">ptz_buffer</span> <span class="id">{hole_symb</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptz:pt_zipper</span> <span class="id">hole_symb</span> <span class="id">hole_word</span>)<span class="id">:</span> <span class="id">buffer</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Top_ptz</span> <span class="id">=&gt;</span> <span class="id">buffer_end</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptz</span> <span class="id">_</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptlz_buffer</span> <span class="id">ptlz</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">ptd_buffer</span> (<span class="id">ptd:pt_dot</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptd</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Reduce_ptd</span> <span class="id">_</span> <span class="id">ptz</span> <span class="id">=&gt;</span> <span class="id">ptz_buffer</span> <span class="id">ptz</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> @<span class="id">Shift_ptd</span> <span class="id">tok</span> <span class="id">_</span> <span class="id">wordq</span> <span class="id">_</span> <span class="id">ptlz</span> <span class="id">=&gt;</span> (<span class="id">tok::ptlz_buffer</span> <span class="id">ptlz</span>)%<span class="id">buf</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">We are now ready to define the main invariant of the proof of
+  completeness: we need to specify when a stack is compatible with a
+  dotted parse tree. Informally, a stack is compatible with a dotted
+  parse tree when it is the concatenation stack fragments which are
+  compatible with each of the partially recognized productions
+  appearing in the parse tree zipper. Moreover, the head of each of
+  these stack fragment contains a state which has an item predicted by
+  the corresponding zipper.
+  More formally, the compatibility relation first needs the following
+  auxiliary definitions: </div>
+<span class="vernacular">Fixpoint</span> <span class="id">ptlz_prod</span> <span class="id">{hole_symbs</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz:ptl_zipper</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span>)<span class="id">:</span> <span class="id">production</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptlz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> @<span class="id">Non_terminal_pt_ptlz</span> <span class="id">prod</span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">prod</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptlz</span> <span class="id">_</span> <span class="id">ptlz'</span> <span class="id">=&gt;</span> <span class="id">ptlz_prod</span> <span class="id">ptlz'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">ptlz_future</span> <span class="id">{hole_symbs</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;(<span class="id">ptlz:ptl_zipper</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span>)<span class="id">:</span> <span class="id">list</span> <span class="id">symbol</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptlz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Non_terminal_pt_ptlz</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">[]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> @<span class="id">Cons_ptl_ptlz</span> <span class="id">_</span> <span class="id">_</span> <span class="id">s</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ptlz'</span> <span class="id">=&gt;</span> <span class="id">s::ptlz_future</span> <span class="id">ptlz'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">ptlz_lookahead</span> <span class="id">{hole_symbs</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;(<span class="id">ptlz:ptl_zipper</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span>) <span class="id">:</span> <span class="id">terminal</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptlz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Non_terminal_pt_ptlz</span> <span class="id">ptz</span> <span class="id">=&gt;</span> <span class="id">token_term</span> (<span class="id">buf_head</span> (<span class="id">ptz_buffer</span> <span class="id">ptz</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptlz</span> <span class="id">_</span> <span class="id">ptlz'</span> <span class="id">=&gt;</span> <span class="id">ptlz_lookahead</span> <span class="id">ptlz'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">ptz_stack_compat</span> <span class="id">{hole_symb</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">stk</span> <span class="id">:</span> <span class="id">stack</span>) (<span class="id">ptz</span> <span class="id">:</span> <span class="id">pt_zipper</span> <span class="id">hole_symb</span> <span class="id">hole_word</span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Top_ptz</span> <span class="id">=&gt;</span> <span class="id">stk</span> <span class="id">=</span> <span class="id">[]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptz</span> <span class="id">ptl</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">stk0,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">state_has_future</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>) (<span class="id">ptlz_prod</span> <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">hole_symb::ptlz_future</span> <span class="id">ptlz</span>) (<span class="id">ptlz_lookahead</span> <span class="id">ptlz</span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_stack_compat</span> <span class="id">stk0</span> <span class="id">ptl</span> <span class="id">stk</span> <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptlz_stack_compat</span> <span class="id">stk0</span> <span class="id">ptlz</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+<span class="gallina-kwd">with</span> <span class="id">ptlz_stack_compat</span> <span class="id">{hole_symbs</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">stk</span> <span class="id">:</span> <span class="id">stack</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptlz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Non_terminal_pt_ptlz</span> <span class="id">ptz</span> <span class="id">=&gt;</span> <span class="id">ptz_stack_compat</span> <span class="id">stk</span> <span class="id">ptz</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptlz</span> <span class="id">_</span> <span class="id">ptlz</span> <span class="id">=&gt;</span> <span class="id">ptlz_stack_compat</span> <span class="id">stk</span> <span class="id">ptlz</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">ptd_stack_compat</span> (<span class="id">ptd:pt_dot</span>) (<span class="id">stk:stack</span>)<span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptd</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> @<span class="id">Reduce_ptd</span> <span class="id">prod</span> <span class="id">_</span> <span class="id">ptl</span> <span class="id">ptz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">stk0,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">state_has_future</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>) <span class="id">prod</span> <span class="id">[]</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">token_term</span> (<span class="id">buf_head</span> (<span class="id">ptz_buffer</span> <span class="id">ptz</span>))) <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_stack_compat</span> <span class="id">stk0</span> <span class="id">ptl</span> <span class="id">stk</span> <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptz_stack_compat</span> <span class="id">stk0</span> <span class="id">ptz</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Shift_ptd</span> <span class="id">tok</span> <span class="id">ptl</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">stk0,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">state_has_future</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>) (<span class="id">ptlz_prod</span> <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>) <span class="id">::</span> <span class="id">ptlz_future</span> <span class="id">ptlz</span>) (<span class="id">ptlz_lookahead</span> <span class="id">ptlz</span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_stack_compat</span> <span class="id">stk0</span> <span class="id">ptl</span> <span class="id">stk</span> <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptlz_stack_compat</span> <span class="id">stk0</span> <span class="id">ptlz</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">ptz_stack_compat_cons_state_has_future</span> <span class="id">{symbsq</span> <span class="id">wordq</span> <span class="id">symbt</span> <span class="id">wordt}</span> <span class="id">stk</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbsq</span> <span class="id">wordq</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> (<span class="id">symbt</span> <span class="id">::</span> <span class="id">symbsq</span>) (<span class="id">wordq</span> <span class="id">++</span> <span class="id">wordt</span>)) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptz_stack_compat</span> <span class="id">stk</span> (<span class="id">Cons_ptl_ptz</span> <span class="id">ptl</span> <span class="id">ptlz</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">state_has_future</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>) (<span class="id">ptlz_prod</span> <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">symbt::ptlz_future</span> <span class="id">ptlz</span>) (<span class="id">ptlz_lookahead</span> <span class="id">ptlz</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+ <span class="id">move=&gt;[stk0</span> <span class="id">[?</span> <span class="id">[?</span> <span class="id">?]]]</span> <span class="id">//</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">ptlz_future_ptlz_prod</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz:ptl_zipper</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">rev_append</span> (<span class="id">ptlz_future</span> <span class="id">ptlz</span>) <span class="id">hole_symbs</span> <span class="id">=</span> <span class="id">prod_rhs_rev</span> (<span class="id">ptlz_prod</span> <span class="id">ptlz</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+ <span class="id">induction</span> <span class="id">ptlz=&gt;//=</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">ptlz_future_first</span> <span class="id">{symbs</span> <span class="id">word}</span> (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">TerminalSet.In</span> (<span class="id">token_term</span> (<span class="id">buf_head</span> (<span class="id">ptlz_buffer</span> <span class="id">ptlz</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">first_word_set</span> (<span class="id">ptlz_future</span> <span class="id">ptlz</span>)) <span class="id">\/</span><br/>
+&nbsp;&nbsp;<span class="id">token_term</span> (<span class="id">buf_head</span> (<span class="id">ptlz_buffer</span> <span class="id">ptlz</span>)) <span class="id">=</span> <span class="id">ptlz_lookahead</span> <span class="id">ptlz</span> <span class="id">/\</span><br/>
+&nbsp;&nbsp;<span class="id">nullable_word</span> (<span class="id">ptlz_future</span> <span class="id">ptlz</span>) <span class="id">=</span> <span class="id">true</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">ptlz</span> <span class="gallina-kwd">as</span> <span class="id">[|???</span> <span class="id">[|tok]</span> <span class="id">pt</span> <span class="id">ptlz</span> <span class="id">IH];</span> <span class="id">[by</span> <span class="id">auto|</span> <span class="id">|]=&gt;/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">rewrite</span> (<span class="id">nullable_correct</span> <span class="id">_</span> <span class="id">_</span> <span class="id">eq_refl</span> <span class="id">pt</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">IH</span> <span class="gallina-kwd">as</span> <span class="id">[|[??]];</span> <span class="id">[left|right]=&gt;/=;</span> <span class="id">auto</span> <span class="gallina-kwd">using</span> <span class="id">TerminalSet.union_3</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">left</span>. <span class="id">destruct</span> <span class="id">nullable_symb;</span> <span class="id">eauto</span> <span class="gallina-kwd">using</span> <span class="id">TerminalSet.union_2</span><span class="id">,</span> <span class="id">first_correct</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">We now want to define what is the next dotted parse tree which is
+  to be handled after one action. Such dotted parse is built in two
+  steps: Not only we have to perform the action by completing the
+  parse tree, but we also have to prepare for the following step by
+  moving the dot down to place it in front of the next action to be
+  performed.
+</div>
+<span class="vernacular">Fixpoint</span> <span class="id">build_pt_dot_from_pt</span> <span class="id">{symb</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">pt</span> <span class="id">:</span> <span class="id">parse_tree</span> <span class="id">symb</span> <span class="id">word</span>) (<span class="id">ptz</span> <span class="id">:</span> <span class="id">pt_zipper</span> <span class="id">symb</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;<span class="id">:</span> <span class="id">pt_dot</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">pt</span> <span class="gallina-kwd">in</span> <span class="id">parse_tree</span> <span class="id">symb</span> <span class="id">word</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="id">pt_zipper</span> <span class="id">symb</span> <span class="id">word</span> <span class="id">-&gt;</span> <span class="id">pt_dot</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Terminal_pt</span> <span class="id">tok</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span class="id">ptz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">X</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptz</span> <span class="gallina-kwd">in</span> <span class="id">pt_zipper</span> <span class="id">symb</span> <span class="id">word</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="gallina-kwd">match</span> <span class="id">symb</span> <span class="gallina-kwd">with</span> <span class="id">T</span> <span class="id">term</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="id">|</span> <span class="id">NT</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="gallina-kwd">end</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{</span> <span class="id">symbsq</span> <span class="id">:</span> <span class="id">list</span> <span class="id">symbol</span> &amp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{</span> <span class="id">wordq</span> <span class="id">:</span> <span class="id">list</span> <span class="id">token</span> &amp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">parse_tree_list</span> <span class="id">symbsq</span> <span class="id">wordq</span> <span class="id">*</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_zipper</span> (<span class="id">symb</span> <span class="id">::</span> <span class="id">symbsq</span>) (<span class="id">wordq</span> <span class="id">++</span> <span class="id">word</span>))%<span class="id">type</span> <span class="id">}</span> <span class="id">}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">Top_ptz</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">F</span> <span class="id">=&gt;</span> <span class="id">False_rect</span> <span class="id">_</span> <span class="id">F</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptz</span> <span class="id">ptl</span> <span class="id">ptlz</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">existT</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">existT</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">ptl,</span> <span class="id">ptlz</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id">I</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Shift_ptd</span> <span class="id">tok</span> (<span class="id">fst</span> (<span class="id">projT2</span> (<span class="id">projT2</span> <span class="id">X</span>))) (<span class="id">snd</span> (<span class="id">projT2</span> (<span class="id">projT2</span> <span class="id">X</span>)))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Non_terminal_pt</span> <span class="id">prod</span> <span class="id">ptl</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">ptz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">is_notnil</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptl</span> <span class="gallina-kwd">in</span> <span class="id">parse_tree_list</span> <span class="id">w</span> <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="id">option</span> (<span class="gallina-kwd">match</span> <span class="id">w</span> <span class="gallina-kwd">return</span> <span class="gallina-kwd">Prop</span> <span class="gallina-kwd">with</span> <span class="id">[]</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="gallina-kwd">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">Nil_ptl</span> <span class="id">=&gt;</span> <span class="id">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">Some</span> <span class="id">I</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">is_notnil</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">Reduce_ptd</span> <span class="id">ptl</span> <span class="id">ptz</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">build_pt_dot_from_pt_rec</span> <span class="id">ptl</span> <span class="id">H</span> (<span class="id">Non_terminal_pt_ptlz</span> <span class="id">ptz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id">ptz</span><br/>
+<span class="gallina-kwd">with</span> <span class="id">build_pt_dot_from_pt_rec</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">Hsymbs</span> <span class="id">:</span> <span class="gallina-kwd">match</span> <span class="id">symbs</span> <span class="gallina-kwd">with</span> <span class="id">[]</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="gallina-kwd">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;<span class="id">:</span> <span class="id">pt_dot</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptl</span> <span class="gallina-kwd">in</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="gallina-kwd">match</span> <span class="id">symbs</span> <span class="gallina-kwd">with</span> <span class="id">[]</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="gallina-kwd">end</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">pt_dot</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Nil_ptl</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">Hsymbs</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">False_rect</span> <span class="id">_</span> <span class="id">Hsymbs</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl</span> <span class="id">ptl'</span> <span class="id">pt</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptl'</span> <span class="gallina-kwd">in</span> <span class="id">parse_tree_list</span> <span class="id">symbsq</span> <span class="id">wordq</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="id">parse_tree_list</span> <span class="id">symbsq</span> <span class="id">wordq</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptl_zipper</span> (<span class="id">_</span> <span class="id">::</span> <span class="id">symbsq</span>) (<span class="id">wordq</span> <span class="id">++</span> <span class="id">_</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">pt_dot</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">Nil_ptl</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">build_pt_dot_from_pt</span> <span class="id">pt</span> (<span class="id">Cons_ptl_ptz</span> <span class="id">Nil_ptl</span> <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">ptl'</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">build_pt_dot_from_pt_rec</span> <span class="id">ptl'</span> <span class="id">I</span> (<span class="id">Cons_ptl_ptlz</span> <span class="id">pt</span> <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id">ptl'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id">Hsymbs</span> <span class="id">ptlz</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">build_pt_dot_from_ptl</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;<span class="id">:</span> <span class="id">pt_dot</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptlz</span> <span class="gallina-kwd">in</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span> <span class="id">-&gt;</span> <span class="id">pt_dot</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Non_terminal_pt_ptlz</span> <span class="id">ptz</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">ptl</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Reduce_ptd</span> <span class="id">ptl</span> <span class="id">ptz</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptlz</span> <span class="id">pt</span> <span class="id">ptlz</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">ptl</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">build_pt_dot_from_pt</span> <span class="id">pt</span> (<span class="id">Cons_ptl_ptz</span> <span class="id">ptl</span> <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id">ptl</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">next_ptd</span> (<span class="id">ptd:pt_dot</span>) <span class="id">:</span> <span class="id">option</span> <span class="id">pt_dot</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptd</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Shift_ptd</span> <span class="id">tok</span> <span class="id">ptl</span> <span class="id">ptlz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Some</span> (<span class="id">build_pt_dot_from_ptl</span> (<span class="id">Cons_ptl</span> <span class="id">ptl</span> (<span class="id">Terminal_pt</span> <span class="id">tok</span>)) <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Reduce_ptd</span> <span class="id">ptl</span> <span class="id">ptz</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptz</span> <span class="gallina-kwd">in</span> <span class="id">pt_zipper</span> <span class="id">symb</span> <span class="id">word</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="id">parse_tree</span> <span class="id">symb</span> <span class="id">word</span> <span class="id">-&gt;</span> <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">Top_ptz</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptz</span> <span class="id">ptl'</span> <span class="id">ptlz</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">pt</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Some</span> (<span class="id">build_pt_dot_from_ptl</span> (<span class="id">Cons_ptl</span> <span class="id">ptl'</span> <span class="id">pt</span>) <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> (<span class="id">Non_terminal_pt</span> <span class="id">_</span> <span class="id">ptl</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">next_ptd_iter</span> (<span class="id">ptd:pt_dot</span>) (<span class="id">log_n_steps:nat</span>) <span class="id">:</span> <span class="id">option</span> <span class="id">pt_dot</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">log_n_steps</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">O</span> <span class="id">=&gt;</span> <span class="id">next_ptd</span> <span class="id">ptd</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">S</span> <span class="id">log_n_steps</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">next_ptd_iter</span> <span class="id">ptd</span> <span class="id">log_n_steps</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">ptd</span> <span class="id">=&gt;</span> <span class="id">next_ptd_iter</span> <span class="id">ptd</span> <span class="id">log_n_steps</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">We prove that these functions behave well w.r.t. semantic values. </div>
+<span class="vernacular">Lemma</span> <span class="id">sem_build_from_pt</span> <span class="id">{symb</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">pt</span> <span class="id">:</span> <span class="id">parse_tree</span> <span class="id">symb</span> <span class="id">word</span>) (<span class="id">ptz</span> <span class="id">:</span> <span class="id">pt_zipper</span> <span class="id">symb</span> <span class="id">word</span>)  <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptz_sem</span> <span class="id">ptz</span> (<span class="id">pt_sem</span> <span class="id">pt</span>)<br/>
+&nbsp;&nbsp;<span class="id">=</span> <span class="id">ptd_sem</span> (<span class="id">build_pt_dot_from_pt</span> <span class="id">pt</span> <span class="id">ptz</span>)<br/>
+<span class="gallina-kwd">with</span> <span class="id">sem_build_from_pt_rec</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Hsymbs</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptlz_sem</span> <span class="id">ptlz</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">ptl_sem</span> <span class="id">ptl</span> <span class="id">f</span>)<br/>
+&nbsp;&nbsp;<span class="id">=</span> <span class="id">ptd_sem</span> (<span class="id">build_pt_dot_from_pt_rec</span> <span class="id">ptl</span> <span class="id">Hsymbs</span> <span class="id">ptlz</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">pt</span> <span class="gallina-kwd">as</span> <span class="id">[tok|prod</span> <span class="id">word</span> <span class="id">ptl]=&gt;/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">revert</span> <span class="id">ptz</span>. <span class="id">generalize</span> <span class="id">[tok]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">token_sem</span> <span class="id">tok</span>). <span class="id">generalize</span> <span class="id">I</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">change</span> <span class="id">True</span> <span class="gallina-kwd">with</span> (<span class="gallina-kwd">match</span> <span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>) <span class="gallina-kwd">with</span> <span class="id">T</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="id">|</span> <span class="id">NT</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="gallina-kwd">end</span>) <span class="gallina-kwd">at</span> <span class="id">1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>)) <span class="id">=&gt;</span> <span class="id">symb</span> <span class="id">HT</span> <span class="id">sem</span> <span class="id">word</span> <span class="id">ptz</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">ptz</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id">context</span> <span class="id">[match</span> <span class="id">?X</span> <span class="gallina-kwd">with</span> <span class="id">Some</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">end]</span> <span class="id">=&gt;</span> <span class="id">destruct</span> <span class="id">X=&gt;//</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-sem_build_from_pt_rec</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">ptl;</span> <span class="id">[contradiction|]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">sem_build_from_pt_rec</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ptl</span>)<span class="id">=&gt;/=</span>. <span class="id">destruct</span> <span class="id">ptl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-sem_build_from_pt</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-sem_build_from_pt_rec</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">sem_build_from_ptl</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptlz_sem</span> <span class="id">ptlz</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">f</span> <span class="id">=&gt;</span> <span class="id">ptl_sem</span> <span class="id">ptl</span> <span class="id">f</span>)<br/>
+&nbsp;&nbsp;<span class="id">=</span> <span class="id">ptd_sem</span> (<span class="id">build_pt_dot_from_ptl</span> <span class="id">ptl</span> <span class="id">ptlz</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+ <span class="id">destruct</span> <span class="id">ptlz=&gt;//=</span>. <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-sem_build_from_pt</span>. Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">sem_next_ptd</span> (<span class="id">ptd</span> <span class="id">:</span> <span class="id">pt_dot</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">next_ptd</span> <span class="id">ptd</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">True</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">ptd'</span> <span class="id">=&gt;</span> <span class="id">ptd_sem</span> <span class="id">ptd</span> <span class="id">=</span> <span class="id">ptd_sem</span> <span class="id">ptd'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptd</span> <span class="gallina-kwd">as</span> <span class="id">[prod</span> <span class="id">word</span> <span class="id">ptl</span> <span class="id">ptz|tok</span> <span class="id">symbs</span> <span class="id">word</span> <span class="id">ptl</span> <span class="id">ptlz]</span> <span class="id">=&gt;/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">change</span> (<span class="id">ptl_sem</span> <span class="id">ptl</span> (<span class="id">prod_action</span> <span class="id">prod</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span> (<span class="id">pt_sem</span> (<span class="id">Non_terminal_pt</span> <span class="id">prod</span> <span class="id">ptl</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">Non_terminal_pt</span> <span class="id">prod</span> <span class="id">ptl</span>). <span class="id">clear</span> <span class="id">ptl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptz</span> <span class="gallina-kwd">as</span> <span class="id">[|??</span> <span class="id">ptl</span> <span class="id">??</span> <span class="id">ptlz]=&gt;//</span> <span class="id">pt</span>. <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-sem_build_from_ptl</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-sem_build_from_ptl</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">sem_next_ptd_iter</span> (<span class="id">ptd</span> <span class="id">:</span> <span class="id">pt_dot</span>) (<span class="id">log_n_steps</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">next_ptd_iter</span> <span class="id">ptd</span> <span class="id">log_n_steps</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">True</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">ptd'</span> <span class="id">=&gt;</span> <span class="id">ptd_sem</span> <span class="id">ptd</span> <span class="id">=</span> <span class="id">ptd_sem</span> <span class="id">ptd'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">ptd</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">log_n_steps</span> <span class="gallina-kwd">as</span> <span class="id">[|log_n_steps</span> <span class="id">IH];</span> <span class="id">[by</span> <span class="id">apply</span> <span class="id">sem_next_ptd|]=&gt;/=</span> <span class="id">ptd</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">IH1</span> <span class="id">:=</span> <span class="id">IH</span> <span class="id">ptd</span>). <span class="id">destruct</span> <span class="id">next_ptd_iter</span> <span class="gallina-kwd">as</span> <span class="id">[ptd'|]=&gt;//</span>.<br/>
+&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">IH</span> <span class="id">ptd'</span>). <span class="id">destruct</span> <span class="id">next_ptd_iter=&gt;//</span>. <span class="id">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">We prove that these functions behave well w.r.t. xxx_buffer. </div>
+<span class="vernacular">Lemma</span> <span class="id">ptd_buffer_build_from_pt</span> <span class="id">{symb</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">pt</span> <span class="id">:</span> <span class="id">parse_tree</span> <span class="id">symb</span> <span class="id">word</span>) (<span class="id">ptz</span> <span class="id">:</span> <span class="id">pt_zipper</span> <span class="id">symb</span> <span class="id">word</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">word</span> <span class="id">++</span> <span class="id">ptz_buffer</span> <span class="id">ptz</span>)%<span class="id">buf</span> <span class="id">=</span> <span class="id">ptd_buffer</span> (<span class="id">build_pt_dot_from_pt</span> <span class="id">pt</span> <span class="id">ptz</span>)<br/>
+<span class="gallina-kwd">with</span> <span class="id">ptd_buffer_build_from_pt_rec</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Hsymbs</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id">word</span> <span class="id">++</span> <span class="id">ptlz_buffer</span> <span class="id">ptlz</span>)%<span class="id">buf</span> <span class="id">=</span> <span class="id">ptd_buffer</span> (<span class="id">build_pt_dot_from_pt_rec</span> <span class="id">ptl</span> <span class="id">Hsymbs</span> <span class="id">ptlz</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">pt</span> <span class="gallina-kwd">as</span> <span class="id">[tok|prod</span> <span class="id">word</span> <span class="id">ptl]=&gt;/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">f_equal</span>. <span class="id">revert</span> <span class="id">ptz</span>. <span class="id">generalize</span> <span class="id">[tok]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">token_sem</span> <span class="id">tok</span>). <span class="id">generalize</span> <span class="id">I</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">change</span> <span class="id">True</span> <span class="gallina-kwd">with</span> (<span class="gallina-kwd">match</span> <span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>) <span class="gallina-kwd">with</span> <span class="id">T</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="id">|</span> <span class="id">NT</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="gallina-kwd">end</span>) <span class="gallina-kwd">at</span> <span class="id">1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>)) <span class="id">=&gt;</span> <span class="id">symb</span> <span class="id">HT</span> <span class="id">sem</span> <span class="id">word</span> <span class="id">ptz</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">ptz</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id">context</span> <span class="id">[match</span> <span class="id">?X</span> <span class="gallina-kwd">with</span> <span class="id">Some</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">end]</span> <span class="id">=&gt;</span> <span class="id">destruct</span> <span class="id">X</span> <span class="id">eqn:EQ</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-ptd_buffer_build_from_pt_rec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">[X</span> <span class="gallina-kwd">in</span> (<span class="id">X</span> <span class="id">++</span> <span class="id">_</span>)%<span class="id">buf]</span>(<span class="id">_</span> <span class="id">:</span> <span class="id">word</span> <span class="id">=</span> <span class="id">[]</span>) <span class="id">//</span>. <span class="id">clear</span> <span class="id">-EQ</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">ptl</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">ptl</span> <span class="gallina-kwd">as</span> <span class="id">[|??</span> <span class="id">ptl</span> <span class="id">??</span> <span class="id">pt];</span> <span class="id">[contradiction|]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">ptd_buffer_build_from_pt_rec</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ptl</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/=</span> <span class="id">-ptd_buffer_build_from_pt</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-ptd_buffer_build_from_pt_rec</span> <span class="id">//=</span> <span class="id">app_buf_assoc</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">ptd_buffer_build_from_ptl</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptlz_buffer</span> <span class="id">ptlz</span> <span class="id">=</span> <span class="id">ptd_buffer</span> (<span class="id">build_pt_dot_from_ptl</span> <span class="id">ptl</span> <span class="id">ptlz</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptlz</span> <span class="gallina-kwd">as</span> <span class="id">[|????</span> <span class="id">pt]=&gt;//=</span>. <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-ptd_buffer_build_from_pt</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">We prove that these functions behave well w.r.t. xxx_stack_compat. </div>
+<span class="vernacular">Lemma</span> <span class="id">ptd_stack_compat_build_from_pt</span> <span class="id">{symb</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">pt</span> <span class="id">:</span> <span class="id">parse_tree</span> <span class="id">symb</span> <span class="id">word</span>) (<span class="id">ptz</span> <span class="id">:</span> <span class="id">pt_zipper</span> <span class="id">symb</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">stk:</span> <span class="id">stack</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptz_stack_compat</span> <span class="id">stk</span> <span class="id">ptz</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> (<span class="id">build_pt_dot_from_pt</span> <span class="id">pt</span> <span class="id">ptz</span>) <span class="id">stk</span><br/>
+<span class="gallina-kwd">with</span> <span class="id">ptd_stack_compat_build_from_pt_rec</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">stk</span> <span class="id">:</span> <span class="id">stack</span>) <span class="id">Hsymbs</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptlz_stack_compat</span> <span class="id">stk</span> <span class="id">ptlz</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">state_has_future</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>) (<span class="id">ptlz_prod</span> <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">rev'</span> (<span class="id">prod_rhs_rev</span> (<span class="id">ptlz_prod</span> <span class="id">ptlz</span>))) (<span class="id">ptlz_lookahead</span> <span class="id">ptlz</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> (<span class="id">build_pt_dot_from_pt_rec</span> <span class="id">ptl</span> <span class="id">Hsymbs</span> <span class="id">ptlz</span>) <span class="id">stk</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
+<div class="proofscript" id="proof22">
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">Hstk</span>. <span class="id">destruct</span> <span class="id">pt</span> <span class="gallina-kwd">as</span> <span class="id">[tok|prod</span> <span class="id">word</span> <span class="id">ptl]=&gt;/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">revert</span> <span class="id">ptz</span> <span class="id">Hstk</span>. <span class="id">generalize</span> <span class="id">[tok]</span>. <span class="id">generalize</span> (<span class="id">token_sem</span> <span class="id">tok</span>). <span class="id">generalize</span> <span class="id">I</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">change</span> <span class="id">True</span> <span class="gallina-kwd">with</span> (<span class="gallina-kwd">match</span> <span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>) <span class="gallina-kwd">with</span> <span class="id">T</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="id">|</span> <span class="id">NT</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="gallina-kwd">end</span>) <span class="gallina-kwd">at</span> <span class="id">1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>)) <span class="id">=&gt;</span> <span class="id">symb</span> <span class="id">HT</span> <span class="id">sem</span> <span class="id">word</span> <span class="id">ptz</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">ptz</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">assert</span> (<span class="id">state_has_future</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>) <span class="id">prod</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">rev'</span> (<span class="id">prod_rhs_rev</span> <span class="id">prod</span>)) (<span class="id">token_term</span> (<span class="id">buf_head</span> (<span class="id">ptz_buffer</span> <span class="id">ptz</span>)))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{</span> <span class="id">revert</span> <span class="id">ptz</span> <span class="id">Hstk</span>. <span class="id">remember</span> (<span class="id">NT</span> (<span class="id">prod_lhs</span> <span class="id">prod</span>)) <span class="id">eqn:EQ=&gt;ptz</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptz</span> <span class="gallina-kwd">as</span> <span class="id">[|??</span> <span class="id">ptl0</span> <span class="id">??</span> <span class="id">ptlz0]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">-&gt;</span>. <span class="id">apply</span> <span class="id">start_future</span>. <span class="id">congruence</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">-</span> <span class="id">subst</span>. <span class="id">intros</span> (<span class="id">stk0</span> &amp; <span class="id">Hfut</span> &amp; <span class="id">_</span>). <span class="id">apply</span> <span class="id">non_terminal_closed</span> <span class="gallina-kwd">in</span> <span class="id">Hfut</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">Hfut</span> <span class="id">prod</span> <span class="id">eq_refl</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">ptlz_future_first</span> <span class="id">ptlz0</span>) <span class="gallina-kwd">as</span> <span class="id">[Hfirst|[Hfirst</span> <span class="id">Hnull]]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> <span class="id">Hfut</span> <span class="gallina-kwd">as</span> <span class="id">[_</span> <span class="id">Hfut]</span>. <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> <span class="id">Hfut</span> <span class="gallina-kwd">as</span> <span class="id">[Hfut</span> <span class="id">_]</span>. <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">Hnull</span> <span class="id">-Hfirst</span> <span class="gallina-kwd">in</span> <span class="id">Hfut</span>. <span class="id">}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id">context</span> <span class="id">[match</span> <span class="id">?X</span> <span class="gallina-kwd">with</span> <span class="id">Some</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">end]</span> <span class="id">=&gt;</span> <span class="id">destruct</span> <span class="id">X</span> <span class="id">eqn:EQ</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">ptd_stack_compat_build_from_pt_rec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="gallina-kwd">exists</span> <span class="id">stk</span>. <span class="id">destruct</span> <span class="id">ptl=&gt;//</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">Hstk</span> <span class="id">Hfut</span>. <span class="id">destruct</span> <span class="id">ptl</span> <span class="gallina-kwd">as</span> <span class="id">[|??</span> <span class="id">ptl</span> <span class="id">??</span> <span class="id">pt];</span> <span class="id">[contradiction|]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">ptd_stack_compat_build_from_pt_rec</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ptl</span>). <span class="id">destruct</span> <span class="id">ptl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">eapply</span> <span class="id">ptd_stack_compat_build_from_pt=&gt;//</span>. <span class="gallina-kwd">exists</span> <span class="id">stk</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">split;</span> <span class="id">[|split]=&gt;//;</span> <span class="id">[]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-ptlz_future_ptlz_prod</span> <span class="id">rev_append_rev</span> <span class="id">/rev'</span> <span class="id">-rev_alt</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rev_app_distr</span> <span class="id">rev_involutive</span> <span class="gallina-kwd">in</span> <span class="id">Hfut</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">ptd_stack_compat_build_from_pt_rec</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">ptd_stack_compat_build_from_ptl</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">stk</span> <span class="id">stk0:</span> <span class="id">stack</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptlz_stack_compat</span> <span class="id">stk0</span> <span class="id">ptlz</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">ptl_stack_compat</span> <span class="id">stk0</span> <span class="id">ptl</span> <span class="id">stk</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">state_has_future</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>) (<span class="id">ptlz_prod</span> <span class="id">ptlz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz_future</span> <span class="id">ptlz</span>) (<span class="id">ptlz_lookahead</span> <span class="id">ptlz</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> (<span class="id">build_pt_dot_from_ptl</span> <span class="id">ptl</span> <span class="id">ptlz</span>) <span class="id">stk</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
+<div class="proofscript" id="proof23">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">Hstk0</span> <span class="id">Hstk</span> <span class="id">Hfut</span>. <span class="id">destruct</span> <span class="id">ptlz=&gt;/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">apply</span> <span class="id">ptd_stack_compat_build_from_pt=&gt;/=</span>. <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">We can now proceed by proving that the invariant is preserved by
+  each step of parsing. We also prove that each step of parsing
+  follows next_ptd.
+  We start with reduce steps: </div>
+<span class="vernacular">Lemma</span> <span class="id">reduce_step_next_ptd</span> (<span class="id">prod</span> <span class="id">:</span> <span class="id">production</span>) (<span class="id">word</span> <span class="id">:</span> <span class="id">list</span> <span class="id">token</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> (<span class="id">prod_rhs_rev</span> <span class="id">prod</span>) <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptz</span> <span class="id">:</span> <span class="id">pt_zipper</span> (<span class="id">NT</span> (<span class="id">prod_lhs</span> <span class="id">prod</span>)) <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">stk</span> <span class="id">:</span> <span class="id">stack</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Hval</span> <span class="id">Hi</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> (<span class="id">Reduce_ptd</span> <span class="id">ptl</span> <span class="id">ptz</span>) <span class="id">stk</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">next_ptd</span> (<span class="id">Reduce_ptd</span> <span class="id">ptl</span> <span class="id">ptz</span>) <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">reduce_step</span> <span class="id">init</span> <span class="id">stk</span> <span class="id">prod</span> (<span class="id">ptz_buffer</span> <span class="id">ptz</span>) <span class="id">Hval</span> <span class="id">Hi</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Accept_sr</span> (<span class="id">ptd_sem</span> (<span class="id">Reduce_ptd</span> <span class="id">ptl</span> <span class="id">ptz</span>)) <span class="id">buffer_end</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">ptd</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">stk',</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">reduce_step</span> <span class="id">init</span> <span class="id">stk</span> <span class="id">prod</span> (<span class="id">ptz_buffer</span> <span class="id">ptz</span>) <span class="id">Hval</span> <span class="id">Hi</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Progress_sr</span> <span class="id">stk'</span> (<span class="id">ptd_buffer</span> <span class="id">ptd</span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> <span class="id">ptd</span> <span class="id">stk'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
+<div class="proofscript" id="proof24">
+&nbsp;&nbsp;<span class="id">intros</span> (<span class="id">stk0</span> &amp; <span class="id">_</span> &amp; <span class="id">Hstk</span> &amp; <span class="id">Hstk0</span>).<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">pop_stack_compat_pop_spec</span> <span class="gallina-kwd">with</span> (<span class="id">action</span> <span class="id">:=</span> <span class="id">prod_action</span> <span class="id">prod</span>) <span class="gallina-kwd">in</span> <span class="id">Hstk</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">&lt;-pop_spec_ok</span> <span class="gallina-kwd">with</span> (<span class="id">Hp</span> <span class="id">:=</span> <span class="id">reduce_step_subproof</span> <span class="id">init</span> <span class="id">stk</span> <span class="id">prod</span> <span class="id">Hval</span> <span class="id">Hi</span>) <span class="gallina-kwd">in</span> <span class="id">Hstk</span>.<br/>
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id">reduce_step</span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id">context</span> <span class="id">[pop_state_valid</span> <span class="id">init</span> <span class="id">?A</span> <span class="id">stk</span> <span class="id">?B</span> <span class="id">?C</span> <span class="id">?D</span> <span class="id">?E</span> <span class="id">?F]</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">pop_state_valid</span> <span class="id">init</span> <span class="id">A</span> <span class="id">stk</span> <span class="id">B</span> <span class="id">C</span> <span class="id">D</span> <span class="id">E</span> <span class="id">F</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Hstk</span> <span class="id">/=</span>. <span class="id">intros</span> <span class="id">Hv</span>.<br/>
+&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">reduce_step_subproof1</span> <span class="id">init</span> <span class="id">stk</span> <span class="id">prod</span> <span class="id">Hval</span> <span class="id">stk0</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">:</span> <span class="id">True</span> <span class="id">=&gt;</span> <span class="id">Hv</span>)).<br/>
+&nbsp;&nbsp;<span class="id">clear</span> <span class="id">Hval</span> <span class="id">Hstk</span> <span class="id">Hi</span> <span class="id">Hv</span> <span class="id">stk</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hgoto</span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span class="id">fut</span> <span class="id">prod'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">non_terminal_goto</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk0</span>) <span class="id">prod'</span> (<span class="id">NT</span> (<span class="id">prod_lhs</span> <span class="id">prod</span>)<span class="id">::fut</span>)).<br/>
+&nbsp;&nbsp;<span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">Hgoto</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">goto_table</span> <span class="gallina-kwd">as</span> <span class="id">[[st</span> <span class="id">Hst]|]</span> <span class="id">eqn:Hgoto'</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">_</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="gallina-kwd">match</span> <span class="id">ptz</span> <span class="gallina-kwd">with</span> <span class="id">Top_ptz</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="gallina-kwd">end</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{</span> <span class="id">revert</span> <span class="id">ptz</span> <span class="id">Hst</span> <span class="id">Hstk0</span> <span class="id">Hgoto'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">eq_refl</span> (<span class="id">NT</span> (<span class="id">prod_lhs</span> <span class="id">prod</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">NT</span> (<span class="id">prod_lhs</span> <span class="id">prod</span>)) <span class="gallina-kwd">at</span> <span class="id">1</span> <span class="id">3</span> <span class="id">5</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> <span class="id">nt</span> <span class="id">Hnt</span> <span class="id">ptz</span>. <span class="id">destruct</span> <span class="id">ptz=&gt;//</span>. <span class="id">injection</span> <span class="id">Hnt=&gt;</span> <span class="id">&lt;-</span> <span class="id">/=</span> <span class="id">Hst</span> <span class="id">-&gt;</span> <span class="id">/=</span> <span class="id">Hg</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hsg</span> <span class="id">:=</span> <span class="id">start_goto</span> <span class="id">init</span>). <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">Hg</span> <span class="gallina-kwd">in</span> <span class="id">Hsg</span>. <span class="id">}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">clear</span> <span class="id">Hgoto'</span>.<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">change</span> (<span class="id">ptl_sem</span> <span class="id">ptl</span> (<span class="id">prod_action</span> <span class="id">prod</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span> (<span class="id">pt_sem</span> (<span class="id">Non_terminal_pt</span> <span class="id">prod</span> <span class="id">ptl</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">Non_terminal_pt</span> <span class="id">prod</span> <span class="id">ptl</span>). <span class="id">clear</span> <span class="id">ptl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptz</span> <span class="gallina-kwd">as</span> <span class="id">[|??</span> <span class="id">ptl</span> <span class="id">?</span> <span class="id">?</span> <span class="id">ptlz]=&gt;//</span> <span class="id">pt</span>.<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">subst=&gt;/=</span>. <span class="id">eexists</span> <span class="id">_</span>. <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">f_equal</span>. <span class="id">apply</span> <span class="id">ptd_buffer_build_from_ptl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> <span class="id">Hstk0</span> <span class="gallina-kwd">as</span> (<span class="id">stk0'</span> &amp; <span class="id">Hfut</span> &amp; <span class="id">Hstk0'</span> &amp; <span class="id">Hstk0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> (<span class="id">ptd_stack_compat_build_from_ptl</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">stk0'</span>)<span class="id">;</span> <span class="id">auto;</span> <span class="id">[]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">split=&gt;//</span>. <span class="gallina-kwd">by</span> <span class="gallina-kwd">exists</span> <span class="id">eq_refl</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">Hv</span>. <span class="id">generalize</span> (<span class="id">reduce_step_subproof0</span> <span class="id">_</span> <span class="id">prod</span> <span class="id">_</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">Hv</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> <span class="id">EQnt</span>. <span class="id">clear</span> <span class="id">Hv</span> <span class="id">Hgoto'</span>.<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">change</span> (<span class="id">ptl_sem</span> <span class="id">ptl</span> (<span class="id">prod_action</span> <span class="id">prod</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span> (<span class="id">pt_sem</span> (<span class="id">Non_terminal_pt</span> <span class="id">prod</span> <span class="id">ptl</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">Non_terminal_pt</span> <span class="id">prod</span> <span class="id">ptl</span>). <span class="id">clear</span> <span class="id">ptl</span>. <span class="id">destruct</span> <span class="id">ptz</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span> <span class="id">pt</span>. <span class="id">f_equal</span>. <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">cast_eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">edestruct</span> <span class="id">Hgoto</span>. <span class="id">eapply</span> <span class="id">ptz_stack_compat_cons_state_has_future,</span> <span class="id">Hstk0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">step_next_ptd</span> (<span class="id">ptd</span> <span class="id">:</span> <span class="id">pt_dot</span>) (<span class="id">stk</span> <span class="id">:</span> <span class="id">stack</span>) <span class="id">Hi</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> <span class="id">ptd</span> <span class="id">stk</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">next_ptd</span> <span class="id">ptd</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">step</span> <span class="id">safe</span> <span class="id">init</span> <span class="id">stk</span> (<span class="id">ptd_buffer</span> <span class="id">ptd</span>) <span class="id">Hi</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Accept_sr</span> (<span class="id">ptd_sem</span> <span class="id">ptd</span>) <span class="id">buffer_end</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">ptd'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">stk',</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">step</span> <span class="id">safe</span> <span class="id">init</span> <span class="id">stk</span> (<span class="id">ptd_buffer</span> <span class="id">ptd</span>) <span class="id">Hi</span> <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Progress_sr</span> <span class="id">stk'</span> (<span class="id">ptd_buffer</span> <span class="id">ptd'</span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> <span class="id">ptd'</span> <span class="id">stk'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
+<div class="proofscript" id="proof25">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">Hstk</span>. <span class="id">unfold</span> <span class="id">step</span>.<br/>
+&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">reduce_ok</span> <span class="id">safe</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>)).<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptd</span> <span class="gallina-kwd">as</span> <span class="id">[prod</span> <span class="id">word</span> <span class="id">ptl</span> <span class="id">ptz|tok</span> <span class="id">symbs</span> <span class="id">word</span> <span class="id">ptl</span> <span class="id">ptlz]</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">assert</span> (<span class="id">Hfut</span> <span class="id">:</span> <span class="id">state_has_future</span> (<span class="id">state_of_stack</span> <span class="id">init</span> <span class="id">stk</span>) <span class="id">prod</span> <span class="id">[]</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">token_term</span> (<span class="id">buf_head</span> (<span class="id">ptz_buffer</span> <span class="id">ptz</span>)))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{</span> <span class="id">destruct</span> <span class="id">Hstk</span> <span class="gallina-kwd">as</span> (<span class="id">?</span> &amp; <span class="id">?</span> &amp; <span class="id">?</span>)<span class="id">=&gt;//</span>. <span class="id">}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hact</span> <span class="id">:=</span> <span class="id">end_reduce</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hfut</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">action_table</span> <span class="gallina-kwd">as</span> <span class="id">[?|awt]=&gt;Hval</span> <span class="id">/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">subst</span>. <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">reduce_step_next_ptd</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">set</span> (<span class="id">term</span> <span class="id">:=</span> <span class="id">token_term</span> (<span class="id">buf_head</span> (<span class="id">ptz_buffer</span> <span class="id">ptz</span>))) <span class="gallina-kwd">in</span> <span class="id">*</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">Hval</span> <span class="id">term</span>). <span class="id">clear</span> <span class="id">Hval</span>. <span class="id">destruct</span> (<span class="id">awt</span> <span class="id">term</span>)<span class="id">=&gt;//</span>. <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> <span class="id">Hval</span>. <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">reduce_step_next_ptd</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">Hstk</span> <span class="gallina-kwd">as</span> (<span class="id">stk0</span> &amp; <span class="id">Hfut</span> &amp; <span class="id">Hstk</span> &amp; <span class="id">Hstk0</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hact</span> <span class="id">:=</span> <span class="id">terminal_shift</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">Hfut</span>). <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">Hact</span>. <span class="id">clear</span> <span class="id">Hfut</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">action_table</span> <span class="gallina-kwd">as</span> <span class="id">[?|awt]=&gt;//=</span> <span class="id">/</span>(<span class="id">_</span> (<span class="id">token_term</span> <span class="id">tok</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">awt</span> <span class="gallina-kwd">as</span> <span class="id">[st'</span> <span class="id">EQ|</span> <span class="id">|]=&gt;//</span> <span class="id">_</span>. <span class="id">eexists</span>. <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">f_equal</span>. <span class="id">rewrite</span> <span class="id">-ptd_buffer_build_from_ptl</span> <span class="id">//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">apply</span> (<span class="id">ptd_stack_compat_build_from_ptl</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">stk0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">We prove the completeness of the parser main loop. </div>
+<span class="vernacular">Lemma</span> <span class="id">parse_fix_next_ptd_iter</span> (<span class="id">ptd</span> <span class="id">:</span> <span class="id">pt_dot</span>) (<span class="id">stk</span> <span class="id">:</span> <span class="id">stack</span>) (<span class="id">log_n_steps</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">Hi</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> <span class="id">ptd</span> <span class="id">stk</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">next_ptd_iter</span> <span class="id">ptd</span> <span class="id">log_n_steps</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">proj1_sig</span> (<span class="id">parse_fix</span> <span class="id">safe</span> <span class="id">init</span> <span class="id">stk</span> (<span class="id">ptd_buffer</span> <span class="id">ptd</span>) <span class="id">log_n_steps</span> <span class="id">Hi</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Accept_sr</span> (<span class="id">ptd_sem</span> <span class="id">ptd</span>) <span class="id">buffer_end</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">ptd'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span> <span class="id">stk',</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">proj1_sig</span> (<span class="id">parse_fix</span> <span class="id">safe</span> <span class="id">init</span> <span class="id">stk</span> (<span class="id">ptd_buffer</span> <span class="id">ptd</span>) <span class="id">log_n_steps</span> <span class="id">Hi</span>) <span class="id">=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Progress_sr</span> <span class="id">stk'</span> (<span class="id">ptd_buffer</span> <span class="id">ptd'</span>) <span class="id">/\</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">ptd_stack_compat</span> <span class="id">ptd'</span> <span class="id">stk'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
+<div class="proofscript" id="proof26">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">ptd</span> <span class="id">stk</span> <span class="id">Hi</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">log_n_steps</span> <span class="gallina-kwd">as</span> <span class="id">[|log_n_steps</span> <span class="id">IH];</span> <span class="id">[by</span> <span class="id">apply</span> <span class="id">step_next_ptd|]</span>.<br/>
+&nbsp;&nbsp;<span class="id">move</span> <span class="id">=&gt;</span> <span class="id">/=</span> <span class="id">ptd</span> <span class="id">stk</span> <span class="id">Hi</span> <span class="id">Hstk</span>. <span class="id">assert</span> (<span class="id">IH1</span> <span class="id">:=</span> <span class="id">IH</span> <span class="id">ptd</span> <span class="id">stk</span> <span class="id">Hi</span> <span class="id">Hstk</span>).<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">EQsem</span> <span class="id">:=</span> <span class="id">sem_next_ptd_iter</span> <span class="id">ptd</span> <span class="id">log_n_steps</span>).<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">parse_fix</span> <span class="gallina-kwd">as</span> <span class="id">[sr</span> <span class="id">Hi']</span>. <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">IH1</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">next_ptd_iter</span> <span class="gallina-kwd">as</span> <span class="id">[ptd'|]</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">rewrite</span> <span class="id">EQsem</span>. <span class="id">destruct</span> <span class="id">IH1</span> <span class="gallina-kwd">as</span> (<span class="id">stk'</span> &amp; <span class="id">-&gt;</span> &amp; <span class="id">Hstk'</span>). <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">IH</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">subst</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">The parser is defined by recursion over a fuel parameter. In the
+  completeness proof, we need to predict how much fuel is going to be
+  needed in order to prove that enough fuel gives rise to a successful
+  parsing.
+  To do so, of a dotted parse tree, which is the number of actions
+  left to be executed before complete parsing when the current state
+  is represented by the dotted parse tree. </div>
+<span class="vernacular">Fixpoint</span> <span class="id">ptlz_cost</span> <span class="id">{hole_symbs</span> <span class="id">hole_word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptlz:ptl_zipper</span> <span class="id">hole_symbs</span> <span class="id">hole_word</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptlz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Non_terminal_pt_ptlz</span> <span class="id">ptz</span> <span class="id">=&gt;</span> <span class="id">ptz_cost</span> <span class="id">ptz</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptlz</span> <span class="id">pt</span> <span class="id">ptlz'</span> <span class="id">=&gt;</span> <span class="id">pt_size</span> <span class="id">pt</span> <span class="id">+</span> <span class="id">ptlz_cost</span> <span class="id">ptlz'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+<span class="gallina-kwd">with</span> <span class="id">ptz_cost</span> <span class="id">{hole_symb</span> <span class="id">hole_word}</span> (<span class="id">ptz:pt_zipper</span> <span class="id">hole_symb</span> <span class="id">hole_word</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptz</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Top_ptz</span> <span class="id">=&gt;</span> <span class="id">0</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Cons_ptl_ptz</span> <span class="id">ptl</span> <span class="id">ptlz'</span> <span class="id">=&gt;</span> <span class="id">1</span> <span class="id">+</span> <span class="id">ptlz_cost</span> <span class="id">ptlz'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">ptd_cost</span> (<span class="id">ptd:pt_dot</span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">ptd</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Reduce_ptd</span> <span class="id">ptl</span> <span class="id">ptz</span> <span class="id">=&gt;</span> <span class="id">ptz_cost</span> <span class="id">ptz</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Shift_ptd</span> <span class="id">_</span> <span class="id">ptl</span> <span class="id">ptlz</span> <span class="id">=&gt;</span> <span class="id">1</span> <span class="id">+</span> <span class="id">ptlz_cost</span> <span class="id">ptlz</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">ptd_cost_build_from_pt</span> <span class="id">{symb</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">pt</span> <span class="id">:</span> <span class="id">parse_tree</span> <span class="id">symb</span> <span class="id">word</span>) (<span class="id">ptz</span> <span class="id">:</span> <span class="id">pt_zipper</span> <span class="id">symb</span> <span class="id">word</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">pt_size</span> <span class="id">pt</span> <span class="id">+</span> <span class="id">ptz_cost</span> <span class="id">ptz</span> <span class="id">=</span> <span class="id">S</span> (<span class="id">ptd_cost</span> (<span class="id">build_pt_dot_from_pt</span> <span class="id">pt</span> <span class="id">ptz</span>))<br/>
+<span class="gallina-kwd">with</span> <span class="id">ptd_cost_build_from_pt_rec</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">Hsymbs</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptl_size</span> <span class="id">ptl</span> <span class="id">+</span> <span class="id">ptlz_cost</span> <span class="id">ptlz</span> <span class="id">=</span> <span class="id">ptd_cost</span> (<span class="id">build_pt_dot_from_pt_rec</span> <span class="id">ptl</span> <span class="id">Hsymbs</span> <span class="id">ptlz</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
+<div class="proofscript" id="proof27">
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">pt</span> <span class="gallina-kwd">as</span> <span class="id">[tok|prod</span> <span class="id">word</span> <span class="id">ptl']=&gt;/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">revert</span> <span class="id">ptz</span>. <span class="id">generalize</span> <span class="id">[tok]</span>. <span class="id">generalize</span> (<span class="id">token_sem</span> <span class="id">tok</span>). <span class="id">generalize</span> <span class="id">I</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">change</span> <span class="id">True</span> <span class="gallina-kwd">with</span> (<span class="gallina-kwd">match</span> <span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>) <span class="gallina-kwd">with</span> <span class="id">T</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">True</span> <span class="id">|</span> <span class="id">NT</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">False</span> <span class="gallina-kwd">end</span>) <span class="gallina-kwd">at</span> <span class="id">1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">T</span> (<span class="id">token_term</span> <span class="id">tok</span>)) <span class="id">=&gt;</span> <span class="id">symb</span> <span class="id">HT</span> <span class="id">sem</span> <span class="id">word</span> <span class="id">ptz</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">ptz</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id">context</span> <span class="id">[match</span> <span class="id">?X</span> <span class="gallina-kwd">with</span> <span class="id">Some</span> <span class="id">H</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">end]</span> <span class="id">=&gt;</span> <span class="id">destruct</span> <span class="id">X</span> <span class="id">eqn:EQ</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">-ptd_cost_build_from_pt_rec</span> <span class="id">/=</span> <span class="id">plus_n_Sm</span> <span class="id">//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">simpl</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">ptl'</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">ptl</span> <span class="gallina-kwd">as</span> <span class="id">[|??</span> <span class="id">ptl</span> <span class="id">??</span> <span class="id">pt];</span> <span class="id">[contradiction|]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">ptd_cost_build_from_pt_rec</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ptl</span>). <span class="id">destruct</span> <span class="id">ptl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">apply</span> <span class="id">eq_add_S</span>. <span class="id">rewrite</span> <span class="id">-ptd_cost_build_from_pt</span> <span class="id">/=</span>. <span class="id">ring</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">rewrite</span> <span class="id">-ptd_cost_build_from_pt_rec</span> <span class="id">//=</span>. <span class="id">ring</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">ptd_cost_build_from_ptl</span> <span class="id">{symbs</span> <span class="id">word}</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id">ptl</span> <span class="id">:</span> <span class="id">parse_tree_list</span> <span class="id">symbs</span> <span class="id">word</span>) (<span class="id">ptlz</span> <span class="id">:</span> <span class="id">ptl_zipper</span> <span class="id">symbs</span> <span class="id">word</span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id">ptlz_cost</span> <span class="id">ptlz</span> <span class="id">=</span> <span class="id">ptd_cost</span> (<span class="id">build_pt_dot_from_ptl</span> <span class="id">ptl</span> <span class="id">ptlz</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
+<div class="proofscript" id="proof28">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptlz=&gt;//</span>. <span class="id">apply</span> <span class="id">eq_add_S</span>. <span class="id">rewrite</span> <span class="id">-ptd_cost_build_from_pt</span> <span class="id">/=</span>. <span class="id">ring</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">next_ptd_cost</span> <span class="id">ptd:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">next_ptd</span> <span class="id">ptd</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">ptd_cost</span> <span class="id">ptd</span> <span class="id">=</span> <span class="id">0</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">ptd'</span> <span class="id">=&gt;</span> <span class="id">ptd_cost</span> <span class="id">ptd</span> <span class="id">=</span> <span class="id">S</span> (<span class="id">ptd_cost</span> <span class="id">ptd'</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
+<div class="proofscript" id="proof29">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptd</span> <span class="gallina-kwd">as</span> <span class="id">[prod</span> <span class="id">word</span> <span class="id">ptl</span> <span class="id">ptz|tok</span> <span class="id">symbq</span> <span class="id">wordq</span> <span class="id">ptl</span> <span class="id">ptlz]</span> <span class="id">=&gt;/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">generalize</span> (<span class="id">Non_terminal_pt</span> <span class="id">prod</span> <span class="id">ptl</span>). <span class="id">clear</span> <span class="id">ptl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">ptz</span> <span class="gallina-kwd">as</span> <span class="id">[|??</span> <span class="id">ptl</span> <span class="id">??</span> <span class="id">ptlz]=&gt;//</span> <span class="id">pt</span>. <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-ptd_cost_build_from_ptl</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-ptd_cost_build_from_ptl</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">next_ptd_iter_cost</span> <span class="id">ptd</span> <span class="id">log_n_steps</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">next_ptd_iter</span> <span class="id">ptd</span> <span class="id">log_n_steps</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">None</span> <span class="id">=&gt;</span> <span class="id">ptd_cost</span> <span class="id">ptd</span> <span class="id">&lt;</span> <span class="id">2^log_n_steps</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Some</span> <span class="id">ptd'</span> <span class="id">=&gt;</span> <span class="id">ptd_cost</span> <span class="id">ptd</span> <span class="id">=</span> <span class="id">2^log_n_steps</span> <span class="id">+</span> <span class="id">ptd_cost</span> <span class="id">ptd'</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
+<div class="proofscript" id="proof30">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">ptd</span>. <span class="id">induction</span> <span class="id">log_n_steps</span> <span class="gallina-kwd">as</span> <span class="id">[|log_n_steps</span> <span class="id">IH]=&gt;ptd</span> <span class="id">/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">assert</span> (<span class="id">Hptd</span> <span class="id">:=</span> <span class="id">next_ptd_cost</span> <span class="id">ptd</span>). <span class="id">destruct</span> <span class="id">next_ptd=&gt;//</span>. <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">Hptd</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">rewrite</span> <span class="id">Nat.add_0_r</span>. <span class="id">assert</span> (<span class="id">IH1</span> <span class="id">:=</span> <span class="id">IH</span> <span class="id">ptd</span>). <span class="id">destruct</span> <span class="id">next_ptd_iter</span> <span class="gallina-kwd">as</span> <span class="id">[ptd'|]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">specialize</span> (<span class="id">IH</span> <span class="id">ptd'</span>). <span class="id">destruct</span> <span class="id">next_ptd_iter</span> <span class="gallina-kwd">as</span> <span class="id">[ptd''|]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">IH1</span> <span class="id">IH</span> <span class="id">-!plus_assoc</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">rewrite</span> <span class="id">IH1</span>. <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">plus_lt_compat_l</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">lt_plus_trans</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">We now prove the top-level parsing function. The only thing that
+  is left to be done is the initialization. To do so, we define the
+  initial dotted parse tree, depending on a full (top-level) parse tree. </div>
+<br/>
+<span class="vernacular">Variable</span> <span class="id">full_pt</span> <span class="id">:</span> <span class="id">parse_tree</span> (<span class="id">NT</span> (<span class="id">start_nt</span> <span class="id">init</span>)) <span class="id">full_word</span>.<br/>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">parse_complete</span> <span class="id">log_n_steps:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">parse</span> <span class="id">safe</span> <span class="id">init</span> (<span class="id">full_word</span> <span class="id">++</span> <span class="id">buffer_end</span>) <span class="id">log_n_steps</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Parsed_pr</span> <span class="id">sem</span> <span class="id">buff</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">sem</span> <span class="id">=</span> <span class="id">pt_sem</span> <span class="id">full_pt</span> <span class="id">/\</span> <span class="id">buff</span> <span class="id">=</span> <span class="id">buffer_end</span> <span class="id">/\</span> <span class="id">pt_size</span> <span class="id">full_pt</span> <span class="id">&lt;=</span> <span class="id">2^log_n_steps</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Timeout_pr</span> <span class="id">=&gt;</span> <span class="id">2^log_n_steps</span> <span class="id">&lt;</span> <span class="id">pt_size</span> <span class="id">full_pt</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Fail_pr</span> <span class="id">=&gt;</span> <span class="id">False</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
+<div class="proofscript" id="proof31">
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hstk</span> <span class="id">:</span> <span class="id">ptd_stack_compat</span> (<span class="id">build_pt_dot_from_pt</span> <span class="id">full_pt</span> <span class="id">Top_ptz</span>) <span class="id">[]</span>) <span class="gallina-kwd">by</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">ptd_stack_compat_build_from_pt</span>.<br/>
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id">parse</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hparse</span> <span class="id">:=</span> <span class="id">parse_fix_next_ptd_iter</span> <span class="id">_</span> <span class="id">_</span> <span class="id">log_n_steps</span> (<span class="id">parse_subproof</span> <span class="id">init</span>) <span class="id">Hstk</span>).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-ptd_buffer_build_from_pt</span> <span class="id">-sem_build_from_pt</span> <span class="id">/=</span> <span class="gallina-kwd">in</span> <span class="id">Hparse</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hcost</span> <span class="id">:=</span> <span class="id">next_ptd_iter_cost</span> (<span class="id">build_pt_dot_from_pt</span> <span class="id">full_pt</span> <span class="id">Top_ptz</span>) <span class="id">log_n_steps</span>).<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">next_ptd_iter</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">Hparse</span> <span class="gallina-kwd">as</span> (<span class="id">?</span> &amp; <span class="id">-&gt;</span> &amp; <span class="id">?</span>). <span class="id">apply</span> (<span class="id">f_equal</span> <span class="id">S</span>) <span class="gallina-kwd">in</span> <span class="id">Hcost</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">-ptd_cost_build_from_pt</span> <span class="id">Nat.add_0_r</span> <span class="gallina-kwd">in</span> <span class="id">Hcost</span>. <span class="id">rewrite</span> <span class="id">Hcost</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">le_lt_n_Sm,</span> <span class="id">le_plus_l</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">rewrite</span> <span class="id">Hparse</span>. <span class="id">split;</span> <span class="id">[|split]=&gt;//</span>. <span class="id">apply</span> <span class="id">lt_le_S</span> <span class="gallina-kwd">in</span> <span class="id">Hcost</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">-ptd_cost_build_from_pt</span> <span class="id">Nat.add_0_r</span> <span class="gallina-kwd">in</span> <span class="id">Hcost</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">Completeness_Proof</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">Make</span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,1497 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Digits</title>
+<meta name="description" content="Documentation of Coq module Digits" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Digits</h1>
+<br/>
+<span class="vernacular">From</span> <span class="id">Coq</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Lia</span> <span class="id">ZArith</span> <span class="id">Zquot</span>.<br/>
+<span class="vernacular">From</span> <span class="id">Coq</span> <span class="vernacular">Require</span> <span class="id">SpecFloat</span>.<br/>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id">Zaux</span>.<br/>
+<br/>
+<span class="vernacular">Notation</span> <span class="id">digits2_pos</span> <span class="id">:=</span> <span class="id">SpecFloat.digits2_pos</span> (<span class="id">only</span> <span class="id">parsing</span>).<br/>
+<span class="vernacular">Notation</span> <span class="id">Zdigits2</span> <span class="id">:=</span> <span class="id">SpecFloat.Zdigits2</span> (<span class="id">only</span> <span class="id">parsing</span>).<br/>
+<br/>
+<div class="doc">Number of bits (radix 2) of a positive integer.
+It serves as an upper bound on the number of digits to ensure termination.
+</div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">digits2_Pnat</span> (<span class="id">n</span> <span class="id">:</span> <span class="id">positive</span>) <span class="id">:</span> <span class="id">nat</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">n</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">xH</span> <span class="id">=&gt;</span> <span class="id">O</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">xO</span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">S</span> (<span class="id">digits2_Pnat</span> <span class="id">p</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">xI</span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">S</span> (<span class="id">digits2_Pnat</span> <span class="id">p</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">digits2_Pnat_correct</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n,</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">d</span> <span class="id">:=</span> <span class="id">digits2_Pnat</span> <span class="id">n</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;(<span class="id">Zpower_nat</span> <span class="id">2</span> <span class="id">d</span> <span class="id">&lt;=</span> <span class="id">Zpos</span> <span class="id">n</span> <span class="id">&lt;</span> <span class="id">Zpower_nat</span> <span class="id">2</span> (<span class="id">S</span> <span class="id">d</span>))%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">d</span>. <span class="id">unfold</span> <span class="id">d</span>. <span class="id">clear</span>.<br/>
+<span class="id">assert</span> (<span class="id">Hp:</span> <span class="gallina-kwd">forall</span> <span class="id">m,</span> (<span class="id">Zpower_nat</span> <span class="id">2</span> (<span class="id">S</span> <span class="id">m</span>) <span class="id">=</span> <span class="id">2</span> <span class="id">*</span> <span class="id">Zpower_nat</span> <span class="id">2</span> <span class="id">m</span>)%<span class="id">Z</span>) <span class="gallina-kwd">by</span> <span class="id">easy</span>.<br/>
+<span class="id">induction</span> <span class="id">n</span> <span class="id">;</span> <span class="id">simpl</span> <span class="id">digits2_Pnat</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpos_xI,</span> <span class="id">2!Hp</span>.<br/>
+<span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Zpos_xO</span> <span class="id">n</span>)<span class="id">,</span> <span class="id">2!Hp</span>.<br/>
+<span class="id">lia</span>.<br/>
+<span class="id">now</span> <span class="id">split</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Section</span> <span class="id">Fcore_digits</span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span class="id">beta</span> <span class="id">:</span> <span class="id">radix</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">Zdigit</span> <span class="id">n</span> <span class="id">k</span> <span class="id">:=</span> <span class="id">Z.rem</span> (<span class="id">Z.quot</span> <span class="id">n</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k</span>)) <span class="id">beta</span>.<br/>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_lt</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k,</span><br/>
+&nbsp;&nbsp;(<span class="id">k</span> <span class="id">&lt;</span> <span class="id">0</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> <span class="id">n</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">[|k|k]</span> <span class="id">Hk</span> <span class="id">;</span> <span class="id">try</span> <span class="id">easy</span>.<br/>
+<span class="id">now</span> <span class="id">case</span> <span class="id">n</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_0</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">k,</span> <span class="id">Zdigit</span> <span class="id">0</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+<span class="id">intros</span> <span class="id">k</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zquot_0_l</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_0_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_opp</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k,</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">-n</span>) <span class="id">k</span> <span class="id">=</span> <span class="id">Z.opp</span> (<span class="id">Zdigit</span> <span class="id">n</span> <span class="id">k</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zquot_opp_l</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_opp_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_ge_Zpower_pos</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e</span> <span class="id">n,</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">n</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">k,</span> (<span class="id">e</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> <span class="id">Zdigit</span> <span class="id">n</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">n</span> <span class="id">Hn</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Z.quot_small</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_0_l</span>.<br/>
+<span class="id">split</span>.<br/>
+<span class="id">apply</span> <span class="id">Hn</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.lt_le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">proj2</span> <span class="id">Hn</span>).<br/>
+<span class="id">replace</span> <span class="id">k</span> <span class="gallina-kwd">with</span> (<span class="id">e</span> <span class="id">+</span> (<span class="id">k</span> <span class="id">-</span> <span class="id">e</span>))%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zmult_1_r</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">e</span>)) <span class="gallina-kwd">at</span> <span class="id">1</span>.<br/>
+<span class="id">apply</span> <span class="id">Zmult_le_compat_l</span>.<br/>
+<span class="id">apply</span> (<span class="id">Zlt_le_succ</span> <span class="id">0</span>).<br/>
+<span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zle_minus_le_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zlt_le_weak</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Z.le_lt_trans</span> <span class="gallina-kwd">with</span> <span class="id">n</span>.<br/>
+<span class="id">generalize</span> (<span class="id">Z.le_lt_trans</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">proj1</span> <span class="id">Hn</span>) (<span class="id">proj2</span> <span class="id">Hn</span>)).<br/>
+<span class="id">clear</span>.<br/>
+<span class="id">now</span> <span class="id">destruct</span> <span class="id">e</span> <span class="gallina-kwd">as</span> <span class="id">[|e|e]</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zle_minus_le_0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_ge_Zpower</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e</span> <span class="id">n,</span><br/>
+&nbsp;&nbsp;(<span class="id">Z.abs</span> <span class="id">n</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">k,</span> (<span class="id">e</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> <span class="id">Zdigit</span> <span class="id">n</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">[|n|n]</span> <span class="id">Hn</span> <span class="id">k</span>.<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_ge_Zpower_pos</span>.<br/>
+<span class="id">now</span> <span class="id">split</span>.<br/>
+<span class="id">intros</span> <span class="id">He</span>.<br/>
+<span class="id">change</span> (<span class="id">Zneg</span> <span class="id">n</span>) <span class="gallina-kwd">with</span> (<span class="id">Z.opp</span> (<span class="id">Zpos</span> <span class="id">n</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_opp</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_ge_Zpower_pos</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">He</span>).<br/>
+<span class="id">apply</span> <span class="id">Z.opp_0</span>.<br/>
+<span class="id">now</span> <span class="id">split</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_not_0_pos</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e</span> <span class="id">n,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span> <span class="id">&lt;=</span> <span class="id">n</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">e</span> <span class="id">+</span> <span class="id">1</span>))%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> <span class="id">n</span> <span class="id">e</span> <span class="id">&lt;&gt;</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">n</span> <span class="id">He</span> (<span class="id">Hn1,Hn2</span>).<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">ZOdiv_mod_mult</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Z.rem_small</span>.<br/>
+<span class="id">intros</span> <span class="id">H</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_not_lt</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hn1</span>).<br/>
+<span class="id">rewrite</span> (<span class="id">Z.quot_rem</span><span class="id">'</span> <span class="id">n</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">e</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">H,</span> <span class="id">Zmult_0_r,</span> <span class="id">Zplus_0_l</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_lt_pos_pos</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">Hn1</span>).<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">split</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">Hn1</span>).<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">replace</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">e</span> <span class="id">*</span> <span class="id">beta</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">beta</span> <span class="id">^</span> (<span class="id">e</span> <span class="id">+</span> <span class="id">1</span>))%<span class="id">Z</span>.<br/>
+<span class="id">exact</span> <span class="id">Hn2</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zmult_1_r</span> <span class="id">beta</span>) <span class="gallina-kwd">at</span> <span class="id">3</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> (<span class="id">Zpower_plus</span> <span class="id">beta</span> <span class="id">e</span> <span class="id">1</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_not_0</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e</span> <span class="id">n,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span> <span class="id">&lt;=</span> <span class="id">Z.abs</span> <span class="id">n</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">e</span> <span class="id">+</span> <span class="id">1</span>))%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> <span class="id">n</span> <span class="id">e</span> <span class="id">&lt;&gt;</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">n</span> <span class="id">He</span> <span class="id">Hn</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">0</span> <span class="id">n</span>) <span class="gallina-kwd">as</span> <span class="id">[Hn'|Hn']</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Z.abs_eq</span> <span class="id">_</span> <span class="id">Hn'</span>) <span class="gallina-kwd">in</span> <span class="id">Hn</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zdigit_not_0_pos</span>.<br/>
+<span class="id">intros</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Zabs_non_eq</span> <span class="id">n</span>) <span class="gallina-kwd">in</span> <span class="id">Hn</span> <span class="gallina-kwd">by</span> <span class="id">now</span> <span class="id">apply</span> <span class="id">Zlt_le_weak</span>.<br/>
+<span class="id">apply</span> (<span class="id">Zdigit_not_0_pos</span> <span class="id">_</span> <span class="id">_</span> <span class="id">He</span> <span class="id">Hn</span>).<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zdigit_opp,</span> <span class="id">H</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_mul_pow</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k',</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k'</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">n</span> <span class="id">*</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k'</span>) <span class="id">k</span> <span class="id">=</span> <span class="id">Zdigit</span> <span class="id">n</span> (<span class="id">k</span> <span class="id">-</span> <span class="id">k'</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">Hk'</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">k'</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[H|H]</span>.<br/>
+<span class="id">revert</span> <span class="id">k</span> <span class="id">H</span>.<br/>
+<span class="id">pattern</span> <span class="id">k'</span> <span class="id">;</span> <span class="id">apply</span> <span class="id">Zlt_0_ind</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">Hk'</span>).<br/>
+<span class="id">clear</span> <span class="id">k'</span> <span class="id">Hk'</span>.<br/>
+<span class="id">intros</span> <span class="id">k'</span> <span class="id">IHk'</span> <span class="id">Hk'</span> <span class="id">k</span> <span class="id">H</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">apply</span> (<span class="id">f_equal</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">Z.rem</span> <span class="id">x</span> <span class="id">beta</span>)).<br/>
+<span class="id">pattern</span> <span class="id">k</span> <span class="gallina-kwd">at</span> <span class="id">1</span> <span class="id">;</span> <span class="id">replace</span> <span class="id">k</span> <span class="gallina-kwd">with</span> (<span class="id">k</span> <span class="id">-</span> <span class="id">k'</span> <span class="id">+</span> <span class="id">k'</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">Hk'</span>).<br/>
+<span class="id">apply</span> <span class="id">Zquot_mult_cancel_r</span>.<br/>
+<span class="id">apply</span> <span class="id">Zgt_not_eq</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zle_minus_le_0</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">0</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[H0|H0]</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Zdigit_lt</span> <span class="id">n</span>) <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">replace</span> <span class="id">k'</span> <span class="gallina-kwd">with</span> (<span class="id">k'</span> <span class="id">-</span> <span class="id">k</span> <span class="id">+</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">H0</span>).<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_assoc,</span> <span class="id">Z_quot_mult</span>.<br/>
+<span class="id">replace</span> (<span class="id">k'</span> <span class="id">-</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">k'</span> <span class="id">-</span> <span class="id">k</span> <span class="id">-</span> <span class="id">1</span> <span class="id">+</span> <span class="id">1</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_exp</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_assoc</span>.<br/>
+<span class="id">change</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">1</span>) <span class="gallina-kwd">with</span> (<span class="id">beta</span> <span class="id">*</span> <span class="id">1</span>)%<span class="id">Z</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_1_r</span>.<br/>
+<span class="id">apply</span> <span class="id">Z_rem_mult</span>.<br/>
+<span class="id">apply</span> <span class="id">Zgt_not_eq</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_minus_le_0</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zlt_le_weak</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_lt</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">H0</span>).<br/>
+<span class="id">apply</span> <span class="id">sym_eq</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_lt</span>.<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_div_pow</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k',</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k'</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">Z.quot</span> <span class="id">n</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k'</span>)) <span class="id">k</span> <span class="id">=</span> <span class="id">Zdigit</span> <span class="id">n</span> (<span class="id">k</span> <span class="id">+</span> <span class="id">k'</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">Hk</span> <span class="id">Hk'</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zquot_Zquot</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zplus_comm</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zpower_plus</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_mod_pow</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k',</span> (<span class="id">k</span> <span class="id">&lt;</span> <span class="id">k'</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">Z.rem</span> <span class="id">n</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k'</span>)) <span class="id">k</span> <span class="id">=</span> <span class="id">Zdigit</span> <span class="id">n</span> <span class="id">k</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">Hk</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">0</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[H|H]</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">2!ZOdiv_mod_mult</span>.<br/>
+<span class="id">apply</span> (<span class="id">f_equal</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">Z.quot</span> <span class="id">x</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">k</span>))).<br/>
+<span class="id">replace</span> <span class="id">k'</span> <span class="gallina-kwd">with</span> (<span class="id">k</span> <span class="id">+</span> <span class="id">1</span> <span class="id">+</span> (<span class="id">k'</span> <span class="id">-</span> (<span class="id">k</span> <span class="id">+</span> <span class="id">1</span>)))%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_exp</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_comm</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">by</span> <span class="id">easy</span>.<br/>
+<span class="id">change</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">1</span>) <span class="gallina-kwd">with</span> (<span class="id">beta</span> <span class="id">*</span> <span class="id">1</span>)%<span class="id">Z</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_1_r</span>.<br/>
+<span class="id">apply</span> <span class="id">ZOmod_mod_mult</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">2!Zdigit_lt</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_mod_pow_out</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k',</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k'</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">Z.rem</span> <span class="id">n</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k'</span>)) <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">Hk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">ZOdiv_small_abs</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_0_l</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.lt_le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k'</span>).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Z.abs_eq</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">k'</span>)) <span class="gallina-kwd">at</span> <span class="id">2</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_lt</span>.<br/>
+<span class="id">apply</span> <span class="id">Zgt_not_eq</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_le</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">Zsum_digit</span> <span class="id">f</span> <span class="id">k</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">k</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">O</span> <span class="id">=&gt;</span> <span class="id">Z0</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">S</span> <span class="id">k</span> <span class="id">=&gt;</span> (<span class="id">Zsum_digit</span> <span class="id">f</span> <span class="id">k</span> <span class="id">+</span> <span class="id">f</span> (<span class="id">Z_of_nat</span> <span class="id">k</span>) <span class="id">*</span> <span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Z_of_nat</span> <span class="id">k</span>))%<span class="id">Z</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zsum_digit_digit</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k,</span><br/>
+&nbsp;&nbsp;<span class="id">Zsum_digit</span> (<span class="id">Zdigit</span> <span class="id">n</span>) <span class="id">k</span> <span class="id">=</span> <span class="id">Z.rem</span> <span class="id">n</span> (<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Z_of_nat</span> <span class="id">k</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+<span class="id">intros</span> <span class="id">n</span>.<br/>
+<span class="id">induction</span> <span class="id">k</span>.<br/>
+<span class="id">apply</span> <span class="id">sym_eq</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.rem_1_r</span>.<br/>
+<span class="id">simpl</span> <span class="id">Zsum_digit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">IHk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">ZOdiv_mod_mult</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">ZOmod_mod_mult</span> <span class="id">n</span> <span class="id">beta</span>).<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_comm</span>.<br/>
+<span class="id">replace</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">Z_of_nat</span> <span class="id">k</span> <span class="id">*</span> <span class="id">beta</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Z_of_nat</span> (<span class="id">S</span> <span class="id">k</span>))).<br/>
+<span class="id">rewrite</span> <span class="id">Zplus_comm,</span> <span class="id">Zmult_comm</span>.<br/>
+<span class="id">apply</span> <span class="id">sym_eq</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.quot_rem</span><span class="id">'</span>.<br/>
+<span class="id">rewrite</span> <span class="id">inj_S</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zmult_1_r</span> <span class="id">beta</span>) <span class="gallina-kwd">at</span> <span class="id">3</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_plus</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_0_nat</span>.<br/>
+<span class="id">easy</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_ext</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n1</span> <span class="id">n2,</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">k,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> <span class="id">Zdigit</span> <span class="id">n1</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Zdigit</span> <span class="id">n2</span> <span class="id">k</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">n1</span> <span class="id">=</span> <span class="id">n2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+<span class="id">intros</span> <span class="id">n1</span> <span class="id">n2</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">ZOmod_small_abs</span> <span class="id">n1</span> (<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Z.max</span> (<span class="id">Z.abs</span> <span class="id">n1</span>) (<span class="id">Z.abs</span> <span class="id">n2</span>)))).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">ZOmod_small_abs</span> <span class="id">n2</span> (<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Z.max</span> (<span class="id">Z.abs</span> <span class="id">n1</span>) (<span class="id">Z.abs</span> <span class="id">n2</span>)))) <span class="gallina-kwd">at</span> <span class="id">2</span>.<br/>
+<span class="id">replace</span> (<span class="id">Z.max</span> (<span class="id">Z.abs</span> <span class="id">n1</span>) (<span class="id">Z.abs</span> <span class="id">n2</span>)) <span class="gallina-kwd">with</span> (<span class="id">Z_of_nat</span> (<span class="id">Z.abs_nat</span> (<span class="id">Z.max</span> (<span class="id">Z.abs</span> <span class="id">n1</span>) (<span class="id">Z.abs</span> <span class="id">n2</span>)))).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">2!Zsum_digit_digit</span>.<br/>
+<span class="id">induction</span> (<span class="id">Z.abs_nat</span> (<span class="id">Z.max</span> (<span class="id">Z.abs</span> <span class="id">n1</span>) (<span class="id">Z.abs</span> <span class="id">n2</span>))).<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">simpl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">H,</span> <span class="id">IHn</span>.<br/>
+<span class="id">apply</span> <span class="id">refl_equal</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_0_nat</span>.<br/>
+<span class="id">rewrite</span> <span class="id">inj_Zabs_nat</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.abs_eq</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">Z.abs</span> <span class="id">n1</span>).<br/>
+<span class="id">apply</span> <span class="id">Zabs_pos</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.le_max_l</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.lt_le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Z.abs</span> <span class="id">n2</span>)).<br/>
+<span class="id">apply</span> <span class="id">Zpower_gt_id</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_le</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.le_max_r</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.lt_le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Z.abs</span> <span class="id">n1</span>)).<br/>
+<span class="id">apply</span> <span class="id">Zpower_gt_id</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_le</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.le_max_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">ZOmod_plus_pow_digit</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">u</span> <span class="id">v</span> <span class="id">n,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">u</span> <span class="id">*</span> <span class="id">v</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">k,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span> <span class="id">&lt;</span> <span class="id">n</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> <span class="id">Zdigit</span> <span class="id">u</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span> <span class="id">\/</span> <span class="id">Zdigit</span> <span class="id">v</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Z.rem</span> (<span class="id">u</span> <span class="id">+</span> <span class="id">v</span>) (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">n</span>) <span class="id">=</span> (<span class="id">Z.rem</span> <span class="id">u</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">n</span>) <span class="id">+</span> <span class="id">Z.rem</span> <span class="id">v</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">n</span>))%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+<span class="id">intros</span> <span class="id">u</span> <span class="id">v</span> <span class="id">n</span> <span class="id">Huv</span> <span class="id">Hd</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">0</span> <span class="id">n</span>) <span class="gallina-kwd">as</span> <span class="id">[Hn|Hn]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zplus_rem</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Huv</span>).<br/>
+<span class="id">apply</span> <span class="id">ZOmod_small_abs</span>.<br/>
+<span class="id">generalize</span> (<span class="id">Z.le_refl</span> <span class="id">n</span>).<br/>
+<span class="id">pattern</span> <span class="id">n</span> <span class="gallina-kwd">at</span> <span class="id">-2</span> <span class="id">;</span> <span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Z.abs_eq</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hn</span>).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">inj_Zabs_nat</span> <span class="id">n</span>).<br/>
+<span class="id">induction</span> (<span class="id">Z.abs_nat</span> <span class="id">n</span>) <span class="gallina-kwd">as</span> <span class="id">[|p</span> <span class="id">IHp]</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">2!Z</span>.<span class="id">rem_1_r</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">2!Zsum_digit_digit</span>.<br/>
+<span class="id">simpl</span> <span class="id">Zsum_digit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">inj_S</span>.<br/>
+<span class="id">intros</span> <span class="id">Hn'</span>.<br/>
+<span class="id">replace</span> (<span class="id">Zsum_digit</span> (<span class="id">Zdigit</span> <span class="id">u</span>) <span class="id">p</span> <span class="id">+</span> <span class="id">Zdigit</span> <span class="id">u</span> (<span class="id">Z_of_nat</span> <span class="id">p</span>) <span class="id">*</span> <span class="id">beta</span> <span class="id">^</span> <span class="id">Z_of_nat</span> <span class="id">p</span> <span class="id">+</span><br/>
+&nbsp;&nbsp;(<span class="id">Zsum_digit</span> (<span class="id">Zdigit</span> <span class="id">v</span>) <span class="id">p</span> <span class="id">+</span> <span class="id">Zdigit</span> <span class="id">v</span> (<span class="id">Z_of_nat</span> <span class="id">p</span>) <span class="id">*</span> <span class="id">beta</span> <span class="id">^</span> <span class="id">Z_of_nat</span> <span class="id">p</span>))%<span class="id">Z</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;(<span class="id">Zsum_digit</span> (<span class="id">Zdigit</span> <span class="id">u</span>) <span class="id">p</span> <span class="id">+</span> <span class="id">Zsum_digit</span> (<span class="id">Zdigit</span> <span class="id">v</span>) <span class="id">p</span> <span class="id">+</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigit</span> <span class="id">u</span> (<span class="id">Z_of_nat</span> <span class="id">p</span>) <span class="id">+</span> <span class="id">Zdigit</span> <span class="id">v</span> (<span class="id">Z_of_nat</span> <span class="id">p</span>)) <span class="id">*</span> <span class="id">beta</span> <span class="id">^</span> <span class="id">Z_of_nat</span> <span class="id">p</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">apply</span> (<span class="id">Z.le_lt_trans</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">Z.abs_triangle</span> <span class="id">_</span> <span class="id">_</span>)).<br/>
+<span class="id">replace</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">Z.succ</span> (<span class="id">Z_of_nat</span> <span class="id">p</span>))%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">Z_of_nat</span> <span class="id">p</span> <span class="id">+</span> (<span class="id">beta</span> <span class="id">-</span> <span class="id">1</span>) <span class="id">*</span> <span class="id">beta</span> <span class="id">^</span> <span class="id">Z_of_nat</span> <span class="id">p</span>)%<span class="id">Z</span>.<br/>
+<span class="id">apply</span> <span class="id">Zplus_lt_le_compat</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!Zsum_digit_digit</span>.<br/>
+<span class="id">apply</span> <span class="id">IHp</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zle_succ_le</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zabs_Zmult</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Z.abs_eq</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">Z_of_nat</span> <span class="id">p</span>)) <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zmult_le_compat_r</span>. <span class="id">2:</span> <span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zlt_succ_le</span>.<br/>
+<span class="id">assert</span> (<span class="gallina-kwd">forall</span> <span class="id">u</span> <span class="id">v,</span> <span class="id">Z.abs</span> (<span class="id">Zdigit</span> <span class="id">u</span> <span class="id">v</span>) <span class="id">&lt;</span> <span class="id">Z.succ</span> (<span class="id">beta</span> <span class="id">-</span>  <span class="id">1</span>))%<span class="id">Z</span>.<br/>
+<span class="id">clear</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">n</span> <span class="id">k</span>.<br/>
+<span class="id">assert</span> (<span class="id">0</span> <span class="id">&lt;</span> <span class="id">beta</span>)%<span class="id">Z</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.lt_le_trans</span> <span class="gallina-kwd">with</span> <span class="id">2</span>%<span class="id">Z</span>.<br/>
+<span class="id">apply</span> <span class="id">refl_equal</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_bool_imp_le</span>.<br/>
+<span class="id">apply</span> <span class="id">beta</span>.<br/>
+<span class="id">replace</span> (<span class="id">Z.succ</span> (<span class="id">beta</span> <span class="id">-</span> <span class="id">1</span>)) <span class="gallina-kwd">with</span> (<span class="id">Z.abs</span> <span class="id">beta</span>).<br/>
+<span class="id">apply</span> <span class="id">Zrem_lt</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zgt_not_eq</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Z.abs_eq</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsucc_pred</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zlt_le_weak</span>.<br/>
+<span class="id">assert</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">Z_of_nat</span> <span class="id">p</span> <span class="id">&lt;</span> <span class="id">n</span>)%<span class="id">Z</span>.<br/>
+<span class="id">split</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_0_nat</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.gt_lt</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zle_succ_gt</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Hd</span> (<span class="id">Z_of_nat</span> <span class="id">p</span>) <span class="id">H0</span>) <span class="gallina-kwd">as</span> <span class="id">[K|K]</span> <span class="id">;</span> <span class="id">rewrite</span> <span class="id">K</span>.<br/>
+<span class="id">apply</span> <span class="id">H</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zplus_0_r</span>.<br/>
+<span class="id">apply</span> <span class="id">H</span>.<br/>
+<span class="id">unfold</span> <span class="id">Z.succ</span>.<br/>
+<span class="id">ring_simplify</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span>.<br/>
+<span class="id">change</span> (<span class="id">beta</span> <span class="id">^1</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">beta</span> <span class="id">*</span> <span class="id">1</span>)%<span class="id">Z</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zmult_1_r</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_0_nat</span>.<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">destruct</span> <span class="id">n</span> <span class="gallina-kwd">as</span> <span class="id">[|n|n]</span> <span class="id">;</span> <span class="id">try</span> <span class="id">easy</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">3!Zrem_0_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">ZOdiv_plus_pow_digit</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">u</span> <span class="id">v</span> <span class="id">n,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">u</span> <span class="id">*</span> <span class="id">v</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">k,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span> <span class="id">&lt;</span> <span class="id">n</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> <span class="id">Zdigit</span> <span class="id">u</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span> <span class="id">\/</span> <span class="id">Zdigit</span> <span class="id">v</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Z.quot</span> (<span class="id">u</span> <span class="id">+</span> <span class="id">v</span>) (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">n</span>) <span class="id">=</span> (<span class="id">Z.quot</span> <span class="id">u</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">n</span>) <span class="id">+</span> <span class="id">Z.quot</span> <span class="id">v</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">n</span>))%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+<span class="id">intros</span> <span class="id">u</span> <span class="id">v</span> <span class="id">n</span> <span class="id">Huv</span> <span class="id">Hd</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zplus_0_r</span> (<span class="id">Z.quot</span> <span class="id">u</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">n</span>) <span class="id">+</span> <span class="id">Z.quot</span> <span class="id">v</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">n</span>))).<br/>
+<span class="id">rewrite</span> <span class="id">ZOdiv_plus</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Huv</span>).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">ZOmod_plus_pow_digit</span> <span class="gallina-kwd">by</span> <span class="id">assumption</span>.<br/>
+<span class="id">apply</span> <span class="id">f_equal</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">0</span> <span class="id">n</span>) <span class="gallina-kwd">as</span> <span class="id">[Hn|Hn]</span>.<br/>
+<span class="id">apply</span> <span class="id">ZOdiv_small_abs</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Z.abs_eq</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_lt</span>.<br/>
+<span class="id">apply</span> <span class="id">Zgt_not_eq</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">clear</span> <span class="id">-Hn</span>.<br/>
+<span class="id">destruct</span> <span class="id">n</span> <span class="gallina-kwd">as</span> <span class="id">[|n|n]</span> <span class="id">;</span> <span class="id">try</span> <span class="id">easy</span>.<br/>
+<span class="id">apply</span> <span class="id">Zquot_0_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_plus</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">u</span> <span class="id">v,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">u</span> <span class="id">*</span> <span class="id">v</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span class="id">k,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> <span class="id">Zdigit</span> <span class="id">u</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span> <span class="id">\/</span> <span class="id">Zdigit</span> <span class="id">v</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">k,</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">u</span> <span class="id">+</span> <span class="id">v</span>) <span class="id">k</span> <span class="id">=</span> (<span class="id">Zdigit</span> <span class="id">u</span> <span class="id">k</span> <span class="id">+</span> <span class="id">Zdigit</span> <span class="id">v</span> <span class="id">k</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+<span class="id">intros</span> <span class="id">u</span> <span class="id">v</span> <span class="id">Huv</span> <span class="id">Hd</span> <span class="id">k</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">0</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[Hk|Hk]</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zdigit</span>.<br/>
+<span class="id">rewrite</span> <span class="id">ZOdiv_plus_pow_digit</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Huv</span>).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zmult_1_r</span> <span class="id">beta</span>) <span class="gallina-kwd">at</span> <span class="id">3</span> <span class="id">5</span> <span class="id">7</span>.<br/>
+<span class="id">change</span> (<span class="id">beta</span> <span class="id">*</span> <span class="id">1</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">beta</span> <span class="id">^1</span>)%<span class="id">Z</span>.<br/>
+<span class="id">apply</span> <span class="id">ZOmod_plus_pow_digit</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_trans_weak</span> <span class="gallina-kwd">with</span> <span class="id">v</span>.<br/>
+<span class="id">intros</span> <span class="id">Zv</span> <span class="id">;</span> <span class="id">rewrite</span> <span class="id">Zv</span>.<br/>
+<span class="id">apply</span> <span class="id">Zquot_0_l</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_comm</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_trans_weak</span> <span class="gallina-kwd">with</span> <span class="id">u</span>.<br/>
+<span class="id">intros</span> <span class="id">Zu</span> <span class="id">;</span> <span class="id">rewrite</span> <span class="id">Zu</span>.<br/>
+<span class="id">apply</span> <span class="id">Zquot_0_l</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zmult_comm</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_odiv</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_odiv</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">intros</span> <span class="id">k'</span> (<span class="id">Hk1,Hk2</span>).<br/>
+<span class="id">rewrite</span> <span class="id">2!Zdigit_div_pow</span> <span class="gallina-kwd">by</span> <span class="id">assumption</span>.<br/>
+<span class="id">apply</span> <span class="id">Hd</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zplus_le_0_compat</span>.<br/>
+<span class="id">intros</span> <span class="id">k'</span> (<span class="id">Hk1,Hk2</span>).<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Hd</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">3!Zdigit_lt</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Left and right shifts </div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">Zscale</span> <span class="id">n</span> <span class="id">k</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">Zle_bool</span> <span class="id">0</span> <span class="id">k</span> <span class="gallina-kwd">then</span> (<span class="id">n</span> <span class="id">*</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="gallina-kwd">else</span> <span class="id">Z.quot</span> <span class="id">n</span> (<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">-k</span>)).<br/>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_scale</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k',</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k'</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">Zscale</span> <span class="id">n</span> <span class="id">k</span>) <span class="id">k'</span> <span class="id">=</span> <span class="id">Zdigit</span> <span class="id">n</span> (<span class="id">k'</span> <span class="id">-</span> <span class="id">k</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">Hk'</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zscale</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zdigit_mul_pow</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_div_pow</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk'</span>).<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zscale_0</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">k,</span><br/>
+&nbsp;&nbsp;<span class="id">Zscale</span> <span class="id">0</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="id">intros</span> <span class="id">k</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zscale</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool</span>.<br/>
+<span class="id">apply</span> <span class="id">Zmult_0_l</span>.<br/>
+<span class="id">apply</span> <span class="id">Zquot_0_l</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zsame_sign_scale</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k,</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">n</span> <span class="id">*</span> <span class="id">Zscale</span> <span class="id">n</span> <span class="id">k</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zscale</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_assoc</span>.<br/>
+<span class="id">apply</span> <span class="id">Zmult_le_0_compat</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_imp</span> <span class="id">;</span> <span class="id">apply</span> <span class="id">Zlt_le_weak</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_odiv</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zscale_mul_pow</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k',</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zscale</span> (<span class="id">n</span> <span class="id">*</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k</span>) <span class="id">k'</span> <span class="id">=</span> <span class="id">Zscale</span> <span class="id">n</span> (<span class="id">k</span> <span class="id">+</span> <span class="id">k'</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">Hk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zscale</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk'</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zle_bool_true</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Zmult_assoc</span>.<br/>
+<span class="id">apply</span> <span class="id">f_equal</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zpower_plus</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zplus_le_0_compat</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk''</span>.<br/>
+<span class="id">pattern</span> <span class="id">k</span> <span class="gallina-kwd">at</span> <span class="id">1</span> <span class="id">;</span> <span class="id">replace</span> <span class="id">k</span> <span class="gallina-kwd">with</span> (<span class="id">k</span> <span class="id">+</span> <span class="id">k'</span> <span class="id">+</span> <span class="id">-k'</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">assert</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">-k'</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">by</span> <span class="id">easy</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_assoc,</span> <span class="id">Z_quot_mult</span>.<br/>
+<span class="id">apply</span> <span class="id">refl_equal</span>.<br/>
+<span class="id">apply</span> <span class="id">Zgt_not_eq</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">replace</span> (<span class="id">-k'</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">-</span>(<span class="id">k+k'</span>) <span class="id">+</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">Hk</span>).<br/>
+<span class="id">apply</span> <span class="id">Zquot_mult_cancel_r</span>.<br/>
+<span class="id">apply</span> <span class="id">Zgt_not_eq</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zscale_scale</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k',</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zscale</span> (<span class="id">Zscale</span> <span class="id">n</span> <span class="id">k</span>) <span class="id">k'</span> <span class="id">=</span> <span class="id">Zscale</span> <span class="id">n</span> (<span class="id">k</span> <span class="id">+</span> <span class="id">k'</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
+<div class="proofscript" id="proof22">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">Hk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zscale</span> <span class="gallina-kwd">at</span> <span class="id">2</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zle_bool_true</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk</span>).<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zscale_mul_pow</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Slice of an integer </div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">Zslice</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id">Zle_bool</span> <span class="id">0</span> <span class="id">k2</span> <span class="gallina-kwd">then</span> <span class="id">Z.rem</span> (<span class="id">Zscale</span> <span class="id">n</span> (<span class="id">-k1</span>)) (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k2</span>) <span class="gallina-kwd">else</span> <span class="id">Z0</span>.<br/>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_slice</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">k,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span> <span class="id">&lt;</span> <span class="id">k2</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">Zslice</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span>) <span class="id">k</span> <span class="id">=</span> <span class="id">Zdigit</span> <span class="id">n</span> (<span class="id">k1</span> <span class="id">+</span> <span class="id">k</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
+<div class="proofscript" id="proof23">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zslice</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zle_bool_true</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_mod_pow</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Hk</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_scale</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Hk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zminus</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Z.opp_involutive</span><span class="id">,</span> <span class="id">Zplus_comm</span>.<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_slice_out</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">k,</span> (<span class="id">k2</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> (<span class="id">Zslice</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span>) <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
+<div class="proofscript" id="proof24">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zslice</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk2</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_mod_pow_out</span>.<br/>
+<span class="id">now</span> <span class="id">split</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zslice_0</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">k</span> <span class="id">k',</span><br/>
+&nbsp;&nbsp;<span class="id">Zslice</span> <span class="id">0</span> <span class="id">k</span> <span class="id">k'</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Proof.</span></div>
+<div class="proofscript" id="proof25">
+<span class="id">intros</span> <span class="id">k</span> <span class="id">k'</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zslice</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zscale_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_0_l</span>.<br/>
+<span class="id">apply</span> <span class="id">refl_equal</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zsame_sign_slice</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k',</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">n</span> <span class="id">*</span> <span class="id">Zslice</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Proof.</span></div>
+<div class="proofscript" id="proof26">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k'</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zslice</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_trans_weak</span> <span class="gallina-kwd">with</span> (<span class="id">Zscale</span> <span class="id">n</span> (<span class="id">-k</span>)).<br/>
+<span class="id">intros</span> <span class="id">H</span> <span class="id">;</span> <span class="id">rewrite</span> <span class="id">H</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_0_l</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_scale</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_comm</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_sgn2</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zmult_0_r</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zslice_slice</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">k1'</span> <span class="id">k2',</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k1'</span> <span class="id">&lt;=</span> <span class="id">k2</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zslice</span> (<span class="id">Zslice</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span>) <span class="id">k1'</span> <span class="id">k2'</span> <span class="id">=</span> <span class="id">Zslice</span> <span class="id">n</span> (<span class="id">k1</span> <span class="id">+</span> <span class="id">k1'</span>) (<span class="id">Z.min</span> (<span class="id">k2</span> <span class="id">-</span> <span class="id">k1'</span>) <span class="id">k2'</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Proof.</span></div>
+<div class="proofscript" id="proof27">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">k1'</span> <span class="id">k2'</span> <span class="id">Hk1'</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">0</span> <span class="id">k2'</span>) <span class="gallina-kwd">as</span> <span class="id">[Hk2'|Hk2']</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_ext</span>.<br/>
+<span class="id">intros</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> (<span class="id">Z.min</span> (<span class="id">k2</span> <span class="id">-</span> <span class="id">k1'</span>) <span class="id">k2'</span>) <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[Hk'|Hk']</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Zdigit_slice_out</span> <span class="id">n</span> (<span class="id">k1</span> <span class="id">+</span> <span class="id">k1'</span>)) <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk'</span>).<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">k2'</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[Hk''|Hk'']</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zdigit_slice_out</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice</span> <span class="gallina-kwd">by</span> <span class="id">now</span> <span class="id">split</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_slice_out</span>.<br/>
+<span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Zdigit_slice</span> <span class="id">n</span> (<span class="id">k1</span> <span class="id">+</span> <span class="id">k1'</span>)) <span class="gallina-kwd">by</span> <span class="id">now</span> <span class="id">split</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zplus_assoc</span>.<br/>
+<span class="id">lia</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zslice</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Z.min_r</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zle_bool_false</span>.<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zslice_mul_pow</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k1</span> <span class="id">k2,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zslice</span> (<span class="id">n</span> <span class="id">*</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k</span>) <span class="id">k1</span> <span class="id">k2</span> <span class="id">=</span> <span class="id">Zslice</span> <span class="id">n</span> (<span class="id">k1</span> <span class="id">-</span> <span class="id">k</span>) <span class="id">k2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
+<div class="proofscript" id="proof28">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">Hk</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zslice</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk2</span>.<br/>
+<span class="id">2:</span> <span class="id">apply</span> <span class="id">refl_equal</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zscale_mul_pow</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk</span>).<br/>
+<span class="id">now</span> <span class="id">replace</span> (<span class="id">-</span> (<span class="id">k1</span> <span class="id">-</span> <span class="id">k</span>))%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">k</span> <span class="id">+</span> <span class="id">-k1</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zslice_div_pow</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k1</span> <span class="id">k2,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k1</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zslice</span> (<span class="id">Z.quot</span> <span class="id">n</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k</span>)) <span class="id">k1</span> <span class="id">k2</span> <span class="id">=</span> <span class="id">Zslice</span> <span class="id">n</span> (<span class="id">k1</span> <span class="id">+</span> <span class="id">k</span>) <span class="id">k2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
+<div class="proofscript" id="proof29">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">Hk</span> <span class="id">Hk1</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zslice</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk2</span>.<br/>
+<span class="id">2:</span> <span class="id">apply</span> <span class="id">refl_equal</span>.<br/>
+<span class="id">apply</span> (<span class="id">f_equal</span> (<span class="gallina-kwd">fun</span> <span class="id">x</span> <span class="id">=&gt;</span> <span class="id">Z.rem</span> <span class="id">x</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">k2</span>))).<br/>
+<span class="id">unfold</span> <span class="id">Zscale</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk1'</span>.<br/>
+<span class="id">replace</span> <span class="id">k1</span> <span class="gallina-kwd">with</span> <span class="id">Z0</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">Hk'</span>.<br/>
+<span class="id">replace</span> <span class="id">k</span> <span class="gallina-kwd">with</span> <span class="id">Z0</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">simpl</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Z.quot_1_r</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Z.opp_involutive</span>.<br/>
+<span class="id">apply</span> <span class="id">Zmult_1_r</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zle_bool_false</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!Z</span>.<span class="id">opp_involutive,</span> <span class="id">Zplus_comm</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">by</span> <span class="id">assumption</span>.<br/>
+<span class="id">apply</span> <span class="id">Zquot_Zquot</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zslice_scale</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k1</span> <span class="id">k2,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k1</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zslice</span> (<span class="id">Zscale</span> <span class="id">n</span> <span class="id">k</span>) <span class="id">k1</span> <span class="id">k2</span> <span class="id">=</span> <span class="id">Zslice</span> <span class="id">n</span> (<span class="id">k1</span> <span class="id">-</span> <span class="id">k</span>) <span class="id">k2</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
+<div class="proofscript" id="proof30">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">Hk1</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zscale</span>.<br/>
+<span class="id">case</span> <span class="id">Zle_bool_spec;</span> <span class="id">intros</span> <span class="id">Hk</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zslice_mul_pow</span>.<br/>
+<span class="id">apply</span> <span class="id">Zslice_div_pow</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">Hk1</span>).<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zslice_div_pow_scale</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k1</span> <span class="id">k2,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zslice</span> (<span class="id">Z.quot</span> <span class="id">n</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">k</span>)) <span class="id">k1</span> <span class="id">k2</span> <span class="id">=</span> <span class="id">Zscale</span> (<span class="id">Zslice</span> <span class="id">n</span> <span class="id">k</span> (<span class="id">k1</span> <span class="id">+</span> <span class="id">k2</span>)) (<span class="id">-k1</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
+<div class="proofscript" id="proof31">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">k1</span> <span class="id">k2</span> <span class="id">Hk</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_ext</span>.<br/>
+<span class="id">intros</span> <span class="id">k'</span> <span class="id">Hk'</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_scale</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk'</span>).<br/>
+<span class="id">unfold</span> <span class="id">Zminus</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Zplus_comm</span> <span class="id">k'</span>)<span class="id">,</span> <span class="id">Z.opp_involutive</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">k2</span> <span class="id">k'</span>) <span class="gallina-kwd">as</span> <span class="id">[Hk2|Hk2]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice_out</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk2</span>).<br/>
+<span class="id">apply</span> <span class="id">sym_eq</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_slice_out</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zplus_le_compat_l</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice</span> <span class="gallina-kwd">by</span> <span class="id">now</span> <span class="id">split</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">0</span> (<span class="id">k1</span> <span class="id">+</span> <span class="id">k'</span>)) <span class="gallina-kwd">as</span> <span class="id">[Hk1'|Hk1']</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_div_pow</span> <span class="gallina-kwd">by</span> <span class="id">assumption</span>.<br/>
+<span class="id">apply</span> <span class="id">f_equal</span>.<br/>
+<span class="id">ring</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">2!Zdigit_lt</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zplus_slice</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">l1</span> <span class="id">l2,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">l1</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">l2</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zslice</span> <span class="id">n</span> <span class="id">k</span> <span class="id">l1</span> <span class="id">+</span> <span class="id">Zscale</span> (<span class="id">Zslice</span> <span class="id">n</span> (<span class="id">k</span> <span class="id">+</span> <span class="id">l1</span>) <span class="id">l2</span>) <span class="id">l1</span>)%<span class="id">Z</span> <span class="id">=</span> <span class="id">Zslice</span> <span class="id">n</span> <span class="id">k</span> (<span class="id">l1</span> <span class="id">+</span> <span class="id">l2</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof32')">Proof.</span></div>
+<div class="proofscript" id="proof32">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k1</span> <span class="id">l1</span> <span class="id">l2</span> <span class="id">Hl1</span> <span class="id">Hl2</span>.<br/>
+<span class="id">clear</span> <span class="id">Hl1</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_ext</span>.<br/>
+<span class="id">intros</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_plus</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_scale</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk</span>).<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> (<span class="id">l1</span> <span class="id">+</span> <span class="id">l2</span>) <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[Hk2|Hk2]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice_out</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk2</span>).<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">2!Zdigit_slice_out</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">conj</span> <span class="id">Hk</span> <span class="id">Hk2</span>).<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">l1</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[Hk1|Hk1]</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice_out</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk1</span>).<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice</span> <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">simpl</span> <span class="id">;</span> <span class="id">apply</span> <span class="id">f_equal</span>.<br/>
+<span class="id">ring</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_slice</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">conj</span> <span class="id">Hk</span> <span class="id">Hk1</span>).<br/>
+<span class="id">rewrite</span> (<span class="id">Zdigit_lt</span> <span class="id">_</span> (<span class="id">k</span> <span class="id">-</span> <span class="id">l1</span>)) <span class="gallina-kwd">by</span> <span class="id">lia</span>.<br/>
+<span class="id">apply</span> <span class="id">Zplus_0_r</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_comm</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_trans_weak</span> <span class="gallina-kwd">with</span> <span class="id">n</span>.<br/>
+<span class="id">intros</span> <span class="id">H</span> <span class="id">;</span> <span class="id">rewrite</span> <span class="id">H</span>.<br/>
+<span class="id">apply</span> <span class="id">Zslice_0</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zmult_comm</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_trans_weak</span> <span class="gallina-kwd">with</span> (<span class="id">Zslice</span> <span class="id">n</span> (<span class="id">k1</span> <span class="id">+</span> <span class="id">l1</span>) <span class="id">l2</span>).<br/>
+<span class="id">intros</span> <span class="id">H</span> <span class="id">;</span> <span class="id">rewrite</span> <span class="id">H</span>.<br/>
+<span class="id">apply</span> <span class="id">Zscale_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_slice</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_scale</span>.<br/>
+<span class="id">apply</span> <span class="id">Zsame_sign_slice</span>.<br/>
+<span class="id">clear</span> <span class="id">k</span> <span class="id">Hk</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdigit_scale</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hk</span>).<br/>
+<span class="id">destruct</span> (<span class="id">Zle_or_lt</span> <span class="id">l1</span> <span class="id">k</span>) <span class="gallina-kwd">as</span> <span class="id">[Hk1|Hk1]</span>.<br/>
+<span class="id">left</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zdigit_slice_out</span>.<br/>
+<span class="id">right</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_lt</span>.<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Section</span> <span class="id">digits_aux</span>.<br/>
+<br/>
+<span class="vernacular">Variable</span> <span class="id">p</span> <span class="id">:</span> <span class="id">Z</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span class="id">Zdigits_aux</span> (<span class="id">nb</span> <span class="id">pow</span> <span class="id">:</span> <span class="id">Z</span>) (<span class="id">n</span> <span class="id">:</span> <span class="id">nat</span>) <span class="id">{</span> <span class="id">struct</span> <span class="id">n</span> <span class="id">}</span> <span class="id">:</span> <span class="id">Z</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">n</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">O</span> <span class="id">=&gt;</span> <span class="id">nb</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">S</span> <span class="id">n</span> <span class="id">=&gt;</span> <span class="gallina-kwd">if</span> <span class="id">Zlt_bool</span> <span class="id">p</span> <span class="id">pow</span> <span class="gallina-kwd">then</span> <span class="id">nb</span> <span class="gallina-kwd">else</span> <span class="id">Zdigits_aux</span> (<span class="id">nb</span> <span class="id">+</span> <span class="id">1</span>) (<span class="id">Zmult</span> <span class="id">beta</span> <span class="id">pow</span>) <span class="id">n</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id">digits_aux</span>.<br/>
+<br/>
+<div class="doc">Number of digits of an integer </div>
+<br/>
+<span class="vernacular">Definition</span> <span class="id">Zdigits</span> <span class="id">n</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">n</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Z0</span> <span class="id">=&gt;</span> <span class="id">Z0</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Zneg</span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">Zdigits_aux</span> (<span class="id">Zpos</span> <span class="id">p</span>) <span class="id">1</span> <span class="id">beta</span> (<span class="id">digits2_Pnat</span> <span class="id">p</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">Zpos</span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">Zdigits_aux</span> <span class="id">n</span> <span class="id">1</span> <span class="id">beta</span> (<span class="id">digits2_Pnat</span> <span class="id">p</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_correct</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n,</span><br/>
+&nbsp;&nbsp;(<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Zdigits</span> <span class="id">n</span> <span class="id">-</span> <span class="id">1</span>) <span class="id">&lt;=</span> <span class="id">Z.abs</span> <span class="id">n</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Zdigits</span> <span class="id">n</span>))%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof33')">Proof.</span></div>
+<div class="proofscript" id="proof33">
+<span class="id">cut</span> (<span class="gallina-kwd">forall</span> <span class="id">p,</span> <span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Zdigits</span> (<span class="id">Zpos</span> <span class="id">p</span>) <span class="id">-</span> <span class="id">1</span>) <span class="id">&lt;=</span> <span class="id">Zpos</span> <span class="id">p</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Zdigits</span> (<span class="id">Zpos</span> <span class="id">p</span>)))%<span class="id">Z</span>.<br/>
+<span class="id">intros</span> <span class="id">H</span> <span class="id">[|n|n]</span> <span class="id">;</span> <span class="id">try</span> <span class="id">exact</span> (<span class="id">H</span> <span class="id">n</span>).<br/>
+<span class="id">now</span> <span class="id">split</span>.<br/>
+<span class="id">intros</span> <span class="id">n</span>.<br/>
+<span class="id">simpl</span>.<br/>
+<span class="comment">(*&nbsp;*)</span><br/>
+<span class="id">assert</span> (<span class="id">U:</span> (<span class="id">Zpos</span> <span class="id">n</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">Z_of_nat</span> (<span class="id">S</span> (<span class="id">digits2_Pnat</span> <span class="id">n</span>))))%<span class="id">Z</span>).<br/>
+<span class="id">apply</span> <span class="id">Z.lt_le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">proj2</span> (<span class="id">digits2_Pnat_correct</span> <span class="id">n</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_Zpower_nat</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zabs_nat_Z_of_nat</span>.<br/>
+<span class="id">induction</span> (<span class="id">S</span> (<span class="id">digits2_Pnat</span> <span class="id">n</span>)).<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">rewrite</span> <span class="id">2!</span>(<span class="id">Zpower_nat_S</span>).<br/>
+<span class="id">apply</span> <span class="id">Zmult_le_compat</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">IHn0</span>).<br/>
+<span class="id">apply</span> <span class="id">Zle_bool_imp_le</span>.<br/>
+<span class="id">apply</span> <span class="id">beta</span>.<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zabs_nat_Z_of_nat</span> <span class="id">n0</span>).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Zpower_Zpower_nat</span>.<br/>
+<span class="id">apply</span> (<span class="id">Zpower_ge_0</span> (<span class="id">Build_radix</span> <span class="id">2</span> (<span class="id">refl_equal</span> <span class="id">true</span>))).<br/>
+<span class="id">apply</span> <span class="id">Zle_0_nat</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_0_nat</span>.<br/>
+<span class="comment">(*&nbsp;*)</span><br/>
+<span class="id">revert</span> <span class="id">U</span>.<br/>
+<span class="id">rewrite</span> <span class="id">inj_S</span>.<br/>
+<span class="id">unfold</span> <span class="id">Z.succ</span>.<br/>
+<span class="id">generalize</span> (<span class="id">digits2_Pnat</span> <span class="id">n</span>).<br/>
+<span class="id">intros</span> <span class="id">u</span> <span class="id">U</span>.<br/>
+<span class="id">pattern</span> (<span class="id">radix_val</span> <span class="id">beta</span>) <span class="gallina-kwd">at</span> <span class="id">2</span> <span class="id">4</span> <span class="id">;</span> <span class="id">replace</span> (<span class="id">radix_val</span> <span class="id">beta</span>) <span class="gallina-kwd">with</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">1</span>) <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Zmult_1_r</span>.<br/>
+<span class="id">assert</span> (<span class="id">V:</span> (<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">1</span> <span class="id">-</span> <span class="id">1</span>) <span class="id">&lt;=</span> <span class="id">Zpos</span> <span class="id">n</span>)%<span class="id">Z</span>).<br/>
+<span class="id">now</span> <span class="id">apply</span> (<span class="id">Zlt_le_succ</span> <span class="id">0</span>).<br/>
+<span class="id">generalize</span> (<span class="id">conj</span> <span class="id">V</span> <span class="id">U</span>).<br/>
+<span class="id">clear</span>.<br/>
+<span class="id">generalize</span> (<span class="id">Z.le_refl</span> <span class="id">1</span>).<br/>
+<span class="id">generalize</span> <span class="id">1</span>%<span class="id">Z</span> <span class="gallina-kwd">at</span> <span class="id">2</span> <span class="id">3</span> <span class="id">5</span> <span class="id">6</span> <span class="id">7</span> <span class="id">9</span> <span class="id">10</span>.<br/>
+<span class="comment">(*&nbsp;*)</span><br/>
+<span class="id">induction</span> <span class="id">u</span>.<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">rewrite</span> <span class="id">inj_S;</span> <span class="id">unfold</span> <span class="id">Z.succ</span>.<br/>
+<span class="id">simpl</span> <span class="id">Zdigits_aux</span>.<br/>
+<span class="id">intros</span> <span class="id">v</span> <span class="id">Hv</span> <span class="id">U</span>.<br/>
+<span class="id">case</span> <span class="id">Zlt_bool_spec</span> <span class="id">;</span> <span class="id">intros</span> <span class="id">K</span>.<br/>
+<span class="id">now</span> <span class="id">split</span>.<br/>
+<span class="id">pattern</span> (<span class="id">radix_val</span> <span class="id">beta</span>) <span class="gallina-kwd">at</span> <span class="id">2</span> <span class="id">5</span> <span class="id">;</span> <span class="id">replace</span> (<span class="id">radix_val</span> <span class="id">beta</span>) <span class="gallina-kwd">with</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">1</span>) <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Zmult_1_r</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Zpower_plus</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zplus_comm</span>.<br/>
+<span class="id">apply</span> <span class="id">IHu</span>.<br/>
+<span class="id">clear</span> <span class="id">-Hv</span> <span class="id">;</span> <span class="id">lia</span>.<br/>
+<span class="id">split</span>.<br/>
+<span class="id">now</span> <span class="id">ring_simplify</span> (<span class="id">1</span> <span class="id">+</span> <span class="id">v</span> <span class="id">-</span> <span class="id">1</span>)%<span class="id">Z</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">Zplus_assoc</span>.<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_succ_le</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hv</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_unique</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">d,</span><br/>
+&nbsp;&nbsp;(<span class="id">Zpower</span> <span class="id">beta</span> (<span class="id">d</span> <span class="id">-</span> <span class="id">1</span>) <span class="id">&lt;=</span> <span class="id">Z.abs</span> <span class="id">n</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">d</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigits</span> <span class="id">n</span> <span class="id">=</span> <span class="id">d</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof34')">Proof.</span></div>
+<div class="proofscript" id="proof34">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">d</span> <span class="id">Hd</span>.<br/>
+<span class="id">assert</span> (<span class="id">Hd'</span> <span class="id">:=</span> <span class="id">Zdigits_correct</span> <span class="id">n</span>).<br/>
+<span class="id">apply</span> <span class="id">Zle_antisym</span>.<br/>
+<span class="id">apply</span> (<span class="id">Zpower_lt_Zpower</span> <span class="id">beta</span>).<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Z.le_lt_trans</span> <span class="gallina-kwd">with</span> (<span class="id">Z.abs</span> <span class="id">n</span>).<br/>
+<span class="id">apply</span> (<span class="id">Zpower_lt_Zpower</span> <span class="id">beta</span>).<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Z.le_lt_trans</span> <span class="gallina-kwd">with</span> (<span class="id">Z.abs</span> <span class="id">n</span>).<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_abs</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n,</span> <span class="id">Zdigits</span> (<span class="id">Z.abs</span> <span class="id">n</span>) <span class="id">=</span> <span class="id">Zdigits</span> <span class="id">n</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof35')">Proof.</span></div>
+<div class="proofscript" id="proof35">
+<span class="id">now</span> <span class="id">intros</span> <span class="id">[|n|n]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_opp</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n,</span> <span class="id">Zdigits</span> (<span class="id">Z.opp</span> <span class="id">n</span>) <span class="id">=</span> <span class="id">Zdigits</span> <span class="id">n</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof36')">Proof.</span></div>
+<div class="proofscript" id="proof36">
+<span class="id">now</span> <span class="id">intros</span> <span class="id">[|n|n]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_cond_Zopp</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">s</span> <span class="id">n,</span> <span class="id">Zdigits</span> (<span class="id">cond_Zopp</span> <span class="id">s</span> <span class="id">n</span>) <span class="id">=</span> <span class="id">Zdigits</span> <span class="id">n</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof37')">Proof.</span></div>
+<div class="proofscript" id="proof37">
+<span class="id">now</span> <span class="id">intros</span> <span class="id">[|]</span> <span class="id">[|n|n]</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_gt_0</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n,</span> <span class="id">n</span> <span class="id">&lt;&gt;</span> <span class="id">Z0</span> <span class="id">-&gt;</span> (<span class="id">0</span> <span class="id">&lt;</span> <span class="id">Zdigits</span> <span class="id">n</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof38')">Proof.</span></div>
+<div class="proofscript" id="proof38">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">Zn</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zdigits_abs</span> <span class="id">n</span>).<br/>
+<span class="id">assert</span> (<span class="id">Hn:</span> (<span class="id">0</span> <span class="id">&lt;</span> <span class="id">Z.abs</span> <span class="id">n</span>)%<span class="id">Z</span>).<br/>
+<span class="id">destruct</span> <span class="id">n</span> <span class="id">;</span> <span class="id">[|easy|easy]</span>.<br/>
+<span class="id">now</span> <span class="id">elim</span> <span class="id">Zn</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Z.abs</span> <span class="id">n</span>) <span class="gallina-kwd">as</span> <span class="id">[|p|p]</span> <span class="id">;</span> <span class="id">try</span> <span class="id">easy</span> <span class="id">;</span> <span class="id">clear</span>.<br/>
+<span class="id">simpl</span>.<br/>
+<span class="id">generalize</span> <span class="id">1</span>%<span class="id">Z</span> (<span class="id">radix_val</span> <span class="id">beta</span>) (<span class="id">refl_equal</span> <span class="id">Lt</span> <span class="id">:</span> (<span class="id">0</span> <span class="id">&lt;</span> <span class="id">1</span>)%<span class="id">Z</span>).<br/>
+<span class="id">induction</span> (<span class="id">digits2_Pnat</span> <span class="id">p</span>).<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">simpl</span>.<br/>
+<span class="id">intros</span>.<br/>
+<span class="id">case</span> <span class="id">Zlt_bool</span>.<br/>
+<span class="id">exact</span> <span class="id">H</span>.<br/>
+<span class="id">apply</span> <span class="id">IHn</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zlt_lt_succ</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_ge_0</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">Zdigits</span> <span class="id">n</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof39')">Proof.</span></div>
+<div class="proofscript" id="proof39">
+<span class="id">intros</span> <span class="id">n</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Z.eq_dec</span> <span class="id">n</span> <span class="id">0</span>) <span class="gallina-kwd">as</span> <span class="id">[H|H]</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">H</span>.<br/>
+<span class="id">apply</span> <span class="id">Zlt_le_weak</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zdigits_gt_0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_out</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k,</span> (<span class="id">Zdigits</span> <span class="id">n</span> <span class="id">&lt;=</span> <span class="id">k</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> <span class="id">n</span> <span class="id">k</span> <span class="id">=</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof40')">Proof.</span></div>
+<div class="proofscript" id="proof40">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">Hk</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_ge_Zpower</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">Hk</span>).<br/>
+<span class="id">apply</span> <span class="id">Zdigits_correct</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigit_digits</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n,</span> <span class="id">n</span> <span class="id">&lt;&gt;</span> <span class="id">Z0</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigit</span> <span class="id">n</span> (<span class="id">Zdigits</span> <span class="id">n</span> <span class="id">-</span> <span class="id">1</span>) <span class="id">&lt;&gt;</span> <span class="id">Z0</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof41')">Proof.</span></div>
+<div class="proofscript" id="proof41">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">Zn</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigit_not_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zlt_0_le_0_pred</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zdigits_gt_0</span>.<br/>
+<span class="id">ring_simplify</span> (<span class="id">Zdigits</span> <span class="id">n</span> <span class="id">-</span> <span class="id">1</span> <span class="id">+</span> <span class="id">1</span>)%<span class="id">Z</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigits_correct</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_slice</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n</span> <span class="id">k</span> <span class="id">l,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">l</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> (<span class="id">Zslice</span> <span class="id">n</span> <span class="id">k</span> <span class="id">l</span>) <span class="id">&lt;=</span> <span class="id">l</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof42')">Proof.</span></div>
+<div class="proofscript" id="proof42">
+<span class="id">intros</span> <span class="id">n</span> <span class="id">k</span> <span class="id">l</span> <span class="id">Hl</span>.<br/>
+<span class="id">unfold</span> <span class="id">Zslice</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zle_bool_true</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">Hl</span>).<br/>
+<span class="id">destruct</span> (<span class="id">Zdigits_correct</span> (<span class="id">Z.rem</span> (<span class="id">Zscale</span> <span class="id">n</span> (<span class="id">-</span> <span class="id">k</span>)) (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">l</span>))) <span class="gallina-kwd">as</span> (<span class="id">H1,H2</span>).<br/>
+<span class="id">apply</span> <span class="id">Zpower_lt_Zpower</span> <span class="gallina-kwd">with</span> <span class="id">beta</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.le_lt_trans</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">H1</span>).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Z.abs_eq</span> (<span class="id">beta</span> <span class="id">^</span> <span class="id">l</span>)) <span class="gallina-kwd">at</span> <span class="id">2</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zrem_lt</span>.<br/>
+<span class="id">apply</span> <span class="id">Zgt_not_eq</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_mult_Zpower</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">m</span> <span class="id">e,</span><br/>
+&nbsp;&nbsp;<span class="id">m</span> <span class="id">&lt;&gt;</span> <span class="id">Z0</span> <span class="id">-&gt;</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigits</span> (<span class="id">m</span> <span class="id">*</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>) <span class="id">=</span> (<span class="id">Zdigits</span> <span class="id">m</span> <span class="id">+</span> <span class="id">e</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof43')">Proof.</span></div>
+<div class="proofscript" id="proof43">
+<span class="id">intros</span> <span class="id">m</span> <span class="id">e</span> <span class="id">Hm</span> <span class="id">He</span>.<br/>
+<span class="id">assert</span> (<span class="id">H</span> <span class="id">:=</span> <span class="id">Zdigits_correct</span> <span class="id">m</span>).<br/>
+<span class="id">apply</span> <span class="id">Zdigits_unique</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Z.abs_mul</span><span class="id">,</span> <span class="id">Z.abs_pow</span><span class="id">,</span> (<span class="id">Z.abs_eq</span> <span class="id">beta</span>).<br/>
+<span class="id">2:</span> <span class="id">now</span> <span class="id">apply</span> <span class="id">Zlt_le_weak,</span> <span class="id">radix_gt_0</span>.<br/>
+<span class="id">split</span>.<br/>
+<span class="id">replace</span> (<span class="id">Zdigits</span> <span class="id">m</span> <span class="id">+</span> <span class="id">e</span> <span class="id">-</span> <span class="id">1</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">Zdigits</span> <span class="id">m</span> <span class="id">-</span> <span class="id">1</span> <span class="id">+</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">He</span>).<br/>
+<span class="id">apply</span> <span class="id">Zmult_le_compat_r</span>.<br/>
+<span class="id">apply</span> <span class="id">H</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zlt_0_le_0_pred,</span> <span class="id">Zdigits_gt_0</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">He</span>).<br/>
+<span class="id">apply</span> <span class="id">Zmult_lt_compat_r</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">apply</span> <span class="id">H</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zlt_le_weak,</span> <span class="id">Zdigits_gt_0</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_Zpower</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e,</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigits</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>) <span class="id">=</span> (<span class="id">e</span> <span class="id">+</span> <span class="id">1</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof44')">Proof.</span></div>
+<div class="proofscript" id="proof44">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">He</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zmult_1_l</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>)).<br/>
+<span class="id">rewrite</span> <span class="id">Zdigits_mult_Zpower</span> <span class="id">;</span> <span class="id">try</span> <span class="id">easy</span>.<br/>
+<span class="id">apply</span> <span class="id">Zplus_comm</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_le</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">x</span> <span class="id">y,</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">x</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> (<span class="id">x</span> <span class="id">&lt;=</span> <span class="id">y</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> <span class="id">x</span> <span class="id">&lt;=</span> <span class="id">Zdigits</span> <span class="id">y</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof45')">Proof.</span></div>
+<div class="proofscript" id="proof45">
+<span class="id">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">Zx</span> <span class="id">Hxy</span>.<br/>
+<span class="id">assert</span> (<span class="id">Hx</span> <span class="id">:=</span> <span class="id">Zdigits_correct</span> <span class="id">x</span>).<br/>
+<span class="id">assert</span> (<span class="id">Hy</span> <span class="id">:=</span> <span class="id">Zdigits_correct</span> <span class="id">y</span>).<br/>
+<span class="id">apply</span> (<span class="id">Zpower_lt_Zpower</span> <span class="id">beta</span>).<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">lt_Zdigits</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">x</span> <span class="id">y,</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">y</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> <span class="id">x</span> <span class="id">&lt;</span> <span class="id">Zdigits</span> <span class="id">y</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">x</span> <span class="id">&lt;</span> <span class="id">y</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof46')">Proof.</span></div>
+<div class="proofscript" id="proof46">
+<span class="id">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">Hy</span>.<br/>
+<span class="id">cut</span> (<span class="id">y</span> <span class="id">&lt;=</span> <span class="id">x</span> <span class="id">-&gt;</span> <span class="id">Zdigits</span> <span class="id">y</span> <span class="id">&lt;=</span> <span class="id">Zdigits</span> <span class="id">x</span>)%<span class="id">Z</span>. <span class="id">lia</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zdigits_le</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zpower_le_Zdigits</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e</span> <span class="id">x,</span><br/>
+&nbsp;&nbsp;(<span class="id">e</span> <span class="id">&lt;</span> <span class="id">Zdigits</span> <span class="id">x</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span> <span class="id">&lt;=</span> <span class="id">Z.abs</span> <span class="id">x</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof47')">Proof.</span></div>
+<div class="proofscript" id="proof47">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">x</span> <span class="id">Hex</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zdigits_correct</span> <span class="id">x</span>) <span class="gallina-kwd">as</span> <span class="id">[H1</span> <span class="id">H2]</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">H1</span>).<br/>
+<span class="id">apply</span> <span class="id">Zpower_le</span>.<br/>
+<span class="id">clear</span> <span class="id">-Hex</span> <span class="id">;</span> <span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_le_Zpower</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e</span> <span class="id">x,</span><br/>
+&nbsp;&nbsp;(<span class="id">Z.abs</span> <span class="id">x</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> <span class="id">x</span> <span class="id">&lt;=</span> <span class="id">e</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof48')">Proof.</span></div>
+<div class="proofscript" id="proof48">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">x</span>.<br/>
+<span class="id">generalize</span> (<span class="id">Zpower_le_Zdigits</span> <span class="id">e</span> <span class="id">x</span>).<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zpower_gt_Zdigits</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e</span> <span class="id">x,</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> <span class="id">x</span> <span class="id">&lt;=</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Z.abs</span> <span class="id">x</span> <span class="id">&lt;</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof49')">Proof.</span></div>
+<div class="proofscript" id="proof49">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">x</span> <span class="id">Hex</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zdigits_correct</span> <span class="id">x</span>) <span class="gallina-kwd">as</span> <span class="id">[H1</span> <span class="id">H2]</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.lt_le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">1</span> <span class="id">:=</span> <span class="id">H2</span>).<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_le</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_gt_Zpower</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">e</span> <span class="id">x,</span><br/>
+&nbsp;&nbsp;(<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span> <span class="id">&lt;=</span> <span class="id">Z.abs</span> <span class="id">x</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">e</span> <span class="id">&lt;</span> <span class="id">Zdigits</span> <span class="id">x</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof50')">Proof.</span></div>
+<div class="proofscript" id="proof50">
+<span class="id">intros</span> <span class="id">e</span> <span class="id">x</span> <span class="id">Hex</span>.<br/>
+<span class="id">generalize</span> (<span class="id">Zpower_gt_Zdigits</span> <span class="id">e</span> <span class="id">x</span>).<br/>
+<span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Number of digits of a product.
+This strong version is needed for proofs of division and square root
+algorithms, since they involve operation remainders.
+</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_mult_strong</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">x</span> <span class="id">y,</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">x</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">y</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> (<span class="id">x</span> <span class="id">+</span> <span class="id">y</span> <span class="id">+</span> <span class="id">x</span> <span class="id">*</span> <span class="id">y</span>) <span class="id">&lt;=</span> <span class="id">Zdigits</span> <span class="id">x</span> <span class="id">+</span> <span class="id">Zdigits</span> <span class="id">y</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof51')">Proof.</span></div>
+<div class="proofscript" id="proof51">
+<span class="id">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">Hx</span> <span class="id">Hy</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigits_le_Zpower</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Z.abs_eq</span>.<br/>
+<span class="id">apply</span> <span class="id">Z.lt_le_trans</span> <span class="gallina-kwd">with</span> ((<span class="id">x</span> <span class="id">+</span> <span class="id">1</span>) <span class="id">*</span> (<span class="id">y</span> <span class="id">+</span> <span class="id">1</span>))%<span class="id">Z</span>.<br/>
+<span class="id">ring_simplify</span>.<br/>
+<span class="id">apply</span> <span class="id">Zle_lt_succ,</span> <span class="id">Z.le_refl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_plus</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Zdigits_ge_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zmult_le_compat</span>.<br/>
+<span class="id">apply</span> <span class="id">Zlt_le_succ</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Z.abs_eq</span> <span class="id">x</span>) <span class="gallina-kwd">at</span> <span class="id">1</span> <span class="gallina-kwd">by</span> <span class="id">easy</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigits_correct</span>.<br/>
+<span class="id">apply</span> <span class="id">Zlt_le_succ</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Z.abs_eq</span> <span class="id">y</span>) <span class="gallina-kwd">at</span> <span class="id">1</span> <span class="gallina-kwd">by</span> <span class="id">easy</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigits_correct</span>.<br/>
+<span class="id">clear</span> <span class="id">-Hx</span> <span class="id">;</span> <span class="id">lia</span>.<br/>
+<span class="id">clear</span> <span class="id">-Hy</span> <span class="id">;</span> <span class="id">lia</span>.<br/>
+<span class="id">change</span> <span class="id">Z0</span> <span class="gallina-kwd">with</span> (<span class="id">0</span> <span class="id">+</span> <span class="id">0</span> <span class="id">+</span> <span class="id">0</span>)%<span class="id">Z</span>.<br/>
+<span class="id">apply</span> <span class="id">Zplus_le_compat</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zplus_le_compat</span>.<br/>
+<span class="id">now</span> <span class="id">apply</span> <span class="id">Zmult_le_0_compat</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_mult</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">x</span> <span class="id">y,</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> (<span class="id">x</span> <span class="id">*</span> <span class="id">y</span>) <span class="id">&lt;=</span> <span class="id">Zdigits</span> <span class="id">x</span> <span class="id">+</span> <span class="id">Zdigits</span> <span class="id">y</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof52')">Proof.</span></div>
+<div class="proofscript" id="proof52">
+<span class="id">intros</span> <span class="id">x</span> <span class="id">y</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Zdigits_abs</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zdigits_abs</span> <span class="id">x</span>).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Zdigits_abs</span> <span class="id">y</span>).<br/>
+<span class="id">apply</span> <span class="id">Z.le_trans</span> <span class="gallina-kwd">with</span> (<span class="id">Zdigits</span> (<span class="id">Z.abs</span> <span class="id">x</span> <span class="id">+</span> <span class="id">Z.abs</span> <span class="id">y</span> <span class="id">+</span> <span class="id">Z.abs</span> <span class="id">x</span> <span class="id">*</span> <span class="id">Z.abs</span> <span class="id">y</span>)).<br/>
+<span class="id">apply</span> <span class="id">Zdigits_le</span>.<br/>
+<span class="id">apply</span> <span class="id">Zabs_pos</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zabs_Zmult</span>.<br/>
+<span class="id">generalize</span> (<span class="id">Zabs_pos</span> <span class="id">x</span>) (<span class="id">Zabs_pos</span> <span class="id">y</span>).<br/>
+<span class="id">lia</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigits_mult_strong</span> <span class="id">;</span> <span class="id">apply</span> <span class="id">Zabs_pos</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_mult_ge</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">x</span> <span class="id">y,</span><br/>
+&nbsp;&nbsp;(<span class="id">x</span> <span class="id">&lt;&gt;</span> <span class="id">0</span>)%<span class="id">Z</span> <span class="id">-&gt;</span> (<span class="id">y</span> <span class="id">&lt;&gt;</span> <span class="id">0</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> <span class="id">x</span> <span class="id">+</span> <span class="id">Zdigits</span> <span class="id">y</span> <span class="id">-</span> <span class="id">1</span> <span class="id">&lt;=</span> <span class="id">Zdigits</span> (<span class="id">x</span> <span class="id">*</span> <span class="id">y</span>))%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof53')">Proof.</span></div>
+<div class="proofscript" id="proof53">
+<span class="id">intros</span> <span class="id">x</span> <span class="id">y</span> <span class="id">Zx</span> <span class="id">Zy</span>.<br/>
+<span class="id">cut</span> ((<span class="id">Zdigits</span> <span class="id">x</span> <span class="id">-</span> <span class="id">1</span>) <span class="id">+</span> (<span class="id">Zdigits</span> <span class="id">y</span> <span class="id">-</span> <span class="id">1</span>) <span class="id">&lt;</span> <span class="id">Zdigits</span> (<span class="id">x</span> <span class="id">*</span> <span class="id">y</span>))%<span class="id">Z</span>. <span class="id">lia</span>.<br/>
+<span class="id">apply</span> <span class="id">Zdigits_gt_Zpower</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zabs_Zmult</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zpower_exp</span>.<br/>
+<span class="id">apply</span> <span class="id">Zmult_le_compat</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_le_Zdigits</span>.<br/>
+<span class="id">apply</span> <span class="id">Zlt_pred</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_le_Zdigits</span>.<br/>
+<span class="id">apply</span> <span class="id">Zlt_pred</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">apply</span> <span class="id">Zpower_ge_0</span>.<br/>
+<span class="id">generalize</span> (<span class="id">Zdigits_gt_0</span> <span class="id">x</span>). <span class="id">lia</span>.<br/>
+<span class="id">generalize</span> (<span class="id">Zdigits_gt_0</span> <span class="id">y</span>). <span class="id">lia</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_div_Zpower</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">m</span> <span class="id">e,</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">m</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">e</span> <span class="id">&lt;=</span> <span class="id">Zdigits</span> <span class="id">m</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;<span class="id">Zdigits</span> (<span class="id">m</span> <span class="id">/</span> <span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>) <span class="id">=</span> (<span class="id">Zdigits</span> <span class="id">m</span> <span class="id">-</span> <span class="id">e</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof54')">Proof.</span></div>
+<div class="proofscript" id="proof54">
+<span class="id">intros</span> <span class="id">m</span> <span class="id">e</span> <span class="id">Hm</span> <span class="id">He</span>.<br/>
+<span class="id">assert</span> (<span class="id">H</span> <span class="id">:=</span> <span class="id">Zdigits_correct</span> <span class="id">m</span>).<br/>
+<span class="id">apply</span> <span class="id">Zdigits_unique</span>.<br/>
+<span class="id">destruct</span> (<span class="id">Zle_lt_or_eq</span> <span class="id">_</span> <span class="id">_</span> (<span class="id">proj2</span> <span class="id">He</span>)) <span class="gallina-kwd">as</span> <span class="id">[He'|He']</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Z.abs_eq</span> <span class="gallina-kwd">in</span> <span class="id">H</span> <span class="gallina-kwd">by</span> <span class="id">easy</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">H</span> <span class="gallina-kwd">as</span> <span class="id">[H1</span> <span class="id">H2]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Z.abs_eq</span>.<br/>
+&nbsp;&nbsp;<span class="id">split</span>.<br/>
+&nbsp;&nbsp;<span class="id">replace</span> (<span class="id">Zdigits</span> <span class="id">m</span> <span class="id">-</span> <span class="id">e</span> <span class="id">-</span> <span class="id">1</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">Zdigits</span> <span class="id">m</span> <span class="id">-</span> <span class="id">1</span> <span class="id">-</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Z.pow_sub_r</span>.<br/>
+&nbsp;&nbsp;<span class="id">2:</span> <span class="id">apply</span> <span class="id">Zgt_not_eq,</span> <span class="id">radix_gt_0</span>.<br/>
+&nbsp;&nbsp;<span class="id">2:</span> <span class="id">clear</span> <span class="id">-He</span> <span class="id">He'</span> <span class="id">;</span> <span class="id">lia</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">Z_div_le</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">H1</span>).<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="id">apply</span> <span class="id">Z.lt_gt</span><span class="id">,</span> <span class="id">Zpower_gt_0</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">Zmult_lt_reg_r</span> <span class="gallina-kwd">with</span> (<span class="id">Zpower</span> <span class="id">beta</span> <span class="id">e</span>).<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="id">apply</span> <span class="id">Zpower_gt_0</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">Z.le_lt_trans</span> <span class="gallina-kwd">with</span> <span class="id">m</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Zmult_comm</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">Z_mult_div_ge</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="id">apply</span> <span class="id">Z.lt_gt</span><span class="id">,</span> <span class="id">Zpower_gt_0</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Zpower_plus</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="id">replace</span> (<span class="id">Zdigits</span> <span class="id">m</span> <span class="id">-</span> <span class="id">e</span> <span class="id">+</span> <span class="id">e</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">Zdigits</span> <span class="id">m</span>) <span class="gallina-kwd">by</span> <span class="id">ring</span>.<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="id">apply</span> <span class="id">Zle_minus_le_0</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">He</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">Z_div_pos</span> <span class="gallina-kwd">with</span> (<span class="id">2</span> <span class="id">:=</span> <span class="id">Hm</span>).<br/>
+&nbsp;&nbsp;<span class="id">now</span> <span class="id">apply</span> <span class="id">Z.lt_gt</span><span class="id">,</span> <span class="id">Zpower_gt_0</span>.<br/>
+<span class="id">rewrite</span> <span class="id">He'</span>.<br/>
+<span class="id">rewrite</span> (<span class="id">Zeq_minus</span> <span class="id">_</span> (<span class="id">Zdigits</span> <span class="id">m</span>)) <span class="gallina-kwd">by</span> <span class="id">reflexivity</span>.<br/>
+<span class="id">simpl</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Zdiv_small</span>.<br/>
+<span class="id">easy</span>.<br/>
+<span class="id">split</span>.<br/>
+<span class="id">exact</span> <span class="id">Hm</span>.<br/>
+<span class="id">now</span> <span class="id">rewrite</span> <span class="id">&lt;-</span> (<span class="id">Z.abs_eq</span> <span class="id">m</span>) <span class="gallina-kwd">at</span> <span class="id">1</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zdigits_succ_le</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">x,</span> (<span class="id">0</span> <span class="id">&lt;=</span> <span class="id">x</span>)%<span class="id">Z</span> <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="id">Zdigits</span> (<span class="id">x</span> <span class="id">+</span> <span class="id">1</span>) <span class="id">&lt;=</span> <span class="id">Zdigits</span> <span class="id">x</span> <span class="id">+</span> <span class="id">1</span>)%<span class="id">Z</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof55')">Proof.</span></div>
+<div class="proofscript" id="proof55">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">x</span> <span class="gallina-kwd">as</span> <span class="id">[|</span> <span class="id">p</span> <span class="id">|</span> <span class="id">p];</span> <span class="id">[intros</span> <span class="id">_;</span> <span class="id">now</span> <span class="id">simpl</span> <span class="id">|</span> <span class="id">intros</span> <span class="id">_</span> <span class="id">|</span> <span class="id">lia]</span>.<br/>
+&nbsp;&nbsp;<span class="id">transitivity</span> (<span class="id">Zdigits</span> (<span class="id">Z.pos</span> <span class="id">p</span> <span class="id">*</span> <span class="id">beta</span> <span class="id">^</span> <span class="id">1</span>))<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">[apply</span> <span class="id">Zdigits_le;</span> <span class="id">[lia</span> <span class="id">|]</span> <span class="id">|</span> <span class="id">rewrite</span> <span class="id">Zdigits_mult_Zpower;</span> <span class="id">lia]</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">Ztac.Zlt_le_add_1</span>. <span class="id">rewrite</span> <span class="id">&lt;-Z</span>.<span class="id">mul_1_r</span> <span class="gallina-kwd">at</span> <span class="id">1</span>. <span class="id">apply</span> <span class="id">Zmult_lt_compat_l;</span> <span class="id">[lia</span> <span class="id">|]</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">Z.pow_1_r</span>. <span class="id">apply</span> <span class="id">radix_gt_1</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">Fcore_digits</span>.<br/>
+<br/>
+<div class="doc">Specialized version for computing the number of bits of an integer </div>
+<br/>
+<span class="vernacular">Section</span> <span class="id">Zdigits2</span>.<br/>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Z_of_nat_S_digits2_Pnat</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">m</span> <span class="id">:</span> <span class="id">positive,</span><br/>
+&nbsp;&nbsp;<span class="id">Z_of_nat</span> (<span class="id">S</span> (<span class="id">digits2_Pnat</span> <span class="id">m</span>)) <span class="id">=</span> <span class="id">Zdigits</span> <span class="id">radix2</span> (<span class="id">Zpos</span> <span class="id">m</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof56')">Proof.</span></div>
+<div class="proofscript" id="proof56">
+<span class="id">intros</span> <span class="id">m</span>.<br/>
+<span class="id">apply</span> <span class="id">eq_sym,</span> <span class="id">Zdigits_unique</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Zpower_nat_Z</span>.<br/>
+<span class="id">rewrite</span> <span class="id">Nat2Z.inj_succ</span>.<br/>
+<span class="id">change</span> (<span class="id">_</span> <span class="id">-</span> <span class="id">1</span>)%<span class="id">Z</span> <span class="gallina-kwd">with</span> (<span class="id">Z.pred</span> (<span class="id">Z.succ</span> (<span class="id">Z.of_nat</span> (<span class="id">digits2_Pnat</span> <span class="id">m</span>)))).<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Zpred_succ</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Zpower_nat_Z</span>.<br/>
+<span class="id">apply</span> <span class="id">digits2_Pnat_correct</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Theorem</span> <span class="id">Zpos_digits2_pos</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">m</span> <span class="id">:</span> <span class="id">positive,</span><br/>
+&nbsp;&nbsp;<span class="id">Zpos</span> (<span class="id">digits2_pos</span> <span class="id">m</span>) <span class="id">=</span> <span class="id">Zdigits</span> <span class="id">radix2</span> (<span class="id">Zpos</span> <span class="id">m</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof57')">Proof.</span></div>
+<div class="proofscript" id="proof57">
+<span class="id">intros</span> <span class="id">m</span>.<br/>
+<span class="id">rewrite</span> <span class="id">&lt;-</span> <span class="id">Z_of_nat_S_digits2_Pnat</span>.<br/>
+<span class="id">unfold</span> <span class="id">Z.of_nat</span>.<br/>
+<span class="id">apply</span> <span class="id">f_equal</span>.<br/>
+<span class="id">induction</span> <span class="id">m</span> <span class="id">;</span> <span class="id">simpl</span> <span class="id">;</span> <span class="id">try</span> <span class="id">easy</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">f_equal,</span> <span class="id">IHm</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span class="id">Zdigits2_Zdigits</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">n,</span> <span class="id">Zdigits2</span> <span class="id">n</span> <span class="id">=</span> <span class="id">Zdigits</span> <span class="id">radix2</span> <span class="id">n</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof58')">Proof.</span></div>
+<div class="proofscript" id="proof58">
+<span class="id">intros</span> <span class="id">[|p|p]</span> <span class="id">;</span> <span class="id">try</span> <span class="id">easy</span> <span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">Zpos_digits2_pos</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id">Zdigits2</span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

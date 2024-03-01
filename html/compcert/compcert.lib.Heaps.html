@@ -1,0 +1,888 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Heaps</title>
+<meta name="description" content="Documentation of Coq module Heaps" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Heaps</h1>
+<br/>
+<div class="doc">A heap data structure. </div>
+<br/>
+<div class="doc">The implementation uses splay heaps, following C. Okasaki,
+    "Purely functional data structures", section 5.4.
+    One difference: we eliminate duplicate elements.
+    (If an element is already in a heap, inserting it again does nothing.)
+</div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.funind.FunInd.html">FunInd</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.FSets.FSets.html">FSets</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Ordered.html">Ordered</a></span>.<br/>
+<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Unset</span> <span class="id">Elimination</span> <span class="id">Schemes</span>.<br/>
+<span class="vernacular">Local</span> <span class="vernacular">Unset</span> <span class="id">Case</span> <span class="id">Analysis</span> <span class="id">Schemes</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="SplayHeapSet" class="id"><a name="SplayHeapSet" class="">SplayHeapSet</a></span>(<span class="id">E:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#OrderedType">OrderedType</a></span>).<br/>
+<br/>
+<div class="doc">"Raw" implementation.  The "is a binary search tree" invariant
+    is proved separately. </div>
+<br/>
+<span class="vernacular">Module</span> <span id="SplayHeapSet.R" class="id"><a name="SplayHeapSet.R" class="">R</a></span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span id="SplayHeapSet.R.heap" class="id"><a name="SplayHeapSet.R.heap" class="">heap:</a></span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="SplayHeapSet.R.Empty" class="id"><a name="SplayHeapSet.R.Empty" class="">Empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="SplayHeapSet.R.Node" class="id"><a name="SplayHeapSet.R.Node" class="">Node</a></span> (<span id="l:3" class="id"><a name="l:3" class="">l:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#heap:1">heap</a></span>) (<span id="x:4" class="id"><a name="x:4" class="">x:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) (<span id="r:5" class="id"><a name="r:5" class="">r:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#heap:1">heap</a></span>).<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.partition" class="id"><a name="SplayHeapSet.R.partition" class="">partition</a></span> (<span id="pivot:6" class="id"><a name="pivot:6" class="">pivot:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) (<span id="h:7" class="id"><a name="h:7" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) <span class="id">{</span> <span class="id">struct</span> <span class="id">h</span> <span class="id">}</span> <span class="id">:</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:7">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id">b</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#E.compare">E.compare</a></span> <span class="id">x</span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:6">pivot</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#EQ">EQ</a></span> <span class="id">_</span> <span class="id">=&gt;</span> (<span class="id">a,</span> <span class="id">b</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#LT">LT</a></span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">b</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> (<span class="id"><a href="compcert.lib.Heaps.html#h:7">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">b1</span> <span class="id">y</span> <span class="id">b2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#E.compare">E.compare</a></span> <span class="id">y</span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:6">pivot</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#EQ">EQ</a></span> <span class="id">_</span> <span class="id">=&gt;</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id">b1,</span> <span class="id">b2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#LT">LT</a></span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="small:11" class="id"><a name="small:11" class="">small,</a></span> <span id="big:12" class="id"><a name="big:12" class="">big</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#partition:8">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:6">pivot</a></span> <span class="id">b2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">in</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id">b1</span>) <span class="id">y</span> <span class="id"><a href="compcert.lib.Heaps.html#small:11">small,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#big:12">big</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#GT">GT</a></span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="small:13" class="id"><a name="small:13" class="">small,</a></span> <span id="big:14" class="id"><a name="big:14" class="">big</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#partition:8">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:6">pivot</a></span> <span class="id">b1</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">in</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id"><a href="compcert.lib.Heaps.html#small:13">small,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id"><a href="compcert.lib.Heaps.html#big:14">big</a></span> <span class="id">y</span> <span class="id">b2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#GT">GT</a></span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">a</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:7">h</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a1</span> <span class="id">y</span> <span class="id">a2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#E.compare">E.compare</a></span> <span class="id">y</span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:6">pivot</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#EQ">EQ</a></span> <span class="id">_</span> <span class="id">=&gt;</span> (<span class="id">a1,</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a2</span> <span class="id">x</span> <span class="id">b</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#LT">LT</a></span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="small:16" class="id"><a name="small:16" class="">small,</a></span> <span id="big:17" class="id"><a name="big:17" class="">big</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#partition:8">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:6">pivot</a></span> <span class="id">a2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">in</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a1</span> <span class="id">y</span> <span class="id"><a href="compcert.lib.Heaps.html#small:16">small,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id"><a href="compcert.lib.Heaps.html#big:17">big</a></span> <span class="id">x</span> <span class="id">b</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.OrderedType.html#GT">GT</a></span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="small:18" class="id"><a name="small:18" class="">small,</a></span> <span id="big:19" class="id"><a name="big:19" class="">big</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#partition:8">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:6">pivot</a></span> <span class="id">a1</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">in</span> (<span class="id"><a href="compcert.lib.Heaps.html#small:18">small,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id"><a href="compcert.lib.Heaps.html#big:19">big</a></span> <span class="id">y</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a2</span> <span class="id">x</span> <span class="id">b</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="SplayHeapSet.R.insert" class="id"><a name="SplayHeapSet.R.insert" class="">insert</a></span> (<span id="x:20" class="id"><a name="x:20" class="">x:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) (<span id="h:21" class="id"><a name="h:21" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="a:22" class="id"><a name="a:22" class="">a,</a></span> <span id="b:23" class="id"><a name="b:23" class="">b</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:20">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:21">h</a></span> <span class="gallina-kwd">in</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id"><a href="compcert.lib.Heaps.html#a:22">a</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:20">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#b:23">b</a></span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.findMin" class="id"><a name="SplayHeapSet.R.findMin" class="">findMin</a></span> (<span id="h:24" class="id"><a name="h:24" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:24">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">x</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">x</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#findMin:25">findMin</a></span> <span class="id">a</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.deleteMin" class="id"><a name="SplayHeapSet.R.deleteMin" class="">deleteMin</a></span> (<span id="h:27" class="id"><a name="h:27" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:27">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">x</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id">b</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">x</span> <span class="id">b</span>) <span class="id">y</span> <span class="id">c</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">b</span> <span class="id">y</span> <span class="id">c</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id">b</span>) <span class="id">y</span> <span class="id">c</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#deleteMin:28">deleteMin</a></span> <span class="id">a</span>) <span class="id">x</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">b</span> <span class="id">y</span> <span class="id">c</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.findMax" class="id"><a name="SplayHeapSet.R.findMax" class="">findMax</a></span> (<span id="h:30" class="id"><a name="h:30" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:30">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">x</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#findMax:31">findMax</a></span> <span class="id">b</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.deleteMax" class="id"><a name="SplayHeapSet.R.deleteMax" class="">deleteMax</a></span> (<span id="h:33" class="id"><a name="h:33" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:33">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">b</span> <span class="id">x</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id">b</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">b</span> <span class="id">x</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">c</span> <span class="id">y</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span>) <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">b</span> <span class="id">x</span> <span class="id">c</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">b</span> <span class="id">y</span> <span class="id">c</span>) <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id">b</span>) <span class="id">y</span> (<span class="id"><a href="compcert.lib.Heaps.html#deleteMax:34">deleteMax</a></span> <span class="id">c</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Induction principles for some of the operators. </div>
+<br/>
+<span class="vernacular">Scheme</span> <span id="SplayHeapSet.R.heap_ind" class="id"><a name="SplayHeapSet.R.heap_ind" class="">heap_ind</a></span> <span class="id">:=</span> <span class="id">Induction</span> <span class="gallina-kwd">for</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span> <span class="id">Sort</span> <span class="gallina-kwd">Prop</span>.<br/>
+<span class="vernacular">Functional</span> <span class="vernacular">Scheme</span> <span class="id">partition_ind</span> <span class="id">:=</span> <span class="id">Induction</span> <span class="gallina-kwd">for</span> <span class="id">partition</span> <span class="id">Sort</span> <span class="gallina-kwd">Prop</span>.<br/>
+<span class="vernacular">Functional</span> <span class="vernacular">Scheme</span> <span class="id">deleteMin_ind</span> <span class="id">:=</span> <span class="id">Induction</span> <span class="gallina-kwd">for</span> <span class="id">deleteMin</span> <span class="id">Sort</span> <span class="gallina-kwd">Prop</span>.<br/>
+<span class="vernacular">Functional</span> <span class="vernacular">Scheme</span> <span class="id">deleteMax_ind</span> <span class="id">:=</span> <span class="id">Induction</span> <span class="gallina-kwd">for</span> <span class="id">deleteMax</span> <span class="id">Sort</span> <span class="gallina-kwd">Prop</span>.<br/>
+<br/>
+<div class="doc">Specification </div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.In" class="id"><a name="SplayHeapSet.R.In" class="">In</a></span> (<span id="x:218" class="id"><a name="x:218" class="">x:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) (<span id="h:219" class="id"><a name="h:219" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:219">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#False">False</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">y</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#In:220">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:218">x</a></span> <span class="id">a</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:218">x</a></span> <span class="id">y</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#In:220">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:218">x</a></span> <span class="id">b</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Invariants </div>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.lt_heap" class="id"><a name="SplayHeapSet.R.lt_heap" class="">lt_heap</a></span> (<span id="h:222" class="id"><a name="h:222" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) (<span id="x:223" class="id"><a name="x:223" class="">x:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:222">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#True">True</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">y</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#lt_heap:224">lt_heap</a></span> <span class="id">a</span> <span class="id"><a href="compcert.lib.Heaps.html#x:223">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id">y</span> <span class="id"><a href="compcert.lib.Heaps.html#x:223">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#lt_heap:224">lt_heap</a></span> <span class="id">b</span> <span class="id"><a href="compcert.lib.Heaps.html#x:223">x</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.gt_heap" class="id"><a name="SplayHeapSet.R.gt_heap" class="">gt_heap</a></span> (<span id="h:226" class="id"><a name="h:226" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) (<span id="x:227" class="id"><a name="x:227" class="">x:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:226">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#True">True</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">y</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#gt_heap:228">gt_heap</a></span> <span class="id">a</span> <span class="id"><a href="compcert.lib.Heaps.html#x:227">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:227">x</a></span> <span class="id">y</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#gt_heap:228">gt_heap</a></span> <span class="id">b</span> <span class="id"><a href="compcert.lib.Heaps.html#x:227">x</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="SplayHeapSet.R.bst" class="id"><a name="SplayHeapSet.R.bst" class="">bst</a></span> (<span id="h:230" class="id"><a name="h:230" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.heap">heap</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.lib.Heaps.html#h:230">h</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#True">True</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Node">Node</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id">b</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Heaps.html#bst:231">bst</a></span> <span class="id">a</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#bst:231">bst</a></span> <span class="id">b</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> <span class="id">a</span> <span class="id">x</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> <span class="id">b</span> <span class="id">x</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="SplayHeapSet.R.le" class="id"><a name="SplayHeapSet.R.le" class="">le</a></span> (<span id="x:233" class="id"><a name="x:233" class="">x</a></span> <span id="y:234" class="id"><a name="y:234" class="">y:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:233">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:234">y</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:233">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:234">y</a></span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.le_lt_trans" class="id"><a name="SplayHeapSet.R.le_lt_trans" class="">le_lt_trans:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x1:235" class="id"><a name="x1:235" class="">x1</a></span> <span id="x2:236" class="id"><a name="x2:236" class="">x2</a></span> <span id="x3:237" class="id"><a name="x3:237" class="">x3,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x1:235">x1</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x2:236">x2</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x2:236">x2</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x3:237">x3</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x1:235">x1</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x3:237">x3</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le;</a></span> <span class="id">intros;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id"><a href="compcert.lib.Heaps.html#E.compare">E.compare</a></span> <span class="id">x1</span> <span class="id">x3</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">elim</span> (@<span class="id"><a href="compcert.lib.Heaps.html#E.lt_not_eq">E.lt_not_eq</a></span> <span class="id">x2</span> <span class="id">x3</span>). <span class="id">auto</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_trans">E.eq_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x1</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>. <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">elim</span> (@<span class="id"><a href="compcert.lib.Heaps.html#E.lt_not_eq">E.lt_not_eq</a></span> <span class="id">x2</span> <span class="id">x1</span>). <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt_trans">E.lt_trans</a></span><span class="id">;</span> <span class="id">eauto</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt_trans">E.lt_trans</a></span><span class="id">;</span> <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.lt_le_trans" class="id"><a name="SplayHeapSet.R.lt_le_trans" class="">lt_le_trans:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x1:238" class="id"><a name="x1:238" class="">x1</a></span> <span id="x2:239" class="id"><a name="x2:239" class="">x2</a></span> <span id="x3:240" class="id"><a name="x3:240" class="">x3,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x1:238">x1</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x2:239">x2</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x2:239">x2</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x3:240">x3</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x1:238">x1</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x3:240">x3</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le;</a></span> <span class="id">intros;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id"><a href="compcert.lib.Heaps.html#E.compare">E.compare</a></span> <span class="id">x1</span> <span class="id">x3</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">elim</span> (@<span class="id"><a href="compcert.lib.Heaps.html#E.lt_not_eq">E.lt_not_eq</a></span> <span class="id">x1</span> <span class="id">x2</span>). <span class="id">auto</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_trans">E.eq_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x3</span>. <span class="id">auto</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">elim</span> (@<span class="id"><a href="compcert.lib.Heaps.html#E.lt_not_eq">E.lt_not_eq</a></span> <span class="id">x3</span> <span class="id">x2</span>). <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt_trans">E.lt_trans</a></span><span class="id">;</span> <span class="id">eauto</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt_trans">E.lt_trans</a></span><span class="id">;</span> <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.le_trans" class="id"><a name="SplayHeapSet.R.le_trans" class="">le_trans:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x1:241" class="id"><a name="x1:241" class="">x1</a></span> <span id="x2:242" class="id"><a name="x2:242" class="">x2</a></span> <span id="x3:243" class="id"><a name="x3:243" class="">x3,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x1:241">x1</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x2:242">x2</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x2:242">x2</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x3:243">x3</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x1:241">x1</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x3:243">x3</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+&nbsp;&nbsp;<span class="id">intros</span>. <span class="id">destruct</span> <span class="id">H</span>. <span class="id">destruct</span> <span class="id">H0</span>. <span class="id">red;</span> <span class="id">left;</span> <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_trans">E.eq_trans</a></span><span class="id">;</span> <span class="id">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">red</span>. <span class="id">right</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_lt_trans">le_lt_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">red</span>. <span class="id">right</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_le_trans">lt_le_trans;</a></span> <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.lt_heap_trans" class="id"><a name="SplayHeapSet.R.lt_heap_trans" class="">lt_heap_trans:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:244" class="id"><a name="x:244" class="">x</a></span> <span id="y:245" class="id"><a name="y:245" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:244">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:245">y</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:246" class="id"><a name="h:246" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:246">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:244">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:246">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:245">y</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">h;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_le_trans">lt_le_trans;</a></span> <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.gt_heap_trans" class="id"><a name="SplayHeapSet.R.gt_heap_trans" class="">gt_heap_trans:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:247" class="id"><a name="x:247" class="">x</a></span> <span id="y:248" class="id"><a name="y:248" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:248">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:247">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:249" class="id"><a name="h:249" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:249">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:247">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:249">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:248">y</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">h;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_lt_trans">le_lt_trans;</a></span> <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">partition</span></span> </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.In_partition" class="id"><a name="SplayHeapSet.R.In_partition" class="">In_partition:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:250" class="id"><a name="x:250" class="">x</a></span> <span id="pivot:251" class="id"><a name="pivot:251" class="">pivot,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181">~E</a></span>.<span class="id">eq</span> <span class="id"><a href="compcert.lib.Heaps.html#x:250">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:251">pivot</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:252" class="id"><a name="h:252" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:252">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:250">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:252">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x">&lt;-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:250">x</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:251">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:252">h</a></span>)) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:250">x</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:251">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:252">h</a></span>))).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">x</span> <span class="id">pivot</span> <span class="id">NEQ</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id">pivot</span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+<span class="id">-</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">intuition</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>. <span class="id">elim</span> <span class="id">NEQ</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_trans">E.eq_trans</a></span><span class="id">;</span> <span class="id">eauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">intuition</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>. <span class="id">elim</span> <span class="id">NEQ</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_trans">E.eq_trans</a></span><span class="id">;</span> <span class="id">eauto</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">intuition</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>. <span class="id">elim</span> <span class="id">NEQ</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_trans">E.eq_trans</a></span><span class="id">;</span> <span class="id">eauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">intuition</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.partition_lt" class="id"><a name="SplayHeapSet.R.partition_lt" class="">partition_lt:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:253" class="id"><a name="x:253" class="">x</a></span> <span id="pivot:254" class="id"><a name="pivot:254" class="">pivot</a></span> <span id="h:255" class="id"><a name="h:255" class="">h,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:255">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:253">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:254">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:255">h</a></span>)) <span class="id"><a href="compcert.lib.Heaps.html#x:253">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:254">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:255">h</a></span>)) <span class="id"><a href="compcert.lib.Heaps.html#x:253">x</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">x</span> <span class="id">pivot</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id">pivot</span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">try</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.partition_gt" class="id"><a name="SplayHeapSet.R.partition_gt" class="">partition_gt:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:256" class="id"><a name="x:256" class="">x</a></span> <span id="pivot:257" class="id"><a name="pivot:257" class="">pivot</a></span> <span id="h:258" class="id"><a name="h:258" class="">h,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:258">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:256">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:257">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:258">h</a></span>)) <span class="id"><a href="compcert.lib.Heaps.html#x:256">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:257">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:258">h</a></span>)) <span class="id"><a href="compcert.lib.Heaps.html#x:256">x</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">x</span> <span class="id">pivot</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id">pivot</span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">try</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.partition_split" class="id"><a name="SplayHeapSet.R.partition_split" class="">partition_split:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="pivot:259" class="id"><a name="pivot:259" class="">pivot</a></span> <span id="h:260" class="id"><a name="h:260" class="">h,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:260">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:259">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:260">h</a></span>)) <span class="id"><a href="compcert.lib.Heaps.html#pivot:259">pivot</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:259">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:260">h</a></span>)) <span class="id"><a href="compcert.lib.Heaps.html#pivot:259">pivot</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">pivot</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id">pivot</span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl</span>.<br/>
+<span class="id">-</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>. <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">y;</span> <span class="id">eauto</span>. <span class="id">red</span>. <span class="id">left</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">y;</span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span> <span class="gallina-kwd">with</span> <span class="id">ordered_type</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>. <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">y;</span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">y;</span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span> <span class="gallina-kwd">with</span> <span class="id">ordered_type</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x;</span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans;</a></span> <span class="id">eauto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.partition_bst" class="id"><a name="SplayHeapSet.R.partition_bst" class="">partition_bst:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="pivot:261" class="id"><a name="pivot:261" class="">pivot</a></span> <span id="h:262" class="id"><a name="h:262" class="">h,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:262">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:261">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:262">h</a></span>)) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd">/\</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id"><a href="compcert.lib.Heaps.html#pivot:261">pivot</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:262">h</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">pivot</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id">pivot</span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">try</span> <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>. <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x;</span> <span class="id">auto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition_gt">partition_gt</a></span> <span class="id">y</span> <span class="id">pivot</span> <span class="id">b2</span> <span class="id">H7</span>). <span class="id">rewrite</span> <span class="id">e3;</span> <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>. <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition_gt">partition_gt</a></span> <span class="id">x</span> <span class="id">pivot</span> <span class="id">b1</span> <span class="id">H3</span>). <span class="id">rewrite</span> <span class="id">e3;</span> <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition_lt">partition_lt</a></span> <span class="id">y</span> <span class="id">pivot</span> <span class="id">b1</span> <span class="id">H4</span>). <span class="id">rewrite</span> <span class="id">e3;</span> <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>. <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition_gt">partition_gt</a></span> <span class="id">y</span> <span class="id">pivot</span> <span class="id">a2</span> <span class="id">H6</span>). <span class="id">rewrite</span> <span class="id">e3;</span> <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition_lt">partition_lt</a></span> <span class="id">x</span> <span class="id">pivot</span> <span class="id">a2</span> <span class="id">H8</span>). <span class="id">rewrite</span> <span class="id">e3;</span> <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+<span class="id">-</span> <span class="id">rewrite</span> <span class="id">e3</span> <span class="gallina-kwd">in</span> <span class="id">*;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>. <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition_lt">partition_lt</a></span> <span class="id">y</span> <span class="id">pivot</span> <span class="id">a1</span> <span class="id">H3</span>). <span class="id">rewrite</span> <span class="id">e3;</span> <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x;</span> <span class="id">auto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">insert</span></span> </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.insert_bst" class="id"><a name="SplayHeapSet.R.insert_bst" class="">insert_bst:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:263" class="id"><a name="x:263" class="">x</a></span> <span id="h:264" class="id"><a name="h:264" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:264">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.insert">insert</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:263">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:264">h</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+&nbsp;&nbsp;<span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.insert">insert</a></span>. <span class="id">case_eq</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id">x</span> <span class="id">h</span>). <span class="id">intros</span> <span class="id">a</span> <span class="id">b</span> <span class="id">EQ;</span> <span class="id">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition_bst">partition_bst</a></span> <span class="id">x</span> <span class="id">h</span> <span class="id">H</span>).<br/>
+&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition_split">partition_split</a></span> <span class="id">x</span> <span class="id">h</span> <span class="id">H</span>).<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id">EQ;</span> <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.In_insert" class="id"><a name="SplayHeapSet.R.In_insert" class="">In_insert:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:265" class="id"><a name="x:265" class="">x</a></span> <span id="h:266" class="id"><a name="h:266" class="">h</a></span> <span id="y:267" class="id"><a name="y:267" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:266">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:267">y</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.insert">insert</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:265">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:266">h</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x">&lt;-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:267">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:265">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:267">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:266">h</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+&nbsp;&nbsp;<span class="id">intros</span>. <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.insert">insert</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">case_eq</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.partition">partition</a></span> <span class="id">x</span> <span class="id">h</span>). <span class="id">intros</span> <span class="id">a</span> <span class="id">b</span> <span class="id">EQ;</span> <span class="id">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id">y</span> <span class="id">x</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181">~E</a></span>.<span class="id">eq</span> <span class="id">y</span> <span class="id">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id"><a href="compcert.lib.Heaps.html#E.compare">E.compare</a></span> <span class="id">y</span> <span class="id">x</span>)<span class="id">;</span> <span class="id">auto</span> <span class="gallina-kwd">with</span> <span class="id">ordered_type</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">right;</span> <span class="id">red;</span> <span class="id">intros</span>. <span class="id">elim</span> (<span class="id"><a href="compcert.lib.Heaps.html#E.lt_not_eq">E.lt_not_eq</a></span> <span class="id">l</span>). <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">H0</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In_partition">In_partition</a></span> <span class="id">y</span> <span class="id">x</span> <span class="id">H0</span> <span class="id">h</span> <span class="id">H</span>). <span class="id">rewrite</span> <span class="id">EQ;</span> <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">findMin</span></span> and <span class="bracket"><span class="id">deleteMin</span></span> </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.deleteMin_lt" class="id"><a name="SplayHeapSet.R.deleteMin_lt" class="">deleteMin_lt:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:268" class="id"><a name="x:268" class="">x</a></span> <span id="h:269" class="id"><a name="h:269" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:269">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:268">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin">deleteMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:269">h</a></span>) <span class="id"><a href="compcert.lib.Heaps.html#x:268">x</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+<span class="vernacular">Opaque</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin">deleteMin</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">x</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin">deleteMin</a></span> <span class="id">h0</span>) <span class="id">;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>. <span class="id">apply</span> <span class="id">IHh</span>. <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.deleteMin_bst" class="id"><a name="SplayHeapSet.R.deleteMin_bst" class="">deleteMin_bst:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:270" class="id"><a name="h:270" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:270">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin">deleteMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:270">h</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin">deleteMin</a></span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IHh</span>. <span class="id">simpl;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin_lt">deleteMin_lt;</a></span> <span class="id">auto</span>. <span class="id">simpl;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_trans">gt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">y;</span> <span class="id">auto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.In_deleteMin" class="id"><a name="SplayHeapSet.R.In_deleteMin" class="">In_deleteMin:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="y:271" class="id"><a name="y:271" class="">y</a></span> <span id="x:272" class="id"><a name="x:272" class="">x</a></span> <span id="h:273" class="id"><a name="h:273" class="">h,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.findMin">findMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:273">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:272">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:271">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:273">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x">&lt;-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:271">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:272">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:271">y</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin">deleteMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:273">h</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+<span class="vernacular">Transparent</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin">deleteMin</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">y</span> <span class="id">x</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMin">deleteMin</a></span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;<span class="id">inv</span> <span class="id">H</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">inv</span> <span class="id">H</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">_x</span>. <span class="id">inv</span> <span class="id">H</span>. <span class="id">simpl</span>. <span class="id">tauto</span>. <span class="id">generalize</span> (<span class="id">IHh</span> <span class="id">H</span>). <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.gt_heap_In" class="id"><a name="SplayHeapSet.R.gt_heap_In" class="">gt_heap_In:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:274" class="id"><a name="x:274" class="">x</a></span> <span id="y:275" class="id"><a name="y:275" class="">y</a></span> <span id="h:276" class="id"><a name="h:276" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:276">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:274">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:275">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:276">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:274">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:275">y</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">h;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">contradiction</span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_le_trans">lt_le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x0;</span> <span class="id">auto</span>. <span class="id">red</span>. <span class="id">left</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.findMin_min" class="id"><a name="SplayHeapSet.R.findMin_min" class="">findMin_min:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:277" class="id"><a name="x:277" class="">x</a></span> <span id="h:278" class="id"><a name="h:278" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.findMin">findMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:278">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:277">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:278">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">forall</span> <span id="y:279" class="id"><a name="y:279" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:279">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:278">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:277">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:279">y</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">h;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">contradiction</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">h1</span>.<br/>
+&nbsp;&nbsp;<span class="id">inv</span> <span class="id">H</span>. <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>. <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">red;</span> <span class="id">left;</span> <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">red;</span> <span class="id">right</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_In">gt_heap_In;</a></span> <span class="id">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id">x</span> <span class="id">x1</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IHh1;</span> <span class="id">auto</span>. <span class="id">tauto</span>. <span class="id">simpl</span>. <span class="id">right;</span> <span class="id">left;</span> <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_refl">E.eq_refl</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_trans">le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x1</span>. <span class="id">auto</span>.  <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_trans">le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x0</span>. <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">H4</span>. <span class="id">red;</span> <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">red;</span> <span class="id">left;</span> <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_sym">E.eq_sym</a></span><span class="id">;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_trans">le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x1</span>. <span class="id">auto</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_trans">le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x0</span>. <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">H4</span>. <span class="id">red;</span> <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">red;</span> <span class="id">right</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap_In">gt_heap_In;</a></span> <span class="id">eauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.findMin_empty" class="id"><a name="SplayHeapSet.R.findMin_empty" class="">findMin_empty:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:280" class="id"><a name="h:280" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:280">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x">&lt;&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.findMin">findMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:280">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x">&lt;&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof18')">Proof.</span></div>
+<div class="proofscript" id="proof18">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">h;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">congruence</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">h1</span>. <span class="id">congruence</span>. <span class="id">apply</span> <span class="id">IHh1</span>. <span class="id">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">findMax</span></span> and <span class="bracket"><span class="id">deleteMax</span></span>. </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.deleteMax_gt" class="id"><a name="SplayHeapSet.R.deleteMax_gt" class="">deleteMax_gt:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:281" class="id"><a name="x:281" class="">x</a></span> <span id="h:282" class="id"><a name="h:282" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:282">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:281">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.gt_heap">gt_heap</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax">deleteMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:282">h</a></span>) <span class="id"><a href="compcert.lib.Heaps.html#x:281">x</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof19')">Proof.</span></div>
+<div class="proofscript" id="proof19">
+<span class="vernacular">Opaque</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax">deleteMax</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">x</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax">deleteMax</a></span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>. <span class="id">apply</span> <span class="id">IHh</span>. <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.deleteMax_bst" class="id"><a name="SplayHeapSet.R.deleteMax_bst" class="">deleteMax_bst:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:283" class="id"><a name="h:283" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:283">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax">deleteMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:283">h</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof20')">Proof.</span></div>
+<div class="proofscript" id="proof20">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax">deleteMax</a></span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IHh</span>. <span class="id">simpl;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_trans">lt_heap_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x;</span> <span class="id">auto</span>. <span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax_gt">deleteMax_gt;</a></span> <span class="id">auto</span>. <span class="id">simpl;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.In_deleteMax" class="id"><a name="SplayHeapSet.R.In_deleteMax" class="">In_deleteMax:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="y:284" class="id"><a name="y:284" class="">y</a></span> <span id="x:285" class="id"><a name="x:285" class="">x</a></span> <span id="h:286" class="id"><a name="h:286" class="">h,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.findMax">findMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:286">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:285">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:284">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:286">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x">&lt;-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:284">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:285">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:284">y</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax">deleteMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:286">h</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof21')">Proof.</span></div>
+<div class="proofscript" id="proof21">
+<span class="vernacular">Transparent</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax">deleteMax</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">y</span> <span class="id">x</span> <span class="id">h0</span>. <span class="id">functional</span> <span class="id">induction</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.deleteMax">deleteMax</a></span> <span class="id">h0</span>)<span class="id">;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">congruence</span>.<br/>
+&nbsp;&nbsp;<span class="id">inv</span> <span class="id">H</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">inv</span> <span class="id">H</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">_x1</span>. <span class="id">inv</span> <span class="id">H</span>. <span class="id">simpl</span>. <span class="id">tauto</span>. <span class="id">generalize</span> (<span class="id">IHh</span> <span class="id">H</span>). <span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.lt_heap_In" class="id"><a name="SplayHeapSet.R.lt_heap_In" class="">lt_heap_In:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:287" class="id"><a name="x:287" class="">x</a></span> <span id="y:288" class="id"><a name="y:288" class="">y</a></span> <span id="h:289" class="id"><a name="h:289" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap">lt_heap</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:289">h</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:287">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:288">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:289">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:288">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:287">x</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof22')">Proof.</span></div>
+<div class="proofscript" id="proof22">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">h;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">contradiction</span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_lt_trans">le_lt_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x0;</span> <span class="id">auto</span>. <span class="id">red</span>. <span class="id">left</span>. <span class="id">assumption</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.findMax_max" class="id"><a name="SplayHeapSet.R.findMax_max" class="">findMax_max:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:290" class="id"><a name="x:290" class="">x</a></span> <span id="h:291" class="id"><a name="h:291" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.findMax">findMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:291">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:290">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.bst">bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:291">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">forall</span> <span id="y:292" class="id"><a name="y:292" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:292">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:291">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:292">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:290">x</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof23')">Proof.</span></div>
+<div class="proofscript" id="proof23">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">h;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">contradiction</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">h2</span>.<br/>
+&nbsp;&nbsp;<span class="id">inv</span> <span class="id">H</span>. <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>. <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">red;</span> <span class="id">right</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_In">lt_heap_In;</a></span> <span class="id">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">red;</span> <span class="id">left</span>. <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le">le</a></span> <span class="id">x1</span> <span class="id">x</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id">IHh2;</span> <span class="id">auto</span>. <span class="id">tauto</span>. <span class="id">simpl</span>. <span class="id">right;</span> <span class="id">left;</span> <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq_refl">E.eq_refl</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_trans">le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x1;</span> <span class="id">auto</span>.  <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_trans">le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x0</span>.<br/>
+&nbsp;&nbsp;<span class="id">red;</span> <span class="id">right</span>. <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.lt_heap_In">lt_heap_In;</a></span> <span class="id">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">H6</span>. <span class="id">red;</span> <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_trans">le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x1;</span> <span class="id">auto</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.le_trans">le_trans</a></span> <span class="gallina-kwd">with</span> <span class="id">x0</span>.<br/>
+&nbsp;&nbsp;<span class="id">red;</span> <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">H6</span>. <span class="id">red;</span> <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.R.findMax_empty" class="id"><a name="SplayHeapSet.R.findMax_empty" class="">findMax_empty:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:293" class="id"><a name="h:293" class="">h,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:293">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x">&lt;&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.Empty">Empty</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R.findMax">findMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:293">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x">&lt;&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof24')">Proof.</span></div>
+<div class="proofscript" id="proof24">
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">h;</span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">congruence</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">h2</span>. <span class="id">congruence</span>. <span class="id">apply</span> <span class="id">IHh2</span>. <span class="id">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.R">R</a></span>.<br/>
+<br/>
+<div class="doc">Wrapping in a dependent type </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="SplayHeapSet.t" class="id"><a name="SplayHeapSet.t" class="">t</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">{</a></span> <span id="h:294" class="id"><a name="h:294" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.heap">R.heap</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">|</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.bst">R.bst</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:294">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">}</a></span>.<br/>
+<br/>
+<div class="doc">Operations </div>
+<br/>
+<span class="id">Program</span> <span class="vernacular">Definition</span> <span id="SplayHeapSet.empty" class="id"><a name="SplayHeapSet.empty" class="">empty</a></span> <span class="id">:</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.Empty">R.Empty</a></span>.<br/>
+<br/>
+<span class="id">Program</span> <span class="vernacular">Definition</span> <span id="SplayHeapSet.insert" class="id"><a name="SplayHeapSet.insert" class="">insert</a></span> (<span id="x:295" class="id"><a name="x:295" class="">x:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) (<span id="h:296" class="id"><a name="h:296" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.insert">R.insert</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:295">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:296">h</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof25')">Next Obligation.</span></div>
+<div class="proofscript" id="proof25">
+ <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.insert_bst">R.insert_bst</a></span>. <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj2_sig">proj2_sig</a></span>. Qed.</div>
+<br/>
+<span class="id">Program</span> <span class="vernacular">Definition</span> <span id="SplayHeapSet.findMin" class="id"><a name="SplayHeapSet.findMin" class="">findMin</a></span> (<span id="h:297" class="id"><a name="h:297" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin">R.findMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:297">h</a></span>.<br/>
+<br/>
+<span class="id">Program</span> <span class="vernacular">Definition</span> <span id="SplayHeapSet.deleteMin" class="id"><a name="SplayHeapSet.deleteMin" class="">deleteMin</a></span> (<span id="h:298" class="id"><a name="h:298" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.deleteMin">R.deleteMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:298">h</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof26')">Next Obligation.</span></div>
+<div class="proofscript" id="proof26">
+ <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.deleteMin_bst">R.deleteMin_bst</a></span>. <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj2_sig">proj2_sig</a></span>. Qed.</div>
+<br/>
+<span class="id">Program</span> <span class="vernacular">Definition</span> <span id="SplayHeapSet.findMax" class="id"><a name="SplayHeapSet.findMax" class="">findMax</a></span> (<span id="h:299" class="id"><a name="h:299" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span>) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax">R.findMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:299">h</a></span>.<br/>
+<br/>
+<span class="id">Program</span> <span class="vernacular">Definition</span> <span id="SplayHeapSet.deleteMax" class="id"><a name="SplayHeapSet.deleteMax" class="">deleteMax</a></span> (<span id="h:300" class="id"><a name="h:300" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.deleteMax">R.deleteMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:300">h</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof27')">Next Obligation.</span></div>
+<div class="proofscript" id="proof27">
+ <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.deleteMax_bst">R.deleteMax_bst</a></span>. <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj2_sig">proj2_sig</a></span>. Qed.</div>
+<br/>
+<div class="doc">Membership (for specification) </div>
+<br/>
+<span class="id">Program</span> <span class="vernacular">Definition</span> <span id="SplayHeapSet.In" class="id"><a name="SplayHeapSet.In" class="">In</a></span> (<span id="x:301" class="id"><a name="x:301" class="">x:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.t">E.t</a></span>) (<span id="h:302" class="id"><a name="h:302" class="">h:</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.t">t</a></span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">R.In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:301">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:302">h</a></span>.<br/>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">empty</span></span> </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.In_empty" class="id"><a name="SplayHeapSet.In_empty" class="">In_empty:</a></span> <span class="gallina-kwd">forall</span> <span id="x:303" class="id"><a name="x:303" class="">x,</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181">~In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:303">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.empty">empty</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof28')">Proof.</span></div>
+<div class="proofscript" id="proof28">
+&nbsp;&nbsp;<span class="id">intros;</span> <span class="id">red;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">red</span> <span class="gallina-kwd">in</span> <span class="id">H</span>. <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">H</span>. <span class="id">tauto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">insert</span></span> </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.In_insert" class="id"><a name="SplayHeapSet.In_insert" class="">In_insert:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="x:304" class="id"><a name="x:304" class="">x</a></span> <span id="h:305" class="id"><a name="h:305" class="">h</a></span> <span id="y:306" class="id"><a name="y:306" class="">y,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:306">y</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.insert">insert</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:304">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:305">h</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x">&lt;-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:306">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:304">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:306">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:305">h</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof29')">Proof.</span></div>
+<div class="proofscript" id="proof29">
+&nbsp;&nbsp;<span class="id">intros</span>. <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.insert">insert;</a></span> <span class="id">simpl</span>. <span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In_insert">R.In_insert</a></span>. <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj2_sig">proj2_sig</a></span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">findMin</span></span> </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.findMin_empty" class="id"><a name="SplayHeapSet.findMin_empty" class="">findMin_empty:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:307" class="id"><a name="h:307" class="">h</a></span> <span id="y:308" class="id"><a name="y:308" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin">findMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:307">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181">~In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:308">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:307">h</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof30')">Proof.</span></div>
+<div class="proofscript" id="proof30">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin">findMin,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In;</a></span> <span class="id">intros;</span> <span class="id">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj1_sig">proj1_sig</a></span> <span class="id">h</span>).<br/>
+&nbsp;&nbsp;<span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">exploit</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin_empty">R.findMin_empty</a></span><span class="id">;</span> <span class="id">eauto</span>. <span class="id">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.findMin_min" class="id"><a name="SplayHeapSet.findMin_min" class="">findMin_min:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:309" class="id"><a name="h:309" class="">h</a></span> <span id="x:310" class="id"><a name="x:310" class="">x</a></span> <span id="y:311" class="id"><a name="y:311" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin">findMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:309">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:310">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:311">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:309">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:310">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:311">y</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:310">x</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:311">y</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof31')">Proof.</span></div>
+<div class="proofscript" id="proof31">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin">findMin,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In;</a></span> <span class="id">simpl</span>. <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">change</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.le">R.le</a></span> <span class="id">x</span> <span class="id">y</span>). <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin_min">R.findMin_min</a></span><span class="id">;</span> <span class="id">eauto</span>. <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj2_sig">proj2_sig</a></span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">deleteMin</span></span>. </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.In_deleteMin" class="id"><a name="SplayHeapSet.In_deleteMin" class="">In_deleteMin:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:312" class="id"><a name="h:312" class="">h</a></span> <span id="x:313" class="id"><a name="x:313" class="">x</a></span> <span id="y:314" class="id"><a name="y:314" class="">y,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin">findMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:312">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:313">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:314">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:312">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x">&lt;-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:314">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:313">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:314">y</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.deleteMin">deleteMin</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:312">h</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof32')">Proof.</span></div>
+<div class="proofscript" id="proof32">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMin">findMin,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In;</a></span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In_deleteMin">R.In_deleteMin</a></span>. <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">findMax</span></span> </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.findMax_empty" class="id"><a name="SplayHeapSet.findMax_empty" class="">findMax_empty:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:315" class="id"><a name="h:315" class="">h</a></span> <span id="y:316" class="id"><a name="y:316" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax">findMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:315">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181">~In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:316">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:315">h</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof33')">Proof.</span></div>
+<div class="proofscript" id="proof33">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax">findMax,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In;</a></span> <span class="id">intros;</span> <span class="id">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj1_sig">proj1_sig</a></span> <span class="id">h</span>).<br/>
+&nbsp;&nbsp;<span class="id">simpl</span>. <span class="id">tauto</span>.<br/>
+&nbsp;&nbsp;<span class="id">exploit</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax_empty">R.findMax_empty</a></span><span class="id">;</span> <span class="id">eauto</span>. <span class="id">congruence</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.findMax_max" class="id"><a name="SplayHeapSet.findMax_max" class="">findMax_max:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:317" class="id"><a name="h:317" class="">h</a></span> <span id="x:318" class="id"><a name="x:318" class="">x</a></span> <span id="y:319" class="id"><a name="y:319" class="">y,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax">findMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:317">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:318">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:319">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:317">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:319">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:318">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.lt">E.lt</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:319">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:318">x</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof34')">Proof.</span></div>
+<div class="proofscript" id="proof34">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax">findMax,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In;</a></span> <span class="id">simpl</span>. <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">change</span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.le">R.le</a></span> <span class="id">y</span> <span class="id">x</span>). <span class="id">eapply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax_max">R.findMax_max</a></span><span class="id">;</span> <span class="id">eauto</span>. <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj2_sig">proj2_sig</a></span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">Properties of <span class="bracket"><span class="id">deleteMax</span></span>. </div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="SplayHeapSet.In_deleteMax" class="id"><a name="SplayHeapSet.In_deleteMax" class="">In_deleteMax:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="h:320" class="id"><a name="h:320" class="">h</a></span> <span id="x:321" class="id"><a name="x:321" class="">x</a></span> <span id="y:322" class="id"><a name="y:322" class="">y,</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax">findMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:320">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:321">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:322">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:320">h</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x">&lt;-&gt;</a></span> <span class="id"><a href="compcert.lib.Heaps.html#E.eq">E.eq</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:322">y</a></span> <span class="id"><a href="compcert.lib.Heaps.html#x:321">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f031fe1957c4a4a8e217aa46af2b4e25">\/</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In</a></span> <span class="id"><a href="compcert.lib.Heaps.html#y:322">y</a></span> (<span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.deleteMax">deleteMax</a></span> <span class="id"><a href="compcert.lib.Heaps.html#h:320">h</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof35')">Proof.</span></div>
+<div class="proofscript" id="proof35">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.findMax">findMax,</a></span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In">In;</a></span> <span class="id">simpl;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet.In_deleteMax">R.In_deleteMax</a></span>. <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet">SplayHeapSet</a></span>.<br/>
+<br/>
+<div class="doc">Instantiation over type <span class="bracket"><span class="id">positive</span></span> </div>
+<br/>
+<span class="vernacular">Module</span> <span id="PHeap" class="id"><a name="PHeap" class="">PHeap</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Heaps.html#SplayHeapSet">SplayHeapSet</a></span>(<span class="id"><a href="compcert.lib.Ordered.html#OrderedPositive">OrderedPositive</a></span>).<br/>
+<br/>
+<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

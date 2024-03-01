@@ -1,0 +1,471 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module BoolEqual</title>
+<meta name="description" content="Documentation of Coq module BoolEqual" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module BoolEqual</h1>
+<br/>
+<div class="doc">Tactics to generate Boolean-valued equalities </div>
+<br/>
+<div class="doc">The <span class="bracket"><span class="id">decide</span> <span class="id">equality</span></span> tactic can generate a term of type
+<span class="bracket"><span class="gallina-kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>: <span class="id">A</span>), {<span class="id">x</span>=<span class="id">y</span>} + {<span class="id">x</span>&lt;&gt;<span class="id">y</span>}</span> if <span class="bracket"><span class="id">A</span></span> is an inductive type.
+This term is a decidable equality function.
+Similarly, this module defines a <span class="bracket"><span class="id">boolean_equality</span></span> tactic that generates
+a term of type <span class="bracket"><span class="id">A</span> -&gt; <span class="id">A</span> -&gt; <span class="id">bool</span></span>.  This term is a Boolean-valued equality
+function over the inductive type <span class="bracket"><span class="id">A</span></span>.  Two internal tactics generate
+proofs that show the correctness of this equality function <span class="bracket"><span class="id">f</span></span>, namely
+proofs of the following two properties:
+<ul>
+<li>
+ <span class="bracket"><span class="gallina-kwd">forall</span> (<span class="id">x</span>: <span class="id">A</span>), <span class="id">f</span> <span class="id">x</span> <span class="id">x</span> = <span class="id">true</span></span>
+</li>
+<li>
+ <span class="bracket"><span class="gallina-kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>: <span class="id">A</span>), <span class="id">f</span> <span class="id">x</span> <span class="id">y</span> = <span class="id">true</span> -&gt; <span class="id">x</span> = <span class="id">y</span></span>
+</li>
+</ul>
+Finally, the <span class="bracket"><span class="id">decide_equality_from</span> <span class="id">f</span></span> tactic wraps <span class="bracket"><span class="id">f</span></span> (the Boolean equality
+generated by <span class="bracket"><span class="id">boolean_equality</span></span>) and those proofs together, producing
+a decidable equality of type <span class="bracket"><span class="gallina-kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>: <span class="id">A</span>), {<span class="id">x</span>=<span class="id">y</span>} + {<span class="id">x</span>&lt;&gt;<span class="id">y</span>}</span>.
+The advantage of the present tactics over the standard <span class="bracket"><span class="id">decide</span> <span class="id">equality</span></span>
+tactic is that the former produce smaller transparent definitions than
+the latter.
+For a type <span class="bracket"><span class="id">A</span></span> that has N constructors, <span class="bracket"><span class="id">decide</span> <span class="id">equality</span></span> produces a
+single term of size O(N^3), which must be kept transparent so that
+it computes and extracts as expected.  Given such a big transparent
+definition, the virtual machine compiler of Coq produces very big
+chunks of VM code, causing memory overflows on 32-bit platforms.
+In contrast, the term produced by <span class="bracket"><span class="id">boolean_equality</span></span> has size O(N^2)
+only (so to speak).  The proofs that this term is a correct boolean
+equality are still O(N^3), but those proofs are opaque and do not need
+to be compiled to VM code.  Only the boolean equality itself is defined
+transparently and compiled.
+The present tactics also have some restrictions:
+<ul>
+<li>
+ Constructors must have at most 4 arguments.
+</li>
+<li>
+ Decidable equalities must be provided (as hypotheses in the context)
+  for all the types <span class="bracket"><span class="id">T</span></span> of constructor arguments other than type <span class="bracket"><span class="id">A</span></span>.
+</li>
+<li>
+ They probably do not work for mutually-defined inductive types.
+</li>
+</ul>
+</div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="BE" class="id"><a name="BE" class="">BE</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="BE.bool_eq" class="id"><a name="BE.bool_eq" class="">bool_eq</a></span> <span class="id">{A:</span> <span class="id">Type}</span> (<span id="x:2" class="id"><a name="x:2" class="">x</a></span> <span id="y:3" class="id"><a name="y:3" class="">y:</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#A:1">A</a></span>) <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>.<br/>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">bool_eq_base</span> <span class="id">x</span> <span class="id">y</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">change</span> (<span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> <span class="id">x</span> <span class="id">y</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">H:</span> <span class="gallina-kwd">forall</span> (<span id="x:6" class="id"><span id="x:4" class="id"><a name="x:6" class="">x</a></span></span> <span id="y:7" class="id"><span id="y:5" class="id"><a name="y:7" class="">y:</a></span></span> <span class="id">?A</span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">|-</span> @<span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> <span class="id">?A</span> <span class="id">x</span> <span class="id">y</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">exact</span> (<span class="id">H</span> <span class="id">x</span> <span class="id">y</span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">H:</span> <span class="gallina-kwd">forall</span> (<span id="x:10" class="id"><span id="x:8" class="id"><a name="x:10" class="">x</a></span></span> <span id="y:11" class="id"><span id="y:9" class="id"><a name="y:11" class="">y:</a></span></span> <span class="id">?A</span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}</a></span> <span class="id">+</span> <span class="id">{x&lt;&gt;y}</span> <span class="id">|-</span> @<span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> <span class="id">?A</span> <span class="id">x</span> <span class="id">y</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">exact</span> (<span class="id"><a href="compcert.lib.Coqlib.html#proj_sumbool">proj_sumbool</a></span> (<span class="id">H</span> <span class="id">x</span> <span class="id">y</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">H:</span> <span class="gallina-kwd">forall</span> (<span id="x:14" class="id"><span id="x:12" class="id"><a name="x:14" class="">x</a></span></span> <span id="y:15" class="id"><span id="y:13" class="id"><a name="y:15" class="">y:</a></span></span> <span class="id">?A</span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}</a></span> <span class="id">+</span> <span class="id">{x&lt;&gt;y}</span> <span class="id">|-</span> @<span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id">?A</span>) <span class="id">x</span> <span class="id">y</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">exact</span> (<span class="id"><a href="compcert.lib.Coqlib.html#proj_sumbool">proj_sumbool</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#list_eq_dec">list_eq_dec</a></span> <span class="id">H</span> <span class="id">x</span> <span class="id">y</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">idtac</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">bool_eq_case</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> (<span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span> <span class="id">?x3</span> <span class="id">?x4</span> <span class="id">?x5</span> <span class="id">?x6</span> <span class="id">?x7</span>) (<span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span> <span class="id">?y3</span> <span class="id">?y4</span> <span class="id">?y5</span> <span class="id">?y6</span> <span class="id">?y7</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">refine</span> (<span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">[bool_eq_base</span> <span class="id">x1</span> <span class="id">y1|bool_eq_base</span> <span class="id">x2</span> <span class="id">y2|bool_eq_base</span> <span class="id">x3</span> <span class="id">y3|</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">bool_eq_base</span> <span class="id">x4</span> <span class="id">y4|bool_eq_base</span> <span class="id">x5</span> <span class="id">y5|bool_eq_base</span> <span class="id">x6</span> <span class="id">y6|</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">bool_eq_base</span> <span class="id">x7</span> <span class="id">y7]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> (<span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span> <span class="id">?x3</span> <span class="id">?x4</span> <span class="id">?x5</span> <span class="id">?x6</span>) (<span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span> <span class="id">?y3</span> <span class="id">?y4</span> <span class="id">?y5</span> <span class="id">?y6</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">refine</span> (<span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">[bool_eq_base</span> <span class="id">x1</span> <span class="id">y1|bool_eq_base</span> <span class="id">x2</span> <span class="id">y2|bool_eq_base</span> <span class="id">x3</span> <span class="id">y3|</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">bool_eq_base</span> <span class="id">x4</span> <span class="id">y4|bool_eq_base</span> <span class="id">x5</span> <span class="id">y5|bool_eq_base</span> <span class="id">x6</span> <span class="id">y6]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> (<span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span> <span class="id">?x3</span> <span class="id">?x4</span> <span class="id">?x5</span>) (<span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span> <span class="id">?y3</span> <span class="id">?y4</span> <span class="id">?y5</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">refine</span> (<span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">[bool_eq_base</span> <span class="id">x1</span> <span class="id">y1|bool_eq_base</span> <span class="id">x2</span> <span class="id">y2|bool_eq_base</span> <span class="id">x3</span> <span class="id">y3|</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">bool_eq_base</span> <span class="id">x4</span> <span class="id">y4|bool_eq_base</span> <span class="id">x5</span> <span class="id">y5]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> (<span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span> <span class="id">?x3</span> <span class="id">?x4</span>) (<span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span> <span class="id">?y3</span> <span class="id">?y4</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">refine</span> (<span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span>)<span class="id">;</span> <span class="id">[bool_eq_base</span> <span class="id">x1</span> <span class="id">y1|bool_eq_base</span> <span class="id">x2</span> <span class="id">y2|bool_eq_base</span> <span class="id">x3</span> <span class="id">y3|bool_eq_base</span> <span class="id">x4</span> <span class="id">y4]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> (<span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span> <span class="id">?x3</span>) (<span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span> <span class="id">?y3</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">refine</span> (<span class="id">_</span> &amp;&amp; <span class="id">_</span> &amp;&amp; <span class="id">_</span>)<span class="id">;</span> <span class="id">[bool_eq_base</span> <span class="id">x1</span> <span class="id">y1|bool_eq_base</span> <span class="id">x2</span> <span class="id">y2|bool_eq_base</span> <span class="id">x3</span> <span class="id">y3]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> (<span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span>) (<span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">refine</span> (<span class="id">_</span> &amp;&amp; <span class="id">_</span>)<span class="id">;</span> <span class="id">[bool_eq_base</span> <span class="id">x1</span> <span class="id">y1|bool_eq_base</span> <span class="id">x2</span> <span class="id">y2]</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> (<span class="id">?C</span> <span class="id">?x1</span>) (<span class="id">?C</span> <span class="id">?y1</span>) <span class="id">=&gt;</span> <span class="id">bool_eq_base</span> <span class="id">x1</span> <span class="id">y1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> <span class="id">?C</span> <span class="id">?C</span> <span class="id">=&gt;</span> <span class="id">exact</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">exact</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">bool_eq</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id">?A</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id">?A</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span> <span class="id">]</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">f</span> <span class="id">:=</span> <span class="id">fresh</span> <span class="id">&quot;rec&quot; in let x := fresh &quot;x&quot; in let y := fresh &quot;y&quot;</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">fix</span> <span class="id">f</span> <span class="id">1;</span> <span class="id">intros</span> <span class="id">x</span> <span class="id">y;</span> <span class="id">change</span> (<span class="id"><a href="compcert.lib.BoolEqual.html#BE.bool_eq">bool_eq</a></span> <span class="id">x</span> <span class="id">y</span>)<span class="id">;</span> <span class="id">destruct</span> <span class="id">x,</span> <span class="id">y;</span> <span class="id">bool_eq_case</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id">_</span> <span class="id">]</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">eq</span> <span class="id">:=</span> <span class="id">fresh</span> <span class="id">&quot;eq&quot;</span> <span class="gallina-kwd">in</span> <span class="id">intro</span> <span class="id">eq;</span> <span class="id">bool_eq</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="BE.proj_sumbool_is_true" class="id"><a name="BE.proj_sumbool_is_true" class="">proj_sumbool_is_true:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="A:16" class="id"><a name="A:16" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="f:19" class="id"><a name="f:19" class="">f:</a></span> <span class="gallina-kwd">forall</span> (<span id="x:17" class="id"><a name="x:17" class="">x</a></span> <span id="y:18" class="id"><a name="y:18" class="">y:</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#A:16">A</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}</a></span> <span class="id">+</span> <span class="id">{x&lt;&gt;y}</span>) (<span id="x:20" class="id"><a name="x:20" class="">x:</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#A:16">A</a></span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Coqlib.html#proj_sumbool">proj_sumbool</a></span> (<span class="id"><a href="compcert.lib.BoolEqual.html#f:19">f</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#x:20">x</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#x:20">x</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+&nbsp;&nbsp;<span class="id">intros</span>. <span class="id">unfold</span> <span class="id"><a href="compcert.lib.Coqlib.html#proj_sumbool">proj_sumbool</a></span>. <span class="id">destruct</span> (<span class="id">f</span> <span class="id">x</span> <span class="id">x</span>). <span class="id">auto</span>. <span class="id">elim</span> <span class="id">n;</span> <span class="id">auto</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">bool_eq_refl_case</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">reflexivity</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id"><a href="compcert.lib.Coqlib.html#proj_sumbool">proj_sumbool</a></span> <span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.proj_sumbool_is_true">proj_sumbool_is_true</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id">_</span> &amp;&amp; <span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Bool.Bool.html#andb_true_iff">andb_true_iff;</a></span> <span class="id">split;</span> <span class="id">bool_eq_refl_case</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">auto</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">bool_eq_refl</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">Hrec</span> <span class="id">:=</span> <span class="id">fresh</span> <span class="id">&quot;Hrec&quot; in let x := fresh &quot;x&quot;</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fix</span> <span class="id">Hrec</span> <span class="id">1;</span> <span class="id">intros</span> <span class="id">x;</span> <span class="id">destruct</span> <span class="id">x;</span> <span class="id">simpl;</span> <span class="id">bool_eq_refl_case</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="BE.false_not_true" class="id"><a name="BE.false_not_true" class="">false_not_true:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="P:21" class="id"><a name="P:21" class="">P:</a></span> <span class="gallina-kwd">Prop</span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#P:21">P</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+&nbsp;&nbsp;<span class="id">intros</span>. <span class="id">discriminate</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="BE.proj_sumbool_true" class="id"><a name="BE.proj_sumbool_true" class="">proj_sumbool_true:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="A:22" class="id"><a name="A:22" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="x:23" class="id"><a name="x:23" class="">x</a></span> <span id="y:24" class="id"><a name="y:24" class="">y:</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#A:22">A</a></span>) (<span id="a:25" class="id"><a name="a:25" class="">a:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}</a></span> <span class="id">+</span> <span class="id">{x&lt;&gt;y}</span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.lib.Coqlib.html#proj_sumbool">proj_sumbool</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#a:25">a</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#x:23">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#y:24">y</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+&nbsp;&nbsp;<span class="id">intros</span>. <span class="id">destruct</span> <span class="id">a</span>. <span class="id">auto</span>. <span class="id">discriminate</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">bool_eq_sound_case</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">H:</span> <span class="id">_</span> &amp;&amp; <span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id">|-</span> <span class="id">_</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#andb_prop">andb_prop</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">destruct</span> <span class="id">H;</span> <span class="id">bool_eq_sound_case</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">H:</span> <span class="id"><a href="compcert.lib.Coqlib.html#proj_sumbool">proj_sumbool</a></span> <span class="id">?a</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id">|-</span> <span class="id">_</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE.proj_sumbool_true">proj_sumbool_true</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">bool_eq_sound_case</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span> <span class="id">?x3</span> <span class="id">?x4</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span> <span class="id">?y3</span> <span class="id">?y4</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f_equal4">f_equal4;</a></span> <span class="id">auto</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span> <span class="id">?x3</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span> <span class="id">?y3</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f_equal3">f_equal3;</a></span> <span class="id">auto</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id">?C</span> <span class="id">?x1</span> <span class="id">?x2</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id">?C</span> <span class="id">?y1</span> <span class="id">?y2</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f_equal2">f_equal2;</a></span> <span class="id">auto</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id">?C</span> <span class="id">?x1</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id">?C</span> <span class="id">?y1</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#f_equal">f_equal;</a></span> <span class="id">auto</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">[</span> <span class="id">|-</span> <span class="id">?x</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id">?x</span> <span class="id">]</span> <span class="id">=&gt;</span> <span class="id">reflexivity</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">idtac</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">bool_eq_sound</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">Hrec</span> <span class="id">:=</span> <span class="id">fresh</span> <span class="id">&quot;Hrec&quot; in let x := fresh &quot;x&quot; in let y := fresh &quot;y&quot;</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">H</span> <span class="id">:=</span> <span class="id">fresh</span> <span class="id">&quot;EQ&quot;</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fix</span> <span class="id">Hrec</span> <span class="id">1;</span> <span class="id">intros</span> <span class="id">x</span> <span class="id">y;</span> <span class="id">destruct</span> <span class="id">x,</span> <span class="id">y;</span> <span class="id">intro</span> <span class="id">H;</span><br/>
+&nbsp;&nbsp;<span class="id">try</span> (<span class="id">apply</span> (<span class="id"><a href="compcert.lib.BoolEqual.html#BE.false_not_true">false_not_true</a></span> <span class="id">_</span> <span class="id">H</span>))<span class="id">;</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">bool_eq_sound_case</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="BE.dec_eq_from_bool_eq" class="id"><a name="BE.dec_eq_from_bool_eq" class="">dec_eq_from_bool_eq:</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="A:26" class="id"><a name="A:26" class="">A:</a></span> <span class="gallina-kwd">Type</span>) (<span id="f:27" class="id"><a name="f:27" class="">f:</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#A:26">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#A:26">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="f_refl:29" class="id"><a name="f_refl:29" class="">f_refl:</a></span> <span class="gallina-kwd">forall</span> <span id="x:28" class="id"><a name="x:28" class="">x,</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#f:27">f</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#x:28">x</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#x:28">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span>) (<span id="f_sound:32" class="id"><a name="f_sound:32" class="">f_sound:</a></span> <span class="gallina-kwd">forall</span> <span id="x:30" class="id"><a name="x:30" class="">x</a></span> <span id="y:31" class="id"><a name="y:31" class="">y,</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#f:27">f</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#x:30">x</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#y:31">y</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#x:30">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#y:31">y</a></span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="x:33" class="id"><a name="x:33" class="">x</a></span> <span id="y:34" class="id"><a name="y:34" class="">y:</a></span> <span class="id"><a href="compcert.lib.BoolEqual.html#A:26">A</a></span>)<span class="id">,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{x=y}</a></span> <span class="id">+</span> <span class="id">{x&lt;&gt;y}</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+&nbsp;&nbsp;<span class="id">intros</span>. <span class="id">destruct</span> (<span class="id">f</span> <span class="id">x</span> <span class="id">y</span>) <span class="id">eqn:E</span>.<br/>
+&nbsp;&nbsp;<span class="id">left</span>. <span class="id">apply</span> <span class="id">f_sound</span>. <span class="id">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id">right;</span> <span class="id">red;</span> <span class="id">intros</span>. <span class="id">subst</span> <span class="id">y</span>. <span class="id">rewrite</span> <span class="id">f_refl</span> <span class="gallina-kwd">in</span> <span class="id">E</span>. <span class="id">discriminate</span>.<br/>
+Defined.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="compcert.lib.BoolEqual.html#BE">BE</a></span>.<br/>
+<br/>
+<div class="doc">Applied to a goal of the form <span class="bracket"><span class="id">t</span> -&gt; <span class="id">t</span> -&gt; <span class="id">bool</span></span>, the <span class="bracket"><span class="id">boolean_equality</span></span>
+  tactic defines a function with that type, returning <span class="bracket"><span class="id">true</span></span> iff the two
+  arguments of type <span class="bracket"><span class="id">t</span></span> are equal.  <span class="bracket"><span class="id">t</span></span> must be an inductive type.
+  For any type <span class="bracket"><span class="id">u</span></span> other than <span class="bracket"><span class="id">t</span></span> that appears in arguments of constructors
+  of <span class="bracket"><span class="id">t</span></span>, a decidable equality over <span class="bracket"><span class="id">u</span></span> must be provided, as an hypothesis
+  of type <span class="bracket"><span class="gallina-kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>: <span class="id">u</span>), {<span class="id">x</span>=<span class="id">y</span>}+{<span class="id">x</span>&lt;&gt;<span class="id">y</span>}</span>. </div>
+<span class="vernacular">Ltac</span> <span class="id">boolean_equality</span> <span class="id">:=</span> <span class="id">BE.bool_eq</span>.<br/>
+<br/>
+<div class="doc">Given a function <span class="bracket"><span class="id">beq</span></span> of type <span class="bracket"><span class="id">t</span> -&gt; <span class="id">t</span> -&gt; <span class="id">bool</span></span> produced by <span class="bracket"><span class="id">boolean_equality</span></span>,
+  the <span class="bracket"><span class="id">decidable_equality_from</span> <span class="id">beq</span></span> produces a decidable equality with type
+  <span class="bracket"><span class="gallina-kwd">forall</span> (<span class="id">x</span> <span class="id">y</span>: <span class="id">t</span></span>, {x=y}+{x&lt;&gt;y}. </div>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">decidable_equality_from</span> <span class="id">beq</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">apply</span> (<span class="id"><a href="compcert.lib.BoolEqual.html#dec_eq_from_bool_eq">BE.dec_eq_from_bool_eq</a></span> <span class="id">_</span> <span class="id">beq</span>)<span class="id">;</span> <span class="id">[abstract</span> <span class="id">BE.bool_eq_refl</span><span class="id">|abstract</span> <span class="id">BE.bool_eq_sound</span><span class="id">]</span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

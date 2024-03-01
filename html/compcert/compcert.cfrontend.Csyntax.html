@@ -1,0 +1,535 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Csyntax</title>
+<meta name="description" content="Documentation of Coq module Csyntax" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Csyntax</h1>
+<br/>
+<div class="doc">Abstract syntax for the Compcert C language </div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span> <span class="id"><a href="compcert.lib.Maps.html">Maps</a></span> <span class="id"><a href="compcert.lib.Integers.html">Integers</a></span> <span class="id"><a href="compcert.lib.Floats.html">Floats</a></span> <span class="id"><a href="compcert.common.Errors.html">Errors</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.common.AST.html">AST</a></span> <span class="id"><a href="compcert.common.Linking.html">Linking</a></span> <span class="id"><a href="compcert.common.Values.html">Values</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></span> <span class="id"><a href="compcert.cfrontend.Cop.html">Cop</a></span>.<br/>
+<br/>
+<h2> Expressions </h2>
+<br/>
+<div class="doc">Compcert C expressions are almost identical to those of C.
+  The only omission is string literals.  Some operators are treated
+  as derived forms: array indexing, pre-increment, pre-decrement, and
+  the <span class="bracket">&amp;&amp;</span> and <span class="bracket">||</span> operators.  All expressions are annotated with
+  their types. </div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="expr" class="id"><a name="expr" class="">expr</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="vernacular">Eval</span> (<span id="v:5" class="id"><a name="v:5" class="">v:</a></span> <span class="id"><a href="compcert.common.Values.html#val">val</a></span>) (<span id="ty:6" class="id"><a name="ty:6" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)                                  <span class="docright">(* constant  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Evar" class="id"><a name="Evar" class="">Evar</a></span> (<span id="x:7" class="id"><a name="x:7" class="">x:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="ty:8" class="id"><a name="ty:8" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)                                <span class="docright">(* variable  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Efield" class="id"><a name="Efield" class="">Efield</a></span> (<span id="l:9" class="id"><a name="l:9" class="">l:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="f:10" class="id"><a name="f:10" class="">f:</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="ty:11" class="id"><a name="ty:11" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+<div class="doc r"> access to a member of a struct or union </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Evalof" class="id"><a name="Evalof" class="">Evalof</a></span> (<span id="l:12" class="id"><a name="l:12" class="">l:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:13" class="id"><a name="ty:13" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)              <span class="docright">(* l-value used as a r-value  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Ederef" class="id"><a name="Ederef" class="">Ederef</a></span> (<span id="r:14" class="id"><a name="r:14" class="">r:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:15" class="id"><a name="ty:15" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)        <span class="docright">(* pointer dereference (unary <span class="bracket">*</span>)  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eaddrof" class="id"><a name="Eaddrof" class="">Eaddrof</a></span> (<span id="l:16" class="id"><a name="l:16" class="">l:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:17" class="id"><a name="ty:17" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)            <span class="docright">(* address-of operators (<span class="bracket">&amp;</span>)  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eunop" class="id"><a name="Eunop" class="">Eunop</a></span> (<span id="op:18" class="id"><a name="op:18" class="">op:</a></span> <span class="id"><a href="compcert.cfrontend.Cop.html#unary_operation">unary_operation</a></span>) (<span id="r:19" class="id"><a name="r:19" class="">r:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:20" class="id"><a name="ty:20" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+<div class="doc r"> unary arithmetic operation </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Ebinop" class="id"><a name="Ebinop" class="">Ebinop</a></span> (<span id="op:21" class="id"><a name="op:21" class="">op:</a></span> <span class="id"><a href="compcert.cfrontend.Cop.html#binary_operation">binary_operation</a></span>) (<span id="r1:22" class="id"><a name="r1:22" class="">r1</a></span> <span id="r2:23" class="id"><a name="r2:23" class="">r2:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:24" class="id"><a name="ty:24" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+<div class="doc r"> binary arithmetic operation </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Ecast" class="id"><a name="Ecast" class="">Ecast</a></span> (<span id="r:25" class="id"><a name="r:25" class="">r:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:26" class="id"><a name="ty:26" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)                        <span class="docright">(* type cast <span class="bracket">(<span class="id">ty</span>)<span class="id">r</span></span>  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eseqand" class="id"><a name="Eseqand" class="">Eseqand</a></span> (<span id="r1:27" class="id"><a name="r1:27" class="">r1</a></span> <span id="r2:28" class="id"><a name="r2:28" class="">r2:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:29" class="id"><a name="ty:29" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)       <span class="docright">(* sequential "and" <span class="bracket"><span class="id">r1</span> &amp;&amp; <span class="id">r2</span></span>  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eseqor" class="id"><a name="Eseqor" class="">Eseqor</a></span> (<span id="r1:30" class="id"><a name="r1:30" class="">r1</a></span> <span id="r2:31" class="id"><a name="r2:31" class="">r2:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:32" class="id"><a name="ty:32" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)        <span class="docright">(* sequential "or" <span class="bracket"><span class="id">r1</span> || <span class="id">r2</span></span>  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Econdition" class="id"><a name="Econdition" class="">Econdition</a></span> (<span id="r1:33" class="id"><a name="r1:33" class="">r1</a></span> <span id="r2:34" class="id"><a name="r2:34" class="">r2</a></span> <span id="r3:35" class="id"><a name="r3:35" class="">r3:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:36" class="id"><a name="ty:36" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)  <span class="docright">(* conditional <span class="bracket"><span class="id">r1</span> ? <span class="id">r2</span> : <span class="id">r3</span></span>  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Esizeof" class="id"><a name="Esizeof" class="">Esizeof</a></span> (<span id="ty':37" class="id"><a name="ty':37" class="">ty':</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) (<span id="ty:38" class="id"><a name="ty:38" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)                      <span class="docright">(* size of a type  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Ealignof" class="id"><a name="Ealignof" class="">Ealignof</a></span> (<span id="ty':39" class="id"><a name="ty':39" class="">ty':</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) (<span id="ty:40" class="id"><a name="ty:40" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)        <span class="docright">(* natural alignment of a type  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eassign" class="id"><a name="Eassign" class="">Eassign</a></span> (<span id="l:41" class="id"><a name="l:41" class="">l:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="r:42" class="id"><a name="r:42" class="">r:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:43" class="id"><a name="ty:43" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)          <span class="docright">(* assignment <span class="bracket"><span class="id">l</span> = <span class="id">r</span></span>  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eassignop" class="id"><a name="Eassignop" class="">Eassignop</a></span> (<span id="op:44" class="id"><a name="op:44" class="">op:</a></span> <span class="id"><a href="compcert.cfrontend.Cop.html#binary_operation">binary_operation</a></span>) (<span id="l:45" class="id"><a name="l:45" class="">l:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="r:46" class="id"><a name="r:46" class="">r:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="tyres:47" class="id"><a name="tyres:47" class="">tyres</a></span> <span id="ty:48" class="id"><a name="ty:48" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+<div class="doc r"> assignment with arithmetic [l op= r] </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Epostincr" class="id"><a name="Epostincr" class="">Epostincr</a></span> (<span id="id:49" class="id"><a name="id:49" class="">id:</a></span> <span class="id"><a href="compcert.cfrontend.Cop.html#incr_or_decr">incr_or_decr</a></span>) (<span id="l:50" class="id"><a name="l:50" class="">l:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:51" class="id"><a name="ty:51" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+<div class="doc r"> post-increment [l++] and post-decrement [l--] </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Ecomma" class="id"><a name="Ecomma" class="">Ecomma</a></span> (<span id="r1:52" class="id"><a name="r1:52" class="">r1</a></span> <span id="r2:53" class="id"><a name="r2:53" class="">r2:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="ty:54" class="id"><a name="ty:54" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)       <span class="docright">(* sequence expression <span class="bracket"><span class="id">r1</span>, <span class="id">r2</span></span>  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Ecall" class="id"><a name="Ecall" class="">Ecall</a></span> (<span id="r1:55" class="id"><a name="r1:55" class="">r1:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="rargs:56" class="id"><a name="rargs:56" class="">rargs:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#exprlist:2">exprlist</a></span>) (<span id="ty:57" class="id"><a name="ty:57" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+<div class="doc r"> function call [r1(rargs)] </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Ebuiltin" class="id"><a name="Ebuiltin" class="">Ebuiltin</a></span> (<span id="ef:58" class="id"><a name="ef:58" class="">ef:</a></span> <span class="id"><a href="compcert.common.AST.html#external_function">external_function</a></span>) (<span id="tyargs:59" class="id"><a name="tyargs:59" class="">tyargs:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#typelist">typelist</a></span>) (<span id="rargs:60" class="id"><a name="rargs:60" class="">rargs:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#exprlist:2">exprlist</a></span>) (<span id="ty:61" class="id"><a name="ty:61" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+<div class="doc r"> builtin function call </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eloc" class="id"><a name="Eloc" class="">Eloc</a></span> (<span id="b:62" class="id"><a name="b:62" class="">b:</a></span> <span class="id"><a href="compcert.common.Values.html#block">block</a></span>) (<span id="ofs:63" class="id"><a name="ofs:63" class="">ofs:</a></span> <span class="id"><a href="compcert.lib.Integers.html#ptrofs">ptrofs</a></span>) (<span id="bf:64" class="id"><a name="bf:64" class="">bf:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#bitfield">bitfield</a></span>) (<span id="ty:65" class="id"><a name="ty:65" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<br/>
+<div class="doc r"> memory location, result of evaluating a l-value </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Eparen" class="id"><a name="Eparen" class="">Eparen</a></span> (<span id="r:66" class="id"><a name="r:66" class="">r:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="tycast:67" class="id"><a name="tycast:67" class="">tycast:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) (<span id="ty:68" class="id"><a name="ty:68" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)   <span class="docright">(* marked subexpression  *)</span><br/>
+<br/>
+<span class="gallina-kwd">with</span> <span id="exprlist" class="id"><a name="exprlist" class="">exprlist</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Enil" class="id"><a name="Enil" class="">Enil</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Econs" class="id"><a name="Econs" class="">Econs</a></span> (<span id="r1:69" class="id"><a name="r1:69" class="">r1:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr:1">expr</a></span>) (<span id="rl:70" class="id"><a name="rl:70" class="">rl:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#exprlist:2">exprlist</a></span>).<br/>
+<br/>
+<div class="doc">Expressions are implicitly classified into l-values and r-values,
+ranged over by <span class="bracket"><span class="id">l</span></span> and <span class="bracket"><span class="id">r</span></span>, respectively, in the grammar above.
+L-values are those expressions that can occur to the left of an assignment.
+They denote memory locations.  (Indeed, the reduction semantics for
+expression reduces them to <span class="bracket"><span class="id">Eloc</span> <span class="id">b</span> <span class="id">ofs</span></span> expressions.)  L-values are
+variables (<span class="bracket"><span class="id">Evar</span></span>), pointer dereferences (<span class="bracket"><span class="id">Ederef</span></span>), field accesses (<span class="bracket"><span class="id">Efield</span></span>).
+R-values are all other expressions.  They denote values, and the reduction
+semantics reduces them to <span class="bracket"><span class="vernacular">Eval</span> <span class="id">v</span></span> expressions.
+A l-value can be used in a r-value context, but this use must be marked
+explicitly with the <span class="bracket"><span class="id">Evalof</span></span> operator, which is not materialized in the
+concrete syntax of C but denotes a read from the location corresponding to
+the l-value <span class="bracket"><span class="id">l</span></span> argument of <span class="bracket"><span class="id">Evalof</span> <span class="id">l</span></span>.
+The grammar above contains some forms that cannot appear in source terms
+but appear during reduction.  These forms are:
+<ul>
+<li>
+ <span class="bracket"><span class="vernacular">Eval</span> <span class="id">v</span></span> where <span class="bracket"><span class="id">v</span></span> is a pointer or <span class="bracket"><span class="id">Vundef</span></span>.  (<span class="bracket"><span class="vernacular">Eval</span></span> of an integer or
+  float value can occur in a source term and represents a numeric literal.)
+</li>
+<li>
+ <span class="bracket"><span class="id">Eloc</span> <span class="id">b</span> <span class="id">ofs</span></span>, which appears during reduction of l-values.
+</li>
+<li>
+ <span class="bracket"><span class="id">Eparen</span> <span class="id">r</span> <span class="id">tycast</span> <span class="id">ty</span></span>, which appears during reduction of conditionals
+  <span class="bracket"><span class="id">r1</span> ? <span class="id">r2</span> : <span class="id">r3</span></span> as well as sequential `and' / `or'.
+</li>
+</ul>
+Some C expressions are derived forms.  Array access <span class="bracket"><span class="id">r1</span>[<span class="id">r2</span>]</span> is expressed
+as <span class="bracket">*(<span class="id">r1</span> + <span class="id">r2</span>)</span>.
+</div>
+<br/>
+<span class="vernacular">Definition</span> <span id="Eindex" class="id"><a name="Eindex" class="">Eindex</a></span> (<span id="r1:71" class="id"><a name="r1:71" class="">r1</a></span> <span id="r2:72" class="id"><a name="r2:72" class="">r2:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span>) (<span id="ty:73" class="id"><a name="ty:73" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Csyntax.html#Ederef">Ederef</a></span> (<span class="id"><a href="compcert.cfrontend.Csyntax.html#Ebinop">Ebinop</a></span> <span class="id"><a href="compcert.cfrontend.Cop.html#Oadd">Oadd</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#r1:71">r1</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#r2:72">r2</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tpointer">Tpointer</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#ty:73">ty</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#noattr">noattr</a></span>)) <span class="id"><a href="compcert.cfrontend.Csyntax.html#ty:73">ty</a></span>.<br/>
+<br/>
+<div class="doc">Pre-increment <span class="bracket">++<span class="id">l</span></span> and pre-decrement <span class="bracket">--<span class="id">l</span></span> are expressed as
+    <span class="bracket"><span class="id">l</span> += 1</span> and <span class="bracket"><span class="id">l</span> -= 1</span>, respectively. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="Epreincr" class="id"><a name="Epreincr" class="">Epreincr</a></span> (<span id="id:74" class="id"><a name="id:74" class="">id:</a></span> <span class="id"><a href="compcert.cfrontend.Cop.html#incr_or_decr">incr_or_decr</a></span>) (<span id="l:75" class="id"><a name="l:75" class="">l:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span>) (<span id="ty:76" class="id"><a name="ty:76" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Csyntax.html#Eassignop">Eassignop</a></span> (<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#id:74">id</a></span> <span class="gallina-kwd">with</span> <span class="id"><a href="compcert.cfrontend.Cop.html#Incr">Incr</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Cop.html#Oadd">Oadd</a></span> <span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Cop.html#Decr">Decr</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Cop.html#Osub">Osub</a></span> <span class="gallina-kwd">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Csyntax.html#l:75">l</a></span> (<span class="vernacular">Eval</span> (<span class="id"><a href="compcert.common.Values.html#Vint">Vint</a></span> <span class="id"><a href="compcert.lib.Integers.html#Int.one">Int.one</a></span>) <span class="id"><a href="compcert.cfrontend.Ctypes.html#type_int32s">type_int32s</a></span>) (<span class="id"><a href="compcert.cfrontend.Ctypes.html#typeconv">typeconv</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#ty:76">ty</a></span>) <span class="id"><a href="compcert.cfrontend.Csyntax.html#ty:76">ty</a></span>.<br/>
+<br/>
+<div class="doc">Selection is a conditional expression that always evaluates both arms
+  and can be implemented by "conditional move" instructions.
+  It is expressed as an invocation of a builtin function. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="Eselection" class="id"><a name="Eselection" class="">Eselection</a></span> (<span id="r1:78" class="id"><a name="r1:78" class="">r1</a></span> <span id="r2:79" class="id"><a name="r2:79" class="">r2</a></span> <span id="r3:80" class="id"><a name="r3:80" class="">r3:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span>) (<span id="ty:81" class="id"><a name="ty:81" class="">ty:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="t:82" class="id"><a name="t:82" class="">t</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#typ_of_type">typ_of_type</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#ty:81">ty</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="sg:83" class="id"><a name="sg:83" class="">sg</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.common.AST.html#mksignature">mksignature</a></span> (<span class="id"><a href="compcert.common.AST.html#Tint">AST.Tint</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#t:82">t</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#t:82">t</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) <span class="id"><a href="compcert.cfrontend.Csyntax.html#t:82">t</a></span> <span class="id"><a href="compcert.common.AST.html#cc_default">cc_default</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Csyntax.html#Ebuiltin">Ebuiltin</a></span> (<span class="id"><a href="compcert.common.AST.html#EF_builtin">EF_builtin</a></span> <span class="id">&quot;__builtin_sel&quot;</span>%<span class="id">string</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#sg:83">sg</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tcons">Tcons</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type_bool">type_bool</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tcons">Tcons</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#ty:81">ty</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tcons">Tcons</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#ty:81">ty</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#Tnil">Tnil</a></span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.cfrontend.Csyntax.html#Econs">Econs</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#r1:78">r1</a></span> (<span class="id"><a href="compcert.cfrontend.Csyntax.html#Econs">Econs</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#r2:79">r2</a></span> (<span class="id"><a href="compcert.cfrontend.Csyntax.html#Econs">Econs</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#r3:80">r3</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Enil">Enil</a></span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Csyntax.html#ty:81">ty</a></span>.<br/>
+<br/>
+<div class="doc">Extract the type part of a type-annotated expression. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="typeof" class="id"><a name="typeof" class="">typeof</a></span> (<span id="a:84" class="id"><a name="a:84" class="">a:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#a:84">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Eloc">Eloc</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Evar">Evar</a></span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Ederef">Ederef</a></span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Efield">Efield</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="vernacular">Eval</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Evalof">Evalof</a></span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Eaddrof">Eaddrof</a></span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Eunop">Eunop</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Ebinop">Ebinop</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Ecast">Ecast</a></span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Econdition">Econdition</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Eseqand">Eseqand</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Eseqor">Eseqor</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Esizeof">Esizeof</a></span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Ealignof">Ealignof</a></span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Eassign">Eassign</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Eassignop">Eassignop</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Epostincr">Epostincr</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Ecomma">Ecomma</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Ecall">Ecall</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Ebuiltin">Ebuiltin</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#Eparen">Eparen</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">ty</span> <span class="id">=&gt;</span> <span class="id">ty</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<h2> Statements </h2>
+<br/>
+<div class="doc">Compcert C statements are very much like those of C and include:
+<ul>
+<li>
+ empty statement <span class="bracket"><span class="id">Sskip</span></span>
+</li>
+<li>
+ evaluation of an expression for its side-effects <span class="bracket"><span class="id">Sdo</span> <span class="id">r</span></span>
+</li>
+<li>
+ conditional <span class="bracket"><span class="gallina-kwd">if</span> (...) { ... } <span class="gallina-kwd">else</span> { ... }</span>
+</li>
+<li>
+ the three loops <span class="bracket"><span class="id">while</span>(...) { ... }</span> and <span class="bracket"><span class="id">do</span> { ... } <span class="id">while</span> (...)</span>
+  and <span class="bracket"><span class="gallina-kwd">for</span>(..., ..., ...) { ... }</span>
+</li>
+<li>
+ the <span class="bracket"><span class="id">switch</span></span> construct
+</li>
+<li>
+ <span class="bracket"><span class="id">break</span></span>, <span class="bracket"><span class="id">continue</span></span>, <span class="bracket"><span class="gallina-kwd">return</span></span> (with and without argument)
+</li>
+<li>
+ <span class="bracket"><span class="id">goto</span></span> and labeled statements.
+</li>
+</ul>
+Only structured forms of <span class="bracket"><span class="id">switch</span></span> are supported; moreover,
+the <span class="bracket"><span class="id">default</span></span> case must occur last.  Blocks and block-scoped declarations
+are not supported. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="label" class="id"><a name="label" class="">label</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>.<br/>
+<br/>
+<span class="vernacular">Inductive</span> <span id="statement" class="id"><a name="statement" class="">statement</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sskip" class="id"><a name="Sskip" class="">Sskip</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span>                   <span class="docright">(* do nothing  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sdo" class="id"><a name="Sdo" class="">Sdo</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span>            <span class="docright">(* evaluate expression for side effects  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Ssequence" class="id"><a name="Ssequence" class="">Ssequence</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span>  <span class="docright">(* sequence  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sifthenelse" class="id"><a name="Sifthenelse" class="">Sifthenelse</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span>  <span class="id">-&gt;</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="docright">(* conditional  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Swhile" class="id"><a name="Swhile" class="">Swhile</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span>   <span class="docright">(* <span class="bracket"><span class="id">while</span></span> loop  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sdowhile" class="id"><a name="Sdowhile" class="">Sdowhile</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="docright">(* <span class="bracket"><span class="id">do</span></span> loop  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sfor" class="id"><a name="Sfor" class="">Sfor:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="docright">(* <span class="bracket"><span class="gallina-kwd">for</span></span> loop  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sbreak" class="id"><a name="Sbreak" class="">Sbreak</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span>                      <span class="docright">(* <span class="bracket"><span class="id">break</span></span> statement  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Scontinue" class="id"><a name="Scontinue" class="">Scontinue</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span>                   <span class="docright">(* <span class="bracket"><span class="id">continue</span></span> statement  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sreturn" class="id"><a name="Sreturn" class="">Sreturn</a></span> <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span>     <span class="docright">(* <span class="bracket"><span class="gallina-kwd">return</span></span> statement  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sswitch" class="id"><a name="Sswitch" class="">Sswitch</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#expr">expr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#labeled_statements:87">labeled_statements</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span>  <span class="docright">(* <span class="bracket"><span class="id">switch</span></span> statement  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Slabel" class="id"><a name="Slabel" class="">Slabel</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#label">label</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Sgoto" class="id"><a name="Sgoto" class="">Sgoto</a></span> <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#label">label</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span><br/>
+<br/>
+<span class="gallina-kwd">with</span> <span id="labeled_statements" class="id"><a name="labeled_statements" class="">labeled_statements</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span>            <span class="docright">(* cases of a <span class="bracket"><span class="id">switch</span></span>  *)</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="LSnil" class="id"><a name="LSnil" class="">LSnil:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#labeled_statements:87">labeled_statements</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="LScons" class="id"><a name="LScons" class="">LScons:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Numbers.BinNums.html#Z">Z</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement:86">statement</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#labeled_statements:87">labeled_statements</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#labeled_statements:87">labeled_statements</a></span>.<br/>
+<div class="doc r"> [None] is [default], [Some x] is [case x] </div>
+<h2> Functions </h2>
+<br/>
+<div class="doc">A function definition is composed of its return type (<span class="bracket"><span class="id">fn_return</span></span>),
+  the names and types of its parameters (<span class="bracket"><span class="id">fn_params</span></span>), the names
+  and types of its local variables (<span class="bracket"><span class="id">fn_vars</span></span>), and the body of the
+  function (a statement, <span class="bracket"><span class="id">fn_body</span></span>). </div>
+<br/>
+<span class="vernacular">Record</span> <span id="function" class="id"><a name="function" class="">function</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span> <span class="id">mkfunction</span> <span class="id">{</span><br/>
+&nbsp;&nbsp;<span id="fn_return" class="id"><a name="fn_return" class="">fn_return:</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type;</a></span><br/>
+&nbsp;&nbsp;<span id="fn_callconv" class="id"><a name="fn_callconv" class="">fn_callconv:</a></span> <span class="id"><a href="compcert.common.AST.html#calling_convention">calling_convention;</a></span><br/>
+&nbsp;&nbsp;<span id="fn_params" class="id"><a name="fn_params" class="">fn_params:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;<span id="fn_vars" class="id"><a name="fn_vars" class="">fn_vars:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;<span id="fn_body" class="id"><a name="fn_body" class="">fn_body:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#statement">statement</a></span><br/>
+<span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="var_names" class="id"><a name="var_names" class="">var_names</a></span> (<span id="vars:96" class="id"><a name="vars:96" class="">vars:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span>(<span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>)) <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span> (@<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span>) <span class="id"><a href="compcert.cfrontend.Csyntax.html#vars:96">vars</a></span>.<br/>
+<br/>
+<div class="doc">Functions can either be defined (<span class="bracket"><span class="id">Internal</span></span>) or declared as
+  external functions (<span class="bracket"><span class="id">External</span></span>). </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="fundef" class="id"><a name="fundef" class="">fundef</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#fundef">Ctypes.fundef</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#function">function</a></span>.<br/>
+<br/>
+<div class="doc">The type of a function definition. </div>
+<br/>
+<span class="vernacular">Definition</span> <span id="type_of_function" class="id"><a name="type_of_function" class="">type_of_function</a></span> (<span id="f:97" class="id"><a name="f:97" class="">f:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#function">function</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.cfrontend.Ctypes.html#Tfunction">Tfunction</a></span> (<span class="id"><a href="compcert.cfrontend.Ctypes.html#type_of_params">type_of_params</a></span> (<span class="id"><a href="compcert.cfrontend.Csyntax.html#fn_params">fn_params</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#f:97">f</a></span>)) (<span class="id"><a href="compcert.cfrontend.Csyntax.html#fn_return">fn_return</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#f:97">f</a></span>) (<span class="id"><a href="compcert.cfrontend.Csyntax.html#fn_callconv">fn_callconv</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#f:97">f</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="type_of_fundef" class="id"><a name="type_of_fundef" class="">type_of_fundef</a></span> (<span id="f:98" class="id"><a name="f:98" class="">f:</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#fundef">fundef</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#type">type</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#f:98">f</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#Internal">Internal</a></span> <span class="id">fd</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#type_of_function">type_of_function</a></span> <span class="id">fd</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#External">External</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">args</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id">cc</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#Tfunction">Tfunction</a></span> <span class="id">args</span> <span class="id">res</span> <span class="id">cc</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<h2> Programs and compilation units </h2>
+<br/>
+<div class="doc">As defined in module <span class="bracket"><span class="id">Ctypes</span></span>, a program, or compilation unit, is
+  composed of:
+<ul>
+<li>
+ a list of definitions of functions and global variables;
+</li>
+<li>
+ the names of functions and global variables that are public (not static);
+</li>
+<li>
+ the name of the function that acts as entry point ("main" function).
+</li>
+<li>
+ a list of definitions for structure and union names
+</li>
+<li>
+ the corresponding composite environment
+</li>
+<li>
+ a proof that this environment is consistent with the definitions. </li>
+</ul>
+</div>
+<br/>
+<span class="vernacular">Definition</span> <span id="program" class="id"><a name="program" class="">program</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.cfrontend.Ctypes.html#program">Ctypes.program</a></span> <span class="id"><a href="compcert.cfrontend.Csyntax.html#function">function</a></span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

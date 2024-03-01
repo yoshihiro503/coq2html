@@ -1,0 +1,499 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Deadcode</title>
+<meta name="description" content="Documentation of Coq module Deadcode" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Deadcode</h1>
+<br/>
+<div class="doc">Elimination of unneeded computations over RTL. </div>
+<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.lib.Coqlib.html">Coqlib</a></span> <span class="id"><a href="compcert.lib.Maps.html">Maps</a></span> <span class="id"><a href="compcert.common.Errors.html">Errors</a></span> <span class="id"><a href="compcert.lib.Integers.html">Integers</a></span> <span class="id"><a href="compcert.lib.Floats.html">Floats</a></span> <span class="id"><a href="compcert.lib.Lattice.html">Lattice</a></span> <span class="id"><a href="compcert.backend.Kildall.html">Kildall</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.common.AST.html">AST</a></span> <span class="id"><a href="compcert.common.Linking.html">Linking</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.common.Memory.html">Memory</a></span> <span class="id"><a href="compcert.backend.Registers.html">Registers</a></span> <span class="id"><a href="compcert.x86.Op.html">Op</a></span> <span class="id"><a href="compcert.backend.RTL.html">RTL</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="compcert.backend.ValueDomain.html">ValueDomain</a></span> <span class="id"><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html">NeedDomain</a></span> <span class="id"><a href="compcert.x86.NeedOp.html">NeedOp</a></span>.<br/>
+<br/>
+<h1> Part 1: the static analysis </h1>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_need_all" class="id"><a name="add_need_all" class="">add_need_all</a></span> (<span id="r:1" class="id"><a name="r:1" class="">r:</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>) (<span id="ne:2" class="id"><a name="ne:2" class="">ne:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.NeedDomain.html#NE.set">NE.set</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#r:1">r</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#All">All</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:2">ne</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_need" class="id"><a name="add_need" class="">add_need</a></span> (<span id="r:3" class="id"><a name="r:3" class="">r:</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>) (<span id="nv:4" class="id"><a name="nv:4" class="">nv:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nval">nval</a></span>) (<span id="ne:5" class="id"><a name="ne:5" class="">ne:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.NeedDomain.html#NE.set">NE.set</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#r:3">r</a></span> (<span class="id"><a href="compcert.backend.NeedDomain.html#nlub">nlub</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nv:4">nv</a></span> (<span class="id"><a href="compcert.backend.NeedDomain.html#NE.get">NE.get</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#r:3">r</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:5">ne</a></span>)) <span class="id"><a href="compcert.backend.Deadcode.html#ne:5">ne</a></span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="add_needs_all" class="id"><a name="add_needs_all" class="">add_needs_all</a></span> (<span id="rl:6" class="id"><a name="rl:6" class="">rl:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>) (<span id="ne:7" class="id"><a name="ne:7" class="">ne:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#rl:6">rl</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:7">ne</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">r1</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">rs</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#add_need_all">add_need_all</a></span> <span class="id">r1</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_needs_all:8">add_needs_all</a></span> <span class="id">rs</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:7">ne</a></span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="add_needs" class="id"><a name="add_needs" class="">add_needs</a></span> (<span id="rl:10" class="id"><a name="rl:10" class="">rl:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>) (<span id="nvl:11" class="id"><a name="nvl:11" class="">nvl:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nval">nval</a></span>) (<span id="ne:12" class="id"><a name="ne:12" class="">ne:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#rl:10">rl,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nvl:11">nvl</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil,</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:12">ne</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">r1</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">rs,</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#add_needs_all">add_needs_all</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#rl:10">rl</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:12">ne</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">r1</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">rs,</span> <span class="id">nv1</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">nvs</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#add_need">add_need</a></span> <span class="id">r1</span> <span class="id">nv1</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_needs:13">add_needs</a></span> <span class="id">rs</span> <span class="id">nvs</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:12">ne</a></span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_ros_need_all" class="id"><a name="add_ros_need_all" class="">add_ros_need_all</a></span> (<span id="ros:16" class="id"><a name="ros:16" class="">ros:</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#e03f39daf98516fa530d3f6f5a1b4d92">+</a></span> <span class="id"><a href="compcert.common.AST.html#ident">ident</a></span>) (<span id="ne:17" class="id"><a name="ne:17" class="">ne:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#ros:16">ros</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#inl">inl</a></span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#add_need_all">add_need_all</a></span> <span class="id">r</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:17">ne</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#inr">inr</a></span> <span class="id">s</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:17">ne</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="add_opt_need_all" class="id"><a name="add_opt_need_all" class="">add_opt_need_all</a></span> (<span id="or:19" class="id"><a name="or:19" class="">or:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>) (<span id="ne:20" class="id"><a name="ne:20" class="">ne:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#or:19">or</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#add_need_all">add_need_all</a></span> <span class="id">r</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:20">ne</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:20">ne</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="kill" class="id"><a name="kill" class="">kill</a></span> (<span id="r:22" class="id"><a name="r:22" class="">r:</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>) (<span id="ne:23" class="id"><a name="ne:23" class="">ne:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nenv">nenv</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.NeedDomain.html#NE.set">NE.set</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#r:22">r</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#Nothing">Nothing</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:23">ne</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="is_dead" class="id"><a name="is_dead" class="">is_dead</a></span> (<span id="v:24" class="id"><a name="v:24" class="">v:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nval">nval</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#v:24">v</a></span> <span class="gallina-kwd">with</span> <span class="id"><a href="compcert.backend.NeedDomain.html#Nothing">Nothing</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#true">true</a></span> <span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span> <span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="is_int_zero" class="id"><a name="is_int_zero" class="">is_int_zero</a></span> (<span id="v:26" class="id"><a name="v:26" class="">v:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nval">nval</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#v:26">v</a></span> <span class="gallina-kwd">with</span> <span class="id"><a href="compcert.backend.NeedDomain.html#I">I</a></span> <span class="id">n</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.lib.Integers.html#Int.eq">Int.eq</a></span> <span class="id">n</span> <span class="id"><a href="compcert.lib.Integers.html#Int.zero">Int.zero</a></span> <span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#false">false</a></span> <span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Fixpoint</span> <span id="transfer_builtin_arg" class="id"><a name="transfer_builtin_arg" class="">transfer_builtin_arg</a></span> (<span id="nv:28" class="id"><a name="nv:28" class="">nv:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nval">nval</a></span>) (<span id="na:29" class="id"><a name="na:29" class="">na:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span>) (<span id="a:30" class="id"><a name="a:30" class="">a:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="ne:32" class="id"><a name="ne:32" class="">ne,</a></span> <span id="nm:33" class="id"><a name="nm:33" class="">nm</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.backend.Deadcode.html#na:29">na</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#a:30">a</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA">BA</a></span> <span class="id">r</span> <span class="id">=&gt;</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_need">add_need</a></span> <span class="id">r</span> <span class="id"><a href="compcert.backend.Deadcode.html#nv:28">nv</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:32">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:33">nm</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_int">BA_int</a></span> <span class="id">_</span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_long">BA_long</a></span> <span class="id">_</span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_float">BA_float</a></span> <span class="id">_</span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_single">BA_single</a></span> <span class="id">_</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addrstack">BA_addrstack</a></span> <span class="id">_</span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addrglobal">BA_addrglobal</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> (<span class="id"><a href="compcert.backend.Deadcode.html#ne:32">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:33">nm</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_loadstack">BA_loadstack</a></span> <span class="id">chunk</span> <span class="id">ofs</span> <span class="id">=&gt;</span> (<span class="id"><a href="compcert.backend.Deadcode.html#ne:32">ne,</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_add">nmem_add</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:33">nm</a></span> (<span class="id"><a href="compcert.backend.ValueDomain.html#Stk">Stk</a></span> <span class="id">ofs</span>) (<span class="id"><a href="compcert.common.Memdata.html#size_chunk">size_chunk</a></span> <span class="id">chunk</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_loadglobal">BA_loadglobal</a></span> <span class="id">chunk</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#id">id</a></span> <span class="id">ofs</span> <span class="id">=&gt;</span> (<span class="id"><a href="compcert.backend.Deadcode.html#ne:32">ne,</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_add">nmem_add</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:33">nm</a></span> (<span class="id"><a href="compcert.backend.ValueDomain.html#Gl">Gl</a></span> <span class="id">id</span> <span class="id">ofs</span>) (<span class="id"><a href="compcert.common.Memdata.html#size_chunk">size_chunk</a></span> <span class="id">chunk</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_splitlong">BA_splitlong</a></span> <span class="id">hi</span> <span class="id">lo</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_arg:31">transfer_builtin_arg</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#All">All</a></span> (<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_arg:31">transfer_builtin_arg</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#All">All</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#na:29">na</a></span> <span class="id">hi</span>) <span class="id">lo</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BA_addptr">BA_addptr</a></span> <span class="id">hi</span> <span class="id">lo</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_arg:31">transfer_builtin_arg</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#All">All</a></span> (<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_arg:31">transfer_builtin_arg</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#All">All</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#na:29">na</a></span> <span class="id">hi</span>) <span class="id">lo</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transfer_builtin_args" class="id"><a name="transfer_builtin_args" class="">transfer_builtin_args</a></span> (<span id="na:35" class="id"><a name="na:35" class="">na:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span>) (<span id="al:36" class="id"><a name="al:36" class="">al:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>)) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#fold_left">List.fold_left</a></span> (<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_arg">transfer_builtin_arg</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#All">All</a></span>) <span class="id"><a href="compcert.backend.Deadcode.html#al:36">al</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#na:35">na</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="kill_builtin_res" class="id"><a name="kill_builtin_res" class="">kill_builtin_res</a></span> (<span id="res:37" class="id"><a name="res:37" class="">res:</a></span> <span class="id"><a href="compcert.common.AST.html#builtin_res">builtin_res</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>) (<span id="ne:38" class="id"><a name="ne:38" class="">ne:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#NE.t">NE.t</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#NE.t">NE.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#res:37">res</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#BR">BR</a></span> <span class="id">r</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#kill">kill</a></span> <span class="id">r</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:38">ne</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span>    <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:38">ne</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Function</span> <span class="id">transfer_builtin</span> (<span id="app:70" class="id"><span id="app:62" class="id"><span id="app:55" class="id"><span id="app:49" class="id"><span id="app:40" class="id"><a name="app:70" class="">app:</a></span></span></span></span></span> <span class="id"><a href="compcert.backend.ValueDomain.html#VA.t">VA.t</a></span>) (<span id="ef:71" class="id"><span id="ef:63" class="id"><span id="ef:56" class="id"><span id="ef:50" class="id"><span id="ef:41" class="id"><a name="ef:71" class="">ef:</a></span></span></span></span></span> <span class="id"><a href="compcert.common.AST.html#external_function">external_function</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="args:72" class="id"><span id="args:64" class="id"><span id="args:57" class="id"><span id="args:51" class="id"><span id="args:42" class="id"><a name="args:72" class="">args:</a></span></span></span></span></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="compcert.common.AST.html#builtin_arg">builtin_arg</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>)) (<span id="res:73" class="id"><span id="res:65" class="id"><span id="res:58" class="id"><span id="res:52" class="id"><span id="res:43" class="id"><a name="res:73" class="">res:</a></span></span></span></span></span> <span class="id"><a href="compcert.common.AST.html#builtin_res">builtin_res</a></span> <span class="id"><a href="compcert.backend.Registers.html#reg">reg</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="ne:74" class="id"><span id="ne:66" class="id"><span id="ne:59" class="id"><span id="ne:53" class="id"><span id="ne:44" class="id"><a name="ne:74" class="">ne:</a></span></span></span></span></span> <span class="id"><a href="compcert.backend.NeedDomain.html#NE.t">NE.t</a></span>) (<span id="nm:75" class="id"><span id="nm:67" class="id"><span id="nm:60" class="id"><span id="nm:54" class="id"><span id="nm:45" class="id"><a name="nm:75" class="">nm:</a></span></span></span></span></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem">nmem</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#ef:41">ef,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#args:42">args</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_vload">EF_vload</a></span> <span class="id">chunk,</span> <span class="id">a1::nil</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_arg">transfer_builtin_arg</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#All">All</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#kill_builtin_res">kill_builtin_res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#res:43">res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:44">ne,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.NeedDomain.html#nmem_add">nmem_add</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:45">nm</a></span> (<span class="id"><a href="compcert.backend.ValueAnalysis.html#aaddr_arg">aaddr_arg</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#app:40">app</a></span> <span class="id">a1</span>) (<span class="id"><a href="compcert.common.Memdata.html#size_chunk">size_chunk</a></span> <span class="id">chunk</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">a1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_vstore">EF_vstore</a></span> <span class="id">chunk,</span> <span class="id">a1::a2::nil</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_arg">transfer_builtin_arg</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#All">All</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_arg">transfer_builtin_arg</a></span> (<span class="id"><a href="compcert.backend.NeedDomain.html#store_argument">store_argument</a></span> <span class="id">chunk</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#kill_builtin_res">kill_builtin_res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#res:43">res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:44">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:45">nm</a></span>) <span class="id">a2</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">a1</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_memcpy">EF_memcpy</a></span> <span class="id">sz</span> <span class="id">al,</span> <span class="id">dst::src::nil</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_contains">nmem_contains</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:45">nm</a></span> (<span class="id"><a href="compcert.backend.ValueAnalysis.html#aaddr_arg">aaddr_arg</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#app:40">app</a></span> <span class="id">dst</span>) <span class="id">sz</span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_args">transfer_builtin_args</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#kill_builtin_res">kill_builtin_res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#res:43">res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:44">ne,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.NeedDomain.html#nmem_add">nmem_add</a></span> (<span class="id"><a href="compcert.backend.NeedDomain.html#nmem_remove">nmem_remove</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:45">nm</a></span> (<span class="id"><a href="compcert.backend.ValueAnalysis.html#aaddr_arg">aaddr_arg</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#app:40">app</a></span> <span class="id">dst</span>) <span class="id">sz</span>) (<span class="id"><a href="compcert.backend.ValueAnalysis.html#aaddr_arg">aaddr_arg</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#app:40">app</a></span> <span class="id">src</span>) <span class="id">sz</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#args:42">args</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> (<span class="id"><a href="compcert.backend.Deadcode.html#ne:44">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:45">nm</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> (<span class="id"><a href="compcert.common.AST.html#EF_annot">EF_annot</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_annot_val">EF_annot_val</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>)<span class="id">,</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_args">transfer_builtin_args</a></span> (<span class="id"><a href="compcert.backend.Deadcode.html#kill_builtin_res">kill_builtin_res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#res:43">res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:44">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:45">nm</a></span>) <span class="id"><a href="compcert.backend.Deadcode.html#args:42">args</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.common.AST.html#EF_debug">EF_debug</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_,</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#kill_builtin_res">kill_builtin_res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#res:43">res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:44">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:45">nm</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_,</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin_args">transfer_builtin_args</a></span> (<span class="id"><a href="compcert.backend.Deadcode.html#kill_builtin_res">kill_builtin_res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#res:43">res</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:44">ne,</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_all">nmem_all</a></span>) <span class="id"><a href="compcert.backend.Deadcode.html#args:42">args</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transfer" class="id"><a name="transfer" class="">transfer</a></span> (<span id="f:161" class="id"><a name="f:161" class="">f:</a></span> <span class="id"><a href="compcert.backend.RTL.html#function">function</a></span>) (<span id="approx:162" class="id"><a name="approx:162" class="">approx:</a></span> <span class="id"><a href="compcert.lib.Maps.html#PMap.t">PMap.t</a></span> <span class="id"><a href="compcert.backend.ValueDomain.html#VA.t">VA.t</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="pc:163" class="id"><a name="pc:163" class="">pc:</a></span> <span class="id"><a href="compcert.backend.RTL.html#node">node</a></span>) (<span id="after:164" class="id"><a name="after:164" class="">after:</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> (<span id="ne:165" class="id"><a name="ne:165" class="">ne,</a></span> <span id="nm:166" class="id"><a name="nm:166" class="">nm</a></span>) <span class="id">:=</span> <span class="id"><a href="compcert.backend.Deadcode.html#after:164">after</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#f:161">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_code">fn_code</a></span>)<span class="id">!pc</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.NeedDomain.html#NA.bot">NA.bot</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="compcert.backend.RTL.html#Inop">Inop</a></span> <span class="id">s</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#after:164">after</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="compcert.backend.RTL.html#Iop">Iop</a></span> <span class="id">op</span> <span class="id">args</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id">s</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="nres:167" class="id"><a name="nres:167" class="">nres</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nreg">nreg</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne</a></span> <span class="id">res</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Deadcode.html#is_dead">is_dead</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nres:167">nres</a></span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.Deadcode.html#after:164">after</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Deadcode.html#is_int_zero">is_int_zero</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nres:167">nres</a></span> <span class="gallina-kwd">then</span> (<span class="id"><a href="compcert.backend.Deadcode.html#kill">kill</a></span> <span class="id">res</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_needs">add_needs</a></span> <span class="id">args</span> (<span class="id"><a href="compcert.x86.NeedOp.html#needs_of_operation">needs_of_operation</a></span> <span class="id">op</span> <span class="id"><a href="compcert.backend.Deadcode.html#nres:167">nres</a></span>) (<span class="id"><a href="compcert.backend.Deadcode.html#kill">kill</a></span> <span class="id">res</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne</a></span>)<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="compcert.backend.RTL.html#Iload">Iload</a></span> <span class="id">chunk</span> <span class="id">addr</span> <span class="id">args</span> <span class="id">dst</span> <span class="id">s</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="ndst:168" class="id"><a name="ndst:168" class="">ndst</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nreg">nreg</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne</a></span> <span class="id">dst</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Deadcode.html#is_dead">is_dead</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ndst:168">ndst</a></span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.Deadcode.html#after:164">after</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Deadcode.html#is_int_zero">is_int_zero</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ndst:168">ndst</a></span> <span class="gallina-kwd">then</span> (<span class="id"><a href="compcert.backend.Deadcode.html#kill">kill</a></span> <span class="id">dst</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_needs_all">add_needs_all</a></span> <span class="id">args</span> (<span class="id"><a href="compcert.backend.Deadcode.html#kill">kill</a></span> <span class="id">dst</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne</a></span>)<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.NeedDomain.html#nmem_add">nmem_add</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span> (<span class="id"><a href="compcert.backend.ValueAnalysis.html#aaddressing">aaddressing</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#approx:162">approx!!pc</a></span> <span class="id">addr</span> <span class="id">args</span>) (<span class="id"><a href="compcert.common.Memdata.html#size_chunk">size_chunk</a></span> <span class="id">chunk</span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="compcert.backend.RTL.html#Istore">Istore</a></span> <span class="id">chunk</span> <span class="id">addr</span> <span class="id">args</span> <span class="id">src</span> <span class="id">s</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="p:169" class="id"><a name="p:169" class="">p</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.ValueAnalysis.html#aaddressing">aaddressing</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#approx:162">approx!!pc</a></span> <span class="id">addr</span> <span class="id">args</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_contains">nmem_contains</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#p:169">p</a></span> (<span class="id"><a href="compcert.common.Memdata.html#size_chunk">size_chunk</a></span> <span class="id">chunk</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">then</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_needs_all">add_needs_all</a></span> <span class="id">args</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_need">add_need</a></span> <span class="id">src</span> (<span class="id"><a href="compcert.backend.NeedDomain.html#store_argument">store_argument</a></span> <span class="id">chunk</span>) <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne</a></span>)<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.NeedDomain.html#nmem_remove">nmem_remove</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#p:169">p</a></span> (<span class="id"><a href="compcert.common.Memdata.html#size_chunk">size_chunk</a></span> <span class="id">chunk</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.backend.Deadcode.html#after:164">after</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Icall">Icall</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#sig">sig</a></span> <span class="id">ros</span> <span class="id">args</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id">s</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#add_needs_all">add_needs_all</a></span> <span class="id">args</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_ros_need_all">add_ros_need_all</a></span> <span class="id">ros</span> (<span class="id"><a href="compcert.backend.Deadcode.html#kill">kill</a></span> <span class="id">res</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne</a></span>))<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_all">nmem_all</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Itailcall">Itailcall</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#sig">sig</a></span> <span class="id">ros</span> <span class="id">args</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#add_needs_all">add_needs_all</a></span> <span class="id">args</span> (<span class="id"><a href="compcert.backend.Deadcode.html#add_ros_need_all">add_ros_need_all</a></span> <span class="id">ros</span> <span class="id"><a href="compcert.backend.NeedDomain.html#NE.bot">NE.bot</a></span>)<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.NeedDomain.html#nmem_dead_stack">nmem_dead_stack</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#f:161">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_stacksize">fn_stacksize</a></span>))<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Ibuiltin">Ibuiltin</a></span> <span class="id">ef</span> <span class="id">args</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id">s</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#transfer_builtin">transfer_builtin</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#approx:162">approx!!pc</a></span> <span class="id">ef</span> <span class="id">args</span> <span class="id">res</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Icond">Icond</a></span> <span class="id">cond</span> <span class="id">args</span> <span class="id">s1</span> <span class="id">s2</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span> <span class="id">s1</span> <span class="id">s2</span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.Deadcode.html#after:164">after</a></span> <span class="gallina-kwd">else</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#add_needs">add_needs</a></span> <span class="id">args</span> (<span class="id"><a href="compcert.x86.NeedOp.html#needs_of_condition">needs_of_condition</a></span> <span class="id">cond</span>) <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Ijumptable">Ijumptable</a></span> <span class="id">arg</span> <span class="id">tbl</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#add_need_all">add_need_all</a></span> <span class="id">arg</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne,</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nm:166">nm</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span>(<span class="id"><a href="compcert.backend.RTL.html#Ireturn">Ireturn</a></span> <span class="id">optarg</span>) <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#add_opt_need_all">add_opt_need_all</a></span> <span class="id">optarg</span> <span class="id"><a href="compcert.backend.Deadcode.html#ne:165">ne,</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_dead_stack">nmem_dead_stack</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#f:161">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_stacksize">fn_stacksize</a></span>))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="DS" class="id"><a name="DS" class="">DS</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.Kildall.html#Backward_Dataflow_Solver">Backward_Dataflow_Solver</a></span>(<span class="id"><a href="compcert.backend.NeedDomain.html#NA">NA</a></span>)(<span class="id"><a href="compcert.backend.Kildall.html#NodeSetBackward">NodeSetBackward</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="analyze" class="id"><a name="analyze" class="">analyze</a></span> (<span id="approx:170" class="id"><a name="approx:170" class="">approx:</a></span> <span class="id"><a href="compcert.lib.Maps.html#PMap.t">PMap.t</a></span> <span class="id"><a href="compcert.backend.ValueDomain.html#VA.t">VA.t</a></span>) (<span id="f:171" class="id"><a name="f:171" class="">f:</a></span> <span class="id"><a href="compcert.backend.RTL.html#function">function</a></span>)<span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> (<span class="id"><a href="compcert.lib.Maps.html#PMap.t">PMap.t</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#fixpoint">DS.fixpoint</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#f:171">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_code">fn_code</a></span>) <span class="id"><a href="compcert.backend.RTL.html#successors_instr">successors_instr</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="compcert.backend.Deadcode.html#transfer">transfer</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#f:171">f</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#approx:170">approx</a></span>).<br/>
+<br/>
+<h1> Part 2: the code transformation </h1>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_instr" class="id"><a name="transf_instr" class="">transf_instr</a></span> (<span id="approx:172" class="id"><a name="approx:172" class="">approx:</a></span> <span class="id"><a href="compcert.lib.Maps.html#PMap.t">PMap.t</a></span> <span class="id"><a href="compcert.backend.ValueDomain.html#VA.t">VA.t</a></span>) (<span id="an:173" class="id"><a name="an:173" class="">an:</a></span> <span class="id"><a href="compcert.lib.Maps.html#PMap.t">PMap.t</a></span> <span class="id"><a href="compcert.backend.NeedDomain.html#NA.t">NA.t</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="pc:174" class="id"><a name="pc:174" class="">pc:</a></span> <span class="id"><a href="compcert.backend.RTL.html#node">node</a></span>) (<span id="instr:175" class="id"><a name="instr:175" class="">instr:</a></span> <span class="id"><a href="compcert.backend.RTL.html#instruction">instruction</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#instr:175">instr</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.RTL.html#Iop">Iop</a></span> <span class="id">op</span> <span class="id">args</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id">s</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="nres:177" class="id"><a name="nres:177" class="">nres</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nreg">nreg</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#an:173">an!!pc</a></span>) <span class="id">res</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Deadcode.html#is_dead">is_dead</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nres:177">nres</a></span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.RTL.html#Inop">Inop</a></span> <span class="id">s</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Deadcode.html#is_int_zero">is_int_zero</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#nres:177">nres</a></span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.RTL.html#Iop">Iop</a></span> (<span class="id"><a href="compcert.x86.Op.html#Ointconst">Ointconst</a></span> <span class="id"><a href="compcert.lib.Integers.html#Int.zero">Int.zero</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">res</span> <span class="id">s</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.x86.NeedOp.html#operation_is_redundant">operation_is_redundant</a></span> <span class="id">op</span> <span class="id"><a href="compcert.backend.Deadcode.html#nres:177">nres</a></span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">args</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">arg</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.RTL.html#Iop">Iop</a></span> <span class="id"><a href="compcert.x86.Op.html#Omove">Omove</a></span> (<span class="id">arg</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) <span class="id">res</span> <span class="id">s</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="compcert.backend.Deadcode.html#instr:175">instr</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#instr:175">instr</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.RTL.html#Iload">Iload</a></span> <span class="id">chunk</span> <span class="id">addr</span> <span class="id">args</span> <span class="id">dst</span> <span class="id">s</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="ndst:179" class="id"><a name="ndst:179" class="">ndst</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nreg">nreg</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#an:173">an!!pc</a></span>) <span class="id">dst</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Deadcode.html#is_dead">is_dead</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ndst:179">ndst</a></span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.RTL.html#Inop">Inop</a></span> <span class="id">s</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.Deadcode.html#is_int_zero">is_int_zero</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#ndst:179">ndst</a></span> <span class="gallina-kwd">then</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.RTL.html#Iop">Iop</a></span> (<span class="id"><a href="compcert.x86.Op.html#Ointconst">Ointconst</a></span> <span class="id"><a href="compcert.lib.Integers.html#Int.zero">Int.zero</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">dst</span> <span class="id">s</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#instr:175">instr</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.RTL.html#Istore">Istore</a></span> <span class="id">chunk</span> <span class="id">addr</span> <span class="id">args</span> <span class="id">src</span> <span class="id">s</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="p:180" class="id"><a name="p:180" class="">p</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.ValueAnalysis.html#aaddressing">aaddressing</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#approx:172">approx!!pc</a></span> <span class="id">addr</span> <span class="id">args</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_contains">nmem_contains</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#an:173">an!!pc</a></span>) <span class="id"><a href="compcert.backend.Deadcode.html#p:180">p</a></span> (<span class="id"><a href="compcert.common.Memdata.html#size_chunk">size_chunk</a></span> <span class="id">chunk</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.Deadcode.html#instr:175">instr</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.backend.RTL.html#Inop">Inop</a></span> <span class="id">s</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.RTL.html#Ibuiltin">Ibuiltin</a></span> (<span class="id"><a href="compcert.common.AST.html#EF_memcpy">EF_memcpy</a></span> <span class="id">sz</span> <span class="id">al</span>) (<span class="id">dst</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id">src</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span>) <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id">s</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.backend.NeedDomain.html#nmem_contains">nmem_contains</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#snd">snd</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#an:173">an!!pc</a></span>) (<span class="id"><a href="compcert.backend.ValueAnalysis.html#aaddr_arg">aaddr_arg</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#approx:172">approx!!pc</a></span> <span class="id">dst</span>) <span class="id">sz</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.Deadcode.html#instr:175">instr</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">else</span> <span class="id"><a href="compcert.backend.RTL.html#Inop">Inop</a></span> <span class="id">s</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="compcert.backend.RTL.html#Icond">Icond</a></span> <span class="id">cond</span> <span class="id">args</span> <span class="id">s1</span> <span class="id">s2</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">if</span> <span class="id"><a href="compcert.lib.Coqlib.html#peq">peq</a></span> <span class="id">s1</span> <span class="id">s2</span> <span class="gallina-kwd">then</span> <span class="id"><a href="compcert.backend.RTL.html#Inop">Inop</a></span> <span class="id">s1</span> <span class="gallina-kwd">else</span> <span class="id"><a href="compcert.backend.Deadcode.html#instr:175">instr</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.Deadcode.html#instr:175">instr</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_function" class="id"><a name="transf_function" class="">transf_function</a></span> (<span id="rm:181" class="id"><a name="rm:181" class="">rm:</a></span> <span class="id"><a href="compcert.backend.ValueDomain.html#romem">romem</a></span>) (<span id="f:182" class="id"><a name="f:182" class="">f:</a></span> <span class="id"><a href="compcert.backend.RTL.html#function">function</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.backend.RTL.html#function">function</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="approx:183" class="id"><a name="approx:183" class="">approx</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.ValueAnalysis.html#analyze">ValueAnalysis.analyze</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#rm:181">rm</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#f:182">f</a></span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="compcert.backend.Deadcode.html#analyze">analyze</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#approx:183">approx</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#f:182">f</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> <span class="id">an</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#OK">OK</a></span> <span class="id">{|</span> <span class="id"><a href="compcert.backend.RTL.html#fn_sig">fn_sig</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.Deadcode.html#f:182">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_sig">fn_sig</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.RTL.html#fn_params">fn_params</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.Deadcode.html#f:182">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_params">fn_params</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.RTL.html#fn_stacksize">fn_stacksize</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.Deadcode.html#f:182">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_stacksize">fn_stacksize</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.RTL.html#fn_code">fn_code</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.lib.Maps.html#PTree.map">PTree.map</a></span> (<span class="id"><a href="compcert.backend.Deadcode.html#transf_instr">transf_instr</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#approx:183">approx</a></span> <span class="id">an</span>) <span class="id"><a href="compcert.backend.Deadcode.html#f:182">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_code">fn_code</a></span>)<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.backend.RTL.html#fn_entrypoint">fn_entrypoint</a></span> <span class="id">:=</span> <span class="id"><a href="compcert.backend.Deadcode.html#f:182">f</a></span>.(<span class="id"><a href="compcert.backend.RTL.html#fn_entrypoint">fn_entrypoint</a></span>) <span class="id">|}</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="compcert.common.Errors.html#Error">Error</a></span> (<span class="id"><a href="compcert.common.Errors.html#msg">msg</a></span> <span class="id">&quot;Neededness analysis failed&quot;</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_fundef" class="id"><a name="transf_fundef" class="">transf_fundef</a></span> (<span id="rm:184" class="id"><a name="rm:184" class="">rm:</a></span> <span class="id"><a href="compcert.backend.ValueDomain.html#romem">romem</a></span>) (<span id="fd:185" class="id"><a name="fd:185" class="">fd:</a></span> <span class="id"><a href="compcert.backend.RTL.html#fundef">fundef</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.backend.RTL.html#fundef">fundef</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transf_partial_fundef">AST.transf_partial_fundef</a></span> (<span class="id"><a href="compcert.backend.Deadcode.html#transf_function">transf_function</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#rm:184">rm</a></span>) <span class="id"><a href="compcert.backend.Deadcode.html#fd:185">fd</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="transf_program" class="id"><a name="transf_program" class="">transf_program</a></span> (<span id="p:186" class="id"><a name="p:186" class="">p:</a></span> <span class="id"><a href="compcert.backend.RTL.html#program">program</a></span>) <span class="id">:</span> <span class="id"><a href="compcert.common.Errors.html#res">res</a></span> <span class="id"><a href="compcert.backend.RTL.html#program">program</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="compcert.common.AST.html#transform_partial_program">transform_partial_program</a></span> (<span class="id"><a href="compcert.backend.Deadcode.html#transf_fundef">transf_fundef</a></span> (<span class="id"><a href="compcert.backend.ValueAnalysis.html#romem_for">romem_for</a></span> <span class="id"><a href="compcert.backend.Deadcode.html#p:186">p</a></span>)) <span class="id"><a href="compcert.backend.Deadcode.html#p:186">p</a></span>.<br/>
+<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>
