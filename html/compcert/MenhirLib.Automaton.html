@@ -1,0 +1,457 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Automaton</title>
+<meta name="description" content="Documentation of Coq module Automaton" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Automaton</h1>
+<pre class="ssrdoc">
+                                                                         
+                                  Menhir                                 
+                                                                         
+          Jacques-Henri Jourdan, CNRS, LRI, Université Paris Sud         
+                                                                         
+ Copyright Inria. All rights reserved. This file is distributed under    
+ the terms of the GNU Lesser General Public License as published by the  
+ Free Software Foundation, either version 3 of the License, or (at your  
+ option) any later version, as described in the file LICENSE.            
+                                                                         
+</pre>
+<br/>
+<span class="vernacular">Require</span> <span class="id"><a href="MenhirLib.Grammar.html">Grammar</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Export</span> <span class="id"><a href="MenhirLib.Alphabet.html">Alphabet</a></span>.<br/>
+<span class="vernacular">From</span> <span class="id">Coq</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.Orders.html">Orders</a></span>.<br/>
+<span class="vernacular">From</span> <span class="id">Coq</span> <span class="vernacular">Require</span> <span class="vernacular">Export</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html">List</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Program.Syntax.html">Syntax</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="gallina-kwd">Type</span> <span id="AutInit" class="id"><a name="AutInit" class="">AutInit</a></span>.<br/>
+<div class="doc">The grammar of the automaton. *</div>
+&nbsp;&nbsp;<span class="vernacular">Declare</span> <span class="vernacular">Module</span> <span id="AutInit.Gram" class="id"><a name="AutInit.Gram" class="">Gram:Grammar</a></span>.<span class="id">T</span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Export</span> <span class="id"><a href="MenhirLib.Automaton.html#AutInit.Gram">Gram</a></span>.<br/>
+<br/>
+<div class="doc">The set of non initial state is considered as an alphabet. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="AutInit.noninitstate" class="id"><a name="AutInit.noninitstate" class="">noninitstate</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id">Global</span> <span class="vernacular">Declare</span> <span class="vernacular">Instance</span> <span id="AutInit.NonInitStateAlph" class="id"><a name="AutInit.NonInitStateAlph" class="">NonInitStateAlph</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Alphabet.html#Alphabet">Alphabet</a></span> <span class="id"><a href="MenhirLib.Automaton.html#AutInit.noninitstate">noninitstate</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="AutInit.initstate" class="id"><a name="AutInit.initstate" class="">initstate</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id">Global</span> <span class="vernacular">Declare</span> <span class="vernacular">Instance</span> <span id="AutInit.InitStateAlph" class="id"><a name="AutInit.InitStateAlph" class="">InitStateAlph</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Alphabet.html#Alphabet">Alphabet</a></span> <span class="id"><a href="MenhirLib.Automaton.html#AutInit.initstate">initstate</a></span>.<br/>
+<br/>
+<div class="doc">When we are at this state, we know that this symbol is the top of the
+     stack. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="AutInit.last_symb_of_non_init_state" class="id"><a name="AutInit.last_symb_of_non_init_state" class="">last_symb_of_non_init_state:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#AutInit.noninitstate">noninitstate</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Automaton.html#AutInit.symbol">symbol</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Automaton.html#AutInit">AutInit</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="Types" class="id"><a name="Types" class="">Types</a></span>(<span class="vernacular">Import</span> <span class="id">Init:AutInit</span>).<br/>
+<div class="doc">In many ways, the behaviour of the initial state is different from the
+     behaviour of the other states. So we have chosen to explicitaly separate
+     them: the user has to provide the type of non initial states. *</div>
+&nbsp;&nbsp;<span class="vernacular">Inductive</span> <span id="Types.state" class="id"><a name="Types.state" class="">state</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span id="Types.Init" class="id"><a name="Types.Init" class="">Init:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Init.initstate">initstate</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Automaton.html#state:4">state</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span id="Types.Ninit" class="id"><a name="Types.Ninit" class="">Ninit:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Init.noninitstate">noninitstate</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Automaton.html#state:4">state</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="id">Global</span> <span class="id">Program</span> <span class="vernacular">Instance</span> <span id="Types.StateAlph" class="id"><a name="Types.StateAlph" class="">StateAlph</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Alphabet.html#Alphabet">Alphabet</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Types.state">state</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{</span> <span class="id"><a href="MenhirLib.Alphabet.html#AlphabetComparable">AlphabetComparable</a></span> <span class="id">:=</span> <span class="id">{|</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare">compare</a></span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span id="x:6" class="id"><a name="x:6" class="">x</a></span> <span id="y:7" class="id"><a name="y:7" class="">y</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Automaton.html#x:6">x,</a></span> <span class="id"><a href="MenhirLib.Automaton.html#y:7">y</a></span> <span class="gallina-kwd">return</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#comparison">comparison</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Init">Init</a></span> <span class="id">_,</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Ninit">Ninit</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Lt">Lt</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Init">Init</a></span> <span class="id">x,</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Init">Init</a></span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare">compare</a></span> <span class="id"><a href="MenhirLib.Automaton.html#x:6">x</a></span> <span class="id"><a href="MenhirLib.Automaton.html#y:7">y</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Ninit">Ninit</a></span> <span class="id">_,</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Init">Init</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Gt">Gt</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Ninit">Ninit</a></span> <span class="id">x,</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Ninit">Ninit</a></span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare">compare</a></span> <span class="id"><a href="MenhirLib.Automaton.html#x:6">x</a></span> <span class="id"><a href="MenhirLib.Automaton.html#y:7">y</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id">|};</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Alphabet.html#AlphabetFinite">AlphabetFinite</a></span> <span class="id">:=</span> <span class="id">{|</span> <span class="id"><a href="MenhirLib.Alphabet.html#all_list">all_list</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Init">Init</a></span> <span class="id"><a href="MenhirLib.Alphabet.html#all_list">all_list</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Ninit">Ninit</a></span> <span class="id"><a href="MenhirLib.Alphabet.html#all_list">all_list</a></span> <span class="id">|}</span> <span class="id">}</span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Local</span> <span class="vernacular">Obligation</span> <span class="vernacular">Tactic</span> <span class="id">:=</span> <span class="id">intros</span>.<br/>
+<div>&nbsp;&nbsp;<span class="toggleproof" onclick="toggleDisplay('proof1')">Next Obligation.</span></div>
+<div class="proofscript" id="proof1">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">x,</span> <span class="id">y;</span> <span class="id">intuition;</span> <span class="id">apply</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare_antisym">compare_antisym</a></span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div>&nbsp;&nbsp;<span class="toggleproof" onclick="toggleDisplay('proof2')">Next Obligation.</span></div>
+<div class="proofscript" id="proof2">
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">x,</span> <span class="id">y,</span> <span class="id">z;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare_trans">compare_trans</a></span> <span class="id">_</span> <span class="id">i0</span>)<span class="id">;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">congruence</span>.<br/>
+&nbsp;&nbsp;<span class="id">congruence</span>.<br/>
+&nbsp;&nbsp;<span class="id">apply</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare_trans">compare_trans</a></span> <span class="id">_</span> <span class="id">n0</span>)<span class="id">;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div>&nbsp;&nbsp;<span class="toggleproof" onclick="toggleDisplay('proof3')">Next Obligation.</span></div>
+<div class="proofscript" id="proof3">
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">x</span> <span class="id">y</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">x,</span> <span class="id">y;</span> <span class="id">intuition;</span> <span class="id">try</span> <span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare_eq">compare_eq</a></span> <span class="id">i</span> <span class="id">i0</span>)<span class="id">;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare_eq">compare_eq</a></span> <span class="id">n</span> <span class="id">n0</span>)<span class="id">;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div>&nbsp;&nbsp;<span class="toggleproof" onclick="toggleDisplay('proof4')">Next Obligation.</span></div>
+<div class="proofscript" id="proof4">
+&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#in_or_app">in_or_app;</a></span> <span class="id">destruct</span> <span class="id">x;</span> <span class="id">intuition;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">[left|right];</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#in_map">in_map;</a></span> <span class="id">apply</span>  <span class="id"><a href="MenhirLib.Alphabet.html#all_list_forall">all_list_forall</a></span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+&nbsp;&nbsp;<span class="vernacular">Coercion</span> <span class="id">Ninit</span> <span class="id">:</span> <span class="id">noninitstate</span> <span class="id">&gt;-&gt;</span> <span class="id">state</span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Coercion</span> <span class="id">Init</span> <span class="id">:</span> <span class="id">initstate</span> <span class="id">&gt;-&gt;</span> <span class="id">state</span>.<br/>
+<br/>
+<div class="doc">For an LR automaton, there are four kind of actions that can be done at a
+     given state:
+       - Shifting, that is reading a token and putting it into the stack,
+       - Reducing a production, that is popping the right hand side of the
+          production from the stack, and pushing the left hand side,
+       - Failing
+       - Accepting the word (special case of reduction)
+     As in the menhir parser generator, we do not want our parser to read after
+     the end of stream. That means that once the parser has read a word in the
+     grammar language, it should stop without peeking the input stream. So, for
+     the automaton to be complete, the grammar must be particular: if a word is
+     in its language, then it is not a prefix of an other word of the language
+     (otherwise, menhir reports an end of stream conflict).
+     As a consequence of that, there is two notions of action: the first one is
+     an action performed before having read the stream, the second one is after
+  *</div>
+<br/>
+&nbsp;&nbsp;<span class="vernacular">Inductive</span> <span id="Types.lookahead_action" class="id"><a name="Types.lookahead_action" class="">lookahead_action</a></span> (<span id="term:10" class="id"><a name="term:10" class="">term:terminal</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Types.Shift_act" class="id"><a name="Types.Shift_act" class="">Shift_act:</a></span> <span class="gallina-kwd">forall</span> <span id="s:13" class="id"><a name="s:13" class="">s:noninitstate,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Automaton.html#Init.Gram.T">T</a></span> <span class="id"><a href="MenhirLib.Automaton.html#term:10">term</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Init.last_symb_of_non_init_state">last_symb_of_non_init_state</a></span> <span class="id"><a href="MenhirLib.Automaton.html#s:13">s</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Automaton.html#lookahead_action:11">lookahead_action</a></span> <span class="id"><a href="MenhirLib.Automaton.html#term:10">term</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Types.Reduce_act" class="id"><a name="Types.Reduce_act" class="">Reduce_act:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Init.Gram.production">production</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Automaton.html#lookahead_action:11">lookahead_action</a></span> <span class="id"><a href="MenhirLib.Automaton.html#term:10">term</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Types.Fail_act" class="id"><a name="Types.Fail_act" class="">Fail_act:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#lookahead_action:11">lookahead_action</a></span> <span class="id"><a href="MenhirLib.Automaton.html#term:10">term</a></span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Arguments</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Shift_act">Shift_act</a></span> <span class="id">{term}</span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Arguments</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Reduce_act">Reduce_act</a></span> <span class="id">{term}</span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Arguments</span> <span class="id"><a href="MenhirLib.Automaton.html#Types.Fail_act">Fail_act</a></span> <span class="id">{term}</span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="vernacular">Inductive</span> <span id="Types.action" class="id"><a name="Types.action" class="">action</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Types.Default_reduce_act" class="id"><a name="Types.Default_reduce_act" class="">Default_reduce_act:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Init.Gram.production">production</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Automaton.html#action:14">action</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Types.Lookahead_act" class="id"><a name="Types.Lookahead_act" class="">Lookahead_act</a></span> <span class="id">:</span> (<span class="gallina-kwd">forall</span> <span id="term:16" class="id"><a name="term:16" class="">term:terminal,</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Types.lookahead_action">lookahead_action</a></span> <span class="id"><a href="MenhirLib.Automaton.html#term:16">term</a></span>) <span class="id">-&gt;</span> <span class="id"><a href="MenhirLib.Automaton.html#action:14">action</a></span>.<br/>
+<br/>
+<div class="doc">Types used for the annotations of the automaton. *</div>
+<br/>
+<div class="doc">An item is a part of the annotations given to the validator.
+     It is acually a set of LR(1) items sharing the same core. It is needed
+     to validate completeness. *</div>
+&nbsp;&nbsp;<span class="vernacular">Record</span> <span id="Types.item" class="id"><a name="Types.item" class="">item</a></span> <span class="id">:=</span> <span class="id">{</span><br/>
+<div class="doc">The pseudo-production of the item. *</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<span id="Types.prod_item" class="id"><a name="Types.prod_item" class="">prod_item:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Init.Gram.production">production;</a></span><br/>
+<br/>
+<div class="doc">The position of the dot. *</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<span id="Types.dot_pos_item" class="id"><a name="Types.dot_pos_item" class="">dot_pos_item:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat;</a></span><br/>
+<br/>
+<div class="doc">The lookahead symbol of the item. We are using a list, so we can store
+     together multiple LR(1) items sharing the same core. *</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<span id="Types.lookaheads_item" class="id"><a name="Types.lookaheads_item" class="">lookaheads_item:</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="MenhirLib.Automaton.html#Init.Gram.terminal">terminal</a></span><br/>
+&nbsp;&nbsp;<span class="id">}</span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Automaton.html#Types">Types</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="gallina-kwd">Type</span> <span id="T" class="id"><a name="T" class="">T</a></span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Include</span> <span class="id"><a href="MenhirLib.Automaton.html#AutInit">AutInit</a></span> <span class="id">&lt;+</span> <span class="id"><a href="MenhirLib.Automaton.html#Types">Types</a></span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Module</span> <span class="vernacular">Export</span> <span id="T.GramDefs" class="id"><a name="T.GramDefs" class="">GramDefs</a></span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs">Grammar.Defs</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.Gram">Gram</a></span>.<br/>
+<br/>
+<div class="doc">For each initial state, the non terminal it recognizes. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.start_nt" class="id"><a name="T.start_nt" class="">start_nt:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.initstate">initstate</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.nonterminal">nonterminal</a></span>.<br/>
+<br/>
+<div class="doc">The action table maps a state to either a map terminal -&gt; action. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.action_table" class="id"><a name="T.action_table" class="">action_table:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Automaton.html#T.state">state</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.action">action</a></span>.<br/>
+<div class="doc">The goto table of an LR(1) automaton. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.goto_table" class="id"><a name="T.goto_table" class="">goto_table:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.state">state</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">forall</span> <span id="nt:23" class="id"><a name="nt:23" class="">nt:nonterminal,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">option</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">{</a></span> <span id="s:24" class="id"><a name="s:24" class="">s:noninitstate</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">|</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.NT">NT</a></span> <span class="id"><a href="MenhirLib.Automaton.html#nt:23">nt</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.last_symb_of_non_init_state">last_symb_of_non_init_state</a></span> <span class="id"><a href="MenhirLib.Automaton.html#s:24">s</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">}</a></span>.<br/>
+<br/>
+<div class="doc">Some annotations on the automaton to help the validation. *</div>
+<br/>
+<div class="doc">When we are at this state, we know that these symbols are just below
+     the top of the stack. The list is ordered such that the head correspond
+     to the (almost) top of the stack. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.past_symb_of_non_init_state" class="id"><a name="T.past_symb_of_non_init_state" class="">past_symb_of_non_init_state:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.noninitstate">noninitstate</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.symbol">symbol</a></span>.<br/>
+<br/>
+<div class="doc">When we are at this state, the (strictly) previous states verify these
+     predicates. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.past_state_of_non_init_state" class="id"><a name="T.past_state_of_non_init_state" class="">past_state_of_non_init_state:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.noninitstate">noninitstate</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="MenhirLib.Automaton.html#T.state">state</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>).<br/>
+<br/>
+<div class="doc">The items of the state. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.items_of_state" class="id"><a name="T.items_of_state" class="">items_of_state:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.state">state</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.item">item</a></span>.<br/>
+<br/>
+<div class="doc">The nullable predicate for non terminals :
+     true if and only if the symbol produces the empty string *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.nullable_nterm" class="id"><a name="T.nullable_nterm" class="">nullable_nterm:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.nonterminal">nonterminal</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bool">bool</a></span>.<br/>
+<br/>
+<div class="doc">The first predicates for non terminals, symbols or words of symbols. A
+     terminal is in the returned list if, and only if the parameter produces a
+     word that begins with the given terminal *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.first_nterm" class="id"><a name="T.first_nterm" class="">first_nterm:</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.nonterminal">nonterminal</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="MenhirLib.Automaton.html#T.terminal">terminal</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Automaton.html#T">T</a></span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

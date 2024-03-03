@@ -1,0 +1,768 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Interpreter</title>
+<meta name="description" content="Documentation of Coq module Interpreter" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Interpreter</h1>
+<pre class="ssrdoc">
+                                                                         
+                                  Menhir                                 
+                                                                         
+          Jacques-Henri Jourdan, CNRS, LRI, Université Paris Sud         
+                                                                         
+ Copyright Inria. All rights reserved. This file is distributed under    
+ the terms of the GNU Lesser General Public License as published by the  
+ Free Software Foundation, either version 3 of the License, or (at your  
+ option) any later version, as described in the file LICENSE.            
+                                                                         
+</pre>
+<br/>
+<span class="vernacular">From</span> <span class="id">Coq</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html">List</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Program.Syntax.html">Syntax</a></span>.<br/>
+<span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ListNotations">ListNotations</a></span>.<br/>
+<span class="vernacular">From</span> <span class="id">Coq.ssr</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.ssr.ssreflect.html">ssreflect</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="id"><a href="MenhirLib.Automaton.html">Automaton</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="MenhirLib.Alphabet.html">Alphabet</a></span> <span class="id"><a href="MenhirLib.Grammar.html">Grammar</a></span> <span class="id"><a href="MenhirLib.Validator_safe.html">Validator_safe</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="Make" class="id"><a name="Make" class="">Make</a></span>(<span class="vernacular">Import</span> <span class="id">A:Automaton</span>.<span class="id">T</span>).<br/>
+<span class="vernacular">Module</span> <span class="vernacular">Import</span> <span id="Make.ValidSafe" class="id"><a name="Make.ValidSafe" class="">ValidSafe</a></span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Validator_safe.html#Make">Validator_safe.Make</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A">A</a></span>.<br/>
+<br/>
+<div class="doc">A few helpers for dependent types. </div>
+<br/>
+<div class="doc">Decidable propositions. </div>
+<span class="vernacular">Class</span> <span id="Make.Decidable" class="id"><span id="Make.Decidable" class="id"><a name="Make.Decidable" class="">Decidable</a></span></span> (<span id="P:1" class="id"><a name="P:1" class="">P</a></span> <span class="id">:</span> <span class="gallina-kwd">Prop</span>) <span class="id">:=</span> <span id="Make.decide" class="id"><span id="Make.decide" class="id"><a name="Make.decide" class="">decide</a></span></span> <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#87727981cdc1579fef00b9d9c1d3b9da">{P}</a></span> <span class="id">+</span> <span class="id">{~P}</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.decide">decide</a></span> <span class="id">_</span> <span class="id">{_}</span>.<br/>
+<br/>
+<div class="doc">A <span class="bracket"><span class="id">Comparable</span></span> type has decidable equality. </div>
+<span class="id">Global</span> <span class="vernacular">Instance</span> <span id="Make.comparable_decidable_eq" class="id"><a name="Make.comparable_decidable_eq" class="">comparable_decidable_eq</a></span> <span id="T:4" class="id"><a name="T:4" class="">T</a></span> <span class="id">`{ComparableLeibnizEq</span> <span class="id"><a href="MenhirLib.Interpreter.html#T:4">T}</a></span> (<span id="x:7" class="id"><a name="x:7" class="">x</a></span> <span id="y:8" class="id"><a name="y:8" class="">y</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#T:4">T</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.Decidable">Decidable</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#x:7">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#y:8">y</a></span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof1')">Proof.</span></div>
+<div class="proofscript" id="proof1">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Decidable">Decidable</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare">compare</a></span> <span class="id">x</span> <span class="id">y</span>) <span class="id">eqn:EQ;</span> <span class="id">[left;</span> <span class="id">apply</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare_eq">compare_eq;</a></span> <span class="id">intuition</span> <span class="id">|</span> ..<span class="id">];</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">right;</span> <span class="id">intros</span> <span class="id">-&gt;;</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare_refl">compare_refl</a></span> <span class="gallina-kwd">in</span> <span class="id">EQ</span>.<br/>
+Defined.</div>
+<br/>
+<span class="id">Global</span> <span class="vernacular">Instance</span> <span id="Make.list_decidable_eq" class="id"><a name="Make.list_decidable_eq" class="">list_decidable_eq</a></span> <span id="T:9" class="id"><a name="T:9" class="">T</a></span> <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span id="x:10" class="id"><a name="x:10" class="">x</a></span> <span id="y:11" class="id"><a name="y:11" class="">y</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#T:9">T,</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Decidable">Decidable</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#x:10">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#y:11">y</a></span>)) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">forall</span> <span id="l1:12" class="id"><a name="l1:12" class="">l1</a></span> <span id="l2:13" class="id"><a name="l2:13" class="">l2</a></span> <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#T:9">T,</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Decidable">Decidable</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#l1:12">l1</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#l2:13">l2</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof2')">Proof.</span></div>
+<div class="proofscript" id="proof2">
+ <span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Decidable">Decidable</a></span>. <span class="id">decide</span> <span class="id">equality</span>. Defined.</div>
+<br/>
+<span class="vernacular">Ltac</span> <span class="id">subst_existT</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">repeat</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">progress</span> <span class="id">subst</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">H</span> <span class="id">:</span> @<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">?A</span> <span class="id">?P</span> <span class="id">?x</span> <span class="id">?y1</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> @<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">?A</span> <span class="id">?P</span> <span class="id">?x</span> <span class="id">?y2</span> <span class="id">|-</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span class="id">DEC</span> <span class="id">:=</span> <span class="id">fresh</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">DEC</span> <span class="id">:</span> <span class="gallina-kwd">forall</span> <span id="u1:14" class="id"><a name="u1:14" class="">u1</a></span> <span id="u2:15" class="id"><a name="u2:15" class="">u2</a></span> <span class="id">:</span> <span class="id">A,</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Decidable">Decidable</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#u1:14">u1</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#u2:15">u2</a></span>)) <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">_;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Logic.Eqdep_dec.html#inj_pair2_eq_dec">Eqdep_dec.inj_pair2_eq_dec</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">[|by</span> <span class="id">apply</span> <span class="id">DEC];</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">clear</span> <span class="id">DEC</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">The interpreter is written using dependent types. In order to
+  avoid reducing proof terms while executing the parser, we thunk all
+  the propositions behind an arrow.
+  Note that thunkP is still in Prop so that it is erased by
+  extraction.
+ </div>
+<span class="vernacular">Definition</span> <span id="Make.thunkP" class="id"><a name="Make.thunkP" class="">thunkP</a></span> (<span id="P:16" class="id"><a name="P:16" class="">P</a></span> <span class="id">:</span> <span class="gallina-kwd">Prop</span>) <span class="id">:</span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#True">True</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#P:16">P</a></span>.<br/>
+<br/>
+<div class="doc">Sometimes, we actually need a reduced proof in a program (for
+  example when using an equality to cast a value). In that case,
+  instead of reducing the proof we already have, we reprove the
+  assertion by using decidability. </div>
+<span class="vernacular">Definition</span> <span id="Make.reprove" class="id"><a name="Make.reprove" class="">reprove</a></span> <span class="id">{P}</span> <span class="id">`{Decidable</span> <span class="id"><a href="MenhirLib.Interpreter.html#P:17">P}</a></span> (<span id="p:19" class="id"><a name="p:19" class="">p</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#P:17">P</a></span>) <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#P:17">P</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.decide">decide</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#P:17">P</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#left">left</a></span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#p:19">p</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#right">right</a></span> <span class="id">np</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#False_ind">False_ind</a></span> <span class="id">_</span> (<span class="id">np</span> (<span class="id"><a href="MenhirLib.Interpreter.html#p:19">p</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span>))<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">Combination of reprove with eq_rect. </div>
+<span class="vernacular">Definition</span> <span id="Make.cast" class="id"><a name="Make.cast" class="">cast</a></span> <span class="id">{T</span> <span class="id">:</span> <span class="id">Type}</span> (<span id="F:21" class="id"><a name="F:21" class="">F</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#T:20">T</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">Type</span>) <span class="id">{x</span> <span id="y:23" class="id"><a name="y:23" class="">y</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#T:20">T}</a></span> (<span id="eq:24" class="id"><a name="eq:24" class="">eq</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#x:22">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#y:23">y</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{DEC</span> <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#unit">unit</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Decidable">Decidable</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#x:22">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#y:23">y</a></span>)<span class="id">}:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#F:21">F</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#x:22">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#F:21">F</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#y:23">y</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">fun</span> <span id="a:26" class="id"><a name="a:26" class="">a</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#eq_rect">eq_rect</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#x:22">x</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#F:21">F</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#a:26">a</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#y:23">y</a></span> (@<span class="id"><a href="MenhirLib.Interpreter.html#Make.reprove">reprove</a></span> <span class="id">_</span> (<span class="id"><a href="MenhirLib.Interpreter.html#DEC:25">DEC</a></span> ()) <span class="id"><a href="MenhirLib.Interpreter.html#eq:24">eq</a></span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="Make.cast_eq" class="id"><a name="Make.cast_eq" class="">cast_eq</a></span> <span id="T:27" class="id"><a name="T:27" class="">T</a></span> <span id="F:28" class="id"><a name="F:28" class="">F</a></span> (<span id="x:29" class="id"><a name="x:29" class="">x</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#T:27">T</a></span>) (<span id="eq:30" class="id"><a name="eq:30" class="">eq</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#x:29">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#x:29">x</a></span>)) <span class="id">`{forall</span> <span id="x:31" class="id"><a name="x:31" class="">x</a></span> <span id="y:32" class="id"><a name="y:32" class="">y,</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Decidable">Decidable</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#x:31">x</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#y:32">y</a></span>)<span class="id">}</span> <span id="a:34" class="id"><a name="a:34" class="">a</a></span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.cast">cast</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#F:28">F</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#eq:30">eq</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#a:34">a</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#a:34">a</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof3')">Proof.</span></div>
+<div class="proofscript" id="proof3">
+ <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">/cast</span> <span class="id">-Eqdep_dec</span>.<span class="id">eq_rect_eq_dec</span>. Qed.</div>
+<br/>
+<div class="doc">Input buffers and operations on them. *</div>
+<span class="vernacular">CoInductive</span> <span id="Make.buffer" class="id"><a name="Make.buffer" class="">buffer</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">Buf_cons</span> <span class="id">{</span> <span id="Make.buf_head" class="id"><a name="Make.buf_head" class="">buf_head</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token">token;</a></span> <span id="Make.buf_tail" class="id"><a name="Make.buf_tail" class="">buf_tail</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:35">buffer</a></span> <span class="id">}</span>.<br/>
+<br/>
+<span class="vernacular">Declare</span> <span class="vernacular">Scope</span> <span class="id">buffer_scope</span>.<br/>
+<span class="vernacular">Delimit</span> <span class="vernacular">Scope</span> <span class="id">buffer_scope</span> <span class="gallina-kwd">with</span> <span class="id">buf</span>.<br/>
+<span class="vernacular">Bind</span> <span class="vernacular">Scope</span> <span class="id">buffer_scope</span> <span class="gallina-kwd">with</span> <span class="id">buffer</span>.<br/>
+<br/>
+<span class="vernacular">Infix</span> <span id="Make.::buffer_scope:x_'::'_x" class="id"><a name="Make.::buffer_scope:x_'::'_x" class="">&quot;::&quot;</a></span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Buf_cons">Buf_cons</a></span> (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">60,</span> <span class="id">right</span> <span class="id">associativity</span>) <span class="id">:</span> <span class="id">buffer_scope</span>.<br/>
+<br/>
+<div class="doc">Concatenation of a list and an input buffer *</div>
+<span class="vernacular">Fixpoint</span> <span id="Make.app_buf" class="id"><a name="Make.app_buf" class="">app_buf</a></span> (<span id="l:38" class="id"><a name="l:38" class="">l:list</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token">token</a></span>) (<span id="buf:39" class="id"><a name="buf:39" class="">buf:buffer</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#l:38">l</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nil">nil</a></span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#buf:39">buf</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#cons">cons</a></span> <span class="id">t</span> <span class="id">q</span> <span class="id">=&gt;</span> (<span class="id">t</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.::buffer_scope:x_'::'_x">::</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#app_buf:40">app_buf</a></span> <span class="id">q</span> <span class="id"><a href="MenhirLib.Interpreter.html#buf:39">buf</a></span>)%<span class="id">buf</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<span class="vernacular">Infix</span> <span id="e5ef4c5240206d18077b2340c00c22e8" class="id"><a name="e5ef4c5240206d18077b2340c00c22e8" class="">&quot;++&quot;</a></span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.app_buf">app_buf</a></span> (<span class="gallina-kwd">at</span> <span class="id">level</span> <span class="id">60,</span> <span class="id">right</span> <span class="id">associativity</span>) <span class="id">:</span> <span class="id">buffer_scope</span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="Make.app_buf_assoc" class="id"><a name="Make.app_buf_assoc" class="">app_buf_assoc</a></span> (<span id="l1:42" class="id"><a name="l1:42" class="">l1</a></span> <span id="l2:43" class="id"><a name="l2:43" class="">l2:list</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token">token</a></span>) (<span id="buf:44" class="id"><a name="buf:44" class="">buf:buffer</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="MenhirLib.Interpreter.html#l1:42">l1</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#e5ef4c5240206d18077b2340c00c22e8">++</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#l2:43">l2</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#e5ef4c5240206d18077b2340c00c22e8">++</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buf:44">buf</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#l1:42">l1</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#l2:43">l2</a></span>) <span class="id">++</span> <span class="id"><a href="MenhirLib.Interpreter.html#buf:44">buf</a></span>)%<span class="id">buf</span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof4')">Proof.</span></div>
+<div class="proofscript" id="proof4">
+ <span class="id">induction</span> <span class="id">l1</span> <span class="gallina-kwd">as</span> <span class="id">[|??</span> <span class="id">IH]=&gt;//=</span>. <span class="id">rewrite</span> <span class="id">IH</span> <span class="id">//</span>. Qed.</div>
+<br/>
+<div class="doc">The type of a non initial state: the type of semantic values associated
+   with the last symbol of this state. </div>
+<span class="vernacular">Definition</span> <span id="Make.noninitstate_type" class="id"><a name="Make.noninitstate_type" class="">noninitstate_type</a></span> <span id="state:45" class="id"><a name="state:45" class="">state</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol_semantic_type">symbol_semantic_type</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.last_symb_of_non_init_state">last_symb_of_non_init_state</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#state:45">state</a></span>).<br/>
+<br/>
+<div class="doc">The stack of the automaton : it can be either nil or contains a non
+    initial state, a semantic value for the symbol associted with this state,
+    and a nested stack. *</div>
+<span class="vernacular">Definition</span> <span id="Make.stack" class="id"><a name="Make.stack" class="">stack</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#sigT">sigT</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.noninitstate_type">noninitstate_type</a></span>). <br/>
+<br/>
+<span class="vernacular">Section</span> <span id="Make.Interpreter" class="id"><a name="Make.Interpreter" class="">Interpreter</a></span>.<br/>
+<br/>
+<span class="vernacular">Hypothesis</span> <span id="Make.Interpreter.safe" class="id"><a name="Make.Interpreter.safe" class="">safe:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.safe">safe</a></span>.<br/>
+<br/>
+<span class="vernacular">Proposition</span> <span id="Make.shift_head_symbs" class="id"><a name="Make.shift_head_symbs" class="">shift_head_symbs:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.shift_head_symbs">shift_head_symbs</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof5')">Proof.</span></div>
+<div class="proofscript" id="proof5">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.safe">safe;</a></span> <span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.safe">ValidSafe.safe</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span id="Make.goto_head_symbs" class="id"><a name="Make.goto_head_symbs" class="">goto_head_symbs:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.goto_head_symbs">goto_head_symbs</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof6')">Proof.</span></div>
+<div class="proofscript" id="proof6">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.safe">safe;</a></span> <span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.safe">ValidSafe.safe</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span id="Make.shift_past_state" class="id"><a name="Make.shift_past_state" class="">shift_past_state:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.shift_past_state">shift_past_state</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof7')">Proof.</span></div>
+<div class="proofscript" id="proof7">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.safe">safe;</a></span> <span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.safe">ValidSafe.safe</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span id="Make.goto_past_state" class="id"><a name="Make.goto_past_state" class="">goto_past_state:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.goto_past_state">goto_past_state</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof8')">Proof.</span></div>
+<div class="proofscript" id="proof8">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.safe">safe;</a></span> <span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.safe">ValidSafe.safe</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<span class="vernacular">Proposition</span> <span id="Make.reduce_ok" class="id"><a name="Make.reduce_ok" class="">reduce_ok:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_ok">reduce_ok</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof9')">Proof.</span></div>
+<div class="proofscript" id="proof9">
+ <span class="id">pose</span> <span class="id">proof</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.safe">safe;</a></span> <span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.safe">ValidSafe.safe</a></span> <span class="gallina-kwd">in</span> <span class="id">H;</span> <span class="id">intuition</span>. Qed.</div>
+<br/>
+<span class="vernacular">Variable</span> <span id="Make.Interpreter.init" class="id"><a name="Make.Interpreter.init" class="">init</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.initstate">initstate</a></span>.<br/>
+<br/>
+<div class="doc">The top state of a stack *</div>
+<span class="vernacular">Definition</span> <span id="Make.state_of_stack" class="id"><a name="Make.state_of_stack" class="">state_of_stack</a></span> (<span id="stack:48" class="id"><a name="stack:48" class="">stack:stack</a></span>)<span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.state">state</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#stack:48">stack</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd">[]</a></span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.init">init</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">_</span> <span class="id">s</span> <span class="id">_::_</span> <span class="id">=&gt;</span> <span class="id">s</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">The stack of states of an automaton stack *</div>
+<span class="vernacular">Definition</span> <span id="Make.state_stack_of_stack" class="id"><a name="Make.state_stack_of_stack" class="">state_stack_of_stack</a></span> (<span id="stack:50" class="id"><a name="stack:50" class="">stack:stack</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span id="cell:51" class="id"><a name="cell:51" class="">cell:sigT</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.noninitstate_type">noninitstate_type</a></span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.singleton_state_pred">singleton_state_pred</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#projT1">projT1</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#cell:51">cell</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#stack:50">stack</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#bc347c51eaf667706ae54503b26d52c6">++</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb">[singleton_state_pred</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.init">init]</a></span>)%<span class="id">list</span>.<br/>
+<br/>
+<div class="doc">The stack of symbols of an automaton stack *</div>
+<span class="vernacular">Definition</span> <span id="Make.symb_stack_of_stack" class="id"><a name="Make.symb_stack_of_stack" class="">symb_stack_of_stack</a></span> (<span id="stack:52" class="id"><a name="stack:52" class="">stack:stack</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">List.map</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span id="cell:53" class="id"><a name="cell:53" class="">cell:sigT</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.noninitstate_type">noninitstate_type</a></span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.last_symb_of_non_init_state">last_symb_of_non_init_state</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#projT1">projT1</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#cell:53">cell</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#stack:52">stack</a></span>.<br/>
+<br/>
+<div class="doc">The stack invariant : it basically states that the assumptions on the
+    states are true. *</div>
+<span class="vernacular">Inductive</span> <span id="Make.stack_invariant" class="id"><a name="Make.stack_invariant" class="">stack_invariant:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.stack">stack</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.stack_invariant_constr" class="id"><a name="Make.stack_invariant_constr" class="">stack_invariant_constr:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="stack:58" class="id"><a name="stack:58" class="">stack,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix">prefix</a></span>      (<span class="id"><a href="MenhirLib.Interpreter.html#Make.head_symbs_of_state">head_symbs_of_state</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stack:58">stack</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="MenhirLib.Interpreter.html#Make.symb_stack_of_stack">symb_stack_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stack:58">stack</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix_pred">prefix_pred</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.head_states_of_state">head_states_of_state</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stack:58">stack</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_stack_of_stack">state_stack_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stack:58">stack</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#stack_invariant_next:55">stack_invariant_next</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stack:58">stack</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#stack_invariant:54">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stack:58">stack</a></span><br/>
+<span class="gallina-kwd">with</span> <span id="Make.stack_invariant_next" class="id"><a name="Make.stack_invariant_next" class="">stack_invariant_next:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.stack">stack</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.stack_invariant_next_nil" class="id"><a name="Make.stack_invariant_next_nil" class="">stack_invariant_next_nil:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#stack_invariant_next:55">stack_invariant_next</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd">[]</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.stack_invariant_next_cons" class="id"><a name="Make.stack_invariant_next_cons" class="">stack_invariant_next_cons:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="state_cur:59" class="id"><a name="state_cur:59" class="">state_cur</a></span> <span id="st:60" class="id"><a name="st:60" class="">st</a></span> <span id="stack_rec:61" class="id"><a name="stack_rec:61" class="">stack_rec,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#stack_invariant:54">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stack_rec:61">stack_rec</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#stack_invariant_next:55">stack_invariant_next</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">_</span> <span class="id"><a href="MenhirLib.Interpreter.html#state_cur:59">state_cur</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#st:60">st::stack_rec</a></span>).<br/>
+<br/>
+<div class="doc"><span class="bracket"><span class="id">pop</span></span> pops some symbols from the stack. It returns the popped semantic
+    values using <span class="bracket"><span class="id">sem_popped</span></span> as an accumulator and discards the popped
+    states.*</div>
+<span class="vernacular">Fixpoint</span> <span id="Make.pop" class="id"><a name="Make.pop" class="">pop</a></span> (<span id="symbols_to_pop:62" class="id"><a name="symbols_to_pop:62" class="">symbols_to_pop:list</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol">symbol</a></span>) <span class="id">{A:Type}</span> (<span id="stk:64" class="id"><a name="stk:64" class="">stk:stack</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix">prefix</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:62">symbols_to_pop</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.symb_stack_of_stack">symb_stack_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:64">stk</a></span>)) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="action:65" class="id"><a name="action:65" class="">action:arrows_right</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A:63">A</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol_semantic_type">symbol_semantic_type</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:62">symbols_to_pop</a></span>))<span class="id">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.stack">stack</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A:63">A</a></span>.<br/>
+<span class="id">unshelve</span> <span class="id">refine</span><br/>
+&nbsp;&nbsp;(<span class="gallina-kwd">match</span> <span class="id">symbols_to_pop</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix">prefix</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:67">symbols_to_pop</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.symb_stack_of_stack">symb_stack_of_stack</a></span> <span class="id">stk</span>))) <span class="id">-&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="action:77" class="id"><span id="action:68" class="id"><a name="action:77" class="">action:arrows_right</a></span></span> <span class="id">A</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id">_</span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:67">symbols_to_pop</a></span>))<span class="id">,</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.stack">stack</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id">A</span><br/>
+&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd">[]</a></span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span id="action:78" class="id"><span id="action:69" class="id"><a name="action:78" class="">action</a></span></span> <span class="id">=&gt;</span> (<span class="id">stk,</span> <span class="id"><a href="MenhirLib.Interpreter.html#action:69">action</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">t::q</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="Hp:79" class="id"><span id="Hp:70" class="id"><a name="Hp:79" class="">Hp</a></span></span> <span id="action:80" class="id"><span id="action:71" class="id"><a name="action:80" class="">action</a></span></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">stk</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix">prefix</a></span> (<span class="id">t::q</span>) (<span class="id"><a href="MenhirLib.Interpreter.html#Make.symb_stack_of_stack">symb_stack_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:72">stk</a></span>)) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.stack">stack</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4">*</a></span> <span class="id">A</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">_</span> <span class="id">state_cur</span> <span class="id">sem::stack_rec</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="Hp:82" class="id"><span id="Hp:73" class="id"><a name="Hp:82" class="">Hp</a></span></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="sem_conv:83" class="id"><span id="sem_conv:74" class="id"><a name="sem_conv:83" class="">sem_conv</a></span></span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.cast">cast</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol_semantic_type">symbol_semantic_type</a></span> <span class="id">_</span> <span class="id">sem</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">pop</span> <span class="id">q</span> <span class="id">_</span> <span class="id">stack_rec</span> <span class="id">_</span> (<span class="id"><a href="MenhirLib.Interpreter.html#action:71">action</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#sem_conv:74">sem_conv</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd">[]</a></span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="Hp:84" class="id"><span id="Hp:75" class="id"><a name="Hp:84" class="">Hp</a></span></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#False_rect">False_rect</a></span> <span class="id">_</span> <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id"><a href="MenhirLib.Interpreter.html#Hp:70">Hp</a></span><br/>
+&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof10')">Proof.</span></div>
+<div class="proofscript" id="proof10">
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">Hp</span>. <span class="id">clear</span> <span class="id">-Hp</span>. <span class="id">abstract</span> (<span class="id">intros</span> <span class="id">_</span> <span class="id">;</span> <span class="id">specialize</span> (<span class="id">Hp</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span>)<span class="id">;</span> <span class="id">now</span> <span class="id">inversion</span> <span class="id">Hp</span>).<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">clear</span> <span class="id">-Hp</span>. <span class="id">abstract</span> (<span class="id">specialize</span> (<span class="id">Hp</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span>)<span class="id">;</span> <span class="id">now</span> <span class="id">inversion</span> <span class="id">Hp</span>).<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">Hp</span>. <span class="id">clear</span> <span class="id">-Hp</span>. <span class="id">abstract</span> (<span class="id">intros</span> <span class="id">_</span> <span class="id">;</span> <span class="id">specialize</span> (<span class="id">Hp</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span>)<span class="id">;</span> <span class="id">now</span> <span class="id">inversion</span> <span class="id">Hp</span>).<br/>
+Defined.</div>
+<br/>
+<span class="vernacular">Inductive</span> <span id="Make.pop_spec" class="id"><a name="Make.pop_spec" class="">pop_spec</a></span> <span class="id">{A:Type}</span> <span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="symbols_to_pop:86" class="id"><a name="symbols_to_pop:86" class="">symbols_to_pop:list</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol">symbol</a></span>) (<span id="stk:87" class="id"><a name="stk:87" class="">stk</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.stack">stack</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="action:88" class="id"><a name="action:88" class="">action</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Grammar.html#arrows_right">arrows_right</a></span> <span class="id">A</span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol_semantic_type">symbol_semantic_type</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:86">symbols_to_pop</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="stk':89" class="id"><a name="stk':89" class="">stk'</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.stack">stack</a></span>) (<span id="sem:90" class="id"><a name="sem:90" class="">sem</a></span> <span class="id">:</span> <span class="id">A</span>)<span class="id">,</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">Prop</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.Nil_pop_spec" class="id"><a name="Make.Nil_pop_spec" class="">Nil_pop_spec</a></span> <span id="stk:93" class="id"><a name="stk:93" class="">stk</a></span> <span id="sem:94" class="id"><a name="sem:94" class="">sem</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#pop_spec:91">pop_spec</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd">[]</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:93">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#sem:94">sem</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:93">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#sem:94">sem</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.Cons_pop_spec" class="id"><a name="Make.Cons_pop_spec" class="">Cons_pop_spec</a></span> <span id="symbols_to_pop:95" class="id"><a name="symbols_to_pop:95" class="">symbols_to_pop</a></span> <span id="st:96" class="id"><a name="st:96" class="">st</a></span> <span id="stk:97" class="id"><a name="stk:97" class="">stk</a></span> <span id="action:98" class="id"><a name="action:98" class="">action</a></span> <span id="sem:99" class="id"><a name="sem:99" class="">sem</a></span> <span id="stk':100" class="id"><a name="stk':100" class="">stk'</a></span> <span id="res:101" class="id"><a name="res:101" class="">res</a></span> <span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#pop_spec:91">pop_spec</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:95">symbols_to_pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:97">stk</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#action:98">action</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#sem:99">sem</a></span>) <span class="id"><a href="MenhirLib.Interpreter.html#stk':100">stk'</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#res:101">res</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#pop_spec:91">pop_spec</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.last_symb_of_non_init_state">last_symb_of_non_init_state</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#st:96">st::symbols_to_pop</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#existT">existT</a></span> <span class="id">_</span> <span class="id"><a href="MenhirLib.Interpreter.html#st:96">st</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#sem:99">sem</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#::list_scope:x_'::'_x">::</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:97">stk</a></span>) <span class="id"><a href="MenhirLib.Interpreter.html#action:98">action</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':100">stk'</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#res:101">res</a></span>.<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="Make.pop_spec_ok" class="id"><a name="Make.pop_spec_ok" class="">pop_spec_ok</a></span> <span class="id">{A:Type}</span> <span id="symbols_to_pop:103" class="id"><a name="symbols_to_pop:103" class="">symbols_to_pop</a></span> <span id="stk:104" class="id"><a name="stk:104" class="">stk</a></span> <span id="Hp:105" class="id"><a name="Hp:105" class="">Hp</a></span> <span id="action:106" class="id"><a name="action:106" class="">action</a></span> <span id="stk':107" class="id"><a name="stk':107" class="">stk'</a></span> <span id="res:108" class="id"><a name="res:108" class="">res:</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.pop">pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:103">symbols_to_pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:104">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hp:105">Hp</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#action:106">action</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#stk':107">stk',</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#res:108">res</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x">&lt;-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.pop_spec">pop_spec</a></span> (<span class="id">A:=A</span>) <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:103">symbols_to_pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:104">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#action:106">action</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':107">stk'</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#res:108">res</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof11')">Proof.</span></div>
+<div class="proofscript" id="proof11">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">stk</span> <span class="id">Hp</span> <span class="id">action</span>.<br/>
+&nbsp;&nbsp;<span class="id">induction</span> <span class="id">symbols_to_pop</span> <span class="gallina-kwd">as</span> <span class="id">[|t</span> <span class="id">symbols_to_pop</span> <span class="id">IH]=&gt;stk</span> <span class="id">Hp</span> <span class="id">action</span> <span class="id">/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span> <span class="id">[=</span> <span class="id">&lt;-</span> <span class="id">&lt;-]</span>. <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span> <span class="id">H</span>. <span class="id">inversion</span> <span class="id">H</span>. <span class="gallina-kwd">by</span> <span class="id">subst_existT</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id">stk</span> <span class="gallina-kwd">as</span> <span class="id">[|[st</span> <span class="id">sem]]=&gt;/=;</span> <span class="id">[by</span> <span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.pop_subproof0">pop_subproof0|]</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">remember</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.pop_subproof">pop_subproof</a></span> <span class="id">t</span> <span class="id">symbols_to_pop</span> <span class="id">stk</span> <span class="id">st</span> <span class="id">Hp</span>) <span class="gallina-kwd">as</span> <span class="id">EQ</span> <span class="id">eqn:eq</span>. <span class="id">clear</span> <span class="id">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> <span class="id">EQ</span>. <span class="id">revert</span> <span class="id">Hp</span> <span class="id">action</span>. <span class="id">rewrite</span> <span class="id">&lt;-</span>(<span class="id">EQ</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span>)<span class="id">=&gt;Hp</span> <span class="id">action</span> <span class="id">?</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.cast_eq">cast_eq</a></span>. <span class="id">rewrite</span> <span class="id">IH</span>. <span class="id">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span>. <span class="gallina-kwd">by</span> <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span> <span class="id">H</span>. <span class="id">inversion</span> <span class="id">H</span>. <span class="gallina-kwd">by</span> <span class="id">subst_existT</span>.<br/>
+Qed.</div>
+<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="Make.pop_preserves_invariant" class="id"><a name="Make.pop_preserves_invariant" class="">pop_preserves_invariant</a></span> <span id="symbols_to_pop:109" class="id"><a name="symbols_to_pop:109" class="">symbols_to_pop</a></span> <span id="stk:110" class="id"><a name="stk:110" class="">stk</a></span> <span id="Hp:111" class="id"><a name="Hp:111" class="">Hp</a></span> <span id="A:112" class="id"><a name="A:112" class="">A</a></span> <span id="action:113" class="id"><a name="action:113" class="">action</a></span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.stack_invariant">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:110">stk</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.stack_invariant">stack_invariant</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.pop">pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:109">symbols_to_pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:110">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hp:111">Hp</a></span> (<span class="id">A:=A</span>) <span class="id"><a href="MenhirLib.Interpreter.html#action:113">action</a></span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof12')">Proof.</span></div>
+<div class="proofscript" id="proof12">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">stk</span> <span class="id">Hp</span> <span class="id">A</span> <span class="id">action</span>. <span class="id">induction</span> <span class="id">symbols_to_pop</span> <span class="gallina-kwd">as</span> <span class="id">[|t</span> <span class="id">q</span> <span class="id">IH]=&gt;//=</span>.<br/>
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">stk</span> <span class="id">Hp</span> <span class="id">A</span> <span class="id">action</span> <span class="id">Hi</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">Hi</span> <span class="gallina-kwd">as</span> <span class="id">[stack</span> <span class="id">Hp'</span> <span class="id">Hpp</span> <span class="id">[|state</span> <span class="id">st</span> <span class="id">stk']]</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.pop_subproof0">pop_subproof0</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">now</span> <span class="id">apply</span> <span class="id">IH</span>.<br/>
+Qed.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="Make.pop_state_valid" class="id"><a name="Make.pop_state_valid" class="">pop_state_valid</a></span> <span id="symbols_to_pop:114" class="id"><a name="symbols_to_pop:114" class="">symbols_to_pop</a></span> <span id="stk:115" class="id"><a name="stk:115" class="">stk</a></span> <span id="Hp:116" class="id"><a name="Hp:116" class="">Hp</a></span> <span id="A:117" class="id"><a name="A:117" class="">A</a></span> <span id="action:118" class="id"><a name="action:118" class="">action</a></span> <span id="lpred:119" class="id"><a name="lpred:119" class="">lpred</a></span> <span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix_pred">prefix_pred</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#lpred:119">lpred</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_stack_of_stack">state_stack_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:115">stk</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="stk':120" class="id"><a name="stk':120" class="">stk'</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.pop">pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:114">symbols_to_pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:115">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hp:116">Hp</a></span> (<span class="id">A:=A</span>) <span class="id"><a href="MenhirLib.Interpreter.html#action:118">action</a></span>) <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_valid_after_pop">state_valid_after_pop</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':120">stk'</a></span>) <span class="id"><a href="MenhirLib.Interpreter.html#symbols_to_pop:114">symbols_to_pop</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#lpred:119">lpred</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof13')">Proof.</span></div>
+<div class="proofscript" id="proof13">
+&nbsp;&nbsp;<span class="id">revert</span> <span class="id">stk</span> <span class="id">Hp</span> <span class="id">A</span> <span class="id">action</span> <span class="id">lpred</span>. <span class="id">induction</span> <span class="id">symbols_to_pop</span> <span class="gallina-kwd">as</span> <span class="id">[|t</span> <span class="id">q</span> <span class="id">IH]=&gt;/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">stk</span> <span class="id">Hp</span> <span class="id">A</span> <span class="id">a</span> <span class="id">lpred</span> <span class="id">Hpp</span>. <span class="id">destruct</span> <span class="id">lpred</span> <span class="gallina-kwd">as</span> <span class="id">[|pred</span> <span class="id">lpred];</span> <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">inversion</span> <span class="id">Hpp</span> <span class="gallina-kwd">as</span> <span class="id">[|?</span> <span class="id">lpred'</span> <span class="id">?</span> <span class="id">pred'</span> <span class="id">Himpl</span> <span class="id">Hpp'</span> <span class="id">eq1</span> <span class="id">eq2];</span> <span class="id">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">Himpl</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">pred'</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk</span>)) <span class="gallina-kwd">as</span> <span class="id">[]</span> <span class="id">eqn:Heqpred'=&gt;//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">stk</span> <span class="gallina-kwd">as</span> <span class="id">[|[]];</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">*</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">inversion</span> <span class="id">eq2;</span> <span class="id">subst;</span> <span class="id">clear</span> <span class="id">eq2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.singleton_state_pred">singleton_state_pred</a></span> <span class="gallina-kwd">in</span> <span class="id">Heqpred'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="id">rewrite</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare_refl">compare_refl</a></span> <span class="gallina-kwd">in</span> <span class="id">Heqpred';</span> <span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">inversion</span> <span class="id">eq2;</span> <span class="id">subst;</span> <span class="id">clear</span> <span class="id">eq2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.singleton_state_pred">singleton_state_pred</a></span> <span class="gallina-kwd">in</span> <span class="id">Heqpred'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">now</span> <span class="id">rewrite</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare_refl">compare_refl</a></span> <span class="gallina-kwd">in</span> <span class="id">Heqpred';</span> <span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">intros</span> <span class="id">stk</span> <span class="id">Hp</span> <span class="id">A</span> <span class="id">a</span> <span class="id">lpred</span> <span class="id">Hpp</span>. <span class="id">destruct</span> <span class="id">stk</span> <span class="gallina-kwd">as</span> <span class="id">[|[]</span> <span class="id">stk]=&gt;//=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.pop_subproof0">pop_subproof0</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">destruct</span> <span class="id">lpred</span> <span class="gallina-kwd">as</span> <span class="id">[|pred</span> <span class="id">lpred];</span> <span class="id">[by</span> <span class="id">constructor|]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">constructor</span>. <span class="id">apply</span> <span class="id">IH</span>. <span class="gallina-kwd">by</span> <span class="id">inversion</span> <span class="id">Hpp</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc"><span class="bracket"><span class="id">step_result</span></span> represents the result of one step of the automaton : it can
+    fail, accept or progress. <span class="bracket"><span class="id">Fail_sr</span></span> means that the input is incorrect.
+    <span class="bracket"><span class="id">Accept_sr</span></span> means that this is the last step of the automaton, and it
+    returns the semantic value of the input word. <span class="bracket"><span class="id">Progress_sr</span></span> means that
+    some progress has been made, but new steps are needed in order to accept
+    a word.
+    For <span class="bracket"><span class="id">Accept_sr</span></span> and <span class="bracket"><span class="id">Progress_sr</span></span>, the result contains the new input buffer.
+    <span class="bracket"><span class="id">Fail_sr</span></span> means that the input word is rejected by the automaton. It is
+    different to <span class="bracket"><span class="id">Err</span></span> (from the error monad), which mean that the automaton is
+    bogus and has perfomed a forbidden action. *</div>
+<span class="vernacular">Inductive</span> <span id="Make.step_result" class="id"><a name="Make.step_result" class="">step_result</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.Fail_sr_full" class="id"><a name="Make.Fail_sr_full" class="">Fail_sr_full:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.state">state</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token">token</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#step_result:121">step_result</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.Accept_sr" class="id"><a name="Make.Accept_sr" class="">Accept_sr:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol_semantic_type">symbol_semantic_type</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.NT">NT</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.start_nt">start_nt</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.init">init</a></span>)) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.buffer">buffer</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#step_result:121">step_result</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.Progress_sr" class="id"><a name="Make.Progress_sr" class="">Progress_sr:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.stack">stack</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.buffer">buffer</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#step_result:121">step_result</a></span>.<br/>
+<br/>
+<br/>
+<div class="doc"><span class="bracket"><span class="id">reduce_step</span></span> does a reduce action :
+   - pops some elements from the stack
+   - execute the action of the production
+   - follows the goto for the produced non terminal symbol *</div>
+<span class="vernacular">Definition</span> <span id="Make.reduce_step" class="id"><a name="Make.reduce_step" class="">reduce_step</a></span> <span id="stk:123" class="id"><a name="stk:123" class="">stk</a></span> <span id="prod:124" class="id"><a name="prod:124" class="">prod</a></span> (<span id="buffer:125" class="id"><a name="buffer:125" class="">buffer</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.buffer">buffer</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="Hval:126" class="id"><a name="Hval:126" class="">Hval</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.valid_for_reduce">valid_for_reduce</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:123">stk</a></span>) <span class="id"><a href="MenhirLib.Interpreter.html#prod:124">prod</a></span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span id="Hi:127" class="id"><a name="Hi:127" class="">Hi</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.stack_invariant">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:123">stk</a></span>))<br/>
+&nbsp;&nbsp;<span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.step_result">step_result</a></span>.<br/>
+<span class="id">refine</span><br/>
+&nbsp;&nbsp;((<span class="gallina-kwd">let</span> <span class="id">'</span>(<span class="id">stk',</span> <span class="id">sem</span>) <span class="gallina-kwd">as</span> <span class="id">ss</span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.pop">pop</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.prod_rhs_rev">prod_rhs_rev</a></span> <span class="id">prod</span>) <span class="id">stk</span> <span class="id">_</span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.prod_action">prod_action</a></span> <span class="id">prod</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_valid_after_pop">state_valid_after_pop</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#fst">fst</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#ss:128">ss</a></span>)) <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="MenhirLib.Interpreter.html#Make.head_states_of_state">head_states_of_state</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk</span>))) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">in</span> <span class="gallina-kwd">fun</span> <span id="Hval':135" class="id"><span id="Hval':129" class="id"><a name="Hval':135" class="">Hval'</a></span></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.goto_table">goto_table</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk'</span>) (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.prod_lhs">prod_lhs</a></span> <span class="id">prod</span>) <span class="gallina-kwd">as</span> <span class="id">goto</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">return</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#goto:130">goto</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk'</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Init">Init</a></span> <span class="id">i</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.prod_lhs">prod_lhs</a></span> <span class="id">prod</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.start_nt">start_nt</a></span> <span class="id">i</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Ninit">Ninit</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#False">False</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>)) <span class="id">-&gt;</span> <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Some">Some</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#exist">exist</a></span> <span class="id">_</span> <span class="id">state_new</span> <span class="id">e</span>) <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="sem:137" class="id"><span id="sem:131" class="id"><a name="sem:137" class="">sem</a></span></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#eq_rect">eq_rect</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">sem</span> <span class="id">_</span> <span class="id">e</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.Progress_sr">Progress_sr</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#existT">existT</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.noninitstate_type">noninitstate_type</a></span> <span class="id">state_new</span> <span class="id"><a href="MenhirLib.Interpreter.html#sem:131">sem::stk'</a></span>) <span class="id">buffer</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#None">None</a></span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="Hval:138" class="id"><span id="Hval:132" class="id"><a name="Hval:138" class="">Hval</a></span></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="sem:139" class="id"><span id="sem:133" class="id"><a name="sem:139" class="">sem</a></span></span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.cast">cast</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol_semantic_type">symbol_semantic_type</a></span> <span class="id">_</span> <span class="id">sem</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.Accept_sr">Accept_sr</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#sem:133">sem</a></span> <span class="id">buffer</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">_</span>))<br/>
+&nbsp;&nbsp;&nbsp;(<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.pop_state_valid">pop_state_valid</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span> <span class="id">_</span>)).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof14')">Proof.</span></div>
+<div class="proofscript" id="proof14">
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">clear</span> <span class="id">-Hi</span> <span class="id">Hval</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">intros</span> <span class="id">_;</span> <span class="id">destruct</span> <span class="id">Hi=&gt;//;</span> <span class="id">eapply</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix_trans">prefix_trans;</a></span> <span class="id">[by</span> <span class="id">apply</span> <span class="id">Hval|eassumption]</span>).<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">clear</span> <span class="id">-Hval</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">intros</span> <span class="id">_;</span> <span class="id">f_equal;</span> <span class="id">specialize</span> (<span class="id">Hval</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#eq_refl">eq_refl</a></span>)<span class="id">;</span> <span class="id">destruct</span> <span class="id">stk'</span> <span class="gallina-kwd">as</span> <span class="id">[|[]]=&gt;//</span>).<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">Hval'</span>. <span class="id">clear</span> <span class="id">-Hval</span> <span class="id">Hval'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">move</span> <span class="id">:</span> <span class="id">Hval</span> <span class="id">=&gt;</span> <span class="id">/</span>(<span class="id">_</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span>) <span class="id">[_</span> <span class="id">/</span>(<span class="id">_</span> <span class="id">_</span> (<span class="id">Hval'</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span>))<span class="id">]</span> <span class="id">Hval2</span> <span class="id">Hgoto;</span> <span class="gallina-kwd">by</span> <span class="id">rewrite</span> <span class="id">Hgoto</span> <span class="gallina-kwd">in</span> <span class="id">Hval2</span>).<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">clear</span> <span class="id">-Hi</span>. <span class="id">abstract</span> <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">Hi</span>.<br/>
+Defined.</div>
+<br/>
+<span class="vernacular">Lemma</span> <span id="Make.reduce_step_stack_invariant_preserved" class="id"><a name="Make.reduce_step_stack_invariant_preserved" class="">reduce_step_stack_invariant_preserved</a></span> <span id="stk:140" class="id"><a name="stk:140" class="">stk</a></span> <span id="prod:141" class="id"><a name="prod:141" class="">prod</a></span> <span id="buffer:142" class="id"><a name="buffer:142" class="">buffer</a></span> <span id="Hv:143" class="id"><a name="Hv:143" class="">Hv</a></span> <span id="Hi:144" class="id"><a name="Hi:144" class="">Hi</a></span> <span id="stk':145" class="id"><a name="stk':145" class="">stk'</a></span> <span id="buffer':146" class="id"><a name="buffer':146" class="">buffer':</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_step">reduce_step</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:140">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#prod:141">prod</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:142">buffer</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hv:143">Hv</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hi:144">Hi</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Progress_sr">Progress_sr</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':145">stk'</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer':146">buffer'</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.stack_invariant">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':145">stk'</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof15')">Proof.</span></div>
+<div class="proofscript" id="proof15">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_step">reduce_step</a></span>.<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id">|-</span> <span class="id">context</span> <span class="id">[pop</span> <span class="id">?symbols_to_pop</span> <span class="id">stk</span> <span class="id">?Hp</span> <span class="id">?action]</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hi':=pop_preserves_invariant</span> <span class="id">symbols_to_pop</span> <span class="id">stk</span> <span class="id">Hp</span> <span class="id">_</span> <span class="id">action</span> (<span class="id">Hi</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span>))<span class="id">;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.pop_state_valid">pop_state_valid</a></span> <span class="id">symbols_to_pop</span> <span class="id">stk</span> <span class="id">Hp</span> <span class="id">_</span> <span class="id">action</span>)<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.pop">pop</a></span> <span class="gallina-kwd">as</span> <span class="id">[stk0</span> <span class="id">sem]=&gt;/=</span>. <span class="id">simpl</span> <span class="gallina-kwd">in</span> <span class="id">Hi'</span>. <span class="id">intros</span> <span class="id">Hv'</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hgoto1:=goto_head_symbs</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk0</span>) (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.prod_lhs">prod_lhs</a></span> <span class="id">prod</span>)).<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hgoto2:=goto_past_state</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk0</span>) (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.prod_lhs">prod_lhs</a></span> <span class="id">prod</span>)).<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">goal</span> <span class="gallina-kwd">with</span> <span class="id">|</span> <span class="id">|-</span> <span class="id">context</span> <span class="id">[fun</span> <span class="id">_</span> <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#True">True</a></span> <span class="id">=&gt;</span> <span class="id">?X]</span> <span class="id">=&gt;</span> <span class="id">generalize</span> <span class="id">X</span> <span class="gallina-kwd">end</span>.<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.goto_table">goto_table</a></span> <span class="gallina-kwd">as</span> <span class="id">[[state_new</span> <span class="id">e]|]</span> <span class="id">eqn:EQgoto=&gt;//</span>.<br/>
+&nbsp;&nbsp;<span class="id">intros</span> <span class="id">_</span> <span class="id">[=</span> <span class="id">&lt;-</span> <span class="id">&lt;-]</span>. <span class="id">constructor=&gt;/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">constructor</span>. <span class="id">eapply</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix_trans">prefix_trans</a></span>. <span class="id">apply</span> <span class="id">Hgoto1</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">Hi'</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.state_stack_of_stack">state_stack_of_stack;</a></span> <span class="id">simpl;</span> <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span> <span class="id">?</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.singleton_state_pred">singleton_state_pred</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">eapply</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix_pred_trans">prefix_pred_trans</a></span>. <span class="id">apply</span> <span class="id">Hgoto2</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">Hi'</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="gallina-kwd">by</span> <span class="id">constructor</span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">One step of parsing. *</div>
+<span class="vernacular">Definition</span> <span id="Make.step" class="id"><a name="Make.step" class="">step</a></span> <span id="stk:147" class="id"><a name="stk:147" class="">stk</a></span> <span id="buffer:148" class="id"><a name="buffer:148" class="">buffer</a></span> (<span id="Hi:149" class="id"><a name="Hi:149" class="">Hi</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.stack_invariant">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:147">stk</a></span>))<span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.step_result">step_result</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.action_table">action_table</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:147">stk</a></span>) <span class="gallina-kwd">as</span> <span class="id">a</span> <span class="gallina-kwd">return</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#a:150">a</a></span> <span class="gallina-kwd">return</span> <span class="gallina-kwd">Prop</span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Default_reduce_act">Default_reduce_act</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#prod">prod</a></span> <span class="id">=&gt;</span> <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Lookahead_act">Lookahead_act</a></span> <span class="id">awt</span> <span class="id">=&gt;</span> <span class="gallina-kwd">forall</span> <span id="t:152" class="id"><a name="t:152" class="">t</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.terminal">terminal,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">awt</span> <span class="id"><a href="MenhirLib.Interpreter.html#t:152">t</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Reduce_act">Reduce_act</a></span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#True">True</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id">_</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Default_reduce_act">Default_reduce_act</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#prod">prod</a></span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="Hv:153" class="id"><a name="Hv:153" class="">Hv</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_step">reduce_step</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:147">stk</a></span> <span class="id">prod</span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:148">buffer</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hv:153">Hv</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hi:149">Hi</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Lookahead_act">Lookahead_act</a></span> <span class="id">awt</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="Hv:154" class="id"><a name="Hv:154" class="">Hv</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.buf_head">buf_head</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:148">buffer</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">tok</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id">awt</span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token_term">token_term</a></span> <span class="id">tok</span>) <span class="gallina-kwd">as</span> <span class="id">a</span> <span class="gallina-kwd">return</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> <span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#a:155">a</a></span> <span class="gallina-kwd">return</span> <span class="gallina-kwd">Prop</span> <span class="gallina-kwd">with</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Reduce_act">Reduce_act</a></span> <span class="id">p</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="id">|</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">_</span> <span class="gallina-kwd">end</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Shift_act">Shift_act</a></span> <span class="id">state_new</span> <span class="id">e</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">let</span> <span id="sem_conv:157" class="id"><a name="sem_conv:157" class="">sem_conv</a></span> <span class="id">:=</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#eq_rect">eq_rect</a></span> <span class="id">_</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol_semantic_type">symbol_semantic_type</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token_sem">token_sem</a></span> <span class="id">tok</span>) <span class="id">_</span> <span class="id">e</span> <span class="gallina-kwd">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.Progress_sr">Progress_sr</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#existT">existT</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.noninitstate_type">noninitstate_type</a></span> <span class="id">state_new</span> <span class="id"><a href="MenhirLib.Interpreter.html#sem_conv:157">sem_conv::stk</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="MenhirLib.Interpreter.html#Make.buf_tail">buf_tail</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:148">buffer</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Reduce_act">Reduce_act</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#prod">prod</a></span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="Hv:158" class="id"><a name="Hv:158" class="">Hv</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_step">reduce_step</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:147">stk</a></span> <span class="id">prod</span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:148">buffer</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hv:158">Hv</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hi:149">Hi</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Fail_act">Fail_act</a></span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.Fail_sr_full">Fail_sr_full</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:147">stk</a></span>) <span class="id">tok</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#Hv:154">Hv</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#I">I</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token_term">token_term</a></span> <span class="id">tok</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_ok">reduce_ok</a></span> <span class="id">_</span>).<br/>
+<br/>
+<span class="vernacular">Lemma</span> <span id="Make.step_stack_invariant_preserved" class="id"><a name="Make.step_stack_invariant_preserved" class="">step_stack_invariant_preserved</a></span> <span id="stk:159" class="id"><a name="stk:159" class="">stk</a></span> <span id="buffer:160" class="id"><a name="buffer:160" class="">buffer</a></span> <span id="Hi:161" class="id"><a name="Hi:161" class="">Hi</a></span> <span id="stk':162" class="id"><a name="stk':162" class="">stk'</a></span> <span id="buffer':163" class="id"><a name="buffer':163" class="">buffer':</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.step">step</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:159">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:160">buffer</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hi:161">Hi</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Progress_sr">Progress_sr</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':162">stk'</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer':163">buffer'</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.stack_invariant">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':162">stk'</a></span>.<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof16')">Proof.</span></div>
+<div class="proofscript" id="proof16">
+&nbsp;&nbsp;<span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.step">step</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_ok">reduce_ok</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk</span>))<span class="id">=&gt;Hred</span>.<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hshift1</span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.shift_head_symbs">shift_head_symbs</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk</span>)).<br/>
+&nbsp;&nbsp;<span class="id">assert</span> (<span class="id">Hshift2</span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.shift_past_state">shift_past_state</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.state_of_stack">state_of_stack</a></span> <span class="id">stk</span>)).<br/>
+&nbsp;&nbsp;<span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.action_table">action_table</a></span> <span class="gallina-kwd">as</span> <span class="id">[prod|awt]=&gt;/=</span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">eauto</span> <span class="gallina-kwd">using</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_step_stack_invariant_preserved">reduce_step_stack_invariant_preserved</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">-</span> <span class="id">set</span> (<span class="id">term</span> <span class="id">:=</span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token_term">token_term</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.buf_head">buf_head</a></span> <span class="id">buffer</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">generalize</span> (<span class="id">Hred</span> <span class="id">term</span>). <span class="id">clear</span> <span class="id">Hred</span>. <span class="id">intros</span> <span class="id">Hred</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">specialize</span> (<span class="id">Hshift1</span> <span class="id">term</span>). <span class="id">specialize</span> (<span class="id">Hshift2</span> <span class="id">term</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> (<span class="id">awt</span> <span class="id">term</span>) <span class="gallina-kwd">as</span> <span class="id">[state_new</span> <span class="id">e|prod|]=&gt;//</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">intros</span> <span class="id">[=</span> <span class="id">&lt;-</span> <span class="id">&lt;-]</span>. <span class="id">constructor=&gt;/=</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">constructor</span>. <span class="id">eapply</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix_trans">prefix_trans</a></span>. <span class="id">apply</span> <span class="id">Hshift1</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">Hi</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">unfold</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.state_stack_of_stack">state_stack_of_stack;</a></span> <span class="id">simpl;</span> <span class="id">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">intros</span> <span class="id">?</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.singleton_state_pred">singleton_state_pred</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">--</span> <span class="id">eapply</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.prefix_pred_trans">prefix_pred_trans</a></span>. <span class="id">apply</span> <span class="id">Hshift2</span>. <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id">Hi</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">*</span> <span class="id">constructor;</span> <span class="gallina-kwd">by</span> <span class="id">apply</span> <span class="id">Hi</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">+</span> <span class="id">eauto</span> <span class="gallina-kwd">using</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.reduce_step_stack_invariant_preserved">reduce_step_stack_invariant_preserved</a></span>.<br/>
+Qed.</div>
+<br/>
+<div class="doc">The parsing use a <span class="bracket"><span class="id">nat</span></span> fuel parameter <span class="bracket"><span class="id">log_n_steps</span></span>, so that we
+    do not have to prove terminaison, which is difficult.
+    Note that <span class="bracket"><span class="id">log_n_steps</span></span> is *not* the fuel in the conventionnal
+    sense: this parameter contains the logarithm (in base 2) of the
+    number of steps to perform. Hence, a value of, e.g., 50 will
+    usually be enough to ensure termination. </div>
+<span class="vernacular">Fixpoint</span> <span id="Make.parse_fix" class="id"><a name="Make.parse_fix" class="">parse_fix</a></span> <span id="stk:164" class="id"><a name="stk:164" class="">stk</a></span> <span id="buffer:165" class="id"><a name="buffer:165" class="">buffer</a></span> (<span id="log_n_steps:166" class="id"><a name="log_n_steps:166" class="">log_n_steps</a></span> <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>) (<span id="Hi:167" class="id"><a name="Hi:167" class="">Hi</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.thunkP">thunkP</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.stack_invariant">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:164">stk</a></span>))<span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">{</a></span> <span id="sr:168" class="id"><a name="sr:168" class="">sr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.step_result">step_result</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">|</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="stk':169" class="id"><a name="stk':169" class="">stk'</a></span> <span id="buffer':170" class="id"><a name="buffer':170" class="">buffer',</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#sr:168">sr</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a">=</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Progress_sr">Progress_sr</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':169">stk'</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer':170">buffer'</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.stack_invariant">stack_invariant</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk':169">stk'</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#6556914db359db999889decec6a4a562">}</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#log_n_steps:166">log_n_steps</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#O">O</a></span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#exist">exist</a></span> <span class="id">_</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.step">step</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:164">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:165">buffer</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hi:167">Hi</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="MenhirLib.Interpreter.html#Make.step_stack_invariant_preserved">step_stack_invariant_preserved</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id"><a href="MenhirLib.Interpreter.html#Hi:167">Hi</a></span>)<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> <span class="id">log_n_steps</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Interpreter.html#parse_fix:171">parse_fix</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:164">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:165">buffer</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#log_n_steps:166">log_n_steps</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Hi:167">Hi</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#exist">exist</a></span> <span class="id">_</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.Progress_sr">Progress_sr</a></span> <span class="id">stk</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.buffer">buffer</a></span>) <span class="id">Hi'</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#parse_fix:171">parse_fix</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#stk:164">stk</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:165">buffer</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#log_n_steps:166">log_n_steps</a></span> (<span class="gallina-kwd">fun</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">Hi'</span> <span class="id">_</span> <span class="id"><a href="MenhirLib.Interpreter.html#buffer:165">buffer</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#eq_refl">eq_refl</a></span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id">sr</span> <span class="id">=&gt;</span> <span class="id">sr</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<div class="doc">The final result of a parsing is either a failure (the automaton
+    has rejected the input word), either a timeout (the automaton has
+    spent all the given <span class="bracket">2^<span class="id">log_n_steps</span></span>), either a parsed semantic value
+    with a rest of the input buffer.
+    Note that we do not make parse_result depend on start_nt for the
+    result type, so that this inductive is extracted without the use
+    of Obj.t in OCaml.  *</div>
+<span class="vernacular">Inductive</span> <span id="Make.parse_result" class="id"><a name="Make.parse_result" class="">parse_result</a></span> <span class="id">{A</span> <span class="id">:</span> <span class="id">Type}</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.Fail_pr_full" class="id"><a name="Make.Fail_pr_full" class="">Fail_pr_full:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.state">state</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.token">token</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#parse_result:174">parse_result</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.Timeout_pr" class="id"><a name="Make.Timeout_pr" class="">Timeout_pr:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#parse_result:174">parse_result</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Make.Parsed_pr" class="id"><a name="Make.Parsed_pr" class="">Parsed_pr:</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A:173">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.buffer">buffer</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#parse_result:174">parse_result</a></span>.<br/>
+<span class="id">Global</span> <span class="vernacular">Arguments</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.parse_result">parse_result</a></span> <span class="id">_</span> <span class="id">:</span> <span class="id">clear</span> <span class="id">implicits</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span> <span id="Make.parse" class="id"><a name="Make.parse" class="">parse</a></span> (<span id="buffer:176" class="id"><a name="buffer:176" class="">buffer</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.buffer">buffer</a></span>) (<span id="log_n_steps:177" class="id"><a name="log_n_steps:177" class="">log_n_steps</a></span> <span class="id">:</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#nat">nat</a></span>)<span class="id">:</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Interpreter.html#Make.parse_result">parse_result</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.symbol_semantic_type">symbol_semantic_type</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.Gram.NT">NT</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#A.start_nt">start_nt</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter.init">init</a></span>))).<br/>
+<span class="id">refine</span> (<span class="gallina-kwd">match</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Specif.html#proj1_sig">proj1_sig</a></span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.parse_fix">parse_fix</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd">[]</a></span> <span class="id">buffer</span> <span class="id">log_n_steps</span> <span class="id">_</span>) <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Fail_sr_full">Fail_sr_full</a></span> <span class="id">st</span> <span class="id">tok</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Fail_pr_full">Fail_pr_full</a></span> <span class="id">st</span> <span class="id">tok</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Accept_sr">Accept_sr</a></span> <span class="id">sem</span> <span class="id">buffer'</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Parsed_pr">Parsed_pr</a></span> <span class="id">sem</span> <span class="id">buffer'</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Progress_sr">Progress_sr</a></span> <span class="id">_</span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Timeout_pr">Timeout_pr</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>).<br/>
+<div><span class="toggleproof" onclick="toggleDisplay('proof17')">Proof.</span></div>
+<div class="proofscript" id="proof17">
+&nbsp;&nbsp;<span class="id">abstract</span> (<span class="id">repeat</span> <span class="id">constructor;</span> <span class="id">intros;</span> <span class="gallina-kwd">by</span> <span class="id">destruct</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.singleton_state_pred">singleton_state_pred</a></span>).<br/>
+Defined.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Interpreter">Interpreter</a></span>.<br/>
+<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Fail_sr_full">Fail_sr_full</a></span> <span class="id">{init}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Accept_sr">Accept_sr</a></span> <span class="id">{init}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<span class="vernacular">Arguments</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make.Progress_sr">Progress_sr</a></span> <span class="id">{init}</span> <span class="id">_</span> <span class="id">_</span>.<br/>
+<br/>
+<span class="vernacular">Notation</span> <span id="Make.Fail_sr" class="id"><a name="Make.Fail_sr" class="">Fail_sr</a></span> <span class="id">:=</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.Fail_sr_full">Fail_sr_full</a></span> <span class="id">_</span> <span class="id">_</span>) (<span class="id">only</span> <span class="id">parsing</span>).<br/>
+<span class="vernacular">Notation</span> <span id="Make.Fail_pr" class="id"><a name="Make.Fail_pr" class="">Fail_pr</a></span> <span class="id">:=</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make.Fail_pr_full">Fail_pr_full</a></span> <span class="id">_</span> <span class="id">_</span>) (<span class="id">only</span> <span class="id">parsing</span>).<br/>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Interpreter.html#Make">Make</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="gallina-kwd">Type</span> <span id="T" class="id"><a name="T" class="">T</a></span>(<span class="id">A:Automaton</span>.<span class="id">T</span>).<br/>
+&nbsp;&nbsp;<span class="vernacular">Include</span> (<span class="id"><a href="MenhirLib.Interpreter.html#Make">Make</a></span> <span class="id"><a href="MenhirLib.Interpreter.html#A">A</a></span>).<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Interpreter.html#T">T</a></span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>

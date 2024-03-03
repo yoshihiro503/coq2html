@@ -1,0 +1,455 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Module Grammar</title>
+<meta name="description" content="Documentation of Coq module Grammar" />
+<link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<link href="coq2html.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="coq2html.js"> </script>
+</head>
+
+<body onload="init('proofscript')">
+
+  <main>
+    <div class="sidebar">
+      <h2>Files</h2>
+      <li><details id="compcert"><summary>compcert</summary>
+          <ul>
+          <li><details id="compcert.backend"><summary>backend</summary>
+          <ul>
+          <li><a href="compcert.backend.Allocation.html">Allocation</a></li>
+<li><a href="compcert.backend.Allocproof.html">Allocproof</a></li>
+<li><a href="compcert.backend.Asmgenproof0.html">Asmgenproof0</a></li>
+<li><a href="compcert.backend.Bounds.html">Bounds</a></li>
+<li><a href="compcert.backend.CleanupLabels.html">CleanupLabels</a></li>
+<li><a href="compcert.backend.CleanupLabelsproof.html">CleanupLabelsproof</a></li>
+<li><a href="compcert.backend.Cminor.html">Cminor</a></li>
+<li><a href="compcert.backend.CminorSel.html">CminorSel</a></li>
+<li><a href="compcert.backend.Cminortyping.html">Cminortyping</a></li>
+<li><a href="compcert.backend.Constprop.html">Constprop</a></li>
+<li><a href="compcert.backend.Constpropproof.html">Constpropproof</a></li>
+<li><a href="compcert.backend.Conventions.html">Conventions</a></li>
+<li><a href="compcert.backend.CSE.html">CSE</a></li>
+<li><a href="compcert.backend.CSEdomain.html">CSEdomain</a></li>
+<li><a href="compcert.backend.CSEproof.html">CSEproof</a></li>
+<li><a href="compcert.backend.Deadcode.html">Deadcode</a></li>
+<li><a href="compcert.backend.Deadcodeproof.html">Deadcodeproof</a></li>
+<li><a href="compcert.backend.Debugvar.html">Debugvar</a></li>
+<li><a href="compcert.backend.Debugvarproof.html">Debugvarproof</a></li>
+<li><a href="compcert.backend.Inlining.html">Inlining</a></li>
+<li><a href="compcert.backend.Inliningproof.html">Inliningproof</a></li>
+<li><a href="compcert.backend.Inliningspec.html">Inliningspec</a></li>
+<li><a href="compcert.backend.Kildall.html">Kildall</a></li>
+<li><a href="compcert.backend.Linear.html">Linear</a></li>
+<li><a href="compcert.backend.Linearize.html">Linearize</a></li>
+<li><a href="compcert.backend.Linearizeproof.html">Linearizeproof</a></li>
+<li><a href="compcert.backend.Lineartyping.html">Lineartyping</a></li>
+<li><a href="compcert.backend.Liveness.html">Liveness</a></li>
+<li><a href="compcert.backend.Locations.html">Locations</a></li>
+<li><a href="compcert.backend.LTL.html">LTL</a></li>
+<li><a href="compcert.backend.Mach.html">Mach</a></li>
+<li><a href="compcert.backend.NeedDomain.html">NeedDomain</a></li>
+<li><a href="compcert.backend.Registers.html">Registers</a></li>
+<li><a href="compcert.backend.Renumber.html">Renumber</a></li>
+<li><a href="compcert.backend.Renumberproof.html">Renumberproof</a></li>
+<li><a href="compcert.backend.RTL.html">RTL</a></li>
+<li><a href="compcert.backend.RTLgen.html">RTLgen</a></li>
+<li><a href="compcert.backend.RTLgenproof.html">RTLgenproof</a></li>
+<li><a href="compcert.backend.RTLgenspec.html">RTLgenspec</a></li>
+<li><a href="compcert.backend.RTLtyping.html">RTLtyping</a></li>
+<li><a href="compcert.backend.SelectDiv.html">SelectDiv</a></li>
+<li><a href="compcert.backend.SelectDivproof.html">SelectDivproof</a></li>
+<li><a href="compcert.backend.Selection.html">Selection</a></li>
+<li><a href="compcert.backend.Selectionproof.html">Selectionproof</a></li>
+<li><a href="compcert.backend.SplitLong.html">SplitLong</a></li>
+<li><a href="compcert.backend.SplitLongproof.html">SplitLongproof</a></li>
+<li><a href="compcert.backend.Stacking.html">Stacking</a></li>
+<li><a href="compcert.backend.Stackingproof.html">Stackingproof</a></li>
+<li><a href="compcert.backend.Tailcall.html">Tailcall</a></li>
+<li><a href="compcert.backend.Tailcallproof.html">Tailcallproof</a></li>
+<li><a href="compcert.backend.Tunneling.html">Tunneling</a></li>
+<li><a href="compcert.backend.Tunnelingproof.html">Tunnelingproof</a></li>
+<li><a href="compcert.backend.Unusedglob.html">Unusedglob</a></li>
+<li><a href="compcert.backend.Unusedglobproof.html">Unusedglobproof</a></li>
+<li><a href="compcert.backend.ValueAnalysis.html">ValueAnalysis</a></li>
+<li><a href="compcert.backend.ValueDomain.html">ValueDomain</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cfrontend"><summary>cfrontend</summary>
+          <ul>
+          <li><a href="compcert.cfrontend.Cexec.html">Cexec</a></li>
+<li><a href="compcert.cfrontend.Clight.html">Clight</a></li>
+<li><a href="compcert.cfrontend.ClightBigstep.html">ClightBigstep</a></li>
+<li><a href="compcert.cfrontend.Cminorgen.html">Cminorgen</a></li>
+<li><a href="compcert.cfrontend.Cminorgenproof.html">Cminorgenproof</a></li>
+<li><a href="compcert.cfrontend.Cop.html">Cop</a></li>
+<li><a href="compcert.cfrontend.Csem.html">Csem</a></li>
+<li><a href="compcert.cfrontend.Csharpminor.html">Csharpminor</a></li>
+<li><a href="compcert.cfrontend.Cshmgen.html">Cshmgen</a></li>
+<li><a href="compcert.cfrontend.Cshmgenproof.html">Cshmgenproof</a></li>
+<li><a href="compcert.cfrontend.Cstrategy.html">Cstrategy</a></li>
+<li><a href="compcert.cfrontend.Csyntax.html">Csyntax</a></li>
+<li><a href="compcert.cfrontend.Ctypes.html">Ctypes</a></li>
+<li><a href="compcert.cfrontend.Ctyping.html">Ctyping</a></li>
+<li><a href="compcert.cfrontend.Initializers.html">Initializers</a></li>
+<li><a href="compcert.cfrontend.Initializersproof.html">Initializersproof</a></li>
+<li><a href="compcert.cfrontend.SimplExpr.html">SimplExpr</a></li>
+<li><a href="compcert.cfrontend.SimplExprproof.html">SimplExprproof</a></li>
+<li><a href="compcert.cfrontend.SimplExprspec.html">SimplExprspec</a></li>
+<li><a href="compcert.cfrontend.SimplLocals.html">SimplLocals</a></li>
+<li><a href="compcert.cfrontend.SimplLocalsproof.html">SimplLocalsproof</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.common"><summary>common</summary>
+          <ul>
+          <li><a href="compcert.common.AST.html">AST</a></li>
+<li><a href="compcert.common.Behaviors.html">Behaviors</a></li>
+<li><a href="compcert.common.Builtins.html">Builtins</a></li>
+<li><a href="compcert.common.Builtins0.html">Builtins0</a></li>
+<li><a href="compcert.common.Determinism.html">Determinism</a></li>
+<li><a href="compcert.common.Errors.html">Errors</a></li>
+<li><a href="compcert.common.Events.html">Events</a></li>
+<li><a href="compcert.common.Globalenvs.html">Globalenvs</a></li>
+<li><a href="compcert.common.Linking.html">Linking</a></li>
+<li><a href="compcert.common.Memdata.html">Memdata</a></li>
+<li><a href="compcert.common.Memory.html">Memory</a></li>
+<li><a href="compcert.common.Memtype.html">Memtype</a></li>
+<li><a href="compcert.common.Separation.html">Separation</a></li>
+<li><a href="compcert.common.Smallstep.html">Smallstep</a></li>
+<li><a href="compcert.common.Switch.html">Switch</a></li>
+<li><a href="compcert.common.Unityping.html">Unityping</a></li>
+<li><a href="compcert.common.Values.html">Values</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.cparser"><summary>cparser</summary>
+          <ul>
+          <li><a href="compcert.cparser.Cabs.html">Cabs</a></li>
+<li><a href="compcert.cparser.Parser.html">Parser</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.driver"><summary>driver</summary>
+          <ul>
+          <li><a href="compcert.driver.Compiler.html">Compiler</a></li>
+<li><a href="compcert.driver.Complements.html">Complements</a></li>
+<li><a href="compcert.driver.Compopts.html">Compopts</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.lib"><summary>lib</summary>
+          <ul>
+          <li><a href="compcert.lib.Axioms.html">Axioms</a></li>
+<li><a href="compcert.lib.BoolEqual.html">BoolEqual</a></li>
+<li><a href="compcert.lib.Coqlib.html">Coqlib</a></li>
+<li><a href="compcert.lib.Decidableplus.html">Decidableplus</a></li>
+<li><a href="compcert.lib.Floats.html">Floats</a></li>
+<li><a href="compcert.lib.FSetAVLplus.html">FSetAVLplus</a></li>
+<li><a href="compcert.lib.Heaps.html">Heaps</a></li>
+<li><a href="compcert.lib.IEEE754_extra.html">IEEE754_extra</a></li>
+<li><a href="compcert.lib.Integers.html">Integers</a></li>
+<li><a href="compcert.lib.Intv.html">Intv</a></li>
+<li><a href="compcert.lib.IntvSets.html">IntvSets</a></li>
+<li><a href="compcert.lib.Iteration.html">Iteration</a></li>
+<li><a href="compcert.lib.Lattice.html">Lattice</a></li>
+<li><a href="compcert.lib.Maps.html">Maps</a></li>
+<li><a href="compcert.lib.Ordered.html">Ordered</a></li>
+<li><a href="compcert.lib.Parmov.html">Parmov</a></li>
+<li><a href="compcert.lib.Postorder.html">Postorder</a></li>
+<li><a href="compcert.lib.UnionFind.html">UnionFind</a></li>
+<li><a href="compcert.lib.Wfsimpl.html">Wfsimpl</a></li>
+<li><a href="compcert.lib.Zbits.html">Zbits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86"><summary>x86</summary>
+          <ul>
+          <li><a href="compcert.x86.Asm.html">Asm</a></li>
+<li><a href="compcert.x86.Asmgen.html">Asmgen</a></li>
+<li><a href="compcert.x86.Asmgenproof.html">Asmgenproof</a></li>
+<li><a href="compcert.x86.Asmgenproof1.html">Asmgenproof1</a></li>
+<li><a href="compcert.x86.Builtins1.html">Builtins1</a></li>
+<li><a href="compcert.x86.CombineOp.html">CombineOp</a></li>
+<li><a href="compcert.x86.CombineOpproof.html">CombineOpproof</a></li>
+<li><a href="compcert.x86.ConstpropOp.html">ConstpropOp</a></li>
+<li><a href="compcert.x86.ConstpropOpproof.html">ConstpropOpproof</a></li>
+<li><a href="compcert.x86.Conventions1.html">Conventions1</a></li>
+<li><a href="compcert.x86.Machregs.html">Machregs</a></li>
+<li><a href="compcert.x86.NeedOp.html">NeedOp</a></li>
+<li><a href="compcert.x86.Op.html">Op</a></li>
+<li><a href="compcert.x86.SelectLong.html">SelectLong</a></li>
+<li><a href="compcert.x86.SelectLongproof.html">SelectLongproof</a></li>
+<li><a href="compcert.x86.SelectOp.html">SelectOp</a></li>
+<li><a href="compcert.x86.SelectOpproof.html">SelectOpproof</a></li>
+<li><a href="compcert.x86.Stacklayout.html">Stacklayout</a></li>
+<li><a href="compcert.x86.ValueAOp.html">ValueAOp</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="compcert.x86_64"><summary>x86_64</summary>
+          <ul>
+          <li><a href="compcert.x86_64.Archi.html">Archi</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq"><summary>Flocq</summary>
+          <ul>
+          <li><details id="Flocq.Calc"><summary>Calc</summary>
+          <ul>
+          <li><a href="Flocq.Calc.Bracket.html">Bracket</a></li>
+<li><a href="Flocq.Calc.Div.html">Div</a></li>
+<li><a href="Flocq.Calc.Operations.html">Operations</a></li>
+<li><a href="Flocq.Calc.Plus.html">Plus</a></li>
+<li><a href="Flocq.Calc.Round.html">Round</a></li>
+<li><a href="Flocq.Calc.Sqrt.html">Sqrt</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Core"><summary>Core</summary>
+          <ul>
+          <li><a href="Flocq.Core.Core.html">Core</a></li>
+<li><a href="Flocq.Core.Defs.html">Defs</a></li>
+<li><a href="Flocq.Core.Digits.html">Digits</a></li>
+<li><a href="Flocq.Core.FIX.html">FIX</a></li>
+<li><a href="Flocq.Core.Float_prop.html">Float_prop</a></li>
+<li><a href="Flocq.Core.FLT.html">FLT</a></li>
+<li><a href="Flocq.Core.FLX.html">FLX</a></li>
+<li><a href="Flocq.Core.FTZ.html">FTZ</a></li>
+<li><a href="Flocq.Core.Generic_fmt.html">Generic_fmt</a></li>
+<li><a href="Flocq.Core.Raux.html">Raux</a></li>
+<li><a href="Flocq.Core.Round_NE.html">Round_NE</a></li>
+<li><a href="Flocq.Core.Round_pred.html">Round_pred</a></li>
+<li><a href="Flocq.Core.Ulp.html">Ulp</a></li>
+<li><a href="Flocq.Core.Zaux.html">Zaux</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.IEEE754"><summary>IEEE754</summary>
+          <ul>
+          <li><a href="Flocq.IEEE754.Binary.html">Binary</a></li>
+<li><a href="Flocq.IEEE754.BinarySingleNaN.html">BinarySingleNaN</a></li>
+<li><a href="Flocq.IEEE754.Bits.html">Bits</a></li>
+          </ul>
+          </details>
+          </li>
+<li><details id="Flocq.Prop"><summary>Prop</summary>
+          <ul>
+          <li><a href="Flocq.Prop.Div_sqrt_error.html">Div_sqrt_error</a></li>
+<li><a href="Flocq.Prop.Double_rounding.html">Double_rounding</a></li>
+<li><a href="Flocq.Prop.Mult_error.html">Mult_error</a></li>
+<li><a href="Flocq.Prop.Plus_error.html">Plus_error</a></li>
+<li><a href="Flocq.Prop.Relative.html">Relative</a></li>
+<li><a href="Flocq.Prop.Round_odd.html">Round_odd</a></li>
+<li><a href="Flocq.Prop.Sterbenz.html">Sterbenz</a></li>
+          </ul>
+          </details>
+          </li>
+          </ul>
+          </details>
+          </li>
+<li><details id="MenhirLib"><summary>MenhirLib</summary>
+          <ul>
+          <li><a href="MenhirLib.Alphabet.html">Alphabet</a></li>
+<li><a href="MenhirLib.Automaton.html">Automaton</a></li>
+<li><a href="MenhirLib.Grammar.html">Grammar</a></li>
+<li><a href="MenhirLib.Interpreter.html">Interpreter</a></li>
+<li><a href="MenhirLib.Interpreter_complete.html">Interpreter_complete</a></li>
+<li><a href="MenhirLib.Interpreter_correct.html">Interpreter_correct</a></li>
+<li><a href="MenhirLib.Main.html">Main</a></li>
+<li><a href="MenhirLib.Validator_classes.html">Validator_classes</a></li>
+<li><a href="MenhirLib.Validator_complete.html">Validator_complete</a></li>
+<li><a href="MenhirLib.Validator_safe.html">Validator_safe</a></li>
+          </ul>
+          </details>
+          </li>
+    </div>
+
+  <div class="coq">
+
+    <div class="content">
+      <p><a href="./index.html">Top</a></p>
+      <h1 class="title">Module Grammar</h1>
+<pre class="ssrdoc">
+                                                                         
+                                  Menhir                                 
+                                                                         
+          Jacques-Henri Jourdan, CNRS, LRI, Université Paris Sud         
+                                                                         
+ Copyright Inria. All rights reserved. This file is distributed under    
+ the terms of the GNU Lesser General Public License as published by the  
+ Free Software Foundation, either version 3 of the License, or (at your  
+ option) any later version, as described in the file LICENSE.            
+                                                                         
+</pre>
+<br/>
+<span class="vernacular">From</span> <span class="id">Coq</span> <span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html">List</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Structures.Orders.html">Orders</a></span>.<br/>
+<span class="vernacular">Import</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ListNotations">ListNotations</a></span>.<br/>
+<span class="vernacular">Require</span> <span class="vernacular">Import</span> <span class="id"><a href="MenhirLib.Alphabet.html">Alphabet</a></span>.<br/>
+<br/>
+<div class="doc">The terminal non-terminal alphabets of the grammar. *</div>
+<span class="vernacular">Module</span> <span class="gallina-kwd">Type</span> <span id="Alphs" class="id"><a name="Alphs" class="">Alphs</a></span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Parameters</span> <span id="Alphs.terminal" class="id"><a name="Alphs.terminal" class="">terminal</a></span> <span id="Alphs.nonterminal" class="id"><a name="Alphs.nonterminal" class="">nonterminal</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id">Global</span> <span class="vernacular">Declare</span> <span class="vernacular">Instance</span> <span id="Alphs.TerminalAlph" class="id"><a name="Alphs.TerminalAlph" class="">TerminalAlph:</a></span> <span class="id"><a href="MenhirLib.Alphabet.html#Alphabet">Alphabet</a></span> <span class="id"><a href="MenhirLib.Grammar.html#Alphs.terminal">terminal</a></span>.<br/>
+&nbsp;&nbsp;<span class="id">Global</span> <span class="vernacular">Declare</span> <span class="vernacular">Instance</span> <span id="Alphs.NonTerminalAlph" class="id"><a name="Alphs.NonTerminalAlph" class="">NonTerminalAlph:</a></span> <span class="id"><a href="MenhirLib.Alphabet.html#Alphabet">Alphabet</a></span> <span class="id"><a href="MenhirLib.Grammar.html#Alphs.nonterminal">nonterminal</a></span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Grammar.html#Alphs">Alphs</a></span>.<br/>
+<br/>
+<div class="doc">Definition of the alphabet of symbols, given the alphabet of terminals
+    and the alphabet of non terminals *</div>
+<span class="vernacular">Module</span> <span id="Symbol" class="id"><a name="Symbol" class="">Symbol</a></span>(<span class="vernacular">Import</span> <span class="id">A:Alphs</span>).<br/>
+<br/>
+&nbsp;&nbsp;<span class="vernacular">Inductive</span> <span id="Symbol.symbol" class="id"><a name="Symbol.symbol" class="">symbol</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span id="Symbol.T" class="id"><a name="Symbol.T" class="">T:</a></span> <span class="id"><a href="MenhirLib.Grammar.html#A.terminal">terminal</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Grammar.html#symbol:3">symbol</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span id="Symbol.NT" class="id"><a name="Symbol.NT" class="">NT:</a></span> <span class="id"><a href="MenhirLib.Grammar.html#A.nonterminal">nonterminal</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Grammar.html#symbol:3">symbol</a></span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="id">Global</span> <span class="id">Program</span> <span class="vernacular">Instance</span> <span id="Symbol.SymbolAlph" class="id"><a name="Symbol.SymbolAlph" class="">SymbolAlph</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Alphabet.html#Alphabet">Alphabet</a></span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.symbol">symbol</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">{</span> <span class="id"><a href="MenhirLib.Alphabet.html#AlphabetComparable">AlphabetComparable</a></span> <span class="id">:=</span> <span class="id">{|</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare">compare</a></span> <span class="id">:=</span> <span class="gallina-kwd">fun</span> <span id="x:5" class="id"><a name="x:5" class="">x</a></span> <span id="y:6" class="id"><a name="y:6" class="">y</a></span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Grammar.html#x:5">x,</a></span> <span class="id"><a href="MenhirLib.Grammar.html#y:6">y</a></span> <span class="gallina-kwd">return</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#comparison">comparison</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.T">T</a></span> <span class="id">_,</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.NT">NT</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Gt">Gt</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.NT">NT</a></span> <span class="id">_,</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.T">T</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#Lt">Lt</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.T">T</a></span> <span class="id">x,</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.T">T</a></span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare">compare</a></span> <span class="id"><a href="MenhirLib.Grammar.html#x:5">x</a></span> <span class="id"><a href="MenhirLib.Grammar.html#y:6">y</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.NT">NT</a></span> <span class="id">x,</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.NT">NT</a></span> <span class="id">y</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare">compare</a></span> <span class="id"><a href="MenhirLib.Grammar.html#x:5">x</a></span> <span class="id"><a href="MenhirLib.Grammar.html#y:6">y</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span> <span class="id">|};</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Alphabet.html#AlphabetFinite">AlphabetFinite</a></span> <span class="id">:=</span> <span class="id">{|</span> <span class="id"><a href="MenhirLib.Alphabet.html#all_list">all_list</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.T">T</a></span> <span class="id"><a href="MenhirLib.Alphabet.html#all_list">all_list++map</a></span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol.NT">NT</a></span> <span class="id"><a href="MenhirLib.Alphabet.html#all_list">all_list</a></span> <span class="id">|}</span> <span class="id">}</span>.<br/>
+<div>&nbsp;&nbsp;<span class="toggleproof" onclick="toggleDisplay('proof1')">Next Obligation.</span></div>
+<div class="proofscript" id="proof1">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">x;</span> <span class="id">destruct</span> <span class="id">y;</span> <span class="id">intuition;</span> <span class="id">apply</span> <span class="id"><a href="MenhirLib.Alphabet.html#compare_antisym">compare_antisym</a></span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div>&nbsp;&nbsp;<span class="toggleproof" onclick="toggleDisplay('proof2')">Next Obligation.</span></div>
+<div class="proofscript" id="proof2">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">x;</span> <span class="id">destruct</span> <span class="id">y;</span> <span class="id">destruct</span> <span class="id">z;</span> <span class="id">intuition;</span> <span class="id">try</span> <span class="id">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare_trans">compare_trans</a></span> <span class="id">_</span> <span class="id">t0</span>)<span class="id">;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">apply</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare_trans">compare_trans</a></span> <span class="id">_</span> <span class="id">n0</span>)<span class="id">;</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<div>&nbsp;&nbsp;<span class="toggleproof" onclick="toggleDisplay('proof3')">Next Obligation.</span></div>
+<div class="proofscript" id="proof3">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">intros</span> <span class="id">x</span> <span class="id">y</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">x;</span> <span class="id">destruct</span> <span class="id">y;</span> <span class="id">try</span> <span class="id">discriminate;</span> <span class="id">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare_eq">compare_eq</a></span> <span class="id">t</span> <span class="id">t0</span>)<span class="id">;</span> <span class="id">now</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> (<span class="id"><a href="MenhirLib.Alphabet.html#compare_eq">compare_eq</a></span> <span class="id">n</span> <span class="id">n0</span>)<span class="id">;</span> <span class="id">now</span> <span class="id">intuition</span>.<br/>
+&nbsp;&nbsp;Defined.</div>
+<div>&nbsp;&nbsp;<span class="toggleproof" onclick="toggleDisplay('proof4')">Next Obligation.</span></div>
+<div class="proofscript" id="proof4">
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">rewrite</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#in_app_iff">in_app_iff</a></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">destruct</span> <span class="id">x;</span> <span class="id">[left</span> <span class="id">|</span> <span class="id">right];</span> <span class="id">apply</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#in_map">in_map;</a></span> <span class="id">apply</span> <span class="id"><a href="MenhirLib.Alphabet.html#all_list_forall">all_list_forall</a></span>.<br/>
+&nbsp;&nbsp;Qed.</div>
+<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol">Symbol</a></span>.<br/>
+<br/>
+<div class="doc">A curryfied function with multiple parameters *</div>
+<span class="vernacular">Definition</span> <span id="arrows_right" class="id"><a name="arrows_right" class="">arrows_right:</a></span> <span class="gallina-kwd">Type</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="gallina-kwd">Type</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#fold_right">fold_right</a></span> (<span class="gallina-kwd">fun</span> <span id="A:9" class="id"><a name="A:9" class="">A</a></span> <span id="B:10" class="id"><a name="B:10" class="">B</a></span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Grammar.html#A:9">A</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Grammar.html#B:10">B</a></span>).<br/>
+<br/>
+<span class="vernacular">Module</span> <span class="gallina-kwd">Type</span> <span id="T" class="id"><a name="T" class="">T</a></span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Include</span> <span class="id"><a href="MenhirLib.Grammar.html#Alphs">Alphs</a></span> <span class="id">&lt;+</span> <span class="id"><a href="MenhirLib.Grammar.html#Symbol">Symbol</a></span>.<br/>
+<br/>
+<div class="doc"><span class="bracket"><span class="id">symbol_semantic_type</span></span> maps a symbols to the type of its semantic
+     values. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.symbol_semantic_type" class="id"><a name="T.symbol_semantic_type" class="">symbol_semantic_type:</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.symbol">symbol</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="gallina-kwd">Type</span>.<br/>
+<br/>
+<div class="doc">The type of productions identifiers *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.production" class="id"><a name="T.production" class="">production</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+&nbsp;&nbsp;<span class="id">Global</span> <span class="vernacular">Declare</span> <span class="vernacular">Instance</span> <span id="T.ProductionAlph" class="id"><a name="T.ProductionAlph" class="">ProductionAlph</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Alphabet.html#Alphabet">Alphabet</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.production">production</a></span>.<br/>
+<br/>
+<div class="doc">Accessors for productions: left hand side, right hand side,
+     and semantic action. The semantic actions are given in the form
+     of curryfied functions, that take arguments in the reverse order. *</div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.prod_lhs" class="id"><a name="T.prod_lhs" class="">prod_lhs:</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.production">production</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.nonterminal">nonterminal</a></span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.prod_rhs_rev" class="id"><a name="T.prod_rhs_rev" class="">prod_rhs_rev:</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.production">production</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#list">list</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.symbol">symbol</a></span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.prod_action" class="id"><a name="T.prod_action" class="">prod_action:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="p:15" class="id"><a name="p:15" class="">p:production,</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#arrows_right">arrows_right</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="MenhirLib.Grammar.html#T.symbol_semantic_type">symbol_semantic_type</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#T.NT">NT</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#T.prod_lhs">prod_lhs</a></span> <span class="id"><a href="MenhirLib.Grammar.html#p:15">p</a></span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.symbol_semantic_type">symbol_semantic_type</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#T.prod_rhs_rev">prod_rhs_rev</a></span> <span class="id"><a href="MenhirLib.Grammar.html#p:15">p</a></span>)).<br/>
+<br/>
+<div class="doc">Tokens are the atomic elements of the input stream: they contain
+     a terminal and a semantic value of the type corresponding to this
+     terminal. </div>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.token" class="id"><a name="T.token" class="">token</a></span> <span class="id">:</span> <span class="gallina-kwd">Type</span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.token_term" class="id"><a name="T.token_term" class="">token_term</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Grammar.html#T.token">token</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.terminal">terminal</a></span>.<br/>
+&nbsp;&nbsp;<span class="vernacular">Parameter</span> <span id="T.token_sem" class="id"><a name="T.token_sem" class="">token_sem</a></span> <span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span id="tok:19" class="id"><a name="tok:19" class="">tok</a></span> <span class="id">:</span> <span class="id"><a href="MenhirLib.Grammar.html#T.token">token,</a></span> <span class="id"><a href="MenhirLib.Grammar.html#T.symbol_semantic_type">symbol_semantic_type</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#T.T">T</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#T.token_term">token_term</a></span> <span class="id"><a href="MenhirLib.Grammar.html#tok:19">tok</a></span>)).<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Grammar.html#T">T</a></span>.<br/>
+<br/>
+<span class="vernacular">Module</span> <span id="Defs" class="id"><a name="Defs" class="">Defs</a></span>(<span class="vernacular">Import</span> <span class="id">G:T</span>).<br/>
+<br/>
+<div class="doc">The semantics of a grammar is defined in two stages. First, we
+    define the notion of parse tree, which represents one way of
+    recognizing a word with a head symbol. Semantic values are stored
+    at the leaves.
+      This notion is defined in two mutually recursive flavours:
+    either for a single head symbol, or for a list of head symbols. </div>
+&nbsp;&nbsp;<span class="vernacular">Inductive</span> <span id="Defs.parse_tree" class="id"><a name="Defs.parse_tree" class="">parse_tree:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="head_symbol:21" class="id"><a name="head_symbol:21" class="">head_symbol:symbol</a></span>) (<span id="word:22" class="id"><a name="word:22" class="">word:list</a></span> <span class="id"><a href="MenhirLib.Grammar.html#G.token">token</a></span>)<span class="id">,</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+<br/>
+<div class="doc">Parse tree for a terminal symbol. </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Defs.Terminal_pt" class="id"><a name="Defs.Terminal_pt" class="">Terminal_pt:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="tok:29" class="id"><a name="tok:29" class="">tok:token</a></span>)<span class="id">,</span> <span class="id"><a href="MenhirLib.Grammar.html#parse_tree:25">parse_tree</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#G.T">T</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#G.token_term">token_term</a></span> <span class="id"><a href="MenhirLib.Grammar.html#tok:29">tok</a></span>)) <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb">[tok]</a></span><br/>
+<br/>
+<div class="doc">Parse tree for a non-terminal symbol.  </div>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Defs.Non_terminal_pt" class="id"><a name="Defs.Non_terminal_pt" class="">Non_terminal_pt:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="prod:30" class="id"><a name="prod:30" class="">prod:production</a></span>) <span class="id">{word:list</span> <span class="id"><a href="MenhirLib.Grammar.html#G.token">token},</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#parse_tree_list:26">parse_tree_list</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#G.prod_rhs_rev">prod_rhs_rev</a></span> <span class="id"><a href="MenhirLib.Grammar.html#prod:30">prod</a></span>) <span class="id"><a href="MenhirLib.Grammar.html#word:31">word</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#parse_tree:25">parse_tree</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#G.NT">NT</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#G.prod_lhs">prod_lhs</a></span> <span class="id"><a href="MenhirLib.Grammar.html#prod:30">prod</a></span>)) <span class="id"><a href="MenhirLib.Grammar.html#word:31">word</a></span><br/>
+<br/>
+&nbsp;&nbsp;<span class="gallina-kwd">with</span> <span id="Defs.parse_tree_list" class="id"><a name="Defs.parse_tree_list" class="">parse_tree_list:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> (<span id="head_symbols_rev:23" class="id"><a name="head_symbols_rev:23" class="">head_symbols_rev:list</a></span> <span class="id"><a href="MenhirLib.Grammar.html#G.symbol">symbol</a></span>) (<span id="word:24" class="id"><a name="word:24" class="">word:list</a></span> <span class="id"><a href="MenhirLib.Grammar.html#G.token">token</a></span>)<span class="id">,</span> <span class="gallina-kwd">Type</span> <span class="id">:=</span><br/>
+<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Defs.Nil_ptl" class="id"><a name="Defs.Nil_ptl" class="">Nil_ptl:</a></span> <span class="id"><a href="MenhirLib.Grammar.html#parse_tree_list:26">parse_tree_list</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd">[]</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd">[]</a></span><br/>
+<br/>
+&nbsp;&nbsp;<span class="id">|</span> <span id="Defs.Cons_ptl" class="id"><a name="Defs.Cons_ptl" class="">Cons_ptl:</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">{head_symbolsq:list</span> <span class="id"><a href="MenhirLib.Grammar.html#G.symbol">symbol}</a></span> <span class="id">{wordq:list</span> <span class="id"><a href="MenhirLib.Grammar.html#G.token">token},</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#parse_tree_list:26">parse_tree_list</a></span> <span class="id"><a href="MenhirLib.Grammar.html#head_symbolsq:32">head_symbolsq</a></span> <span class="id"><a href="MenhirLib.Grammar.html#wordq:33">wordq</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">forall</span> <span class="id">{head_symbolt:symbol}</span> <span class="id">{wordt:list</span> <span class="id"><a href="MenhirLib.Grammar.html#G.token">token},</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#parse_tree:25">parse_tree</a></span> <span class="id"><a href="MenhirLib.Grammar.html#head_symbolt:34">head_symbolt</a></span> <span class="id"><a href="MenhirLib.Grammar.html#wordt:35">wordt</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#parse_tree_list:26">parse_tree_list</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#head_symbolt:34">head_symbolt::head_symbolsq</a></span>) (<span class="id"><a href="MenhirLib.Grammar.html#wordq:33">wordq++wordt</a></span>).<br/>
+<br/>
+<div class="doc">We can now finish the definition of the semantics of a grammar,
+    by giving the semantic value assotiated with a parse tree. </div>
+&nbsp;&nbsp;<span class="vernacular">Fixpoint</span> <span id="Defs.pt_sem" class="id"><a name="Defs.pt_sem" class="">pt_sem</a></span> <span class="id">{head_symbol</span> <span id="word:37" class="id"><a name="word:37" class="">word}</a></span> (<span id="tree:38" class="id"><a name="tree:38" class="">tree:parse_tree</a></span> <span class="id"><a href="MenhirLib.Grammar.html#head_symbol:36">head_symbol</a></span> <span class="id"><a href="MenhirLib.Grammar.html#word:37">word</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#G.symbol_semantic_type">symbol_semantic_type</a></span> <span class="id"><a href="MenhirLib.Grammar.html#head_symbol:36">head_symbol</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Grammar.html#tree:38">tree</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs.Terminal_pt">Terminal_pt</a></span> <span class="id">tok</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Grammar.html#G.token_sem">token_sem</a></span> <span class="id">tok</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs.Non_terminal_pt">Non_terminal_pt</a></span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#prod">prod</a></span> <span class="id">ptl</span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Grammar.html#ptl_sem:44">ptl_sem</a></span> <span class="id">ptl</span> (<span class="id"><a href="MenhirLib.Grammar.html#G.prod_action">prod_action</a></span> <span class="id">prod</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">with</span> <span id="Defs.ptl_sem" class="id"><a name="Defs.ptl_sem" class="">ptl_sem</a></span> <span class="id">{A</span> <span id="head_symbols:40" class="id"><a name="head_symbols:40" class="">head_symbols</a></span> <span id="word:41" class="id"><a name="word:41" class="">word}</a></span> (<span id="tree:42" class="id"><a name="tree:42" class="">tree:parse_tree_list</a></span> <span class="id"><a href="MenhirLib.Grammar.html#head_symbols:40">head_symbols</a></span> <span class="id"><a href="MenhirLib.Grammar.html#word:41">word</a></span>) <span class="id">:</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#arrows_right">arrows_right</a></span> <span class="id"><a href="MenhirLib.Grammar.html#A:39">A</a></span> (<span class="id"><a href="https://coq.inria.fr/library/Coq.Lists.List.html#map">map</a></span> <span class="id"><a href="MenhirLib.Grammar.html#G.symbol_semantic_type">symbol_semantic_type</a></span> <span class="id"><a href="MenhirLib.Grammar.html#head_symbols:40">head_symbols</a></span>) <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x">-&gt;</a></span> <span class="id"><a href="MenhirLib.Grammar.html#A:39">A</a></span> <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Grammar.html#tree:42">tree</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs.Nil_ptl">Nil_ptl</a></span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="act:47" class="id"><a name="act:47" class="">act</a></span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Grammar.html#act:47">act</a></span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs.Cons_ptl">Cons_ptl</a></span> <span class="id">q</span> <span class="id">t</span> <span class="id">=&gt;</span> <span class="gallina-kwd">fun</span> <span id="act:48" class="id"><a name="act:48" class="">act</a></span> <span class="id">=&gt;</span> <span class="id"><a href="MenhirLib.Grammar.html#ptl_sem:44">ptl_sem</a></span> <span class="id">q</span> (<span class="id"><a href="MenhirLib.Grammar.html#act:48">act</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#pt_sem:43">pt_sem</a></span> <span class="id">t</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+&nbsp;&nbsp;<span class="vernacular">Fixpoint</span> <span id="Defs.pt_size" class="id"><a name="Defs.pt_size" class="">pt_size</a></span> <span class="id">{head_symbol</span> <span id="word:50" class="id"><a name="word:50" class="">word}</a></span> (<span id="tree:51" class="id"><a name="tree:51" class="">tree:parse_tree</a></span> <span class="id"><a href="MenhirLib.Grammar.html#head_symbol:49">head_symbol</a></span> <span class="id"><a href="MenhirLib.Grammar.html#word:50">word</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Grammar.html#tree:51">tree</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs.Terminal_pt">Terminal_pt</a></span> <span class="id">_</span> <span class="id">=&gt;</span> <span class="id">1</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs.Non_terminal_pt">Non_terminal_pt</a></span> <span class="id">_</span> <span class="id">l</span> <span class="id">=&gt;</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#S">S</a></span> (<span class="id"><a href="MenhirLib.Grammar.html#ptl_size:56">ptl_size</a></span> <span class="id">l</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">with</span> <span id="Defs.ptl_size" class="id"><a name="Defs.ptl_size" class="">ptl_size</a></span> <span class="id">{head_symbols</span> <span id="word:53" class="id"><a name="word:53" class="">word}</a></span> (<span id="tree:54" class="id"><a name="tree:54" class="">tree:parse_tree_list</a></span> <span class="id"><a href="MenhirLib.Grammar.html#head_symbols:52">head_symbols</a></span> <span class="id"><a href="MenhirLib.Grammar.html#word:53">word</a></span>) <span class="id">:=</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">match</span> <span class="id"><a href="MenhirLib.Grammar.html#tree:54">tree</a></span> <span class="gallina-kwd">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs.Nil_ptl">Nil_ptl</a></span> <span class="id">=&gt;</span> <span class="id">0</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs.Cons_ptl">Cons_ptl</a></span> <span class="id">q</span> <span class="id">t</span> <span class="id">=&gt;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="MenhirLib.Grammar.html#pt_size:55">pt_size</a></span> <span class="id">t</span> <span class="id"><a href="https://coq.inria.fr/library/Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633">+</a></span> <span class="id"><a href="MenhirLib.Grammar.html#ptl_size:56">ptl_size</a></span> <span class="id">q</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<span class="vernacular">End</span> <span class="id"><a href="MenhirLib.Grammar.html#Defs">Defs</a></span>.<br/>
+
+      <div class="footer"><hr/>Generated by <a href="https://github.com/yoshihiro503/coq2html/">a fork of coq2html</a></div>
+    </div>
+  </div>
+    </main>
+</body>
+</html>
