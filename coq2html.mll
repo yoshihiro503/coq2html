@@ -88,45 +88,61 @@ let url_for_module m =
       if starts_with m pref then url_concat url m ^ ".html" else url_for rem
   in url_for !documentation_urls
 
-let directory_mappings : (string * string) list ref = ref []
+let directory_mappings : (string list * string) list ref = ref []
 
 let add_directory_mapping physical_dir path =
-  let physical_dir = if physical_dir = "." then "" else physical_dir in
+  let physical_dir =
+    if physical_dir = "." then []
+    else String.split_on_char '/' physical_dir
+  in
   directory_mappings := (physical_dir, path) :: !directory_mappings
 
+let list_take n xs =
+  let rec iter store = function
+    | (n, _) when n <= 0 -> List.rev store
+    | (n, []) -> List.rev store
+    | (n, x :: xs) -> iter (x :: store) (n - 1, xs)
+  in
+  iter [] (n, xs)
+
+let list_drop n xs =
+  let rec iter = function
+    | (n, xs) when n <= 0 -> xs
+    | (n, []) -> []
+    | (n, _ :: xs) -> iter (n - 1, xs)
+  in
+  iter (n, xs)
+
+let list_max_by measure xs =
+  match xs with
+  | [] -> None
+  | x0 :: xs ->
+     List.fold_left (fun (m, y) x -> if measure x > m then (measure x, x) else (m, y))
+       (measure x0, x0) xs
+     |> snd
+     |> Option.some
+
 let find_directory_mapping physical_path =
+  let is_prefix prefix =
+    list_take (List.length prefix) physical_path = prefix
+  in
   List.filter_map (fun (dir, path) ->
-      if starts_with physical_path dir then Some (dir, path) else None)
+      if is_prefix dir then Some (dir, path) else None)
     !directory_mappings
-  |> List.sort (fun (x,_) (y,_) -> compare (String.length x) (String.length y))
-  |> List.rev
-  |> function
-    | [] -> None
-    | dir :: _ -> Some dir
+  |> list_max_by (fun (dir, _) -> List.length dir)
 
-
-
-(*let module_name_of_file_name f =
-  let concat f = Str.(split (regexp "/")) f
-                 |> List.filter (fun s -> s <> "." && s <> "..")
-                 |> String.concat "."
-  in
-  match List.find_opt (fun (dir, _) -> starts_with f dir) !directory_mappings with
-  | None -> concat f
-  | Some (physical_dir, path) ->
-     Str.(replace_first (regexp_string physical_dir)) path f
-     |> concat
-*)
 let module_name_of_file_name f =
-  let concat f = Str.(split (regexp "/")) f
-                 |> List.filter (fun s -> s <> "." && s <> "..")
-                 |> String.concat "."
-  in
-  match find_directory_mapping f with
+(*  let concat f =
+    String.split_on_char '/' f
+    |> List.filter (fun s -> s <> "." && s <> "..")
+    |> String.concat "."
+  in*)
+  let file_path = String.split_on_char '/' f in
+  match find_directory_mapping file_path with
   | Some (physical_dir, path) ->
-     Str.(replace_first (regexp_string physical_dir)) path f
-     |> concat
-  | None -> concat f
+     path :: list_drop (List.length physical_dir) file_path
+     |> String.concat "."
+  | None -> String.concat "." file_path
 
 (* Produce a HTML link if possible *)
 
@@ -179,7 +195,7 @@ let coq_vernaculars = mkset [
 ]
 
 let coq_gallina_keywords = mkset [
-  "Prop"; "SProp"; "Set"; "Type"; 
+  "Prop"; "SProp"; "Set"; "Type";
   "as"; "at"; "cofix"; "else"; "end"; "fix"; "for"; "forall"; "fun";
   "if"; "in"; "let"; "match"; "return"; "then"; "where"; "with";
   "using"; "with";
@@ -246,7 +262,7 @@ let end_doc () =
 
 let nested_ids_anchor classes ids text =
   let id0 = List.hd ids in
-  let opens = 
+  let opens =
     List.map (fun id ->sprintf "<span id=\"%s\" class=\"id\">"id ) ids
     |> String.concat ""
   in
@@ -323,7 +339,7 @@ let end_proof kwd =
 (* Like Str.global_replace but don't interpret '\1' etc in replacement text *)
 let global_replace re subst txt =
   Str.global_substitute re (fun _ -> subst) txt
-  
+
 let start_html_page modname all_files =
   global_replace (Str.regexp "\\$NAME") modname Resources.header
   |> global_replace (Str.regexp_string "$FILES") (sidebar_files all_files)
@@ -612,7 +628,7 @@ let write_file txt filename =
   let oc = open_out filename in
   output_string oc txt;
   close_out oc
-  
+
 let _ =
   let v_files = ref [] and glob_files = ref [] in
   let process_file f =
