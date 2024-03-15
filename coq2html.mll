@@ -20,10 +20,15 @@ open Generate_index
 
 let current_module = ref ""
 
+let current_definition = ref ""
+
 (* Record cross-references found in .glob files *)
 
 (* (name of module, character position in file) -> cross-reference *)
 let xref_table : (string * int, xref) Hashtbl.t = Hashtbl.create 273
+
+(* Mapping that maps a defined path to the location of references *)
+let xref_reverse_dictionary : (string * string, string * int * string) Hashtbl.t = Hashtbl.create 273
 
 (* Records all module names for which a .glob file is given *)
 let xref_modules : (string, unit) Hashtbl.t = Hashtbl.create 29
@@ -42,7 +47,11 @@ let add_module m =
 let add_reference curmod pos dp sp id ty =
   (*eprintf "add_reference %s %d %s %s %s %s\n" curmod pos dp sp id ty;*)
   if not (Hashtbl.mem xref_table (curmod, pos))
-  then Hashtbl.add xref_table (curmod, pos) (Ref(dp, path sp id, ty))
+  then Hashtbl.add xref_table (curmod, pos) (Ref(dp, path sp id, ty));
+  let definition = !current_definition in
+  Hashtbl.add xref_reverse_dictionary (dp, path sp id) (curmod, pos, definition)
+
+let find_all_usages dp path = Hashtbl.find_all xref_reverse_dictionary (dp, path)
 
 let add_definition curmod pos sp id ty =
   (*eprintf "add_definition %s %d %s %s %s\n" curmod pos sp id ty;*)
@@ -132,11 +141,6 @@ let find_directory_mapping physical_path =
   |> list_max_by (fun (dir, _) -> List.length dir)
 
 let module_name_of_file_name f =
-(*  let concat f =
-    String.split_on_char '/' f
-    |> List.filter (fun s -> s <> "." && s <> "..")
-    |> String.concat "."
-  in*)
   let file_path = String.split_on_char '/' f in
   match find_directory_mapping file_path with
   | Some (physical_dir, path) ->
@@ -260,14 +264,18 @@ let end_doc () =
   set_enum_depth 0;
   fprintf !oc "</div>\n"
 
-let nested_ids_anchor classes ids text =
+let nested_ids_anchor classes ids text references =
   let id0 = List.hd ids in
-  let opens =
-    List.map (fun id ->sprintf "<span id=\"%s\" class=\"id\">"id ) ids
+  let opens = 
+    List.map (fun id ->sprintf {|<span id="%s" class="id">|} id) ids
     |> String.concat ""
   in
   let closes = List.map (fun _ -> "</span>") ids |> String.concat "" in
-  fprintf !oc {|%s<a name="%s" class="%s">%s</a>%s|} opens id0 classes
+  let tooltip_text =
+    references
+    |> String.concat "<br>"
+  in
+  fprintf !oc {|%s<a name="%s" class="%s tooltip"><span class="tooltip-text">%s</span>%s</a>%s|} opens id0 classes tooltip_text  
     text closes
 
 let ident pos id =
@@ -281,11 +289,18 @@ let ident pos id =
   | Link p ->
       fprintf !oc "<span class=\"id\"><a href=\"%s\">%s</a></span>" p id
   | Anchors ps ->
+       let curmod = !current_module in
+       let usages = List.concat_map (find_all_usages curmod) ps in
+       
        let classes =
          if StringSet.mem id mathcomp_hierarchy_builders then
            "hierarchy-builder" else ""
        in
-       nested_ids_anchor classes ps id
+       let references =
+         usages
+         |> List.map (fun (m, pos, name) -> Printf.sprintf {|%s#%s|} m name)
+       in
+       nested_ids_anchor classes ps id references
 
 let space s =
   for _ = 1 to String.length s do fprintf !oc "&nbsp;" done
@@ -579,6 +594,7 @@ and globfile = parse
     space+ (xref as id)
     space* "\n"
       { add_definition !current_module (int_of_string pos) sp id ty;
+        current_definition := path sp id;
         globfile lexbuf }
   | [^ '\n']* "\n"
       { globfile lexbuf }

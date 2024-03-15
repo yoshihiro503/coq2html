@@ -173,6 +173,36 @@ div.content {
     color: white;
 }
 
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+/* text of tooltips */
+.tooltip-text {
+  opacity: 0; /* hidden at first */
+  visibility: hidden; /* hidden at first */
+  position: absolute;
+  left: 50%; /* centered */
+  transform: translateX(-50%); /* centered */
+  bottom: -30px; /* position from the parent element */
+  display: inline-block;
+  padding: 5px;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  line-height: 1.3; /* the height between lines */
+  background: #333; /* background color */
+  color: #fff; /* text color */
+  border-radius: 3px; /* round corners */
+  transition: 0.3s ease-in; /* animation */
+}
+
+/* show the tooltip text when the mouse hover */
+.tooltip:hover .tooltip-text {
+  opacity: 1;
+  visibility: visible;
+}
+
 @media screen and (max-width:960px) {
 
     body {
