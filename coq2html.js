@@ -69,6 +69,23 @@ function setUpSavingDetails() {
     });
 }
 
+function showWindow(id)
+{
+    //const content = '<div id="" style="padding:10px;font-size:12px;color:darkgray;">Contents of window</div>'
+    const content = '<div style="padding:10px;font-size:12px;">hofasdfjkljasdfkaaa</div>';
+    const jsFrame = new JSFrame();
+    const frame = jsFrame.create({
+	title: 'ウィンドウ: '+id,
+	left: 20, top: 20, width: 320, height: 220,
+	movable: true,//マウスで移動可能
+	resizable: true,//マウスでリサイズ可能
+	appearanceName: "popup",
+	html: content
+    });
+    //ウィンドウを表示する
+    frame.show();
+}
+
 function init(cls)
 {
     hideAll(cls);

@@ -276,8 +276,11 @@ let nested_ids_anchor classes ids text references =
     references
     |> String.concat "<br>"
   in
-  fprintf !oc {|%s<a name="%s" class="%s tooltip"><span class="tooltip-text">%s</span>%s</a>%s|} opens id0 classes tooltip_text  
-    text closes
+  fprintf !oc {|%s<a name="%s" class="%s tooltip" onclick="showWindow('%s')">%s</a>
+<span class="tooltip-text">%s</span>
+%s|} opens id0 classes id0 text
+    tooltip_text
+     closes
 
 let ident pos id =
   if StringSet.mem id coq_gallina_keywords then
@@ -299,7 +302,7 @@ let ident pos id =
        in
        let references =
          usages
-         |> List.map (fun (m, pos, name) -> Printf.sprintf {|%s#%s|} m name)
+         |> List.map (fun (m, pos, name) -> Printf.sprintf {|<a href="%s#R%d">%s %s</a>|} m pos m name)
        in
        nested_ids_anchor classes ps id references
 
