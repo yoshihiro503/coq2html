@@ -46,10 +46,11 @@ let add_module m =
 
 let add_reference curmod pos dp sp id ty =
   (*eprintf "add_reference %s %d %s %s %s %s\n" curmod pos dp sp id ty;*)
-  if not (Hashtbl.mem xref_table (curmod, pos))
-  then Hashtbl.add xref_table (curmod, pos) (Ref(dp, path sp id, ty));
-  let definition = !current_definition in
-  Hashtbl.add xref_reverse_dictionary (dp, path sp id) (curmod, pos, definition)
+  if not (Hashtbl.mem xref_table (curmod, pos)) then begin
+    Hashtbl.add xref_table (curmod, pos) (Ref(dp, path sp id, ty));
+    let definition = !current_definition in
+    Hashtbl.add xref_reverse_dictionary (dp, path sp id) (curmod, pos, definition)
+  end
 
 let find_all_usages dp path = Hashtbl.find_all xref_reverse_dictionary (dp, path)
 
