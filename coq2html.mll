@@ -124,13 +124,12 @@ let list_drop n xs =
   iter (n, xs)
 
 let list_max_by measure xs =
-  match xs with
-  | [] -> None
-  | x0 :: xs ->
-     List.fold_left (fun (m, y) x -> if measure x > m then (measure x, x) else (m, y))
-       (measure x0, x0) xs
-     |> snd
-     |> Option.some
+  if xs = [] then None else Some begin
+      let x0, xs = List.hd xs, List.tl xs in
+      List.fold_left (fun (m, y) x -> if measure x > m then (measure x, x) else (m, y))
+        (measure x0, x0) xs
+      |> snd
+    end
 
 let find_directory_mapping physical_path =
   let is_prefix prefix =
@@ -151,7 +150,9 @@ let module_name_of_file_name f =
 
 (* Produce a HTML link if possible *)
 
-type link = Link of string | Anchors of string list | Nolink
+type link = Link of int * string | Anchors of string list | Nolink
+
+let anchor_of_reference pos = !%"--Ref%d--" pos
 
 let crossref m pos =
   (*eprintf "crossref %s %d\n" m pos;*)
@@ -161,9 +162,9 @@ let crossref m pos =
   | Ref(m', p, _) ->
       let url = url_for_module m' in  (* can raise Not_found *)
       if p = "" then
-        Link url
+        Link (pos, url)
       else
-        Link(url ^ "#" ^ (sanitize_linkname p))
+        Link (pos, url ^ "#" ^ (sanitize_linkname p))
   with Not_found ->
     Nolink
 
@@ -290,8 +291,9 @@ let ident pos id =
   else match crossref !current_module pos with
   | Nolink ->
       fprintf !oc "<span class=\"id\">%s</span>" id
-  | Link p ->
-      fprintf !oc "<span class=\"id\"><a href=\"%s\">%s</a></span>" p id
+  | Link (pos, p) ->
+      let anchor = anchor_of_reference pos in
+      fprintf !oc "<span id=\"%s\" class=\"id\"><a href=\"%s\">%s</a></span>" anchor p id
   | Anchors ps ->
        let curmod = !current_module in
        let usages = List.concat_map (find_all_usages curmod) ps in
@@ -302,7 +304,9 @@ let ident pos id =
        in
        let references =
          usages
-         |> List.map (fun (m, pos, name) -> Printf.sprintf {|<a href="%s#R%d">%s %s</a>|} m pos m name)
+         |> List.map (fun (m, pos, name) ->
+             let link = !%"%s#%s" (url_for_module m) (anchor_of_reference pos) in
+             !%{|<a href="%s" target="_blank">%s %d</a>|} link m pos)
        in
        nested_ids_anchor classes ps id references
 
@@ -598,7 +602,12 @@ and globfile = parse
     space+ (xref as id)
     space* "\n"
       { add_definition !current_module (int_of_string pos) sp id ty;
-        current_definition := path sp id;
+        begin match ty with
+        | "def" | "prf" | "ind" | "rec" | "not" | "abbrev" | "ax" ->
+          current_definition := path sp id
+        | "binder" | "mod" | "sec" | "constr" | "scheme" | "proj" | "var" | "inst" | "modtype" -> ()
+        | other -> eprintf "TODO: unsupported definition type: '%s' in %s %s\n" ty !current_module !current_definition
+        end;
         globfile lexbuf }
   | [^ '\n']* "\n"
       { globfile lexbuf }
@@ -625,6 +634,7 @@ let process_v_file all_files f =
   let base_f = Filename.basename pref_f in
   let module_name = !logical_name_base ^ module_name_of_file_name pref_f in
   current_module := module_name;
+  current_definition := "";
   let friendly_name = if !use_short_names then base_f else module_name in
   let ic = open_in f in
   oc := open_out (Filename.concat !output_dir (module_name ^ ".html"));

@@ -71,26 +71,49 @@ function setUpSavingDetails() {
 
 function showWindow(id)
 {
-    //const content = '<div id="" style="padding:10px;font-size:12px;color:darkgray;">Contents of window</div>'
-    const content = '<div style="padding:10px;font-size:12px;">hofasdfjkljasdfkaaa</div>';
+    const target = document.getElementById(id);
+    const body = target.getElementsByClassName("tooltip-text")[0].innerHTML
+    const frame_id = "--frame-" + id + "--";
+    const content = '<div id="'+frame_id+'" style="padding:10px;font-size:12px;">'+body+'</div>';
     const jsFrame = new JSFrame();
     const frame = jsFrame.create({
-	title: 'ウィンドウ: '+id,
-	left: 20, top: 20, width: 320, height: 220,
+	title: id,
+	left: 0, top: 0, width: 320, height: 220,
 	movable: true,//マウスで移動可能
 	resizable: true,//マウスでリサイズ可能
-	appearanceName: "popup",
+//	appearanceName: "popup",
 	html: content
     });
+    const rect = target.getBoundingClientRect();
+    const x = (rect.left + rect.right) / 2;
+    const y = rect.bottom;
+    frame.setPosition(x, y, 'CENTER_TOP');
     //ウィンドウを表示する
     frame.show();
+
+    const elem = document.getElementById(frame_id);
+    const elem_rect = elem.getBoundingClientRect();
+    frame.setSize(frame.width, elem_rect.height + 20)
+}
+
+function openAProofIfInTheProofScript()
+{
+    const hash = location.hash;
+    if (hash) {
+	const id = hash.slice(1);
+	const target = document.getElementById(id);
+	const proofscript = target.closest("div.proofscript");
+	if (proofscript != null) {
+	    toggleDisplay(proofscript.id);
+	}
+    }
 }
 
 function init(cls)
 {
     hideAll(cls);
+    openAProofIfInTheProofScript();
     renderMarkdowns();
     showDarkmodeWidget();
     setUpSavingDetails();
 }
- 

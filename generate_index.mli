@@ -1,3 +1,5 @@
+val (!%) : ('a, unit, string) format -> 'a
+
 type xref =
   | Defs of (string * string) list
   | Ref of string * string * string
