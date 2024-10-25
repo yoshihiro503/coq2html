@@ -246,15 +246,28 @@ let generate_hierarchy_graph xref_table output_dir dot_file =
   Printf.sprintf {|<h2>Mathematical Structures</h2><img src="%s" usemap="#Hierarchy"/>
 %s|} png_filename map
 
+let generate_dependency_graph xref_table output_dir dot_file =
+  let png_filename = "dependency_graph.png" in
+  let png_path = Filename.concat output_dir png_filename in
+  let map_path = Filename.concat output_dir "dependency_graph.map" in
+  Graphviz.from_file dot_file
+  |> Graphviz.generate_file png_path map_path;
+  let map = read_file map_path in
+  Printf.sprintf {|<h2>Dependency Graph</h2><img src="%s" usemap="#depend"/>%s|} png_filename map
+
 (*
  * generate index.html
  *)
-let generate_topfile output_dir all_files xrefs title xref_table hierarchy_graph_dot_file =
-  let body =
-    if hierarchy_graph_dot_file = "" then table xrefs
-    else
-      table xrefs ^ generate_hierarchy_graph xref_table output_dir hierarchy_graph_dot_file
+let generate_topfile output_dir all_files xrefs title xref_table hierarchy_graph_dot_file dependency_dot_file =
+  let hierarchy_graph =
+    if hierarchy_graph_dot_file = "" then "" else
+      generate_hierarchy_graph xref_table output_dir hierarchy_graph_dot_file
   in
+  let dependency_graph =
+    if dependency_dot_file = "" then "" else
+      generate_dependency_graph xref_table output_dir dependency_dot_file
+  in
+  let body = table xrefs ^ hierarchy_graph ^ dependency_graph in
   write_html_file all_files body (Filename.concat output_dir "index.html") title
 
 let is_initial c s =
@@ -289,7 +302,7 @@ let all_files xref_modules =
   |> List.map (String.split_on_char '.')
   |> iter
 
-let generate output_dir (xref_table:XrefTable.t) xref_modules title hierarchy_dot_file =
+let generate output_dir (xref_table:XrefTable.t) xref_modules title hierarchy_dot_file dependency_dot_file =
   let indexed_items =
     List.map (fun c ->
         let items =
@@ -321,4 +334,4 @@ let generate output_dir (xref_table:XrefTable.t) xref_modules title hierarchy_do
   List.iter (fun kind ->
       List.iter (generate_with_capital output_dir (table indexed_items) all_files kind) indexed_items)
     kinds;
-  generate_topfile output_dir all_files indexed_items title xref_table hierarchy_dot_file
+  generate_topfile output_dir all_files indexed_items title xref_table hierarchy_dot_file dependency_dot_file
