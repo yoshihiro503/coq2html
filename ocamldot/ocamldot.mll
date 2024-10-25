@@ -1,10 +1,12 @@
 (* ocamldot.mll, July 1999, Trevor Jim *)
+(* partly based on https://github.com/math-comp/Coq-Combi/ *)
 
 {
 module StringSet =
   Set.Make(struct type t = string let compare = compare end)
 
 let dependencies = ref []
+let nodes = ref StringSet.empty
 let currentSource = ref ""
 let addDepend t =
   let s = !currentSource in
@@ -20,9 +22,9 @@ rule processSource = parse
       { let s = Lexing.lexeme lexbuf in
         let i = String.rindex s '.' in
         let s = String.sub s 0 i in
-        let s = Filename.basename s in
-        let s = String.capitalize s in
+        let s = String.capitalize_ascii s in
         currentSource := s;
+	nodes := StringSet.add s (!nodes);
         processTargets lexbuf }
   | eof
       { () }
@@ -39,8 +41,7 @@ and processTargets = parse
       { let t = Lexing.lexeme lexbuf in
         let i = String.rindex t '.' in
         let t = String.sub t 0 i in
-        let t = Filename.basename t in
-        let t = String.capitalize t in
+        let t = String.capitalize_ascii t in
         addDepend t;
         processTargets lexbuf }
   | eof
@@ -152,9 +153,15 @@ let isEdge graph source target =
 let printGraph graph =
   let printEdges(source,targets) =
     StringSet.iter
-      (fun t -> Printf.printf "  \"%s\" -> \"%s\" ;\n" source t)
-      targets in
-  List.iter printEdges graph
+      (fun t -> Printf.printf "  \"%s\" -> \"%s\" ;\n"
+	  (Filename.basename t) (Filename.basename source))
+      targets
+  in
+    StringSet.iter
+      (fun t -> Printf.printf " \"%s\" [URL=\"%s.html\"];\n" (Filename.basename t) t)
+      !nodes;
+    List.iter printEdges graph
+
 
 (********************************)
 (* Targets of a node in a graph *)
@@ -291,7 +298,6 @@ let getDependFromStdin () =
 let usage = "Usage: ocamldot [options] <files>"
 
 let leftToRight = ref false
-let landscape = ref false
 let roots = ref []
 ;;
 
@@ -300,9 +306,6 @@ Arg.parse
     ("-fullgraph",
      Arg.Clear doKernel,
      "  draw the full graph (default is to draw only the kernel)");
-    ("-landscape",
-     Arg.Set landscape,
-     "  output in landscape format (default is portrait)");
     ("-lr",
      Arg.Set leftToRight,
      "         draw graph from left to right (default is top to bottom)");
@@ -312,12 +315,10 @@ Arg.parse
   ]
   getDependFromFile usage;
 if not(!calledOnFile) then getDependFromStdin();
-print_string "digraph G {\n";
-if !landscape
-then print_string "  size=\"10,7.5\" ;\n  rotate=90 ;\n"
-else print_string "  size=\"7.5,10\" ;\n";
+print_string "digraph depend {\n";
 if (!leftToRight) then print_string "  rankdir = LR ;\n"
 else print_string "  rankdir = TB ;\n";
+print_string "bgcolor=transparent;\n  splines=true;\n  nodesep=1;\n  node [fontsize=18, shape=rect, color=\"#dbc3b6\", style=filled];\n";
 let graph = graphOfEdges(!dependencies) in
 begin
   match !roots with
@@ -333,10 +334,10 @@ begin
       roots;
     print_string "  };\n";
     (* Find the graph reachable from the roots *)
-    let tcGraph = tc graph in          
+    let tcGraph = tc graph in
     let reachable node =
       (List.exists (fun r -> r=node) roots)
-      or
+      ||
       (List.exists (fun r -> isEdge tcGraph r node) roots) in
     let reachableFromRoots =
       List.concat
