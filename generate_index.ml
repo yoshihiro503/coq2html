@@ -225,7 +225,7 @@ let overwrite_dot_file_with_url xref_table dot_file = (* dirty *)
   let node_with_node (mod_, path) =
     let name = String.sub path 0 (String.length path - String.length ".pack_")  in
     let url = mod_ ^ ".html#" ^ name in
-    !%{|%s [URL="%s"]|}  name url
+    !%{|"%s" [URL="%s"]|}  name url
   in
   let links = String.concat "; " (List.map node_with_node all_hb_defs) in
   let tmp = dot_file ^ ".sed" in
@@ -234,7 +234,7 @@ let overwrite_dot_file_with_url xref_table dot_file = (* dirty *)
   Common.shell (!%"mv %s %s" tmp dot_file)
 
 
-let generate_hierarchy_graph xref_table output_dir dot_file =
+let generate_hierarchy_graph title xref_table output_dir dot_file =
   overwrite_dot_file_with_url xref_table dot_file;
   let png_filename = "hierarchy_graph.png" in
   let png_path = Filename.concat output_dir png_filename in
@@ -243,8 +243,8 @@ let generate_hierarchy_graph xref_table output_dir dot_file =
   |> Graphviz.generate_file png_path map_path;
   let map = read_file map_path in
   (*TODO: ↓ The map id (#Hierarchy) should be taken from dot file *)
-  Printf.sprintf {|<h2>Mathematical Structures</h2><img src="%s" usemap="#Hierarchy"/>
-%s|} png_filename map
+  Printf.sprintf {|<h2>Mathematical Structures (%s only)</h2><img src="%s" title usemap="#Hierarchy"/>
+%s|} title png_filename map
 
 let generate_dependency_graph xref_table output_dir dot_file =
   let png_filename = "dependency_graph.png" in
@@ -253,7 +253,7 @@ let generate_dependency_graph xref_table output_dir dot_file =
   Graphviz.from_file dot_file
   |> Graphviz.generate_file png_path map_path;
   let map = read_file map_path in
-  Printf.sprintf {|<h2>Dependency Graph</h2><img src="%s" usemap="#depend"/>%s|} png_filename map
+  Printf.sprintf {|<h2>Clickable Dependency Graph of Files</h2><img src="%s" usemap="#depend"/>%s|} png_filename map
 
 (*
  * generate index.html
@@ -261,7 +261,7 @@ let generate_dependency_graph xref_table output_dir dot_file =
 let generate_topfile output_dir all_files xrefs title xref_table hierarchy_graph_dot_file dependency_dot_file =
   let hierarchy_graph =
     if hierarchy_graph_dot_file = "" then "" else
-      generate_hierarchy_graph xref_table output_dir hierarchy_graph_dot_file
+      generate_hierarchy_graph title xref_table output_dir hierarchy_graph_dot_file
   in
   let dependency_graph =
     if dependency_dot_file = "" then "" else

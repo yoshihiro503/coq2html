@@ -17,7 +17,7 @@ endif
 
 ocamldot$(EXE): ocamldot.mll
 	ocamllex ocamldot.mll
-	ocamlc -o $@ ocamldot.ml
+	ocamlc -annot -o $@ ocamldot.ml
 
 clean:
 	$(RM) ocamldot$(EXE) ocamldot.ml *.cmi *.cmo *.o *.obj

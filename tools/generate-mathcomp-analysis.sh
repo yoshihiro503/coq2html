@@ -14,9 +14,11 @@ ls -l
 FILES=$(find classical/ theories/ -name "*.v" -or -name "*.glob")
 
 coqdep -f _CoqProject > depend.d
+cat -n depend.d >&2
 $DIR/ocamldot/ocamldot depend.d > depend.dot
 sed -i 's/Classical\//mathcomp\.classical\./' depend.dot
 sed -i 's/Theories\//mathcomp\.analysis\./' depend.dot
+sed -i 's/\(".*"\) -> \(".*"\)/\2 -> \1/' depend.dot
 
 $DIR/tools/generate-hierarchy-graph.sh
 
@@ -27,3 +29,5 @@ $DIR/coq2html -title "MathComp-Analysis" -d $OUTDIR -base mathcomp \
   -hierarchy-graph "hierarchy-graph.dot" \
   -dependency-graph "depend.dot" \
   $FILES
+
+cp hierarchy-graph.dot depend.dot $OUTDIR/

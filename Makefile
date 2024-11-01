@@ -1,4 +1,4 @@
-OCAMLOPT=ocamlopt -I +str
+OCAMLOPT=ocamlopt -I +str -annot
 OCAMLLEX=ocamllex
 
 GEN_IDX=generate_index
