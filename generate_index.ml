@@ -302,6 +302,9 @@ let all_files xref_modules =
   |> List.map (String.split_on_char '.')
   |> iter
 
+
+let is_subproof path = String.ends_with ~suffix:"_subproof" path
+
 let generate output_dir (xref_table:XrefTable.t) xref_modules title hierarchy_dot_file dependency_dot_file =
   let indexed_items =
     List.map (fun c ->
@@ -309,8 +312,10 @@ let generate output_dir (xref_table:XrefTable.t) xref_modules title hierarchy_do
           XrefTable.fold (fun (name, pos) xref store ->
             match xref with
             | range, XrefTable.Defs defs ->
-               List.filter (fun (_, typ) -> typ <> "binder") defs
-               |> List.filter (fun (path, _) -> is_initial c path)
+               List.filter (fun (path, _) -> is_initial c path) defs
+               |> List.filter (fun (_, typ) -> typ <> "binder")
+               |> List.filter (fun (_, typ) -> typ <> "var")
+               |> List.filter (fun (path, _) -> not (is_subproof path))
                |> List.map (fun (path, typ) ->
                       let linkname = !%"%s.html#%s" name (sanitize_linkname path) in
                       let module_ = name in
