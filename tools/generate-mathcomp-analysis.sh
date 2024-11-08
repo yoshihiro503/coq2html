@@ -18,7 +18,6 @@ cat -n depend.d >&2
 $DIR/ocamldot/ocamldot depend.d > depend.dot
 sed -i 's/Classical\//mathcomp\.classical\./' depend.dot
 sed -i 's/Theories\//mathcomp\.analysis\./' depend.dot
-sed -i 's/\(".*"\) -> \(".*"\)/\2 -> \1/' depend.dot
 
 $DIR/tools/generate-hierarchy-graph.sh
 

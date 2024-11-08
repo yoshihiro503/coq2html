@@ -7,29 +7,36 @@ module StringSet =
 
 let dependencies = ref []
 let nodes = ref StringSet.empty
-let currentSource = ref ""
-let addDepend t =
-  let s = !currentSource in
+let currentSources = ref StringSet.empty
+let addDepend1 s t =
   if s<>t
   then dependencies := (s,t)::(!dependencies)
+let addDepend t =
+  StringSet.iter (fun s -> addDepend1 s t) !currentSources
+let addSources source =
+  currentSources := StringSet.add source !currentSources
+let clearSources () =
+  currentSources := StringSet.empty
 
 }
 
-rule processSource = parse
-    ['.' '-' '/' 'A'-'Z' 'a'-'z' '_' '\192'-'\214' '\216'-'\246'
+rule processSources = parse
+  | ':'
+      { processTargets lexbuf }
+  | ['.' '-' '/' 'A'-'Z' 'a'-'z' '_' '\192'-'\214' '\216'-'\246'
      '\248'-'\255' '\'' '0'-'9' ]+ '.' ['A'-'Z' 'a'-'z']+
-    [' ' '\009']* ':'
+    [' ' '\009']*
       { let s = Lexing.lexeme lexbuf in
-        let i = String.rindex s '.' in
+        let i = String.index s '.' in
         let s = String.sub s 0 i in
         let s = String.capitalize_ascii s in
-        currentSource := s;
+        addSources s;
 	nodes := StringSet.add s (!nodes);
-        processTargets lexbuf }
+        processSources lexbuf }
   | eof
       { () }
   | _
-      { processSource lexbuf }
+      { processSources lexbuf }
 
 and processTargets = parse
     [' ' '\009']+
@@ -39,7 +46,7 @@ and processTargets = parse
   | ['.' '/' 'A'-'Z' 'a'-'z' '_' '\192'-'\214' '\216'-'\246'
      '\248'-'\255' '\'' '0'-'9' ]+ '.' ['A'-'Z' 'a'-'z']+
       { let t = Lexing.lexeme lexbuf in
-        let i = String.rindex t '.' in
+        let i = String.index t '.' in
         let t = String.sub t 0 i in
         let t = String.capitalize_ascii t in
         addDepend t;
@@ -47,7 +54,8 @@ and processTargets = parse
   | eof
       { () }
   | _
-      { processSource lexbuf }
+      { clearSources ();
+        processSources lexbuf }
 
 {
 
@@ -280,14 +288,14 @@ let getDependFromFile file =
   try
     let ic = open_in file in
     let lexbuf = Lexing.from_channel ic in
-    processSource lexbuf;
+    processSources lexbuf;
     close_in ic
   with Sys_error msg -> ()
   | Exit -> ()
 let getDependFromStdin () =
   try
     let lexbuf = Lexing.from_channel stdin in
-    processSource lexbuf
+    processSources lexbuf
   with Sys_error msg -> ()
   | Exit -> ()
 
