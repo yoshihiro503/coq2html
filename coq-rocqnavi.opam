@@ -1,0 +1,24 @@
+opam-version: "2.0"
+name: "coq-rocqnavi"
+version: "dev"
+synopsis: "Extension of coq2html Document Generator"
+description: """
+Extension of coq2html Document Generator
+"""
+maintainer: "Yoshihiro Imai"
+authors: [
+  "Reynald Affeldt"
+  "Yoshihiro Imai"
+  "Xavier Leroy"
+]
+bug-reports: "https://github.com/affeldt-aist/coq2html/issues"
+dev-repo: "git+https://github.com/yoshihiro503/coq2html.git"
+depends: [
+  "ocaml" {>= "4.14"}
+]
+build: [
+  [make]
+]
+install: [
+  [make "BINDIR=%{bin}%" "install"]
+]
