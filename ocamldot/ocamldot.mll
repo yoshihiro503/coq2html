@@ -324,6 +324,7 @@ Arg.parse
   getDependFromFile usage;
 if not(!calledOnFile) then getDependFromStdin();
 print_string "digraph depend {\n";
+print_string "  dpi = 48;\n";
 if (!leftToRight) then print_string "  rankdir = LR ;\n"
 else print_string "  rankdir = TB ;\n";
 print_string "bgcolor=transparent;\n  splines=true;\n  nodesep=1;\n  node [fontsize=18, shape=rect, color=\"#dbc3b6\", style=filled];\n";
