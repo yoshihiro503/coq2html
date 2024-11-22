@@ -53,7 +53,7 @@ jobs:
       - name: Build coq2html
         run: opam exec -- make
 
-      - run: opam exec -- tools/generate-mathcomp-analysis.sh
+      - run: opam exec -- tools/generate-mathcomp-analysis.sh ${GITHUB_SHA::8}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
