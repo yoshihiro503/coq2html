@@ -44,22 +44,25 @@ jobs:
             coq-released: https://coq.inria.fr/opam/released
             default: https://github.com/ocaml/opam-repository.git
 
+      - name: Setup Coq temporary fix for the Dependency Graph
+        run: opam install -y coq.8.19.2
+
       - name: Build Mathcomp Analysis
         run: cd analysis/ && opam install -y --deps-only . && opam exec -- make all install
 
       - name: Build coq2html
         run: opam exec -- make
 
-      - run: opam exec -- tools/generate-mathcomp-analysis.sh
+      - run: opam exec -- tools/generate-mathcomp-analysis.sh ${GITHUB_SHA::8}
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: 'html/'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4

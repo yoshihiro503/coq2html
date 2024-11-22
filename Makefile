@@ -1,9 +1,11 @@
-OCAMLOPT=ocamlopt -I +str
+OCAMLOPT=ocamlopt -I +str -annot
 OCAMLLEX=ocamllex
 
 GEN_IDX=generate_index
 
 PROJ_OBJS=common.cmx graphviz.cmx range.cmx xrefTable.cmx generate_index.cmx
+
+all: coq2html ocamldot/ocamldot
 
 coq2html: $(PROJ_OBJS:.cmx=.cmi) $(PROJ_OBJS)  coq2html.cmx
 	$(OCAMLOPT) -o coq2html str.cmxa resources.cmx $(PROJ_OBJS) coq2html.cmx
@@ -36,6 +38,7 @@ clean:
 	rm -f coq2html
 	rm -f coq2html.ml resources.ml
 	rm -f *.o *.cm?
+	$(MAKE) -C ocamldot/ clean
 
 PREFIX=/usr/local
 BINDIR=$(PREFIX)/bin
@@ -47,3 +50,7 @@ depend:
 	ocamldep *.mli *.ml > .depend
 
 -include .depend
+
+# ocamldot
+ocamldot/ocamldot: ocamldot/
+	$(MAKE) -C ocamldot/ ocamldot
