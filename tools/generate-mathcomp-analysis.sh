@@ -16,7 +16,8 @@ FILES=$(find classical/ theories/ reals/ reals_stdlib experimental_reals analysi
 
 coqdep -f _CoqProject > depend.d
 cat -n depend.d >&2
-$DIR/ocamldot/ocamldot --style "bgcolor=white;\n  splines=true;\n  nodesep=1;\n  node [fontsize=18, shape=rect, color=\"#dbc3b6\", style=filled];" depend.d > depend.dot
+$DIR/ocamldot/ocamldot --style "bgcolor=white; splines=true; nodesep=1; node [fontsize=18, shape=rect, color=\"#dbc3b6\", style=filled];" depend.d > depend.dot
+
 sed -i 's/Classical/mathcomp\.classical/' depend.dot
 sed -i 's/Theories/mathcomp\.analysis/' depend.dot
 sed -i 's/Reals_stdlib/mathcomp\.reals_stdlib/' depend.dot
