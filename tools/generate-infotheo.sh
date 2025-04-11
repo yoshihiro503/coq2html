@@ -18,6 +18,13 @@ coqdep -f _CoqProject > depend.d
 cat -n depend.d >&2
 $DIR/ocamldot/ocamldot --style "bgcolor=white; splines=true; nodesep=1; node [fontsize=18, shape=rect, color=\"#dbc3b6\", style=filled];" depend.d > depend.dot
 
+sed -i 's/Lib/infotheo\.lib/' depend.dot
+sed -i 's/Probability/infotheo\.probability/' depend.dot
+sed -i 's/Infomation_theory/infotheo\.infomation_theory/' depend.dot
+sed -i 's/Ecc_classic/infotheo\.ecc_classic /' depend.dot
+sed -i 's/Ecc_modern/infotheo\.ecc_modern /' depend.dot
+sed -i 's/Robust/infotheo\.robust/' depend.dot
+sed -i 's/Toy_examples/infotheo\.toy_examples/' depend.dot
 sed -i 's/\//\./g' depend.dot
 
 $DIR/coq2html -title "Infotheo ($COMMIT_HASH)" -d $OUTDIR -base infotheo \
