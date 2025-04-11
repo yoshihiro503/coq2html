@@ -27,12 +27,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Clone Mathcomp Analysis
-        uses: actions/checkout@v4
-        with:
-          repository: math-comp/analysis
-          path: analysis
-
       - name: Setup Graphviz
         uses: ts-graphviz/setup-graphviz@v2
 
@@ -44,16 +38,37 @@ jobs:
             coq-released: https://coq.inria.fr/opam/released
             default: https://github.com/ocaml/opam-repository.git
 
-      - name: Setup Coq temporary fix for the Dependency Graph
-        run: opam install -y coq.8.20.1
-
-      - name: Build Mathcomp Analysis
-        run: cd analysis/ && opam install -y --deps-only . && opam exec -- make all install
-
       - name: Build coq2html
         run: opam exec -- make
 
-      - run: opam exec -- tools/generate-mathcomp-analysis.sh ${GITHUB_SHA::8}
+      - name: Setup Coq temporary fix for the Dependency Graph
+        run: opam install -y coq.8.20.1
+
+      ## Infotheo -------------------
+      - name: Clone Infotheo
+        uses: actions/checkout@v4
+        with:
+          repository: affeldt-aist/infotheo
+          path: infotheo
+          ref: 0.9.1
+
+      - name: Build Infotheo
+        run: cd infotheo/ && opam install -y --deps-only . && opam exec -- make all install
+      - run: opam exec -- tools/generate-infotheo.sh "0.9.1(rocqnavi-${GITHUB_SHA::8})"
+      ## ----------------------------
+
+      ## Mathcomp Analysis ----------
+      - name: Clone Mathcomp Analysis
+        uses: actions/checkout@v4
+        with:
+          repository: math-comp/analysis
+          path: analysis
+          ref: 1.9.0
+
+      - name: Build Mathcomp Analysis
+        run: cd analysis/ && opam install -y --deps-only . && opam exec -- make all install
+      - run: opam exec -- tools/generate-mathcomp-analysis.sh "1.9.0(rocqnavi-${GITHUB_SHA::8})"
+      ## ----------------------------
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
