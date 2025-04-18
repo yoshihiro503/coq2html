@@ -54,7 +54,9 @@ jobs:
 
       - name: Build Infotheo
         run: cd infotheo/ && opam install -y --deps-only . && opam exec -- make all install
-      - run: opam exec -- tools/generate-infotheo.sh "0.9.1(rocqnavi-${GITHUB_SHA::8})"
+      - run: |
+             opam exec -- tools/generate-infotheo.sh "0.9.1(rocqnavi-${GITHUB_SHA::8})"
+             tree html/
       ## ----------------------------
 
       ## Mathcomp Analysis ----------
@@ -67,7 +69,9 @@ jobs:
 
       - name: Build Mathcomp Analysis
         run: cd analysis/ && opam install -y --deps-only . && opam exec -- make all install
-      - run: opam exec -- tools/generate-mathcomp-analysis.sh "1.9.0(rocqnavi-${GITHUB_SHA::8})"
+      - run: |
+          opam exec -- tools/generate-mathcomp-analysis.sh "1.9.0(rocqnavi-${GITHUB_SHA::8})"
+          tree html/
       ## ----------------------------
 
       - name: Setup Pages
@@ -76,7 +80,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: 'html/'
       - name: Deploy to GitHub Pages
         id: deployment
