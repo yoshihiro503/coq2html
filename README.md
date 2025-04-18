@@ -26,9 +26,10 @@ which so far has been relying on a fragile combination of coqdoc and sed scripts
 
 ### Examples of documentation generated using this fork of coq2hml:
 
-* [MathComp-Analysis](https://github.com/math-comp/analysis): https://yoshihiro503.github.io/coq2html/
-* [Monae](https://yoshihiro503.github.io/coq2html/monae/): https://yoshihiro503.github.io/coq2html/monae/
-* [CompCert](https://compcert.org/): https://yoshihiro503.github.io/coq2html/compcert/
+* [MathComp-Analysis](https://github.com/math-comp/analysis): https://yoshihiro503.github.io/coq2html/analysis/
+* [Infotheo](https://github.com/affeldt-aist/infotheo): https://yoshihiro503.github.io/coq2html/infotheo/
+* TODO: [Monae](https://yoshihiro503.github.io/coq2html/monae/): https://yoshihiro503.github.io/coq2html/monae/
+* TODO: [CompCert](https://compcert.org/): https://yoshihiro503.github.io/coq2html/compcert/
 
 ## Usage
 

@@ -3,16 +3,16 @@ set -eux
 MATHCOMP_ANALYSIS=./analysis
 COMMIT_HASH=$1
 DIR=$(pwd `dirname .`)
-OUTDIR=$DIR/html
+OUTDIR=$DIR/html/analysis
 
 rm -rf $OUTDIR
-mkdir $OUTDIR
+mkdir -p $OUTDIR
 
 cd $MATHCOMP_ANALYSIS
 
 ls -l
 
-FILES=$(find classical/ theories/ reals/ reals_stdlib experimental_reals analysis_stdlib -name "*.v" -or -name "*.glob")
+FILES=$(find . -name "*.v" -or -name "*.glob")
 
 coqdep -f _CoqProject > depend.d
 cat -n depend.d >&2
