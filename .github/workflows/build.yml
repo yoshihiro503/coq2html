@@ -18,6 +18,8 @@ jobs:
         ocaml-compiler:
           - 5
           - 4.14
+        coq_version:
+          - "8.20.1"
 
     runs-on: ${{ matrix.os }}
 
@@ -30,4 +32,8 @@ jobs:
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
 
-      - run: eval $(opam env) && make
+      - name: Set-up Rocq for testing
+        run: |
+          opam install coq.${{ matrix.coq_version }}
+
+      - run: eval $(opam env) && make && make test

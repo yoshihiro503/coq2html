@@ -34,6 +34,11 @@ resources.ml: $(RESOURCES:%=coq2html.%)
          echo ''; \
          done) > resources.ml
 
+.PHONY: test
+
+test: coq2html
+	./test.sh
+
 clean:
 	rm -f coq2html
 	rm -f coq2html.ml resources.ml
