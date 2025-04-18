@@ -44,20 +44,8 @@ jobs:
       - name: Setup Coq temporary fix for the Dependency Graph
         run: opam install -y coq.8.20.1
 
-      ## Infotheo -------------------
-      - name: Clone Infotheo
-        uses: actions/checkout@v4
-        with:
-          repository: affeldt-aist/infotheo
-          path: infotheo
-          ref: 0.9.1
-
-      - name: Build Infotheo
-        run: cd infotheo/ && opam install -y --deps-only . && opam exec -- make all install
-      - run: |
-             opam exec -- tools/generate-infotheo.sh "0.9.1(rocqnavi-${GITHUB_SHA::8})"
-             tree html/
-      ## ----------------------------
+      - name: top site
+        run: mkdir html && cp -r .github/workflows/resources/* html/
 
       ## Mathcomp Analysis ----------
       - name: Clone Mathcomp Analysis
@@ -72,6 +60,21 @@ jobs:
       - run: |
           opam exec -- tools/generate-mathcomp-analysis.sh "1.9.0(rocqnavi-${GITHUB_SHA::8})"
           tree html/
+      ## ----------------------------
+
+      ## Infotheo -------------------
+      - name: Clone Infotheo
+        uses: actions/checkout@v4
+        with:
+          repository: affeldt-aist/infotheo
+          path: infotheo
+          ref: 0.9.1
+
+      - name: Build Infotheo
+        run: cd infotheo/ && opam install -y --deps-only . && opam exec -- make all install
+      - run: |
+             opam exec -- tools/generate-infotheo.sh "0.9.1(rocqnavi-${GITHUB_SHA::8})"
+             tree html/
       ## ----------------------------
 
       - name: Setup Pages
