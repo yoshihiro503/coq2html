@@ -6,10 +6,10 @@ GEN_IDX=generate_index
 
 PROJ_OBJS=common.cmx graphviz.cmx range.cmx xrefTable.cmx generate_index.cmx
 
-all: coq2html ocamldot/ocamldot
+all: $(OUTPUT) ocamldot/ocamldot
 
 $(OUTPUT): $(PROJ_OBJS:.cmx=.cmi) $(PROJ_OBJS) $(OUTPUT).cmx
-	$(OCAMLOPT) -o $(OUTPUT) str.cmxa resources.cmx $(PROJ_OBJS) coq2html.cmx
+	$(OCAMLOPT) -o $(OUTPUT) str.cmxa resources.cmx $(PROJ_OBJS) $(OUTPUT).cmx
 
 
 %.cmx: %.ml
@@ -23,27 +23,27 @@ $(OUTPUT): $(PROJ_OBJS:.cmx=.cmi) $(PROJ_OBJS) $(OUTPUT).cmx
 
 generate_index.cmx: resources.cmx
 
-coq2html.cmx: resources.cmx
+$(OUTPUT).cmx: resources.cmx
 resources.cmx: resources.cmi
 
 RESOURCES=header footer css js redirect
 
-resources.ml: $(RESOURCES:%=coq2html.%)
+resources.ml: $(RESOURCES:%=$(OUTPUT).%)
 	(for i in $(RESOURCES); do \
          echo "let $$i = {xxx|"; \
-         cat coq2html.$$i; \
+         cat $(OUTPUT).$$i; \
          echo '|xxx}'; \
          echo ''; \
          done) > resources.ml
 
 .PHONY: test
 
-test: coq2html
+test: $(OUTPUT)
 	./test.sh
 
 clean:
 	rm -f $(OUTPUT)
-	rm -f coq2html.ml resources.ml
+	rm -f $(OUTPUT).ml resources.ml
 	rm -f *.o *.cm?
 	$(MAKE) -C ocamldot/ clean
 

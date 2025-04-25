@@ -28,7 +28,7 @@ sed -i 's/\//\./g' depend.dot
 
 $DIR/tools/generate-hierarchy-graph.sh
 
-$DIR/coq2html -title "MathComp-Analysis($COMMIT_HASH)" -d $OUTDIR -base mathcomp \
+$DIR/rocqnavi -title "MathComp-Analysis($COMMIT_HASH)" -d $OUTDIR -base mathcomp \
   -Q theories analysis -coqlib https://coq.inria.fr/doc/V8.20.1/stdlib/ \
   -external https://math-comp.github.io/htmldoc_2_1_0/ mathcomp.ssreflect \
   -external https://math-comp.github.io/htmldoc_2_1_0/ mathcomp.algebra \

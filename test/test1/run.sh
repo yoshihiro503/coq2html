@@ -3,7 +3,7 @@ set -eux
 
 DIR=$(cd $(dirname $0) && pwd)
 
-RocqNavi=$DIR/../../coq2html
+RocqNavi=$DIR/../../rocqnavi
 
 rm -rf $DIR/html
 mkdir $DIR/html
@@ -15,5 +15,5 @@ coqc $VFiles
 GlobFiles="Main.glob"
 $RocqNavi -title "test1" -d ./html $VFiles $GlobFiles
 
-diff -r --exclude=coq2html.css --exclude=coq2html.js \
+diff -r --exclude=rocqnavi.css --exclude=rocqnavig.js \
   $DIR/expected_html $DIR/html

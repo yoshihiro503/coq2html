@@ -732,7 +732,7 @@ let _ =
        ]),
       "<url> <coqdir> Set base URL for linking references whose names start with <coqdir>";
     "-no-css", Arg.Clear generate_css,
-      "   Do not add coq2html.css to the output directory";
+      "   Do not add rocqnavi.css to the output directory";
     "-redirect", Arg.Set generate_redirects,
       "   Generate redirection files modname.html -> coqdir.modname.html";
     "-short-names", Arg.Set use_short_names,
@@ -743,7 +743,7 @@ let _ =
       "   Show the dependency graph of <dot-file> on the index.html";
   ])
   process_file
-  "Usage: coq2html [options] file.glob ... file.v ...\nOptions are:";
+  "Usage: rocqnavi [options] file.glob ... file.v ...\nOptions are:";
   if !v_files = [] then begin
     eprintf "No .v file provided, aborting\n";
     exit 1
@@ -761,7 +761,7 @@ let _ =
   let all_files = Generate_index.all_files xref_modules in
   List.iter (process_v_file all_files) (List.rev !v_files);
   Generate_index.generate !output_dir !xref_table xref_modules !title !hierarchy_graph_dot_file !dependency_graph_dot_file;
-  write_file Resources.js (Filename.concat !output_dir "coq2html.js");
+  write_file Resources.js (Filename.concat !output_dir "rocqnavi.js");
   if !generate_css then
-    write_file Resources.css (Filename.concat !output_dir "coq2html.css")
+    write_file Resources.css (Filename.concat !output_dir "rocqnavi.css")
 }
