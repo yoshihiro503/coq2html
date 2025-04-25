@@ -1,6 +1,5 @@
 on:
   push:
-#    branches: ["mcahtml"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -38,7 +37,7 @@ jobs:
             coq-released: https://coq.inria.fr/opam/released
             default: https://github.com/ocaml/opam-repository.git
 
-      - name: Build coq2html
+      - name: Build rocqnavi
         run: opam exec -- make
 
       - name: Setup Coq temporary fix for the Dependency Graph
@@ -53,7 +52,7 @@ jobs:
         with:
           repository: math-comp/analysis
           path: analysis
-          ref: 1.9.0
+          ref: 1.10.0
 
       - name: Build Mathcomp Analysis
         run: cd analysis/ && opam install -y --deps-only . && opam exec -- make all install

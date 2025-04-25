@@ -1,14 +1,16 @@
 OCAMLOPT=ocamlopt -I +str -annot
 OCAMLLEX=ocamllex
+OUTPUT=rocqnavi
 
 GEN_IDX=generate_index
 
 PROJ_OBJS=common.cmx graphviz.cmx range.cmx xrefTable.cmx generate_index.cmx
 
-all: coq2html ocamldot/ocamldot
+all: $(OUTPUT) ocamldot/ocamldot
 
-coq2html: $(PROJ_OBJS:.cmx=.cmi) $(PROJ_OBJS)  coq2html.cmx
-	$(OCAMLOPT) -o coq2html str.cmxa resources.cmx $(PROJ_OBJS) coq2html.cmx
+$(OUTPUT): $(PROJ_OBJS:.cmx=.cmi) $(PROJ_OBJS) $(OUTPUT).cmx
+	$(OCAMLOPT) -o $(OUTPUT) str.cmxa resources.cmx $(PROJ_OBJS) $(OUTPUT).cmx
+
 
 %.cmx: %.ml
 	$(OCAMLOPT) -c $*.ml
@@ -21,27 +23,27 @@ coq2html: $(PROJ_OBJS:.cmx=.cmi) $(PROJ_OBJS)  coq2html.cmx
 
 generate_index.cmx: resources.cmx
 
-coq2html.cmx: resources.cmx
+$(OUTPUT).cmx: resources.cmx
 resources.cmx: resources.cmi
 
 RESOURCES=header footer css js redirect
 
-resources.ml: $(RESOURCES:%=coq2html.%)
+resources.ml: $(RESOURCES:%=$(OUTPUT).%)
 	(for i in $(RESOURCES); do \
          echo "let $$i = {xxx|"; \
-         cat coq2html.$$i; \
+         cat $(OUTPUT).$$i; \
          echo '|xxx}'; \
          echo ''; \
          done) > resources.ml
 
 .PHONY: test
 
-test: coq2html
+test: $(OUTPUT)
 	./test.sh
 
 clean:
-	rm -f coq2html
-	rm -f coq2html.ml resources.ml
+	rm -f $(OUTPUT)
+	rm -f $(OUTPUT).ml resources.ml
 	rm -f *.o *.cm?
 	$(MAKE) -C ocamldot/ clean
 
@@ -49,7 +51,7 @@ PREFIX=/usr/local
 BINDIR=$(PREFIX)/bin
 
 install:
-	install coq2html $(BINDIR)/coq2html
+	install $(OUPUT) $(BINDIR)/$(OUTPUT)
 
 depend:
 	ocamldep *.mli *.ml > .depend

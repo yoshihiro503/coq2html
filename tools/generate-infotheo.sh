@@ -27,7 +27,7 @@ sed -i 's/Robust/infotheo\.robust/' depend.dot
 sed -i 's/Toy_examples/infotheo\.toy_examples/' depend.dot
 sed -i 's/\//\./g' depend.dot
 
-$DIR/coq2html -title "Infotheo ($COMMIT_HASH)" -d $OUTDIR -base infotheo \
+$DIR/rocqnavi -title "Infotheo ($COMMIT_HASH)" -d $OUTDIR -base infotheo \
   -coqlib https://coq.inria.fr/doc/V8.20.1/stdlib/ \
   -external https://math-comp.github.io/htmldoc_2_1_0/ mathcomp.ssreflect \
   -external https://math-comp.github.io/htmldoc_2_1_0/ mathcomp.algebra \
