@@ -51,7 +51,7 @@ PREFIX=/usr/local
 BINDIR=$(PREFIX)/bin
 
 install:
-	install $(OUPUT) $(BINDIR)/$(OUTPUT)
+	install $(OUTPUT) $(BINDIR)/$(OUTPUT)
 
 depend:
 	ocamldep *.mli *.ml > .depend
