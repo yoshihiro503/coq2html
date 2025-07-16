@@ -8,6 +8,7 @@ on:
 jobs:
   generate-artifact:
     runs-on: ubuntu-latest
+    continue-on-error: true  # ← If a job fails, do not make it a total failure
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,7 +37,7 @@ jobs:
         with:
           repository: affeldt-aist/infotheo
           path: infotheo
-          fetch-tags: 0.9.1
+          fetch-tags: 0.9.4
 
       - name: Setup Graphviz
         uses: ts-graphviz/setup-graphviz@v2
@@ -52,11 +53,15 @@ jobs:
       - name: Build rocqnavi
         run: opam install -y --deps-only . && opam exec -- make
 
+      - name: Set-up Rocq
+        run: |
+          opam install -y coq.8.20.1
+
       - name: Build Infotheo
         run: cd infotheo/ && opam install -y --deps-only . && opam exec -- make all install
 
       - run: |
-             opam exec -- tools/generate-infotheo.sh "0.9.1(rocqnavi-${GITHUB_SHA::8})"
+             opam exec -- tools/generate-infotheo.sh "0.9.4(rocqnavi-${GITHUB_SHA::8})"
              tree html/
 
       - name: Upload htmldoc as artifacts
