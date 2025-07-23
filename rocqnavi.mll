@@ -16,6 +16,7 @@
 open Printf
 open Common
 open Generate_index
+module K = Glob_kind
 
 let warn lexbuf message =
   let open Lexing in
@@ -47,11 +48,11 @@ let add_module m =
   Hashtbl.add xref_modules m ()
 
 let add_reference curmod pos_from pos_to dp sp id ty =
-  let tbl = XrefTable.add_reference !xref_table curmod pos_from pos_to dp (path sp id) ty in
+  let tbl = XrefTable.add_reference !xref_table curmod pos_from pos_to dp (path sp id) (Glob_kind.of_string ty) in
   xref_table := tbl
 
 let add_definition curmod pos_from pos_to sp id ty =
-  let tbl = XrefTable.add_definition !xref_table curmod pos_from pos_to (path sp id) ty in
+  let tbl = XrefTable.add_definition !xref_table curmod pos_from pos_to (path sp id) (Glob_kind.of_string ty) in
   xref_table := tbl
 
 (* Map module names to URLs *)
@@ -142,7 +143,7 @@ let module_name_of_file_name f =
 
 (* Produce a HTML link if possible *)
 
-type link = Link of int * string | Anchors of int * string list | Nolink of int option
+type link = Link of int * string | Anchors of int * (string * Glob_kind.t) list | Nolink of int option
 
 let re_sane_path = Str.regexp "[A-Za-z0-9_.\x80-\xFF]+$"
 
@@ -151,11 +152,11 @@ let find_pos xref_table (m, pos) = XrefTable.find xref_table m pos
 let crossref m pos max_pos =
 (*  eprintf "crossref %s %d\n" m pos;*)
   match find_pos !xref_table (m, pos) with
-  | Some (_range, Defs [(path, "not")]) ->
+  | Some (_range, Defs [(path, Notation)]) ->
     let pos' = pos + String.length path in
-    Anchors (pos', [sanitize_linkname path])
+    Anchors (pos', [(sanitize_linkname path, Notation)])
   | Some (range, Defs defs) ->
-    Anchors (snd range + 1, List.map (fun (path, _) -> sanitize_linkname path) defs)
+    Anchors (snd range + 1, List.map (fun (path, kind) -> (sanitize_linkname path, kind)) defs)
   | Some (range, Ref(m', p, _)) ->
       let url = url_for_module m' in
       if p = "" then
@@ -269,15 +270,30 @@ let end_doc () =
   set_enum_depth 0;
   fprintf !oc "</div>\n"
 
-let nested_ids_anchor classes ids text =
-  let id0 = List.hd ids in
+(* Whether type should be displayed or not *)
+let coqtop_for_type_infomation : Coqtop_command.conn option ref = ref None
+
+let nested_ids_anchor ?coqtop classes ids text =
+  let (id0, kind0) = List.hd ids in
+  let ids = List.map fst ids in
   let opens =
     List.map (fun id ->sprintf "<span id=\"%s\" class=\"id\">"id ) ids
     |> String.concat ""
   in
   let closes = List.map (fun _ -> "</span>") ids |> String.concat "" in
-  sprintf {|%s<a name="%s" class="%s">%s</a>%s|} opens id0 classes
-    (escaped text) closes
+  match coqtop with
+  | Some conn when kind0 = K.Definition
+                   || kind0 = K.Other "prf" ->
+     let type_infomation =
+       match Coqtop_command.about conn id0 with
+       | Ok info -> info
+       | Error e -> !%"ERR:%s" e
+     in
+     sprintf {|%s<a name="%s" class="%s" title="%s">%s</a>%s|}
+       opens id0 classes type_infomation (escaped text) closes
+  | _ ->
+     sprintf {|%s<a name="%s" class="%s">%s</a>%s|} opens id0 classes
+       (escaped text) closes
 
 let is_gallina_keyword id =
   StringSet.find_opt id coq_gallina_keywords
@@ -286,7 +302,7 @@ let is_vernacular id =
   StringSet.to_seq coq_vernaculars
   |> Seq.find (fun key -> String.starts_with ~prefix:key id)
 
-let ident_partial pos id =
+let ident_partial ?coqtop pos id =
   let name pos' id =
     if pos' - pos > String.length id then id
     else String.sub id 0 (pos' - pos)
@@ -317,13 +333,13 @@ let ident_partial pos id =
          if StringSet.mem id mathcomp_hierarchy_builders then
            "hierarchy-builder" else ""
        in
-       pos', nested_ids_anchor classes ps (name pos' id)
+       pos', nested_ids_anchor ?coqtop classes ps (name pos' id)
 
 let idents pos id =
 (*  eprintf "idents: %d '%s'\n" pos id;*)
   let rec iter pos id =
     if id = "" then () else begin
-      let (pos', tags) = ident_partial pos id in
+      let (pos', tags) = ident_partial ?coqtop:!coqtop_for_type_infomation pos id in
       fprintf !oc "%s" tags;
       let rpos' = pos' - pos in
       if pos' <= pos then begin
@@ -685,11 +701,13 @@ let generate_redirects = ref false
 let hierarchy_graph_dot_file = ref ""
 let dependency_graph_dot_file = ref ""
 let index_blacklist_file = ref ""
+let show_type_infomation_using_coqtop_process = ref false
 
-let process_v_file all_files f =
+let process_v_file ?coqtop_conn all_files f =
   let pref_f = Filename.chop_suffix f ".v" in
   let base_f = Filename.basename pref_f in
   let module_name = !logical_name_base ^ module_name_of_file_name pref_f in
+  Option.iter (fun conn -> ignore @@ Coqtop_command.send ~wait:3.0 conn (!%"Require Import %s.\n" module_name)) coqtop_conn;
   current_module := module_name;
   let friendly_name = if !use_short_names then base_f else module_name in
   let ic = open_in f in
@@ -717,7 +735,7 @@ let write_file txt filename =
   output_string oc txt;
   close_out oc
 
-let _ =
+let () =
   let v_files = ref [] and glob_files = ref [] in
   let process_file f =
     if Filename.check_suffix f ".v" then
@@ -731,7 +749,7 @@ let _ =
     "-title", Arg.String (fun s -> title := s),
       "<title>  Set the title of the index.html";
     "-base", Arg.String (fun s -> logical_name_base := s ^ "."),
-      "<coqdir>  Set the name space for the modules being processed";
+      "DEPRECATED: use -Q\n<coqdir>  Set the name space for the modules being processed";
     "-coqlib", Arg.String (fun s -> add_documentation_url "Coq" s),
       "<url>   Set base URL for Coq standard library";
     "-d", Arg.Set_string output_dir,
@@ -761,6 +779,8 @@ let _ =
       "   Show the dependency graph of <dot-file> on the index.html";
     "-index-blacklist", Arg.Set_string index_blacklist_file,
       "   Exclude specified items from the index";
+    "-show-type-infomation-using-coqtop-process", Arg.Set show_type_infomation_using_coqtop_process,
+      "  Show type infomation of definitions as a tooltip";
   ])
   process_file
   "Usage: rocqnavi [options] file.glob ... file.v ...\nOptions are:";
@@ -783,8 +803,16 @@ let _ =
     exit 1
   end;
   List.iter process_glob_file (List.rev !glob_files);
+  let mapping_options = List.map (fun (phy, log) -> !%"-Q %s %s" (String.concat "/" phy) log) !directory_mappings
+                        |> String.concat " "
+  in
   let all_files = Generate_index.all_files xref_modules in
-  List.iter (process_v_file all_files) (List.rev !v_files);
+  if !show_type_infomation_using_coqtop_process then
+    Coqtop_command.using ~coqtop_bin:("coqtop -emacs " ^ mapping_options) (fun coqtop_conn ->
+        coqtop_for_type_infomation := Some coqtop_conn;
+        List.iter (process_v_file ~coqtop_conn all_files) (List.rev !v_files))
+  else
+    List.iter (process_v_file ?coqtop_conn:None all_files) (List.rev !v_files);
   let index_blacklist_opt =
     if !index_blacklist_file = "" then None
     else Some (Index_blacklist.from_file !index_blacklist_file)
