@@ -1,12 +1,11 @@
+name: Docker CI
+
 on:
-  push:
-    branches: ["mca2html"]
-  pull_request:
-  schedule:
-    - cron: 0 0 * * * # every morning
+  - push
+  - pull_request
 
 jobs:
-  generate-artifact:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,25 +16,6 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - name: set the variables for push event
-        if: ${{ github.event_name == 'push' }}
-        run: |
-          branch_name=${{ github.ref_name }}
-          short_sha=$(git rev-parse --short ${{ github.sha }})
-          echo "destination_dir=sample_"$branch_name_$short_sha >> $GITHUB_ENV
-
-      - name: set the variables for PR event
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          branch_name=${{ github.head_ref }}
-          echo "destination_dir=sample_$branch_name" >> $GITHUB_ENV
-
-      - name: set the variables for scheduled event
-        if: ${{ github.event_name == 'schedule' }}
-        run: |
-          name=${{ github.action }}
-          echo "destination_dir=nightly_$name" >> $GITHUB_ENV
-
       - uses: coq-community/docker-coq-action@v1
         with:
           opam_file: 'rocq-navi.opam'
@@ -49,7 +29,7 @@ jobs:
           script: |
             startGroup "Do Rocqnavi"
               export MATHCOMP_ANALYSIS=$OPAM_SWITCH_PREFIX/lib/coq/user-contrib/mathcomp/
-              export REVISION=${{ matrix.analysis_tag }}-rocqnavi-${{ env.destination_dir }}
+              export REVISION=${{ matrix.analysis_tag }}
               export DIR=$(pwd `dirname .`)
               export OUTDIR=$DIR/html/analysis-${{ matrix.analysis_tag }}
               export CoqProject=$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis/_CoqProject
@@ -59,6 +39,6 @@ jobs:
       - name: Upload htmldoc as artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.destination_dir }}
           path: |
             html
+
