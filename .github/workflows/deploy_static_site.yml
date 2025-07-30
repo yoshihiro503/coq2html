@@ -93,7 +93,7 @@ jobs:
               export REVISION=${{ matrix.analysis_tag }}-rocqnavi-${{ env.COMMIT_SHORT_SHA }}
               export DIR=$(pwd `dirname .`)
               export OUTDIR=$DIR/html/analysis-$REVISION
-              export CoqProject=$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis/_CoqProject
+              export ANALYSIS_SRC=$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis
               ./tools/generate-mathcomp-analysis.sh
               sed -i "/<!-- ADD_ITEM -->/ i <li><a href=\"analysis-$REVISION\">Math-Comp Analysis</a></li>" html/index.html
             endGroup

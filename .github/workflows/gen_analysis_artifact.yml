@@ -52,7 +52,7 @@ jobs:
               export REVISION=${{ matrix.analysis_tag }}-rocqnavi-${{ env.destination_dir }}
               export DIR=$(pwd `dirname .`)
               export OUTDIR=$DIR/html/analysis-${{ matrix.analysis_tag }}
-              export CoqProject=$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis/_CoqProject
+              export ANALYSIS_SRC=$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis
               ./tools/generate-mathcomp-analysis.sh
             endGroup
 
