@@ -20,18 +20,19 @@ let clearSources () =
 
 }
 
+let filepath = ['.' '-' '/' 'A'-'Z' 'a'-'z' '_' '+' '\192'-'\214' '\216'-'\246'
+     '\248'-'\255' '\'' '0'-'9' ]+ '.' ['A'-'Z' 'a'-'z']+
+
 rule processSources = parse
   | ':'
       { processTargets lexbuf }
-  | ['.' '-' '/' 'A'-'Z' 'a'-'z' '_' '\192'-'\214' '\216'-'\246'
-     '\248'-'\255' '\'' '0'-'9' ]+ '.' ['A'-'Z' 'a'-'z']+
-    [' ' '\009']*
+  | filepath [' ' '\009']*
       { let s = Lexing.lexeme lexbuf in
-        let i = String.index s '.' in
-        let s = String.sub s 0 i in
-        let s = String.capitalize_ascii s in
-        addSources s;
-	nodes := StringSet.add s (!nodes);
+        if Filename.check_suffix s ".vo " then begin
+            let s = Filename.chop_extension s in
+            addSources s;
+	    nodes := StringSet.add s (!nodes)
+          end;
         processSources lexbuf }
   | eof
       { () }
@@ -43,13 +44,12 @@ and processTargets = parse
       { processTargets lexbuf }
   | '\\' [' ' '\009']* ['\010' '\013']+ [' ' '\009']+
       { processTargets lexbuf }
-  | ['.' '/' 'A'-'Z' 'a'-'z' '_' '\192'-'\214' '\216'-'\246'
-     '\248'-'\255' '\'' '0'-'9' ]+ '.' ['A'-'Z' 'a'-'z']+
+  | filepath
       { let t = Lexing.lexeme lexbuf in
-        let i = String.index t '.' in
-        let t = String.sub t 0 i in
-        let t = String.capitalize_ascii t in
-        addDepend t;
+        if Filename.check_suffix t ".vo" then begin
+            let t = Filename.chop_extension t in
+            addDepend t;
+          end;
         processTargets lexbuf }
   | eof
       { () }
