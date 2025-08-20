@@ -9,10 +9,15 @@ jobs:
   generate-artifact:
     runs-on: ubuntu-latest
     continue-on-error: true  # ← If a job fails, do not make it a total failure
+    strategy:
+      matrix:
+        infotheo:
+          - '0.9.4'
+        image:
+          - 'yoshihiro503/mathcomp-analysis:1.12.0-coq-8.20-ocaml-4.14-flambda'
+      fail-fast: false
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: set the variables for push event
         if: ${{ github.event_name == 'push' }}
         run: |
@@ -32,41 +37,39 @@ jobs:
           name=${{ github.action }}
           echo "destination_dir=nightly_$name" >> $GITHUB_ENV
 
-      - name: Clone Infotheowith a specific tag
+      - name: Checkout Infotheowith a specific tag
         uses: actions/checkout@v4
         with:
           repository: affeldt-aist/infotheo
           path: infotheo
-          fetch-tags: 0.9.4
-
-      - name: Setup Graphviz
-        uses: ts-graphviz/setup-graphviz@v2
-
-      - name: Set-up OCaml
-        uses: ocaml/setup-ocaml@v3
+          fetch-tags: ${{ matrix.infotheo }}
+      - uses: coq-community/docker-coq-action@v1
         with:
-          ocaml-compiler: 4.14
-          opam-repositories: |
-            coq-released: https://coq.inria.fr/opam/released
-            default: https://github.com/ocaml/opam-repository.git
-
-      - name: Build rocqnavi
-        run: opam install -y --deps-only . && opam exec -- make
-
-      - name: Set-up Rocq
-        run: |
-          opam install -y coq.8.20.1
-
-      - name: Build Infotheo
-        run: cd infotheo/ && opam install -y --deps-only . && opam exec -- make all install
-
-      - run: |
-             opam exec -- tools/generate-infotheo.sh "0.9.4(rocqnavi-${GITHUB_SHA::8})"
-             tree html/
+          opam_file: 'rocq-navi.opam'
+          custom_image: ${{ matrix.image }}
+          before_script: |
+            startGroup "Build Rocqnavi"
+              sudo apt-get install -y graphviz
+              sudo chown -R 1000:1000 .
+              make
+              cd infotheo/
+              opam install -y coq-interval coq-mathcomp-algebra-tactics coq-mathcomp-reals-stdlib
+              make all
+              cd ..
+            endGroup
+          script: |
+            startGroup "Do Rocqnavi"
+              export SOURCE=infotheo
+              export REVISION=${{ matrix.infoetheo }}-rocqnavi-${{ env.destination_dir }}
+              export DIR=$(pwd `dirname .`)
+              export OUTDIR=$DIR/html/infotheo-$REVISION
+              ./tools/generate-infotheo.sh
+            endGroup
 
       - name: Upload htmldoc as artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.destination_dir }}
           path: |
-            artifact
+            html
+

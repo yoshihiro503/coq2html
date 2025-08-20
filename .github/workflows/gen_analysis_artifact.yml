@@ -8,10 +8,15 @@ on:
 jobs:
   generate-artifact:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        analysis_tag:
+          - '1.12.0'
+        image:
+          - 'yoshihiro503/mathcomp-analysis:1.12.0-coq-8.20-ocaml-4.14-flambda'
+      fail-fast: false
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: set the variables for push event
         if: ${{ github.event_name == 'push' }}
         run: |
@@ -31,41 +36,29 @@ jobs:
           name=${{ github.action }}
           echo "destination_dir=nightly_$name" >> $GITHUB_ENV
 
-      - name: Clone Mathcomp Analysis with a specific tag
-        uses: actions/checkout@v4
+      - uses: coq-community/docker-coq-action@v1
         with:
-          repository: math-comp/analysis
-          path: analysis
-          fetch-tags: 1.10.0
-
-      - name: Setup Graphviz
-        uses: ts-graphviz/setup-graphviz@v2
-
-      - name: Set-up OCaml
-        uses: ocaml/setup-ocaml@v3
-        with:
-          ocaml-compiler: 4.14
-          opam-repositories: |
-            coq-released: https://coq.inria.fr/opam/released
-            default: https://github.com/ocaml/opam-repository.git
-
-      - name: Setup Coq temporary fix for the Dependency Graph
-        run: opam install -y coq.8.20.1
-
-      - name: Build Mathcomp Analysis
-        run: cd analysis/ && opam install -y --deps-only . && opam exec -- make all install
-
-      - name: Build rocqnavi
-        run: opam install -y --deps-only . && opam exec -- make
-
-      - run: |
-          opam exec -- tools/generate-mathcomp-analysis.sh ${GITHUB_SHA::8}
-          mkdir -p artifact
-          mv html artifact/${{ env.destination_dir }}
+          opam_file: 'rocq-navi.opam'
+          custom_image: ${{ matrix.image }}
+          before_script: |
+            startGroup "Build Rocqnavi"
+              sudo apt-get install -y graphviz
+              sudo chown -R 1000:1000 .
+              make
+            endGroup
+          script: |
+            startGroup "Do Rocqnavi"
+              export MATHCOMP_ANALYSIS=$OPAM_SWITCH_PREFIX/lib/coq/user-contrib/mathcomp/
+              export REVISION=${{ matrix.analysis_tag }}-rocqnavi-${{ env.destination_dir }}
+              export DIR=$(pwd `dirname .`)
+              export OUTDIR=$DIR/html/analysis-${{ matrix.analysis_tag }}
+              export ANALYSIS_SRC=$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis
+              ./tools/generate-mathcomp-analysis.sh
+            endGroup
 
       - name: Upload htmldoc as artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.destination_dir }}
           path: |
-            artifact
+            html
