@@ -5,7 +5,7 @@ REVISION=${REVISION:-"no"}
 DIR=$(pwd `dirname .`)
 OUTDIR=${OUTDIR:-$DIR/html/analysis-$REVISION}
 ANALYSIS_SRC=${ANALYSIS_SRC:-$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis.dev}
-INDEX_BLACKLIST_FILE=$DIR/tools/index-blacklist
+INDEX_BLACKLIST_FILE=$DIR/sample_blacklist/index_blacklist
 
 rm -rf $OUTDIR
 mkdir -p $OUTDIR
@@ -39,7 +39,7 @@ cp hierarchy-graph.dot depend.dot $OUTDIR/
 
 
 cd $MATHCOMP_ANALYSIS
-FILES=$(find analysis classical reals -name "*.v" -or -name "*.glob")
+FILES=$(find analysis/topology_theory -name "*.v" -or -name "*.glob")
 
 $DIR/rocqnavi -title "MathComp-Analysis-$REVISION" -d $OUTDIR \
   -coqlib https://coq.inria.fr/doc/V8.20.1/stdlib/ \
@@ -55,4 +55,5 @@ $DIR/rocqnavi -title "MathComp-Analysis-$REVISION" -d $OUTDIR \
   -structure-graph $OUTDIR/"hierarchy-graph.dot" \
   -file-graph $OUTDIR/"depend.dot" \
   -index-blacklist $INDEX_BLACKLIST_FILE \
+  -show-type-information-using-rocq-lsp \
   $FILES
