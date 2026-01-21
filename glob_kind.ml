@@ -67,11 +67,10 @@ let of_string = function
   | "abbrev" -> Other "abbrev"
   | "sec" -> Other "sec"
   | "prf" -> Other "prf"
-  | "abbrev" -> Other "abbrev"
   | "vardef" -> Other "vardef"
   | "vardefax" -> Other "vardefax"
   | other ->
-     warn (!%"unknown kind: '%s'" other);
+     Log.warn (!%"unknown kind: '%s'" other);
      Other other
 
 let to_string = function
@@ -109,5 +108,5 @@ let to_string = function
   | Other "vardef" -> "vardef"
   | Other "vardefax" -> "vardefax"
   | Other other ->
-     warn (!%"unknown kind: '%s'" other);
+     Log.warn (!%"unknown kind: '%s'" other);
      other

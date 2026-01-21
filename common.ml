@@ -1,11 +1,13 @@
 let (!%) s = Printf.sprintf s
+let (<<) g f = fun x -> g (f x)
+let (>>) f g = fun x -> g (f x)
 
 (* simple execution of external command *)
 let shell cmd =
-  Printf.eprintf " $ %s\n" cmd;
+  Log.debug (!%" $ %s" cmd);
   let status = Sys.command cmd in
   if status <> 0 then begin
-    prerr_endline ("Common.shell Error: " ^ cmd);
+    Log.error ("Common.shell: " ^ cmd);
     exit status
   end
 
@@ -71,6 +73,10 @@ let grep word contents =
   strstr ~haystack:contents ~needle:word
   |> Option.is_some
 
+let list_hd_opt = function
+  | [] -> None
+  | x :: _ -> Some x
+
 let list_group_by f xs =
   let rec iter store = function
     | [] -> store
@@ -85,7 +91,35 @@ let list_group_by f xs =
 let list_sort_by f xs =
   List.sort (fun x y -> compare (f x) (f y)) xs
 
-let warn s = prerr_endline ("Warning: " ^ s)
+let list_uniq xs =
+  List.fold_left (fun store x ->
+      if List.mem x store then store else x :: store) [] xs
+  |> List.rev
+
+let list_take n xs =
+  let rec iter store = function
+    | (n, _) when n <= 0 -> List.rev store
+    | (n, []) -> List.rev store
+    | (n, x :: xs) -> iter (x :: store) (n - 1, xs)
+  in
+  iter [] (n, xs)
+
+let list_drop n xs =
+  let rec iter = function
+    | (n, xs) when n <= 0 -> xs
+    | (n, []) -> []
+    | (n, _ :: xs) -> iter (n - 1, xs)
+  in
+  iter (n, xs)
+
+let list_max_by measure xs =
+  match xs with
+  | [] -> None
+  | x0 :: xs ->
+     List.fold_left (fun (m, y) x -> if measure x > m then (measure x, x) else (m, y))
+       (measure x0, x0) xs
+     |> snd
+     |> Option.some
 
 let html_escaped =
   let buff = Buffer.create 5 in
@@ -100,4 +134,3 @@ let html_escaped =
     | c -> Buffer.add_char buff c
   done;
   Buffer.contents buff
-
