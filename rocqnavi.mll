@@ -26,6 +26,8 @@ let warn lexbuf message =
     (!%"File: %s, line %d, culumn %d: %s" position.pos_fname
        position.pos_lnum (position.pos_cnum - position.pos_bol + 1) message)
 
+let linenum loc = loc.Lexing.pos_lnum
+
 (** Cross-referencing *)
 
 let current_module = ref ""
@@ -278,14 +280,37 @@ let nested_ids_anchor env classes ids text loc =
     | None -> false
     | Some list -> Index_blacklist.is_listed list id0
   in
-  match env.type_lookup, kind0 with
-  | Some conn, K.Definition when is_black = false ->
-     let type_information = lookup_type_info conn id0 loc
-                            |> Option.value ~default:(Type_lookup.PlainText "")
-     in
-     let atag = Tooltip.tag_with_tooltip "a" id0 classes type_information text in
-     sprintf {|%s%s%s|} opens atag closes
-  | _ ->
+  let tooltip_content =
+    match env.type_lookup, kind0 with
+    | Some conn, K.Definition when is_black = false ->
+       begin match lookup_type_info conn id0 loc with
+       | None -> ""
+       | Some (Type_lookup.Markdown md) ->
+          !%"<span class='markdown'>%s</span>" md
+       | Some (PlainText txt) -> !%"<p>%s</p>" txt
+       end |> Option.some
+    | _ -> None
+  in
+  let tooltip_content =
+    match env.repository_root_url with
+    | Some repo_root ->
+       let line = linenum loc in
+       let filepath =
+         String.split_on_char '.' !current_module
+         |> Directory_mappings.inverse_apply env.directory_mappings
+         |> String.concat "/"
+       in
+       let url = !%"%s/%s.v#L%d"repo_root filepath line in
+       let link = !%"<hr/><a href='%s' target='_blank'>Source code</a>" url in
+       (Option.value ~default:"" tooltip_content) ^ link
+       |> Option.some
+    | None -> tooltip_content
+  in
+  match tooltip_content with
+  | Some tooltip ->
+     let divtag = Tooltip.tag_with_tooltip "div" id0 classes tooltip text in
+     sprintf {|%s%s%s|} opens divtag closes
+  | None ->
      sprintf {|%s<a name="%s" class="%s">%s</a>%s|} opens id0 classes
        (html_escaped text) closes
 
@@ -640,6 +665,8 @@ and custom_mode = parse
       { () }
   | eof
       { () }
+  | "\n" as c
+      { Lexing.new_line lexbuf; character c; custom_mode lexbuf}
   | _ as c
       { character c; custom_mode lexbuf }
 
@@ -721,7 +748,7 @@ let file_graph_depend_file = ref ""
 let index_blacklist_file = ref ""
 let show_type_information_using_coqtop_process = ref false
 let show_type_information_using_rocq_lsp_process = ref false
-let link_to_source = ref ""
+let doc_source_url = ref ""
 
 let file_graph dot_file depend_file =
   match dot_file, depend_file with
@@ -729,7 +756,7 @@ let file_graph dot_file depend_file =
   | "", depend -> Some (File_graph.FromDependFile depend)
   | dot, _     -> Some (File_graph.FromDotFile dot)
 
-let process_v_file ?link_to_source proj_name env all_files f =
+let process_v_file ?repo_root proj_name env all_files f =
   let pref_f = Filename.chop_suffix f ".v" in
   let base_f = Filename.basename pref_f in
   let module_name = !logical_name_base ^ module_name_of_file_name pref_f in
@@ -741,7 +768,11 @@ let process_v_file ?link_to_source proj_name env all_files f =
   let ic = open_in f in
   oc := open_out (Filename.concat !output_dir (module_name ^ ".html"));
   enum_depth := 0; in_proof := false;
-  Generate_index.start_html_page !oc ?link_to_source title title proj_name all_files;
+  Log.debug (!%"process_v_file: %s" f);
+  let repo_file =
+    Option.map (fun root -> root ^ "/" ^ f) repo_root
+  in
+  Generate_index.start_html_page !oc ?repo_file title title proj_name all_files;
   let lexbuf = Lexing.from_channel ~with_positions:true ic in
   Lexing.set_filename lexbuf filepath;
   coq_bol lexbuf;
@@ -824,7 +855,7 @@ let () =
       "   Show type information of definitions as a tooltip (consider using -show-type-infomation-using-rocq-lsp)";
     "-show-type-information-using-rocq-lsp", Arg.Set show_type_information_using_rocq_lsp_process,
       "   Show type information of definitions as a tooltip";
-    "-link-to-source", Arg.Set_string link_to_source,
+    "-doc-source-url", Arg.Set_string doc_source_url,
       "   The Link to the source repository";
   ])
   process_file
@@ -857,15 +888,21 @@ let () =
     if !index_blacklist_file = "" then None
     else Some (Index_blacklist.from_file !index_blacklist_file)
   in
-  let link_to_source = if !link_to_source = "" then None else Some !link_to_source in
+  let repo_root =
+    if !doc_source_url = "" then None else Some !doc_source_url
+  in
   write_file Resources.js (Filename.concat !output_dir "rocqnavi.js");
   if !generate_css then
     write_file Resources.css (Filename.concat !output_dir "rocqnavi.css");
   let file_graph_input = file_graph !file_graph_dot_file !file_graph_depend_file in
-  Generate_index.generate ?link_to_source !output_dir !xref_table xref_modules
+  Generate_index.generate ?repo_root !output_dir
+    !xref_table xref_modules
     !title !directory_mappings !hierarchy_graph_dot_file file_graph_input
     index_blacklist_opt;
-
+  env := {!env with
+           repository_root_url = repo_root;
+           directory_mappings = !directory_mappings;
+         };
   if !show_type_information_using_coqtop_process
      || !show_type_information_using_rocq_lsp_process then
     let method_ = if !show_type_information_using_coqtop_process then
@@ -873,8 +910,9 @@ let () =
                   else Rocq_LSP
     in
     Type_lookup.using method_ (fun conn ->
-        env := Env.{type_lookup=Some conn; definition_blacklist=index_blacklist_opt;};
-        List.iter (process_v_file ?link_to_source !title !env all_files) (List.rev !v_files))
+        env := Env.{!env with type_lookup = Some conn;
+                             definition_blacklist = index_blacklist_opt;};
+        List.iter (process_v_file ?repo_root !title !env all_files) (List.rev !v_files))
   else
-    List.iter (process_v_file ?link_to_source !title !env all_files) (List.rev !v_files)
+    List.iter (process_v_file ?repo_root !title !env all_files) (List.rev !v_files)
 }
