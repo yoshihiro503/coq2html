@@ -56,3 +56,7 @@ let using command f =
   | exn ->
      close command (i, o, e);
      raise exn
+
+let is_command_available command =
+  let result = Sys.command (!%"which %s > /dev/null 2>&1" command) in
+  (result = 0)

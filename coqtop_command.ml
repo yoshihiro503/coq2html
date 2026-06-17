@@ -51,6 +51,9 @@ let about conn ident =
   incr about_count;
   send conn (!%"About %s.\n" ident)
 
-
-
-
+let find_available_command () =
+  if Command.is_command_available "rocq" then
+    Some "rocq top"
+  else if Command.is_command_available "coqtop" then
+    Some "coqtop"
+  else None
