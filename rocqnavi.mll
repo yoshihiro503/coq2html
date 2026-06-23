@@ -905,9 +905,13 @@ let () =
          };
   if !show_type_information_using_coqtop_process
      || !show_type_information_using_rocq_lsp_process then
-    let method_ = if !show_type_information_using_coqtop_process then
-                    Type_lookup.Coqtop_emacs ("coqtop -emacs " ^ mapping_options)
-                  else Rocq_LSP
+    let method_ =
+      if !show_type_information_using_coqtop_process then
+        let cmd = Coqtop_command.find_available_command ()
+                  |> Option.value ~default:"Neither rocq nor coqtop are unavailable."
+        in
+        Type_lookup.Coqtop_emacs (cmd ^ " -emacs " ^ mapping_options)
+      else Rocq_LSP
     in
     Type_lookup.using method_ (fun conn ->
         env := Env.{!env with type_lookup = Some conn;
