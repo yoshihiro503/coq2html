@@ -36,15 +36,10 @@ let send ?(wait=0.05) (i, o, e) coq_command =
   | Some res ->
      Ok res
 
-let exit conn =
-  ignore @@ send conn "Quit.\n"
-
 let using ?(coqtop_bin = "coqtop -emacs") f =
   Command.using coqtop_bin (fun (i,o,e) ->
       ignore @@ Command.read_available i;
-      let y = f (i, o, e) in
-      exit (i, o, e);
-      y
+      f (i, o, e)
     )
 
 let about conn ident =
