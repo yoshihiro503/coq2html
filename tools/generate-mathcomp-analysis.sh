@@ -28,7 +28,7 @@ cp hierarchy-graph.dot depend.d $OUTDIR/
 
 
 cd $MATHCOMP_ANALYSIS
-FILES=$(find analysis/topology_theory -name "*.v" -or -name "*.glob")
+FILES=$(find . -name "*.v" -or -name "*.glob")
 
 $DIR/rocqnavi -title "MathComp-Analysis-$REVISION" -d $OUTDIR \
   -debug \
@@ -40,9 +40,10 @@ $DIR/rocqnavi -title "MathComp-Analysis-$REVISION" -d $OUTDIR \
   -Q experimental_reals mathcomp.experimental_reals \
   -Q theories mathcomp.analysis \
   -Q analysis_stdlib mathcomp.analysis_stdlib \
-  -external https://math-comp.github.io/htmldoc_2_5_0/ mathcomp.ssreflect \
+  -external https://math-comp.github.io/htmldoc_2_5_0/ mathcomp.boot \
   -external https://math-comp.github.io/htmldoc_2_5_0/ mathcomp.algebra \
   -external https://math-comp.github.io/htmldoc_2_5_0/ mathcomp.order \
+  -external https://math-comp.github.io/htmldoc_2_5_0/ HB \
   -structure-graph $OUTDIR/"hierarchy-graph.dot" \
   -file-graph-from-depend $OUTDIR/"depend.d" \
   -index-blacklist $INDEX_BLACKLIST_FILE \
