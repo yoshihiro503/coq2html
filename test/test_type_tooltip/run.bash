@@ -10,7 +10,7 @@ mkdir $DIR/html
 
 cd $DIR
 VFiles="Main.v"
-coqc $VFiles
+rocq compile $VFiles
 
 GlobFiles="Main.glob"
 $RocqNavi -title "test_type_tooltip" -d ./html $VFiles $GlobFiles \
