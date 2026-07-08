@@ -260,12 +260,12 @@ let end_doc () =
 
 (* If the option to show type infomation is enabled, return the type infomation *)
 let lookup_type_info conn id loc =
-      let position = Lexing.(loc.pos_lnum - 1, loc.pos_cnum - loc.pos_bol + 1) in
-      let filename = Lexing.(loc.pos_fname) in
-      match Type_lookup.ask_type_info_of id filename position conn with
-      | Ok ty -> Some ty
-      | Error message -> Log.warn (!%"fail: lookup_type_info '%s'" id);
-                         None
+  let position = Lexing.(loc.pos_lnum - 1, loc.pos_cnum - loc.pos_bol + 1) in
+  let filename = Lexing.(loc.pos_fname) in
+  match Type_lookup.ask_type_info_of id filename position conn with
+  | Ok ty -> Some ty
+  | Error message -> Log.warn (!%"fail: lookup_type_info '%s' : '%s'" id message);
+                     None
 
 let nested_ids_anchor env classes ids text loc =
   let (id0, kind0) = List.hd ids in
@@ -907,10 +907,10 @@ let () =
      || !show_type_information_using_rocq_lsp_process then
     let method_ =
       if !show_type_information_using_coqtop_process then
-        let cmd = Coqtop_command.find_available_command ()
+        let cmd = Rocqtop_command.find_available_command ()
                   |> Option.value ~default:"Neither rocq nor coqtop are unavailable."
         in
-        Type_lookup.Coqtop_emacs (cmd ^ " -emacs " ^ mapping_options)
+        Type_lookup.Rocqtop_emacs (cmd ^ " -emacs " ^ mapping_options)
       else Rocq_LSP
     in
     Type_lookup.using method_ (fun conn ->

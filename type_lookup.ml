@@ -2,18 +2,18 @@ open Common
 module Json = Yojson.Basic
 
 type method_ =
-  | Coqtop_emacs of string
+  | Rocqtop_emacs of string
   | Rocq_LSP
 
 type conn =
-  | Coqtop_emacs_conn of Coqtop_command.conn
+  | Rocqtop_emacs_conn of Rocqtop_command.conn
   | Rocq_LSP_conn of Lsp_client.conn
 
 let using method_ f =
   match method_ with
-  | Coqtop_emacs command ->
-     Coqtop_command.using ~coqtop_bin:command
-       (fun conn -> f (Coqtop_emacs_conn conn))
+  | Rocqtop_emacs command ->
+     Rocqtop_command.using ~coqtop_bin:command
+       (fun conn -> f (Rocqtop_emacs_conn conn))
   | Rocq_LSP ->
      Lsp_client.using (fun conn ->
          let rootpath = Sys.getcwd () in
@@ -22,14 +22,14 @@ let using method_ f =
          f (Rocq_LSP_conn conn))
 
 let open_file filepath module_name = function
-  | Coqtop_emacs_conn conn ->
+  | Rocqtop_emacs_conn conn ->
      let cmd = !%"Require Import %s.\n" module_name in
-     Coqtop_command.send conn cmd |> ignore
+     Rocqtop_command.send conn cmd |> ignore
   | Rocq_LSP_conn conn ->
      Lsp_client.did_open filepath conn
 
 let close_file filepath module_name = function
-  | Coqtop_emacs_conn conn -> ()
+  | Rocqtop_emacs_conn conn -> ()
   | Rocq_LSP_conn conn ->
      Lsp_client.did_close filepath conn
 
@@ -39,9 +39,13 @@ type info =
 
 let ask_type_info_of name filepath (line, col) conn =
   match conn with
-  | Coqtop_emacs_conn conn ->
-     Coqtop_command.about conn name
-     |> Result.map (fun t -> PlainText t)
+  | Rocqtop_emacs_conn conn ->
+     begin match Rocqtop_command.about conn name with
+     | Ok (stdout, stderr) ->
+        if stderr <> "" then Log.warn ("Type_lookup.ask_type_info_of: "^stderr);
+        Ok (PlainText stdout)
+     | Error message -> Error message
+     end
   | Rocq_LSP_conn conn ->
      let open Json.Util in
      let pos = Lsp_client.Location.{line; character=col} in
@@ -58,7 +62,7 @@ let ask_type_info_of name filepath (line, col) conn =
 
 let load cmd conn =
   match conn with
-  | Coqtop_emacs_conn conn ->
-     Coqtop_command.send conn cmd |> ignore
+  | Rocqtop_emacs_conn conn ->
+     Rocqtop_command.send conn cmd |> ignore
   | Rocq_LSP_conn conn ->
      ()

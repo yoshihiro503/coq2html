@@ -1,5 +1,5 @@
 type method_ =
-  | Coqtop_emacs of string
+  | Rocqtop_emacs of string
   | Rocq_LSP
 
 type conn

@@ -5,7 +5,7 @@ let send o input =
 
 let read_available ?(max=4096) ch =
   let fd = Unix.descr_of_in_channel ch in
-  let ready, _, _ = Unix.select [fd] [] [] 0.1 in
+  let ready, _, _ = Unix.select [fd] [] [] 0.5 in
   if ready <> [] then begin
       let rec iter store =
         let buf = Bytes.create max in
@@ -31,7 +31,7 @@ let input_line_with_timeout timeout_sec ch =
 
 let show_errors (i, o, e) =
   match read_available e with
-  | Some msg -> Log.warn msg
+  | Some msg -> Log.warn (!%"Command.show_errors: %s" msg)
   | None -> ()
 
 let close command ioe =
