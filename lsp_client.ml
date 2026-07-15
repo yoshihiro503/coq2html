@@ -56,10 +56,10 @@ let wait_response (i, _o, _e) =
       Json.from_string s
       |> response_of_json)
 
-let rec wait_result_response ?(verbose=false) conn =
+let rec wait_result_response conn =
   match wait_response conn with
   | NotificationResponse _ as res ->
-     if verbose then prerr_endline (show_response res);
+     Log.debug (show_response res);
      wait_result_response conn
   | ResultResponse r -> (r.request_id, r.result)
 
@@ -94,7 +94,7 @@ let send_request method_ params conn =
   in
   send message conn;
   let (id, result) = wait_result_response conn in
-  if id <> req_id then prerr_endline (!%"Unexpected id: (expected)%d <> %d" req_id id);
+  if id <> req_id then Log.warn (!%"Unexpected id: (expected)%d <> %d" req_id id);
   result
 
 let initialize rootpath ?options conn =
