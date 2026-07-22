@@ -42,9 +42,23 @@ function setUpSavingDetails() {
     });
 }
 
+function setUpGraphZoom() {
+    // Zoom for Graphviz SVG
+    document.querySelectorAll("div.graph svg").forEach(svg => {
+        svgPanZoom(svg, {
+            zoomEnabled: true,
+            mouseWheelZoomEnabled: true,
+            controlIconsEnabled: true,
+            fit: true,
+            center: true
+        });
+    });
+};
+
 function init()
 {
     renderMarkdowns();
     showDarkmodeWidget();
     setUpSavingDetails();
+    setUpGraphZoom();
 }
