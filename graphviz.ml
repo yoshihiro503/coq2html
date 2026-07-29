@@ -8,6 +8,9 @@ let from_file filename = filename
 let generate_file pngfile mapfile srcfile =
   Common.shell (Printf.sprintf "tred %s | dot -Tpng -o %s -Tcmapx -o %s" srcfile pngfile mapfile)
 
+let generate_svg outputfile srcfile =
+  Common.shell (!%"tred %s | dot -Tsvg -o %s" srcfile outputfile)
+
 let of_string body =
   let filename = "__tmp__.dot" in
   file_using_w filename (fun ch -> output_string ch body);
