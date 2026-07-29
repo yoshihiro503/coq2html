@@ -80,9 +80,11 @@ let make_dot (nodes, edges) : string =
   let style =
     {|  bgcolor=white; splines=true; nodesep=1; node [fontsize=18, shape=rect, color="#dbc3b6", style="rounded,filled"];|}
   in
+  let target = {|  node [target="_blank"]|} (* open link as the next tab *) in
   let sedge (src, dst) = !%{|  "%s" -> "%s";|} (key src) (key dst) in
   "digraph depend {\n"
   ^ style ^ "\n"
+  ^ target ^ "\n"
   ^ String.concat "\n" (List.map (snode 0) trees)
   ^ "\n\n"
   ^ String.concat "\n" (List.map sedge edges)
