@@ -44,3 +44,9 @@ let to_mapping_options mappings =
 let inverse_apply mappings logical_path =
   let inv = List.map (fun (x,y) -> (y,x)) mappings in
   apply inv logical_path
+
+let show t =
+  t
+  |> List.map (fun (phi, log) ->
+         !%"'%s' --> '%s'" (String.concat "/" phi) (String.concat "." log))
+  |> String.concat "\n"

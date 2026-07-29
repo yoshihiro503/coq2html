@@ -301,7 +301,7 @@ let overwrite_dot_file_with_url xref_table dot_file = (* dirty *)
     let url = mod_ ^ ".html#" ^ name in
     !%{|"%s" [URL="%s"]|}  name url
   in
-  let links = String.concat "; " (List.map node_with_node hb_defs) in
+  let links = String.concat ";\n" (List.map node_with_node hb_defs) in
   let target = {|  node [target="_blank"]|}(*リンクを別タブで表示*) in
   let lines = Common.read_lines dot_file in
   let lines = match lines with (* insert links to second line *)
@@ -315,18 +315,15 @@ let generate_hierarchy_graph title xref_table output_dir dot_file =
   overwrite_dot_file_with_url xref_table dot_file;
   let svg_path = Filename.concat output_dir "hierarchy_graph.svg" in
   let dot = Graphviz.from_file dot_file in
-  dot |> Graphviz.generate_svg svg_path;
+  Graphviz.generate_svg svg_path dot;
   !%"<h2>Mathematical Structures (%s only)</h2>\n" title
-  ^ (!%{|<div id="hgraph" class="graph">%s</div>|} (read_file svg_path))
+  ^ Zoomable_svgtag.div "hierarchy_graph" (read_file svg_path)
 
 let generate_dependency_graph_from_dot output_dir dot =
-  let png_filename = "dependency_graph.png" in
-  let png_path = Filename.concat output_dir png_filename in
-  let map_path = Filename.concat output_dir "dependency_graph.map" in
-  dot
-  |> Graphviz.generate_file png_path map_path;
-  let map = read_file map_path in
-  Printf.sprintf {|<h2>Clickable Dependency Graph of Files</h2><img src="%s" usemap="#depend" class="img-darkmode-enable"/>%s|} png_filename map
+  let svg_path = Filename.concat output_dir "dependency_graph.svg" in
+  Graphviz.generate_svg svg_path dot;
+  !%"<h2>Clickable Dependency Graph of Files</h2>\n"
+  ^ Zoomable_svgtag.div "file-graph" (read_file svg_path)
 
 (*
  * generate index.html

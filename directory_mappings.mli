@@ -14,3 +14,5 @@ val apply : t -> string list -> string list
 val to_mapping_options : t -> string
 
 val inverse_apply : t -> string list -> string list
+
+val show : t -> string

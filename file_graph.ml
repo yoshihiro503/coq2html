@@ -20,6 +20,7 @@ let parse_filepath directory_mappings name =
      (logical_path, Filename.remove_extension base, ext)
 
 let url (path, base, _ext) =
+  if List.is_empty path then base ^ ".html" else
   String.concat "." path ^ "." ^ base ^ ".html"
 
 let path (path, _base, _ext) = path

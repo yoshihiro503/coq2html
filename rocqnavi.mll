@@ -895,6 +895,7 @@ let () =
   if !generate_css then
     write_file Resources.css (Filename.concat !output_dir "rocqnavi.css");
   let file_graph_input = file_graph !file_graph_dot_file !file_graph_depend_file in
+  Log.debug (!%"directory_mapping: [%s]" (Directory_mappings.show !directory_mappings));
   Generate_index.generate ?repo_root !output_dir
     !xref_table xref_modules
     !title !directory_mappings !hierarchy_graph_dot_file file_graph_input
