@@ -34,3 +34,5 @@ else
     diff -ruw -x rocqnavi.css -x rocqnavi.js \
          $DIR/expected_html $DIR/html
 fi
+
+echo 'Success: test1'
