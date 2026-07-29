@@ -1,0 +1,21 @@
+(ocamllex rocqnavi)
+
+(executable
+ (name rocqnavi)
+ (public_name rocqnavi)
+ (package rocq-navi)
+ (flags
+  (:standard -warn-error -A))
+ (libraries str dune-glob yojson rocqnavi_lib))
+
+(rule
+ (target resources.ml)
+ (deps
+  ../rocqnavi.header
+  ../rocqnavi.footer
+  ../rocqnavi.css
+  ../rocqnavi.js
+  ../rocqnavi.redirect)
+ (action
+  (system
+   "for i in header footer css js redirect; do echo \"let $i = {xxx|\"; cat ../rocqnavi.$i; echo '|xxx}'; echo; done > resources.ml")))

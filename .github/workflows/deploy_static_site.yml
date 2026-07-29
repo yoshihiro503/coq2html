@@ -2,16 +2,17 @@ name: Deploy artifact
 
 on:
   push:
-    branches:
-
+    branches: ["mca2html"]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# and to read artifacts/run history from the gen_* workflows below.
 permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -24,82 +25,70 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    strategy:
-      matrix:
-        analysis_tag:
-          - '1.16.0'
-        analysis_image:
-          - 'yoshihiro503/mathcomp-analysis:1.12.0-coq-8.20-ocaml-4.14-flambda'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set Short Commit Hash
-        run: |
-          echo "COMMIT_SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
-      - name: Setup Graphviz
-        uses: ts-graphviz/setup-graphviz@v2
-
-      - name: Set-up OCaml
-        uses: ocaml/setup-ocaml@v3
-        with:
-          ocaml-compiler: 4.14
-          opam-repositories: |
-            coq-released: https://coq.inria.fr/opam/released
-            default: https://github.com/ocaml/opam-repository.git
-
-      - name: Build rocqnavi
-        run: opam install -y . --deps-only --with-test && opam exec -- make
-
-      - name: Setup Coq temporary fix for the Dependency Graph
-        run: opam install -y coq.8.20.1
 
       - name: top site
         run: mkdir html && cp -r .github/workflows/resources/* html/
 
-      ## Amidakuji -------------------
-      - name: Clone amidakuji
-        uses: actions/checkout@v4
-        with:
-          repository: yoshihiro503/rocq-amidakuji
-          path: rocq-amidakuji
+      ## Mathcomp Analysis (built by gen_analysis_artifact.yml) --------
+      - name: Find latest successful analysis-doc run
+        id: analysis_run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run_id=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow gen_analysis_artifact.yml \
+            --status success --branch mca2html --limit 1 --json databaseId -q '.[0].databaseId')
+          if [ -z "$run_id" ]; then
+            echo "::error::No successful run of gen_analysis_artifact.yml on mca2html yet - nothing to deploy"
+            exit 1
+          fi
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
 
-      - name: Build Amidakuji
-        run: cd rocq-amidakuji && opam exec -- ./configure.sh && opam exec -- make
-      - run: |
-             opam exec -- tools/generate-amidakuji.sh "(rocqnavi-${{ env.COMMIT_SHORT_SHA }})"
-             sed -i '/<!-- ADD_ITEM -->/ i <li><a href="rocq-amidakuji">rocq-amidakuji</a></li>' html/index.html
+      - name: Download analysis doc
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.analysis_run.outputs.run_id }}
+          name: analysis-html
+          path: html
+
+      - name: Place analysis doc under html/analysis
+        run: |
+          src=$(ls -d html/analysis-*/ | head -n1)
+          mv "$src" html/analysis
+          sed -i '/<!-- ADD_ITEM -->/ i <li><a href="analysis">Math-Comp Analysis</a></li>' html/index.html
       ## ----------------------------
 
-      ## Mathcomp Analysis ----------
-      - uses: coq-community/docker-coq-action@v1
-        with:
-          opam_file: 'rocq-navi.opam'
-          custom_image: ${{ matrix.analysis_image }}
-          before_script: |
-            startGroup "Build Rocqnavi"
-              pwd
-              ls -la
-              ls -la ocamldot/
-              sudo apt-get install -y graphviz
-              sudo chown -R 1000:1000 .
-              make clean
-              make
-            endGroup
-          script: |
-            startGroup "Do Rocqnavi"
-              export MATHCOMP_ANALYSIS=$OPAM_SWITCH_PREFIX/lib/coq/user-contrib/mathcomp/
-              export REVISION=${{ matrix.analysis_tag }}-rocqnavi-${{ env.COMMIT_SHORT_SHA }}
-              export DIR=$(pwd `dirname .`)
-              export OUTDIR=$DIR/html/analysis-$REVISION
-              export ANALYSIS_SRC=$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis
-              ./tools/generate-mathcomp-analysis.sh
-              sed -i "/<!-- ADD_ITEM -->/ i <li><a href=\"analysis-$REVISION\">Math-Comp Analysis</a></li>" html/index.html
-            endGroup
-          export: 'OPAMWITHTEST'  # space-separated list of variables
+      ## Infotheo (built by gen_infotheo_artifact.yml) -----------------
+      - name: Find latest successful infotheo-doc run
+        id: infotheo_run
         env:
-          OPAMWITHTEST: 'true'
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run_id=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow gen_infotheo_artifact.yml \
+            --status success --branch mca2html --limit 1 --json databaseId -q '.[0].databaseId')
+          if [ -z "$run_id" ]; then
+            echo "::error::No successful run of gen_infotheo_artifact.yml on mca2html yet - nothing to deploy"
+            exit 1
+          fi
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+
+      - name: Download infotheo doc
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.infotheo_run.outputs.run_id }}
+          name: infotheo-html
+          path: html
+
+      - name: Place infotheo doc under html/infotheo
+        run: |
+          src=$(ls -d html/infotheo-*/ | head -n1)
+          mv "$src" html/infotheo
+          sed -i '/<!-- ADD_ITEM -->/ i <li><a href="infotheo">Infotheo</a></li>' html/index.html
       ## ----------------------------
 
       - name: Setup Pages

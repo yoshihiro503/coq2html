@@ -46,7 +46,8 @@ jobs:
               sudo apt-get install -y graphviz
               sudo chown -R 1000:1000 .
               opam install -y coq-lsp
-              make
+              dune build
+              ln -sf _build/default/bin/rocqnavi.exe rocqnavi
             endGroup
           script: |
             startGroup "Do Rocqnavi"
@@ -58,9 +59,17 @@ jobs:
               ./tools/generate-mathcomp-analysis.sh
             endGroup
 
-      - name: Upload htmldoc as artifacts
+      - name: Upload htmldoc as artifacts (for humans to inspect this run)
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.destination_dir }}
-          path: |
-            html
+          path: html
+
+      # Stable name (unlike the one above, which varies per event/branch/sha)
+      # so deploy_static_site.yml can fetch "the latest one" by artifact name
+      # instead of needing to know this run's destination_dir.
+      - name: Upload htmldoc as artifact (stable name, for deploy_static_site.yml)
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-html
+          path: html
