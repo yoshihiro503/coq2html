@@ -13,9 +13,9 @@ jobs:
     strategy:
       matrix:
         analysis_tag:
-          - '1.14.0'
+          - '1.16.0'
         image:
-          - 'yoshihiro503/mathcomp-analysis:1.14.0-rocq-9.0'
+          - 'yoshihiro503/mathcomp-analysis:1.16.0-rocq-9.0'
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
               export REVISION=${{ matrix.analysis_tag }}-rocqnavi-${{ env.destination_dir }}
               export DIR=$(pwd `dirname .`)
               export OUTDIR=$DIR/html/analysis-${{ matrix.analysis_tag }}
-              export ANALYSIS_SRC=$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis
+              export ANALYSIS_SRC=$OPAM_SWITCH_PREFIX/.opam-switch/sources/rocq-mathcomp-analysis
               ./tools/generate-mathcomp-analysis.sh
             endGroup
 
