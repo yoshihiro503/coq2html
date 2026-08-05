@@ -53,6 +53,7 @@ let html_of_notation scope notation module_ linkname =
     and quoted pos tags store =
       let tag_of_quoted ss =
         String.concat "" (List.rev ss)
+        |> html_escaped
         |> !%"<span class=\"notation-symbol\">%s</span>"
       in
       if pos < len then
