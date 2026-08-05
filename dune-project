@@ -27,4 +27,5 @@
   dune-glob
   yojson
   (coq-lsp :with-test)
-  (rocq-hierarchy-builder :with-test)))
+  (rocq-hierarchy-builder :with-test)
+  (alcotest :with-test)))
