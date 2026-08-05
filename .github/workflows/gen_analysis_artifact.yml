@@ -5,6 +5,7 @@ on:
   pull_request:
   schedule:
     - cron: 0 18 * * * # every night (03:00 JST)
+  workflow_dispatch:
 
 jobs:
   generate-artifact:
@@ -12,9 +13,9 @@ jobs:
     strategy:
       matrix:
         analysis_tag:
-          - '1.16.0'
+          - '1.14.0'
         image:
-          - 'yoshihiro503/mathcomp-analysis:1.12.0-coq-8.20-ocaml-4.14-flambda'
+          - 'yoshihiro503/mathcomp-analysis:1.14.0-rocq-9.0'
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
@@ -37,6 +38,12 @@ jobs:
           name=${{ github.action }}
           echo "destination_dir=nightly_$name" >> $GITHUB_ENV
 
+      - name: set the variables for manual (workflow_dispatch) event
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          short_sha=$(git rev-parse --short ${{ github.sha }})
+          echo "destination_dir=manual_$short_sha" >> $GITHUB_ENV
+
       - uses: coq-community/docker-coq-action@v1
         with:
           opam_file: 'rocq-navi.opam'
@@ -46,7 +53,7 @@ jobs:
               sudo apt-get install -y graphviz
               sudo chown -R 1000:1000 .
               opam install -y coq-lsp
-              dune build
+              dune build bin/rocqnavi.exe
               ln -sf _build/default/bin/rocqnavi.exe rocqnavi
             endGroup
           script: |
