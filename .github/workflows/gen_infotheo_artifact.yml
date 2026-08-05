@@ -1,3 +1,5 @@
+name: Infotheo [Build HTML and upload as Artifact]
+
 on:
   push:
     branches: ["mca2html"]
@@ -37,12 +39,6 @@ jobs:
           name=${{ github.action }}
           echo "destination_dir=nightly_$name" >> $GITHUB_ENV
 
-      - name: Checkout Infotheowith a specific tag
-        uses: actions/checkout@v4
-        with:
-          repository: affeldt-aist/infotheo
-          path: infotheo
-          ref: ${{ matrix.infotheo }}
       - uses: coq-community/docker-coq-action@v1
         with:
           opam_file: 'rocq-navi.opam'
@@ -51,7 +47,11 @@ jobs:
             startGroup "Build Rocqnavi"
               sudo apt-get install -y graphviz
               sudo chown -R 1000:1000 .
-              make
+              dune build
+              ln -sf _build/default/bin/rocqnavi.exe rocqnavi
+            endGroup
+            startGroup "Fetch and build Infotheo"
+              git clone --depth 1 --branch ${{ matrix.infotheo }} https://github.com/affeldt-aist/infotheo.git infotheo
               cd infotheo/
               opam install -y coq-interval coq-mathcomp-algebra-tactics coq-mathcomp-reals-stdlib
               make all
@@ -66,10 +66,19 @@ jobs:
               ./tools/generate-infotheo.sh
             endGroup
 
-      - name: Upload htmldoc as artifacts
+      - name: Upload htmldoc as artifacts (for humans to inspect this run)
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.destination_dir }}
           path: |
             html
 
+      # Stable name (unlike the one above, which varies per event/branch/sha)
+      # so deploy_static_site.yml can fetch "the latest one" by artifact name
+      # instead of needing to know this run's destination_dir.
+      - name: Upload htmldoc as artifact (stable name, for deploy_static_site.yml)
+        uses: actions/upload-artifact@v4
+        with:
+          name: infotheo-html
+          path: |
+            html
