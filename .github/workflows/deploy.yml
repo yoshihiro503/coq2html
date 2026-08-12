@@ -5,8 +5,8 @@ on:
   # finishing on mca2html, instead of polling/searching for their runs here.
   workflow_run:
     workflows:
-      - "Analysis [Build HTML and upload as Artifact]"
-      - "Infotheo [Build HTML and upload as Artifact]"
+      - "Mathcomp Analysis: Build HTML as Artifact"
+      - "Infotheo: Build HTML as Artifact"
     types: [completed]
     branches: ["mca2html"]
   # Allows you to run this workflow manually from the Actions tab
@@ -46,7 +46,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ "${{ github.event.workflow_run.name }}" = "Analysis [Build HTML and upload as Artifact]" ]; then
+          if [ "${{ github.event.workflow_run.name }}" = "Mathcomp Analysis: Build HTML as Artifact" ]; then
             # This run itself is what triggered us - use it directly, no lookup needed.
             run_id=${{ github.event.workflow_run.id }}
           else
@@ -80,7 +80,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ "${{ github.event.workflow_run.name }}" = "Infotheo [Build HTML and upload as Artifact]" ]; then
+          if [ "${{ github.event.workflow_run.name }}" = "Infotheo: Build HTML as Artifact" ]; then
             # This run itself is what triggered us - use it directly, no lookup needed.
             run_id=${{ github.event.workflow_run.id }}
           else
