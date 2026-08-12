@@ -146,8 +146,6 @@ let linkname_of_capital = string_of_initial_letter
 
 type item = {kind: kind; name: string; linkname: string; module_: string}
 
-let notations_html_filename = "index_notations.html"
-
 let table citems =
   let mkrow kind =
     (!%"<td>%s</td>\n" (skind kind))
@@ -161,93 +159,15 @@ let table citems =
   in
   "<table><tbody>\n"
   ^ (List.map mkrow kinds |> String.concat "")
-  ^ (!%{|<tr><td><a href="%s">Notations</a></td></tr>|} notations_html_filename)
+  ^ (!%{|<tr><td><a href="%s">Notations</a></td></tr>|} Notation_index.filename)
   ^ "</tbody></table>"
 
-let notation_of_item item =
-  match Str.(bounded_split_delim (regexp ":") item.name 4) with
-  | [_; _; ""; notation] -> (`NoScope, notation, item)
-  | [_; _; scope; notation] -> (`Scope scope, notation, item)
-  | _ ->
-     failwith (!%"unexpected notation format in glob file: name=%s" item.name)
-
-let show_scope = function
-  | `NoScope -> "no scope"
-  | `Scope scope -> scope
-
-let compare_scope x y =
-  match x, y with
-  | `NoScope, `NoScope -> 0
-  | `NoScope, _ -> -1
-  | _, `NoScope -> 1
-  | `Scope x, `Scope y -> compare x y
-
-let html_of_notation scope notation item =
-  let scope =
-    match scope with
-    | `NoScope -> "<span class=\"warning\">no scope</span>"
-    | `Scope scope -> "in " ^ scope
-  in
-  let show notation =
-    let len = String.length notation in
-    let rec iter pos tags =
-      let text_of_placeholder s =
-        Str.(global_replace (regexp_string "_")  s " ")
-(*        |> fun s -> Str.(global_replace (regexp_string "x") s "x")*)
-      in
-      if pos < len then
-        match String.index_from_opt notation pos '\'' with
-        | Some pos' when pos = pos' -> quoted (pos+1) tags []
-        | Some pos' ->
-           quoted (pos'+1)
-             (text_of_placeholder (String.sub notation pos (pos'-pos)) :: tags) []
-        | None ->
-           List.rev (
-               text_of_placeholder (String.sub notation pos (len - pos)) :: tags)
-      else List.rev tags
-    and quoted pos tags store =
-      let tag_of_quoted ss =
-        String.concat "" (List.rev ss)
-        |> !%"<span class=\"notation-symbol\">%s</span>"
-      in
-      if pos < len then
-        match String.index_from_opt notation pos '\'' with
-        | Some pos' when pos' = len - 1 ->
-           tag_of_quoted (String.sub notation pos (pos'-pos) :: store) :: tags
-           |> List.rev
-        | Some pos' when String.get notation (pos'+1) = '\'' ->
-           (* two contiguous quotations *)
-           let s = String.sub notation pos (pos' - pos) in
-           quoted (pos'+2) tags ("\'" :: s :: store)
-        | Some pos' ->
-           (* termination of the quote *)
-           let tag = tag_of_quoted (String.sub notation pos (pos' - pos) :: store) in
-           iter (pos' + 1) (tag :: tags)
-        | None ->
-           failwith "unclosed quote"
-      else
-        List.rev (tag_of_quoted store :: tags)
-    in
-    String.concat "" (iter 0 [])
-  in
-  !%{|<a href="%s">%s</a> [%s, in %s] (%s)|} item.linkname (show notation) (linkname_of_kind item.kind) item.module_ scope
-
 let generate_notation_list ?repo_root output_dir proj_name table all_files items =
-  let grouped =
-    List.map notation_of_item items
-    |> Common.list_group_by (fun (scope, not, item) -> scope)
-    |> List.sort (fun (s1, _) (s2, _) -> compare_scope s1 s2)
-    |> List.map (fun (scope, nots) -> scope, Common.list_sort_by (fun (_, not, _) -> not) nots)
-  in
-  let html_of_group (scope, notations) =
-    let h2 = !%"<h2>%s</h2>" (show_scope scope) in
-    let tags = List.map (fun (scope, not, item) -> html_of_notation scope not item) notations in
-    h2 ^ String.concat "<br>\n" tags
-  in
   let body =
-    table ^ (String.concat "" @@ List.map html_of_group grouped)
+    List.map (fun item -> item.module_, item.linkname, item.name) items
+    |> Notation_index.generate_body table
   in
-  let filename = Filename.concat output_dir notations_html_filename in
+  let filename = Filename.concat output_dir Notation_index.filename in
   let title = "Notations" in
   write_html_file ?repo_root all_files body filename title proj_name
 
