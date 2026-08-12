@@ -4,7 +4,7 @@ MATHCOMP_ANALYSIS=${MATHCOMP_ANALYSIS:-"$OPAM_SWITCH_PREFIX/lib/coq/user-contrib
 REVISION=${REVISION:-"no"}
 DIR=$(pwd `dirname .`)
 OUTDIR=${OUTDIR:-$DIR/html/analysis-$REVISION}
-ANALYSIS_SRC=${ANALYSIS_SRC:-$OPAM_SWITCH_PREFIX/.opam-switch/sources/coq-mathcomp-analysis.1.16.0}
+ANALYSIS_SRC=${ANALYSIS_SRC:-$OPAM_SWITCH_PREFIX/.opam-switch/sources/rocq-mathcomp-analysis.1.16.0}
 INDEX_BLACKLIST_FILE=$DIR/sample_blacklist/index_blacklist
 
 rm -rf $OUTDIR
@@ -13,13 +13,15 @@ mkdir -p $OUTDIR
 SRC=$OUTDIR/src
 mkdir $SRC
 
+ls $OPAM_SWITCH_PREFIX/.opam-switch/sources/
+ls -a $ANALYSIS_SRC
 cp -r $ANALYSIS_SRC/* $SRC/
 
 cd $SRC
 
 ls -l
 
-coqdep -f _CoqProject > depend.d
+rocq dep -f _CoqProject > depend.d
 cat -n depend.d >&2
 
 $DIR/tools/generate-hierarchy-graph.sh
