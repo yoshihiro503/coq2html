@@ -1,3 +1,5 @@
+open Common
+
 module Key = struct
   type t = string * int
   let compare = compare
@@ -60,7 +62,9 @@ let fold f xref_table init =
   Map.fold f xref_table init
 
 let dump t =
-  Printf.printf"====DUMP====\n";
-  Map.iter (fun (m, pos) (range, xref) ->
-      Printf.printf "%s:%d: %s\n" m pos (sxref xref)) t;
-  Printf.printf"============\n"
+  let lines =
+    Map.to_list t
+    |> List.map (fun ((m, pos), (_range, xref)) ->
+           !%"%s:%d: %s" m pos (sxref xref))
+  in
+  String.concat "\n" (["====DUMP===="] @ lines @ ["============"])

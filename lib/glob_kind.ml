@@ -1,6 +1,6 @@
 open Common
 
-(* see: https://rocq-prover.org/doc/V8.20.0/api/coq-core/Dumpglob/index.html *)
+(* see: https://rocq-prover.org/doc/v9.2/api/rocq-runtime/Dumpglob/index.html *)
 
 type kind =
   | Axiom (* Axiom, Parameter or Variable(s), Hypothes,es, Context outside any section *)
@@ -110,3 +110,4 @@ let to_string = function
   | Other other ->
      Log.warn (!%"unknown kind: '%s'" other);
      other
+

@@ -134,3 +134,5 @@ let html_escaped =
     | c -> Buffer.add_char buff c
   done;
   Buffer.contents buff
+
+exception Usage_error of string

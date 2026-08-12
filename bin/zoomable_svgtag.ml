@@ -9,11 +9,9 @@ let get_viewbox svgstring =
       (fun x y width height ->  (x, y, width, height))
     |> Option.some
   with
-  | Not_found ->
-    let _ = prerr_endline (!%"regexp error '%s'" svgstring) in
-     None
+  | Not_found -> None
   | Scanf.Scan_failure _ ->
-       prerr_endline (!%"scan error '%s'" svgstring); None
+     Log.warn (!%"scan error '%s'" svgstring); None
 
 let is_small svgstring =
   match get_viewbox svgstring with

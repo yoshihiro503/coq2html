@@ -27,10 +27,7 @@ let test_html_of_notation_with_scope () =
     {|<a href="measurable_structure.html#deadbeef"><span class="notation-symbol">&lt;&lt;M</span> x <span class="notation-symbol">&gt;&gt;</span></a> [not, in measurable_structure] (in classical_set_scope)|}
     actual
 
-let () =
-  Alcotest.run "notation_index" [
-    "html_of_notation", [
-      Alcotest.test_case "no scope" `Quick test_html_of_notation_no_scope;
-      Alcotest.test_case "with scope" `Quick test_html_of_notation_with_scope;
-    ];
-  ]
+let tests = [
+  Alcotest.test_case "no scope" `Quick test_html_of_notation_no_scope;
+  Alcotest.test_case "with scope" `Quick test_html_of_notation_with_scope;
+]
