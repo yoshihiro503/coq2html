@@ -15,17 +15,6 @@ open Glob_kind
 
 type range = Range.t
 
-let use_file filename f =
-  let ch = open_in filename in
-  try
-    let y = f ch in
-    close_in ch; y
-  with
-  | e -> close_in ch; raise e
-
-let read_file filename = use_file filename (fun ch ->
-    really_input_string ch (in_channel_length ch))
-
 let sanitize_linkname s =
   let rec loop esc i =
     if i < 0 then if esc then html_escaped s else s
@@ -237,13 +226,13 @@ let generate_hierarchy_graph title xref_table output_dir dot_file =
   let dot = Graphviz.from_file dot_file in
   Graphviz.generate_svg svg_path dot;
   !%"<h2>Mathematical Structures (%s only)</h2>\n" title
-  ^ Zoomable_svgtag.div "hierarchy_graph" (read_file svg_path)
+  ^ Zoomable_svgtag.div "hierarchy_graph" svg_path
 
 let generate_dependency_graph_from_dot output_dir dot =
   let svg_path = Filename.concat output_dir "dependency_graph.svg" in
   Graphviz.generate_svg svg_path dot;
   !%"<h2>Clickable Dependency Graph of Files</h2>\n"
-  ^ Zoomable_svgtag.div "file-graph" (read_file svg_path)
+  ^ Zoomable_svgtag.div "file-graph" svg_path
 
 (*
  * generate index.html

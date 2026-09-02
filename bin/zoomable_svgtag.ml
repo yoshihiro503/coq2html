@@ -21,6 +21,12 @@ let is_small svgstring =
     width < 800. -> true
   | _ -> false
 
-let div id svgstring =
+let read_svg svg_path =
+  file_using_r svg_path (fun ch -> really_input_string ch (in_channel_length ch))
+
+let div id svg_path =
+  let svgstring = read_svg svg_path in
   let class_ = if is_small svgstring then "small-graph" else "graph" in
-  !%{|<div id="%s" class="%s">%s</div>|} id class_ svgstring
+  !%{|<div id="%s" class="%s">%s</div>
+<p class="svg-direct-link"><a href="%s" target="_blank">View raw SVG</a></p>|}
+    id class_ svgstring (Filename.basename svg_path)
