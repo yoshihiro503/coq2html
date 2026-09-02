@@ -197,16 +197,6 @@ let coq_gallina_keywords = mkset [
   "as"; "at"; "cofix"; "else"; "end"; "fix"; "for"; "forall"; "fun";
   "if"; "in"; "let"; "match"; "return"; "then"; "where"; "with";
   "using";
-(* "The following are keywords defined in notations or plugins
-    loaded in the prelude" (reference manual) *)
-  "IF"; "by"; "exists"; "exists2"; "using";
-]
-
-let mathcomp_hierarchy_builders = mkset [
-  "HB.check"; "HB.locate"; "HB.about"; "HB.howto";
-  "HB.status"; "HB.graph"; "HB.mixin"; "HB.structure";
-  "HB.saturate"; "HB.instance"; "HB.factory"; "HB.builders";
-  "HB.end"; "HB.export"; "HB.reexport"; "HB.declare";
 ]
 
 (** HTML generation *)
@@ -315,11 +305,13 @@ let nested_ids_anchor env classes ids text loc =
        (html_escaped text) closes
 
 let is_gallina_keyword id =
-  StringSet.find_opt id coq_gallina_keywords
+  StringSet.mem id coq_gallina_keywords
 
 let is_vernacular id =
   StringSet.to_seq coq_vernaculars
-  |> Seq.find (fun key -> String.starts_with ~prefix:key id)
+  |> Seq.exists (fun key -> String.starts_with ~prefix:key id)
+
+let is_hb_prefix id = (id = "HB")
 
 let ident_partial env pos id loc =
   let name pos' id =
@@ -328,35 +320,24 @@ let ident_partial env pos id loc =
   in
   if id = "_" then (pos + 1, "_") else
     let max_pos = pos + String.length id in
+    let classes =
+      if is_gallina_keyword (String.trim id) then "gallina-kwd"
+      else if is_vernacular (String.trim id) then "vernacular"
+      else if is_hb_prefix id then "hierarchy-builder"
+      else "id"
+    in
     begin match crossref !current_module pos max_pos with
     | Nolink None ->
-       begin match
-         is_gallina_keyword (String.trim id),
-         is_vernacular (String.trim id)
-       with
-       | Some keyword, _ ->
-          let tags = sprintf "<span class=\"gallina-kwd\">%s</span>" (html_escaped id) in
-          (pos + String.length id, tags)
-       | None, Some vernac ->
-          let tags = sprintf "<span class=\"vernacular\">%s</span>" (html_escaped id) in
-          (pos + String.length id, tags)
-       | None, None ->
-(*      eprintf "   Nolink '%s'\n" id; *)
-          pos, sprintf "<span class=\"id\">%s</span>" (html_escaped id)
-       end
+       pos, !%"<span class=\"%s\">%s</span>" classes (html_escaped id)
     | Nolink (Some pos') ->
-(*      eprintf "   Nolink '%s'\n" (name pos' id); *)
-       pos', sprintf "<span class=\"id\">%s</span>" (html_escaped (name pos' id))
+       pos', !%"<span class=\"%s\">%s</span>" classes
+               (html_escaped (name pos' id))
     | Link (pos', p) ->
-(*      eprintf "   Link '%s'\n" (name pos' id); *)
-       pos', sprintf "<span class=\"id\"><a href=\"%s\">%s</a></span>" p (html_escaped (name pos' id))
+       pos', !%"<span class=\"%s link\"><a href=\"%s\">%s</a></span>" classes
+               p (html_escaped (name pos' id))
     | Anchors (pos', ps) ->
-(*      eprintf "   Anchors '%s'\n" (name pos' id); *)
-       let classes =
-         if StringSet.mem id mathcomp_hierarchy_builders then
-           "hierarchy-builder" else ""
-       in
-       pos', nested_ids_anchor env classes ps (name pos' id) loc
+       let classes = classes ^ " anchor" in
+       (pos', nested_ids_anchor env classes ps (name pos' id) loc)
     end
 
 
@@ -377,6 +358,10 @@ let idents env pos id loc =
     end
   in
   iter pos id
+
+let quoted q =
+  !%{|<span class="quoted">%s</span>|} q
+  |> fprintf !oc "%s"
 
 let space s =
   for _ = 1 to String.length s do fprintf !oc "&nbsp;" done
@@ -557,7 +542,8 @@ and coq = parse
   | quoted as q
       {
         proceed_current_command (Lexing.lexeme lexbuf);
-        idents !env (Lexing.lexeme_start lexbuf) q (Lexing.lexeme_start_p lexbuf); coq lexbuf
+        quoted q; coq lexbuf
+(*        idents !env (Lexing.lexeme_start lexbuf) q (Lexing.lexeme_start_p lexbuf); coq lexbuf*)
       }
   | (' '? non_whites+ as id)
       {(*output_char !oc ' ';*)
