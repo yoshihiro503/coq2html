@@ -683,11 +683,11 @@ let process_v_file ?repo_root proj_name env all_files f =
   let repo_file =
     Option.map (fun root -> root ^ "/" ^ f) repo_root
   in
-  Generate_index.start_html_page !oc ?repo_file title title proj_name all_files;
+  Generate_index.start_html_page !oc title title proj_name all_files;
   let lexbuf = Lexing.from_channel ~with_positions:true ic in
   Lexing.set_filename lexbuf filepath;
   coq_bol lexbuf;
-  Generate_index.end_html_page !oc;
+  Generate_index.end_html_page ?repo_file !oc;
   close_out !oc; oc := stdout;
   close_in ic;
   Option.iter (Type_lookup.close_file filepath module_name) env.type_lookup;

@@ -1,6 +1,8 @@
 #!/bin/sh
 
 set -e
+dune build
+
 examples/test1/run.bash
 examples/test_type_tooltip/run.bash
 examples/hb/run.bash
