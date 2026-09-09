@@ -26,8 +26,6 @@ let warn lexbuf message =
     (!%"File: %s, line %d, culumn %d: %s" position.pos_fname
        position.pos_lnum (position.pos_cnum - position.pos_bol + 1) message)
 
-let linenum loc = loc.Lexing.pos_lnum
-
 (** Cross-referencing *)
 
 let current_module = ref ""
@@ -71,15 +69,14 @@ let path sp id =
   | _   , _    -> sp ^ "." ^ id
 
 let add_module m =
-  (*eprintf "add_module %s\n" m;*)
   Hashtbl.add xref_modules m ()
 
 let add_reference curmod pos_from pos_to dp sp id ty =
-  let tbl = XrefTable.add_reference !xref_table curmod pos_from pos_to dp (path sp id) (Glob_kind.of_string ty) in
+  let tbl = XrefTable.add_reference !xref_table curmod pos_from pos_to dp (path sp id) ty in
   xref_table := tbl
 
 let add_definition curmod pos_from pos_to sp id ty =
-  let tbl = XrefTable.add_definition !xref_table curmod pos_from pos_to (path sp id) (Glob_kind.of_string ty) in
+  let tbl = XrefTable.add_definition !xref_table curmod pos_from pos_to (path sp id) ty in
   xref_table := tbl
 
 (* Map module names to URLs *)
@@ -111,7 +108,6 @@ let url_concat url suff =
   (if ends_with url "/" then url else url ^ "/") ^ suff
 
 let url_for_module m =
-  (*eprintf "url_for_module %s\n" m;*)
   let rec url_for = function
   | [] ->
       if Hashtbl.mem xref_modules m then m ^ ".html" else ("NOTFOUND the module url for "^m)
@@ -138,7 +134,6 @@ let re_sane_path = Str.regexp "[A-Za-z0-9_.\x80-\xFF]+$"
 let find_pos xref_table (m, pos) = XrefTable.find xref_table m pos
 
 let crossref m pos max_pos =
-(*  eprintf "crossref %s %d\n" m pos;*)
   match find_pos !xref_table (m, pos) with
   | Some (_range, Defs [(path, Notation)]) ->
     let pos' = pos + String.length path in
@@ -248,61 +243,21 @@ let end_doc () =
   set_enum_depth 0;
   fprintf !oc "</div>\n"
 
-(* If the option to show type infomation is enabled, return the type infomation *)
-let lookup_type_info conn id loc =
-  let position = Lexing.(loc.pos_lnum - 1, loc.pos_cnum - loc.pos_bol + 1) in
-  let filename = Lexing.(loc.pos_fname) in
-  match Type_lookup.ask_type_info_of id filename position conn with
-  | Ok ty -> Some ty
-  | Error message -> Log.warn (!%"fail: lookup_type_info '%s' : '%s'" id message);
-                     None
-
 let nested_ids_anchor env classes ids text loc =
   let (id0, kind0) = List.hd ids in
   let ids = List.map fst ids in
   let opens =
-    List.map (fun id ->sprintf "<span id=\"%s\" class=\"id\">"id ) ids
+    List.map (fun id -> !%"<span id=\"%s\" class=\"id\">" id ) ids
     |> String.concat ""
   in
   let closes = List.map (fun _ -> "</span>") ids |> String.concat "" in
-  let is_black =
-    match env.definition_blacklist with
-    | None -> false
-    | Some list -> Index_blacklist.is_listed list id0
-  in
-  let tooltip_content =
-    match env.type_lookup, kind0 with
-    | Some conn, K.Definition when is_black = false ->
-       begin match lookup_type_info conn id0 loc with
-       | None -> ""
-       | Some (Type_lookup.Markdown md) ->
-          !%"<span class='markdown'>%s</span>" md
-       | Some (PlainText txt) -> !%"<p>%s</p>" txt
-       end |> Option.some
-    | _ -> None
-  in
-  let tooltip_content =
-    match env.repository_root_url with
-    | Some repo_root ->
-       let line = linenum loc in
-       let filepath =
-         String.split_on_char '.' !current_module
-         |> Directory_mappings.inverse_apply env.directory_mappings
-         |> String.concat "/"
-       in
-       let url = !%"%s/%s.v#L%d"repo_root filepath line in
-       let link = !%"<hr/><a href='%s' target='_blank'>Source code</a>" url in
-       (Option.value ~default:"" tooltip_content) ^ link
-       |> Option.some
-    | None -> tooltip_content
-  in
-  match tooltip_content with
+  match Tooltip.make env !current_module loc id0 kind0 with
   | Some tooltip ->
-     let divtag = Tooltip.tag_with_tooltip "div" id0 classes tooltip text in
-     sprintf {|%s%s%s|} opens divtag closes
+    let divtag = Tooltip.tag_with_tooltip "div" id0 classes tooltip text in
+     !%{|%s%s%s|} opens divtag closes
   | None ->
-     sprintf {|%s<a name="%s" class="%s">%s</a>%s|} opens id0 classes
-       (html_escaped text) closes
+    !%{|%s<a name="%s" class="%s">%s</a>%s|} opens id0 classes
+      (html_escaped text) closes
 
 let is_gallina_keyword id =
   StringSet.mem id coq_gallina_keywords
@@ -429,14 +384,9 @@ let path = ident ("." ident)*
 let start_proof = ("Proof" space* ".") | ("Proof" space+ "with") | ("Next" space+ "Obligation.")
 let end_proof = "Qed." | "Defined." | "Save." | "Admitted." | "Abort."
 
-let globkind = ['a'-'z']+
-
 let quoted = ['\"'] ([' ' '!' '#'-'~'] | utf8)* ['\"']
 let symbol = ['!' '#'-'\'' '*'-'-' '/' ':'-'@' '['-'`' '{'-'~'] (*'"', '(', ')' *)
 let non_whites = (['A'-'Z' 'a'-'z' '0'-'9'] | symbol | utf8)+
-
-let xref = (['A'-'Z' 'a'-'z' '0'-'9' '!' '#'-'~'] | utf8)+ | "<>"
-let integer = ['0'-'9']+
 
 let end_of_command = '.' (space | '\n')
 
@@ -686,33 +636,8 @@ and verbatim = parse
   | _ as c
       { character c; verbatim lexbuf }
 
-and globfile = parse
-  | eof
-      { () }
-  | "F" (path as m) space* "\n"
-      { current_module := m; add_module m;
-        globfile lexbuf }
-  | "R" (integer as pos1) ":" (integer as pos2)
-    space+ (xref as dp)
-    space+ (xref as sp)
-    space+ (xref as id)
-    space+ (globkind as ty)
-    space* "\n"
-      { add_reference !current_module (int_of_string pos1) (int_of_string pos2)
-          dp sp id ty;
-        globfile lexbuf }
-  | (globkind as ty)
-    space+ (integer as pos1) ":" (integer as pos2)
-    space+ (xref as sp)
-    space+ (xref as id)
-    space* "\n"
-      { add_definition !current_module (int_of_string pos1) (int_of_string pos2)
-          sp id ty;
-        globfile lexbuf }
-  | [^ '\n']* "\n"
-      { globfile lexbuf }
-
 {
+open Common
 
 let make_redirect fromfile toURL =
   let oc = open_out fromfile in
@@ -771,10 +696,16 @@ let process_v_file ?repo_root proj_name env all_files f =
                   (module_name ^ ".html")
 
 let process_glob_file f =
-  current_module := "";
   let ic = open_in f in
-  globfile (Lexing.from_channel ic);
-  close_in ic
+  let glob = Glob_parser.parse_channel ic in
+  close_in ic;
+  add_module glob.file_module;
+  List.iter (function
+    | Glob.Definition { pos_from; pos_to; section_path; id; kind } ->
+       add_definition glob.file_module pos_from pos_to section_path id kind
+    | Glob.Reference { pos_from; pos_to; logical_path; section_path; id; kind } ->
+       add_reference glob.file_module pos_from pos_to logical_path section_path id kind)
+    glob.entries
 
 let write_file txt filename =
   let oc = open_out filename in
@@ -785,16 +716,17 @@ let arg_deprecated_set_string msg sref : Arg.spec =
   Arg.String (fun s ->
       Log.warn (!%"DEPRECATED: %s" msg); sref := s)
 
-let () =
+
+let main () =
   let v_files = ref [] and glob_files = ref [] in
   let process_file f =
     if Filename.check_suffix f ".v" then
       v_files := f :: !v_files
     else if Filename.check_suffix f ".glob" then
       glob_files := f :: !glob_files
-    else begin
-      eprintf "Don't know what to do with file %s\n" f; exit 2
-    end in
+    else
+      raise (Usage_error (!%"Don't know what to do with file %s\n" f))
+  in
   Arg.parse (Arg.align [
     "-debug", Arg.Set Log.debug_flag, "Print debug messages to stderr";
     "-title", Arg.String (fun s -> title := s),
@@ -846,29 +778,20 @@ let () =
   ])
   process_file
   "Usage: rocqnavi [options] file.glob ... file.v ...\nOptions are:";
-  if !v_files = [] then begin
-    eprintf "No .v file provided, aborting\n";
-    exit 1
-  end;
-  if (try not (Sys.is_directory !output_dir) with Sys_error _ -> true)
-  then begin
-    eprintf "Error: output directory %s does not exist or is not a directory.\n" !output_dir;
-    exit 1
-  end;
-  if "" <> !hierarchy_graph_dot_file && not (Sys.file_exists !hierarchy_graph_dot_file) then begin
-    eprintf "Error: The dot file does not exists: '%s'\n" !hierarchy_graph_dot_file;
-    exit 1
-  end;
-  if "" <> !index_blacklist_file && not (Sys.file_exists !index_blacklist_file) then begin
-    eprintf "Error: The file '%s' does not exists, which file was specified by the -index-blacklist option.\n"
-      !index_blacklist_file;
-    exit 1
-  end;
+  if !v_files = [] then
+    raise (Usage_error "No .v file provided, aborting\n");
+  if (try not (Sys.is_directory !output_dir) with Sys_error _ -> true) then
+    raise (Usage_error (!%"Error: output directory %s does not exist or is not a directory.\n"
+             !output_dir));
+  if "" <> !hierarchy_graph_dot_file && not (Sys.file_exists !hierarchy_graph_dot_file) then
+    raise (Usage_error (!%"Error: The dot file does not exists: '%s'\n"
+                         !hierarchy_graph_dot_file));
+  if "" <> !index_blacklist_file && not (Sys.file_exists !index_blacklist_file) then
+    raise (Usage_error (!%"Error: The file '%s' does not exists, which file was specified by the -index-blacklist option.\n" !index_blacklist_file));
   List.iter process_glob_file (List.rev !glob_files);
   let mapping_options =
     Directory_mappings.to_mapping_options !directory_mappings
   in
-(*  XrefTable.dump !xref_table;*)
   let all_files = Generate_index.all_files xref_modules in
   let index_blacklist_opt =
     if !index_blacklist_file = "" then None
@@ -906,4 +829,11 @@ let () =
         List.iter (process_v_file ?repo_root !title !env all_files) (List.rev !v_files))
   else
     List.iter (process_v_file ?repo_root !title !env all_files) (List.rev !v_files)
+
+let () =
+  try main () with
+  | Usage_error msg -> Log.error msg; exit 1
+  | Failure msg ->
+     Log.error (!%"%s\nPlease report it." msg);
+     exit 2
 }

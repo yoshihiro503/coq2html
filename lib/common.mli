@@ -19,3 +19,5 @@ val list_drop : int -> 'a list -> 'a list
 val list_max_by : ('a -> 'b) -> 'a list -> 'a option
 
 val html_escaped : string -> string
+
+exception Usage_error of string

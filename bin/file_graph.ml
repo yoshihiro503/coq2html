@@ -10,7 +10,7 @@ type edge = node * node
 let parse_filepath directory_mappings name =
   let ext = Filename.extension name in
   match List.rev @@ String.split_on_char '/' name with
-  | [] -> failwith (!%"file_graph.ml: parse_filepath: The depend file has an item where the filename '%s' could not be read correctly" name)
+  | [] -> raise (Usage_error (!%"file_graph.ml: parse_filepath: The depend file has an item where the filename '%s' could not be read correctly" name))
   | [base] ->
      ([], Filename.remove_extension base, ext)
   | base :: path ->

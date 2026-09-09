@@ -1,3 +1,5 @@
+open Common
+
 module Key = struct
   type t = string * int
   let compare = compare
@@ -58,9 +60,3 @@ let add_definition xref_table curmod pos_from pos_to path ty =
 
 let fold f xref_table init =
   Map.fold f xref_table init
-
-let dump t =
-  Printf.printf"====DUMP====\n";
-  Map.iter (fun (m, pos) (range, xref) ->
-      Printf.printf "%s:%d: %s\n" m pos (sxref xref)) t;
-  Printf.printf"============\n"
