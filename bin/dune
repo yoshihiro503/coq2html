@@ -11,11 +11,11 @@
 (rule
  (target resources.ml)
  (deps
-  ../rocqnavi.header
-  ../rocqnavi.footer
-  ../rocqnavi.css
-  ../rocqnavi.js
-  ../rocqnavi.redirect)
+  ../resources/rocqnavi.header
+  ../resources/rocqnavi.footer
+  ../resources/rocqnavi.css
+  ../resources/rocqnavi.js
+  ../resources/rocqnavi.redirect)
  (action
   (system
-   "for i in header footer css js redirect; do echo \"let $i = {xxx|\"; cat ../rocqnavi.$i; echo '|xxx}'; echo; done > resources.ml")))
+   "for i in header footer css js redirect; do echo \"let $i = {xxx|\"; cat ../resources/rocqnavi.$i; echo '|xxx}'; echo; done > resources.ml")))

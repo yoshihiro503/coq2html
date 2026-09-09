@@ -84,28 +84,29 @@ let sidebar_files all_files =
   |> List.map (tag_of_file_path [])
   |> String.concat "\n"
 
-let start_html_page ch ?repo_file title h1 project_name all_files =
+let start_html_page ch title h1 project_name all_files =
   let open Str in
-  let link_to_source_tag =
-    Option.map (!%{|<a href="%s">source</a>|}) repo_file
-    |> Option.value ~default:""
-  in
   global_replace (regexp_string "$NAME") title Resources.header
   |> global_replace (regexp_string "$H1") h1
   |> global_replace (regexp_string "$PROJECT") project_name
   |> global_replace (regexp_string "$FILES") (sidebar_files all_files)
-  |> global_replace (regexp_string "$LINK_TO_SOURCE") link_to_source_tag
   |> output_string ch
 
-let end_html_page ch =
-  output_string ch Resources.footer
+let end_html_page ?repo_file ch =
+  let open Str in
+  let link_to_source_tag =
+    Option.map (!%{|<a href="%s">Source</a>|}) repo_file
+    |> Option.value ~default:""
+  in
+  global_replace (regexp_string "$LINK_TO_SOURCE") link_to_source_tag Resources.footer
+  |> output_string ch
 
 let write_html_file ?repo_root all_files txt filename title project_name =
   let oc = open_out filename in
   let repo_file = repo_root in
-  start_html_page oc ?repo_file title title project_name all_files;
+  start_html_page oc title title project_name all_files;
   output_string oc txt;
-  end_html_page oc;
+  end_html_page ?repo_file oc;
   close_out oc
 
 type kind = Global | EntryKind of string

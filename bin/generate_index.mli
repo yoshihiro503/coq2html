@@ -17,11 +17,10 @@ val sanitize_linkname : string -> string
 type file_path
 val all_files : (string, unit) Hashtbl.t -> file_path list
 val sidebar_files : file_path list -> string
-val start_html_page : out_channel -> ?repo_file: string -> string -> string
+val start_html_page : out_channel -> string -> string
                       -> string -> file_path list -> unit
 
-
-val end_html_page : out_channel -> unit
+val end_html_page : ?repo_file: string -> out_channel -> unit
 
 val generate : ?repo_root:string -> string -> XrefTable.t
                -> (string, unit) Hashtbl.t -> string
